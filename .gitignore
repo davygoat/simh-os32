@@ -3,7 +3,4 @@ id32
 *.dsk
 *.out
 *.lst
-oink*
 delme*
-*keep*
-keep/
