@@ -2,6 +2,19 @@
 # vim:set syntax=sh:
 # vim:set nowrap:
 
+:safety-first
+
+   if not exist dm0.dsk goto check-prerequisites
+   echo
+   echo
+   echo
+   set env -p "Warning: file 'dm0.dsk' already exists, overwrite (yes/no) ?  " YES=no
+   if -i YES == "y" goto check-prerequisites
+   if -i YES == "yes" goto check-prerequisites
+   if -i YES == "n" exit
+   if -i YES == "no" exit
+   goto safety-first
+
 :check-prerequisites
 
    echo
@@ -169,6 +182,7 @@
    boot dm0
    exit
 
+
 :install-mtm
 
    echo
@@ -209,16 +223,17 @@
    expect "EDIT32>" send "sub/4/8/17\r";c
    expect "EDIT32>" send "done\r";c
    expect "EDIT32:END OF TASK     0\r\n*" send "MTMSGN MAC\r";c
-   expect "MTMMAC.TSK CREATED ***" send "load a,actuty\r";c
-   expect "TSKID = A" send "start ,com=con:,li=con:,cre=users.auf\r";c
-   expect "A>" send "add 255,255,pass1,master,*,*,FFFFFFF0\r";c
-   expect "A>" send "add 25,20,user1,user1,*,*,FFFFFFF0\r";c
-   expect "A>" send "end\r";c
-   expect "A:END OF TASK" send "rename users.auf,users.auf/255 ; mark dsc4:,off ; display devices\r";c
+   expect "MTMMAC.TSK CREATED ***" send "load actuty\r";c
+   expect "TSKID = ACTUTY" send "start ,com=con:,li=con:,cre=users.auf\r";c
+   expect "ACTUTY>" send "add 255,255,pass1,master,*,*,FFFFFFF0\r";c
+   expect "ACTUTY>" send "add 25,20,user1,user1,*,*,FFFFFFF0\r";c
+   expect "ACTUTY>" send "end\r";c
+   expect "ACTUTY:END OF TASK" send "rename users.auf,users.auf/255 ; mark dsc4:,off ; display devices\r";c
    expect "DSC5  FE 0000   OFF" detach mt0 ; detach dm0 ; goto install-fortran-pascal
 
    boot dm0
    exit
+
 
 :install-fortran-pascal
 
@@ -285,6 +300,7 @@
 
    boot dm0
    exit
+
 
 :startup-shutdown-scripts
 
