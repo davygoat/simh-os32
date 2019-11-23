@@ -1,0 +1,9 @@
+id32
+*.tap
+*.dsk
+*.out
+*.lst
+oink*
+delme*
+*keep*
+keep/
