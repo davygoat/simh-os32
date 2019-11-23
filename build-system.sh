@@ -277,6 +277,8 @@
    expect "COPY32>" send "copy for:pascal.tsk,pascal.tsk\r";c
    expect "COPY32>" send "copy for:pasrtl.obj,pasrtl.obj\r";c
    expect "COPY32>" send "copy for:primes.pas,primes.pas\r";c
+   expect "COPY32>" send "copy for:pem51.obj,pemath.obj\r";c
+   expect "COPY32>" send "copy for:f7rtl.obj,f7rtl51.obj\r";c
    expect "COPY32>" send "end\r";c
    expect "COPY32:END OF TASK" send "mark dsc3:,off ; mark dsc4:,off ; display devices\r";c
    expect "DSC5  FE 0000   OFF" detach mt0 ; detach dm1 ; detach dm0 ; goto startup-shutdown-scripts
@@ -479,10 +481,102 @@
    expect "\r\n*"  send "rename actuty.css,actuty.css/255\r";c
    # final shutdown
    expect "\r\n*" send "mark dsc4:,off ; display devices\r";c
+   expect "DSC5  FE 0000   OFF" detach dm0 ; goto example-code
+
+   boot dm0
+   exit
+
+
+:example-code
+
+   echo
+   echo
+   echo
+   echo
+   echo ************* STAGE 6 - EXAMPLE CODE FOR EOU *************
+   echo
+   echo
+   echo
+
+   set cpu 832
+   set ttp enabled
+   set pas devno=20
+   set dm0 msm80
+   set environ DATE=%DATE_MM%/%DATE_DD%/%DATE_YY%
+   set environ TIME=%TIME_HH%:%TIME_MM%
+   send delay=10000
+
+   attach -e dm0 dm0.dsk
+
+   deposit 7c 00000002
+
+   noexpect
+   expect "ENTER DATE AND TIME" send "set time %DATE%,%TIME%\r";c
+   expect "*";c
+   expect "*" send "mark dsc4:,on\r";c
+   expect "DSC4:  SYS" send "volume sys\r";c
+   expect "*";c
+   expect "*" send "volume sys/temp\r";c
+   # HELLO.FTN
+   expect "*" send "build hellof.ftn\r";c
+   expect ".CMDP>" send "       program hello;\r";c
+   expect ".CMDP>" send "       write(0,1000)\r";c
+   expect ".CMDP>" send "1000   format(' Hello Fortran')\r";c
+   expect ".CMDP>" send "       end\r";c
+   expect ".CMDP>" send "endb\r";c
+   expect "\r\n*"  send "rename hellof.ftn,hellof.ftn/25\r";c
+   # HELLO.PAS
+   expect "*" send "build hellop.pas\r";c
+   expect ".CMDP>" send "program hello(output);\r";c
+   expect ".CMDP>" send "begin\r";c
+   expect ".CMDP>" send "   writeln('Hello Pascal');\r";c
+   expect ".CMDP>" send "end.\r";c
+   expect ".CMDP>" send "endb\r";c
+   expect "\r\n*"  send "rename hellop.pas,hellop.pas/25\r";c
+   # USERINIT.CSS/25
+   expect "*" send "alloc userinit.css,in,100 ; build userinit.css\r";c
+   expect ".CMDP>" send "prevent prompt\r";c
+   expect ".CMDP>" send "$ifnx userinit.css/s\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write First thing we need to do is, install the 'Ease Of Use' scripts.\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write This might be a little intimidating, but we'll use the defaults.\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write Remember :-\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write - Whenever it asks you to 'GIVE' something, enter a single space.\r";c
+   expect ".CMDP>" send "   $write - Whenever it asks you to type $CONT, enter $CONT.\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write Expect the following sequence :-\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write - Enter $CONT 4 times.\r";c
+   expect ".CMDP>" send "   $write - Enter a space 13 times.\r";c
+   expect ".CMDP>" send "   $write - Enter $CONT again, 4 times.\r";c
+   expect ".CMDP>" send "   $write - ... Lots of text will go by ...\r";c
+   expect ".CMDP>" send "   $write - ... Wait until you see 'Thankyou for your patience' ...\r";c
+   expect ".CMDP>" send "   $write - Enter $CONT once more to finish.\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write To begin, please enter $CONT now, or $CLEAR if you do not want EOU.\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $pause\r";c
+   expect ".CMDP>" send "   set private 0\r";c
+   expect ".CMDP>" send "   set group 0\r";c
+   expect ".CMDP>" send "   eou\r";c
+   expect ".CMDP>" send "   set private 25\r";c
+   expect ".CMDP>" send "   set group 20\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "eouinit\r";c
+   expect ".CMDP>" send "ssysprt null:\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "endb\r";c
+   expect "\r\n*"  send "rename userinit.css,userinit.css/25\r";c
+   # final shutdown
+   expect "\r\n*" send "mark dsc4:,off ; display devices\r";c
    expect "DSC5  FE 0000   OFF" detach dm0 ; goto thats-all-folks
 
    boot dm0
    exit
+
 
 :thats-all-folks
 
