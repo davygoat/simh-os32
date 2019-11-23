@@ -267,7 +267,7 @@
    expect "COPY32>" send "copy for:f7o51.tsk,f7o51.tsk\r";c
    expect "COPY32>" send "copy for:f7zo51.err,f7zo51.err\r";c
    expect "COPY32>" send "copy for:f7lib51a.obj,f7lib51a.obj\r";c
-   expect "COPY32>" send "copy for:pem51a.obj,pem51a.obJ\r";c
+   expect "COPY32>" send "copy for:pem51a.obj,pem51a.obj\r";c
    expect "COPY32>" send "end\r";c
    expect "COPY32:END OF TASK" attach -e -r mt0 OS32_pascal.tap ; send "load backup\r";c
    expect "TSKID = BACKUP" send "start ,in=mag1:,out=dsc3:,list=con:,ac=0,verify,delete\r";c
@@ -277,9 +277,6 @@
    expect "COPY32>" send "copy for:pascal.tsk,pascal.tsk\r";c
    expect "COPY32>" send "copy for:pasrtl.obj,pasrtl.obj\r";c
    expect "COPY32>" send "copy for:primes.pas,primes.pas\r";c
-   expect "COPY32>" send "copy for:pascal.css,pascal.css\r";c
-   expect "COPY32>" send "copy for:pascomp.css,pascomp.css\r";c
-   expect "COPY32>" send "copy for:paslink.css,paslink.css\r";c
    expect "COPY32>" send "end\r";c
    expect "COPY32:END OF TASK" send "mark dsc3:,off ; mark dsc4:,off ; display devices\r";c
    expect "DSC5  FE 0000   OFF" detach mt0 ; detach dm1 ; detach dm0 ; goto startup-shutdown-scripts
@@ -293,7 +290,7 @@
    echo
    echo
    echo
-   echo ************* STAGE 5 - STARTUP/SHUTDOWN SCRIPTS *************
+   echo ************* STAGE 5 - STARTUP/SHUTDOWN AND CSS SCRIPTS *************
    echo
    echo
    echo
@@ -318,7 +315,7 @@
    expect "*";c
    expect "*" send "volume sys/temp\r";c
    # SYSONLY.CSS
-   expect "*" send "build sysonly.css\r";c
+   expect "\r\n*" send "build sysonly.css\r";c
    expect ".CMDP>" send "$job\r";c
    expect ".CMDP>" send "   display tasks ,null:\r";c
    expect ".CMDP>" send "$termjob\r";c
@@ -329,7 +326,7 @@
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "endb\r";c
    # STARTUP.CSS
-   expect "*" send "build startup.css\r";c
+   expect "\r\n*" send "build startup.css\r";c
    expect ".CMDP>" send "sysonly\r";c
    expect ".CMDP>" send "mtmup\r";c
    expect ".CMDP>" send "$wait 1\r";c
@@ -337,7 +334,7 @@
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "endb\r";c
    # MTMUP.CSS
-   expect "*" send "build mtmup.css\r";c
+   expect "\r\n*" send "build mtmup.css\r";c
    expect ".CMDP>" send "sysonly\r";c
    expect ".CMDP>" send "$job\r";c
    expect ".CMDP>" send "   $write STARTING MTM\r";c
@@ -360,7 +357,7 @@
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "endb\r";c
    # MTMDOWN.CSS
-   expect "*" send "build mtmdown.css\r";c
+   expect "\r\n*" send "build mtmdown.css\r";c
    expect ".CMDP>" send "sysonly\r";c
    expect ".CMDP>" send "$job\r";c
    expect ".CMDP>" send "   $write STOPPING MTM\r";c
@@ -372,7 +369,7 @@
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "endb\r";c
    # SHUTDOWN.CSS
-   expect "*" send "build shutdown.css\r";c
+   expect "\r\n*" send "build shutdown.css\r";c
    expect ".CMDP>" send "sysonly\r";c
    expect ".CMDP>" send "$write MARKING NON SYSTEM DISKS OFF\r";c
    expect ".CMDP>" send "mark dsc0:,off\r";c
@@ -384,8 +381,104 @@
    expect ".CMDP>" send "$write MARK DSC4 OFF BEFORE YOU GO\r";c
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "endb\r";c
+   # TYPE.CSS
+   expect "\r\n*" send "build type.css\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$ifnull @1\r";c
+   expect ".CMDP>" send "   $write USAGE: TYPE FD\r";c
+   expect ".CMDP>" send "   $clear\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$ifnx @1\r";c
+   expect ".CMDP>" send "   $write FILE NOT FOUND\r";c
+   expect ".CMDP>" send "   $clear\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$job\r";c
+   expect ".CMDP>" send "   $build type.tmp\r";c
+   expect ".CMDP>" send "      copy @1,con:\r";c
+   expect ".CMDP>" send "      end\r";c
+   expect ".CMDP>" send "   $endb\r";c
+   expect ".CMDP>" send "   load .bg,copy32; task .bg; start ,command=type.tmp\r";c
+   expect ".CMDP>" send "$termjob\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "xdelete type.tmp\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "endb\r";c
+   # COPY.CSS
+   expect "\r\n*" send "build copy.css\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$ifnull @1\r";c
+   expect ".CMDP>" send "   $write USAGE: COPY FROM,TO\r";c
+   expect ".CMDP>" send "   $clear\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$ifnx @1\r";c
+   expect ".CMDP>" send "   $write FILE NOT FOUND\r";c
+   expect ".CMDP>" send "   $clear\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$ifx @2\r";c
+   expect ".CMDP>" send "   $write OUTPUT FILE ALREADY EXISTS\r";c
+   expect ".CMDP>" send "   $clear\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$job\r";c
+   expect ".CMDP>" send "   $build copy.tmp\r";c
+   expect ".CMDP>" send "      copy @1,@2\r";c
+   expect ".CMDP>" send "      end\r";c
+   expect ".CMDP>" send "   $endb\r";c
+   expect ".CMDP>" send "   load .bg,copy32; task .bg; start ,command=copy.tmp\r";c
+   expect ".CMDP>" send "$termjob\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "xdelete copy.tmp\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "endb\r";c
+   # DIR.CSS
+   expect "\r\n*" send "build dir.css\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$ifnull @1\r";c
+   expect ".CMDP>" send "   display files\r";c
+   expect ".CMDP>" send "$else\r";c
+   expect ".CMDP>" send "   display files ,@1\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "endb\r";c
+   # USERINIT.CSS/255
+   expect "\r\n*"  send "build userinit.css\r";c
+   expect ".CMDP>" send "prevent prompt\r";c
+   expect ".CMDP>" send "prevent etm\r";c
+   expect ".CMDP>" send "$copy\r";c
+   expect ".CMDP>" send "$copy\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "* Type ACTUTY to load-start the MTM account utility.\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "* Useful, i.e. known, commands are:\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "* list  [ACT]\r";c
+   expect ".CMDP>" send "* add    ACT,GRP,PASS,NAME,*,*,PRIV\r";c
+   expect ".CMDP>" send "* change ACT,GRP,PASS,NAME,*,*,PRIV\r";c
+   expect ".CMDP>" send "* end\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$noc\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "endb\r";c
+   expect "\r\n*"  send "rename userinit.css,userinit.css/255\r";c
+   # ACTUTY.CSS/255
+   expect "\r\n*" send "build actuty.css\r";c
+   expect ".CMDP>" send "load actuty\r";c
+   expect ".CMDP>" send "start ,com=con:,li=con:,upd=users.auf\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "endb\r";c
+   expect "\r\n*"  send "rename actuty.css,actuty.css/255\r";c
    # final shutdown
-   expect "*" send "mark dsc4:,off ; display devices\r";c
+   expect "\r\n*" send "mark dsc4:,off ; display devices\r";c
    expect "DSC5  FE 0000   OFF" detach dm0 ; goto thats-all-folks
 
    boot dm0
