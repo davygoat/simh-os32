@@ -203,7 +203,12 @@
    expect "*" attach -e mt0 04-083M71R10_OS32MTM8.1.tap; send "\r";c
    expect "*" send "load backup\r";c
    expect "TSKID = BACKUP" send "start ,in=mag1:,out=dsc4:,li=con:,ac=0,verify,delete\r";c
-   expect "BACKUP:END OF TASK" send "MTMSGN MAC\r";c
+   # Enable up to eight users/terminals (default is 4)
+   expect "BACKUP:END OF TASK"; send "load edit32 ; start\r";c
+   expect "EDIT32>" send "get mtmparms.mac\r";c
+   expect "EDIT32>" send "sub/4/8/17\r";c
+   expect "EDIT32>" send "done\r";c
+   expect "EDIT32:END OF TASK     0\r\n*" send "MTMSGN MAC\r";c
    expect "MTMMAC.TSK CREATED ***" send "load a,actuty\r";c
    expect "TSKID = A" send "start ,com=con:,li=con:,cre=users.auf\r";c
    expect "A>" send "add 255,255,pass1,master,*,*,FFFFFFF0\r";c
@@ -335,10 +340,19 @@
    expect "*" send "build mtmup.css\r";c
    expect ".CMDP>" send "sysonly\r";c
    expect ".CMDP>" send "$job\r";c
-   expect ".CMDP>" send "   $write STARTING MTM (FOUR TERMINALS MAX, IT SEEMS)\r";c
+   expect ".CMDP>" send "   $write STARTING MTM\r";c
    expect ".CMDP>" send "   load .mtm,mtmmac\r";c
    expect ".CMDP>" send "   task .mtm\r";c
-   expect ".CMDP>" send "   start ,auf=users.auf,atf=null:,term=(t020:,t022:,t024:,t026:)\r";c
+   expect ".CMDP>" send "   start ,auf=users.auf,atf=null:\r";c
+   expect ".CMDP>" send "   $wait 1\r";c
+   expect ".CMDP>" send "   .mtm add t020:\r";c
+   expect ".CMDP>" send "   .mtm add t022:\r";c
+   expect ".CMDP>" send "   .mtm add t024:\r";c
+   expect ".CMDP>" send "   .mtm add t026:\r";c
+   expect ".CMDP>" send "   .mtm add t028:\r";c
+   expect ".CMDP>" send "   .mtm add t02a:\r";c
+   expect ".CMDP>" send "   .mtm add t02c:\r";c
+   expect ".CMDP>" send "   .mtm add t02e:\r";c
    expect ".CMDP>" send "$termjob\r";c
    expect ".CMDP>" send "$ifne 0\r";c
    expect ".CMDP>" send "   $write NO PROBLEM, MTM ALREADY RUNNING\r";c
