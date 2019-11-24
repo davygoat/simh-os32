@@ -234,19 +234,19 @@
    expect "ACTUTY>" send "add 25,20,user1,user1,*,*,FFFFFFF0\r";c
    expect "ACTUTY>" send "end\r";c
    expect "ACTUTY:END OF TASK" send "rename users.auf,users.auf/255 ; mark dsc4:,off ; display devices\r";c
-   expect "DSC5  FE 0000   OFF" detach mt0 ; detach dm0 ; goto install-fortran-pascal
+   expect "DSC5  FE 0000   OFF" detach mt0 ; detach dm0 ; goto install-compilers
 
    boot dm0
    exit 1
 
 
-:install-fortran-pascal
+:install-compilers
 
    echo
    echo
    echo
    echo
-   echo ************* STAGE 4 - INSTALL FORTRAN AND PASCAL *************
+   echo ************* STAGE 4 - INSTALL COMPILERS *************
    echo
    echo
    echo
@@ -351,8 +351,8 @@
    # STARTUP.CSS
    expect "\r\n*" send "build startup.css\r";c
    expect ".CMDP>" send "sysonly\r";c
-   expect ".CMDP>" send "mtmup\r";c
-   expect ".CMDP>" send "$wait 1\r";c
+   expect ".CMDP>" send "mtmup ; $wait 1\r";c
+   expect ".CMDP>" send "splup ; $wait 1\r";c
    expect ".CMDP>" send "display tasks\r";c
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "endb\r";c
@@ -391,6 +391,33 @@
    expect ".CMDP>" send "$endc\r";c
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "endb\r";c
+   # SPLUP.CSS
+   expect "\r\n*" send "build splup.css\r";c
+   expect ".CMDP>" send "sysonly\r";c
+   expect ".CMDP>" send "$job\r";c
+   expect ".CMDP>" send "   $write STARTING SPL/32\r";c
+   expect ".CMDP>" send "   load spl32\r";c
+   expect ".CMDP>" send "   task spl32\r";c
+   expect ".CMDP>" send "   start\r";c
+   expect ".CMDP>" send "   $wait 1\r";c
+   expect ".CMDP>" send "$termjob\r";c
+   expect ".CMDP>" send "$ifne 0\r";c
+   expect ".CMDP>" send "   $write NO PROBLEM, SPL/32 ALREADY RUNNING\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "endb\r";c
+   # SPLDOWN.CSS
+   expect "\r\n*" send "build spldown.css\r";c
+   expect ".CMDP>" send "sysonly\r";c
+   expect ".CMDP>" send "$job\r";c
+   expect ".CMDP>" send "   $write STOPPING SPL/32\r";c
+   expect ".CMDP>" send "   cancel spl32\r";c
+   expect ".CMDP>" send "$termjob\r";c
+   expect ".CMDP>" send "$ifne 0\r";c
+   expect ".CMDP>" send "   $write NO PROBLEM, SPL/32 PROBABLY NOT RUNNING\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "endb\r";c
    # SHUTDOWN.CSS
    expect "\r\n*" send "build shutdown.css\r";c
    expect ".CMDP>" send "sysonly\r";c
@@ -400,7 +427,8 @@
    expect ".CMDP>" send "mark dsc2:,off\r";c
    expect ".CMDP>" send "mark dsc3:,off\r";c
    expect ".CMDP>" send "mark dsc5:,off\r";c
-   expect ".CMDP>" send "mtmdown\r";c
+   expect ".CMDP>" send "mtmdown ; $wait 1\r";c
+   expect ".CMDP>" send "spldown ; $wait 1\r";c
    expect ".CMDP>" send "$write MARK DSC4 OFF BEFORE YOU GO\r";c
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "endb\r";c
