@@ -8,8 +8,8 @@ clean::
 clobber:: clean
 	rm -f *.dsk
 
-dist::	os32kit.zip os32tiny.zip os32doc.zip os32src.zip
-	@for f in *.zip; do echo ; echo ===== $$f ===================== ; echo ; unzip -lv $$f; done
+dist::	os32doc.zip os32src.zip os32kit.zip os32tiny.zip
+	@for f in $^; do echo ; echo ===== $$f ===================== ; echo ; unzip -lv $$f; done
 
 os32kit.zip: os32.sh dm0.dsk
 	rm -f os32kit.zip
