@@ -475,24 +475,22 @@
    expect "\r\n*"  send "build userinit.css\r";c
    expect ".CMDP>" send "prevent prompt\r";c
    expect ".CMDP>" send "prevent etm\r";c
-   expect ".CMDP>" send "$copy\r";c
-   expect ".CMDP>" send "$copy\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "* Type ACTUTY to load-start the MTM account utility.\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "* Useful, i.e. known, commands are:\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "* list  [ACT]\r";c
-   expect ".CMDP>" send "* add    ACT,GRP,PASS,NAME,*,*,PRIV\r";c
-   expect ".CMDP>" send "* change ACT,GRP,PASS,NAME,*,*,PRIV\r";c
-   expect ".CMDP>" send "* end\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "$noc\r";c
+   expect ".CMDP>" send "$write\r";c
+   expect ".CMDP>" send "$write Type ACTUTY to load-start the MTM account utility.\r";c
+   expect ".CMDP>" send "$write\r";c
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "endb\r";c
    expect "\r\n*"  send "rename userinit.css,userinit.css/255\r";c
    # ACTUTY.CSS/255
    expect "\r\n*" send "build actuty.css\r";c
+   expect ".CMDP>" send "$write\r";c
+   expect ".CMDP>" send "$write Useful, i.e. known, commands are:\r";c
+   expect ".CMDP>" send "$write\r";c
+   expect ".CMDP>" send "$write list  [ACT]\r";c
+   expect ".CMDP>" send "$write add    ACT,GRP,PASS,NAME,*,*,PRIV\r";c
+   expect ".CMDP>" send "$write change ACT,GRP,PASS,NAME,*,*,PRIV\r";c
+   expect ".CMDP>" send "$write end\r";c
+   expect ".CMDP>" send "$write\r";c
    expect ".CMDP>" send "load actuty\r";c
    expect ".CMDP>" send "start ,com=con:,li=con:,upd=users.auf\r";c
    expect ".CMDP>" send "$exit\r";c
