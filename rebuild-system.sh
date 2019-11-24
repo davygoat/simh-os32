@@ -151,7 +151,7 @@
    expect "CMDP>" send "T02C:,2C,39,XDCOD=X2A0D          *PE 550/PE 1100\r";c
    expect "CMDP>" send "T02E:,2E,39,XDCOD=X2A0D          *PE 550/PE 1100\r";c
    expect "CMDP>" send "CRT: ,12,39,XDCOD=X2A0D          *PE 550/PE 1100\r";c
-   expect "CMDP>" send "PTPR:,13,80                      *PAPER TAPE\r";c
+#  expect "CMDP>" send "PTPR:,13,80                      *PAPER TAPE\r";c
    expect "CMDP>" send "CR:  ,4,96                       *CARD READER\r";c
    expect "CMDP>" send "PR:  ,62,113                     *300-LPM LINE PRIN\r";c
    expect "CMDP>" send "CAS1:,45,66                      *CASSETTE NO 1\r";c
@@ -173,7 +173,7 @@
 #  expect "CMDP>" send "SPOOL SYS                        *OLD SPOOLER\r";c
 #  expect "CMDP>" send "SPOOL DSC4                       *OLD SPOOLER\r";c
 #  expect "CMDP>" send "SPOOL PTPR                       *OLD SPOOLER\r";c
-  expect "CMDP>" send "SPL32                            *NEW SPOOLER\r";c
+#  expect "CMDP>" send "SPL32                            *NEW SPOOLER\r";c
    expect "CMDP>" send "ENDC\r";c
    expect "CMDP>" send "ENDB\r";c
    expect "ENDB" send "OSGEN\r";c
