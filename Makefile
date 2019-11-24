@@ -16,7 +16,7 @@ os32small.zip:	dm0.dsk
 
 os32jumbo.zip:	dm0.dsk dm1.dsk
 	rm -f os32jumbo.zip
-	zip -9 os32jumbo *.tap dm0.dsk dm1.dsk rebuild-system.sh os32.sh
+	zip -9 os32jumbo *.tap dm0.dsk dm1.dsk rebuild-system.sh os32.sh Makefile
 
 dm0.dsk dm1.dsk:
 	[ -x dm0.dsk ] || ./rebuild-system.sh
