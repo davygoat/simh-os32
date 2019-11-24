@@ -26,21 +26,22 @@
    echo
    echo
 
-   if not exist eou.tap echo ; echo ; echo Cannot find eou.tap. It should be in the kit! ; echo ; echo ; echo ; exit
+   if not exist tapes/eou.tap echo ; echo ; echo Cannot find eou.tap. It should be in the kit! ; echo ; echo ; echo ; exit
 
-   if not exist 04-082M71R16S_OS32_starter.tap  set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/OS32_8.1/04-082M71R16S_OS32_starter.tap.gz
-   if not exist 04-082M71R16_OS32_8.1.tap       set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/OS32_8.1/04-082M71R16_OS32_8.1.tap.gz
-   if not exist 04-083M71R10_OS32MTM8.1.tap     set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/OS32_8.1/04-083M71R10_OS32MTM8.1.tap.gz
-   if not exist 04-101M31R09_FortranVII.tap     set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/04-101M31R09_FortranVII.tap.gz
-   if not exist OS32_pascal.tap                 set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/OS32_pascal.tap.gz
+   if not exist tapes/04-082M71R16S_OS32_starter.tap  set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/OS32_8.1/04-082M71R16S_OS32_starter.tap.gz
+   if not exist tapes/04-082M71R16_OS32_8.1.tap       set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/OS32_8.1/04-082M71R16_OS32_8.1.tap.gz
+   if not exist tapes/04-083M71R10_OS32MTM8.1.tap     set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/OS32_8.1/04-083M71R10_OS32MTM8.1.tap.gz
+   if not exist tapes/04-101M31R09_FortranVII.tap     set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/04-101M31R09_FortranVII.tap.gz
+   if not exist tapes/OS32_pascal.tap                 set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/OS32_pascal.tap.gz
 
    if "%MISSING%" == "" echo ALL TAPES PRESENT AND CORRECT ; goto install-os32
 
    echo gunzip *.tap.gz
+   echo mv *.tap tapes/
    echo
    echo
    echo
-   echo *** PLEASE DOWNLOAD THE URLS LISTED ABOVE, AND GUNZIP THEM INTO THIS DIRECTORY ***
+   echo *** PLEASE DOWNLOAD THE URLS LISTED ABOVE, AND GUNZIP THEM INTO THE TAPES DIRECTORY ***
    echo
    echo
    echo
@@ -64,7 +65,7 @@
    send delay=10000
 
    attach -n dm0 dm0.dsk
-   attach -e -r mt0 04-082M71R16S_OS32_starter.tap
+   attach -e -r mt0 tapes/04-082M71R16S_OS32_starter.tap
 
    deposit 78 85a18540
 
@@ -80,7 +81,7 @@
    expect "TSKID = F" send "start ,init=dsc4:,vol=sys,li=con:\r";c
    expect "F:END OF TASK     0" send "mark dsc4:,on\r";c
    expect "DSC4:  SYS" send "ffile mag1: ; load backup,mag1:\r";c
-   expect "TSKID = BACKUP" attach -e -r mt0 04-082M71R16_OS32_8.1.tap ; send "start ,in=mag1:,out=dsc4:,list=con:,verify\r";c
+   expect "TSKID = BACKUP" attach -e -r mt0 tapes/04-082M71R16_OS32_8.1.tap ; send "start ,in=mag1:,out=dsc4:,list=con:,verify\r";c
    expect "BACKUP:END OF TASK     0" send "mark dsc4:,off ; display devices\r";c
    expect "DSC5  FC 0000   OFF" detach mt0 ; detach dm0 ; goto perform-sysgen
 
@@ -217,7 +218,7 @@
    expect "*";c
    expect "*" send AFTER=100000 "mark dsc4:,on\r";c
    expect "DSC4:  SYS" send "volume sys ; volume sys/temp\r";c
-   expect "*" attach -e mt0 04-083M71R10_OS32MTM8.1.tap; send "\r";c
+   expect "*" attach -e mt0 tapes/04-083M71R10_OS32MTM8.1.tap; send "\r";c
    expect "*" send "load backup\r";c
    expect "TSKID = BACKUP" send "start ,in=mag1:,out=dsc4:,li=con:,ac=0,verify,delete\r";c
    expect "BACKUP:END OF TASK"; send "load edit32 ; start\r";c
@@ -258,7 +259,7 @@
 
    attach -e dm0 dm0.dsk
    attach -n dm1 dm1.dsk
-   attach -e -r mt0 04-101M31R09_FortranVII.tap
+   attach -e -r mt0 tapes/04-101M31R09_FortranVII.tap
 
    deposit 7c 00000002
 
@@ -286,7 +287,7 @@
    expect "COPY32>" send "copy for:f7lib51a.obj,f7lib51a.obj\r";c
    expect "COPY32>" send "copy for:pem51a.obj,pem51a.obj\r";c
    expect "COPY32>" send "end\r";c
-   expect "COPY32:END OF TASK" attach -e -r mt0 OS32_pascal.tap ; send "load backup\r";c
+   expect "COPY32:END OF TASK" attach -e -r mt0 tapes/OS32_pascal.tap ; send "load backup\r";c
    expect "TSKID = BACKUP" send "start ,in=mag1:,out=dsc3:,list=con:,ac=0,verify,delete\r";c
    expect "BACKUP:TASK PAUSED" send "cancel backup\r";c
    expect "BACKUP:END OF TASK" send "load copy32\r";c
@@ -576,7 +577,7 @@
    expect ".CMDP>" send "endb\r";c
    expect "\r\n*"  send "rename userinit.css,userinit.css/25\r";c
    # Get canned EOU from my tape
-   expect "\r\n*" attach -e mt0 eou.tap ; send "load backup\r";c
+   expect "\r\n*" attach -e mt0 tapes/eou.tap ; send "load backup\r";c
    expect "TSKID = BACKUP" send "start ,in=mag1:,out=dsc4:,li=con:,ac=0,verify,delete\r";c
    expect "BACKUP:END OF TASK     0" send "mark dsc4:,off ; display devices\r";c
    # It's the final shutdown!
