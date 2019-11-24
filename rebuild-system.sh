@@ -352,7 +352,7 @@
    expect "\r\n*" send "build startup.css\r";c
    expect ".CMDP>" send "sysonly\r";c
    expect ".CMDP>" send "mtmup ; $wait 1\r";c
-   expect ".CMDP>" send "splup ; $wait 1\r";c
+   expect ".CMDP>" send "*splup ; $wait 1\r";c
    expect ".CMDP>" send "display tasks\r";c
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "endb\r";c
