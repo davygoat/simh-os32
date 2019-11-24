@@ -170,11 +170,15 @@
    expect "CMDP>" send "DSC4:,FC,53,SELCH=F0,CONTR=FB    * 67-MB DISK (REMO\r";c
    expect "CMDP>" send "DSC5:,FE,53,SELCH=F0,CONTR=FB    *67-MB DISK (REMOV\r";c
    expect "CMDP>" send "ENDD\r";c
-   expect "CMDP>" send "SPL32                            *NEW SPOOLER\r";c
+#  expect "CMDP>" send "SPOOL SYS                        *OLD SPOOLER\r";c
+#  expect "CMDP>" send "SPOOL DSC4                       *OLD SPOOLER\r";c
+#  expect "CMDP>" send "SPOOL PTPR                       *OLD SPOOLER\r";c
+  expect "CMDP>" send "SPL32                            *NEW SPOOLER\r";c
    expect "CMDP>" send "ENDC\r";c
    expect "CMDP>" send "ENDB\r";c
    expect "ENDB" send "OSGEN\r";c
    expect "OSGEN COMPLETED  ***" send "sysgen32 new02\r";c
+   expect "*** SYSGEN32 ERROR ***" echo ; echo Oh, bugger! ; exit
    expect "BG:END OF TASK     0" send "sysmacro new02\r";c
    expect "BG:END OF TASK     0"                        ;c
    expect "BG:END OF TASK     0" send "syslink new02\r" ;c
