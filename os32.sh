@@ -12,6 +12,8 @@
 
 :init
 
+   if not exist dm0.dsk echo ; echo ; echo dm0.dsk not found, try running rebuild-system.sh ; echo ; echo ; echo ; exit 0
+
    set cpu 832
    set cpu idle
 
