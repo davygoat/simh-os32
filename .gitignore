@@ -1,5 +1,6 @@
 id32
-*.tap
+tapes/
+doc/
 *.dsk
 *.out
 *.lst

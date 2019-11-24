@@ -8,15 +8,24 @@ clean::
 clobber:: clean
 	rm -f *.dsk
 
-dist::	os32small.zip os32jumbo.zip
+dist::	os32kit.zip os32tiny.zip os32doc.zip os32src.zip
+	@for f in *.zip; do echo ; echo ===== $$f ===================== ; echo ; unzip -lv $$f; done
 
-os32small.zip:	dm0.dsk
-	rm -f os32small.zip
-	zip -r9 os32small os32.sh dm0.dsk
+os32kit.zip: os32.sh dm0.dsk
+	rm -f os32kit.zip
+	zip -r9 os32kit os32.sh dm0.dsk "doc/2016 - Getting Started with Interdata OS32.pdf"
 
-os32jumbo.zip:	dm0.dsk dm1.dsk
-	rm -f os32jumbo.zip
-	zip -r9 os32jumbo tapes/ dm0.dsk dm1.dsk rebuild-system.sh os32.sh Makefile
+os32doc.zip: doc/*
+	rm -f os32doc.zip
+	zip -r9 os32doc doc/
+
+os32src.zip: dm0.dsk dm1.dsk
+	rm -f os32src.zip
+	zip -r9 os32src tapes/ rebuild-system.sh os32.sh Makefile
+
+os32tiny.zip: os32.sh rebuild-system.sh tapes/eou.tap
+	rm -f os32tiny.zip
+	zip -r9 os32tiny $^
 
 dm0.dsk dm1.dsk:
 	[ -x dm0.dsk ] || ./rebuild-system.sh
