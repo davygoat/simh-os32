@@ -3,4 +3,5 @@ id32
 *.dsk
 *.out
 *.lst
+*.zip
 delme*
