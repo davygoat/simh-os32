@@ -11,8 +11,8 @@
    set env -p "Warning: file 'dm0.dsk' already exists, overwrite (yes/no) ?  " YES=no
    if -i YES == "y" goto check-prerequisites
    if -i YES == "yes" goto check-prerequisites
-   if -i YES == "n" exit
-   if -i YES == "no" exit
+   if -i YES == "n" echo ; echo ; exit
+   if -i YES == "no" echo ; echo ; exit
    goto safety-first
 
 
