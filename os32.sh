@@ -21,6 +21,9 @@
    set pas devno=20
    attach pas 1026
 
+   set pt enabled
+   #TODO - attach pt?
+
    attach -e dm0 dm0.dsk
    #attach -e dm1 dsk3.dsk   ;# To mount disk, e.g. FOR, on DSK3:
    #attach mt0 mag1.tap      ;# To use backup tape on MAG1:
