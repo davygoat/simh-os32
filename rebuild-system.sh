@@ -2,6 +2,8 @@
 # vim:set syntax=sh:
 # vim:set nowrap:
 
+set cpu idle
+
 :safety-first
 
    if not exist dm0.dsk goto check-prerequisites
@@ -33,6 +35,7 @@
    if not exist tapes/04-083M71R10_OS32MTM8.1.tap     set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/OS32_8.1/04-083M71R10_OS32MTM8.1.tap.gz
    if not exist tapes/04-101M31R09_FortranVII.tap     set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/04-101M31R09_FortranVII.tap.gz
    if not exist tapes/OS32_pascal.tap                 set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/OS32_pascal.tap.gz
+   if not exist tapes/C_Deb_Bas_Pas.tap               set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/C_Deb_Bas_Pas.tap.gz
 
    if "%MISSING%" == "" echo ALL TAPES PRESENT AND CORRECT ; goto install-os32
 
@@ -265,7 +268,6 @@
 
    attach -e dm0 dm0.dsk
    attach -n dm1 dm1.dsk
-   attach -e -r mt0 tapes/04-101M31R09_FortranVII.tap
 
    deposit 7c 00000002
 
@@ -276,35 +278,66 @@
    expect "DSC4:  SYS" send "volume sys\r";c
    expect "*";c
    expect "*" send "volume sys/temp\r";c
+   # Create the SAFE volume
    expect "*" send "load sys:fastchek\r";c
-   expect "TSKID = FASTCHEK" send "start ,init=dsc3:,vol=for,li=con:\r";c
+   expect "TSKID = FASTCHEK" send "start ,init=dsc3:,vol=safe,li=con:\r";c
    expect "FASTCHEK:END OF TASK" send "mark dsc3:,on\r";c
-   expect "DSC3:  FOR" send "load backup\r";c
-   expect "TSKID = BACKUP" send "start ,in=mag1:,out=dsc3:,list=con:,verify\r";c
+   # Copy CAL to SAFE:/10 because we need to juggle with it later on
+   expect "DSC3:  SAFE" send "load copy32\r";c
+   expect "TSKID = COPY32" send "start\r";c
+   expect "COPY32>" send "copy cal32.tsk,safe:cal32.tsk/10\r";c
+   expect "COPY32>" send "end\r";c
+   # Fortran tape goes into SAFE:/11
+   expect "COPY32:END OF TASK" attach -e -r mt0 tapes/04-101M31R09_FortranVII.tap ; send "load backup\r";c
+   expect "TSKID = BACKUP" send "start ,in=mag1:,out=safe:,ac=11,verify,list=con:\r";c
    expect "BACKUP:END OF TASK" send "load copy32\r";c
    expect "TSKID = COPY32" send "start\r";c
-   expect "COPY32>" send "copy for:f7d51.tsk,f7d51.tsk\r";c
-   expect "COPY32>" send "copy for:f7d51.err,f7d51.err\r";c
-   expect "COPY32>" send "copy for:f7lib51.obj,f7lib51.obj\r";c
-   expect "COPY32>" send "copy for:f7rtl51.err,f7rtl51.err\r";c
-   expect "COPY32>" send "copy for:pem51.obj,pem51.obj\r";c
-   expect "COPY32>" send "copy for:f7o51.tsk,f7o51.tsk\r";c
-   expect "COPY32>" send "copy for:f7zo51.err,f7zo51.err\r";c
-   expect "COPY32>" send "copy for:f7lib51a.obj,f7lib51a.obj\r";c
-   expect "COPY32>" send "copy for:pem51a.obj,pem51a.obj\r";c
+   expect "COPY32>" send "copy safe:f7d51.tsk/11,f7d51.tsk/0\r";c
+   expect "COPY32>" send "copy safe:f7d51.err/11,f7d51.err/0\r";c
+   expect "COPY32>" send "copy safe:f7lib51.obj/11,f7lib51.obj/0\r";c
+   expect "COPY32>" send "copy safe:f7rtl51.err/11,f7rtl51.err/0\r";c
+   expect "COPY32>" send "copy safe:pem51.obj/11,pem51.obj/0\r";c
+   expect "COPY32>" send "copy safe:f7o51.tsk/11,f7o51.tsk/0\r";c
+   expect "COPY32>" send "copy safe:f7zo51.err/11,f7zo51.err/0\r";c
+   expect "COPY32>" send "copy safe:f7lib51a.obj/11,f7lib51a.obj/0\r";c
+   expect "COPY32>" send "copy safe:pem51a.obj/11,pem51a.obj/0\r";c
    expect "COPY32>" send "end\r";c
+   # Pascal tape goes into SAFE:/12
    expect "COPY32:END OF TASK" attach -e -r mt0 tapes/OS32_pascal.tap ; send "load backup\r";c
-   expect "TSKID = BACKUP" send "start ,in=mag1:,out=dsc3:,list=con:,ac=0,verify,delete\r";c
+   expect "TSKID = BACKUP" send "start ,in=mag1:,out=safe:,ac=12,verify,list=con:\r";c
    expect "BACKUP:TASK PAUSED" send "cancel backup\r";c
    expect "BACKUP:END OF TASK" send "load copy32\r";c
    expect "TSKID = COPY32" send "start\r";c
-   expect "COPY32>" send "copy for:pascal.tsk,pascal.tsk\r";c
-   expect "COPY32>" send "copy for:pasrtl.obj,pasrtl.obj\r";c
-   expect "COPY32>" send "copy for:primes.pas,primes.pas\r";c
-   expect "COPY32>" send "copy for:pem51.obj,pemath.obj\r";c   ;# Needed for EOU
-   expect "COPY32>" send "copy for:f7rtl.obj,f7rtl51.obj\r";c  ;# Needed for EOU
+   expect "COPY32>" send "copy safe:pascal.tsk/12,pascal.tsk/0\r";c
+   expect "COPY32>" send "copy safe:pasrtl.obj/12,pasrtl.obj/0\r";c
+   expect "COPY32>" send "copy safe:prefix.pas/12,prefix.pas/0\r";c
+   expect "COPY32>" send "copy safe:prefix.pas/12,prefix.pas/25\r";c
+   expect "COPY32>" send "copy safe:primes.pas/12,primes.pas/25\r";c
+   expect "COPY32>" send "copy safe:smplsvcs.pas/12,smplsvcs.pas/25\r";c
+   expect "COPY32>" send "copy safe:pemath.obj/12,pemath.obj/0\r";c  ;# Needed for EOU
+   expect "COPY32>" send "copy safe:f7rtl.obj/12,f7rtl51.obj/0\r";c  ;# Needed for EOU
    expect "COPY32>" send "end\r";c
-   expect "COPY32:END OF TASK" send "mark dsc3:,off ; mark dsc4:,off ; display devices\r";c
+   # Whitesmiths goes into SAFE:/13
+   expect "COPY32:END OF TASK" attach -e -r mt0 tapes/C_Deb_Bas_Pas.tap ; send "load backup\r";c
+   expect "TSKID = BACKUP" send "start ,in=mag1:,out=safe:,ac=13,verify,list=con:\r";c
+   expect "BACKUP:TASK PAUSED" send "cancel backup\r";c
+   expect "BACKUP:END OF TASK" send "load copy32\r";c
+   expect "TSKID = COPY32" send "start\r";c
+   expect "COPY32>" send "copy safe:pp.tsk/13,pp.tsk/0\r";c
+   expect "COPY32>" send "copy safe:p1.tsk/13,p1.tsk/0\r";c
+   expect "COPY32>" send "copy safe:p2.tsk/13,p2.tsk/0\r";c
+   expect "COPY32>" send "copy safe:lister.tsk/13,lister.tsk/0\r";c
+   expect "COPY32>" send "copy safe:libe.obj/13,libe.obj/0\r";c
+   expect "COPY32>" send "copy safe:libu.obj/13,libu.obj/0\r";c
+   expect "COPY32>" send "copy safe:libw.obj/13,libw.obj/0\r";c
+   expect "COPY32>" send "copy safe:cinit.obj/13,cinit.obj/0\r";c
+   expect "COPY32>" send "copy safe:cfinit.obj/13,cfinit.obj/0\r";c
+   expect "COPY32>" send "copy safe:eouc.css/13,eouc.css/0\r";c
+   expect "COPY32>" send "copy safe:chloc.css/13,chloc.css/0\r";c
+   expect "COPY32>" send "option noterm,nopsfm\r";c
+   expect "COPY32>" send "copy safe:chfiles.css/13,chfiles.css/0\r";c
+   expect "COPY32>" send "end\r";c
+   expect "COPY32:END OF TASK" send "chloc ; chfiles ; mark dsc3:,off ; mark dsc4:,off ; display devices\r";c
    expect "DSC5  FE 0000   OFF" detach mt0 ; detach dm1 ; detach dm0 ; goto startup-shutdown-scripts
 
    boot dm0
@@ -451,6 +484,7 @@
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "$job\r";c
    expect ".CMDP>" send "   $build type.tmp\r";c
+   expect ".CMDP>" send "      option noterm,nopsfm\r";c
    expect ".CMDP>" send "      copy @1,con:\r";c
    expect ".CMDP>" send "      end\r";c
    expect ".CMDP>" send "   $endb\r";c
@@ -482,6 +516,7 @@
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "$job\r";c
    expect ".CMDP>" send "   $build copy.tmp\r";c
+   expect ".CMDP>" send "      option noterm,nopsfm\r";c
    expect ".CMDP>" send "      copy @1,@2\r";c
    expect ".CMDP>" send "      end\r";c
    expect ".CMDP>" send "   $endb\r";c
@@ -579,16 +614,27 @@
    expect ".CMDP>" send "         dc    a(say1)\r";c
    expect ".CMDP>" send "         dc    a(say2)\r";c
    expect ".CMDP>" send "         das   2\r";c
-   expect ".CMDP>" send "say1     dc    c'Hello Assembly'\r";c
+   expect ".CMDP>" send "say1     dc    c'CAL the assembler says, \"Hello world\".'\r";c
    expect ".CMDP>" send "say2     equ   *-1\r";c
    expect ".CMDP>" send "         end\r";c
    expect ".CMDP>" send "endb\r";c
    expect "\r\n*"  send "rename helloa.cal,helloa.cal/25\r";c
+   # HELLOC.C
+   expect "\r\n*" send "build helloc.c\r";c
+   expect ".CMDP>" send "#include <stdio.h>\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "int main (void)\r";c
+   expect ".CMDP>" send "{\r";c
+   expect ".CMDP>" send "   printf (\"Whitesmiths C says, 'Hello world'.\");\r";c
+   expect ".CMDP>" send "   return (0);\r";c
+   expect ".CMDP>" send "}\r";c
+   expect ".CMDP>" send "endb\r";c
+   expect "\r\n*"  send "rename helloc.c,helloc.c/25\r";c
    # HELLOF.FTN
    expect "\r\n*" send "build hellof.ftn\r";c
    expect ".CMDP>" send "       program hello;\r";c
    expect ".CMDP>" send "       write(0,1000)\r";c
-   expect ".CMDP>" send "1000   format(' Hello Fortran')\r";c
+   expect ".CMDP>" send "1000   format(' Interdata Fortran VII says, \"Hello world\".')\r";c
    expect ".CMDP>" send "       end\r";c
    expect ".CMDP>" send "endb\r";c
    expect "\r\n*"  send "rename hellof.ftn,hellof.ftn/25\r";c
@@ -596,7 +642,7 @@
    expect "\r\n*" send "build hellop.pas\r";c
    expect ".CMDP>" send "program hello(output);\r";c
    expect ".CMDP>" send "begin\r";c
-   expect ".CMDP>" send "   writeln('Hello Pascal');\r";c
+   expect ".CMDP>" send "   writeln('Perkin-Elmer Pascal says, \"Hello world\".');\r";c
    expect ".CMDP>" send "end.\r";c
    expect ".CMDP>" send "endb\r";c
    expect "\r\n*"  send "rename hellop.pas,hellop.pas/25\r";c
