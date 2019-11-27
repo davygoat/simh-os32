@@ -232,7 +232,7 @@ set cpu idle
    expect "TSKID = BACKUP" send "start ,in=mag1:,out=dsc4:,li=con:,ac=0,verify,delete\r";c
    expect "BACKUP:END OF TASK"; send "load edit32 ; start\r";c
    expect "EDIT32>" send "get mtmparms.mac\r";c
-   expect "EDIT32>" send "sub/4/8/17\r";c ;# Eight terminals rather than just four
+   expect "EDIT32>" send "find /NUSERS/,1- ; sub/4/8/\r";c ;# Eight terminals rather than just four
    expect "EDIT32>" send "done\r";c
    expect "EDIT32:END OF TASK     0\r\n*" send "MTMSGN MAC\r";c
    expect "MTMMAC.TSK CREATED ***" send "load actuty\r";c
