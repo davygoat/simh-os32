@@ -127,22 +127,22 @@ set cpu idle
    expect "CMDP>" send "         MCALL MTPI,$MTP,DCB64,DCB65\r";c
    expect "CMDP>" send "         MCALL BIOCGEN,BIOCDCB,BIOCEQU,$VFDCB,DCB39\r";c
    expect "CMDP>" send "ENDCOPY\r";c
-   expect "CMDP>" send "VERSION OS32MTS1                 *OS32MTS1 SYSTEM\r";c
-   expect "CMDP>" send "CPU 8/32,8                       *CPU = 7/32 OR 8/3\r";c
-   expect "CMDP>" send "MEMORY 1024                      *MEMORY = 1024-KB\r";c
-   expect "CMDP>" send "DSYS         100                 *SYSTEM SPACE = 1\r";c
+   expect "CMDP>" send "VERSION    OS32MTS1              *OS32MTS1 SYSTEM\r";c
+   expect "CMDP>" send "CPU        8/32,8                *CPU = 7/32 OR 8/3\r";c
+   expect "CMDP>" send "MEMORY     1024                  *MEMORY = 1024-KB\r";c
+   expect "CMDP>" send "DSYS       100                   *SYSTEM SPACE = 1\r";c
    expect "CMDP>" send "MEMCHECK                         *MEMORY DIAGNOSTIC\r";c
-   expect "CMDP>" send "DEVADS          3                *MAX OF 1023 DEVIC\r";c
+   expect "CMDP>" send "DEVADS     3                     *MAX OF 1023 DEVIC\r";c
    expect "CMDP>" send "FLOAT      S,S                   *FLOATING POINT SO\r";c
-   expect "CMDP>" send "CLOCK 60,6C,6D,D                 *60-HZ, LFC=6C, PI\r";c
+   expect "CMDP>" send "CLOCK      60,6C,6D,D            *60-HZ, LFC=6C, PI\r";c
    expect "CMDP>" send "BACKGROUND 16,200                *BACKGROUND TASK'S\r";c
-   expect "CMDP>" send "VOLUME SYS                       *DEFAULT SYSTEM VOL\r";c
+   expect "CMDP>" send "VOLUME     SYS                   *DEFAULT SYSTEM VOL\r";c
    expect "CMDP>" send "TEMP       SYS                   *DEFAULT TEMPORARY\r";c
    expect "CMDP>" send "DIRECTORY                        *CORE DIRECTORY IN\r";c
-   expect "CMDP>" send "DISCBLOCK 32,IN=8/1              *DISKFILE BLOCKING\r";c
-   expect "CMDP>" send "CSS 8                            *CSS NESTING DEPTH\r";c
-   expect "CMDP>" send "CMDLEN 100                       *COMMAND BUFFER LE\r";c
-   expect "CMDP>" send "LOGLEN 100                       *LOG BUFFER LENGTH\r";c
+   expect "CMDP>" send "DISCBLOCK  32,IN=8/1             *DISKFILE BLOCKING\r";c
+   expect "CMDP>" send "CSS        8                     *CSS NESTING DEPTH\r";c
+   expect "CMDP>" send "CMDLEN     100                   *COMMAND BUFFER LE\r";c
+   expect "CMDP>" send "LOGLEN     100                   *LOG BUFFER LENGTH\r";c
    expect "CMDP>" send "DEVICES\r";c
    expect "CMDP>" send "CON: ,10,39,XDCOD=X2A0D,RECL=120,CONS\r";c
    expect "CMDP>" send "T020:,20,39,XDCOD=X2A0D          *PE 550/PE 1100\r";c
