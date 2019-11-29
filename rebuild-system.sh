@@ -6,11 +6,11 @@ set cpu idle
 
 :safety-first
 
-   if not exist dm0.dsk goto check-prerequisites
+   if not exist dsk4.dsk goto check-prerequisites
    echo
    echo
    echo
-   set env -p "Warning: file 'dm0.dsk' already exists, overwrite (yes/no) ?  " YES=no
+   set env -p "Warning: file 'dsk4.dsk' already exists, overwrite (yes/no) ?  " YES=no
    if -i YES == "y" goto check-prerequisites
    if -i YES == "yes" goto check-prerequisites
    if -i YES == "n" echo ; echo ; exit 1
@@ -67,7 +67,7 @@ set cpu idle
    set environ TIME=%TIME_HH%:%TIME_MM%
    send delay=10000
 
-   attach -n dm0 dm0.dsk
+   attach -n dm0 dsk4.dsk
    attach -e -r mt0 tapes/04-082M71R16S_OS32_starter.tap
 
    deposit 78 85a18540
@@ -109,10 +109,10 @@ set cpu idle
    set environ TIME=%TIME_HH%:%TIME_MM%
    send delay=10000
 
-   attach -e dm0 dm0.dsk
+   attach -e dm0 dsk4.dsk
 
    deposit 78 0
-   deposit 7c 00000001
+   deposit 7c 001
 
    noexpect
    expect "ENTER DATE AND TIME\n" send "set time %DATE%,%TIME%\r";c
@@ -217,9 +217,9 @@ set cpu idle
    set pas devno=20
    attach pas 1026
 
-   attach -e dm0 dm0.dsk
+   attach -e dm0 dsk4.dsk
 
-   deposit 7c 00000002
+   deposit 7c 002
 
    noexpect
    expect "ENTER DATE AND TIME" send "set time %DATE%,%TIME%\r";c
@@ -266,10 +266,9 @@ set cpu idle
    set environ TIME=%TIME_HH%:%TIME_MM%
    send delay=10000
 
-   attach -e dm0 dm0.dsk
-   attach -n dm1 dm1.dsk
+   attach -e dm0 dsk4.dsk
 
-   deposit 7c 00000002
+   deposit 7c 002
 
    noexpect
    expect "ENTER DATE AND TIME" send "set time %DATE%,%TIME%\r";c
@@ -278,67 +277,63 @@ set cpu idle
    expect "DSC4:  SYS" send "volume sys\r";c
    expect "*";c
    expect "*" send "volume sys/temp\r";c
-   # Create the SAFE volume
-   expect "*" send "load sys:fastchek\r";c
-   expect "TSKID = FASTCHEK" send "start ,init=dsc3:,vol=safe,li=con:\r";c
-   expect "FASTCHEK:END OF TASK" send "mark dsc3:,on\r";c
-   # Copy CAL to SAFE:/10 because we need to juggle with it later on
-   expect "DSC3:  SAFE" send "load copy32\r";c
+   # Copy CAL to /10 because we may need to juggle with it later on
+   expect "*" send "load copy32\r";c
    expect "TSKID = COPY32" send "start\r";c
-   expect "COPY32>" send "copy cal32.tsk,safe:cal32.tsk/10\r";c
+   expect "COPY32>" send "copy cal32.tsk,cal32.tsk/10\r";c
    expect "COPY32>" send "end\r";c
-   # Fortran tape goes into SAFE:/11
+   # Fortran tape goes into /11
    expect "COPY32:END OF TASK" attach -e -r mt0 tapes/04-101M31R09_FortranVII.tap ; send "load backup\r";c
-   expect "TSKID = BACKUP" send "start ,in=mag1:,out=safe:,ac=11,verify,list=con:\r";c
+   expect "TSKID = BACKUP" send "start ,in=mag1:,out=dsc4:,ac=11,verify,list=con:\r";c
    expect "BACKUP:END OF TASK" send "load copy32\r";c
    expect "TSKID = COPY32" send "start\r";c
-   expect "COPY32>" send "copy safe:f7d51.tsk/11,f7d51.tsk/0\r";c
-   expect "COPY32>" send "copy safe:f7d51.err/11,f7d51.err/0\r";c
-   expect "COPY32>" send "copy safe:f7lib51.obj/11,f7lib51.obj/0\r";c
-   expect "COPY32>" send "copy safe:f7rtl51.err/11,f7rtl51.err/0\r";c
-   expect "COPY32>" send "copy safe:pem51.obj/11,pem51.obj/0\r";c
-   expect "COPY32>" send "copy safe:f7o51.tsk/11,f7o51.tsk/0\r";c
-   expect "COPY32>" send "copy safe:f7zo51.err/11,f7zo51.err/0\r";c
-   expect "COPY32>" send "copy safe:f7lib51a.obj/11,f7lib51a.obj/0\r";c
-   expect "COPY32>" send "copy safe:pem51a.obj/11,pem51a.obj/0\r";c
+   expect "COPY32>" send "copy f7d51.tsk/11,f7d51.tsk/0\r";c
+   expect "COPY32>" send "copy f7d51.err/11,f7d51.err/0\r";c
+   expect "COPY32>" send "copy f7lib51.obj/11,f7lib51.obj/0\r";c
+   expect "COPY32>" send "copy f7rtl51.err/11,f7rtl51.err/0\r";c
+   expect "COPY32>" send "copy pem51.obj/11,pem51.obj/0\r";c
+   expect "COPY32>" send "copy f7o51.tsk/11,f7o51.tsk/0\r";c
+   expect "COPY32>" send "copy f7zo51.err/11,f7zo51.err/0\r";c
+   expect "COPY32>" send "copy f7lib51a.obj/11,f7lib51a.obj/0\r";c
+   expect "COPY32>" send "copy pem51a.obj/11,pem51a.obj/0\r";c
    expect "COPY32>" send "end\r";c
-   # Pascal tape goes into SAFE:/12
+   # Pascal tape goes to /12
    expect "COPY32:END OF TASK" attach -e -r mt0 tapes/OS32_pascal.tap ; send "load backup\r";c
-   expect "TSKID = BACKUP" send "start ,in=mag1:,out=safe:,ac=12,verify,list=con:\r";c
+   expect "TSKID = BACKUP" send "start ,in=mag1:,out=dsc4:,ac=12,verify,list=con:\r";c
    expect "BACKUP:TASK PAUSED" send "cancel backup\r";c
    expect "BACKUP:END OF TASK" send "load copy32\r";c
    expect "TSKID = COPY32" send "start\r";c
-   expect "COPY32>" send "copy safe:pascal.tsk/12,pascal.tsk/0\r";c
-   expect "COPY32>" send "copy safe:pasrtl.obj/12,pasrtl.obj/0\r";c
-   expect "COPY32>" send "copy safe:prefix.pas/12,prefix.pas/0\r";c
-   expect "COPY32>" send "copy safe:prefix.pas/12,prefix.pas/0\r";c
-   expect "COPY32>" send "copy safe:primes.pas/12,primes.pas/0\r";c
-   expect "COPY32>" send "copy safe:smplsvcs.pas/12,smplsvcs.pas/0\r";c
-   expect "COPY32>" send "copy safe:pemath.obj/12,pemath.obj/0\r";c  ;# Needed for EOU
-   expect "COPY32>" send "copy safe:f7rtl.obj/12,f7rtl51.obj/0\r";c  ;# Needed for EOU
+   expect "COPY32>" send "copy pascal.tsk/12,pascal.tsk/0\r";c
+   expect "COPY32>" send "copy pasrtl.obj/12,pasrtl.obj/0\r";c
+   expect "COPY32>" send "copy prefix.pas/12,prefix.pas/0\r";c
+   expect "COPY32>" send "copy prefix.pas/12,prefix.pas/0\r";c
+   expect "COPY32>" send "copy primes.pas/12,primes.pas/0\r";c
+   expect "COPY32>" send "copy smplsvcs.pas/12,smplsvcs.pas/0\r";c
+   expect "COPY32>" send "copy pemath.obj/12,pemath.obj/0\r";c  ;# Needed for EOU
+   expect "COPY32>" send "copy f7rtl.obj/12,f7rtl51.obj/0\r";c  ;# Needed for EOU
    expect "COPY32>" send "end\r";c
-   # Whitesmiths goes into SAFE:/13
+   # Whitesmiths goes to /13
    expect "COPY32:END OF TASK" attach -e -r mt0 tapes/C_Deb_Bas_Pas.tap ; send "load backup\r";c
-   expect "TSKID = BACKUP" send "start ,in=mag1:,out=safe:,ac=13,verify,list=con:\r";c
+   expect "TSKID = BACKUP" send "start ,in=mag1:,out=dsc4:,ac=13,verify,list=con:\r";c
    expect "BACKUP:TASK PAUSED" send "cancel backup\r";c
    expect "BACKUP:END OF TASK" send "load copy32\r";c
    expect "TSKID = COPY32" send "start\r";c
-   expect "COPY32>" send "copy safe:pp.tsk/13,pp.tsk/0\r";c
-   expect "COPY32>" send "copy safe:p1.tsk/13,p1.tsk/0\r";c
-   expect "COPY32>" send "copy safe:p2.tsk/13,p2.tsk/0\r";c
-   expect "COPY32>" send "copy safe:lister.tsk/13,lister.tsk/0\r";c
-   expect "COPY32>" send "copy safe:libe.obj/13,libe.obj/0\r";c
-   expect "COPY32>" send "copy safe:libu.obj/13,libu.obj/0\r";c
-   expect "COPY32>" send "copy safe:libw.obj/13,libw.obj/0\r";c
-   expect "COPY32>" send "copy safe:cinit.obj/13,cinit.obj/0\r";c
-   expect "COPY32>" send "copy safe:cfinit.obj/13,cfinit.obj/0\r";c
-   expect "COPY32>" send "copy safe:eouc.css/13,eouc.css/0\r";c
-   expect "COPY32>" send "copy safe:chloc.css/13,chloc.css/0\r";c
+   expect "COPY32>" send "copy pp.tsk/13,pp.tsk/0\r";c
+   expect "COPY32>" send "copy p1.tsk/13,p1.tsk/0\r";c
+   expect "COPY32>" send "copy p2.tsk/13,p2.tsk/0\r";c
+   expect "COPY32>" send "copy lister.tsk/13,lister.tsk/0\r";c
+   expect "COPY32>" send "copy libe.obj/13,libe.obj/0\r";c
+   expect "COPY32>" send "copy libu.obj/13,libu.obj/0\r";c
+   expect "COPY32>" send "copy libw.obj/13,libw.obj/0\r";c
+   expect "COPY32>" send "copy cinit.obj/13,cinit.obj/0\r";c
+   expect "COPY32>" send "copy cfinit.obj/13,cfinit.obj/0\r";c
+   expect "COPY32>" send "copy eouc.css/13,eouc.css/0\r";c
+   expect "COPY32>" send "copy chloc.css/13,chloc.css/0\r";c
    expect "COPY32>" send "option noterm,nopsfm\r";c
-   expect "COPY32>" send "copy safe:chfiles.css/13,chfiles.css/0\r";c
+   expect "COPY32>" send "copy chfiles.css/13,chfiles.css/0\r";c
    expect "COPY32>" send "end\r";c
-   expect "COPY32:END OF TASK" send "chloc ; chfiles ; mark dsc3:,off ; mark dsc4:,off ; display devices\r";c
-   expect "DSC5  FE 0000   OFF" detach mt0 ; detach dm1 ; detach dm0 ; goto startup-shutdown-scripts
+   expect "COPY32:END OF TASK" send "chloc ; chfiles ; mark dsc4:,off ; display devices\r";c
+   expect "DSC5  FE 0000   OFF" detach mt0 ; detach dm0 ; goto startup-shutdown-scripts
 
    boot dm0
    exit 1
@@ -363,9 +358,9 @@ set cpu idle
    set environ TIME=%TIME_HH%:%TIME_MM%
    send delay=10000
 
-   attach -e dm0 dm0.dsk
+   attach -e dm0 dsk4.dsk
 
-   deposit 7c 00000002
+   deposit 7c 002
 
    noexpect
    expect "ENTER DATE AND TIME" send "set time %DATE%,%TIME%\r";c
@@ -592,9 +587,9 @@ set cpu idle
    set environ TIME=%TIME_HH%:%TIME_MM%
    send delay=10000
 
-   attach -e dm0 dm0.dsk
+   attach -e dm0 dsk4.dsk
 
-   deposit 7c 00000002
+   deposit 7c 002
 
    noexpect
    expect "ENTER DATE AND TIME" send "set time %DATE%,%TIME%\r";c

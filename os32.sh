@@ -12,7 +12,7 @@
 
 :init
 
-   if not exist dm0.dsk echo ; echo ; echo dm0.dsk not found, try running rebuild-system.sh ; echo ; echo ; echo ; exit 0
+   if not exist dsk4.dsk echo ; echo ; echo dsk4.dsk not found, try running rebuild-system.sh ; echo ; echo ; echo ; exit 0
 
    set cpu 832
    set cpu idle
@@ -39,12 +39,12 @@
    #attach -r pt0 readme.txt
    #attach -c pt1 writeme.txt
 
-   attach -e dm0 dm0.dsk
-   #attach -e dm1 dsk3.dsk   ;# To mount disk, e.g. FOR, on DSK3:
+   attach -e dm0 dsk4.dsk
+   #attach -e dm1 dsk3.dsk   ;# To mount disk a second disk on DSK3:
    #attach mt0 mag1.tap      ;# To use backup tape on MAG1:
 
    attach lpt printer.out
-   deposit 7c 00000002
+   deposit 7c 002
 
    goto ok-here-we-go
 

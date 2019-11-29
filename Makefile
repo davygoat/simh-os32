@@ -11,15 +11,15 @@ clobber:: clean
 dist::	os32doc.zip os32src.zip os32kit.zip os32tiny.zip
 	@for f in $^; do echo ; echo ===== $$f ===================== ; echo ; unzip -lv $$f; done
 
-os32kit.zip: os32.sh dm0.dsk
+os32kit.zip: os32.sh dsk4.dsk
 	rm -f os32kit.zip
-	zip -r9 os32kit os32.sh dm0.dsk "doc/2016 - Getting Started with Interdata OS32.pdf"
+	zip -r9 os32kit os32.sh dsk4.dsk "doc/2016 - Getting Started with Interdata OS32.pdf"
 
 os32doc.zip: doc/*
 	rm -f os32doc.zip
 	zip -r9 os32doc doc/
 
-os32src.zip: dm0.dsk dm1.dsk
+os32src.zip:  dsk4.dsk
 	rm -f os32src.zip
 	zip -r9 os32src tapes/ rebuild-system.sh os32.sh Makefile
 
@@ -27,6 +27,6 @@ os32tiny.zip: os32.sh rebuild-system.sh tapes/eou.tap
 	rm -f os32tiny.zip
 	zip -r9 os32tiny $^
 
-dm0.dsk dm1.dsk:
-	[ -x dm0.dsk ] || ./rebuild-system.sh
+dsk4.dsk:
+	[ -x dsk4.dsk ] || ./rebuild-system.sh
 
