@@ -22,9 +22,9 @@
    attach pas 1026
 
    #
-   # Paper tape reader/punch PTPR:
+   # Paper Tape Punch/Reader, PTPR:
    #
-   # - pt0 appears to be read end since it supports readonly.
+   # - pt0 appears to be read end since only it supports readonly.
    # - pt1 does not allow readonly so I presume it must be the punch.
    #
    # You SHOULD be able to execute a CSS simply by typing PTPR: at
