@@ -21,8 +21,23 @@
    set pas devno=20
    attach pas 1026
 
+   #
+   # Paper tape reader/punch PTPR:
+   #
+   # - pt0 appears to be read end since it supports readonly.
+   # - pt1 does not allow readonly so I presume it must be the punch.
+   #
+   # You SHOULD be able to execute a CSS simply by typing PTPR: at
+   # the MTM prompt. But I'm getting "I/O ERROR, TYPE=DU". What's
+   # DU? If you use COPY32 to COPY PTPR:,CON:, it says "DEVICE
+   # UNAVAILABLE". Same thing happens at the system console. Maybe
+   # the device needs to be marked on in some way? But MARK PTPR:,ON
+   # does not work.
+   #
    set pt enabled
-   #TODO - attach pt?
+   set pt devno=13
+   #attach -r pt0 readme.txt
+   #attach -c pt1 writeme.txt
 
    attach -e dm0 dm0.dsk
    #attach -e dm1 dsk3.dsk   ;# To mount disk, e.g. FOR, on DSK3:

@@ -154,7 +154,7 @@ set cpu idle
    expect "CMDP>" send "T02C:,2C,39,XDCOD=X2A0D          *PE 550/PE 1100\r";c
    expect "CMDP>" send "T02E:,2E,39,XDCOD=X2A0D          *PE 550/PE 1100\r";c
    expect "CMDP>" send "CRT: ,12,39,XDCOD=X2A0D          *PE 550/PE 1100\r";c
-#  expect "CMDP>" send "PTPR:,13,80                      *PAPER TAPE\r";c
+   expect "CMDP>" send "PTPR:,13,80                      *PAPER TAPE\r";c
    expect "CMDP>" send "CR:  ,4,96                       *CARD READER\r";c
    expect "CMDP>" send "PR:  ,62,113                     *300-LPM LINE PRIN\r";c
    expect "CMDP>" send "CAS1:,45,66                      *CASSETTE NO 1\r";c
@@ -311,9 +311,9 @@ set cpu idle
    expect "COPY32>" send "copy safe:pascal.tsk/12,pascal.tsk/0\r";c
    expect "COPY32>" send "copy safe:pasrtl.obj/12,pasrtl.obj/0\r";c
    expect "COPY32>" send "copy safe:prefix.pas/12,prefix.pas/0\r";c
-   expect "COPY32>" send "copy safe:prefix.pas/12,prefix.pas/25\r";c
-   expect "COPY32>" send "copy safe:primes.pas/12,primes.pas/25\r";c
-   expect "COPY32>" send "copy safe:smplsvcs.pas/12,smplsvcs.pas/25\r";c
+   expect "COPY32>" send "copy safe:prefix.pas/12,prefix.pas/0\r";c
+   expect "COPY32>" send "copy safe:primes.pas/12,primes.pas/0\r";c
+   expect "COPY32>" send "copy safe:smplsvcs.pas/12,smplsvcs.pas/0\r";c
    expect "COPY32>" send "copy safe:pemath.obj/12,pemath.obj/0\r";c  ;# Needed for EOU
    expect "COPY32>" send "copy safe:f7rtl.obj/12,f7rtl51.obj/0\r";c  ;# Needed for EOU
    expect "COPY32>" send "end\r";c
