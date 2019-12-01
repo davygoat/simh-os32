@@ -645,7 +645,6 @@ set cpu idle
    expect "\r\n*" send "alloc userinit.css,in,100 ; build userinit.css\r";c
    expect ".CMDP>" send "prevent prompt\r";c
    expect ".CMDP>" send "eouinit\r";c
-   expect ".CMDP>" send "ssysprt null:\r";c
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "endb\r";c
    expect "\r\n*"  send "rename userinit.css,userinit.css/25\r";c
