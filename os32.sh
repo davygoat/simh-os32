@@ -6,7 +6,7 @@
 # It also assumes that you have two CSS files called STARTUP.CSS and
 # SHUTDOWN.CSS. STARTUP brings up MTM and anything else you may want, such
 # as the spooler. SHUTDOWN cancels those tasks and marks non system disks
-# off, after which it tell us to mark the system disk off and power down
+# off, after which it tells us to mark the system disk off and power down
 # (which cannot be done inside a CSS file).
 #
 
