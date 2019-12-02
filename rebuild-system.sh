@@ -380,6 +380,17 @@ set cpu idle
    expect ".CMDP>" send "$endc\r";c
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "endb\r";c
+   # MTMONLY.CSS
+   expect "\r\n*" send "build mtmonly.css\r";c
+   expect ".CMDP>" send "$job\r";c
+   expect ".CMDP>" send "   display users ,null:\r";c
+   expect ".CMDP>" send "$termjob\r";c
+   expect ".CMDP>" send "$ifne 0\r";c
+   expect ".CMDP>" send "   $write THIS COMMAND ONLY WORKS IN MTM\r";c
+   expect ".CMDP>" send "   $clear\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "endb\r";c
    # STARTUP.CSS
    expect "\r\n*" send "build startup.css\r";c
    expect ".CMDP>" send "sysonly\r";c
