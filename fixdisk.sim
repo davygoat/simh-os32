@@ -1,0 +1,29 @@
+# vim:set syntax=sh:
+
+:params
+
+   set env DISK=%1
+
+   if "%DISK%" == "" goto usage
+
+:automate
+
+   expect "*" send "mark %DISK%:,on,p\r";c
+   expect "*" send "load sys:fastchek\r";c
+   expect "*" send "mark %DISK%:,off\r";c
+   expect "*" send "start ,ch=%DISK%:,nor,ext,li=con:\r";c
+   send "\r"
+   continue
+   goto bottom
+
+:usage
+
+   echof ""
+   echof "Usage: sim> do fixdisk DISK"
+   echof ""
+   echof "Note:  DISK is typically DSC3"
+   echof ""
+   goto bottom
+
+:bottom
+

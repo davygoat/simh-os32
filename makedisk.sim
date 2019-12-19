@@ -1,0 +1,42 @@
+# vim:set nowrap:
+# vim:set syntax=sh:
+
+:params
+
+   set env VOL=%1
+   set env FNAM=%2
+
+   if "%VOL%" == "" goto usage
+   if "%FNAM%" == "" goto usage
+
+   if exist "%FNAM%" goto trample
+
+:automate
+
+   attach -n dm1 %FNAM%
+   expect "\r\n*" send "load fastchek\r";c
+   expect "TSKID = FASTCHEK" send "start ,init=dsc3:,vol=%VOL%,li=con:\r";c
+   expect "FASTCHEK:END OF TASK" send "mark dsc3:,on\r";c
+   send "\r"
+   continue
+   goto bottom
+
+:usage
+
+   echof ""
+   echof "Usage: sim> do makedisk VOLUME FILENAME"
+   echof ""
+   echof "Note:  VOLUME is four chars max"
+   echof "       FILENAME is a file on the host"
+   echof ""
+   goto bottom
+
+:trample
+
+   echof "\n"
+   echof "ERROR: File %FNAM% already exists. You don't want to trample on it."
+   echof "\n"
+   goto bottom
+
+:bottom
+
