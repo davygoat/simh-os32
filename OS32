@@ -1,0 +1,848 @@
+#!/usr/bin/expect
+# vim:set syntax=tcl:
+# vim:set nowrap:
+
+#
+# TODO
+#
+# - MDTM: modification date and time.
+# - RNTO: rename file (with RNFR rename from).
+# - APPE: special case STOR.
+# - STOU: special case STOR.
+# - DELE: delete file. Rely on protection for important files.
+# - Binary and contiguous files?
+# - Don't "die" on the client. 
+# - Don't leave the dimmer on.
+# - Return errors to the client.
+#
+
+package require Expect
+package require ftpd
+
+namespace eval OS32 {
+
+   variable ftpcmd  ""
+   variable ftpsok  ""
+ 
+   #
+   # Disable the bits we don't want, or haven't gotten round to.
+   #
+
+   rename ::ftpd::Fs {}
+
+   proc ::ftpd::command::MKD { sock prm } {
+      ::OS32::NoTransmit $sock "500 mkdir not supported on OS/32"
+   }
+
+   proc ::ftpd::command::XMKD { sock prm } {
+      ::OS32::NoTransmit $sock "500 mkdir not supported on OS/32"
+   }
+
+   proc ::ftpd::command::RMD { sock prm } {
+      ::OS32::NoTransmit $sock "500 rmdir not supported on OS/32"
+   }
+
+   proc ::ftpd::command::XRMD { sock prm } {
+      ::OS32::NoTransmit $sock "500 rmdir not supported on OS/32"
+   }
+
+   proc ::ftpd::command::SIZE { sock prm } {
+      ::OS32::NoTransmit $sock "500 It's complicated (record oriented filesystem)."
+   }
+
+   proc ::ftpd::command::APPE {sock prm} { ::OS32::NoTransmit $sock "500 TODO" ; puts "\n\n*** TODO: APPE (APPEND) ****" }
+   proc ::ftpd::command::DELE {sock prm} { ::OS32::NoTransmit $sock "500 TODO" ; puts "\n\n*** TODO: DELE (DELETE) ****" }
+   proc ::ftpd::command::MDTM {sock prm} { ::OS32::NoTransmit $sock "500 TODO" ; puts "\n\n*** TODO: MDTM (MODIFIED DATE TIME) ****" }
+   proc ::ftpd::command::RNFR {sock prm} { ::OS32::NoTransmit $sock "500 TODO" ; puts "\n\n*** TODO: RNFR (RENAME FROM) ****" }
+   proc ::ftpd::command::RNTO {sock prm} { ::OS32::NoTransmit $sock "500 TODO" ; puts "\n\n*** TODO: RNTO (RENAME TO) ****" }
+   proc ::ftpd::command::STOU {sock prm} { ::OS32::NoTransmit $sock "500 TODO" ; puts "\n\n*** TODO: STOU (STORE UNIQUE) ****" }
+
+;#########################################################################
+   #
+   # CWD -- Change working directory
+   #
+   # - OS/32 does not have directories as such, but we can use the volume
+   #   name and/or account as a sort-of equivalent.
+   #
+   # - Accounts cannot be nested. Because the built-in CWD command assumes
+   #   a POSIX-like environment, we have to override the existing code.
+   #
+   # - If the CWD request includes a volume name, we run a script called
+   #   CHECKVOL.CSS to make sure that said volume does in fact exists. This
+   #   has to happen asynchronously, which is why we use a top half bottom 
+   #   half construct.
+   #
+
+   namespace eval CWD {
+
+      # Copy some variables from the parent namespace.
+      upvar #0 [namespace parent]::ftpsok  ftpsok
+      upvar #0 [namespace parent]::BadFile BadFile
+
+      #
+      # Tcl'er tricks: This is how we override the built-in CWD, simply
+      # redefine the proc.
+      #
+
+      proc ::ftpd::command::CWD { sock dir } {
+         return [::OS32::CWD::TopHalf $sock $dir]
+      }
+
+      #
+      # The name is not important, but I'm calling this proc TopHalf 
+      # because I'll be using a BottomHalf to check that a volume exists.
+      #
+
+      proc TopHalf { sock dir } {
+
+         upvar #0 ::ftpd::$sock data
+
+         # Obvious errors? Immediate 500 series response. Easy.
+         set dir [string toupper $dir]
+         if { ![regexp {^([A-Z][A-Z0-9]{0,3}:?)?/?([0-9]+)?$} $dir -> vol act] } {
+            puts $sock "550 Not a directory (must be NUMBER, VOLUME, or VOLUME:/NUMBER)"
+            return
+         }
+         if { $act != "" } {
+            if { $act > 65535 } {
+               puts $sock "550 Not a directory, account must be less than 65536"
+               return
+            }
+         }
+
+         # That's all? Immediate 200 series success. Great.
+         if { $vol == "" } {
+            set data(cwd) $act
+            puts $sock "250 Directory is now $data(vol)/$data(cwd)"
+            return
+         }
+
+         # But if we need to SEND a command (to run CHECKVOL.CSS), we have
+         # to schedule a "bottom half" for pattern matching.
+         set data(rvol) $vol
+         if { $act != "" } { set data(ract) $act }
+         ::OS32::BottomHalf $sock CWD "CHECKVOL $vol"
+      }
+
+      #
+      # The asynchronous bit is done with our own home made AWK-like Tcl 
+      # command. This proc must be called LinePatternMatch. The interact
+      # (expect) command will check if we have one. If we do, then it'll
+      # call us with the current output line.
+      #
+
+      proc LinePatternMatch { line } {
+
+         awkward $line {
+
+            # State variables have to brought into scope in our primitive
+            # awk. In this case we only need the socket. Note that ftpsok
+            # is also listed above. The "variable ftpsok" below refers to
+            # the "upvar" that we did above, which in turn refers to the
+            # variable in the parent OS32 namespace.
+            BEGIN {
+               variable ftpsok
+               upvar #0 ::ftpd::$ftpsok data
+            }
+            # ===BEGIN=== marker, turn the dimmer on.
+            "^\\*=== BEGIN CHECKVOL (.*) ===" {
+               dimmer on $0
+            }
+            # We need a success/failure indicator of sorts. In this case we
+            # use the CSS' error message as the deciding factor.
+            "^\\*VOLUME (.*) OK" {
+            }
+            "^\\*VOLUME (.*) NOT FOUND" {
+               set data(error) "550 No such volume, $1, or disk not marked on"
+            }
+            # When we get the ===END=== marker, return the console back to 
+            # normal (dimmer off).
+            "^\\*=== END CHECKVOL (.*) ===" {
+               dimmer off $0
+               if { [info exists data(error)] } {
+                  # If we got an error, we return the message to the client
+                  # with the help of our NoTransmit proc.
+                  if { [info exists data(ract)] } {
+                     unset data(ract)
+                  }
+                  NoTransmit $ftpsok $data(error)
+                  unset data(rvol)
+                  unset data(error)
+               } else {
+                  # If it worked, we can accept the new default volume 
+                  # and/or account. But remember to unset custom state.
+                  if { [info exists data(ract)] } {
+                     set data(cwd) $data(ract)
+                     unset data(ract)
+                  }
+                  set data(vol) $data(rvol)
+                  if { ![string match *: $data(vol)] } { append data(vol) : }
+                  unset data(rvol)
+                  # In THIS case we use NoTransmit to return the response,
+                  # since we are not using the passive mode socket.
+                  NoTransmit $ftpsok "250 Directory is now $data(vol)/$data(cwd)"
+               }
+            }
+         }
+      }
+   }
+
+;#########################################################################
+   #
+   # CDUP -- Go up one directory level
+   #
+   # Again, OS/32 does not have nested directories. But we can return to
+   # the initial/default directory. This one is easy: just chain to the
+   # CWD handler we just did.
+   #
+
+   namespace eval CDUP {
+      proc ::ftpd::command::CDUP { sock list } {
+         return [::ftpd::command::CWD $sock 0]
+      }
+   }
+
+;#########################################################################
+   #
+   # LIST -- List files
+   #
+   # - Invoke the DISPLAY FILES command through a script called DIR.CSS.
+   #
+   # - DOS wildcards are accepted, and translated to OS/32 syntax.
+   #
+   #   - Asterisks are converted to dashes. These only work at the end of
+   #     a file name or extension.
+   #
+   #   - Question marks are converted to asterisks. These are a bit hit
+   #     and miss...
+   #
+   # - DOS/UNIX wildcards are very much preferred because everyone's FTP 
+   #   client will be using them for mget and mput.
+   #
+
+   namespace eval LIST {
+
+      # Bring parent variables into scope
+      upvar #0 [namespace parent]::ftpcmd  ftpcmd
+      upvar #0 [namespace parent]::ftpsok  ftpsok
+      upvar #0 [namespace parent]::BadFile BadFile
+
+      proc ::ftpd::command::LIST { sock fnam } {
+         return [::OS32::LIST::TopHalf $sock $fnam LIST]
+      }
+
+      proc TopHalf { sock fnam ftpcmd } {
+         variable BadFile
+         set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
+         if { $fnam == $BadFile } {
+            puts $sock "501 Invalid filename or wildcard"
+            return
+         }
+         upvar #0 ::ftpd::$sock data
+         set data(fnam) $fnam
+         ::OS32::BottomHalf $sock $ftpcmd "DIR $fnam,,,,,,,,FTP"
+      }
+
+      proc LinePatternMatch { line } {
+
+         awkward $line {
+
+            BEGIN {
+               variable ftpcmd
+               variable ftpsok
+               upvar #0 ::ftpd::$ftpsok data
+            }
+            # The ===BEGIN=== marker tells us to turn the dimmer on. But its
+            # *real* purpose is to balance the ===END=== marker that we use
+            # to signal the end of DISPLAY FILES output. You can't rely on
+            # the OS prompt because it's well nigh impossible to distinguish
+            # from command output. (Not reliably, at least.)
+            "^\\*=== BEGIN DIRECTORY .*? ===" {
+               dimmer on $0
+            }
+            # We have an error message. Remember it for later.
+            "^\\*FILE.S. NOT FOUND ON .*" {
+               set data(error) "550 File(s) not found, $data(fnam)"
+            }
+            # The presence of a "VOLUME=" means that DIR was successful. Get 
+            # ready to transmit data through the secondary (passive mode) 
+            # socket. So we'll call BeginTransmit now.
+            "^\\*(VOLUME= .*)" {
+               BeginTransmit $ftpsok "DIR $data(fnam)"
+               if { $ftpcmd == "LIST" } {
+                  puts -nonewline $data(sock2) "$1\r\n"
+               }
+            }
+            # If we're handling a LIST, we will forward all output verbatim.
+            # If it's an NLST, we only send the file name and extension.
+            "^\\* (........).(...)/(.....) (.. .+)" {
+               if { $ftpcmd == "LIST" } {
+                  puts -nonewline $data(sock2) " $1.$2/$3 $4\r\n"
+               }
+               if { $ftpcmd == "NLST" } {
+                  set nam [string trim $1]
+                  set ext [string trim $2]
+                  puts -nonewline $data(sock2) [string tolower "$nam.$ext\r\n"]
+               }
+            }
+            # The ===END=== marker tells us to turn the dimmer off and stop
+            # sending data. If we sent a directory list to the client, we
+            # will have called BeginTransmit, which we now close off with
+            # EndTransmit. If we didn't send a directory list (because we 
+            # detected an error), we'll close with a NoTransmit because
+            # there is no passive mode socket.
+            "^\\*=== END DIRECTORY .*? ===" {
+               dimmer off $0
+               if { [info exists data(error)] } {
+                  NoTransmit $ftpsok $data(error)
+                  unset data(error)
+               } else {
+                  EndTransmit $ftpsok "DIR $data(fnam)"
+               }
+               unset data(fnam)
+            }
+         }
+      }
+   }
+
+;#########################################################################
+   #
+   # NLST -- List file names
+   #
+   # This is a variation of the LIST command that only returns file names.
+   # It is is typically invoked by the FTP client's mget command to resolve
+   # remote wildcards. So we can again chain to our previously written LIST
+   # handler.
+   #
+
+   namespace eval NLST {
+
+      proc ::ftpd::command::NLST { sock fnam } {
+         return [::OS32::LIST::TopHalf $sock $fnam NLST]
+      }
+
+      proc LinePatternMatch { line } {
+         return [::OS32::LIST::LinePatternMatch $line]
+      }
+   }
+
+;#########################################################################
+   #
+   # PASS -- Check password
+   #
+   # tcllib's ftpd already has a pretty good password checker, but that only
+   # works for UNIX-like systems. Meanwhile, we'll just use a cleartext
+   # username/password array in our config file. Later on we might want to 
+   # try logging in on an MTM (Telnet) session.
+   #
+
+if [info exists config::passwords] {
+   namespace eval PASS {
+
+      #
+      # Tcl'er tricks: Rename the original proc before you override it. 
+      # Then you can add extra functionality (setting the default volume
+      # and account) by "specialisation".
+      #
+
+      rename ::ftpd::command::PASS ::ftpd::command::_PASS
+
+      proc ::ftpd::command::PASS { sock password } {
+         upvar #0 ::ftpd::$sock data
+         set data(cwd) 0
+         set data(vol) "SYS:"
+         return [::ftpd::command::_PASS $sock $password]
+      }
+
+      # This proc is passed as an option to the ::ftpd::server command.
+      proc AuthUserCallback { user pass } {
+         upvar #0 ::[namespace parent]::config::passwords passwords
+         if { [array names passwords -exact $user] == $user &&
+              [set passwords($user)] == $pass } {
+            ::OS32::trafficlight green "FTP USER $user LOGGED IN"
+            return 1
+         } else {
+            ::OS32::trafficlight red "FTP USER $user FAILED LOGIN"
+            return 0
+         }
+      }
+   }
+}
+
+;#########################################################################
+   #
+   # PWD -- Print working directory
+   #
+   # Returns the current "working directory", i.e. volume and account, to
+   # the client. We're overriding the built-in version because we're not
+   # doing it UNIX style.
+   #
+
+   namespace eval PWD {
+      proc ::ftpd::command::PWD { sock argument } {
+         upvar #0 ::ftpd::$sock data
+         puts $sock "250 Current directory is $data(vol)/$data(cwd)"
+      }
+   }
+
+;#########################################################################
+   #
+   # RETR -- Retrieve file
+   #
+   # TYPE the file, and capture the meanful bits. Because OS/32 has no 
+   # built-in command to do this, we have to use a CSS to run COPY32 and 
+   # copy the file to the console.
+   #
+
+   namespace eval RETR {
+
+      upvar #0 [namespace parent]::ftpcmd  ftpcmd
+      upvar #0 [namespace parent]::ftpsok  ftpsok
+      upvar #0 [namespace parent]::BadFile BadFile
+
+      proc ::ftpd::command::RETR { sock fnam } {
+         return [::OS32::RETR::TopHalf $sock $fnam]
+      }
+
+      proc TopHalf { sock fnam } {
+         variable BadFile
+         set fnam [::OS32::WildFile $sock [string toupper $fnam] RETR]
+         if { $fnam == $BadFile } {
+            puts $sock "501 Invalid filename (8.3 max, letters, digits)"
+            return
+         }
+         upvar #0 ::ftpd::$sock data
+         set data(fnam) $fnam
+         ::OS32::BottomHalf $sock RETR "TYPE $fnam,,,,,,,,FTP"
+      }
+
+      proc LinePatternMatch { line } {
+
+         awkward $line {
+
+            BEGIN {
+               variable ftpcmd
+               variable ftpsok
+               upvar #0 ::ftpd::$ftpsok data
+            }
+            "^\\*FILE NOT FOUND" {
+               NoTransmit $ftpsok "550 File not found, $data(fnam)"
+            }
+            "^\\*=== BEGIN COPYOUT .*? ===" {
+               dimmer on $0
+               BeginTransmit $ftpsok $data(fnam)
+            }
+            "^\\*.*\\.BG:(PERKIN-ELMER OS/32 COPY ..-... R..-..)" {
+               # ignore
+            }
+            "^\\*.*\\.BG:END OF TASK" {
+               # ignore
+            }
+            "^\\*.*\\.BG:(.*)" {
+               puts -nonewline $data(sock2) "$1\r\n"
+            }
+            "^\\*=== END COPYOUT .*? ===" {
+               dimmer off $0
+               EndTransmit $ftpsok $data(fnam)
+            }
+         }
+      }
+   }
+
+;#########################################################################
+   #
+   # STOR -- Store file
+   #
+   # - This is quite difficult because we have to allocate a file, start
+   #   the editor, feed it with commands and text, save the file, rename it,
+   #   and clean up after ourselves. Fortunately, most of this can be done
+   #   by a CSS, but we still have some obstacles...
+   #
+   # - We're going to start by issuing a *bad* COPYIN command because we
+   #   don't know the record length, and we can't receive data in the "top
+   #   half"..
+   #
+   # - When that results in a USAGE reply, we'll start the transmission,
+   #   read all the data up front, work out a record length, and THEN issue
+   #   the correct COPYIN command.
+   #
+   # - In addition to line-oriented patterns, we'll also be dealing with
+   #   prompt patterns, i.e. partial lines. So have an extra proc, called 
+   #   PromptPatternMatch.
+   #
+
+   namespace eval STOR {
+
+      upvar #0 [namespace parent]::ftpcmd  ftpcmd
+      upvar #0 [namespace parent]::ftpsok  ftpsok
+      upvar #0 [namespace parent]::osline  osline
+      upvar #0 [namespace parent]::BadFile BadFile
+
+      proc ::ftpd::command::STOR { sock fnam } {
+         return [::OS32::STOR::TopHalf $sock $fnam]
+      }
+
+      proc TopHalf { sock fnam } {
+         variable BadFile
+         upvar #0 ::ftpd::$sock data
+         set fnam [::OS32::WildFile $sock [string toupper $fnam] STOR]
+         if { $fnam == $BadFile } {
+            puts $sock "501 Invalid filename (8.3 max, letters, digits)"
+            return
+         }
+         ::OS32::BottomHalf $sock STOR "COPYIN $fnam\r"
+         set data(fnam) $fnam
+      }
+
+      proc LinePatternMatch { line } {
+
+         awkward $line {
+
+            BEGIN {
+               variable ftpcmd
+               variable ftpsok
+               upvar #0 ::ftpd::$ftpsok data
+            }
+            "^\\*USAGE: COPYIN FD,RECLEN" {
+               dimmer on $0
+               BeginTransmit $ftpsok $data(fnam)
+               set data(reclen) 80
+               set data(nrec) 0
+               set data(ccc) 0
+               while { [gets $data(sock2) line] > 0 } {
+                  set line [string trimright $line]
+                  lappend data(storme) $line
+                  set len [string length $line]
+                  if { $len > $data(reclen) } { set data(reclen) $len }
+                  incr data(nrec)
+               }
+               if { [expr $data(reclen)%4] > 0 } {
+                  incr data(reclen) [expr 4-$data(reclen)%4]
+               }
+               send -- "COPYIN $data(fnam),$data(reclen)\r"
+            }
+            "^\\*=== BEGIN COPYIN .*? ===" {
+            }
+            "^\\*DELE-ERR  TYPE=PROT" {
+               set data(error) "550 Cannot delete file because it is protected"
+            }
+            "^\\*(....-ERR.*)" {
+               set data(error) "550 $1"
+            }
+            "^\\*=== END COPYIN .*? ===" {
+               dimmer off $0
+               if { [info exists data(error)] } {
+                  NoTransmit $ftpsok $data(error)
+                  unset data(error)
+               } else {
+                  EndTransmit $ftpsok "$data(fnam), $data(nrec) records, $data(reclen) chars reclen"
+               }
+               unset data(reclen)
+               unset data(nrec)
+               unset data(ccc)
+            }
+         }
+      }
+
+      proc PromptPatternMatch { line } {
+
+         awkward $line {
+
+            BEGIN {
+               variable ftpcmd
+               variable ftpsok
+               variable osline
+               upvar #0 ::ftpd::$ftpsok data
+            }
+            "^\\*.+\\.BG:.+\\.BG>" {
+               if { $data(ccc) < $data(nrec) } {
+                  set line [lindex $data(storme) $data(ccc)]
+                  if { $line == "" } { set line " " }
+                  send -- "$line\r"
+                  incr data(ccc)
+               } else {
+                  unset data(storme)
+                  send -- "\r"
+               }
+               set osline ""
+            }
+            "^\\*\\.BG>" {
+               send -- "done\r"
+               set osline ""
+            }
+         }
+      }
+   }
+
+;#########################################################################
+   #
+   # SYST -- Return system information
+   #
+   # The built-in version reports UNIX or Windows. We're neither.
+   #
+
+   namespace eval SYST {
+      proc ::ftpd::command::SYST { sock list } {
+         upvar #0 ::OS32::config::ostype ostype
+         puts $sock "215 $ostype"
+      }
+   }
+
+;#########################################################################
+   #
+   # USER -- User connect
+   #
+   # - I'm perfectly ok with the built-in version. It calls the routine
+   #   supplied with the -authIpCmd option. The USER namespace serves only
+   #   as a logical place to put the proc to keep everything out of the
+   #   global namespace.
+   #
+   # - The config file has a variable called allowip, which lists the IP 
+   #   addresses that we wish to allow.
+   #
+
+   namespace eval USER {
+
+      proc AuthIpCallback { ip } {
+         upvar #0 ::OS32::config::allowip allowip
+         if { $allowip != "all" } {
+            foreach allow $allowip {
+               if { $ip == $allow } {
+                  return 1
+               }
+            }
+            ::OS32::trafficlight red "FTP CONNECTION ($ip) REJECTED"
+            return 0
+         } else {
+            ::OS32::trafficlight green "FTP CONNECTION ($ip) ACCEPTED"
+            return 1
+         }
+      }
+   }
+
+;#########################################################################
+   #
+   # Bottom half and convenience routines.
+   #
+
+   variable BadFile {//////////////////////////}
+
+   proc WildFile { sock fnam cmd } {
+
+      switch $cmd {
+         LIST {
+            set re {^[-*A-Za-z][-*.A-Za-z0-9]{0,11}$}
+            set fnam [string map { * - ? * } $fnam]
+            set acceptnull 1
+         }
+         NLST {
+            set re {^[-A-Za-z][-.A-Za-z0-9]{0,11}$}
+            regsub -all {\*} $fnam {-} fnam
+            set acceptnull 1
+         }
+         RETR {
+            set re {^[A-Za-z][A-Za-z0-9]{0,7}(\.[A-Za-z0-9]{1,3})?$}
+            set acceptnull 0
+         }
+         STOR {
+            set re {^[A-Za-z][A-Za-z0-9]{0,7}(\.[A-Za-z0-9]{1,3})?$}
+            set acceptnull 0
+         }
+      }
+
+      variable BadFile
+      if { $fnam == "" } {
+         if { $acceptnull == 0 } { return $BadFile }
+      } elseif { ![regexp $re $fnam] } {
+         return $BadFile
+      }
+
+      upvar #0 ::ftpd::$sock data
+      return $data(vol)$fnam/$data(cwd)
+   }
+
+   proc BottomHalf { sock ftpcm oscmd } {
+      variable ftpcmd $ftpcm
+      variable ftpsok $sock
+      send -- "$oscmd\r"
+   }
+
+   proc BeginTransmit { sock ftpcmd } {
+      puts $sock "150 Begin $ftpcmd"
+      ::ftpd::PasvCheckAndWait $sock
+   }
+
+   proc EndTransmit { sock ftpcm } {
+      ::ftpd::FinishData $sock
+      puts $sock "226 End $ftpcm"
+      variable ftpcmd ""
+      variable ftpsok ""
+   }
+
+   proc NoTransmit { sock mess } {
+      ::ftpd::FinishData $sock
+      puts $sock $mess
+      variable ftpcmd ""
+      variable ftpsok ""
+   }
+
+   proc LogNothing { severity wot } {
+      return
+   }
+
+   proc awkward { 0 arglist } {
+      set awk {}
+      foreach line [split $arglist \n] {
+         set line [string trim $line]
+         if { $line == "" || [string range $line 0 0] == "#" } continue
+         if { $awk != "" } { append awk \n }
+         append awk $line
+      }
+      set match 0
+      foreach { re action } $awk {
+         if { $re == "BEGIN" || $re == "END" } {
+            eval $action
+            continue
+         }
+         if { !$match && [regexp $re $0 -> 1 2 3 4 5 6 7 8 9] } {
+            eval $action
+            set match 1
+            continue
+         }
+      }
+      return $match
+   }
+
+   # reference 'awkward' in the global namespace for convenience
+   proc ::awkward { 0 awk } {
+      return [::OS32::awkward $0 $awk]
+   }
+
+   variable dimmeris off
+   variable vt100
+
+   array set vt100 {
+      red    "\x1b\[31;1m"
+      green  "\x1b\[32m"
+      grey   "\x1b\[2m"
+      normal "\x1b\[0m"
+      on     "\x1b\[2m"
+      off    "\x1b\[0m"
+   }
+
+   proc dimmer { onoff str } {
+      variable vt100
+      switch $onoff {
+         "on" {
+            puts -nonewline "\r$vt100(on)$str"
+            variable dimmeris on
+         }
+         "off" {
+            puts -nonewline "\r$str$vt100(off)"
+            variable dimmeris off
+         }
+      }
+   }
+
+   proc trafficlight { colour message } {
+      variable dimmeris
+      variable vt100
+      set cn [set vt100($colour)]
+      set dm [set vt100($dimmeris)]
+      puts -nonewline "\r*$cn$message$dm\n*"
+   }
+
+;#########################################################################
+   #
+   # Startup
+   #
+
+   proc StartFTP {} {
+
+      set ::ftpd::welcome $config::welcome
+      set ::ftpd::contact $config::contact
+      set ::ftpd::port    $config::port
+
+      ftpd::config -authIpCmd ::OS32::USER::AuthIpCallback
+#     ftpd::config -logCmd    ::OS32::LogNothing
+
+      if [info exists config::passwords] {
+         ftpd::config -authUsrCmd ::OS32::PASS::AuthUserCallback
+      }
+
+      ftpd::server $config::host
+
+      variable vt100
+      puts -nonewline "\n$vt100(green)$config::welcome $config::host port $config::port$vt100(normal)\n\n"
+   }
+
+   variable osline ""
+
+   proc DoExpect {} {
+      namespace eval :: {
+         interact {
+            -o
+            # We'll usually trigger pattern matching on <CR>.
+            -re "\r" {
+               upvar #0 ::OS32::ftpcmd ftpcmd
+               upvar #0 ::OS32::osline osline
+               set LinePatternMatch ::OS32::[set ftpcmd]::LinePatternMatch
+               if { $ftpcmd != "" } {
+                  if { [info procs $LinePatternMatch] != "" } {
+                     $LinePatternMatch $osline
+                  }
+               }
+               puts ""
+               set osline ""
+            }
+            # Discard <NL> and annoying <DEL> characters.
+            -re "(\n|\x7f)" {
+            }
+            # All other characters are echoed and assembled into lines. But
+            # some OS/32 programs have their own prompts that have to spot
+            # before we ever get a carriage return.
+            -re . {
+               upvar #0 ::OS32::ftpcmd ftpcmd
+               upvar #0 ::OS32::osline osline
+               set c $interact_out(0,string)
+               if { $c != 0x7f } {
+                  append osline $c
+                  puts -nonewline stderr $c
+               }
+               set PromptPatternMatch ::OS32::[set ftpcmd]::PromptPatternMatch
+               if { $ftpcmd != "" } {
+                  if { [info procs $PromptPatternMatch] != "" } {
+                     $PromptPatternMatch $osline
+                  }
+               }
+            }
+         }
+      }
+   }
+
+;#########################################################################
+   #
+   # Main program
+   #
+
+   puts "\x1b\[m"
+   if { [file exists ftpd.config] } {
+      source ftpd.config
+      if { [info exists config::host] &&
+           [info exists config::port] &&
+           $config::port } {
+         StartFTP
+      } else {
+         puts "FTP server is disabled"
+      }
+   }
+
+   namespace eval :: {
+      catch { exec killall -9 id32 } 
+      spawn ./id32 os32.ini
+   }
+   DoExpect
+   puts "\x1b\[m"
+
+   namespace export *
+}
