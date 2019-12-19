@@ -475,29 +475,24 @@ set cpu idle
    expect ".CMDP>" send "$write MARK DSC4 OFF BEFORE YOU GO\r";c
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "endb\r";c
-   # TYPE.CSS
-   expect "\r\n*" send "build type.css\r";c
+   # DIR.CSS
+   expect "\r\n*" send "build dir.css\r";c
    expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "$ifnull @1\r";c
-   expect ".CMDP>" send "   $write USAGE: TYPE FD\r";c
-   expect ".CMDP>" send "   $clear\r";c
-   expect ".CMDP>" send "$endc\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "$ifnx @1\r";c
-   expect ".CMDP>" send "   $write FILE NOT FOUND\r";c
-   expect ".CMDP>" send "   $clear\r";c
+   expect ".CMDP>" send "$ifnnull @9\r";c
+   expect ".CMDP>" send "   $write === BEGIN DIRECTORY @1 ===\r";c
    expect ".CMDP>" send "$endc\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "$job\r";c
-   expect ".CMDP>" send "   $build type.tmp\r";c
-   expect ".CMDP>" send "      option noterm,nopsfm\r";c
-   expect ".CMDP>" send "      copy @1,con:\r";c
-   expect ".CMDP>" send "      end\r";c
-   expect ".CMDP>" send "   $endb\r";c
-   expect ".CMDP>" send "   load .bg,copy32; task .bg; start ,command=type.tmp\r";c
+   expect ".CMDP>" send "   $ifnull @1\r";c
+   expect ".CMDP>" send "      display files\r";c
+   expect ".CMDP>" send "   $else\r";c
+   expect ".CMDP>" send "      display files ,@1\r";c
+   expect ".CMDP>" send "   $endc\r";c
    expect ".CMDP>" send "$termjob\r";c
    expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "xdelete type.tmp\r";c
+   expect ".CMDP>" send "$ifnnull @9\r";c
+   expect ".CMDP>" send "   $write === END DIRECTORY @1 ===\r";c
+   expect ".CMDP>" send "$endc\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "*\r";c
@@ -534,18 +529,86 @@ set cpu idle
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "endb\r";c
-   # DIR.CSS
-   expect "\r\n*" send "build dir.css\r";c
+   # TYPE.CSS
+   expect "\r\n*" send "build type.css\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "$ifnull @1\r";c
-   expect ".CMDP>" send "   display files\r";c
-   expect ".CMDP>" send "$else\r";c
-   expect ".CMDP>" send "   display files ,@1\r";c
+   expect ".CMDP>" send "   $write USAGE: TYPE FD\r";c
+   expect ".CMDP>" send "   $clear\r";c
    expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$ifnx @1\r";c
+   expect ".CMDP>" send "   $write FILE NOT FOUND\r";c
+   expect ".CMDP>" send "   $clear\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$ifnnull @9\r";c
+   expect ".CMDP>" send "   $write === BEGIN COPYOUT @1 ===\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$job\r";c
+   expect ".CMDP>" send "   $build type.tmp\r";c
+   expect ".CMDP>" send "      option noterm,nopsfm\r";c
+   expect ".CMDP>" send "      copy @1,con:\r";c
+   expect ".CMDP>" send "      end\r";c
+   expect ".CMDP>" send "   $endb\r";c
+   expect ".CMDP>" send "   load .bg,copy32; task .bg; start ,command=type.tmp\r";c
+   expect ".CMDP>" send "$termjob\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$ifnnull @9\r";c
+   expect ".CMDP>" send "   $write === END COPYOUT @1 ===\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "xdelete type.tmp\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "endb\r";c
+   # COPYOUT.CSS
+   expect "\r\n*" send "build copyout.css\r";c
+   expect ".CMDP>" send "type @1,,,,,,,,ftp\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "endb\r";c
+   # COPYIN.CSS
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "sysonly\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$ifnull @1\r";c
+   expect ".CMDP>" send "   $write USAGE: COPYIN FD,RECLEN\r";c
+   expect ".CMDP>" send "   $clear\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "$ifnull @2\r";c
+   expect ".CMDP>" send "   $write USAGE: COPYIN FD,RECLEN\r";c
+   expect ".CMDP>" send "   $clear\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$write === BEGIN COPYIN @1 ===\r";c
+   expect ".CMDP>" send "$job\r";c
+   expect ".CMDP>" send "   xallocate copyin.tmp,index,@2\r";c
+   expect ".CMDP>" send "   xdelete @1\r";c
+   expect ".CMDP>" send "$termjob\r";c
+   expect ".CMDP>" send "$ifne 0\r";c
+   expect ".CMDP>" send "   $write === END COPYIN @1 ===\r";c
+   expect ".CMDP>" send "   $clear\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "$build edit.tmp\r";c
+   expect ".CMDP>" send "   option com=con: ; get copyin.tmp ; append\r";c
+   expect ".CMDP>" send "$endb\r";c
+   expect ".CMDP>" send "$job\r";c
+   expect ".CMDP>" send "   load .bg,edit32\r";c
+   expect ".CMDP>" send "   task .bg\r";c
+   expect ".CMDP>" send "   start ,command=edit.tmp,list=con:\r";c
+   expect ".CMDP>" send "$termjob\r";c
+   expect ".CMDP>" send "$ifne 0\r";c
+   expect ".CMDP>" send "   $write === END COPYIN @1 ===\r";c
+   expect ".CMDP>" send "   $clear\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "copy copyin.tmp,@1\r";c
+   expect ".CMDP>" send "xdelete edit.tmp,copyin.tmp\r";c
+   expect ".CMDP>" send "$write === END COPYIN @1 ===\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "*\r";c
    # USERINIT.CSS/255
    expect "\r\n*"  send "build userinit.css\r";c
    expect ".CMDP>" send "prevent prompt\r";c
