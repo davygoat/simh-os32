@@ -10,6 +10,7 @@
 # - APPE: special case STOR.
 # - STOU: special case STOR.
 # - DELE: delete file. Rely on protection for important files.
+# - SITE: chmod uses it.
 # - Binary and contiguous files?
 # - Don't "die" on the client. 
 # - Don't leave the dimmer on.
@@ -50,12 +51,13 @@ namespace eval OS32 {
       ::OS32::NoTransmit $sock "500 It's complicated (record oriented filesystem)."
    }
 
-   proc ::ftpd::command::APPE {sock prm} { ::OS32::NoTransmit $sock "500 TODO" ; puts "\n\n*** TODO: APPE (APPEND) ****" }
-   proc ::ftpd::command::DELE {sock prm} { ::OS32::NoTransmit $sock "500 TODO" ; puts "\n\n*** TODO: DELE (DELETE) ****" }
-   proc ::ftpd::command::MDTM {sock prm} { ::OS32::NoTransmit $sock "500 TODO" ; puts "\n\n*** TODO: MDTM (MODIFIED DATE TIME) ****" }
-   proc ::ftpd::command::RNFR {sock prm} { ::OS32::NoTransmit $sock "500 TODO" ; puts "\n\n*** TODO: RNFR (RENAME FROM) ****" }
-   proc ::ftpd::command::RNTO {sock prm} { ::OS32::NoTransmit $sock "500 TODO" ; puts "\n\n*** TODO: RNTO (RENAME TO) ****" }
-   proc ::ftpd::command::STOU {sock prm} { ::OS32::NoTransmit $sock "500 TODO" ; puts "\n\n*** TODO: STOU (STORE UNIQUE) ****" }
+   proc ::ftpd::command::APPE {sock prm} { ::OS32::NoTransmit $sock "500 TODO: APPE" ; puts "\n\n*** TODO: APPE (APPEND) ****" }
+   proc ::ftpd::command::DELE {sock prm} { ::OS32::NoTransmit $sock "500 TODO: DELE" ; puts "\n\n*** TODO: DELE (DELETE) ****" }
+   proc ::ftpd::command::MDTM {sock prm} { ::OS32::NoTransmit $sock "500 TODO: MDTM" ; puts "\n\n*** TODO: MDTM (MODIFIED DATE TIME) ****" }
+   proc ::ftpd::command::RNFR {sock prm} { ::OS32::NoTransmit $sock "500 TODO: RNFR" ; puts "\n\n*** TODO: RNFR (RENAME FROM) ****" }
+   proc ::ftpd::command::RNTO {sock prm} { ::OS32::NoTransmit $sock "500 TODO: RNTO" ; puts "\n\n*** TODO: RNTO (RENAME TO) ****" }
+   proc ::ftpd::command::STOU {sock prm} { ::OS32::NoTransmit $sock "500 TODO: STOU" ; puts "\n\n*** TODO: STOU (STORE UNIQUE) ****" }
+   proc ::ftpd::command::SITE {sock prm} { ::OS32::NoTransmit $sock "500 TODO: SITE" ; puts "\n\n*** TODO: SITE (SITE SPECIFIC COMMANDS) ****" }
 
 ;#########################################################################
    #
@@ -336,7 +338,6 @@ namespace eval OS32 {
    # try logging in on an MTM (Telnet) session.
    #
 
-if [info exists config::passwords] {
    namespace eval PASS {
 
       #
@@ -367,7 +368,6 @@ if [info exists config::passwords] {
          }
       }
    }
-}
 
 ;#########################################################################
    #
@@ -764,7 +764,7 @@ if [info exists config::passwords] {
       set ::ftpd::port    $config::port
 
       ftpd::config -authIpCmd ::OS32::USER::AuthIpCallback
-#     ftpd::config -logCmd    ::OS32::LogNothing
+      ftpd::config -logCmd    ::OS32::LogNothing
 
       if [info exists config::passwords] {
          ftpd::config -authUsrCmd ::OS32::PASS::AuthUserCallback
