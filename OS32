@@ -62,9 +62,9 @@ namespace eval OS32 {
    #
    # CWD -- Change working directory
    #
-   # Format is VOLUME:/ACCOUNT. VOLUME starts with a letter, followed by three
-   # letters or digits max. ACCOUNT is an unsigned 16 bit integer (less than
-   # 65636).
+   # Format is VOLUME:/ACCOUNT. VOLUME starts with a letter, followed by a
+   # maximum of three letters or digits. ACCOUNT is an unsigned 16 bit
+   # integer (i.e. less than 65636).
    #
    # If the request includes a volume name, we schedule a BottomHalf to run
    # a CHECKVOL script, with awk-like pattern matching to determine success
@@ -640,7 +640,7 @@ namespace eval OS32 {
 
 ;#########################################################################
    #
-   # Our AWK-like pattern matching construct
+   # Our awk-like pattern matching construct
    #
 
    proc awkward { 0 arglist } {
