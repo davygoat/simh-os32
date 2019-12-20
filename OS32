@@ -10,7 +10,6 @@
 # - APPE: special case STOR.
 # - STOU: special case STOR.
 # - DELE: delete file. Rely on protection for important files.
-# - SITE: chmod uses it.
 # - Binary and contiguous files?
 # - Don't "die" on the client. 
 # - Don't leave the dimmer on.
@@ -58,7 +57,6 @@ namespace eval OS32 {
    proc ::ftpd::command::RNFR {sock prm} { ::OS32::NoTransmit $sock "500 TODO: RNFR" ; puts "\n\n*** TODO: RNFR (RENAME FROM) ****" }
    proc ::ftpd::command::RNTO {sock prm} { ::OS32::NoTransmit $sock "500 TODO: RNTO" ; puts "\n\n*** TODO: RNTO (RENAME TO) ****" }
    proc ::ftpd::command::STOU {sock prm} { ::OS32::NoTransmit $sock "500 TODO: STOU" ; puts "\n\n*** TODO: STOU (STORE UNIQUE) ****" }
-   proc ::ftpd::command::SITE {sock prm} { ::OS32::NoTransmit $sock "500 TODO: SITE" ; puts "\n\n*** TODO: SITE (SITE SPECIFIC COMMANDS) ****" }
 
 ;#########################################################################
    #
