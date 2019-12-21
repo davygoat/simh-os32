@@ -353,7 +353,7 @@ namespace eval OS32 {
                dimmer on $0
                BeginTransmit $ftpsok $data(fnam)
             }
-            "^\\*.*\\.BG:(PERKIN-ELMER OS/32 COPY ..-... R..-..)" {
+            "^\\*.*\\.BG:(PERKIN-ELMER OS/32 COPY)" {
                # ignore
             }
             "^\\*.*\\.BG:END OF TASK" {
@@ -459,7 +459,6 @@ namespace eval OS32 {
          awkward $line {
 
             BEGIN {
-               variable ftpcmd
                variable ftpsok
                variable osline
                upvar #0 ::ftpd::$ftpsok data
@@ -518,7 +517,7 @@ namespace eval OS32 {
                   return 1
                }
             }
-            # someone is messing with your server
+            # Outsiders!
             ::OS32::trafficlight red "FTP CONNECTION ($ip) REJECTED"
             return 0
          } else {
@@ -564,7 +563,7 @@ namespace eval OS32 {
       if { $fnam == "" } {
          if { $acceptnull == 0 } {
             puts $sock "501 Missing filename"
-            return -level 2
+            return -level 2 ;# exit CALLER
          }
       } elseif { ![regexp $re $fnam] } {
          puts $sock $err
@@ -586,11 +585,8 @@ namespace eval OS32 {
       ::ftpd::PasvCheckAndWait $sock
    }
 
-   proc EndTransmit { sock ftpcm } {
-      ::ftpd::FinishData $sock
-      puts $sock "226 End $ftpcm"
-      variable ftpcmd ""
-      variable ftpsok ""
+   proc EndTransmit { sock ftpcmd } {
+      NoTransmit $sock "226 End $ftpcmd"
    }
 
    proc NoTransmit { sock mess } {
@@ -616,7 +612,7 @@ namespace eval OS32 {
       off    "\x1b\[0m"
    }
 
-   proc dimmer { onoff str } {
+   proc dimmer { onoff { str "" } } {
       variable vt100
       switch $onoff {
          "on" {
@@ -705,8 +701,8 @@ namespace eval OS32 {
             -re "\r" {
                upvar #0 ::OS32::ftpcmd ftpcmd
                upvar #0 ::OS32::osline osline
-               set LinePatternMatch ::OS32::[set ftpcmd]::LinePatternMatch
                if { $ftpcmd != "" } {
+                  set LinePatternMatch ::OS32::[set ftpcmd]::LinePatternMatch
                   if { [info procs $LinePatternMatch] != "" } {
                      $LinePatternMatch $osline
                   }
@@ -728,8 +724,8 @@ namespace eval OS32 {
                   append osline $c
                   puts -nonewline stderr $c
                }
-               set PromptPatternMatch ::OS32::[set ftpcmd]::PromptPatternMatch
                if { $ftpcmd != "" } {
+                  set PromptPatternMatch ::OS32::[set ftpcmd]::PromptPatternMatch
                   if { [info procs $PromptPatternMatch] != "" } {
                      $PromptPatternMatch $osline
                   }
@@ -744,12 +740,13 @@ namespace eval OS32 {
    # Main program
    #
 
-   puts "\x1b\[m"
+   dimmer off
+
    if { [file exists ftpd.config] } {
       source ftpd.config
       if { [info exists config::host] &&
            [info exists config::port] &&
-           $config::port } {
+           $config::port > 0 } {
          StartFTP
       } else {
          puts "FTP server is disabled"
@@ -761,5 +758,6 @@ namespace eval OS32 {
       spawn ./id32 os32.ini
    }
    DoExpect
-   puts "\x1b\[m"
+
+   dimmer off
 }
