@@ -1,9 +1,5 @@
 
-- Use an FTP.CSS to combine DIR, TYPE, COPYIN, COPYOUT into one command
-  that clearly says "FTP". Include remote username as dummy parameter to
-  script.
-
-- Rename, delete, chmod. Append.
+- Append.
 
 - Add operator-initiated COPYIN and COPYOUT?
 

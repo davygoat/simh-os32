@@ -6,10 +6,8 @@
 # TODO
 #
 # - MDTM: modification date and time.
-# - RNTO: rename file (with RNFR rename from).
 # - APPE: special case STOR.
 # - STOU: special case STOR.
-# - DELE: delete file. Rely on protection for important files.
 # - Binary and contiguous files?
 # - Don't "die" on the client. 
 # - Don't leave the dimmer on.
@@ -52,10 +50,7 @@ namespace eval OS32 {
    }
 
    proc ::ftpd::command::APPE {sock prm} { ::OS32::NoTransmit $sock "500 TODO: APPE" ; puts "\n\n*** TODO: APPE (APPEND) ****" }
-   proc ::ftpd::command::DELE {sock prm} { ::OS32::NoTransmit $sock "500 TODO: DELE" ; puts "\n\n*** TODO: DELE (DELETE) ****" }
    proc ::ftpd::command::MDTM {sock prm} { ::OS32::NoTransmit $sock "500 TODO: MDTM" ; puts "\n\n*** TODO: MDTM (MODIFIED DATE TIME) ****" }
-   proc ::ftpd::command::RNFR {sock prm} { ::OS32::NoTransmit $sock "500 TODO: RNFR" ; puts "\n\n*** TODO: RNFR (RENAME FROM) ****" }
-   proc ::ftpd::command::RNTO {sock prm} { ::OS32::NoTransmit $sock "500 TODO: RNTO" ; puts "\n\n*** TODO: RNTO (RENAME TO) ****" }
    proc ::ftpd::command::STOU {sock prm} { ::OS32::NoTransmit $sock "500 TODO: STOU" ; puts "\n\n*** TODO: STOU (STORE UNIQUE) ****" }
 
 ;#########################################################################
@@ -106,7 +101,7 @@ namespace eval OS32 {
          # Or bottom half if we have to check the volume exists
          set data(rvol) $vol
          if { $act != "" } { set data(ract) $act }
-         ::OS32::BottomHalf $sock CWD "CHECKVOL [lindex [split $vol :] 0]"
+         ::OS32::BottomHalf $sock CWD "FTP CHECKVOL,[lindex [split $vol :] 0]"
       }
 
       proc LinePatternMatch { line } {
@@ -116,6 +111,9 @@ namespace eval OS32 {
             BEGIN {
                variable ftpsok
                upvar #0 ::ftpd::$ftpsok data
+            }
+            "^(....-ERR.*)" {
+               NoTransmit $ftpsok "404 Command line error, try again"
             }
             "^\\*=== BEGIN CHECKVOL (.*) ===" {
                dimmer on $0
@@ -165,6 +163,68 @@ namespace eval OS32 {
 
 ;#########################################################################
    #
+   # DELE -- Delete file
+   #
+   # Delete a file, again through a CSS wrapper.
+   #
+
+   namespace eval DELE {
+
+      # Bring parent variables into scope
+      upvar #0 [namespace parent]::ftpcmd ftpcmd
+      upvar #0 [namespace parent]::ftpsok ftpsok
+
+      proc ::ftpd::command::DELE { sock fnam } {
+         ::OS32::DELE::TopHalf $sock $fnam DELE
+      }
+
+      proc TopHalf { sock fnam ftpcmd } {
+         set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
+         upvar #0 ::ftpd::$sock data
+         set data(fnam) $fnam
+         ::OS32::BottomHalf $sock $ftpcmd "FTP DELETE,$fnam"
+      }
+
+      proc LinePatternMatch { line } {
+
+         awkward $line {
+
+            BEGIN {
+               variable ftpcmd
+               variable ftpsok
+               upvar #0 ::ftpd::$ftpsok data
+            }
+            "^(....-ERR.*)" {
+               NoTransmit $ftpsok "404 Command line error, try again"
+            }
+            "^\\*=== BEGIN DELETE (.*) ===" {
+               dimmer on $0
+            }
+            "^\\*(DELE-ERR  TYPE=PROT)" {
+               set data(error) "550 Delete error, file is protected"
+            }
+            "^\\*(DELE-ERR  TYPE=NAME)" {
+               set data(error) "550 File not found, $data(fnam)"
+            }
+            "^\\*(DELE-ERR.*)" {
+               set data(error) "550 Delete error: $1"
+            }
+            "^\\*=== END DELETE (.*) ===" {
+               dimmer off  $0
+               if { [info exists data(error)] } {
+                  NoTransmit $ftpsok $data(error)
+                  unset data(error)
+               } else {
+                  NoTransmit $ftpsok "250 Delete $data(fnam) successful"
+               }
+               unset data(fnam)
+            }
+         }
+      }
+   }
+
+;#########################################################################
+   #
    # LIST -- List files
    #
    # Invoke DISPLAY FILES through a CSS wrapper. We allow UNIX and OS/32 
@@ -188,7 +248,7 @@ namespace eval OS32 {
          set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
          upvar #0 ::ftpd::$sock data
          set data(fnam) $fnam
-         ::OS32::BottomHalf $sock $ftpcmd "DIR $fnam,,,,,,,,FTP"
+         ::OS32::BottomHalf $sock $ftpcmd "FTP DIR,$fnam"
       }
 
       proc LinePatternMatch { line } {
@@ -200,7 +260,10 @@ namespace eval OS32 {
                variable ftpsok
                upvar #0 ::ftpd::$ftpsok data
             }
-            "^\\*=== BEGIN DIRECTORY .*? ===" {
+            "^(....-ERR.*)" {
+               NoTransmit $ftpsok "404 Command line error, try again"
+            }
+            "^\\*=== BEGIN DIR .*? ===" {
                dimmer on $0
             }
             "^\\*FILE.S. NOT FOUND ON .*" {
@@ -222,7 +285,7 @@ namespace eval OS32 {
                   puts -nonewline $data(sock2) [string tolower "$nam.$ext\r\n"]
                }
             }
-            "^\\*=== END DIRECTORY .*? ===" {
+            "^\\*=== END DIR .*? ===" {
                dimmer off $0
                if { [info exists data(error)] } {
                   NoTransmit $ftpsok $data(error)
@@ -334,7 +397,7 @@ namespace eval OS32 {
          set fnam [::OS32::WildFile $sock [string toupper $fnam] RETR]
          upvar #0 ::ftpd::$sock data
          set data(fnam) $fnam
-         ::OS32::BottomHalf $sock RETR "TYPE $fnam,,,,,,,,FTP"
+         ::OS32::BottomHalf $sock RETR "FTP COPYOUT,$fnam"
       }
 
       proc LinePatternMatch { line } {
@@ -346,12 +409,15 @@ namespace eval OS32 {
                variable ftpsok
                upvar #0 ::ftpd::$ftpsok data
             }
-            "^\\*FILE NOT FOUND" {
-               NoTransmit $ftpsok "550 File not found, $data(fnam)"
+            "^(....-ERR.*)" {
+               NoTransmit $ftpsok "404 Command line error, try again"
             }
             "^\\*=== BEGIN COPYOUT .*? ===" {
                dimmer on $0
                BeginTransmit $ftpsok $data(fnam)
+            }
+            "^\\*FILE NOT FOUND" {
+               set data(error) "550 File not found, $data(fnam)"
             }
             "^\\*.*\\.BG:(PERKIN-ELMER OS/32 COPY)" {
                # ignore
@@ -364,11 +430,98 @@ namespace eval OS32 {
             }
             "^\\*=== END COPYOUT .*? ===" {
                dimmer off $0
-               EndTransmit $ftpsok $data(fnam)
+               if { [info exists data(error)] } {
+                  NoTransmit $ftpsok $data(error)
+                  unset data(error)
+               } else {
+                  EndTransmit $ftpsok $data(fnam)
+               }
             }
          }
       }
    }
+
+;#########################################################################
+   #
+   # RNFR/RNTO -- Rename file
+   #
+
+   namespace eval RNFR {
+
+      upvar #0 [namespace parent]::ftpcmd ftpcmd
+      upvar #0 [namespace parent]::ftpsok ftpsok
+      upvar #0 [namespace parent]::osline osline
+
+      proc ::ftpd::command::RNFR { sock fnam } {
+         ::OS32::RNFR::TopHalf $sock $fnam
+      }
+
+      proc TopHalf { sock fnam } {
+
+         upvar #0 ::ftpd::$sock data
+
+         set fnam [::OS32::WildFile $sock [string toupper $fnam] RNFR]
+         set data(fnam1) $fnam
+
+         puts $sock "350 RNFR OK"
+      }
+   }
+
+   namespace eval RNTO {
+
+      upvar #0 [namespace parent]::ftpcmd ftpcmd
+      upvar #0 [namespace parent]::ftpsok ftpsok
+      upvar #0 [namespace parent]::osline osline
+
+      proc ::ftpd::command::RNTO { sock fnam } {
+         ::OS32::RNTO::TopHalf $sock $fnam
+      }
+
+      proc TopHalf { sock fnam } {
+         upvar #0 ::ftpd::$sock data
+         set fnam [::OS32::WildFile $sock [string toupper $fnam] RNTO]
+         set data(fnam2) $fnam
+         ::OS32::BottomHalf $sock RNTO "FTP RENAME,$data(fnam1),$data(fnam2)"
+      }
+
+      proc LinePatternMatch { line } {
+
+         awkward $line {
+            BEGIN {
+               variable ftpcmd
+               variable ftpsok
+               upvar #0 ::ftpd::$ftpsok data
+            }
+            "^(....-ERR.*)" {
+               NoTransmit $ftpsok "404 Command line error, try again"
+            }
+            "^\\*=== BEGIN RENAME (.*) (.*) ===" {
+               dimmer on $0
+            }
+            "^\\*(ASGN-ERR  TYPE=NAME.*)" {
+               set data(error) "550 File not found, $data(fnam1)"
+            }
+            "^\\*(RENM-ERR  TYPE=NAME.*)" {
+               set data(error) "550 Destination $data(fnam2) already exists, $data(fnam1) not renamed"
+            }
+            "^\\*(FILE RENAMED)" {
+               # ignore
+            }
+            "^\\*=== END RENAME (.*) (.*) ===" {
+               dimmer off $0
+               if { [info exists data(error)] } {
+                  NoTransmit $ftpsok $data(error)
+                  unset data(error)
+               } else {
+                  NoTransmit $ftpsok "250 $data(fnam1) renamed $data(fnam2)"
+               }
+               unset data(fnam1)
+               unset data(fnam2)
+            }
+         }
+      }
+   }
+
 
 ;#########################################################################
    #
@@ -399,7 +552,7 @@ namespace eval OS32 {
          set fnam [::OS32::WildFile $sock [string toupper $fnam] STOR]
          set data(fnam) $fnam
          # This command will fail with a USAGE error
-         ::OS32::BottomHalf $sock STOR "COPYIN $fnam\r"
+         ::OS32::BottomHalf $sock STOR "FTP STOR,$fnam"
       }
 
       proc LinePatternMatch { line } {
@@ -411,8 +564,11 @@ namespace eval OS32 {
                variable ftpsok
                upvar #0 ::ftpd::$ftpsok data
             }
+            "^(....-ERR.*)" {
+               NoTransmit $ftpsok "404 Command line error, try again"
+            }
             # Now we can read all the data to work out the record length
-            "^\\*USAGE: COPYIN FD,RECLEN" {
+            "^\\*STOR GO AHEAD" {
                dimmer on $0
                BeginTransmit $ftpsok $data(fnam)
                set data(reclen) 80
@@ -429,15 +585,12 @@ namespace eval OS32 {
                   incr data(reclen) [expr 4-$data(reclen)%4]
                }
                # This command should work now
-               send -- "COPYIN $data(fnam),$data(reclen)\r"
+               send -- "FTP COPYIN,$data(fnam),$data(reclen)\r"
             }
             "^\\*=== BEGIN COPYIN .*? ===" {
             }
-            "^\\*DELE-ERR  TYPE=PROT" {
-               set data(error) "550 Cannot delete file because it is protected"
-            }
-            "^\\*(....-ERR.*)" {
-               set data(error) "550 $1"
+            "^\\*(DELE-ERR  TYPE=PROT)" {
+               set data(error) "550 Cannot upload file because it is write protected"
             }
             "^\\*=== END COPYIN .*? ===" {
                dimmer off $0
@@ -557,6 +710,21 @@ namespace eval OS32 {
             set re {^[A-Za-z][A-Za-z0-9]{0,7}(\.[A-Za-z0-9]{1,3})?$}
             set acceptnull 0
             set err "501 Invalid filename, must be letters, digits, 8.3 max"
+         }
+         DELE {
+            set re {^[A-Za-z][A-Za-z0-9]{0,7}(\.[A-Za-z0-9]{1,3})?$}
+            set acceptnull 0
+            set err "501 Invalid filename, must be letters, digits, 8.3 max"
+         }
+         RNFR {
+            set re {^[A-Za-z][A-Za-z0-9]{0,7}(\.[A-Za-z0-9]{1,3})?$}
+            set acceptnull 0
+            set err "501 Invalid filename $fnam, must be letters, digits, 8.3 max"
+         }
+         RNTO {
+            set re {^[A-Za-z][A-Za-z0-9]{0,7}(\.[A-Za-z0-9]{1,3})?$}
+            set acceptnull 0
+            set err "501 Invalid filename $fnam, must be letters, digits, 8.3 max"
          }
       }
 
