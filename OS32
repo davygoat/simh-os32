@@ -269,6 +269,9 @@ namespace eval OS32 {
             "^\\*FILE.S. NOT FOUND ON .*" {
                set data(error) "550 File(s) not found, $data(fnam)"
             }
+            "^\\*(....-ERR.*)" {
+               set data(error) "550 $1"
+            }
             "^\\*(VOLUME= .*)" {
                BeginTransmit $ftpsok "DIR $data(fnam)"
                if { $ftpcmd == "LIST" } {
@@ -688,58 +691,34 @@ namespace eval OS32 {
 
    proc WildFile { sock fnam cmd } {
 
-      switch $cmd {
-         LIST {
-            set re {^[-*A-Za-z][-*.A-Za-z0-9]{0,11}$}
-            set fnam [string map { * - ? * } $fnam]
-            set acceptnull 1
-            set err "501 Invalid filename or wildcard pattern"
-         }
-         NLST {
-            set re {^[-A-Za-z][-.A-Za-z0-9]{0,11}$}
-            regsub -all {\*} $fnam {-} fnam
-            set acceptnull 1
-            set err "501 Invalid filename or wildcard pattern"
-         }
-         RETR {
-            set re {^[A-Za-z][A-Za-z0-9]{0,7}(\.[A-Za-z0-9]{1,3})?$}
-            set acceptnull 0
-            set err "501 Invalid filename, must be letters, digits, 8.3 max"
-         }
-         STOR {
-            set re {^[A-Za-z][A-Za-z0-9]{0,7}(\.[A-Za-z0-9]{1,3})?$}
-            set acceptnull 0
-            set err "501 Invalid filename, must be letters, digits, 8.3 max"
-         }
-         DELE {
-            set re {^[A-Za-z][A-Za-z0-9]{0,7}(\.[A-Za-z0-9]{1,3})?$}
-            set acceptnull 0
-            set err "501 Invalid filename, must be letters, digits, 8.3 max"
-         }
-         RNFR {
-            set re {^[A-Za-z][A-Za-z0-9]{0,7}(\.[A-Za-z0-9]{1,3})?$}
-            set acceptnull 0
-            set err "501 Invalid filename $fnam, must be letters, digits, 8.3 max"
-         }
-         RNTO {
-            set re {^[A-Za-z][A-Za-z0-9]{0,7}(\.[A-Za-z0-9]{1,3})?$}
-            set acceptnull 0
-            set err "501 Invalid filename $fnam, must be letters, digits, 8.3 max"
-         }
+      set fnam [string toupper $fnam]
+
+      if { $cmd == "LIST" || $cmd == "NLST" } {
+         set re {^([-*A-Z][-*A-Z0-9]*)(\.[-*A-Z0-9]*)?$}
+         set fnam [string map { * - ? * } $fnam]
+         set acceptnull 1
+         set err "501 Invalid filename or wildcard pattern"
+      } else {
+         set re {^([A-Z][A-Z0-9]*)(\.[A-Z0-9]*)?$}
+         set acceptnull 0
+         set err "501 Invalid filename $fnam, must be letters, digits, 8.3 max"
       }
 
       if { $fnam == "" } {
          if { $acceptnull == 0 } {
             puts $sock "501 Missing filename"
-            return -level 2 ;# exit CALLER
+            return -level 2
          }
-      } elseif { ![regexp $re $fnam] } {
+      } elseif { ![regexp $re $fnam -> nam ext] } {
          puts $sock $err
-         return -level 2 ;# exit CALLER
+         return -level 2                  ;# extension inc dot -----v
+      } elseif { [string length $nam] > 8 || [string length $ext] > 4 } {
+         puts $sock "501 Invalid filename $fnam, 8.3 max"
+         return -level 2
       }
 
       upvar #0 ::ftpd::$sock data
-      return [string toupper $data(vol)$fnam/$data(cwd)]
+      return $data(vol)$fnam/$data(cwd)
    }
 
    proc BottomHalf { sock ftpcm oscmd } {
