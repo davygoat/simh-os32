@@ -1,10 +1,6 @@
 
 - Append.
 
-- Add operator-initiated COPYIN and COPYOUT?
-
-- Add operator-initiated FTP ON/OFF.
-
 - Add configurable FTP/copyin directory to prevent trampling on simh files.
 
 - Check for command in progress before proceeding with client request. Can't

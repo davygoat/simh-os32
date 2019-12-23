@@ -816,7 +816,7 @@ namespace eval OS32 {
 
 ;#########################################################################
    #
-   # Startup
+   # FTP start, stop, users
    #
 
    proc StartFTP {} {
@@ -838,6 +838,41 @@ namespace eval OS32 {
       puts -nonewline "\n$vt100(green)$config::welcome $config::host port $config::port$vt100(normal)\n\n"
    }
 
+   proc StopFTP {} {
+      upvar #0 ::ftpd::serviceSock serviceSock
+      if { [info exists serviceSock] } {
+         puts ""
+         set socks [info vars ::ftpd::sock*]
+         if { [llength $socks] > 0 } {
+            foreach sock $socks {
+               puts "CLOSING CLIENT SOCKET $sock"
+               regsub ::ftpd:: $sock {} sock
+               chan close $sock
+               array unset ::ftpd::$sock
+            }
+         }
+         puts -nonewline "CLOSING LISTENING SOCKET"
+         chan close $serviceSock
+         unset serviceSock
+      }
+   }
+
+   proc ShowFTP {} {
+      set n 0
+      puts ""
+      foreach sock [info vars ::ftpd::sock*] {
+         upvar $sock data
+         puts "$data(user)@$data(ip)"
+         incr n
+      }
+      puts -nonewline "$n CONNECTED"
+   }
+
+;#########################################################################
+   #
+   # The interact/expect loop
+   #
+
    variable osline ""
 
    proc DoExpect {} {
@@ -853,6 +888,11 @@ namespace eval OS32 {
                   if { [info procs $LinePatternMatch] != "" } {
                      $LinePatternMatch $osline
                   }
+               } elseif { $osline == "*START FTP SERVER" } {
+               } elseif { $osline == "*STOP FTP SERVER" } {
+                  ::OS32::StopFTP
+               } elseif { $osline == "*SHOW FTP USERS" } {
+                  ::OS32::ShowFTP
                }
                puts ""
                set osline ""
