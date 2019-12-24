@@ -477,25 +477,14 @@ set cpu idle
    expect ".CMDP>" send "endb\r";c
    # DIR.CSS
    expect "\r\n*" send "build dir.css\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "$ifnnull @9\r";c
-   expect ".CMDP>" send "   $write === BEGIN DIRECTORY @1 ===\r";c
-   expect ".CMDP>" send "$endc\r";c
-   expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "$job\r";c
-   expect ".CMDP>" send "   $ifnull @1\r";c
-   expect ".CMDP>" send "      display files\r";c
-   expect ".CMDP>" send "   $else\r";c
-   expect ".CMDP>" send "      display files ,@1\r";c
-   expect ".CMDP>" send "   $endc\r";c
-   expect ".CMDP>" send "$termjob\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "$ifnnull @9\r";c
-   expect ".CMDP>" send "   $write === END DIRECTORY @1 ===\r";c
+   expect ".CMDP>" send "$ifnnull @1\r";c
+   expect ".CMDP>" send "   display files ,@1\r";c
+   expect ".CMDP>" send "$else\r";c
+   expect ".CMDP>" send "   display files\r";c
    expect ".CMDP>" send "$endc\r";c
-   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$termjob\r";c
    expect ".CMDP>" send "$exit\r";c
-   expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "endb\r";c
    # COPY.CSS
    expect "\r\n*" send "build copy.css\r";c
@@ -534,16 +523,12 @@ set cpu idle
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "$ifnull @1\r";c
    expect ".CMDP>" send "   $write USAGE: TYPE FD\r";c
-   expect ".CMDP>" send "   $clear\r";c
+   expect ".CMDP>" send "   $exit\r";c
    expect ".CMDP>" send "$endc\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "$ifnx @1\r";c
    expect ".CMDP>" send "   $write FILE NOT FOUND\r";c
-   expect ".CMDP>" send "   $clear\r";c
-   expect ".CMDP>" send "$endc\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "$ifnnull @9\r";c
-   expect ".CMDP>" send "   $write === BEGIN COPYOUT @1 ===\r";c
+   expect ".CMDP>" send "   $exit\r";c
    expect ".CMDP>" send "$endc\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "$job\r";c
@@ -555,60 +540,160 @@ set cpu idle
    expect ".CMDP>" send "   load .bg,copy32; task .bg; start ,command=type.tmp\r";c
    expect ".CMDP>" send "$termjob\r";c
    expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "$ifnnull @9\r";c
-   expect ".CMDP>" send "   $write === END COPYOUT @1 ===\r";c
-   expect ".CMDP>" send "$endc\r";c
-   expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "xdelete type.tmp\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "endb\r";c
-   # COPYOUT.CSS
-   expect "\r\n*" send "build copyout.css\r";c
-   expect ".CMDP>" send "type @1,,,,,,,,ftp\r";c
-   expect ".CMDP>" send "$exit\r";c
-   expect ".CMDP>" send "endb\r";c
-   # COPYIN.CSS
+   # FTP.CSS
+   expect "\r\n*" send "build ftp.css\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "sysonly\r";c
-   expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "$ifnull @1\r";c
-   expect ".CMDP>" send "   $write USAGE: COPYIN FD,RECLEN\r";c
-   expect ".CMDP>" send "   $clear\r";c
-   expect ".CMDP>" send "$endc\r";c
-   expect ".CMDP>" send "$ifnull @2\r";c
-   expect ".CMDP>" send "   $write USAGE: COPYIN FD,RECLEN\r";c
-   expect ".CMDP>" send "   $clear\r";c
+   expect ".CMDP>" send "   $write THIS CSS SHOULD ONLY BE RUN BY THE FTP SERVER\r";c
+   expect ".CMDP>" send "   $exit\r";c
    expect ".CMDP>" send "$endc\r";c
    expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "$write === BEGIN COPYIN @1 ===\r";c
-   expect ".CMDP>" send "$job\r";c
-   expect ".CMDP>" send "   xallocate copyin.tmp,index,@2\r";c
-   expect ".CMDP>" send "   xdelete @1\r";c
-   expect ".CMDP>" send "$termjob\r";c
-   expect ".CMDP>" send "$ifne 0\r";c
-   expect ".CMDP>" send "   $write === END COPYIN @1 ===\r";c
-   expect ".CMDP>" send "   $clear\r";c
-   expect ".CMDP>" send "$endc\r";c
-   expect ".CMDP>" send "$build edit.tmp\r";c
-   expect ".CMDP>" send "   option com=con: ; get copyin.tmp ; append\r";c
-   expect ".CMDP>" send "$endb\r";c
-   expect ".CMDP>" send "$job\r";c
-   expect ".CMDP>" send "   load .bg,edit32\r";c
-   expect ".CMDP>" send "   task .bg\r";c
-   expect ".CMDP>" send "   start ,command=edit.tmp,list=con:\r";c
-   expect ".CMDP>" send "$termjob\r";c
-   expect ".CMDP>" send "$ifne 0\r";c
-   expect ".CMDP>" send "   $write === END COPYIN @1 ===\r";c
-   expect ".CMDP>" send "   $clear\r";c
-   expect ".CMDP>" send "$endc\r";c
-   expect ".CMDP>" send "copy copyin.tmp,@1\r";c
-   expect ".CMDP>" send "xdelete edit.tmp,copyin.tmp\r";c
-   expect ".CMDP>" send "$write === END COPYIN @1 ===\r";c
+   expect ".CMDP>" send "xdelete users.ftp,off.ftp,on.ftp,start.ftp,stop.ftp\r";c
+   expect ".CMDP>" send "xdelete copyout.ftp,copyin.ftp\r";c
+   expect ".CMDP>" send "xdelete delete.ftp,rename.ftp\r";c
+   expect ".CMDP>" send "xdelete dir.ftp,checkvol.ftp\r";c
    expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "*** FTP USERS ************************************************\r";c
+   expect ".CMDP>" send "xallocate users.ftp,index,80\r";c
+   expect ".CMDP>" send "$ifx @1.ftp\r";c
+   expect ".CMDP>" send "   $write SHOW FTP USERS\r";c
+   expect ".CMDP>" send "   delete @1.ftp\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "delete users.ftp\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "*** FTP OFF **************************************************\r";c
+   expect ".CMDP>" send "xallocate off.ftp,index,80\r";c
+   expect ".CMDP>" send "xallocate stop.ftp,index,80\r";c
+   expect ".CMDP>" send "$ifx @1.ftp\r";c
+   expect ".CMDP>" send "   $write STOP FTP SERVER\r";c
+   expect ".CMDP>" send "   delete off.ftp,stop.ftp\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "delete off.ftp,stop.ftp\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "*** FTP ON ***************************************************\r";c
+   expect ".CMDP>" send "xallocate on.ftp,index,80\r";c
+   expect ".CMDP>" send "xallocate start.ftp,index,80\r";c
+   expect ".CMDP>" send "$ifx @1.ftp\r";c
+   expect ".CMDP>" send "   $write START FTP SERVER\r";c
+   expect ".CMDP>" send "   delete on.ftp,start.ftp\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "delete on.ftp,start.ftp\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "*** DIR ******************************************************\r";c
+   expect ".CMDP>" send "xallocate dir.ftp,index,80\r";c
+   expect ".CMDP>" send "$ifx @1.ftp\r";c
+   expect ".CMDP>" send "   delete @1.ftp\r";c
+   expect ".CMDP>" send "   $write === BEGIN DIR @2 ===\r";c
+   expect ".CMDP>" send "   @1 @2\r";c
+   expect ".CMDP>" send "   $write === END DIR @2 ===\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "delete dir.ftp\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "*** COPYOUT **************************************************\r";c
+   expect ".CMDP>" send "xallocate copyout.ftp,index,80\r";c
+   expect ".CMDP>" send "$ifx @1.ftp\r";c
+   expect ".CMDP>" send "   delete @1.ftp\r";c
+   expect ".CMDP>" send "   $write === BEGIN COPYOUT @2 ===\r";c
+   expect ".CMDP>" send "   type @2\r";c
+   expect ".CMDP>" send "   $write === END COPYOUT @2 ===\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "delete copyout.ftp\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "*** COPYIN ***************************************************\r";c
+   expect ".CMDP>" send "xallocate copyin.ftp,index,80\r";c
+   expect ".CMDP>" send "$ifx @1.ftp\r";c
+   expect ".CMDP>" send "   delete @1.ftp\r";c
+   expect ".CMDP>" send "   $write === BEGIN COPYIN @2 ===\r";c
+   expect ".CMDP>" send "   $job\r";c
+   expect ".CMDP>" send "      xallocate copyin.tmp,index,@3\r";c
+   expect ".CMDP>" send "      xdelete @2\r";c
+   expect ".CMDP>" send "   $termjob\r";c
+   expect ".CMDP>" send "   $ife 0\r";c
+   expect ".CMDP>" send "      $build edit.tmp\r";c
+   expect ".CMDP>" send "         option command=con: ; get copyin.tmp ; append\r";c
+   expect ".CMDP>" send "      $endb\r";c
+   expect ".CMDP>" send "      $job\r";c
+   expect ".CMDP>" send "         load .bg,edit32\r";c
+   expect ".CMDP>" send "         task .bg\r";c
+   expect ".CMDP>" send "         start ,command=edit.tmp,list=con:\r";c
+   expect ".CMDP>" send "      $termjob\r";c
+   expect ".CMDP>" send "      $ife 0\r";c
+   expect ".CMDP>" send "         copy copyin.tmp,@2\r";c
+   expect ".CMDP>" send "      $endc\r";c
+   expect ".CMDP>" send "      xdelete edit.tmp\r";c
+   expect ".CMDP>" send "   $endc\r";c
+   expect ".CMDP>" send "   xdelete copyin.tmp\r";c
+   expect ".CMDP>" send "   $write === END COPYIN @2 ===\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "delete copyin.ftp\r";c
+   expect ".CMDP>" send "*** STOR [COPYIN] ********************************************\r";c
+   expect ".CMDP>" send "xallocate stor.ftp,index,80\r";c
+   expect ".CMDP>" send "$ifx @1.ftp\r";c
+   expect ".CMDP>" send "   delete @1.ftp\r";c
+   expect ".CMDP>" send "   $write STOR GO AHEAD\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "delete stor.ftp\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "*** CHECKVOL *************************************************\r";c
+   expect ".CMDP>" send "xallocate checkvol.ftp,index,80\r";c
+   expect ".CMDP>" send "$ifx @1.ftp\r";c
+   expect ".CMDP>" send "   delete @1.ftp\r";c
+   expect ".CMDP>" send "   $write === BEGIN CHECKVOL @2 ===\r";c
+   expect ".CMDP>" send "   checkvol @2\r";c
+   expect ".CMDP>" send "   $write === END CHECKVOL @2 ===\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "delete checkvol.ftp\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "*** DELETE ***************************************************\r";c
+   expect ".CMDP>" send "xallocate delete.ftp,index,80\r";c
+   expect ".CMDP>" send "$ifx @1.ftp\r";c
+   expect ".CMDP>" send "   delete @1.ftp\r";c
+   expect ".CMDP>" send "   $write === BEGIN DELETE @2 ===\r";c
+   expect ".CMDP>" send "   $job\r";c
+   expect ".CMDP>" send "      delete @2\r";c
+   expect ".CMDP>" send "   $termjob\r";c
+   expect ".CMDP>" send "   $ife 0\r";c
+   expect ".CMDP>" send "      $write FILE DELETED\r";c
+   expect ".CMDP>" send "   $endc\r";c
+   expect ".CMDP>" send "   $write === END DELETE @2 ===\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "delete delete.ftp\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "*** RENAME ***************************************************\r";c
+   expect ".CMDP>" send "xallocate rename.ftp,index,80\r";c
+   expect ".CMDP>" send "$ifx @1.ftp\r";c
+   expect ".CMDP>" send "   delete @1.ftp\r";c
+   expect ".CMDP>" send "   $write === BEGIN RENAME @2 @3 ===\r";c
+   expect ".CMDP>" send "   $job\r";c
+   expect ".CMDP>" send "      rename @2,@3\r";c
+   expect ".CMDP>" send "   $termjob\r";c
+   expect ".CMDP>" send "   $ife 0\r";c
+   expect ".CMDP>" send "      $write FILE RENAMED\r";c
+   expect ".CMDP>" send "   $endc\r";c
+   expect ".CMDP>" send "   $write === END RENAME @2 @3 ===\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "delete rename.ftp\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$write FTP UNRECOGNISED COMMAND @1\r";c
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "endb\r";c
    # USERINIT.CSS/255
    expect "\r\n*"  send "build userinit.css\r";c
    expect ".CMDP>" send "prevent prompt\r";c
