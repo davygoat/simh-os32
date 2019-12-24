@@ -6,8 +6,6 @@
 # TODO
 #
 # - MDTM: modification date and time.
-# - APPE: special case STOR.
-# - STOU: special case STOR.
 # - Binary and contiguous files?
 # - Don't "die" on the client. 
 # - Don't leave the dimmer on.
@@ -30,23 +28,23 @@ namespace eval OS32 {
    rename ::ftpd::Fs {}
 
    proc ::ftpd::command::MKD { sock prm } {
-      ::OS32::NoTransmit $sock "500 mkdir not supported on OS/32"
+      ::OS32::NoTransmit $sock "500 Make directory not supported on OS/32"
    }
 
    proc ::ftpd::command::XMKD { sock prm } {
-      ::OS32::NoTransmit $sock "500 mkdir not supported on OS/32"
+      ::OS32::NoTransmit $sock "500 Make directory not supported on OS/32"
    }
 
    proc ::ftpd::command::RMD { sock prm } {
-      ::OS32::NoTransmit $sock "500 rmdir not supported on OS/32"
+      ::OS32::NoTransmit $sock "500 Remove directory not supported on OS/32"
    }
 
    proc ::ftpd::command::XRMD { sock prm } {
-      ::OS32::NoTransmit $sock "500 rmdir not supported on OS/32"
+      ::OS32::NoTransmit $sock "500 Remove directory not supported on OS/32"
    }
 
    proc ::ftpd::command::SIZE { sock prm } {
-      ::OS32::NoTransmit $sock "500 It's complicated (record oriented filesystem)."
+      ::OS32::NoTransmit $sock "500 File size not supported (record oriented filesystem)"
    }
 
    proc ::ftpd::command::APPE {sock prm} { ::OS32::NoTransmit $sock "500 TODO: APPE" ; puts "\n\n*** TODO: APPE (APPEND) ****" }
