@@ -819,7 +819,25 @@ namespace eval OS32 {
    # FTP start, stop, users
    #
 
+   proc CheckWeHaveFTP {} {
+      if { ![info exists config::host] ||
+           ![info exists config::port] ||
+           $config::port <= 0 } {
+         puts -nonewline "\nFTP server is disabled"
+         return -level 2
+      }
+   }
+
    proc StartFTP {} {
+
+      CheckWeHaveFTP
+
+      upvar #0 ::ftpd::serviceSock serviceSock
+
+      if { [info exists serviceSock] } {
+         puts -nonewline "\nFTP server already running"
+         return
+      }
 
       set ::ftpd::welcome $config::welcome
       set ::ftpd::contact $config::contact
@@ -835,29 +853,46 @@ namespace eval OS32 {
       ftpd::server $config::host
 
       variable vt100
-      puts -nonewline "\n$vt100(green)$config::welcome $config::host port $config::port$vt100(normal)\n\n"
+      puts -nonewline "\n$vt100(green)$config::welcome $config::host port $config::port$vt100(normal)"
    }
 
    proc StopFTP {} {
+
+      CheckWeHaveFTP
+
       upvar #0 ::ftpd::serviceSock serviceSock
-      if { [info exists serviceSock] } {
-         puts ""
-         set socks [info vars ::ftpd::sock*]
-         if { [llength $socks] > 0 } {
-            foreach sock $socks {
-               puts "CLOSING CLIENT SOCKET $sock"
-               regsub ::ftpd:: $sock {} sock
-               chan close $sock
-               array unset ::ftpd::$sock
-            }
-         }
-         puts -nonewline "CLOSING LISTENING SOCKET"
-         chan close $serviceSock
-         unset serviceSock
+
+      if { ![info exists serviceSock] } {
+         puts -nonewline "\nFTP server not running"
+         return
       }
+
+      puts ""
+      set socks [info vars ::ftpd::sock*]
+      if { [llength $socks] > 0 } {
+         foreach sock $socks {
+            puts "Closing client socket $sock"
+            regsub ::ftpd:: $sock {} sock
+            chan close $sock
+            array unset ::ftpd::$sock
+         }
+      }
+      puts -nonewline "Closing listening socket"
+      chan close $serviceSock
+      unset serviceSock
    }
 
    proc ShowFTP {} {
+
+      CheckWeHaveFTP
+
+      upvar #0 ::ftpd::serviceSock serviceSock
+
+      if { ![info exists serviceSock] } {
+         puts -nonewline "\nFTP server not running"
+         return
+      }
+
       set n 0
       puts ""
       foreach sock [info vars ::ftpd::sock*] {
@@ -889,6 +924,7 @@ namespace eval OS32 {
                      $LinePatternMatch $osline
                   }
                } elseif { $osline == "*START FTP SERVER" } {
+                  ::OS32::StartFTP
                } elseif { $osline == "*STOP FTP SERVER" } {
                   ::OS32::StopFTP
                } elseif { $osline == "*SHOW FTP USERS" } {
@@ -931,13 +967,8 @@ namespace eval OS32 {
 
    if { [file exists ftpd.config] } {
       source ftpd.config
-      if { [info exists config::host] &&
-           [info exists config::port] &&
-           $config::port > 0 } {
-         StartFTP
-      } else {
-         puts "FTP server is disabled"
-      }
+      StartFTP
+      puts ""
    }
 
    namespace eval :: {

@@ -1,8 +1,6 @@
 
 - Append.
 
-- Add configurable FTP/copyin directory to prevent trampling on simh files.
-
 - Check for command in progress before proceeding with client request. Can't
   have overlapping requests. FTP to return 400 series "FTP busy" (try again)
   response to client.
