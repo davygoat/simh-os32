@@ -109,13 +109,18 @@ namespace eval OS32 {
 
             BEGIN {
                variable ftpsok
+               variable dimmeris
                upvar #0 ::ftpd::$ftpsok data
-            }
-            "^(....-ERR.*)" {
-               NoTransmit $ftpsok "404 Command line error, try again"
             }
             "^\\*=== BEGIN CHECKVOL (.*) ===" {
                dimmer on $0
+            }
+            "^\\*?(....-ERR.*)" {
+               if { $dimmeris == "off" } {
+                  NoTransmit $ftpsok "404 Command line error, try again"
+               } else {
+                  set data(error) "550 $1"
+               }
             }
             "^\\*VOLUME (.*) OK" {
             }
@@ -192,10 +197,8 @@ namespace eval OS32 {
             BEGIN {
                variable ftpcmd
                variable ftpsok
+               variable dimmeris
                upvar #0 ::ftpd::$ftpsok data
-            }
-            "^(....-ERR.*)" {
-               NoTransmit $ftpsok "404 Command line error, try again"
             }
             "^\\*=== BEGIN DELETE (.*) ===" {
                dimmer on $0
@@ -208,6 +211,13 @@ namespace eval OS32 {
             }
             "^\\*(DELE-ERR.*)" {
                set data(error) "550 Delete error: $1"
+            }
+            "^\\*?(....-ERR.*)" {
+               if { $dimmeris == "off" } {
+                  NoTransmit $ftpsok "404 Command line error, try again"
+               } else {
+                  set data(error) "550 $1"
+               }
             }
             "^\\*=== END DELETE (.*) ===" {
                dimmer off  $0
@@ -259,10 +269,8 @@ namespace eval OS32 {
             BEGIN {
                variable ftpcmd
                variable ftpsok
+               variable dimmeris
                upvar #0 ::ftpd::$ftpsok data
-            }
-            "^(....-ERR.*)" {
-               NoTransmit $ftpsok "404 Command line error, try again"
             }
             "^\\*=== BEGIN DIR .*? ===" {
                dimmer on $0
@@ -270,8 +278,12 @@ namespace eval OS32 {
             "^\\*FILE.S. NOT FOUND ON .*" {
                set data(error) "550 File(s) not found, $data(fnam)"
             }
-            "^\\*(....-ERR.*)" {
-               set data(error) "550 $1"
+            "^\\*?(....-ERR.*)" {
+               if { $dimmeris == "off" } {
+                  NoTransmit $ftpsok "404 Command line error, try again"
+               } else {
+                  set data(error) "550 $1"
+               }
             }
             "^\\*(VOLUME= .*)" {
                BeginTransmit $ftpsok "DIR $data(fnam)"
@@ -413,10 +425,8 @@ namespace eval OS32 {
             BEGIN {
                variable ftpcmd
                variable ftpsok
+               variable dimmeris
                upvar #0 ::ftpd::$ftpsok data
-            }
-            "^(....-ERR.*)" {
-               NoTransmit $ftpsok "404 Command line error, try again"
             }
             "^\\*=== BEGIN COPYOUT .*? ===" {
                dimmer on $0
@@ -424,6 +434,13 @@ namespace eval OS32 {
             }
             "^\\*FILE NOT FOUND" {
                set data(error) "550 File not found, $data(fnam)"
+            }
+            "^\\*?(....-ERR.*)" {
+               if { $dimmeris == "off" } {
+                  NoTransmit $ftpsok "404 Command line error, try again"
+               } else {
+                  set data(error) "550 $1"
+               }
             }
             "^\\*.*\\.BG:(PERKIN-ELMER OS/32 COPY)" {
                # ignore
@@ -497,10 +514,8 @@ namespace eval OS32 {
             BEGIN {
                variable ftpcmd
                variable ftpsok
+               variable dimmeris
                upvar #0 ::ftpd::$ftpsok data
-            }
-            "^(....-ERR.*)" {
-               NoTransmit $ftpsok "404 Command line error, try again"
             }
             "^\\*=== BEGIN RENAME (.*) (.*) ===" {
                dimmer on $0
@@ -510,6 +525,13 @@ namespace eval OS32 {
             }
             "^\\*(RENM-ERR  TYPE=NAME.*)" {
                set data(error) "550 Destination $data(fnam2) already exists, $data(fnam1) not renamed"
+            }
+            "^\\*?(....-ERR.*)" {
+               if { $dimmeris == "off" } {
+                  NoTransmit $ftpsok "404 Command line error, try again"
+               } else {
+                  set data(error) "550 $1"
+               }
             }
             "^\\*(FILE RENAMED)" {
                # ignore
@@ -570,10 +592,8 @@ namespace eval OS32 {
             BEGIN {
                variable ftpcmd
                variable ftpsok
+               variable dimmeris
                upvar #0 ::ftpd::$ftpsok data
-            }
-            "^(....-ERR.*)" {
-               NoTransmit $ftpsok "404 Command line error, try again"
             }
             # Now we can read all the data to work out the record length
             "^\\*STOR GO AHEAD" {
@@ -599,6 +619,13 @@ namespace eval OS32 {
             }
             "^\\*(DELE-ERR  TYPE=PROT)" {
                set data(error) "550 Cannot upload file because it is write protected"
+            }
+            "^\\*?(....-ERR.*)" {
+               if { $dimmeris == "off" } {
+                  NoTransmit $ftpsok "404 Command line error, try again"
+               } else {
+                  set data(error) "550 $1"
+               }
             }
             "^\\*=== END COPYIN .*? ===" {
                dimmer off $0
