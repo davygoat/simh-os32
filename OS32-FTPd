@@ -117,7 +117,7 @@ namespace eval OS32 {
             }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
-                  NoTransmit $ftpsok "404 Command line error, try again"
+                  NoTransmit $ftpsok "450 Command line error, try again"
                } else {
                   set data(error) "550 $1"
                }
@@ -214,7 +214,7 @@ namespace eval OS32 {
             }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
-                  NoTransmit $ftpsok "404 Command line error, try again"
+                  NoTransmit $ftpsok "450 Command line error, try again"
                } else {
                   set data(error) "550 $1"
                }
@@ -280,7 +280,7 @@ namespace eval OS32 {
             }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
-                  NoTransmit $ftpsok "404 Command line error, try again"
+                  NoTransmit $ftpsok "450 Command line error, try again"
                } else {
                   set data(error) "550 $1"
                }
@@ -437,7 +437,7 @@ namespace eval OS32 {
             }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
-                  NoTransmit $ftpsok "404 Command line error, try again"
+                  NoTransmit $ftpsok "450 Command line error, try again"
                } else {
                   set data(error) "550 $1"
                }
@@ -528,7 +528,7 @@ namespace eval OS32 {
             }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
-                  NoTransmit $ftpsok "404 Command line error, try again"
+                  NoTransmit $ftpsok "450 Command line error, try again"
                } else {
                   set data(error) "550 $1"
                }
@@ -622,7 +622,7 @@ namespace eval OS32 {
             }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
-                  NoTransmit $ftpsok "404 Command line error, try again"
+                  NoTransmit $ftpsok "450 Command line error, try again"
                } else {
                   set data(error) "550 $1"
                }
@@ -756,7 +756,7 @@ namespace eval OS32 {
    proc CheckOperatorBusy {sock} {
       variable taskcount
       if { $taskcount > 0 } {
-         puts $sock "404 Operator busy, do not disturb"
+         puts $sock "450 Operator busy, do not disturb"
          return -level 2
       }
    }
