@@ -1,4 +1,4 @@
-#!/usr/bin/expect
+#!/usr/bin/tclsh
 # vim:set syntax=tcl:
 # vim:set nowrap:
 
