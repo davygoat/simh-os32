@@ -3,7 +3,15 @@
   have overlapping requests. FTP to return 400 series "FTP busy" (try again)
   response to client.
 
-- Show errors in red, using dimmer status to restore dim/normal status.
+- BASIC.
+
+- Ratfor.
+
+- SEARCH, DIFF.
+
+- Check AUF reader for MTM permission bits.
+
+- MTM login.
 
 - Add global try/except and bgerror to:
 

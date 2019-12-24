@@ -5,7 +5,6 @@
 #
 # TODO
 #
-# - MDTM: modification date and time.
 # - Binary and contiguous files?
 # - Don't "die" on the client. 
 # - Don't leave the dimmer on.
@@ -47,9 +46,9 @@ namespace eval OS32 {
       ::OS32::NoTransmit $sock "500 File size not supported (record oriented filesystem)"
    }
 
-   proc ::ftpd::command::APPE {sock prm} { ::OS32::NoTransmit $sock "500 TODO: APPE" ; puts "\n\n*** TODO: APPE (APPEND) ****" }
-   proc ::ftpd::command::MDTM {sock prm} { ::OS32::NoTransmit $sock "500 TODO: MDTM" ; puts "\n\n*** TODO: MDTM (MODIFIED DATE TIME) ****" }
-   proc ::ftpd::command::STOU {sock prm} { ::OS32::NoTransmit $sock "500 TODO: STOU" ; puts "\n\n*** TODO: STOU (STORE UNIQUE) ****" }
+   proc ::ftpd::command::APPE {sock prm} { ::OS32::NoTransmit $sock "500 TODO: APPE" ; puts "\n\n*** TODO? APPE (APPEND) ****" }
+   proc ::ftpd::command::MDTM {sock prm} { ::OS32::NoTransmit $sock "500 TODO: MDTM" ; puts "\n\n*** TODO? MDTM (MODIFIED DATE TIME) ****" }
+   proc ::ftpd::command::STOU {sock prm} { ::OS32::NoTransmit $sock "500 TODO: STOU" ; puts "\n\n*** TODO? STOU (STORE UNIQUE) ****" }
 
 ;#########################################################################
    #
