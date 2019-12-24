@@ -3,10 +3,6 @@
   have overlapping requests. FTP to return 400 series "FTP busy" (try again)
   response to client.
 
-- Monitor interactive prompts (EDIT32, COPY32, BACKUP, etc.) so FTP can
-  return 400 series "Operator busy" (do not disturb) response to client.
-  Or use "TSKID=" and ":END OF TASK" outputs to infer operator busyness.
-
 - Show errors in red, using dimmer status to restore dim/normal status.
 
 - Add global try/except and bgerror to:

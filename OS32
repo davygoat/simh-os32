@@ -97,6 +97,7 @@ namespace eval OS32 {
          }
 
          # Or bottom half if we have to check the volume exists
+         ::OS32::CheckOperatorBusy $sock
          set data(rvol) $vol
          if { $act != "" } { set data(ract) $act }
          ::OS32::BottomHalf $sock CWD "FTP CHECKVOL,[lindex [split $vol :] 0]"
@@ -177,6 +178,7 @@ namespace eval OS32 {
       }
 
       proc TopHalf { sock fnam ftpcmd } {
+         ::OS32::CheckOperatorBusy $sock
          set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
          upvar #0 ::ftpd::$sock data
          set data(fnam) $fnam
@@ -243,6 +245,7 @@ namespace eval OS32 {
       }
 
       proc TopHalf { sock fnam ftpcmd } {
+         ::OS32::CheckOperatorBusy $sock
          set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
          upvar #0 ::ftpd::$sock data
          set data(fnam) $fnam
@@ -339,6 +342,7 @@ namespace eval OS32 {
       rename ::ftpd::command::PASS ::ftpd::command::_PASS
 
       proc ::ftpd::command::PASS { sock password } {
+         ::OS32::CheckOperatorBusy $sock
          upvar #0 ::ftpd::$sock data
          set data(cwd) 0
          set data(vol) "SYS:"
@@ -395,6 +399,7 @@ namespace eval OS32 {
       }
 
       proc TopHalf { sock fnam } {
+         ::OS32::CheckOperatorBusy $sock
          set fnam [::OS32::WildFile $sock [string toupper $fnam] RETR]
          upvar #0 ::ftpd::$sock data
          set data(fnam) $fnam
@@ -479,6 +484,7 @@ namespace eval OS32 {
       }
 
       proc TopHalf { sock fnam } {
+         ::OS32::CheckOperatorBusy $sock
          upvar #0 ::ftpd::$sock data
          set fnam [::OS32::WildFile $sock [string toupper $fnam] RNTO]
          set data(fnam2) $fnam
@@ -549,6 +555,7 @@ namespace eval OS32 {
       }
 
       proc TopHalf { sock fnam } {
+         ::OS32::CheckOperatorBusy $sock
          upvar #0 ::ftpd::$sock data
          set fnam [::OS32::WildFile $sock [string toupper $fnam] STOR]
          set data(fnam) $fnam
@@ -717,6 +724,14 @@ namespace eval OS32 {
 
       upvar #0 ::ftpd::$sock data
       return $data(vol)$fnam/$data(cwd)
+   }
+
+   proc CheckOperatorBusy {sock} {
+      variable taskcount
+      if { $taskcount > 0 } {
+         puts $sock "404 Operator busy, do not disturb"
+         return -level 2
+      }
    }
 
    proc BottomHalf { sock ftpcm oscmd } {
@@ -907,6 +922,7 @@ namespace eval OS32 {
    #
 
    variable osline ""
+   variable taskcount 0
 
    proc DoExpect {} {
       namespace eval :: {
@@ -914,8 +930,13 @@ namespace eval OS32 {
             -o
             # We'll usually trigger pattern matching on <CR>.
             -re "\r" {
-               upvar #0 ::OS32::ftpcmd ftpcmd
                upvar #0 ::OS32::osline osline
+               if { [string match "TSKID = *" $osline] } {
+                  incr ::OS32::taskcount
+               } elseif { [string match "*:END OF TASK*" $osline] } {
+                  incr ::OS32::taskcount -1
+               }
+               upvar #0 ::OS32::ftpcmd ftpcmd
                if { $ftpcmd != "" } {
                   set LinePatternMatch ::OS32::[set ftpcmd]::LinePatternMatch
                   if { [info procs $LinePatternMatch] != "" } {
