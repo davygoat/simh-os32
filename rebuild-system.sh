@@ -550,7 +550,15 @@ set cpu idle
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "sysonly\r";c
    expect ".CMDP>" send "$ifnull @1\r";c
-   expect ".CMDP>" send "   $write THIS CSS SHOULD ONLY BE RUN BY THE FTP SERVER\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write OPERATOR COMMANDS ARE:\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write FTP ON\r";c
+   expect ".CMDP>" send "   $write FTP OFF\r";c
+   expect ".CMDP>" send "   $write FTP USERS\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write ALL OTHER COMMANDS ARE RESERVED FOR THE FTP SERVER.\r";c
+   expect ".CMDP>" send "   $write\r";c
    expect ".CMDP>" send "   $exit\r";c
    expect ".CMDP>" send "$endc\r";c
    expect ".CMDP>" send "*\r";c
@@ -570,23 +578,25 @@ set cpu idle
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "*** FTP OFF **************************************************\r";c
    expect ".CMDP>" send "xallocate off.ftp,index,80\r";c
+   expect ".CMDP>" send "xallocate down.ftp,index,80\r";c
    expect ".CMDP>" send "xallocate stop.ftp,index,80\r";c
    expect ".CMDP>" send "$ifx @1.ftp\r";c
    expect ".CMDP>" send "   $write STOP FTP SERVER\r";c
-   expect ".CMDP>" send "   delete off.ftp,stop.ftp\r";c
+   expect ".CMDP>" send "   delete off.ftp,down.ftp,stop.ftp\r";c
    expect ".CMDP>" send "   $exit\r";c
    expect ".CMDP>" send "$endc\r";c
-   expect ".CMDP>" send "delete off.ftp,stop.ftp\r";c
+   expect ".CMDP>" send "delete off.ftp,down.ftp,stop.ftp\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "*** FTP ON ***************************************************\r";c
    expect ".CMDP>" send "xallocate on.ftp,index,80\r";c
+   expect ".CMDP>" send "xallocate up.ftp,index,80\r";c
    expect ".CMDP>" send "xallocate start.ftp,index,80\r";c
    expect ".CMDP>" send "$ifx @1.ftp\r";c
    expect ".CMDP>" send "   $write START FTP SERVER\r";c
-   expect ".CMDP>" send "   delete on.ftp,start.ftp\r";c
+   expect ".CMDP>" send "   delete on.ftp,up.ftp,start.ftp\r";c
    expect ".CMDP>" send "   $exit\r";c
    expect ".CMDP>" send "$endc\r";c
-   expect ".CMDP>" send "delete on.ftp,start.ftp\r";c
+   expect ".CMDP>" send "delete on.ftp,up.ftp,start.ftp\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "*** DIR ******************************************************\r";c
    expect ".CMDP>" send "xallocate dir.ftp,index,80\r";c
