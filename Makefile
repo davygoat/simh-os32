@@ -19,7 +19,7 @@ os32doc.zip: doc/*
 	rm -f os32doc.zip
 	zip -r9 os32doc doc/
 
-os32src.zip: OS32 ftpd.config *.sim rebuild-system.sh tapes/eou.tap
+os32src.zip: OS32 ftpd.config *.sim rebuild-system.sh make-sim.sh tapes/eou.tap
 	rm -f os32src.zip
 	zip -r9 os32src $^
 
