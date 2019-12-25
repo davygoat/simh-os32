@@ -797,8 +797,7 @@ set cpu idle
    # HELLOF.FTN
    expect "\r\n*" send "build hellof.ftn\r";c
    expect ".CMDP>" send "       program hello;\r";c
-   expect ".CMDP>" send "       write(0,1000)\r";c
-   expect ".CMDP>" send "1000   format(' Interdata Fortran VII says, \"Hello world\".')\r";c
+   expect ".CMDP>" send "       write(0,*) 'Interdata Fortran VII says, \"Hello world\".'\r";c
    expect ".CMDP>" send "       end\r";c
    expect ".CMDP>" send "endb\r";c
    expect "\r\n*"  send "rename hellof.ftn,hellof.ftn/25\r";c
