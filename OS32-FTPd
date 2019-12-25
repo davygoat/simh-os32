@@ -290,6 +290,11 @@ namespace eval OS32 {
                   puts -nonewline $data(sock2) "$1\r\n"
                }
             }
+            "^\\* (FILENAME...........+)" {
+               if { $ftpcmd == "LIST" } {
+                  puts -nonewline $data(sock2) " $1\r\n"
+               }
+            }
             "^\\* (........).(...)/(.....) (.. .+)" {
                if { $ftpcmd == "LIST" } {
                   puts -nonewline $data(sock2) " $1.$2/$3 $4\r\n"
