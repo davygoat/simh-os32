@@ -1,0 +1,45 @@
+# vim:set nowrap:
+# vim:set syntax=sh:
+#
+# This file assumes that a disk labelled IUG is marked on as DSC3.
+# A clean disk can be created with the 'do makedisk' script.
+#
+
+:params
+
+   set env IUG=%1
+   set env TAP=tapes/iug0%IUG%.tap
+   set env ACT=%2
+
+   if "%ACT%" == "" set env ACT=%IUG%
+   if "%IUG%" == "" goto usage
+   if not exist "%AP%" goto notfound
+
+:automate
+
+   attach -e -r mt0 %TAP%
+   expect "\r\n*" send "load backup\r";c
+   expect "TSKID = BACKUP" send "start ,in=mag1:,out=iug:,ac=%ACT%,verify,delete,list=con:\r";c
+   send "\r"
+   continue
+   goto bottom
+
+:usage
+
+   echof ""
+   echof "Usage: sim> do iug NUMBER [ACCOUNT]"
+   echof ""
+   echof "Note:  NUMBER is three digits between 100 and 534"
+   echof "       ACCOUNT is the destination account, if it differs from NUMBER"
+   echof ""
+   goto bottom
+
+:notfound
+
+   echof "\n"
+   echof "ERROR: File %TAP% not found."
+   echof "\n"
+   goto bottom
+
+:bottom
+
