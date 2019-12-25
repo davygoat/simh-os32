@@ -1,6 +1,7 @@
 id32
 tapes/
 doc/
+*.swp
 *.dsk
 *.out
 *.lst
