@@ -1,6 +1,11 @@
-#!/usr/bin/tclsh
-# vim:set syntax=tcl:
-# vim:set nowrap:
+#!/bin/sh
+## vim:set nowrap:\
+## vim:set syntax=tcl:\
+## FreeBSD, no symlink... ###############################################\
+   TCL=$(ls /usr/bin/tclsh* /usr/local/bin/tclsh* 2>/dev/null |head -1) #\
+   [ -n "$TCL" ] || exec echo "Cannot find tclsh"                       #\
+   exec $TCL "$0" ${1+"$@"}                                             #\
+#########################################################################
 
 #
 # TODO
