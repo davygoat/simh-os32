@@ -7,21 +7,39 @@
    exec $TCL "$0" ${1+"$@"}                                             #\
 #########################################################################
 
-if { $argc < 1 } {
+set numfiles 0
+set acct 0
+foreach arg $argv {
+   if { ![string is integer $arg] } {
+      incr numfiles
+   }
+}
+
+if { $numfiles < 1 } {
    puts stderr ""
-   puts stderr "Usage: $ make-sim FILENAME..."
+   puts stderr "Usage: $ make-sim \[ACCOUNT\] FILENAME..."
    puts stderr ""
    puts stderr "   UNIX:     ./make-sim *.css >wop"
-   puts stderr "   WINDOWS:  tclsh.exe make-sim  wild.c search.c >wop"
+   puts stderr "   WINDOWS:  tclsh.exe make-sim  25 wild.c search.c >wop"
    puts stderr "   simh:     <Ctrl/E> do wop"
    puts stderr ""
    exit
 }
-foreach fnam $argv {
+
+foreach arg $argv {
+   if { [string is integer $arg] } {
+      set acct $arg
+      continue
+   }
+   set fnam $arg
    set fd [open $fnam r]
    set schluck [string trimright [read $fd]]
    set fnam [file tail $fnam]
-   puts "   # $fnam"
+   if { $acct } {
+       puts "   # [string toupper $fnam]/$acct"
+   } else {
+       puts "   # [string toupper $fnam]"
+   }
    puts "   expect \"\\r\\n*\" send \"build $fnam\\r\";c"
    foreach line [split $schluck \n] {
       set line [string trimright $line]
@@ -31,7 +49,11 @@ foreach fnam $argv {
       puts "   expect \".CMDP>\" send \"$line\\r\";c"
    }
    puts "   expect \".CMDP>\" send \"endb\\r\";c"
+   if { $acct } {
+      puts "   expect \"\\r\\n*\" send \"xdelete $fnam/$acct ; rename $fnam,$fnam/$acct\\r\";c"
+   }
 }
+
 puts "   # make it happen!"
 puts "   send \"\\r\""
 puts "   continue"
