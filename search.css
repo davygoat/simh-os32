@@ -1,0 +1,42 @@
+*
+$ifnnull @4
+   $goto dofile
+   $exit
+$endc
+*
+*** WILDCARD *************************************
+*
+mtmonly
+*
+$ifnull @1
+   $write
+   $write USAGE: SEARCH WILDCARD,"STRING"
+   $write
+   $write NOTE:  TO SEARCH FOR $, USE $$
+   $exit
+$endc
+*
+$ifnull @2
+   $write
+   $write USAGE: SEARCH WILDCARD,"STRING"
+   $write
+   $write NOTE:  TO SEARCH FOR $, USE $$
+   $exit
+$endc
+*
+wild "search $F,@2,,go",@1
+*
+$exit
+*
+*** SINGLE FILE **********************************
+*
+$label dofile
+prevent etm
+load .bg,search,10
+task .bg
+assign 0,@1
+assign 1,con:
+assign 2,con:
+start ,@1,"@2"
+*
+$exit

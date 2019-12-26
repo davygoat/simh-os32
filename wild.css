@@ -1,0 +1,60 @@
+*
+mtmonly
+*
+* Check parameters present
+*
+$ifnull @1
+   load wild,10
+   task wild
+   start
+   $exit
+$endc
+$ifnull @2
+   load wild,10
+   task wild
+   start
+   $exit
+$end
+*
+* Use DISPLAY FILES to write WILD.TSK input
+*
+$job
+   xalloc wildin.tmp,index,80
+   xalloc wildtmp.css,index,128
+   display files ,@2,wildin.tmp
+$termjob
+$ifne 0
+   xdelete wildin.tmp
+   xdelete wildtmp.css
+   $exit
+$endc
+*
+* Convert to CSS using WILD.TSK
+*
+$job
+   load wild,10
+   task wild
+   assign 0,wildin.tmp,ero
+   assign 1,wildtmp.css,ewo
+   start ,"@1",@2
+$termjob
+$ifne 0
+   xdelete wildin.css
+   xdelete wildtmp.css
+   $exit
+$endc
+*
+* Run CSS
+*
+$job
+   wildtmp
+$termjob
+$ifne 0
+   $write THERE WERE A FEW PROBLEMS
+$endc
+*
+* Cleanup
+*
+xdelete wildin.tmp
+xdelete wildtmp.css
+$exit
