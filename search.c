@@ -64,6 +64,8 @@ int main (argc,argv)
          printf ("%6d %s", lc, line);
       }
    }
+   if (mc > 0)
+      printf ("\nFound %d matches for \"%s\".", mc, str);
 
    return (0);
 }
