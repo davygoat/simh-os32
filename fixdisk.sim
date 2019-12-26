@@ -2,16 +2,18 @@
 
 :params
 
-   set env DISK=%1
+   set env FNAM=%1
 
-   if "%DISK%" == "" goto usage
+   if "%FNAM%" == "" goto usage
 
 :automate
 
-   expect "*" send "mark %DISK%:,on,p\r";c
+   attach -e dm1 %FNAM%
+   expect "*" send "mark dsc3:,on,p\r";c
    expect "*" send "load sys:fastchek\r";c
-   expect "*" send "mark %DISK%:,off\r";c
-   expect "*" send "start ,ch=%DISK%:,nor,ext,li=con:\r";c
+   expect "*" send "mark dsc3:,off\r";c
+   expect "*" send "start ,ch=dsc3:,nor,ext,li=con:\r";c
+   expect "FASTCHEK:END OF TASK" send "mark dsc3:,on\r";c
    send "\r"
    continue
    goto bottom
@@ -19,9 +21,9 @@
 :usage
 
    echof ""
-   echof "Usage: sim> do fixdisk DISK"
+   echof "Usage: sim> do fixdisk FNAM"
    echof ""
-   echof "Note:  DISK is typically DSC3"
+   echof "Note:  FNAM must exists, and will be mounted on DSC3/DM1."
    echof ""
    goto bottom
 
