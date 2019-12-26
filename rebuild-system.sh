@@ -237,8 +237,8 @@ set cpu idle
    expect "EDIT32:END OF TASK     0\r\n*" send "MTMSGN MAC\r";c
    expect "MTMMAC.TSK CREATED ***" send "load actuty\r";c
    expect "TSKID = ACTUTY" send "start ,com=con:,li=con:,cre=users.auf\r";c
-   expect "ACTUTY>" send "add 255,255,pass1,master,*,*,FFFFFFF0\r";c
-   expect "ACTUTY>" send "add 25,20,user1,user1,*,*,FFFFFFF0\r";c
+   expect "ACTUTY>" send "add 255,255,pass1,MTM admin,*,*,FFFFFFF0\r";c
+   expect "ACTUTY>" send "add 25,20,user1,Joe Bloggs with privs,*,*,FFFFFFF0\r";c
    expect "ACTUTY>" send "end\r";c
    expect "ACTUTY:END OF TASK" send "rename users.auf,users.auf/255 ; mark dsc4:,off ; display devices\r";c
    expect "DSC5  FE 0000   OFF" detach mt0 ; detach dm0 ; goto install-compilers
@@ -551,6 +551,114 @@ set cpu idle
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "endb\r";c
+   # WILD.CSS
+   expect "\r\n*" send "build wild.css\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "mtmonly\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "* Check parameters present\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$ifnull @1\r";c
+   expect ".CMDP>" send "   load sys:wild,10\r";c
+   expect ".CMDP>" send "   task wild\r";c
+   expect ".CMDP>" send "   start\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "$ifnull @2\r";c
+   expect ".CMDP>" send "   load sys:wild,10\r";c
+   expect ".CMDP>" send "   task wild\r";c
+   expect ".CMDP>" send "   start\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$end\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "* Use DISPLAY FILES to write WILD.TSK input\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$job\r";c
+   expect ".CMDP>" send "   xalloc wildin.tmp,index,80\r";c
+   expect ".CMDP>" send "   xalloc wildtmp.css,index,128\r";c
+   expect ".CMDP>" send "   display files ,@2,wildin.tmp\r";c
+   expect ".CMDP>" send "$termjob\r";c
+   expect ".CMDP>" send "$ifne 0\r";c
+   expect ".CMDP>" send "   xdelete wildin.tmp\r";c
+   expect ".CMDP>" send "   xdelete wildtmp.css\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "* Convert to CSS using WILD.TSK\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$job\r";c
+   expect ".CMDP>" send "   load sys:wild,10\r";c
+   expect ".CMDP>" send "   task wild\r";c
+   expect ".CMDP>" send "   assign 0,wildin.tmp,ero\r";c
+   expect ".CMDP>" send "   assign 1,wildtmp.css,ewo\r";c
+   expect ".CMDP>" send "   start ,\"@1\",@2\r";c
+   expect ".CMDP>" send "$termjob\r";c
+   expect ".CMDP>" send "$ifne 0\r";c
+   expect ".CMDP>" send "   xdelete wildin.css\r";c
+   expect ".CMDP>" send "   xdelete wildtmp.css\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "* Run CSS\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$job\r";c
+   expect ".CMDP>" send "   wildtmp\r";c
+   expect ".CMDP>" send "$termjob\r";c
+   expect ".CMDP>" send "$ifne 0\r";c
+   expect ".CMDP>" send "   $write THERE WERE A FEW PROBLEMS\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "* Cleanup\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "xdelete wildin.tmp\r";c
+   expect ".CMDP>" send "xdelete wildtmp.css\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "endb\r";c
+   # SEARCH.CSS
+   expect "\r\n*" send "build search.css\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$ifnnull @4\r";c
+   expect ".CMDP>" send "   $goto dofile\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "*** WILDCARD *************************************\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "mtmonly\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$ifnull @1\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write USAGE: SEARCH WILDCARD,\"STRING\"\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write NOTE:  TO SEARCH FOR $, USE $$\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$ifnull @2\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write USAGE: SEARCH WILDCARD,\"STRING\"\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write NOTE:  TO SEARCH FOR $, USE $$\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "wild \"search $V:$F,@2,,go\",@1\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "*** SINGLE FILE **********************************\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$label dofile\r";c
+   expect ".CMDP>" send "prevent etm\r";c
+   expect ".CMDP>" send "load .bg,sys:search,10\r";c
+   expect ".CMDP>" send "task .bg\r";c
+   expect ".CMDP>" send "assign 0,@1\r";c
+   expect ".CMDP>" send "assign 1,con:\r";c
+   expect ".CMDP>" send "assign 2,con:\r";c
+   expect ".CMDP>" send "start ,@1,\"@2\"\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "endb\r";c
    # FTP.CSS
    expect "\r\n*" send "build ftp.css\r";c
    expect ".CMDP>" send "*\r";c
@@ -561,6 +669,7 @@ set cpu idle
    expect ".CMDP>" send "   $write\r";c
    expect ".CMDP>" send "   $write FTP ON\r";c
    expect ".CMDP>" send "   $write FTP OFF\r";c
+   expect ".CMDP>" send "   $write FTP RESET\r";c
    expect ".CMDP>" send "   $write FTP USERS\r";c
    expect ".CMDP>" send "   $write\r";c
    expect ".CMDP>" send "   $write ALL OTHER COMMANDS ARE RESERVED FOR THE FTP SERVER.\r";c
@@ -568,7 +677,9 @@ set cpu idle
    expect ".CMDP>" send "   $exit\r";c
    expect ".CMDP>" send "$endc\r";c
    expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "xdelete users.ftp,off.ftp,on.ftp,start.ftp,stop.ftp\r";c
+   expect ".CMDP>" send "xdelete users.ftp,reset.ftp\r";c
+   expect ".CMDP>" send "xdelete off.ftp,down.ftp,stop.ftp\r";c
+   expect ".CMDP>" send "xdelete on.ftp,up.ftp,start.ftp\r";c
    expect ".CMDP>" send "xdelete copyout.ftp,copyin.ftp\r";c
    expect ".CMDP>" send "xdelete delete.ftp,rename.ftp\r";c
    expect ".CMDP>" send "xdelete dir.ftp,checkvol.ftp\r";c
@@ -603,6 +714,16 @@ set cpu idle
    expect ".CMDP>" send "   $exit\r";c
    expect ".CMDP>" send "$endc\r";c
    expect ".CMDP>" send "delete on.ftp,up.ftp,start.ftp\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "*** FTP RESET ************************************************\r";c
+   expect ".CMDP>" send "xallocate reset.ftp,index,80\r";c
+   expect ".CMDP>" send "$ifx @1.ftp\r";c
+   expect ".CMDP>" send "   $write STOP FTP SERVER\r";c
+   expect ".CMDP>" send "   $write START FTP SERVER\r";c
+   expect ".CMDP>" send "   delete reset.ftp\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "delete reset.ftp\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "*** DIR ******************************************************\r";c
    expect ".CMDP>" send "xallocate dir.ftp,index,80\r";c
@@ -831,7 +952,6 @@ set cpu idle
 
    boot dm0
    exit 1
-
 
 :thats-all-folks
 
