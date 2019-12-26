@@ -1,8 +1,22 @@
 
-MTM privileges:
+SIGNON :
+
+- SIGNON name,account,password.
+- Ctrl/E before password disables echoing during password.
+- Or type SIGNON without parameters for dialog version.
+
+  - USERID is a unique session name (your alias).
+  - ACCOUNT is the numeric account. Who you *really* are.
+  - PASSWORD is your password.
+  - ENVIRONMENT is the name of a CSS to run instead of USERINIT.
+
+- SIGNON without parameters does not echo USERID or PASSWORD.
+
+
+MTM privileges :
 
 - SET GROUP
 - SET PRIVATE
-- EXTENDED ACCOUNT ACCESS
+- EXTENDED ACCOUNT ACCESS (80808080 ?)
 - PRIVILEGED
 
