@@ -47,8 +47,8 @@ int main (argc,argv)
 
    fnam = argv[1];
    str = argv[2];
-
    lc = mc = 0;
+
    while ( fgets(line,sizeof(line),stdin) && !feof(stdin) )
    {
       lc++;
@@ -64,6 +64,7 @@ int main (argc,argv)
          printf ("%6d %s", lc, line);
       }
    }
+
    if (mc > 0)
       printf ("\nFound %d matches for \"%s\".", mc, str);
 
