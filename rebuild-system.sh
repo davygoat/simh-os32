@@ -394,8 +394,14 @@ set cpu idle
    # STARTUP.CSS
    expect "\r\n*" send "build startup.css\r";c
    expect ".CMDP>" send "sysonly\r";c
-   expect ".CMDP>" send "mtmup ; $wait 1\r";c
+   expect ".CMDP>" send "$job\r";c
+   expect ".CMDP>" send "*   mark dsc3:,on\r";c
+   expect ".CMDP>" send "$termjob\r";c
+   expect ".CMDP>" send "$ifne 0\r";c
+   expect ".CMDP>" send "   $write *** DSC3 IS BROKEN, USE SIMH 'DO FIXDISK' TO RECOVER ***\r";c
+   expect ".CMDP>" send "$endc\r";c
 #  expect ".CMDP>" send "splup ; $wait 1\r";c
+   expect ".CMDP>" send "mtmup ; $wait 1\r";c
    expect ".CMDP>" send "display tasks\r";c
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "endb\r";c
