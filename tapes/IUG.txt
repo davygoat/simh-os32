@@ -1,0 +1,2511 @@
+ 
+                INTERCHANGE PROGRAM LIBRARY ABSTRACTS
+
+Interchange was name of the Interdata User Group.
+
+This file has been extracted from  chapter 2 of the R21-03 Interchange
+Library Catalog,  the original of which  can be found on  bitsavers. I
+have merely reformatted it, and added  URLs, to make it easier to read
+and use.
+
+Tip for vim users: Map one of your function keys to /^L^Mzt to quickly
+'flip pages' by searching for embedded formfeed characters.
+
+Note there are about 520 IUG tapes.  You cannot install all of them on
+one 67MB disk. To install individual tapes:
+
+* Create a disk labelled IUG  by typing 'do makedisk iug dsk3-iug.dsk'
+at  the simh  prompt.  The newly-created  disk  will automatically  be
+marked  on by  the sim  script. If  you want  to keep  the IUG  volume
+'mounted' after a reboot, do the following:
+
+  Host:  Uncomment the 'attach  dm1' statement in os32.sim
+  OS/32: Uncomment the 'mark dsc3:,on' statement in STARTUP.CSS.  
+
+* To restore  the  SOFTWARE TOOLS  tape  (e.g. to  use  lex,  yacc  or
+ratfor), type 'do iug 523'  and the files will go  onto the IUG volume
+under account number 523. But note...
+
+* MTM's  SET PRIVATE  cannot handle account  numbers that  are greater
+than 255. In that case, type 'do  iug 523 99' or something similar for
+a more suitable account.
+
+* Under MTM, type the following  commands to see the files in IUG:/99,
+and to return to your usual SYS:/25 directory.
+
+  VOLUME IUG/USR    VOLUME SYS/USR
+  SET PRIVATE 99    SET PRIVATE 25
+
+
+
+IUG0101: MEMFILE
+ 
+Category: UTIL        Language: CAL Macro/32             R-00 09/15/83
+ 
+MEMFILE is  an E-Task which  makes use of  SVC intercepts to  create a
+virtual device called  MEM:. A user task may assign  this 'device' and
+through  it  read  all  of  configured  memory  in  either  random  or
+sequential mode in 256 byte blocks, just as if memory were a read only
+contiguous file. This program  is particularly valuable in conjunction
+with DMPTYP IUG0491 and DUMPRINT.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0101.zip
+
+
+IUG0102: OS/32 ENHANCEMENTS
+ 
+Category: OS&L        Language: CAL Macro/32             R-10 02/12/92
+ 
+This  catalog  entry  has  been  opened  to  receive  enhancements  to
+the  operating  system. Such  enhancements  can  be those  of  general
+usefulness or for a specific application, such as specialized drivers.
+Currently this package  contains enhancements to the  BIOC driver. The
+OS  6.2.4/7.2/8.1  BIOC  enhancements include  minimum  write  timeout
+specification, control  over type ahead buffer  length, suppression of
+rubout echo,  a correction  to DCB40,  ability to  send a  line break,
+sysgen clock specification which functions  on dial-in lines, reset of
+CMD2 byte  to sysgen value  upon disconnect, and  several enhancements
+required for smooth operation with the new intelligent modems.
+
+An enhancement  to BIOC  is provided  which gives the  user an  8 line
+history buffer. The  user may retrieve any of the  last 8 typed lines,
+view it, then optionally execute it. Currently BIOC only allows you to
+retrieve the single last line entered.
+
+The panic dump module is enhanced with respect to generic discs.
+
+BACKUP is changed to make CLOSE=REWIND the default.
+
+CAL is  enhanced by the  addition of  new pseudo-ops and  start string
+parms:  PASS/NPASS causes  CAL to  output to  the user's  terminal the
+message 'Ending pass  nn' at the end of every  pass. NLSTP[ char]/LSTP
+causes CAL  to suppress  from the symbol  table listing  those symbols
+which  begin  with the  prefix  'char'  whose  default value  is  '@'.
+LOUR/NLOUR  causes CAL  to  list only  unreferenced  symbols. Two  new
+pseudo-ops, ALERT  & ERROR, allow  the user to force  warnings (ALERT)
+and errors (ERROR) permitting one to delay until assembly time certain
+checks whose evaluation is not possible at macro time.
+
+BIAS, EXAMINE and MODIFY from the OS console are greatly enhanced. The
+EXAMINE  display is  enhanced  to display  both  the absolute  address
+and  the offset  with  respect to  the  bias. BIAS  now  has this  new
+compatible format: BIAS N|+N|-N|*[TaskName][+N|-N]|null.  If N bias is
+set  to  that  absolute value,  If  +  or  -  N bias  is  offset  from
+the  current  value by  that  amount.  If  *[+N|-N]  the bias  is  set
+to  the  start of  the  currently  'tasked'  task  plus or  minus  the
+offset N.  If the  TaskName is included  it is  automatically 'tasked'
+then  the bias  is set  accordingly. EXAMINE  has this  new compatible
+format: EXAMINE  AddressExpr[,N|/AddressExpr][,fd]. An  AddressExpr is
+N|+N|-N|^[+N|-N]|![+N|-N|]. N and +N indicate  the display is to start
+N bytes  forward from  the bias  while -N begins  the display  N bytes
+before the  current bias. "^" is  a variable whose value,  initially 0
+and always  reset by the  BIAS command,  is the starting  address with
+respect to the bias  of the last effective EXA command  while "!" is a
+variable  whose  value, initially  0  and  always  reset by  the  BIAS
+command, is the address of the byte one greater than that displayed by
+the last effective  EXA command. MODIFY also sets "!"  in this manner,
+but does  not set "^". MODIFY  has this new compatable  format: MODIFY
+AddressExpr[,HalfwordData|null]*. "*"  means one or  more repetitions.
+When a null  parm is encountered the corresponding  halfword in memory
+is not  altered. As  a result of  MODIFY setting "!"  but not  "^" the
+following  very  convenient  commands  are  possible:  EXA  1FEA,2;MOD
+^,C830,8000;MOD !,4230,8076  followed by  simply EXA  ^/! to  view the
+results. An additional form of  the MODIFY command allows registers in
+the 'tasked'  task to be modified:  MODIFY Rn[,FullwordData|null]*. Rn
+is the starting  register where n is  in [0,F]. A null  parm skips the
+corresponding register.
+
+The changes and enhancements offered in this package are provided only
+in  source updater  format, you  must apply  them youself  against the
+appropriate source modules.
+
+A  series of  new console  commands  are implemented:  XCANCEL -  same
+as  cancel  except  no  error  is generated  if  task  isn't  present;
+$IFTASK/$IFNTASK  execute/skip  commands  if  named  task  is  loaded;
+$IFWCS/$IFNWCS  - execute/skip  commands  if  processor supports  WCS;
+$IFOS/$IFNOS N.M - execute/skip commands  if OS version is N.M. $QUERY
+- Use like a $WRITE. The text string is written to the console with an
+appended question mark  to which a "yes" or "no"  response is required
+setting the EOT code to zero or nonzero.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0102.zip
+
+
+IUG0103: CODECARD
+ 
+Category: UTIL        Language: CAL Macro/32             R-01 07/22/85
+ 
+A program  to generate a  formatted ASCII code card  and send it  to a
+device. Useful for testing the controller/device response to the ASCII
+set.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0103.zip
+
+
+IUG0104: OBJECT LIBRARY UTILITIES
+ 
+Category: UTIL        Language: CSS                      R-00 01/31/84
+ 
+A package  of 4 CSS  files which  greatly facilitate the  creation and
+maintenance of object  libraries. These CSS's use  the standard LIBLDR
+to allow  you to create,  add modules to,  replace modules in,  and to
+list the contents of such libraries with a single command.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0104.zip
+
+
+IUG0105: XAIDS - OS DEBUGGING TOOL
+ 
+Category: OS&L        Language: CAL Macro/32             R-04 02/12/92
+ 
+Contributed  by CCUR  as  a useful,  but  unsupported, program,  XAIDS
+is  intended  only for  the  experienced  systems programmer  for  use
+in  operating  systems  work.  XAIDS  is  substituted  for  UBOT  when
+generating an OS. When so installed XAIDS takes control of the illegal
+instruction trap and  may be used to  insert breakpoints, disassemble,
+display register sets,  etc. Users with their  own specialized drivers
+should find this a valuable diagnostic tool.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0105.zip
+
+
+IUG0106: MACTOOLS - MACRO TOOL KIT
+ 
+Category: OS&L        Language: CAL Macro/32             R-09 08/11/89
+ 
+Macros - with more to come - currently containing time/date processing
+macros to pack/unpack date from halfword, date and time from fullword.
+These  are  an implementation  of  algorithm  199 from  the  Collected
+Algorithms of the A.C.M. The year  2000 looms large. If you store time
+and date using these macros you won't be in any trouble until Thursday
+April 8,  2100 at  06:25:15. Macros  to control  segmentation options.
+Macro to generate a uniformly distributed random integer.
+
+Macros to  do left and right  justification of strings in  a buffer. A
+macro  to  find  the first  match  of  a  pattern  in a  string,  with
+the  option to  ignore upper/lower  case distinctions  in [a..z,A..Z].
+OSREV..generates  a user  stated symbol  which  is equated  to the  OS
+revision level.  OSUPDATE..analagous to OSREV  for OS update  level. A
+macro to parse a start sting.  Macros to translate ASCII to EBCDIC and
+EBCDIC to  ASCII. RAISE  and its counterpart  LOWER converts  a buffer
+from lowercase  to uppercase  and visa  versa optionally  padding with
+spaces and clipping to 7 bit. CLIP7 clips to 7 bit and optionally pads
+with spaces.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0106.zip
+
+
+IUG0107: DEVICE HARDWARE STATUS LOOP PROGRAM
+ 
+Category: UTIL        Language: CAL Macro/32             R-00 04/06/84
+ 
+Program will report changes in status in the DCB and the status in the
+SSR command.  Will also print a message if the device name is found in
+a table in the program.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0107.zip
+
+
+IUG0108: MAP - DISPLAY MEMORY FROM MTM TERMINAL
+ 
+Category: UTIL        Language: CAL Macro/32             R-04 02/12/92
+ 
+Allows the privileged MTM user to display the system memory map to his
+terminal providing much the same information as a D M command from the
+OS console.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0108.zip
+
+
+IUG0109: GLOBALLY ACT ON A SPECIFIED FILE DESCRIPTOR PATTERN
+ 
+Category: UTIL        Language: CAL Macro/32, FORTRAN    R-01 08/01/86
+ 
+Allows a user at an MTM  terminal (or the system console) to construct
+and execute  a CSS command (GB)  that applies to all  files that match
+the specified file pattern. For example,
+
+GB X-.-,DE &F.&E would delete all files that begin with an X.
+
+GB -.FTN,$IFNX  &F.OBJ\COMPILE &F\$ENDC  would compile all  .FTN files
+that  did  not have  a  corresponding  .OBJ  file.  In the  above,  &F
+substitutes for the filename, &E for the extension, other fields found
+in the D F  listing are similarly represented. The "\"  acts as a line
+separator, allowing multiple commands on a single line.
+
+GB :-.-,$IF  CH &V:&F.&E NE &V:GB.EXE\DEL  &V:&F.&E\$ENDC would delete
+all files  in the  users account  on all  accessible volumes.  The $IF
+CH...is needed  to avoid  trying to delete  GB.EXE which  contains the
+constructed commands. For this command to work of course all the users
+files to be deleted must be unprotected and unassigned.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0109.zip
+
+
+IUG0110: SRCCOM - SMART TEXT FILE COMPARATOR
+ 
+Category: UTIL        Language: Pascal                   R-03 08/07/86
+ 
+Defines match by  user selectable number of  contiguous equal records.
+Can  optionally  ignore blanks,  sequence  numbers  and FORTRAN  style
+comment lines. Upon  detecting a mismatch it seeks ahead  in each file
+for  a resumption  of  match.  Maximum lookahead  is  limited only  by
+available memory.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0110.zip
+
+
+IUG0111: FORTRAN/FILE UTILITY PACKAGE
+ 
+Category: UTIL        Language: FORTRAN                  R-01 01/28/90
+ 
+COLM..Shifts part or whole lines within a file. COMPARE..Provides line
+by line comparison of two files. COMTABLE..Sorts and tabulates FORTRAN
+source file block or blank  common blocks. Common is copied throughout
+all desired  subroutines. COMTABL2..Sorts  and tabulates  all existing
+FORTRAN  source file  blocks or  blank common  blocks. DOLOOP..Indents
+and/or  realigns  FORTRAN  source   files.  GENINPUT..Used  to  easily
+manipulate data files. LABEL..Adds or  removes statement labels to all
+executable  statements in  a  FORTRAN  program. LISTF..Provides  quick
+listings to  console of  files. NUMPR..Prints a  sequentially numbered
+copy of a file. PHOTO..Sets up a log file monitoring console activity.
+RENUMBER..Renumbers statement labels in a FORTRAN program.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0111.zip
+
+
+IUG0112: NEW SOURCE UPDATER
+ 
+Category: UTIL        Language: FORTRAN                  R-00 06/06/84
+ 
+An alternative to the CCUR source  updater. Its a tad more friendly to
+use. Revision numbers in the sequence field do not confuse it.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0112.zip
+
+
+IUG0113: "FAIRLY WONDERFUL UTILITIES"
+ 
+Category: UTIL        Language: FORTRAN                  R-00 06/06/84
+ 
+A collection  of utilities, each of  which alone may not  appear to be
+much,  but  together they  are  "fairly  wonderful" according  to  the
+author. MOVELEFT shifts  a record a specified number  of columns. CLIP
+clips  records  before  or  after  a  specified  pattern.  PARAM  adds
+Integer*4  declarations  for  all  untyped  parameters  in  a  FORTRAN
+program. TOUPPER  changes lower to  upper case while TOLOWER  does the
+opposite. EXCEPT finds all lines in  a file not containing a specified
+pattern.  FIND  is  the  inverse  of EXCEPT.  DIR  presents  a  sorted
+directory  listing qualified  by  a selection  pattern. STRIP  removes
+comment lines in FORTRAN programs. APPEND appends one file to another.
+APPLY  inserts a  string in  a file.  UNIQUE removes  duplicate lines.
+WRITETO appends a string to a file. MORE presents a file on the screen
+23 lines  at a  time. PRINTQUE  is yet  another printer  queue display
+program. CURSOR  is a  library of cursor  control routines.  BSORT and
+QSORT  are bubble  and quick  sort routines.  STRING is  a library  of
+string functions.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0113.zip
+
+
+IUG0114: ALPHA3 - FORMATS BACKUP LISTING IN 3 COLUMNS
+ 
+Category: UTIL        Language: PASCAL & MACRO ASSEMBLER R-00 04/10/86
+ 
+Processes the list  output of BACKUP into a 3  column format sorted by
+filename within account number.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0114.zip
+
+
+IUG0115: NATIONAL BUREAU OF STANDARDS CORE MATHEMATICAL LIBRARY
+ 
+Category: MATH        Language: FORTRAN                  R-01 10/02/85
+ 
+A collection of non-proprietary  FORTRAN subprogram packages solving a
+variety  of  mathematical  and  statistical  problems.  Although  most
+applications will only use a small  number of CMLIB modules, there are
+no name conflicts within the library  and thus all of CMLIB can easily
+be installed. All the documentation is machine readable.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0115.zip
+
+
+IUG0116: SAN DIEGO ENVIRONMENT CONTROL MANAGER
+ 
+Category: UTIL        Language: CAL Macro/32             R-25 02/12/92
+ 
+The  Environment Control  Manager (SDECM/32)  provides facilities  for
+terminal users  to transfer control  of their terminals  between local
+monitor  tasks as  well  as  to access  remote  processor systems  via
+PENnet.  Access is  also provided  to locally  written monitor  tasks.
+Monitor tasks include Reliance and MTM. Transfer of control is subject
+to the  task being  able to  accept and  interpret the  'ADD terminal'
+command sent by SDECM/32. SDECM will  control up to 126 terminal pairs
+(BIOC/ITAM) to  provide easy  transition between  MTM and  Reliance. A
+functional variation supporting nonpaired lines will support up to 253
+terminals.  A  'screen  saver'  feature clears  the  screen  of  local
+terminals after  10 minutes  of no use.  A 'modem  disconnect' feature
+disconnects a  phone line after  1 minute of  no use. These  times are
+configurable. A 'I/O  Count' feature tabulates the number  of I/O's on
+each terminal and sends an alert to the OS console when a configurable
+threshold is exceeded. Disconnected terminal  lines can ring and swamp
+the system with  interupts consuming large amounts  of processor time.
+This warning will alert you to the source of the problem.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0116.zip
+
+
+IUG0117: KERMIT FILE TRANSFER PROTOCOL IMPLEMENTATION
+ 
+Category: UTIL        Language: FORTRAN                  R-05 02/23/90
+ 
+KERMIT  is  a  protocol  for  transferring  sequential  files  between
+computers of  all sizes over ordinary  asynchronous telecommunications
+lines  using packets,  checksums  and retransmission  to promote  data
+integrity. The protocol was developed  at Columbia University. This is
+KERMIT-CO V2.2 12/20/89.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0117.zip
+
+
+IUG0118: HANDY CSS'S
+ 
+Category: UTIL        Language: CSS                      R-03 08/01/86
+ 
+Devoted  to  generally  useful  CSS's,  currently  including:  HC..Hex
+calculator.  DC..Decimal calculator.  HD..Hex  to decimal  conversion.
+DH..Decimal to Hex conversion.  ACCT..Displays private & group account
+numbers, Date  & Time, Device Name,  Batch File Descriptor, User  ID &
+Last  EOT  code.  BATCH..Submit  a  CSS as  a  batch  job.  A  package
+of  systems  development CSS's  to  do  macro expansions,  assemblies,
+compiles, links in foreground and background are provided.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0118.zip
+
+
+IUG0119: IRDR - SUBMIT CONSOLE COMMANDS FROM MTM TERMINAL
+ 
+Category: UTIL        Language: CAL/Macro32              R-01 08/04/87
+ 
+This task creates a pseudo device to  which a user task can assign and
+write. The  user's data buffer is  passed to the OS  command processor
+via a SVC  2,14 to be executed as a  command line. WARNING-Very useful
+in restricted  circumstances--Too dangerous  to have available  in the
+typical multiuser environement as the average MTM user can do untoward
+things to the system!
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0119.zip
+
+
+IUG0120: CAPTURE DEVICES
+ 
+Category: UTIL        Language: CAL/Macro32              R-00 11/19/84
+ 
+Two programs, DEVASG which intercepts  and performs all assigns, which
+has been  instructed by ASGDEV  to accept  all requests or  only those
+from a specified  user. A user can, without being  assigned to a given
+device,  deny other  users access,  until released  by ASGDEV.  A user
+could for example prevent other  users from corrupting his tape before
+he could get it  removed from the tape drive, or  he could reserve the
+plotter for himself.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0120.zip
+
+
+IUG0121: ENABLE/DISABLE TYPAHEAD
+ 
+Category: UTIL        Language: CAL/Macro32              R-00 11/19/84
+ 
+Disables/Enables typeahead on  BIOC devices which are  not assigned to
+MTM or any other program.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0121.zip
+
+
+IUG0122: TEXT/32 FORMAT TO VFC
+ 
+Category: UTIL        Language: FORTRAN                  R-04 01/21/87
+ 
+Translates formatted output of TEXT/32 into VFC output. A VFC file can
+be saved  and printed later, and  is considerably more compact  than a
+formatted file.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0122.zip
+
+
+IUG0123: ARCHIVING SYSTEM
+ 
+Category: UTIL        Language: FORTRAN                  R-00 01/31/85
+ 
+A system to  aid in the archiving  of user files. It  is of particular
+use to sites which have a large number of independent users. Users can
+request a file  be archived by a single command.  The option to delete
+the file from disc after archiving  is available. The user is informed
+at the time of  the request of the tape number to  which the file will
+be  archived. The  actual  archiving  is performed  at  a later  date,
+according to a schedule established  at the installation. The operator
+can archive files on all volumes with a single command. Audit logs are
+produced  of all  file  archive  requests and  of  all files  actually
+archived.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0123.zip
+
+
+IUG0126: NBS LIBRARIAN
+ 
+Category: UTIL        Language: FORTRAN                  R-00 02/08/85
+ 
+The NBS Librarian is a program for cross referencing object modules in
+files.  This cross  referencing is  by external  reference/entry point
+pairs.  The  Librarian  scans  files  containing  object  modules  and
+produces a cross reference map and assigns a static link level to each
+object module.  Given a  set of  unique entry  points defined  in some
+number of  modules with no recursion,  there exists a static  link map
+which is a directed tree. The static  link level is the level in which
+a module  would be placed  such that it is  one lower than  the lowest
+module calling it.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0126.zip
+
+
+IUG0127: SHOW TIME & PECALC
+ 
+Category: UTIL        Language: FORTRAN                  R-00 03/08/85
+ 
+SHOW TIME continuously displays the  time in full screen size letters.
+Currently  designed  for  Freedom  100 terminals,  should  be  readily
+adaptable for any terminal which allows cursor addressing. PECALC is a
+terminal calculator operating in both  decimal and hex. In addition to
+conversions  and simple  arithmetic it  also performs  exponentiation,
+logs, squares and trig functions.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0127.zip
+
+
+IUG0128: COMPRESS - HIGH PERFORMANCE DATA COMPRESSION UTILITY
+ 
+Category: UTIL        Language: C                        R-01 04/27/85
+ 
+This is the now-famous state-of-the-art public domain data compression
+program  "compress" which  has been  ported  to OS/32  by its  author.
+This  program uses  a new  technique called  "modified Lempel-Ziv"  to
+compress files  down to sizes  that were  never thought possible  in a
+data-independent algorithm.  This program will help  you alleviate the
+ever-pressing  problem of  disk space.  All previously  developed text
+compression programs are  made obsolete by this  program. In addition,
+binary files are  handled correctly. A program is  included to perform
+operations on multiple files based on a Display Files pattern.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0128.zip
+
+
+IUG0129: DUPE - EASY TO USE TAPE DUPLICATOR
+ 
+Category: UTIL        Language: CAL                      R-00 04/15/85
+ 
+A program which takes one tape as  an input master and generates up to
+4 copies of it simultaneously. The input tape is considered ended when
+a double  end of file marks  is read. The  double end of file  mark is
+written to the copies as well.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0129.zip
+
+
+IUG0130: READCHEK - QUICK DISC SURFACE CHECK
+ 
+Category: UTIL        Language: CAL MACRO/32             R-03 05/23/90
+ 
+Assigns SRO  to the disc and  reads the entire surface,  reporting any
+errors. If given enough space  it will read entire cylinders. Provides
+an  informative   report  including   tracks/cylinder,  sectors/track,
+total  cylinders, total  sectors,  total megabytes,  transfer rate  in
+megabytes/second,  device code,  device  address, controller  address,
+selch address and device name. Executes very quickly!
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0130.zip
+
+
+IUG0131: MAGCTRL - SEND COMMANDS TO TAPE DRIVE
+ 
+Category: UTIL        Language: CAL MACRO/32             R-00 04/15/85
+ 
+Program to  command a drive to  back file, back record,  forward file,
+write filemark,  rewind, rewind  and unload  and select  density. Very
+convenient. When started without parms it explains its use.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0131.zip
+
+
+IUG0132: DEVWAIT - COORDINATE DEVICE RESOURCES
+ 
+Category: UTIL        Language: CAL MACRO/32             R-00 04/15/85
+ 
+A program which as its start string accepts a list of device names. It
+attempts to  assign each  of these ERW.  Those which  are successfully
+assigned remain  assigned, those  which cannot  be assigned  are tried
+again after  10 seconds. This cycle  repeats until all devices  in the
+list are assigned, at which point the program goes to EOT=0. Useful in
+coordinating a process requiring specific device resources.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0132.zip
+
+
+IUG0133: CARNIFEX - MTM SYSTEMS MANAGER'S UTILITY
+ 
+Category: UTIL        Language: CAL MACRO/32             R-01 01/29/86
+ 
+A  MTM Systems  Manager's Utility  which allows  a privileged  user by
+account number  specification to:  allocate a file,  rename (including
+account transfer), reprotect, delete, display files by account number,
+copy one file/device to another optionally deleting the source, list a
+file with  line numbering, print  a file.  A help screen  explains its
+use.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0133.zip
+
+
+IUG0134: WAIT - WAIT FOR OPERATOR RESPONSE OR TIMEOUT
+ 
+Category: UTIL        Language: CAL MACRO/32             R-06 06/12/86
+ 
+WAIT is designed to be inserted in a CSS stream as follows: LO WAIT ST
+,!Q[uiet],T[imeout]=seconds  generating  the  message "Hit  RETURN  to
+continue>". Entering the  RETURN key causes WAIT to go  to EOT code 0,
+any other  entry results in  EOT code 2.  Not responding results  in a
+timeout and EOT code 1. By testing the EOT code you may direct further
+execution of  the CSS.  The !QUIET  parm suppresses  the sending  of a
+bell, i.e.  control G,  with the  message. The  TIMEOUT period  may be
+stated, but  if not  it defaults to  5 seconds. If  started with  ST ,
+!H[elp] a  description of the use  of the program is  displayed on the
+user's screen. All  possible error conditions are  diagnosed. The time
+remaining is displayed  as it is counted down. Besides  being a useful
+program it is a thoroughly commented  example of the use of task queue
+traps, proceed I/O and timer completion queue entry.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0134.zip
+
+
+IUG0135: SYPMAP - MAP SYSTEM SPACE USAGE
+ 
+Category: UTIL        Language: CAL MACRO/32             R-02 10/17/85
+ 
+SYPMAP  produces a  map of  system space,  showing how  each block  of
+memory is used. For each block the following data is given: The owning
+task,  the  type  of  block,  and starting  and  ending  addresses  of
+the  block, the  size  of the  block in  hex  and decimal,  additional
+information if applicable, e.g.  file control blocks, file descriptor,
+program name.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0135.zip
+
+
+IUG0136: CPUUSERS - PERIODICALLY DISPLAY CURRENTLY EXECUTING TASK
+ 
+Category: UTIL        Language: CAL MACRO/32             R-03 10/17/85
+ 
+Every 0.2  seconds (adjustable) display the  currently executing task,
+load  file, memory  size, system  space  used, run  priority and  task
+status.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0136.zip
+
+
+IUG0137: MAGLOCK-DYNAMICALLY RESERVE TAPE RESOURCES BY ACCOUNT NUMBER
+ 
+Category: UTIL        Language: CAL MACRO/32             R-00 06/27/85
+ 
+MAGLOCK prevents unauthorized  use of a tape drive  by requiring MOUNT
+and  DISMOUNT commands  accompanied by  an  account number  at the  OS
+console.  This  prevents  inadvertent  repositioning,  or  worse  yet,
+destruction of another users data during  the time when the tape is on
+the drive but not assigned to  a specific task. A status command shows
+the assignability  status of all  drives. MAGLOCK uses  intercepts and
+communications features of the OS.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0137.zip
+
+
+IUG0138: DELECAND - SUGGEST DISC FILE CANDIDATES FOR DELETION
+ 
+Category: UTIL        Language: CAL MACRO/32             R-01 03/27/86
+ 
+DELECAND  suggests  disc file  candidates  for  deletion, producing  a
+report showing sectors used per file, in decreasing order. Files using
+the most space are shown on the first page. If any files have not been
+assigned for a year, a second report will list these.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0138.zip
+
+
+IUG0140: TINFO - DISPLAY TASK AND LU INFORMATION FOR ANY TASK
+ 
+Category: UTIL        Language: CAL MACRO/32             R-04 11/27/90
+
+TINFO allows an MTM user to  display information on any task currently
+loaded,  including a  status display  of all  assigned logical  units.
+General task information is first,  including load file name, task and
+system space  memory usage, and priority.  This is followed by  a line
+for each LU  assigned, in a format resembling the  DISPLAY LU command,
+but with more data.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0140.zip
+
+
+IUG0141: WAITUNTL - WAIT UNTIL A SPECIFIED TIME OF DAY
+ 
+Category: UTIL        Language: CAL MACRO/32             R-00 08/22/85
+
+WAITUNTL accepts a  time of day start parm in  a user-friendly format,
+converts it to a seconds-from-midnight value,  and calls SVC 2 code 10
+to wait  until that time is  reached. An option is  provided to either
+wait or not if it is past the specified time.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0141.zip
+
+
+IUG0142: ZAPVCF - SEND ABORT MESSAGE TO VCF UTILITY
+ 
+Category: UTIL        Language: CAL MACRO/32             R-00 10/17/85
+
+ZAPVCF  will  recover the  system  console  for  command input  if  an
+unrecoverable error occurs on a  terminal attached to VCF (the Virtual
+Console Facility).  Such an  error would  prevent commands  from being
+entered to OS/32 anywhere, including commands to cancel VCF itself. By
+running this program  at an MTM terminal one can  command VCF to abort
+itself.  Password protection  will  prevent unauthorized  use of  this
+utility.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0142.zip
+
+
+IUG0143: DDSTAT - DISPLAY DEVICE STATUS FOR ANY DEVICE
+ 
+Category: UTIL        Language: CAL MACRO/32             R-00 10/17/85
+
+DDSTAT will continuously display the  hardware status of any device in
+the system, using the SSR instruction. The status byte and descriptive
+messages will be  logged to the user CRT 4  times per second, allowing
+one  to detect  error, busy,  and offline  status immediately  as they
+occur. A start parm specifies the device, if interactive both read and
+write side status are displayed.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0143.zip
+
+
+IUG0144: DEVICE - A DEVICE INDEPENDENT GRAPHICS DRIVER
+ 
+Category: UTIL        Language: FORTRAN                  R-01 03/03/88
+
+This set of programs is an  interface to graphics devices which allows
+one to write graphics primitives  to several devices without regard to
+the  specific  device. The  salient  features  are the  low  overhead,
+transportability, speed  and expandability.  In addition to  the usual
+primitives  such  as 'polygon',  higher  level  functions such  as  3D
+contouring  and  surface plotting  are  available.  Supported by  this
+release are Plot10 compatible  devices, printers, Calcomp plotters and
+the Lexidata  3400 & 8100  series. The  next release will  include the
+IBM-PC, Hewlett Packard 7500 and the Lexidata 3700 series devices.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0144.zip
+
+
+IUG0145: A FULL DUPLEX CRT DRIVER
+ 
+Category: OS&L        Language: CAL Macro/32             R-01 03/30/89
+ 
+A full duplex  PALS/PASLA/COMM-MUX driver for use with  CRT's and like
+devices. Supporting ASCII,  IMAGE or BINARY modes.  Separate DCB's are
+required for the read side (even address) and write side (read address
++1).  Because it  is a  full duplex  driver it  allows you  to post  a
+proceed read followed by a write  without first halting the read. This
+driver is  incompatible with MTM. Lack  of options is traded  for full
+duplex operation and less processor load.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0145.zip
+
+
+IUG0146: LIST COBOL PROGRAMS WITH CROSS REFERENCING
+ 
+Category: UTIL        Language: COBOL                    R-00 01/29/86
+
+This  program provides  a COBOL  output listing  with cross  reference
+numbers in the text lines. Reference  line numbers of data names noted
+in the source will  appear in the space at the right  hand side of the
+text. Reference  line number  of procedure names  noted in  the source
+will appear between the line number and the actual text.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0146.zip
+
+
+IUG0147: ATFDECOD - PRODUCE DETAILED LISTING OF MTM ACTIVITIES
+ 
+Category: UTIL        Language: FORTRAN                  R-01 06/05/86
+
+ATFDECOD  decodes the  MTM  account transaction  file.  The amount  of
+information provided is  extensive. It may be optionally  limited to a
+specified account.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0147.zip
+
+
+IUG0148: LINKAT - A ROUTINE TO RETRIEVE A TASK'S LINK TIME
+ 
+Category: UTIL        Language: FORTRAN                  R-01 06/05/86
+
+A FORTRAN subroutine to retrieve the  date and time a task was linked.
+Useful for configuration control                                     .
+
+http://bitsavers.org/bits/Interdata/interchange/iug0148.zip
+
+
+IUG0149: TXCMDP/RXCMDP - SEND COMMANDS TO OS CONSOLE FROM MTM
+ 
+Category: UTIL        Language: FORTRAN                  R-01 06/05/86
+
+A pair of programs which allow an  MTM user to send commands to the OS
+console for  execution of operator  commands. Based upon  the internal
+reader facility.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0149.zip
+
+
+IUG0150: DEVINQ - WHICH TASKS ARE USING A GIVEN DEVICE?
+ 
+Category: UTIL        Language: CAL Macro/32             R-00 06/05/86
+
+An E-Task  which when  given a  device name returns  the names  of all
+tasks  using said  device.  Used to  find  out who  has  a tape  drive
+assigned, or why a disk cannot be marked off.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0150.zip
+
+
+IUG0151: CONEX - CONSOLE EXCHANGE PROGRAM
+ 
+Category: UTIL        Language: CAL Macro/32             R-02 08/05/87
+
+CONEX is a systems utility that  allows any MTM terminal to become the
+system  console. It  is useful  to systems  personnel, programmers  or
+anyone  needing access  to  the system  console.  By swapping  certain
+identifying and  control information  between terminal DCB's,  the MTM
+terminal actually  becomes the system  console and the  system console
+becomes  the user's  MTM terminal.  Another execution  of the  utility
+restores the original  state. The utility, which will  only execute if
+the user  has E-task  load privileges,  is password  protected against
+unauthorized use.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0151.zip
+
+
+IUG0152: DIR - DIRECTORY SEARCH FACILITY
+ 
+Category: OS&L        Language: CAL Macro/32             R-01 10/02/87
+
+DIR is a relocatable E-task which creates a pseudo-device DIR:. A user
+program, which  does not  require any  special privileges,  may assign
+this pseudo-device and perform directory  reads from any existing disc
+volume. These requests may be  'wild card' specifications, in the same
+format  as the  'display  files'  command, limited  only  by the  user
+program account privileges.
+
+Supplied with  this package are  two user  programs which use  the DIR
+facility. A 'files' program which allows  an MTM user with ACP display
+files  capability with  account  number specification,  and a  'space'
+program which reports  the amount of disc space occupied  by any 'wild
+card' file specification on one or all volumes.
+
+Besides  being very  useful  in its  own right,  DIR  is an  excellent
+example of the power of intercepts to extend the OS capabilities.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0152.zip
+
+
+IUG0153: SPELL - A SPELLING UTILITY
+ 
+Category: UTIL        Language: CAL Macro/32             R-00 11/28/86
+
+SPELL was written  for people who 'occasionally'  doubt their spelling
+of a difficult word. I find it useful and you may too! To use SPELL in
+response to the  prompt "Enter your 'WORD' >...." you  enter your best
+guess, or alternatively  your first suggested spelling  may be entered
+immediately thus: SPELL 'my-word'. The  program responds with a screen
+of 27 words  with the closest in  the center. If your  word is spelled
+correctly, it is  highlighted. At this point you may  enter a new word
+or you may  scan forward by entering  a '+' or backward  by entering a
+'-'. The spelling dictionary contains 50,000 words. You may edit it to
+add or delete words at will.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0153.zip
+
+
+IUG0155: DSKSPACE - REPORT USED & FREE DISK SPACE
+ 
+Category: UTIL        Language: CAL Macro/32             R-00 05/24/87
+
+Allows  the privileged  MTM  user to  obtain a  report  on disk  space
+availability by volume name.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0155.zip
+
+
+IUG0156: SPY - UNIVERSAL SVC INTERCEPT PROGRAM
+ 
+Category: UTIL        Language: CAL Macro/32             R-00 05/24/87
+
+A  utility which  allows the  user to  dynamically specify  a task  or
+device on which SVC interception is  to be performed. The user may set
+the SVC  type, the  task or  device to  be intercepted,  the intercept
+mode, etc. A help screen is provided.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0156.zip
+
+
+IUG0157: PANIC - INTERACTIVE PANIC DUMP ANALYZER
+ 
+Category: UTIL        Language: CAL Macro/32             R-00 05/24/87
+
+A  utility which  allows the  the  experienced user  to analyze  panic
+dumps.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0157.zip
+
+
+IUG0158: DVRT - OS32 DRIVER TEST PROGRAM
+ 
+Category: UTIL        Language: CAL Macro/32             R-00 05/24/87
+ 
+A utility which allows the experienced user to test drivers.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0158.zip
+
+
+IUG0159: CSSSYNC - SYNCHRONIZE CSS WITH FOREGROUND TASKS
+ 
+Category: UTIL        Language: CAL Macro/32             R-01 02/12/92
+ 
+An E-Task which can be used to synchronize the execution of a CSS with
+end of task on one or more foreground tasks.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0159.zip
+
+
+IUG0160: CALPOST - REPORT ASSEMBLY ERRORS TO USER TERMINAL
+ 
+Category: UTIL        Language: CAL Macro/32             R-01 07/14/89
+
+A handy  utility which post  processes the CAL listing,  reporting all
+errors to  the users terminal. No  more searching 'F /**  /1,1-'! Very
+nice.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0160.zip
+
+
+IUG0161: OS/32 AND UTILITY DEVELOPMENT CSS PROCEDURES
+ 
+Category: UTIL        Language: CAL Macro/32             R-01 07/14/89
+
+A package which builds all the CSS's used in the assembly, compilation
+and linkage  of the OS/32  modules, drivers and utilities.  Includes a
+SNOBOL4 interpreter.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0161.zip
+
+
+IUG0162: MTM/RELIANCE INTERFACE BRIDGE
+ 
+Category: UTIL        Language: CAL Macro/32             R-00 05/28/87
+
+This package provides a means to  move between MTM and local or remote
+Reliance systems. Requires revision 8.2 of MTM.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0162.zip
+
+
+IUG0163: REGTRACK - MONITOR EXECUTION ADDRESS AND REGISTER CONTENTS
+ 
+Category: UTIL        Language: CAL Macro/32             R-00 05/28/87
+
+A  program  which  periodically  reports  the  execution  address  and
+register contents. This program requires a separate precision interval
+clock. The interval is typically set  to a very small value, perhaps 8
+microseconds  between samples.  This  utility is  used  to track  down
+really nasty problems.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0163.zip
+
+
+IUG0164: WATCH9 - MONITOR A MEMORY LOCATION AND CRASH IF MODIFIED
+ 
+Category: UTIL        Language: CAL Macro/32             R-00 05/28/87
+
+A program which  from an APU continuously monitors  a memory location.
+If  any  change in  its  contents  occurs  the system  is  immediately
+crashed. Hopefully  a study of  the subsequent panic dump  will permit
+you to determine the responsible party.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0164.zip
+
+
+IUG0165: MICRO EMACS - A FULL SCREEN EDITOR
+ 
+Category: UTIL        Language: C                        R-03 05/01/89
+
+An implementation  of microEmacs, somewhat  less than the  full EMACS,
+yet very  impressive. In particular  it allows you  to edit 2  or more
+files at the  same time. Wonderful for  simultaneously displaying your
+assembler/compiler  listing  and  your  source  code  for  correction.
+Includes a  terminal capability  description file  into which  you may
+edit a description of  your particular terminal, permitting microEmacs
+to correctly use its features.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0165.zip
+
+
+IUG0166: PROFF - A TEXT FORMATTER
+ 
+Category: UTIL        Language: C                        R-00 07/11/87
+
+PROFF is  a text formatter  based on  the format utility  presented in
+Software  Tools. In  addition to  the minimum  expected features  of a
+formatter,  PROFF  supports Roman  numeral  page  numbering, table  of
+contents  generation,  macros,  variables, output  of  special  escape
+sequences to configure printers and more.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0166.zip
+
+
+IUG0167: NJIT PASCAL COMPILER/INTERPRETER/CODE GENERATOR V5.91
+ 
+Category: OS&L        Language: Pascal & CAL Macro/32    R-00 07/11/87
+
+New Jersey  Institute of  Technology (NJIT) Pascal  is a  compiler for
+standard Pascal  as defined  by Jensen  & Wirth  in the  "Pascal Users
+Manual and  Report", Springer-Verlag,  New York,  1975. It  offers two
+methods of compilation, one that generates reasonably efficient series
+32 machine code, and the other which creates P-code for an interpreter
+which  provides  a good  debugging  environment  and fast  compilation
+times.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0167.zip
+
+
+IUG0168: SWEEP - V2.27
+ 
+Category: UTIL        Language: Ratfor                   R-01 01/27/90
+
+SWEEP is  a utility running  under OS/32 that provides  an interactive
+environment  for  the  routine  house-keeping  tasks  associated  with
+maintaining  disk files.  The  following features  are provided:  1..A
+sorted list  of the user's  files is created  that allows files  to be
+worked with  individually and  in groups. 2..An  individual file  or a
+group of files can be copied, deleted, or printed. 3..Individual files
+can be viewed at  the terminal 20 lines at a  time. 4..Groups of files
+can be formed  by moving through the  list and tagging the  ones to be
+included  or by  using a  single  command to  tag all  files having  a
+particular character string in their directory entry. 5..The files can
+be  ordered  by  name,  extension,  or date  last  written  in  either
+ascending  or  descending  order.  6..A directory  listing  sorted  in
+any  of  the  above  ways  can  be sent  to  the  user's  terminal,  a
+printer, or  a file.  The directory listing  can include  the complete
+directory information as supplied by MTM's Display Files command or an
+abbreviated discription with  filenames listed in 1, 2,  or 3 columns.
+7..An inventory of  files can be generated which lists  the disk space
+taken by  all files  over a  specific number of  bytes choosen  by the
+user, files  grouped by file name  extension, files grouped by  age in
+days. 8..The disk space taken by files is available.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0168.zip
+
+
+IUG0169: OSFILE - OS/32 FILE UTILITY
+ 
+Category: UTIL        Language: CAL Macro/32             R-00 08/05/87
+
+The  OS/32 File  Utility  (OSFILE) performs  three functions:  delete,
+reprotect  or rename.  Single-  or multiple-filename  requests may  be
+entered, in the  same format as the operator  "DISPLAY FILES" command.
+Requests  can be  limited  by number  of records  or  by date  (either
+created,  last  written  or  last assigned).  If  specified,  non-zero
+read/write protection keys can be  ignored. In addition, a "list only"
+function is available,  whereby the current utility  function will not
+be performed on matching filenames.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0169.zip
+
+
+IUG0170: PROG
+ 
+Category: UTIL        Language: CAL Macro/32             R-00 08/05/87
+
+PROG will tell  you the file name  of the task which  is running under
+the name which is entered in the START command.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0170.zip
+
+
+IUG0171: VOLUME DESCRIPTOR REBUILD
+ 
+Category: UTIL        Language: Pascal                   R-00 08/05/87
+
+In many cases when  a problem occurs with a disc  volume that has been
+damaged, it is only the integrity of the data in the volume descriptor
+that has  been lost.  The volume descriptor  contains pointers  to the
+disc  structures  that  are  necessary  to read  files  on  the  disc.
+Fortunately there is usually enough  redundant information on the disc
+to reconstruct the volume descriptor but  the effort required to do so
+manually can be prohibitive. The  process of reconstructing the volume
+descriptor  is  mechanical enough  that  this  task can  be  performed
+automatically.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0171.zip
+
+
+IUG0172: LISTAUF - LIST INFORMATION FROM THE MTM AUF FILE
+ 
+Category: UTIL        Language: FORTRAN                  R-00 08/05/87
+
+The LISTAUF program will list file information from the MTM authorized
+user  file  to  a  user   specified  file  or  device.  The  following
+information  from  the AUF  is  displayed:  account #,  group  account
+#,  ascii-password,  userid,   password  mnemonic  representation  (if
+non-printable char(s) ).
+
+http://bitsavers.org/bits/Interdata/interchange/iug0172.zip
+
+
+IUG0174: LISTINP - LIST LAST INPUT LINE FROM BIOC TERMINALS
+ 
+Category: UTIL        Language: CAL MACRO/32             R-00 10/23/87
+
+LISTINP displays the  last input line read from all  BIOC terminals in
+the  system.  It makes  use  of  a special  buffer  used  by the  BIOC
+control-C function.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0174.zip
+
+
+IUG0175: ERRSTAT - CHECK STATUS OF ERROR RECORDING FILE
+ 
+Category: UTIL        Language: CAL MACRO/32             R-00 10/23/87
+
+ERRSTAT  examines the  system error  recording file  and displays  the
+number  of records  in  use  and the  total  number  of records.  Used
+periodically, it will provide more warning than the OS about a pending
+wraparound condition on the error recording file.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0175.zip
+
+
+IUG0176: TEXT MANIPULATION UTILITIES
+ 
+Category: UTIL        Language: CAL MACRO/32             R-00 03/02/88
+
+SHIFT  shifts the  contents of  a file  right or  left by  a specified
+amount  within  a  window  replacing  the  vacated  positions  with  a
+specified byte. ROTATE rotates the contents of a file right or left by
+a  specified  amount  within  a  window.  LEFTJUST  left  justifies  a
+specified  window in  a  file. RITEJUST  right  justifies a  specified
+window  in a  file. CRYPT  encrypts and  decrypts a  file to  keep its
+contents secret.  ATOE translates a  file from ASCII to  EBCDIC, while
+ETOA does the opposite. There is more to come.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0176.zip
+
+
+IUG0177: ACCTMON - AN ACCOUNTING MONITOR
+ 
+Category: UTIL        Language: CAL MACRO/32             R-00 03/03/88
+
+ACCTMON  is   an  accounting  monitor  which   operates  by  comparing
+differences in  the accounting  information for  tasks and  discs over
+a  specified  time  period.  It is  oriented  towards  a  periodically
+refreshing  display  on an  OWL  terminal.  ACCTMONR is  a  functional
+variation whose output is intended for a spool file or printer so that
+no limitations on the vertical height of display are imposed.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0177.zip
+
+
+IUG0178: FASTLINK - A HIGH SPEED LINKER
+ 
+Category: UTIL        Language: CAL MACRO/32             R-00 03/03/88
+
+FASTLINK  is a  modification to  LINK/32 which  reduces by  up to  260
+times  the I/O  from object  libraries during  the link  process. This
+is  accomplished  by preprocessing  once  the  sites object  libraries
+effectively blocking them by 260. Thus  a single I/O will bring in 260
+126 byte object records. Unblocked object libraries are recognized and
+used correctly, although no speedup will be obtained. Thus FASTLINK is
+a  functional replacement  for LINK/32.  Library blocking  is done  by
+SINGLE.CSS whose operation is self explanitory. Blocked libraries will
+have a record  length of 32,760 with  a data block size of  128 and an
+index block size of 1.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0178.zip
+
+
+IUG0179: SCHEDULE
+ 
+Category: UTIL        Language: FORTRAN                  R-03 11/11/91
+
+Allows the user  to submit to the command processor  commands or CSS's
+at a particular time of day.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0179.zip
+
+
+IUG0180: DISPLAY FILES WITH TIMES
+ 
+Category: UTIL        Language: FORTRAN                  R-00 05/17/88
+
+A Display Files processor which includes the last assigned date.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0180.zip
+
+
+IUG0181: START COMMAND OPTION PROCESSOR FOR FORTRAN
+ 
+Category: UTIL        Language: FORTRAN                  R-02 04/27/91
+
+Processes  format  ST, [COMmand/CMD=fd:],[Log=fd:],[List=Con:]  making
+the appropriate assigments.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0181.zip
+
+
+IUG0182: VCF UTILITY
+ 
+Category: UTIL        Language: FORTRAN                  R-02 04/27/91
+
+Allows an MTM user to issue commands to the system console and receive
+the  command output  at the  user's terminal.  Uses the  OS/32 command
+processor's  logging capability  to capture  and re-route  the command
+processor's output.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0182.zip
+
+
+IUG0183: REBOOT
+ 
+Category: OS&L        Language: CAL Macro/32             R-01 10/10/88
+
+An E-Task which allows a privileged remote or local user to reboot the
+operating system. Optionally the users terminal can assume the role of
+the console  upon upon reboot.  In addition  the user can  hand modify
+locations in the OS before execution begins. Not a tool for novices!
+
+http://bitsavers.org/bits/Interdata/interchange/iug0183.zip
+
+
+IUG0184: STARPACK 2.07
+ 
+Category: MATH        Language: FORTRAN                  R-00 07/18/88
+
+STARPAC  is  a portable  library  of  approximately 150  user-callable
+ANSI 77  FORTRAN subroutines  for statistical data  analysis. Designed
+primarily for  time series  analysis and  for nonlinear  least squares
+regression,  STARPAC  also  includes  subroutines  for  normal  random
+number generation, line printer  plots, basic statistical analyses and
+linear  least  squares.  Emphasis  has  been  placed  on  facilitating
+the  interpretation of  statistical  analyses, and,  for this  reason,
+comprehensive  printed reports  of auxiliary  statistical information,
+often  in  graphical  form,  are  automatically  provided  to  augment
+the  basic statistical  computations performed  by each  user-callable
+STARPAC  subroutine.  STARPAC  thus  provides  the  best  features  of
+many  stand-alone statistical  software programs  within the  flexible
+environment of a subroutine library.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0184.zip
+
+
+IUG0185: COLLECTED EBCDIC/ASCII CONVERSION ROUTINES
+ 
+Category: UTIL        Language: Various                  R-01 01/01/84
+ 
+Subroutines to perform conversions between EBCDIC and ASCII.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0185.zip
+
+
+IUG0186: TO32 - REPLACE CAL COMMON MODE WITH 32 BIT INSTRUCTIONS
+ 
+Category: UTIL        Language: CAL/Macro 32             R-00 08/24/88
+
+Replaces CAL common mode instructions  with 32-bit instructions in CAL
+and Macro source. Also translates  macro library source. Why does LDAI
+translate to LA but CLAI translate to CLI. Who cares!
+
+http://bitsavers.org/bits/Interdata/interchange/iug0186.zip
+
+
+IUG0187: PURGACC/IOACT - I/O ACTIVITY STATISTICS
+ 
+Category: UTIL        Language: C                        R-00 10/21/88
+
+PURGACC is a mechanism for collecting OS/32 accounting statistics from
+active tasks on a periodic basis.  IOACT is a report generator for i/o
+activity  statistics  gathered  in  ATF files  which  can  support  an
+essentially unlimited number of i/o classes.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0187.zip
+
+
+IUG0188: OS/32 STRUCTURES IN C
+ 
+Category: UTIL        Language: C                        R-00 10/21/88
+ 
+Miscellaneous headers/modules for OS/32 structures in C.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0188.zip
+
+
+IUG0189: DUMP - INTERACTIVE PANIC DUMP ANALYSER
+ 
+Category: UTIL        Language: MACRO/32                 R-02 06/28/91
+
+DUMP  is a  program  that helps  you analyze  panic  dumps from  OS/32
+systems.  You can  also use  it to  look at  the current  memory on  a
+running system. DUMP will also work on any contiguous file or anything
+which  looks  like a  contiguous  file,  such  as  a bare  disc.  With
+DUMP  you examine/modify  memory  or disk  files,  display systems  or
+user  defined  structures, display  which  tasks  are loaded,  display
+memory  utilization, display  accounting  information, display  device
+information,  display  disk  information, search  memory,  disassemble
+code,  display lu's  assigned to  a  task, toggle  between memory  and
+a  disk  file,  list  files,  copy  panic  dump  from  tape  to  disk,
+snap memory  image to  disk, display  system journal,  display APU/IOP
+information, display task/system  registers, do hex/decimal arithmetic
+and conversions, equate memory locations  to symbols, read system map,
+find system  modules, display  MTM users, display  general information
+about system, display system pointer table  and there is more. Its use
+is not  limited to operating  system analysis, it  may be used  in the
+analysis of problems in user tasks as well. Clearly this is a tool for
+the experienced user.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0189.zip
+
+
+IUG0190: LJWYSE - LASER PRINTER/TERMINAL UTILITY
+ 
+Category: UTIL        Language: MACRO/32                 R-00 03/28/89
+
+Provides a  means to send printouts  to a laser printer  attached to a
+terminal. Primarily  intended to provide  printer service to  a remote
+site  on a  modem through  the use  of the  printer port  of a  WYSE60
+terminal with a connected HP  LaserJet series II. This is accomplished
+by prefixing  the listing  with the necessary  sequences to  place the
+terminal in  transparent print mode,  set up the printer  by selecting
+fonts, page specifications,  etc and restoring the  terminal to normal
+operation after  print is completed.  The user may readily  modify the
+program  to  include  the  particular  sequences  required  for  their
+terminal/printer combination.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0190.zip
+
+
+IUG0191: SPL/32 - INPUT/OUTPUT SPOOLER
+ 
+Category: UTIL        Language: PASCAL                   R-00 07/14/89
+
+CCUR has dropped  SPL/32 effective with the release of  OS/32 Rev 8.3.
+Those who  desire advanced spooler  capabilities may want  to consider
+CUSP  as an  optional  extra  cost product  available  from CCUR.  The
+Interchange Library  has been  given the  complete SPL/32  packages in
+order to  provide it  to those who  care to continue  to use  and self
+maintain SPL/32. This package includes source, in PASCAL and MACRO/32,
+as  well as  documentation in  TEXT/32 format.  SPL/32 is  designed to
+improve  handling  of input/output  processes  to  low speed  devices.
+It  provides advanced  capabilities  for  configuring and  dynamically
+altering the output spooling environment.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0191.zip
+
+
+IUG0192: HERCULES UTILITIES
+ 
+Category: UTIL        Language: FORTRAN/MACRO32          R-00 07/31/89
+
+A collection  of utilities from Hercules  Incorporated. TUSE/DUSD/DUSE
+are routines  that estimate how many  feet of Backup tape  or how many
+sectors  will be  used  by a  file  select list.  CSORT  is a  FORTRAN
+implementation of  the QUICKSORT algorithm. VERIFx  series of programs
+are used  for comparing  files, side  by side,  binary, hex  or ascii.
+EXCON exchanges  an MTM terminal  with the  OS console. SNDMSG  can be
+used from an  MTM terminal to send  messages to tasks, such  as MTM or
+SPL. XRF7  makes a cross reference  from FORTRAN source. ENEX  makes a
+cross  reference  of one  or  more  relocatable binary  object  files.
+BINLIST makes a hex listing of  an object file underlining the command
+bytes.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0192.zip
+
+
+IUG0193: QCHEK - CHECK TASK QUEUE DEPTH
+ 
+Category: UTIL        Language: MACRO/32                 R-00 11/20/89
+
+QCHEK displays the task queue depth for  all tasks in the system. If a
+number is passed  in the start string only those  tasks having a queue
+depth greater or equal to that number will be displayed.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0193.zip
+
+
+IUG0194: SPOOLER MONITOR
+ 
+Category: UTIL        Language: MACRO/32                 R-00 01/17/90
+
+Through the  MTM foreground the  user may  send commands to  the OS/32
+spooler and receive the output on their MTM terminal.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0194.zip
+
+
+IUG0195: CALENDAR DATE GENERATION ROUTINES
+ 
+Category: UTIL        Language: Fortran & C              R-01 04/27/91
+
+Routines  used to  generate, maintain  and convert  dates from  and to
+julian and month/day/year format. The base year is Jan/01/1800.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0195.zip
+
+
+IUG0196: USER CONTROL FACILITY
+ 
+Category: UTIL        Language: Source not provided      R-02 04/27/91
+
+User Control Facility  (UCF) is a signon processor  running under MTM.
+Included  are  a  user  file maintenance  utility,  signon  processor,
+SYSINIT.CSS files and a 40 page  document. Designed to run under OS/32
+R08-03  but contains  support for  R08-02. UCF  enables tailoring  the
+access  a  user has  to  devices  by  user  device groups.  The  users
+privileges are tailored to the user rather than to the account.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0196.zip
+
+
+IUG0197: LS FOR OS/32
+ 
+Category: UTIL        Language: C                        R-03 11/11/91
+
+LS  is  used to  perform  a  display  file  based upon  multiple  file
+descriptor masks. The  package allows a user to  display the filename,
+file type,  blocking factors, record  lengh, file size,  time created,
+written and  last assigned, and the  keys in any order  or combination
+the user  desires. Headings may  be omitted  and the filenames  may be
+formatted without blanks. OS/32 8.3  is the minimum revision required.
+The output may be redirected  with the command line redirection symbol
+'>'.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0197.zip
+
+
+IUG0198: MACSHORT - SHORTEN MACRO LIBRARY SOURCE
+ 
+Category: UTIL        Language: CAL Macro/32             R-01 07/22/85
+
+Shortens Macro  Library source by removing  superfluous text. Macro/32
+will execute more quickly when using such a library.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0198.zip
+
+
+IUG0199: ANSITAPE - UNPACK ANSI STANDARD LABELED TAPE
+ 
+Category: UTIL        Language: CAL Macro/32             R-06 01/16/87
+
+Unpack ANSI standard  labeled tape in formats F  (fixed length blocked
+records), D (variable length blocked  records) and U (nonstandard line
+feed terminated records). Currently multi-file single-volume format is
+handled.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0199.zip
+
+
+IUG0200: HLAL2 - HIGH LEVEL ASSEMBLER LANGUAGE MACROS
+ 
+Category: OS&L        Language: CAL Macro/32             R-08 02/18/87
+
+The HLAL2 macros provide structured  programming similar to high level
+languages.  In addition  to structure  statements like  IF-ELSE-ENDIF,
+LOOP-ENDLOOP,   WHILE-ENDWHILE,  REPEAT-UNTIL,   &  CASE-WHEN-ENDCASE,
+appropriate service macros are provided for entry and exit of modules.
+Module entry and exit provide a means of passing parameters as well as
+controlled stacking and unstacking  of registers and providing dynamic
+storage. Conditional  and unconditional  exits from  labeled enclosing
+loops are provided by LEXIT and LEXITIF. A utility program formats the
+assembler listing output for easy reading.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0200.zip
+
+
+IUG0201: SEARCH
+ 
+Category: UTIL        Language: MACRO/32                 R-01 07/22/91
+
+Searches a set of files  selected with display files format, including
+wildcard selection, for a specific string producing a report.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0201.zip
+
+
+IUG0202: FREEMEM - REPORT ON FREE SYSTEM SPACE & TASK MEMORY
+ 
+Category: UTIL        Language: MACRO/32                 R-00 01/26/90
+
+An E-Task which  reports the amount of free system  and task memory in
+KB and by blocks.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0202.zip
+
+
+IUG0203: IFTASKX - IF TASK EXISTS
+ 
+Category: UTIL        Language: MACRO/32                 R-00 01/26/90
+ 
+An E-Task which determines if a named task is currently loaded.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0203.zip
+
+
+IUG0204: TSKTRACE
+ 
+Category: UTIL        Language: MACRO/32                 R-00 01/26/90
+
+An E-Task  which provides a coarse  trace function. It samples  once a
+second  to determine  which task  is  executing. After  100 samples  a
+report is generated.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0204.zip
+
+
+IUG0205: SVC1INT3 - INTERCEPT SVC1'S TO A REAL DEVICE
+ 
+Category: UTIL        Language: MACRO/32                 R-00 11/16/90
+
+SVC1INT3 is a CAL/32 program which  intercepts SVC1 I/O to a specified
+existent real device. The SVC1 block  is output to the log file, along
+with any  data read or written  (in a COPY32 Display  format). This is
+NOT as  good as an  independant datascope, but for  many communication
+interface problems it is sufficient.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0205.zip
+
+
+IUG0206: RAMDISK - QUICKLY INITIALIZE RAMDISK WITH DATA
+ 
+Category: UTIL        Language: MACRO/32                 R-00 11/16/90
+
+The RAM disk is first initialized  with the static files using BACKUP.
+The RAM disk is then marked off and using this program an image of the
+RAM disk is written  to a contiguous file. When the RAM  disk is to be
+restored this  program will  read that  image to the  RAM disk  with a
+single SVC1 Read (directory, bitmap, data, everything!).
+
+http://bitsavers.org/bits/Interdata/interchange/iug0206.zip
+
+
+IUG0207: DUSEUTIL - ANALYZE DISK PERFORMANCE
+ 
+Category: UTIL        Language: MACRO/32                 R-00 11/16/90
+
+DUSEUTIL  is used  to study  the traditional  I/O bound  or CPU  bound
+problem of  tasks. The accounting data  from the OS gives  disk reads,
+writes, and  seeks; but  DUSEUTIL attempts to  measure (statistically)
+the actual disk usage. It is  also helpful to display contentions when
+there are shared controllers or selches.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0207.zip
+
+
+IUG0208: DIOSREAD - SEARCH FOR AND DISPLAY DIOS DCB'S
+ 
+Category: UTIL        Language: MACRO/32                 R-00 11/16/90
+
+DIOSREAD is an  E-Task which will look thru the  DMT and corresponding
+OS/32's DCBs for  DIOS (DMA I/O Subsystem) devices.  When located each
+DIOS's device  DCB (not  to be  confused with  OS/32's device  DCB) is
+written  to the  pre-assigned  logical unit.  Interupts are  disabled,
+the  16 halfwords  of  a DIOS's  device DCB  are  read, interupts  are
+re-enabled, and the halfwords are  formatted and output to log device.
+It  is necessary  to disable  interupts to  prevent a  mis-interpreted
+DIOS  interupts. Because  of  timing requirements,  interupts must  be
+re-enabled between each device's reads.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0208.zip
+
+
+IUG0209: ADDRESS - SEARCH FOR ALL RESPONDING DEVICES
+ 
+Category: UTIL        Language: MACRO/32                 R-00 11/16/90
+
+ADDRESS is an E-Task which does a sense status to each possible device
+address  on the  system 1-1023  and outputs  records of  devices which
+respond.  Useful  when  making  system  changes  or  debugging  device
+problems.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0209.zip
+
+
+IUG0210: CMONUTIL - C-CALLABLE TRAP HANDLING LIBRARY
+ 
+Category: UTIL        Language: MACRO/32                 R-01 02/12/92
+
+A collection  of C-Callable routines  written in MACRO/32  including a
+routine which  may be placed between  main and code to  process a trap
+queue item.  This routine  permits a  trap driven  monitor task  to be
+written in C.  The collection also includes stack  and memory snapshot
+routines.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0210.zip
+
+
+IUG0211: DUMPTASK - DO A TASK MEMORY DUMP
+ 
+Category: UTIL        Language: MACRO/32                 R-00 01/03/91
+
+DUMPTASK displays  task information  and impure  data to  the selected
+output device,  generally a printer  although file or  terminal output
+may be specified if desired. Task information includes the name of the
+program file  and its link  time, memory allocation, TSW  and register
+values, and assigned LU information. Task information is followed by a
+side-by-side hex/ASCII dump  of the impure area assigned  to the task.
+This dump  may be  either narrow  (80 columns of  output, 16  bytes of
+data, per line) or wide (120 columns  of output, 32 bytes of data, per
+line).  Usually the  attributes  of the  output  device determine  the
+format. Multiple lines  of identical content are  compressed in either
+format.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0211.zip
+
+
+IUG0212: LIMS SELECTIVE DATA SET MAINTENANCE
+ 
+Category: LIMS        Language: Fortran                  R-00 04/19/91
+
+Essentially  identical  in function  to  the  standard LIMS  data  set
+maintenance program, this package offers access to selective data sets
+on a per user basis as  well as offering enhanced performance on range
+list processing.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0212.zip
+
+
+IUG0213: OS/32 C ENHANCEMENT LIBRARY
+ 
+Category: OS&L        Language: CAL Macro/32 & C         R-01 11/11/91
+ 
+Enhances C by providing SVC, Task Queue and Intercept functions.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0213.zip
+
+
+IUG0214: MULTI-FILE SEARCH UTILITY
+ 
+Category: UTIL        Language: CAL Macro/32 & Fortran   R-00 07/03/91
+
+Searches multiple  files (optionally using wild  card specificiations)
+for all occurances of a string.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0214.zip
+
+
+IUG0215: XYSTATS - STATISTICAL AYALYSIS
+ 
+Category: UTIL        Language: Fortran                  R-00 02/21/92
+
+Performs  general statistics,  such as  the mean,  standard deviation,
+relative standard deviation  and coefficients of correlation  on up to
+100 pairs of data. The program has built in help.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0215.zip
+
+
+IUG0216: DUMPCOPY - PANIC DUMP TAPE TO DISC
+ 
+Category: UTIL        Language: MACRO/32                 R-00 02/21/92
+
+Reads a panic  dump tape, issuing up  to 32 proceed reads  to keep the
+tape  streaming, generating  a  disk file  using  multi-record I/O  to
+improve performance.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0216.zip
+
+
+IUG0320: SCIENTIFIC SUBROUTINE PACKAGE
+ 
+Category: SCIE        Language: FORTRAN                  R-01 04/09/84
+
+A  total of  356 subroutines  provide  a broad  base of  computational
+routines. All  routines are  accessible by  simple FORTRAN  calls. All
+data is transmitted via the arguments in the call and none cause input
+or output  directly, resulting in  device independent service  for the
+user.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0320.zip
+
+
+IUG0323: MOTOROLA M6800 CROSS ASSEMBLER
+ 
+Category: OS&L        Language: CAL                      R-00 02/24/81
+
+This  assembler accepts  source code  for  the M6800  in the  standard
+Motorola  format. The  operand  data  identifiers H,  O  &  B are  not
+permitted, however  the leading identifiers  $, % and @  are, allowing
+compatibility  with existing  Motorola  source programs.  Additionally
+conditional assembly is supported. A listing and unsorted symbol table
+is produced.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0323.zip
+
+
+IUG0338: CSMP - CONTINUOUS SYSTEMS MODELING PROGRAM
+ 
+Category: UTIL        Language: Fortran                  R-00 01/28/90
+
+This program is  designed for modeling and  evaluating the performance
+of  continuous   systems  described  by  time   dependent,  non-linear
+differential equations and/or transfer functions.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0338.zip
+
+
+IUG0344: PSEUDO-RANDOM NUMBER GENERATOR SUBROUTINE PACKAGE
+ 
+Category: MATH        Language: CAL                      R-00 07/25/75
+
+Package  consists  of a  set  of  subroutines  for sampling  from  the
+uniform, Gaussian  and exponential distributions.  Mathematical proofs
+for algorithms used exist in the mathematical literature.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0344.zip
+
+
+IUG0347: 1130 COMMERCIAL SUBROUTINE PACKAGE
+ 
+Category: MATH        Language: FORTRAN                  R-00 09/18/75
+
+Subroutines  as  detailed  in   the  IBM  1130  Commercial  Subroutine
+Programmers Guide H20-0241-3 plus  several commonly used additions and
+a SORT/MERGE  routine. Most  of the  routines have  corresponding test
+programs in an included test file.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0347.zip
+
+
+IUG0348: CANONICAL CORRELATION ANALYSIS
+ 
+Category: MATH        Language: FORTRAN                  R-00 02/24/81
+
+Designed  to  provide the  facilities  to  study experimental  results
+without restrictions of traditional  analytic methods. Allows the user
+to study the effects of various groupings of variables.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0348.zip
+
+
+IUG0349: NONPARAMETRIC STATISTICAL ANALYSIS
+ 
+Category: MATH        Language: FORTRAN                  R-00 11/15/75
+
+The facilities provided  by this program for analyzing  data are those
+procedures that involve the use of contingency or cross-classification
+frequency tables.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0349.zip
+
+
+IUG0359: SNAPSHOT DUMP
+ 
+Category: UTIL        Language: CAL                      R-00 01/01/84
+
+Prints Hex and ASCII equivalent data from a starting through an ending
+address. Adjacent identical lines are suppressed.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0359.zip
+
+
+IUG0365: BASIC I
+ 
+Category: OS&L        Language: CAL                      R-00 01/01/84
+
+A BASIC interpreter written as a reentrant package providing multiuser
+capability and file handling features.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0365.zip
+
+
+IUG0375: SORT
+ 
+Category: UTIL        Language: CAL                      R-00 01/01/84
+
+The records are sorted in place without using a work area. The routine
+half-divides a  given set of records  into two halves so  that all the
+records in  the low  half are less  than those in  the high  half. The
+routine is called repeatedly. When the small half is eleven records or
+less  it is  sorted  by pairwise  swapping and  the  previous half  is
+examined.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0375.zip
+
+
+IUG0378: SNAP
+ 
+Category: UTIL        Language: CAL Macro/32             R-00 01/01/84
+
+Allows the programmer  to monitor general registers  and storage while
+the application is executing.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0378.zip
+
+
+IUG0388: CONTINUOUS MODELING PROGRAM
+ 
+Category: MATH        Language: FORTRAN                  R-00 01/01/84
+
+An implementation of the IBM  1130 Continuous Modeling Program Version
+I.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0388.zip
+
+
+IUG0390: TAPE BLOCKING/DEBLOCKING SUBROUTINES
+ 
+Category: UTIL        Language: CAL                      R-00 01/13/82
+
+A series of subroutines intended for use with either COBOL or FORTRAN.
+Optional double  buffering for  improved performance.  This is  a well
+written and documented package.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0390.zip
+
+
+IUG0404: SPEDIT - SUPER EDIT
+ 
+Category: UTIL        Language: CAL MACRO/32             R-05 11/03/85
+
+SPEDIT is  an online  interactive text editor  designed to  create and
+modify character oriented  text stored on any input  medium. SPEDIT is
+operator directed through a keyboard device. A version using VTM/32 is
+provided permitting  the user  to edit  files as large  as 4  MB while
+loaded in a task space of about 200 KB.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0404.zip
+
+
+IUG0413: P4 PASCAL SYSTEM
+ 
+Category: OS&L        Language: Pascal & CAL             R-03 02/24/81
+
+The  P4  Pascal  compiler,  written  in Pascal,  was  designed  to  be
+independent of  any existing  machine. The compiler  translates Pascal
+source  programs  into  P4  assembly language.  This  is  subsequently
+assembled by an assembler written in CAL and executed by an emulator.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0413.zip
+
+
+IUG0424: ATE
+ 
+Category: UTIL        Language: CAL                      R-00 01/01/84
+
+The Algorithmic Text Editor is a text editing interpreter developed to
+provide an open-ended approach to text editing. Designed to be easy to
+use for manually  controlled editing, ATE will also  run under control
+of preprogrammed input  strings. One application that  has proven most
+useful  is  extending  CSS  capability.  The  users  manual,  provided
+on  tape,  contains several  such  CSS  examples  as well  as  general
+information and tutorial examples.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0424.zip
+
+
+IUG0425: COSY1632
+ 
+Category: UTIL        Language: CAL                      R-00 01/01/84
+
+ASCII data  compression and  expansion programs provide  about 3  to 1
+compression on common program text.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0425.zip
+
+
+IUG0426: PARTIAL VOLUME PROTECTION
+ 
+Category: UTIL        Language: CAL                      R-00 01/01/84
+ 
+Partial Volume Protection scheme allows an area of a single MSM volume
+to be write-protected while the remainder of the volume may be written
+to.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0426.zip
+
+
+IUG0428: FORTRAN V LEVEL I COMPILER AND RUN TIME LIBRARY
+ 
+Category: OS&L        Language: CAL                      R-00 02/09/81
+
+FORTRAN V  16 & 32-Bit compiler  in source. 32-Bit source  for the Run
+Time Library plus 30 test programs and a description of the package on
+magnetic media. There are no manuals available.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0428.zip
+
+
+IUG0443: SUBFILER
+ 
+Category: UTIL        Language: CAL                      R-00 01/01/84
+
+A  filing system  which  packages  many files  onto  one  file with  a
+systematic retrieval method.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0443.zip
+
+
+IUG0444: PPI DRIVER
+ 
+Category: OS&L        Language: CAL Macro/32             R-00 01/01/84
+ 
+Processor to Processor interface driver.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0444.zip
+
+
+IUG0446: USEFUL COBOL CALLABLE SUBROUTINES
+ 
+Category: UTIL        Language: COBOL, CAL Macro/32      R-04 09/21/87
+
+COBOL subprograms which provide fast sequential read/rewrite access to
+contiguous  files with  automatic blocking  to  64, 128  and 256  byte
+records.  To  edit  numeric  strings in  connection  with  the  ACCEPT
+statement. To  pass start  parameters to a  COBOL program.  To provide
+cyclic  wakeup  to  a  COBOL  program.  To  expand  two  letter  state
+abbreviations. To assign and deassign  files and devices from within a
+COBOL program. To do cursor placement,  image reads and writes to CRT.
+To to ASCII to EBCDIC and EBCDIC to ASCII conversion of a buffer.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0446.zip
+
+
+IUG0447: OPERATING SYSTEM MONITOR - SYSMON83
+ 
+Category: UTIL        Language: CAL Macro/32             R-08 12/30/90
+
+Continuous  graphic display  of system  activity on  a CRT.  Currently
+supporting OS32/MT Rev 7.2, 8.1, 8.2  and 8.3. A new enhancement makes
+the ZOOM automatic,  periodically adjusting itself to make  use of the
+full screen as tasks come and go.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0447.zip
+
+
+IUG0455: BATCH
+ 
+Category: UTIL        Language: CAL, COBOL               R-01 01/01/84
+
+Allows  an MTM  user to  create and  submit batch  jobs with  a single
+command.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0455.zip
+
+
+IUG0458: COMMENT
+ 
+Category: UTIL        Language: FORTRAN                  R-00 06/30/81
+ 
+Aids in commenting Assembly or FORTRAN programs.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0458.zip
+
+
+IUG0460: DISPACK UTILITY
+ 
+Category: UTIL        Language: FORTRAN, CAL             R-01 11/19/84
+
+Packs  free space  on disc  into  a single  contiguous area  requiring
+neither tape nor a second disc.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0460.zip
+
+
+IUG0463: MTMUSERS
+ 
+Category: UTIL        Language: CAL Macro/32             R-03 02/21/92
+
+Allows the privileged  MTM user to display the current  MTM users, the
+program they are running, their priority, account numbers, privileges,
+etc.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0463.zip
+
+
+IUG0468: TEXT
+ 
+Category: UTIL        Language: FORTRAN                  R-00 01/01/84
+ 
+Diablo 1620 right justification printing.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0468.zip
+
+
+IUG0469: STUDRAW
+ 
+Category: UTIL        Language: FORTRAN                  R-00 06/30/81
+ 
+Display OS/32 System Structures graphically.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0469.zip
+
+
+IUG0470: OSVER
+ 
+Category: UTIL        Language: CAL Macro/32             R-00 01/01/84
+ 
+Log OS/32 Version.  OK, who loaded the wrong OS?
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0470.zip
+
+
+IUG0477: CALENDAR GENERATOR
+ 
+Category: UTIL        Language: FORTRAN                  R-02 10/20/88
+
+Prints either  a single  page or  a 12 page  calendar, the  later with
+optional holidays. Very nice format.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0477.zip
+
+
+IUG0478: VERSATEC V-07 PLOTTING SOFTWARE INTERFACE
+ 
+Category: UTIL        Language: FORTRAN VII              R-02 02/26/82
+
+A  general batch  plot program  interface for  Versatec V-07  plotting
+software.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0478.zip
+
+
+IUG0479: DATA BASE SYSTEM FOR INDEXING RESEARCH PAPERS
+ 
+Category: UTIL        Language: FORTRAN                  R-00 03/01/82
+
+This  system  permits users  to  index,  edit, classify  and  retrieve
+scientific  research  paper  citations.  The system  uses  an  indexed
+directory look-up  file structure.  Reports and  statistical summaries
+are produced based on criteria selected by the user.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0479.zip
+
+
+IUG0481: FINDPARM - ISOLATE COMMAND LINE ARGUMENTS
+ 
+Category: OS&L        Language: CAL Macro/32             R-04 01/08/87
+
+A macro used in the processing of a start string. Upon each invocation
+it  returns the  ordinal  position, and  starting  address and  ending
+address  of  each parameter.  Skips  leading  and disregards  trailing
+blanks. A  test program  is included  permitting the  user to  gain an
+understanding of the macro.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0481.zip
+
+
+IUG0482: TIDY - FORTRAN CLEANUP ROUTINE
+ 
+Category: UTIL        Language: FORTRAN                  R-00 05/25/82
+
+TIDY is a  program that edits and improves the  readability of FORTRAN
+source code.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0482.zip
+
+
+IUG0483: SYSERR
+ 
+Category: UTIL        Language: FORTRAN                  R-05 05/17/88
+
+Takes the 2 status  bytes of the SVC 1 parm block  used in the FORTRAN
+RTL and returns an error code to be used with a computed go to. If the
+error status is not recognized the device dependent status is returned
+as a -1.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0483.zip
+
+
+IUG0484: SCREEN
+ 
+Category: UTIL        Language: FORTRAN                  R-05 05/17/88
+
+Allows  a program  to move  the  cursor on  the  CCUR 550  VDU to  any
+location. All the programmable features of the 550 are supported.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0484.zip
+
+
+IUG0487: TASKDUMP
+ 
+Category: UTIL        Language: CAL                      R-00 07/20/82
+
+An  E-Task used  to dump  out structures  associated with  tasks, pure
+segments  and  other items  that  are  displayed  on a  'Display  Map'
+command.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0487.zip
+
+
+IUG0488: DOCUMENT
+ 
+Category: UTIL        Language: FORTRAN, CAL             R-00 07/20/82
+
+Used to extract documentation from source  code such as CAL or FORTRAN
+producing a  document with table  of contents and  index. Particularly
+useful when a user subroutine library catalog is required.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0488.zip
+
+
+IUG0490: USEFUL FORTRAN CALLABLE SUBROUTINES AND RELATED PROGRAMS
+ 
+Category: OS&L        Language: FORTRAN                  R-05 05/17/88
+
+Parsers..A  collection  of  string manipulation  routines,  Move..Move
+characters based on  addresses, Getadr & Getf7ctr..Get  the address of
+arguments.  Osscan..To  execute  a  SVC  2  Code  17,  Compdir..Insert
+compiler  directives  into  a   source  program,  Stparms..move  start
+parameters  to   a  common   block.  Mnenbld..Produces   FORTRAN  data
+statements   that  contain   a  SVC   2  Code   17  scannable   table.
+Extfd..Extracts  a file  name  from  a buffer  and  checks for  proper
+format.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0490.zip
+
+
+IUG0491: DMPTYP - AN AID TO ANALYZING OS/32MT SYSTEM DUMPS
+ 
+Category: UTIL        Language: FORTRAN & CAL Macro/32   R-01 09/15/83
+
+DMPTYP R01-01 is a program (written  mostly in FORTRAN ) which permits
+the interactive  examination of System Dump  files by an analyst  at a
+terminal. It permits the calling of command files such as "SPTINIT.".
+
+The  file   "SPTINIT."  is   included  as   an  example   of  DMPTYP's
+programmability. It  also contains a  Hex calculator which  is capable
+of  accessing the  current  System Dump  file's  memory locations  for
+computations.  This  is  demonstrated   by  the  DMPTYP  command  file
+"SPTINIT.".
+
+http://bitsavers.org/bits/Interdata/interchange/iug0491.zip
+
+
+IUG0492: DATE FILE SYSTEM
+ 
+Category: UTIL        Language: COBOL                    R-00 09/30/82
+
+This system  has as  its backbone  a three year  date file  where date
+records point to previous and next working days. This data base allows
+ratcheting  forward  or backward  using  time  intervals to  calculate
+estimated completion or starting dates.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0492.zip
+
+
+IUG0493: NCAR GRAPHICS SYSTEM, ADAPTED FOR CCUR SYSTEMS
+ 
+Category: SCIE        Language: FORTRAN                  R-01 08/30/82
+
+A graphics package  tailored to your CCUR computer. Easy  to use, with
+high level calls  to do contour plots,  X vs Y plots  in many formats,
+surface displays, world continent maps,  maps of the U.S.A. Supporting
+a variety of different plotting  devices. Including fancy text writing
+and 3-dimensional plotting. With full source code.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0493.zip
+
+
+IUG0495: DISC DIRECTORY AUDIT UTILITY
+ 
+Category: UTIL        Language: FORTRAN                  R-01 10/27/82
+
+Performs an  audit of  files on  a disc,  classifying them  by account
+number, size, age and file  extension. Produces a summary report which
+allows any user or the system  manager to assess disc usage. Disc hogs
+are quickly revealed.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0495.zip
+
+
+IUG0496: RTMAIN - REAL TIME EVENT CONTROL NUCLEUS
+ 
+Category: UTIL        Language: CAL Macro/32             R-00 12/17/82
+
+RTMAIN is  a versatile CAL main-line  program that can be  used as the
+event  control  nucleus  for  many  real-time  applications.  Used  at
+Perkin-Elmer's  Optical Group  in Danbury  CT  for a  wide variety  of
+applications requiring  process control or other  similar event driven
+systems. RTMAIN will interface with FORTRAN programs.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0496.zip
+
+
+IUG0499: TESTVOLS - ARE VOLUMES IN START STRING ON LINE?
+ 
+Category: UTIL        Language: CAL Macro/32             R-04 08/12/85
+
+In an application environment which is brought up by a CSS it is often
+critical  that specific  disc volumes  are on  line. This  program can
+guarantee this  by checking if  all volume  names passed in  the start
+string are in fact  on line. If any volumes named are  not on line the
+task reports  the error and goes  to end with a  non-zero return code.
+Errors reported are 'No start parms', 'Missing parm', 'Parm too long',
+'Syntax Error', or 'Volume off line'.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0499.zip
+
+
+IUG0501: SACRAMENTO PEAK OBSERVATORY SUBROUTINE LIBRARY
+ 
+Category: SCIE        Language: CAL Macro/32 & FORTRAN   R-03 03/19/85
+
+45 subroutines  making up a Math,  RTL and User library  to supplement
+the CCUR FORTRAN libraries. From SVC 2 and SVC 7 interfaces to Fourier
+Transforms. Includes  a how  to manual  prepared by  experienced users
+describing hardware,  operating system  software, utilities  to smooth
+the way  for beginning or infrequent  CCUR users. This may  serve as a
+guide for the operations manual you  were planning to prepare some day
+soon.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0501.zip
+
+
+IUG0502: ACTTAB - SUMMARIZES DISK OCCUPANCY BY ACCOUNT
+ 
+Category: UTIL        Language: CAL Macro/32             R-04 04/08/85
+
+A very useful program which assigns directly to a disk and generates a
+listing showing usage of disk space  by account number, broken down by
+IN, CO, EC and NB file types.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0502.zip
+
+
+IUG0503: FORTRAN CALLABLE SVC LIBRARIES & TELECOMMUNICATIONS SUPPORT
+ 
+Category: OS&L        Language: FORTRAN & CAL            R-08 04/27/91
+ 
+Allows SVC calls 1, 2, 3, 4, 5, 6, 7, 9, 14 and 15 with many
+variations from FORTRAN programs.
+
+Most data communication applications present a common class of complex
+problems.  Usually  a  good  degree of  operating  system  support  is
+required to efficiently implement  solutions. OS/32 provides this kind
+of support  through ITAM, Terminal  Managers and SVC 15  Line Drivers.
+However  the  traditional  user  interface to  these  facilities,  via
+assembly language,  is rather complex.  In the past,  real programming
+examples  were  not  generally  available. This  high  level  language
+interface package provides solutions to these difficulties. While this
+package supports asynchronous, synchronous and Ethernet communications
+under OS/32,  it also provides  the user  with a comprehensive  set of
+coding examples. Also  included is an SVC  Intercept implementation of
+UDP Datagram  Sockets for Ethernet  and a file transfer  mechanism for
+use under OS/32 and Unix systems.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0503.zip
+
+
+IUG0504: MAILBOX - A GENERAL MAIL SYSTEM BASED UPON SVC INTERCEPTS
+ 
+Category: UTIL        Language: CAL Macro/32             R-09 09/17/91
+
+MAILBOX is a system program that provides a generalized, on-line, mail
+facility. It dynamically  creates an intercept device  that appears to
+the user  as a disc volume.  Besides being valuable in  its own right,
+this is an excellent example of the programming of SVC intercepts.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0504.zip
+
+
+IUG0505: PACK/UNPACK FILE COMPRESSION UTILITIES
+ 
+Category: UTIL        Language: FORTRAN                  R-01 01/01/84
+
+PACK and  UNPACK are two tasks  and associated CSS files  developed to
+allow  on-line  archival  storage  of  source  data  and  programs  in
+compressed  ASCII  format. These  utilities  provide  for quick,  easy
+access to an  archived program or data file while  minimizing its disc
+storage requirements during periods of low activity.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0505.zip
+
+
+IUG0506: COPYL - OBJECT LIBRARY MAINTENANCE UTILITY
+ 
+Category: UTIL        Language: FORTRAN                  R-00 01/01/84
+
+Beginning with an object library and a file containing one or more new
+object modules this utility will  automatically replace modules in the
+library with  new modules having  the same object label,  producing an
+updated library while retaining the original order of the modules. Any
+new modules for which a module of the same name cannot be found in the
+original library will be appended to  the updated library. A report is
+optionally  generated. Checksums  are verified.  More convenient  than
+LIBLDR.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0506.zip
+
+
+IUG0508: MULTI-FILE DELETE UTILITY
+ 
+Category: UTIL        Language: FORTRAN                  R-00 01/01/84
+
+Invoked by a CSS  to process a list of files produced  by the OS/32 or
+MTM  "Display Files"  command. The  output  is a  CSS file  containing
+REP/DEL commands to  delete the selected files.  Options are available
+to allow the  user veto power on  a file by file basis  if desired, to
+skip, delete or ask the user for instructions in the case of protected
+files.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0508.zip
+
+
+IUG0509: MACROS FOR FORTRAN CALLABLE MACROASSEMBLER SUBROUTINES
+ 
+Category: OS&L        Language: CAL Macro/32             R-00 01/01/84
+
+Macros  for FORTRAN  VII callable  subroutines to  generate a  program
+statement for the subroutine, start  data area, define save areas, end
+data area,  generate subroutine entry  preamble and exit  from routine
+restoring registers.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0509.zip
+
+
+IUG0510: SPYR07 - A TERMINAL SPY
+ 
+Category: UTIL        Language: FORTRAN                  R-01 03/18/86
+
+Tells you what's happening throughout  the system. Uses a little known
+feature of SVC  2.19 (Peek) to spy on other  tasks. Revision R-01 adds
+support for ANSI X3.64/VT100 type terminals.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0510.zip
+
+
+IUG0511: ASK - INTERACTIVE CSS SUPPORT
+ 
+Category: UTIL        Language: FORTRAN                  R-00 01/01/84
+
+FORTRAN program  and CSS to allow  CSS to ask simple  Yes/No questions
+and branch on the response.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0511.zip
+
+
+IUG0512: TSCAN - TAPE SCANNER
+ 
+Category: UTIL        Language: FORTRAN                  R-01 09/14/88
+
+Reads a magnetic tape generating a report of the number of records and
+their length file by file.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0512.zip
+
+
+IUG0513: EXPTAB - EXPAND TABS IN FILES
+ 
+Category: UTIL        Language: FORTRAN                  R-00 01/01/84
+
+Expands an  ASCII file which  includes imbedded tabs into  a formatted
+file.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0513.zip
+
+
+IUG0514: STATLOOP - I/O INTERFACE TESTING
+ 
+Category: UTIL        Language: CAL                      R-00 01/01/84
+ 
+An E task to perform status loop testing on a half word interface.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0514.zip
+
+
+IUG0515: EXAMPLE DRIVERS FOR SELCH AND NON-SELCH DEVICES
+ 
+Category: OS&L        Language: CAL Macro/32             R-00 01/01/84
+ 
+Well documented example drivers, for both mux bus devices and EDMA bus
+devices.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0515.zip
+
+
+IUG0516: STRUDIAG - DIAGRAMS STRUC'S FROM CAL SOURCE
+ 
+Category: UTIL        Language: CAL Macro/32 & Pascal    R-03 07/22/85
+ 
+Extracts data  from structure definitions using  the instruction STRUC
+and formats it into a structure  diagram giving the offset, name, byte
+length and comments of each storage space.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0516.zip
+
+
+IUG0518: BITMAP - SCAN BIT MAP & REPORT ON DISC USAGE
+ 
+Category: UTIL        Language: CAL Macro/32             R-03 04/15/85
+
+An E-task which reads the bitmap and reports the number of sectors and
+percentages which are allocated and  free. The largest contiguous free
+space,  and number  of  allocated  and free  extents  as  well as  the
+percentage  of fragmentation  are reported.  Executes up  to 18  times
+faster than the original BITMAP.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0518.zip
+
+
+IUG0519: DP - DISC PATCH
+ 
+Category: UTIL        Language: CAL Macro/32             R-03 11/10/87
+
+DISC PATCH (DP) is a completely new replacement for DISCUPD, with much
+enhanced utility.  Its commands  have been  modeled after  Edit/32 and
+Copy/32 to quickly allow the user  to become familiar with its use. DP
+commands include  Chain, which  outputs the  primary directory  to the
+list device. Directory, which will decode a requested directory entry.
+Display,  which displayes  a user  specified range  of sectors.  Find,
+which  searches the  directory for  a user  specified fd.  Info, which
+displayes basic  information about the  volume. Get and  Modify, which
+allow the user to edit sectors. Many additional commands are provided,
+including on line Help.
+
+Along with this  power comes risks. DP will allow  you to edit sectors
+directly,  thus  you can  destroy  the  disc's structure,  or  ideally
+restore a corrupted disc.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0519.zip
+
+
+IUG0520: LIST - AN INTERACTIVE & BATCH FILE LISTER
+ 
+Category: UTIL        Language: CAL Macro/32             R-00 01/01/84
+
+A  convenient program  to  produce formatted  listings  of files.  The
+program  obtains the  attributes  of the  output  device and  produces
+listings  of the  correct page  length, with  headings. If  the output
+device is interactive, one page at a time is produced in response to a
+prompt.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0520.zip
+
+
+IUG0521: LISTMLB - MACRO LIBRARY FORMATTING LISTER
+ 
+Category: UTIL        Language: CAL Macro/32             R-03 08/19/86
+
+Reads a macro  library established by MLU32 and produces  a listing of
+macro names  in alphabetical order  followed by the  macros themselves
+also in alphabetical order, one per page.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0521.zip
+
+
+IUG0523: SOFTWARE TOOLS
+ 
+Category: UTIL        Language: FORTRAN & RATFOR         R-03 01/28/90
+
+The SOFTWARE  TOOLS package as  generated by the Software  Tools Users
+Group  is  an extensive  collection  of  portable software  which  had
+its  roots  in the  book  SOFTWARE  TOOLS  by Kernighan  and  Plauger.
+This  collection  is   so  extensive  that  it   would  be  impossible
+to  provide  a  detailed  description  here. A  few  examples  of  the
+tools  are:  RATFOR..a  preprocessor   which  translates  RATFOR  into
+FORTRAN,  AR..an archive  file maintainer,  CH..change text  patterns,
+COMM..print lines common to  two files, CMPRESS..compress input files,
+CRYPT..encrypt  and  decrypt   standard  input,  DC..desk  calculator,
+DIFF..isolate  differences  between  files,  EXPAND..uncompress  input
+files,   FIELD..manipulate  fields   of  data,   FORMAT..format  text,
+LAM..laminate  files,   LEX..generate  a  lexical   analyzer,  LISP..a
+reasonably well-endowed LISP interpreter, MACRO..general purpose macro
+processor,  MCOL..multicolumn  formatting,   ROFF..a  text  formatter,
+SPELL..locate  spelling  errors,  TSORT..topologically  sort  symbols,
+XREF..make  a cross  reference of  symbols, YACC..generate  a compiler
+from a  yacc compiler specification.  A spelling dictionary  of 42,000
+words  is included  for use  by the  SPELL utility.  At 1600  BPI this
+package alone requires 1200 feet of tape.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0523.zip
+
+
+IUG0524: TAPE INVENTORY PROGRAM
+ 
+Category: UTIL        Language: FORTRAN                  R-02 05/17/88
+ 
+A program for maintaining an index to a library of tapes.
+ 
+http://bitsavers.org/bits/Interdata/interchange/iug0524.zip
+
+
+IUG0525: SELECTOR AND COMPARE
+ 
+Category: UTIL        Language: FORTRAN                  R-00 09/29/83
+
+SELECTOR copies records from an input file or device to an output file
+or device with the option  of selecting particular fields and records.
+It can unblock tapes and convert  from EBCDIC to ASCII in the process.
+Blanks or other text can be inserted into the output. COMPARE compares
+selected fields  from two  files. All  records that  do not  match are
+listed as they  exist on both files with  the differences highlighted.
+Up to 20 fields may be selected to form the compare key.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0525.zip
+
+
+IUG0530: SETTERM - SET BIOC TERMINAL PARAMETERS
+ 
+Category: UTIL        Language: CAL Macro/32             R-03 08/07/91
+ 
+A  program  which  permits  each   user  to  set  terminal  parameters
+dynamically  when  using  the  BIOC  driver.  Includes  on  line  help
+facilities.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0530.zip
+
+
+IUG0531: SPICE2 - A PROGRAM TO SIMULATE SEMICONDUCTOR CIRCUITS
+ 
+Category: SCIE        Language: CAL Macro/32 & FORTRAN   R-00 11/14/83
+
+SPICE is  a general-purpose  circuit simulation program  for nonlinear
+dc, nonlinear transient, and linear  ac analyses. Circuits may contain
+resistors,  capacitors,   inductors,  mutual   inductors,  independent
+voltage  and  current  sources,   four  types  of  dependent  sources,
+transmission lines,  and the  four most common  semiconductor devices:
+diodes, BJT's, JFET's, and MOSFET's. SPICE has built-in models for the
+semiconductor devices,  and the user  need specify only  the pertinent
+model parameter values. A 75 page manual is provided on tape.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0531.zip
+
+
+IUG0532: UNIQEXT - ENUMERATE UNIQUE FILENAME EXTENSIONS
+ 
+Category: UTIL        Language: FORTRAN                  R-00 01/20/84
+
+A program  which reads the  disc directory  and produces a  listing of
+filename extensions and the number of occurences of each.
+
+http://bitsavers.org/bits/Interdata/interchange/iug0532.zip
+
+
+IUG0533: COMPRS/EXPAND - IMPROVED FILE COMPRESSION UTILITY
+ 
+Category: UTIL        Language: FORTRAN                  R-01 05/11/84
+
+Improved file compression and  expansion utility compresses text files
+such as program source, listings. Optionally will encrypt using a user
+provided key, but please don't forget the key!
+
+http://bitsavers.org/bits/Interdata/interchange/iug0533.zip
