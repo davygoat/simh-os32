@@ -4,13 +4,13 @@ mtmonly
 * Check parameters present
 *
 $ifnull @1
-   load wild,10
+   load sys:wild,10
    task wild
    start
    $exit
 $endc
 $ifnull @2
-   load wild,10
+   load sys:wild,10
    task wild
    start
    $exit
@@ -32,7 +32,7 @@ $endc
 * Convert to CSS using WILD.TSK
 *
 $job
-   load wild,10
+   load sys:wild,10
    task wild
    assign 0,wildin.tmp,ero
    assign 1,wildtmp.css,ewo
