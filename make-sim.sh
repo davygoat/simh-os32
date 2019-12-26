@@ -12,7 +12,8 @@ set fnam [file tail $fnam]
 puts "   expect \"\\r\\n*\" send \"build $fnam\\r\";c"
 foreach line [split $schluck \n] {
    set line [string trimright $line]
-   regsub -all "\"" $line {\\&} line
+   regsub -all {[\\"]} $line {\\&} line
+   regsub -all {[%]} $line {&&} line
    if { $line == "" } { set line " " }
    puts "   expect \".CMDP>\" send \"$line\\r\";c"
 }
