@@ -21,7 +21,7 @@ os32kit.zip: $(FILES) dsk4.dsk
 	rm -f os32kit.zip
 	zip -r9 os32kit $^ "doc/Getting Started with Interdata OS32.pdf"
 
-os32src.zip: $(FILES) rebuild-system.sh tapes/eou.tap
+os32src.zip: $(FILES) rebuild-system.sh tapes/eou.tap wild.c* search.c*
 	rm -f os32src.zip
 	zip -r9 os32src $^
 
