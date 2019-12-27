@@ -551,114 +551,6 @@ set cpu idle
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "endb\r";c
-   # WILD.CSS
-   expect "\r\n*" send "build wild.css\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "mtmonly\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "* Check parameters present\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "$ifnull @1\r";c
-   expect ".CMDP>" send "   load sys:wild,10\r";c
-   expect ".CMDP>" send "   task wild\r";c
-   expect ".CMDP>" send "   start\r";c
-   expect ".CMDP>" send "   $exit\r";c
-   expect ".CMDP>" send "$endc\r";c
-   expect ".CMDP>" send "$ifnull @2\r";c
-   expect ".CMDP>" send "   load sys:wild,10\r";c
-   expect ".CMDP>" send "   task wild\r";c
-   expect ".CMDP>" send "   start\r";c
-   expect ".CMDP>" send "   $exit\r";c
-   expect ".CMDP>" send "$end\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "* Use DISPLAY FILES to write WILD.TSK input\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "$job\r";c
-   expect ".CMDP>" send "   xalloc wildin.tmp,index,80\r";c
-   expect ".CMDP>" send "   xalloc wildtmp.css,index,128\r";c
-   expect ".CMDP>" send "   display files ,@2,wildin.tmp\r";c
-   expect ".CMDP>" send "$termjob\r";c
-   expect ".CMDP>" send "$ifne 0\r";c
-   expect ".CMDP>" send "   xdelete wildin.tmp\r";c
-   expect ".CMDP>" send "   xdelete wildtmp.css\r";c
-   expect ".CMDP>" send "   $exit\r";c
-   expect ".CMDP>" send "$endc\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "* Convert to CSS using WILD.TSK\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "$job\r";c
-   expect ".CMDP>" send "   load sys:wild,10\r";c
-   expect ".CMDP>" send "   task wild\r";c
-   expect ".CMDP>" send "   assign 0,wildin.tmp,ero\r";c
-   expect ".CMDP>" send "   assign 1,wildtmp.css,ewo\r";c
-   expect ".CMDP>" send "   start ,\"@1\",@2\r";c
-   expect ".CMDP>" send "$termjob\r";c
-   expect ".CMDP>" send "$ifne 0\r";c
-   expect ".CMDP>" send "   xdelete wildin.css\r";c
-   expect ".CMDP>" send "   xdelete wildtmp.css\r";c
-   expect ".CMDP>" send "   $exit\r";c
-   expect ".CMDP>" send "$endc\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "* Run CSS\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "$job\r";c
-   expect ".CMDP>" send "   wildtmp\r";c
-   expect ".CMDP>" send "$termjob\r";c
-   expect ".CMDP>" send "$ifne 0\r";c
-   expect ".CMDP>" send "   $write THERE WERE A FEW PROBLEMS\r";c
-   expect ".CMDP>" send "$endc\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "* Cleanup\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "xdelete wildin.tmp\r";c
-   expect ".CMDP>" send "xdelete wildtmp.css\r";c
-   expect ".CMDP>" send "$exit\r";c
-   expect ".CMDP>" send "endb\r";c
-   # SEARCH.CSS
-   expect "\r\n*" send "build search.css\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "$ifnnull @4\r";c
-   expect ".CMDP>" send "   $goto dofile\r";c
-   expect ".CMDP>" send "   $exit\r";c
-   expect ".CMDP>" send "$endc\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "*** WILDCARD *************************************\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "mtmonly\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "$ifnull @1\r";c
-   expect ".CMDP>" send "   $write\r";c
-   expect ".CMDP>" send "   $write USAGE: SEARCH WILDCARD,\"STRING\"\r";c
-   expect ".CMDP>" send "   $write\r";c
-   expect ".CMDP>" send "   $write NOTE:  TO SEARCH FOR $, USE $$\r";c
-   expect ".CMDP>" send "   $exit\r";c
-   expect ".CMDP>" send "$endc\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "$ifnull @2\r";c
-   expect ".CMDP>" send "   $write\r";c
-   expect ".CMDP>" send "   $write USAGE: SEARCH WILDCARD,\"STRING\"\r";c
-   expect ".CMDP>" send "   $write\r";c
-   expect ".CMDP>" send "   $write NOTE:  TO SEARCH FOR $, USE $$\r";c
-   expect ".CMDP>" send "   $exit\r";c
-   expect ".CMDP>" send "$endc\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "wild \"search $V:$F,@2,,go\",@1\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "$exit\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "*** SINGLE FILE **********************************\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "$label dofile\r";c
-   expect ".CMDP>" send "prevent etm\r";c
-   expect ".CMDP>" send "load .bg,sys:search,10\r";c
-   expect ".CMDP>" send "task .bg\r";c
-   expect ".CMDP>" send "assign 0,@1\r";c
-   expect ".CMDP>" send "assign 1,con:\r";c
-   expect ".CMDP>" send "assign 2,con:\r";c
-   expect ".CMDP>" send "start ,@1,\"@2\"\r";c
-   expect ".CMDP>" send "*\r";c
-   expect ".CMDP>" send "$exit\r";c
-   expect ".CMDP>" send "endb\r";c
    # FTP.CSS
    expect "\r\n*" send "build ftp.css\r";c
    expect ".CMDP>" send "*\r";c
@@ -856,17 +748,6 @@ set cpu idle
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "endb\r";c
    expect "\r\n*"  send "rename actuty.css,actuty.css/255\r";c
-   # Create some dummy CSS files for SEARCH and WILD work-in-progress
-   expect "\r\n*" send "build zzz.css\r";c
-   expect ".CMDP>" send "sys:search/s @1,\"@2\",@3,@4\r";c
-   expect ".CMDP>" send "$exit\r";c
-   expect ".CMDP>" send "endb\r";c
-   expect "\r\n*"  send "repro zzz.css,ff00 ; rename zzz.css,search.css/25\r";c
-   expect "\r\n*" send "build zzz.css\r";c
-   expect ".CMDP>" send "sys:wild/s \"@1\",@2\r";c
-   expect ".CMDP>" send "$exit\r";c
-   expect ".CMDP>" send "endb\r";c
-   expect "\r\n*"  send "repro zzz.css,ff00 ; rename zzz.css,wild.css/25\r";c
    # Over to stage 6
    expect "\r\n*" send "mark dsc4:,off ; display devices\r";c
    expect "DSC5  FE 0000   OFF" detach dm0 ; goto example-code
