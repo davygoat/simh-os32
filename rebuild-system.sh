@@ -856,6 +856,17 @@ set cpu idle
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "endb\r";c
    expect "\r\n*"  send "rename actuty.css,actuty.css/255\r";c
+   # Create some dummy CSS files for SEARCH and WILD work-in-progress
+   expect "\r\n*" send "build zzz.css\r";c
+   expect ".CMDP>" send "sys:search/s @1,\"@2\",@3,@4\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "endb\r";c
+   expect "\r\n*"  send "repro zzz.css,ff00 ; rename zzz.css,search.css/25\r";c
+   expect "\r\n*" send "build zzz.css\r";c
+   expect ".CMDP>" send "sys:wild/s \"@1\",@2\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "endb\r";c
+   expect "\r\n*"  send "repro zzz.css,ff00 ; rename zzz.css,wild.css/25\r";c
    # Over to stage 6
    expect "\r\n*" send "mark dsc4:,off ; display devices\r";c
    expect "DSC5  FE 0000   OFF" detach dm0 ; goto example-code
