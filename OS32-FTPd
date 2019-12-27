@@ -18,12 +18,12 @@
 #
 # FIXME
 #
-# Some ?large files get stuck midway, with some line endings messed up,
-# the dimmer left on, and the FTP client dangling. You can restore the
-# console by killing the client, reconnecting, and doing a DIR to kick
-# a VT100 sequence at it. Annoyingly, FTP RESET does not work in this
-# situation. Maybe this has something to do with those annoying DEL
-# characters?
+# Some ?large FTP GET get requests  stuck midway, with some line endings
+# messed up,  the dimmer left on,  and the FTP client  dangling. You can
+# restore the console  by killing the client, reconnecting,  and doing a
+# DIR to  kick a VT100  sequence at it.  Annoyingly, FTP RESET  does not
+# work in  this situation.  Maybe this  has something  to do  with those
+# annoying DEL characters?
 #
 
 package require Expect
@@ -64,17 +64,18 @@ namespace eval OS32 {
    proc ::ftpd::command::MDTM {sock prm} { ::OS32::NoTransmit $sock "500 TODO: MDTM" ; puts "\n\n*** TODO? MDTM (MODIFIED DATE TIME) ****" }
    proc ::ftpd::command::STOU {sock prm} { ::OS32::NoTransmit $sock "500 TODO: STOU" ; puts "\n\n*** TODO? STOU (STORE UNIQUE) ****" }
 
-;#########################################################################
+;######################################################################
    #
    # CWD -- Change working directory
    #
-   # Format is VOLUME:/ACCOUNT. VOLUME starts with a letter, followed by a
-   # maximum of three letters or digits. ACCOUNT is an unsigned 16 bit
+   # Format is VOLUME:/ACCOUNT. VOLUME starts with a letter, followed by
+   # a maximum of three letters or digits. ACCOUNT is an unsigned 16 bit
    # integer (i.e. less than 65636).
    #
-   # If the request includes a volume name, we schedule a BottomHalf to run
-   # a CHECKVOL script, with awk-like pattern matching to determine success
-   # or failure. The final response is returned with the NoTransmit proc.
+   # If the request includes a volume  name, we schedule a BottomHalf to
+   # run a CHECKVOL script, with  awk-like pattern matching to determine
+   # success  or  failure.  The  final response  is  returned  with  the
+   # NoTransmit proc.
    #
 
    namespace eval CWD {
@@ -164,21 +165,21 @@ namespace eval OS32 {
       }
    }
 
-;#########################################################################
+;######################################################################
    #
    # CDUP -- Go up one directory level
    #
-   # OS/32 directories cannot be nested, so we'll simply return to the initial
-   # or default directory.
+   # OS/32 directories cannot  be nested, so we'll simply  return to the
+   # initial or default directory.
    #
 
    namespace eval CDUP {
       proc ::ftpd::command::CDUP { sock list } {
-         ::ftpd::command::CWD $sock 0 ;# TODO should pick this up from MTM
+         ::ftpd::command::CWD $sock 0 ;# TODO get from MTM
       }
    }
 
-;#########################################################################
+;######################################################################
    #
    # DELE -- Delete file
    #
@@ -246,14 +247,15 @@ namespace eval OS32 {
       }
    }
 
-;#########################################################################
+;######################################################################
    #
    # LIST -- List files
    #
    # Invoke DISPLAY FILES through a CSS wrapper. We allow UNIX and OS/32
-   # wildcards. Asterisks are converted to dashes, question marks to asterisks.
+   # wildcards.  Asterisks are  converted to  dashes, question  marks to
+   # asterisks.
    #
-   # This command uses the passive mode socket, with BeginTransmit and
+   # This command uses  the passive mode socket,  with BeginTransmit and
    # EndTransmit, or NoTransmit on error.
    #
 
@@ -333,13 +335,13 @@ namespace eval OS32 {
       }
    }
 
-;#########################################################################
+;######################################################################
    #
    # NLST -- List file names
    #
-   # This is a variation of the LIST command that only returns file names.
-   # It is is typically invoked by the FTP client's mget command to resolve
-   # remote wildcards.
+   # This is  a variation  of the  LIST command  that only  returns file
+   # names. It is is typically invoked  by the FTP client's mget command
+   # to resolve remote wildcards.
    #
 
    namespace eval NLST {
@@ -353,19 +355,19 @@ namespace eval OS32 {
       }
    }
 
-;#########################################################################
+;######################################################################
    #
    # PASS -- Check password
    #
-   # Use the username/passwords array from the ftpd.config file. We really
-   # ought to try doing an MTM login so we don't have to store our passwords
-   # in cleartext.
+   # Use  the username/passwords  array  from the  ftpd.config file.  We
+   # really ought to  try doing an MTM  login so we don't  have to store
+   # our passwords in cleartext.
    #
 
    namespace eval PASS {
 
       #
-      # Note override. ftpd will call us, and we'll call back into ftpd
+      # Note override. ftpd will call us,  and we'll call back into ftpd
       # by doing a base call.
       #
 
@@ -393,13 +395,13 @@ namespace eval OS32 {
       }
    }
 
-;#########################################################################
+;######################################################################
    #
    # PWD -- Print working directory
    #
-   # Returns the current "working directory", i.e. volume and account, to
-   # the client. We're overriding the built-in version because we're not
-   # doing it UNIX style.
+   # Returns the  current "working directory", i.e.  volume and account,
+   # to the client. We're overriding  the built-in version because we're
+   # not doing it UNIX style.
    #
 
    namespace eval PWD {
@@ -409,14 +411,14 @@ namespace eval OS32 {
       }
    }
 
-;#########################################################################
+;######################################################################
    #
    # RETR -- Retrieve file
    #
-   # TYPE the file, and capture the meanful bits. Because OS/32 has no
-   # built-in TYPE command, we are using a CSS to run COPY32 and copy the
-   # file to the console. It also wraps the output in ===BEGIN===/===END===
-   # markers.
+   # TYPE the file,  and capture the meanful bits. Because  OS/32 has no
+   # built-in  TYPE command,  we  are  using a  CSS  to  run COPY32  and
+   # copy  the  file  to  the  console. It  also  wraps  the  output  in
+   # ===BEGIN===/===END=== markers.
    #
 
    namespace eval RETR {
@@ -482,7 +484,7 @@ namespace eval OS32 {
       }
    }
 
-;#########################################################################
+;######################################################################
    #
    # RNFR/RNTO -- Rename file
    #
@@ -570,17 +572,18 @@ namespace eval OS32 {
    }
 
 
-;#########################################################################
+;######################################################################
    #
    # STOR -- Store file
    #
-   # Invoke EDIT/32 through a CSS that allocates and renames the temporary
-   # files, and cleans up after itself. This one is complicated by the fact
-   # that we do not know the record length in the top half, and we cannot
-   # receive data while in that socket event.
+   # Invoke  EDIT/32  through  a  CSS that  allocates  and  renames  the
+   # temporary  files,  and   cleans  up  after  itself.   This  one  is
+   # complicated by  the fact that we  do not know the  record length in
+   # the  top half,  and we  cannot receive  data while  in that  socket
+   # event.
    #
-   # This is where we introduce a proc called PromptPatternMatch, which
-   # checks for prompts, before we get the carriage return that would
+   # This is where we introduce  a proc called PromptPatternMatch, which
+   # checks for  prompts, before we  get the carriage return  that would
    # trigger LinePatternMatch.
    #
 
@@ -613,7 +616,7 @@ namespace eval OS32 {
                variable dimmeris
                upvar #0 ::ftpd::$ftpsok data
             }
-            # Now we can read all the data to work out the record length
+            # Now we can read all the data to work out record length
             "^\\*STOR GO AHEAD" {
                dimmer on $0
                BeginTransmit $ftpsok $data(fnam)
@@ -689,12 +692,12 @@ namespace eval OS32 {
       }
    }
 
-;#########################################################################
+;######################################################################
    #
    # SYST -- Return system information
    #
-   # No use pretending that we are UNIX or Windows. You can configure the
-   # ostype in ftpd.config.
+   # No use  pretending that we are  UNIX or Windows. You  can configure
+   # the ostype in ftpd.config.
    #
 
    namespace eval SYST {
@@ -704,7 +707,7 @@ namespace eval OS32 {
       }
    }
 
-;#########################################################################
+;######################################################################
    #
    # USER -- User connect
    #
@@ -734,7 +737,7 @@ namespace eval OS32 {
       }
    }
 
-;#########################################################################
+;######################################################################
    #
    # Bottom half and convenience routines.
    #
@@ -839,7 +842,7 @@ namespace eval OS32 {
       puts -nonewline "\r*$cn$message$dm\n*"
    }
 
-;#########################################################################
+;######################################################################
    #
    # Our awk-like pattern matching construct
    #
@@ -872,7 +875,7 @@ namespace eval OS32 {
       return [::OS32::awkward $0 $awk]
    }
 
-;#########################################################################
+;######################################################################
    #
    # FTP start, stop, users
    #
@@ -961,7 +964,7 @@ namespace eval OS32 {
       puts -nonewline "$n CONNECTED"
    }
 
-;#########################################################################
+;######################################################################
    #
    # The interact/expect loop
    #
@@ -1000,9 +1003,9 @@ namespace eval OS32 {
             # Discard <NL> and annoying <DEL> characters.
             -re "(\n|\x7f)" {
             }
-            # All other characters are echoed and assembled into lines. But
-            # some OS/32 programs have their own prompts that have to spot
-            # before we ever get a carriage return.
+            # All  other  characters  are echoed  and  assembled  into
+            # lines. But  some OS/32  programs have their  own prompts
+            # that have to spot before we ever get a carriage return.
             -re . {
                upvar #0 ::OS32::ftpcmd ftpcmd
                upvar #0 ::OS32::osline osline
@@ -1022,7 +1025,7 @@ namespace eval OS32 {
       }
    }
 
-;#########################################################################
+;######################################################################
    #
    # Main program
    #
