@@ -11,5 +11,3 @@
   - Avoid leaving the dimmer on.
   - Avoid leaving temporary files around.
 
-- Config options to enable/disable commands such as DELE.
-
