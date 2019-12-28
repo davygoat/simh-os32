@@ -3,7 +3,7 @@ xyzzy::
 	@echo Nothing happens...
 
 clean::
-	rm -f *.zip *.out delme* wot wop
+	rm -f *.zip *.out delme* wop
 
 clobber:: clean
 	rm -f *.dsk

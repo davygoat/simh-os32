@@ -90,7 +90,7 @@ namespace eval OS32 {
 
          upvar #0 ::ftpd::$sock data
 
-         # Obvious errors
+         # Handle immediate errors
          set dir [string toupper $dir]
          if { ![regexp {^([A-Z][A-Z0-9]{0,3}:?)?/?([0-9]+)?$} $dir -> vol act] } {
             puts $sock "550 Not a directory (must be NUMBER, VOLUME, or VOLUME:/NUMBER)"
@@ -102,7 +102,7 @@ namespace eval OS32 {
                return
             }
             if { [lsearch $data(acl) $act] < 0 && [lsearch -exact $data(acl) *] < 0 } {
-               puts $sock "550 Access denied, $act not in ACL"
+               puts $sock "550 Access denied, your ACL is ([join $data(acl) ,])"
                return
             }
          }
@@ -377,82 +377,121 @@ namespace eval OS32 {
 
    namespace eval PASS {
 
-      #
-      # Note override. ftpd will call us,  and we'll call back into ftpd
-      # by doing a base call.
-      #
-
-      rename ::ftpd::command::PASS ::ftpd::command::_PASS
-
-      proc ::ftpd::command::PASS { sock password } {
+      proc ::ftpd::command::PASS { sock pass } {
 
          ::OS32::CheckOperatorBusy $sock
 
          upvar #0 ::ftpd::$sock data
+         upvar #0 ::OS32::config::numericlogins numericlogins
+         upvar #0 ::OS32::config::access access
+         upvar #0 ::OS32::config::passwords passwords
+
+         set user $data(user)
+         set data(pass) $pass
+
+         #
+         # Numeric logins  can be disabled  because they are  too easily
+         # enumerated.
+         #
+
+         if { [string is integer $user] && !$numericlogins } {
+            ::OS32::trafficlight red "FTP USER $user FAILED LOGIN (numeric logins disabled)"
+            puts $sock "551 Access denied, numeric logins disabled"
+            return
+         }
+
+         #
+         # Named users  must be  listed in  the access  array so  we can
+         # assign them to  numeric accounts. However, we do  NOT want to
+         # tell the client that their  username is invalid -- that's bad
+         # practice these days.
+         #
+
+         if { ![info exists access($user)] && ![string is integer $user] } {
+            ::OS32::trafficlight red "FTP USER $user FAILED LOGIN (not in config::access)"
+            puts $sock "551 Access denied"
+            return
+         }
+
+         #
+         # On the  other hand, you  may want to explicitly  disable some
+         # users. In that case it makes sense to tell them off.
+         #
+
+         if { [info exists access($user)] && ![llength [set access($user)]] } {
+            ::OS32::trafficlight red "FTP USER $user FAILED LOGIN (empty acl)"
+            puts $sock "551 User $user is denied ftp access"
+            return
+         }
+
+         #
+         # Set up defaults. Named users  start in the first account that
+         # is listed in  their acl. Numeric users will  be restricted to
+         # just the account they give.
+         #
+
          set data(vol) "SYS:"
          set data(cwd) -1
 
-         if { ![string is integer $data(user)] } {
-            upvar #0 ::OS32::config::accounts accounts
-            if { [info exists accounts($data(user))] } {
-               set data(acl) [set accounts($data(user))]
-               set data(cwd) [lindex $data(acl) 0]
-               if { $data(cwd) == "*" } {
-                  set data(cwd) 0
-               }
-            }
+         if { [string is integer $user] } {
+            set data(acl) $user
+            set data(cwd) $user
          } else {
-            set data(acl) $data(user)
-            set data(cwd) $data(user)
-         }
-
-         ::ftpd::command::_PASS $sock $password
-      }
-
-      # This proc is passed as an option to the ::ftpd::server command.
-      proc AuthUserCallback { user pass } {
-
-         upvar #0 ::[namespace parent]::config::accounts  accounts
-         upvar #0 ::[namespace parent]::config::passwords passwords
-
-         # Account MUST be listed in config file
-         if { ![string is integer $user] } {
-            if { ![info exists accounts($user)] } {
-               ::OS32::trafficlight red "FTP USER $user FAILED LOGIN (not in config::accounts)"
-               return 0
+            set data(acl) [set access($user)]
+            set data(cwd) [lindex $data(acl) 0]
+            if { $data(cwd) == "*" } {
+               set data(cwd) 0
             }
          }
 
-         # MTM authentication
+         #
+         # If the  user/account is  listed in passwords,  do an  md5 and
+         # check  the hash.  Note  that  we salt  with  the username  to
+         # prevent hash collisions, and we also terminate with a newline
+         # because the echo command pipes one in by default.
+         #
+         #  $ echo "myid/my password" | md5sum
+         #
+
+         if { [info exists passwords($user)] } {
+            set md5 [string tolower [::md5::md5 -hex "$user/$pass\n"]]
+            if { [array names passwords -exact $user] == $user &&
+                 [set passwords($user)] == $md5 } {
+               ::OS32::trafficlight green "FTP USER $user LOGGED IN USING MD5"
+               puts $sock "230 Password accepted, directory is [::OS32::CurrentWorkingDirectory $sock]"
+               set data(access) 1
+               return
+            } else {
+               ::OS32::trafficlight red "FTP USER $user FAILED LOGIN USING MD5"
+               puts $sock "551 Access denied"
+               return
+            }
+         }
+
+         #
+         # Otherwise we'll use MTM to authenticate. This shells out to a
+         # separate expect script.
+         #
+
          if { ![string is integer $user] } {
-            set acct [lindex [set accounts($user)] 0]
+            set acct [lindex [set access($user)] 0]
          } else {
             set acct $user
          }
-         if { $acct != "*" || [info exists passwords($user)] == 0 } {
-            set erno [CheckPasswordMTM $acct $pass ermes]
-            if { $erno == 0 } {
-               ::OS32::trafficlight green "FTP USER $user LOGGED IN USING MTM"
-               return 1
-            } else {
-               ::OS32::trafficlight red "FTP USER $user FAILED LOGIN USING MTM ($ermes)"
-               return 0
-            }
-         }
-
-         # Configuration-based MD5 authentication
-         set md5 [string tolower [::md5::md5 -hex "$pass\n"]]
-         if { [array names passwords -exact $user] == $user &&
-              [set passwords($user)] == $md5 } {
-            ::OS32::trafficlight green "FTP USER $user LOGGED IN USING MD5"
-            return 1
+         set erno [::OS32::PASS::AuthenticateMTM $acct $pass ermes]
+         if { $erno == 0 } {
+            ::OS32::trafficlight green "FTP USER $user LOGGED IN USING MTM"
+            puts $sock "230 MTM login successful, directory is [::OS32::CurrentWorkingDirectory $sock]"
+            set data(access) 1
+            return
          } else {
-            ::OS32::trafficlight red "FTP USER $user FAILED LOGIN USING MD5"
-            return 0
+            ::OS32::trafficlight red "FTP USER $user FAILED LOGIN USING MTM ($ermes)"
+            puts $sock "551 Access denied"
+            return
          }
       }
 
-      proc CheckPasswordMTM { acct pass errvar } {
+      proc AuthenticateMTM { acct pass errvar } {
          set exp [info nameofexecutable]
          upvar 1 $errvar ermes
          catch {
@@ -999,10 +1038,6 @@ namespace eval OS32 {
 
       ftpd::config -authIpCmd ::OS32::USER::AuthIpCallback
       ftpd::config -logCmd    ::OS32::LogNothing
-
-      if [info exists config::passwords] {
-         ftpd::config -authUsrCmd ::OS32::PASS::AuthUserCallback
-      }
 
       ftpd::server $config::host
 
