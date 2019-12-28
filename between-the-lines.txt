@@ -20,6 +20,37 @@ MTM privileges :
 - SET PRIVATE
 - EXTENDED ACCOUNT ACCESS (80808080 ?)
 - PRIVILEGED
+- Others?
+
+  fffffff0 currently set to this
+  ffffffe0 what if?
+  ffffffd0 what if?
+  ffffffb0 etc
+  ffffff70
+  fffffef0 are there four groups of eight bits?
+  fffffdf0 e.g. private, group, system, ?css
+  fffffbf0
+  fffff7f0
+  ffffeff0
+  ffffdff0
+  ffffbff0
+  ffff7ff0
+  fffefff0
+  fffdfff0
+  fffbfff0
+  fff7fff0
+  ffeffff0
+  ffdffff0
+  ffbffff0
+  ff7ffff0
+  fefffff0
+  fdfffff0
+  fbfffff0
+  f7fffff0
+  effffff0
+  dffffff0
+  bffffff0
+  7ffffff0
 
 Problems :
 
