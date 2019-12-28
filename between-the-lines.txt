@@ -1,3 +1,4 @@
+vim:set nowrap:
 
 SIGNON :
 
@@ -20,3 +21,37 @@ MTM privileges :
 - EXTENDED ACCOUNT ACCESS (80808080 ?)
 - PRIVILEGED
 
+Problems :
+
+- MTM seems to do a lot of "busy work". CPU usage can get quite high
+  after a while.
+
+- Weird prompt behaviour. But note MTMSGN.MAC:
+
+  :*                                                                      SGN00431
+  :*       GENERATE DEFAULT SIGMA-10 PROMPT SEQUENCES                     SGN00432
+  :*                                                                      SGN00433
+  &SIGMA   ANOP                                                           SGN00434
+           AIF   (N'%SYSLIST(%CNT) NE 1)&ERRNUMB                          SGN00435
+  SIGMA    EQU   *                                                        SGN00436
+           DB    0                        TASK/CSS EXECUTING              SGN00437
+           DB    4,C'>',X'11',X'FF',X'FF' USER TASK READ                  SGN00438
+           DB    4,C'*',X'11',X'FF',X'FF' COMMAND REQUEST                 SGN00439
+           DB    4,C'B>',X'11',X'FF'      BUILD READ                      SGN00440
+           AGO   &LOOP1                                                   SGN00441
+  :*                                                                      SGN00442
+  :*       MAKE SURE THE STANDARD PROMPT SEQUENCE IS PRESENT              SGN00443
+  :*                                                                      SGN00444
+  &EXIT    ANOP                                                           SGN00445
+           AIF   (%MAX EQ 0)&EXITSTD                                      SGN00446
+  %CNT     SETA  1                                                        SGN00447
+  &EXITLP  ANOP                                                           SGN00448
+           AIF   ('%SEQN(%CNT)' EQ 'STANDARD')&IGNORE                     SGN00449
+  %CNT     SETA  %CNT+1                                                   SGN00450
+           AIF   (%CNT LE %MAX)&EXITLP                                    SGN00451
+  &EXITSTD ANOP                                                           SGN00452
+  STANDARD EQU   *                                                        SGN00453
+           DB    4,C'-',X'FF',X'FF',X'FF' TASK/CSS EXECUTING              SGN00454
+           DB    4,C'>',X'FF',X'FF',X'FF' USER TASK READ                  SGN00455
+           DB    4,C'*',X'FF',X'FF',X'FF' COMMAND REQUEST                 SGN00456
+           DB    4,C'B>',X'FF',X'FF'      BUILD READ                      SGN00457
