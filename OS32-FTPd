@@ -88,6 +88,8 @@ namespace eval OS32 {
 
       proc TopHalf { sock dir ftpcmd } {
 
+         ::OS32::CheckNotAllowed $sock $ftpcmd
+
          upvar #0 ::ftpd::$sock data
 
          # Handle immediate errors
@@ -179,6 +181,7 @@ namespace eval OS32 {
 
    namespace eval CDUP {
       proc ::ftpd::command::CDUP { sock list } {
+         ::OS32::CheckNotAllowed $sock CDUP
          upvar #0 ::ftpd::$sock data
          set act [lindex $data(acl) 0]
          if { $act == "*" } {
@@ -207,6 +210,7 @@ namespace eval OS32 {
 
       proc TopHalf { sock fnam ftpcmd } {
          ::OS32::CheckReadOnly $sock $ftpcmd
+         ::OS32::CheckNotAllowed $sock $ftpcmd
          ::OS32::CheckOperatorBusy $sock
          set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
          upvar #0 ::ftpd::$sock data
@@ -280,6 +284,7 @@ namespace eval OS32 {
       }
 
       proc TopHalf { sock fnam ftpcmd } {
+         ::OS32::CheckNotAllowed $sock $ftpcmd
          ::OS32::CheckOperatorBusy $sock
          set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
          upvar #0 ::ftpd::$sock data
@@ -528,6 +533,7 @@ namespace eval OS32 {
 
    namespace eval PWD {
       proc ::ftpd::command::PWD { sock argument } {
+         ::OS32::CheckNotAllowed $sock PWD
          upvar #0 ::ftpd::$sock data
          set cwd [::OS32::CurrentWorkingDirectory $sock]
          puts $sock "250 Current directory is $cwd"
@@ -562,6 +568,7 @@ namespace eval OS32 {
       }
 
       proc TopHalf { sock fnam ftpcmd } {
+         ::OS32::CheckNotAllowed $sock $ftpcmd
          ::OS32::CheckOperatorBusy $sock
          set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
          upvar #0 ::ftpd::$sock data
@@ -632,6 +639,7 @@ namespace eval OS32 {
 
       proc TopHalf { sock fnam ftpcmd } {
          ::OS32::CheckReadOnly $sock $ftpcmd
+         ::OS32::CheckNotAllowed $sock $ftpcmd
          upvar #0 ::ftpd::$sock data
          set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
          set data(fnam1) $fnam
@@ -646,11 +654,12 @@ namespace eval OS32 {
       upvar #0 [namespace parent]::osline osline
 
       proc ::ftpd::command::RNTO { sock fnam } {
-         ::OS32::RNTO::TopHalf $sock $fnam $ftpcmd
+         ::OS32::RNTO::TopHalf $sock $fnam RNTO
       }
 
       proc TopHalf { sock fnam ftpcmd } {
          ::OS32::CheckReadOnly $sock $ftpcmd
+         ::OS32::CheckNotAllowed $sock $ftpcmd
          ::OS32::CheckOperatorBusy $sock
          upvar #0 ::ftpd::$sock data
          set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
@@ -729,6 +738,7 @@ namespace eval OS32 {
 
       proc TopHalf { sock fnam ftpcmd } {
          ::OS32::CheckReadOnly $sock $ftpcmd
+         ::OS32::CheckNotAllowed $sock $ftpcmd
          ::OS32::CheckOperatorBusy $sock
          upvar #0 ::ftpd::$sock data
          set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
@@ -833,6 +843,7 @@ namespace eval OS32 {
 
    namespace eval SYST {
       proc ::ftpd::command::SYST { sock list } {
+         ::OS32::CheckNotAllowed $sock SYST
          upvar #0 ::OS32::config::ostype ostype
          puts $sock "215 $ostype"
       }
@@ -913,11 +924,21 @@ namespace eval OS32 {
       }
    }
 
+   # Note: must be called BEFORE CheckNotAllowed
    proc CheckReadOnly { sock ftpcmd } {
       upvar #0 ::ftpd::$sock data
       if { [lsearch $data(acl) RO] >= 0 &&
            [lsearch $data(acl) +$ftpcmd] < 0 } {
-         puts $sock "550 Permission denied (read only)"
+         puts $sock "550 Permission denied (user is read only)"
+         return -level 2
+      }
+   }
+
+   # Note: must be called AFTER CheckReadOnly
+   proc CheckNotAllowed { sock ftpcmd } {
+      upvar #0 ::ftpd::$sock data
+      if { [lsearch $data(acl) -$ftpcmd] >= 0 } {
+         puts $sock "550 Permission denied ($ftpcmd not allowed)"
          return -level 2
       }
    }

@@ -1,5 +1,13 @@
 vim:set nowrap:
 
+Tips/quirks :
+
+- MTM copy, rename, etc. cannot "see" file with /99 type account ref.
+
+- Use SET PRIVATE and SET GROUP to switch accounts, and to copy files
+  between accounts.
+
+
 SIGNON :
 
 - SIGNON name,account,password.
