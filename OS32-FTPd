@@ -1,11 +1,11 @@
 #!/bin/sh
 ## vim:set nowrap:\
 ## vim:set syntax=tcl:\
-## FreeBSD, no symlink... ###############################################\
-   TCL=$(ls /usr/bin/tclsh* /usr/local/bin/tclsh* 2>/dev/null |head -1) #\
-   [ -n "$TCL" ] || exec echo "Cannot find tclsh"                       #\
-   exec $TCL "$0" ${1+"$@"}                                             #\
-#########################################################################
+## FreeBSD, no symlink... ##############################################\
+   TCL=$(ls {/usr,/usr/local,/opt}/bin/expect* 2>/dev/null | head -1)  #\
+   [ -n "$TCL" ] || exec echo "Cannot find tclsh"                      #\
+   exec $TCL "$0" ${1+"$@"}                                            #\
+########################################################################
 #
 # TODO
 #
@@ -14,7 +14,6 @@
 # - Don't "die" on the client.
 # - Don't leave the dimmer on.
 # - Return errors to the client.
-# - Check password by doing an MTM login, also pick up HOME dir.
 #
 # FIXME
 #
@@ -28,6 +27,7 @@
 
 package require Expect
 package require ftpd
+package require md5
 
 namespace eval OS32 {
 
@@ -101,12 +101,16 @@ namespace eval OS32 {
                puts $sock "550 Not a directory, account must be less than 65536"
                return
             }
+            if { [lsearch $data(acl) $act] < 0 && [lsearch -exact $data(acl) *] < 0 } {
+               puts $sock "550 Access denied, $act not in ACL"
+               return
+            }
          }
 
          # Immediate success
          if { $vol == "" } {
             set data(cwd) $act
-            puts $sock "250 Directory is now $data(vol)/$data(cwd)"
+            puts $sock "250 Directory is now [::OS32::CurrentWorkingDirectory $sock]"
             return
          }
 
@@ -158,7 +162,7 @@ namespace eval OS32 {
                   set data(vol) $data(rvol)
                   if { ![string match *: $data(vol)] } { append data(vol) : }
                   unset data(rvol)
-                  NoTransmit $ftpsok "250 Directory is now $data(vol)/$data(cwd)"
+                  puts $ftpsock "250 Directory is now [::OS32::CurrentWorkingDirectory $sock]"
                }
             }
          }
@@ -175,7 +179,12 @@ namespace eval OS32 {
 
    namespace eval CDUP {
       proc ::ftpd::command::CDUP { sock list } {
-         ::ftpd::command::CWD $sock 0 ;# TODO get from MTM
+         upvar #0 ::ftpd::$sock data
+         set act [lindex $data(acl) 0]
+         if { $act == "*" } {
+            set act 0
+         }
+         ::ftpd::command::CWD $sock $act
       }
    }
 
@@ -359,9 +368,11 @@ namespace eval OS32 {
    #
    # PASS -- Check password
    #
-   # Use  the username/passwords  array  from the  ftpd.config file.  We
-   # really ought to  try doing an MTM  login so we don't  have to store
-   # our passwords in cleartext.
+   # There are three options:
+   #
+   # - If the username is listed in the passwords array, do an MD5 check.
+   # - If the username is numeric, do a straight MTM signon.
+   # - If the username is not numeric, do a lookup, and then try MTM.
    #
 
    namespace eval PASS {
@@ -374,22 +385,93 @@ namespace eval OS32 {
       rename ::ftpd::command::PASS ::ftpd::command::_PASS
 
       proc ::ftpd::command::PASS { sock password } {
+
          ::OS32::CheckOperatorBusy $sock
+
          upvar #0 ::ftpd::$sock data
-         set data(cwd) 0
          set data(vol) "SYS:"
+         set data(cwd) -1
+
+         if { ![string is integer $data(user)] } {
+            upvar #0 ::OS32::config::accounts accounts
+            if { [info exists accounts($data(user))] } {
+               set data(acl) [set accounts($data(user))]
+               set data(cwd) [lindex $data(acl) 0]
+               if { $data(cwd) == "*" } {
+                  set data(cwd) 0
+               }
+            }
+         } else {
+            set data(acl) $data(user)
+            set data(cwd) $data(user)
+         }
+
          ::ftpd::command::_PASS $sock $password
       }
 
       # This proc is passed as an option to the ::ftpd::server command.
       proc AuthUserCallback { user pass } {
+
+         upvar #0 ::[namespace parent]::config::accounts  accounts
          upvar #0 ::[namespace parent]::config::passwords passwords
+
+         # Account MUST be listed in config file
+         if { ![string is integer $user] } {
+            if { ![info exists accounts($user)] } {
+               ::OS32::trafficlight red "FTP USER $user FAILED LOGIN (not in config::accounts)"
+               return 0
+            }
+         }
+
+         # MTM authentication
+         if { ![string is integer $user] } {
+            set acct [lindex [set accounts($user)] 0]
+         } else {
+            set acct $user
+         }
+         if { $acct != "*" || [info exists passwords($user)] == 0 } {
+            set erno [CheckPasswordMTM $acct $pass ermes]
+            if { $erno == 0 } {
+               ::OS32::trafficlight green "FTP USER $user LOGGED IN USING MTM"
+               return 1
+            } else {
+               ::OS32::trafficlight red "FTP USER $user FAILED LOGIN USING MTM ($ermes)"
+               return 0
+            }
+         }
+
+         # Configuration-based MD5 authentication
+         set md5 [string tolower [::md5::md5 -hex "$pass\n"]]
          if { [array names passwords -exact $user] == $user &&
-              [set passwords($user)] == $pass } {
-            ::OS32::trafficlight green "FTP USER $user LOGGED IN"
+              [set passwords($user)] == $md5 } {
+            ::OS32::trafficlight green "FTP USER $user LOGGED IN USING MD5"
             return 1
          } else {
-            ::OS32::trafficlight red "FTP USER $user FAILED LOGIN"
+            ::OS32::trafficlight red "FTP USER $user FAILED LOGIN USING MD5"
+            return 0
+         }
+      }
+
+      proc CheckPasswordMTM { acct pass errvar } {
+         set exp [info nameofexecutable]
+         upvar 1 $errvar ermes
+         catch {
+            # yes, password could be visible to ps...
+            set out [exec $exp mtmcheckpass.tcl 1026 $acct $pass]]
+         } err
+         if { [regexp {\*\*\* FAIL ([0-9]+) \((.*?)\) \*\*\*} $err -> n reas] } {
+            set ermes [string totitle $reas]
+            return $n
+         } elseif { ![regexp {\*\*\* SUCCESS \*\*\*} $err] } {
+            puts ""
+            puts "=========================================================================="
+            puts " FIXME -- MTM password check returned success, but output says otherwise"
+            puts $err
+            puts "=========================================================================="
+            puts ""
+            return -1
+         } else {
+            set ermes ""
             return 0
          }
       }
@@ -407,8 +489,17 @@ namespace eval OS32 {
    namespace eval PWD {
       proc ::ftpd::command::PWD { sock argument } {
          upvar #0 ::ftpd::$sock data
-         puts $sock "250 Current directory is $data(vol)/$data(cwd)"
+         set cwd [::OS32::CurrentWorkingDirectory $sock]
+         puts $sock "250 Current directory is $cwd"
       }
+   }
+
+   proc CurrentWorkingDirectory { sock } {
+      upvar #0 ::ftpd::$sock data
+      set vol $data(vol)
+      set cwd $data(cwd)
+      set acl [join $data(acl) ,]
+      return "$vol/$cwd, ACL=($acl)"
    }
 
 ;######################################################################
@@ -805,7 +896,9 @@ namespace eval OS32 {
    }
 
    proc LogNothing { severity wot } {
-      return
+      if { $severity == "ERROR" } {
+         trafficlight red $wot
+      }
    }
 
    variable dimmeris off

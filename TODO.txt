@@ -5,10 +5,6 @@
   have overlapping requests. FTP to return 400 series "FTP busy" (try again)
   response to client.
 
-- Check AUF reader for MTM permission bits.
-
-- MTM login.
-
 - Add global try/except and bgerror to:
 
   - Avoid dying.
