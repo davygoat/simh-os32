@@ -1,11 +1,11 @@
 #!/bin/sh
 ## vim:set nowrap:\
 ## vim:set syntax=tcl:\
-## FreeBSD, no symlink... ###############################################\
-   TCL=$(ls /usr/bin/tclsh* /usr/local/bin/tclsh* 2>/dev/null |head -1) #\
-   [ -n "$TCL" ] || exec echo "Cannot find tclsh"                       #\
-   exec $TCL "$0" ${1+"$@"}                                             #\
-#########################################################################
+## FreeBSD, no symlink... ##############################################\
+   SH=$(ls /{usr,usr/local,opt}/bin/tclsh* 2>/dev/null | head -1)      #\
+   [ -n "$SH" ] || exec echo "Cannot find tclsh"                       #\
+   exec $SH "$0" ${1+"$@"}                                             #\
+########################################################################
 
 set numfiles 0
 set acct 0
