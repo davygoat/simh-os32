@@ -83,10 +83,10 @@ namespace eval OS32 {
       upvar #0 [namespace parent]::ftpsok ftpsok
 
       proc ::ftpd::command::CWD { sock dir } {
-         ::OS32::CWD::TopHalf $sock $dir
+         ::OS32::CWD::TopHalf $sock $dir CWD
       }
 
-      proc TopHalf { sock dir } {
+      proc TopHalf { sock dir ftpcmd } {
 
          upvar #0 ::ftpd::$sock data
 
@@ -118,7 +118,7 @@ namespace eval OS32 {
          ::OS32::CheckOperatorBusy $sock
          set data(rvol) $vol
          if { $act != "" } { set data(ract) $act }
-         ::OS32::BottomHalf $sock CWD "FTP CHECKVOL,[lindex [split $vol :] 0]"
+         ::OS32::BottomHalf $sock $ftpcmd "FTP CHECKVOL,[lindex [split $vol :] 0]"
       }
 
       proc LinePatternMatch { line } {
@@ -206,7 +206,7 @@ namespace eval OS32 {
       }
 
       proc TopHalf { sock fnam ftpcmd } {
-         ::OS32::CheckReadOnly $sock
+         ::OS32::CheckReadOnly $sock $ftpcmd
          ::OS32::CheckOperatorBusy $sock
          set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
          upvar #0 ::ftpd::$sock data
@@ -558,12 +558,12 @@ namespace eval OS32 {
       upvar #0 [namespace parent]::ftpsok ftpsok
 
       proc ::ftpd::command::RETR { sock fnam } {
-         ::OS32::RETR::TopHalf $sock $fnam
+         ::OS32::RETR::TopHalf $sock $fnam RETR
       }
 
-      proc TopHalf { sock fnam } {
+      proc TopHalf { sock fnam ftpcmd } {
          ::OS32::CheckOperatorBusy $sock
-         set fnam [::OS32::WildFile $sock [string toupper $fnam] RETR]
+         set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
          upvar #0 ::ftpd::$sock data
          set data(fnam) $fnam
          ::OS32::BottomHalf $sock RETR "FTP COPYOUT,$fnam"
@@ -627,17 +627,14 @@ namespace eval OS32 {
       upvar #0 [namespace parent]::osline osline
 
       proc ::ftpd::command::RNFR { sock fnam } {
-         ::OS32::RNFR::TopHalf $sock $fnam
+         ::OS32::RNFR::TopHalf $sock $fnam RNFR
       }
 
-      proc TopHalf { sock fnam } {
-
+      proc TopHalf { sock fnam ftpcmd } {
+         ::OS32::CheckReadOnly $sock $ftpcmd
          upvar #0 ::ftpd::$sock data
-
-         ::OS32::CheckReadOnly $sock
-         set fnam [::OS32::WildFile $sock [string toupper $fnam] RNFR]
+         set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
          set data(fnam1) $fnam
-
          puts $sock "350 RNFR OK"
       }
    }
@@ -649,16 +646,16 @@ namespace eval OS32 {
       upvar #0 [namespace parent]::osline osline
 
       proc ::ftpd::command::RNTO { sock fnam } {
-         ::OS32::RNTO::TopHalf $sock $fnam
+         ::OS32::RNTO::TopHalf $sock $fnam $ftpcmd
       }
 
-      proc TopHalf { sock fnam } {
-         ::OS32::CheckReadOnly $sock
+      proc TopHalf { sock fnam ftpcmd } {
+         ::OS32::CheckReadOnly $sock $ftpcmd
          ::OS32::CheckOperatorBusy $sock
          upvar #0 ::ftpd::$sock data
-         set fnam [::OS32::WildFile $sock [string toupper $fnam] RNTO]
+         set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
          set data(fnam2) $fnam
-         ::OS32::BottomHalf $sock RNTO "FTP RENAME,$data(fnam1),$data(fnam2)"
+         ::OS32::BottomHalf $sock $ftpcmd "FTP RENAME,$data(fnam1),$data(fnam2)"
       }
 
       proc LinePatternMatch { line } {
@@ -727,17 +724,17 @@ namespace eval OS32 {
       upvar #0 [namespace parent]::osline osline
 
       proc ::ftpd::command::STOR { sock fnam } {
-         ::OS32::STOR::TopHalf $sock $fnam
+         ::OS32::STOR::TopHalf $sock $fnam STOR
       }
 
-      proc TopHalf { sock fnam } {
-         ::OS32::CheckReadOnly $sock
+      proc TopHalf { sock fnam ftpcmd } {
+         ::OS32::CheckReadOnly $sock $ftpcmd
          ::OS32::CheckOperatorBusy $sock
          upvar #0 ::ftpd::$sock data
-         set fnam [::OS32::WildFile $sock [string toupper $fnam] STOR]
+         set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
          set data(fnam) $fnam
          # This command will fail with a USAGE error
-         ::OS32::BottomHalf $sock STOR "FTP STOR,$fnam"
+         ::OS32::BottomHalf $sock $ftpcmd "FTP $ftpcmd,$fnam"
       }
 
       proc LinePatternMatch { line } {
@@ -916,9 +913,10 @@ namespace eval OS32 {
       }
    }
 
-   proc CheckReadOnly {sock} {
+   proc CheckReadOnly { sock ftpcmd } {
       upvar #0 ::ftpd::$sock data
-      if { [lsearch $data(acl) RO] >= 0 } {
+      if { [lsearch $data(acl) RO] >= 0 &&
+           [lsearch $data(acl) +$ftpcmd] < 0 } {
          puts $sock "550 Permission denied (read only)"
          return -level 2
       }
