@@ -34,35 +34,71 @@ namespace eval OS32 {
    variable ftpcmd  ""
    variable ftpsok  ""
 
+;######################################################################
    #
-   # Disable the bits we don't want, or haven't gotten round to.
+   # Unsupported commands
    #
 
    rename ::ftpd::Fs {}
 
    proc ::ftpd::command::MKD { sock prm } {
-      ::OS32::NoTransmit $sock "500 Make directory not supported on OS/32"
+      set ftpcmd MKD
+      ::OS32::CheckNotAllowed $sock $ftpcmd
+      ::OS32::CheckReadOnly $sock $ftpcmd
+      ::OS32::NoTransmit $sock "500 Make directory not supported by OS/32"
    }
 
    proc ::ftpd::command::XMKD { sock prm } {
-      ::OS32::NoTransmit $sock "500 Make directory not supported on OS/32"
+      set ftpcmd XMKD
+      ::OS32::CheckNotAllowed $sock $ftpcmd
+      ::OS32::CheckReadOnly $sock $ftpcmd
+      ::OS32::NoTransmit $sock "500 Make directory not supported by OS/32"
    }
 
    proc ::ftpd::command::RMD { sock prm } {
-      ::OS32::NoTransmit $sock "500 Remove directory not supported on OS/32"
+      set ftpcmd RMD
+      ::OS32::CheckNotAllowed $sock $ftpcmd
+      ::OS32::CheckReadOnly $sock $ftpcmd
+      ::OS32::NoTransmit $sock "500 Remove directory not supported by OS/32"
    }
 
    proc ::ftpd::command::XRMD { sock prm } {
-      ::OS32::NoTransmit $sock "500 Remove directory not supported on OS/32"
+      set ftpcmd XRMD
+      ::OS32::CheckNotAllowed $sock $ftpcmd
+      ::OS32::CheckReadOnly $sock $ftpcmd
+      ::OS32::NoTransmit $sock "500 Remove directory not supported by OS/32"
    }
 
    proc ::ftpd::command::SIZE { sock prm } {
+      set ftpcmd SIZE
+      ::OS32::CheckNotAllowed $sock $ftpcmd
       ::OS32::NoTransmit $sock "500 File size not supported (record oriented filesystem)"
    }
 
-   proc ::ftpd::command::APPE {sock prm} { ::OS32::NoTransmit $sock "500 TODO: APPE" ; puts "\n\n*** TODO? APPE (APPEND) ****" }
-   proc ::ftpd::command::MDTM {sock prm} { ::OS32::NoTransmit $sock "500 TODO: MDTM" ; puts "\n\n*** TODO? MDTM (MODIFIED DATE TIME) ****" }
-   proc ::ftpd::command::STOU {sock prm} { ::OS32::NoTransmit $sock "500 TODO: STOU" ; puts "\n\n*** TODO? STOU (STORE UNIQUE) ****" }
+;######################################################################
+   #
+   # Possible TODOs, but rarely used.
+   #
+
+   proc ::ftpd::command::MDTM {sock prm} {
+      set ftpcmd MDTM
+      ::OS32::CheckNotAllowed $sock $ftpcmd
+      ::OS32::NoTransmit $sock "500 Rarely used"
+   }
+
+   proc ::ftpd::command::APPE {sock prm} {
+      set ftpcmd STOU
+      ::OS32::CheckNotAllowed $sock $ftpcmd
+      ::OS32::CheckReadOnly $sock $ftpcmd
+      ::OS32::NoTransmit $sock "500 Rarely used"
+   }
+
+   proc ::ftpd::command::STOU {sock prm} {
+      set ftpcmd STOU
+      ::OS32::CheckNotAllowed $sock $ftpcmd
+      ::OS32::CheckReadOnly $sock $ftpcmd
+      ::OS32::NoTransmit $sock "500 Rarely used"
+   }
 
 ;######################################################################
    #
@@ -188,6 +224,7 @@ namespace eval OS32 {
             set act 0
          }
          ::ftpd::command::CWD $sock $act
+         # mention ::OS32::CheckNotAllowed to match ::ftpd::command above
       }
    }
 
@@ -362,7 +399,9 @@ namespace eval OS32 {
    namespace eval NLST {
 
       proc ::ftpd::command::NLST { sock fnam } {
-         ::OS32::LIST::TopHalf $sock $fnam NLST
+         set ftpcmd NLST
+         ::OS32::CheckNotAllowed $sock $ftpcmd
+         ::OS32::LIST::TopHalf $sock $fnam $ftpcmd
       }
 
       proc LinePatternMatch { line } {
@@ -385,6 +424,7 @@ namespace eval OS32 {
 
       proc ::ftpd::command::PASS { sock pass } {
 
+         # Note: ::OS32::CheckNotAllowed not possible this early
          ::OS32::CheckOperatorBusy $sock
 
          upvar #0 ::ftpd::$sock data
@@ -858,6 +898,9 @@ namespace eval OS32 {
    #
 
    namespace eval USER {
+
+      # Using default ::ftpd::command::USER proc
+      # Note: ::OS32::CheckNotAllowed not possible this early
 
       proc AuthIpCallback { ip } {
          upvar #0 ::OS32::config::allowip allowip
