@@ -206,6 +206,7 @@ namespace eval OS32 {
       }
 
       proc TopHalf { sock fnam ftpcmd } {
+         ::OS32::CheckReadOnly $sock
          ::OS32::CheckOperatorBusy $sock
          set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
          upvar #0 ::ftpd::$sock data
@@ -633,6 +634,7 @@ namespace eval OS32 {
 
          upvar #0 ::ftpd::$sock data
 
+         ::OS32::CheckReadOnly $sock
          set fnam [::OS32::WildFile $sock [string toupper $fnam] RNFR]
          set data(fnam1) $fnam
 
@@ -651,6 +653,7 @@ namespace eval OS32 {
       }
 
       proc TopHalf { sock fnam } {
+         ::OS32::CheckReadOnly $sock
          ::OS32::CheckOperatorBusy $sock
          upvar #0 ::ftpd::$sock data
          set fnam [::OS32::WildFile $sock [string toupper $fnam] RNTO]
@@ -728,6 +731,7 @@ namespace eval OS32 {
       }
 
       proc TopHalf { sock fnam } {
+         ::OS32::CheckReadOnly $sock
          ::OS32::CheckOperatorBusy $sock
          upvar #0 ::ftpd::$sock data
          set fnam [::OS32::WildFile $sock [string toupper $fnam] STOR]
@@ -908,6 +912,14 @@ namespace eval OS32 {
       variable taskcount
       if { $taskcount > 0 } {
          puts $sock "450 Operator busy, do not disturb"
+         return -level 2
+      }
+   }
+
+   proc CheckReadOnly {sock} {
+      upvar #0 ::ftpd::$sock data
+      if { [lsearch $data(acl) RO] >= 0 } {
+         puts $sock "550 Permission denied (read only)"
          return -level 2
       }
    }
