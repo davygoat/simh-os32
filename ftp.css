@@ -67,7 +67,7 @@ xallocate dir.ftp,index,80
 $ifx @1.ftp
    delete @1.ftp
    $write === BEGIN DIR @2 ===
-   @1 @2
+   dir @2
    $write === END DIR @2 ===
    $exit
 $endc
@@ -112,7 +112,7 @@ $ifx @1.ftp
    $exit
 $endc
 delete copyin.ftp
-*** STOR [COPYIN] ********************************************
+*** STOR (COPYIN) ********************************************
 xallocate stor.ftp,index,80
 $ifx @1.ftp
    delete @1.ftp
