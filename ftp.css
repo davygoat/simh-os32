@@ -55,6 +55,7 @@ delete on.ftp,up.ftp,start.ftp
 *** FTP RESET ************************************************
 xallocate reset.ftp,index,80
 $ifx @1.ftp
+   $write SHOW FTP USERS
    $write STOP FTP SERVER
    $write START FTP SERVER
    delete reset.ftp
