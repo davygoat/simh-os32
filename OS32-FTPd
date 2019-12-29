@@ -15,9 +15,9 @@
 # - Don't leave the dimmer on.
 # - Return errors to the client.
 #
-# FIXME
+# Known problems:
 #
-# Some ?large FTP GET get requests stuck midway.
+# - Some ?large FTP get requests stuck midway, esp. with mget.
 #
 
 package require Expect
@@ -42,6 +42,21 @@ namespace eval OS32 {
 
    variable ftpcmd  ""
    variable sock  ""
+
+   namespace eval config {
+      variable  host          "localhost"
+      variable  port          2121
+      variable  numericlogins 1
+      array set access        {}
+      array set passwords     {}
+      variable  allowip       127.0.0.1
+      variable  welcome       "OS/32 FTP server"
+      variable  ostype        "OS/32 Version 8.1"
+      variable  contact       "nobody@nowhere.not"
+      variable  inifile       "os32.ini"
+      variable  debugconfig   1
+      variable  timeout       10
+   }
 
 ;######################################################################
    #
@@ -1115,6 +1130,16 @@ namespace eval OS32 {
       }
    }
 
+   proc FileIs600 { fnam } {
+      file stat $fnam stat
+      set perm [expr {$stat(mode)%512}]
+      if { $perm == 0600 || $perm ==  0400 } {
+         return 1
+      } else {
+         return 0
+      }
+   }
+
    proc StartFTP {} {
 
       upvar #0 ::ftpd::serviceSock serviceSock
@@ -1128,11 +1153,33 @@ namespace eval OS32 {
 
       namespace eval ::OS32 {
          if { [file exists ftpd.config] } {
-            puts "$vt100(green)Sourcing ftpd.config$vt100(normal)"
-            source ftpd.config
+            if { [FileIs600 ftpd.config] } {
+               puts "$vt100(green)Sourcing ftpd.config$vt100(normal)"
+               source ftpd.config
+            } else {
+               puts "$vt100(red)Ignoring ftpd.config, must be chmod 600 or 400$vt100(normal)"
+            }
          } else {
-            puts "$vt100(red)Cannot find ftpd.config$vt100(normal)"
-            exit
+            puts "$vt100(green)No ftpd.config$vt100(normal)"
+         }
+         namespace eval config {
+            if {$debugconfig} {
+               proc dumpconfig {} {
+                  puts =================================================================
+                  foreach var [info vars [namespace current]::*] {
+                     if { [array exists $var] } {
+                        parray $var
+                     } else {
+                        regsub -all "\r?\n" [set $var] { } $var
+                        regsub -all { +}    [set $var] { } $var
+                        puts "$var = [string trim [set $var]]"
+                     }
+                  }
+                  puts =================================================================
+               }
+               dumpconfig
+               rename dumpconfig {}
+            }
          }
       }
 
