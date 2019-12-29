@@ -1305,6 +1305,10 @@ namespace eval OS32 {
       catch { exec killall -9 id32 }
       spawn ./id32 $::OS32::config::inifile
    }
+
+   unset fd
+   unset schluck
+
    DoExpect
 
    Dimmer off
