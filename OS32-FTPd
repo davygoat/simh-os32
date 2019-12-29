@@ -437,6 +437,7 @@ namespace eval OS32 {
          CheckOperatorBusy $sock
 
          upvar #0 ::ftpd::$sock data
+         upvar #0 ::OS32::mtmport mtmport
          upvar #0 ::OS32::config::numericlogins numericlogins
          upvar #0 ::OS32::config::access access
          upvar #0 ::OS32::config::passwords passwords
@@ -528,22 +529,31 @@ namespace eval OS32 {
          # separate expect script.
          #
 
-         if { ![string is integer $user] } {
-            set acct [lindex [set access($user)] 0]
-         } else {
-            set acct $user
+         if { $mtmport > 0 } {
+            if { ![string is integer $user] } {
+               set acct [lindex [set access($user)] 0]
+            } else {
+               set acct $user
+            }
+            set erno [::OS32::PASS::AuthenticateMTM $acct $pass ermes]
+            if { $erno == 0 } {
+               TrafficLight green "FTP USER $user LOGGED IN USING MTM"
+               ReplyCommandSocket $sock "230 MTM login successful, directory is [CurrentWorkingDirectory $sock]"
+               set data(access) 1
+               return
+            } else {
+               TrafficLight red "FTP USER $user FAILED LOGIN USING MTM ($ermes)"
+               ReplyCommandSocket $sock "551 Access denied"
+               return
+            }
          }
-         set erno [::OS32::PASS::AuthenticateMTM $acct $pass ermes]
-         if { $erno == 0 } {
-            TrafficLight green "FTP USER $user LOGGED IN USING MTM"
-            ReplyCommandSocket $sock "230 MTM login successful, directory is [CurrentWorkingDirectory $sock]"
-            set data(access) 1
-            return
-         } else {
-            TrafficLight red "FTP USER $user FAILED LOGIN USING MTM ($ermes)"
-            ReplyCommandSocket $sock "551 Access denied"
-            return
-         }
+
+         #
+         # Now what?
+         #
+
+         ReplyCommandSocket $sock "551 Cannot authenticate using MTM"
+         return
       }
 
       proc AuthenticateMTM { acct pass errvar } {
@@ -551,7 +561,8 @@ namespace eval OS32 {
          upvar 1 $errvar ermes
          catch {
             # yes, password could be visible to ps...
-            set out [exec $exp mtmcheckpass.tcl 1026 $acct $pass]]
+            upvar #0 ::OS32::mtmport mtmport
+            set out [exec $exp mtmcheckpass.tcl $mtmport $acct $pass]]
          } err
          if { [regexp {\*\*\* FAIL ([0-9]+) \((.*?)\) \*\*\*} $err -> n reas] } {
             set ermes [string totitle $reas]
@@ -1278,6 +1289,17 @@ namespace eval OS32 {
    Dimmer off
 
    StartFTP
+
+   set fd [ open $::OS32::config::inifile r ]
+   set schluck [ read $fd ]
+   if { [regexp -nocase {\s*att[^ ]* +pas +([0-9]+)} $schluck -> mtmport] } {
+      puts "\n$vt100(green)PAS device for MTM authentication on port $mtmport$vt100(normal)"
+   } else {
+      set mtmport -1
+      puts "\n$vt100(red)Cannot find PAS attach command -> no MTM authentication$vt100(normal)"
+   }
+   close $fd
+
    namespace eval :: {
       puts ""
       catch { exec killall -9 id32 }
