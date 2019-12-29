@@ -126,7 +126,13 @@ xallocate checkvol.ftp,index,80
 $ifx @1.ftp
    delete @1.ftp
    $write === BEGIN CHECKVOL @2 ===
-   checkvol @2
+   $job
+      display volume ,@2
+      $write VOLUME @2 OK
+   $termjob
+   $ifne 0
+      $write VOLUME @2 NOT FOUND
+   $endc
    $write === END CHECKVOL @2 ===
    $exit
 $endc
