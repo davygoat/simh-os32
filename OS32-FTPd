@@ -17,12 +17,7 @@
 #
 # FIXME
 #
-# Some ?large FTP GET get requests  stuck midway, with some line endings
-# messed up,  the dimmer left on,  and the FTP client  dangling. You can
-# restore the console  by killing the client, reconnecting,  and doing a
-# DIR to  kick a VT100  sequence at it.  Annoyingly, FTP RESET  does not
-# work in  this situation.  Maybe this  has something  to do  with those
-# annoying DEL characters?
+# Some ?large FTP GET get requests stuck midway.
 #
 
 package require Expect
@@ -31,8 +26,21 @@ package require md5
 
 namespace eval OS32 {
 
+   namespace export CheckReadOnly
+   namespace export CheckNotAllowed
+   namespace export CheckOperatorBusy
+   namespace export BottomHalf
+   namespace export BeginTransmit
+   namespace export EndTransmit
+   namespace export NoTransmit
+   namespace export CurrentWorkingDirectory
+   namespace export WildFile
+   namespace export awkward
+   namespace export trafficlight
+   namespace export dimmer
+
    variable ftpcmd  ""
-   variable ftpsok  ""
+   variable sock  ""
 
 ;######################################################################
    #
@@ -43,36 +51,36 @@ namespace eval OS32 {
 
    proc ::ftpd::command::MKD { sock prm } {
       set ftpcmd MKD
-      ::OS32::CheckNotAllowed $sock $ftpcmd
-      ::OS32::CheckReadOnly $sock $ftpcmd
-      ::OS32::NoTransmit $sock "500 Make directory not supported by OS/32"
+      CheckNotAllowed $sock $ftpcmd
+      CheckReadOnly $sock $ftpcmd
+      NoTransmit $sock "500 Make directory not supported by OS/32"
    }
 
    proc ::ftpd::command::XMKD { sock prm } {
       set ftpcmd XMKD
-      ::OS32::CheckNotAllowed $sock $ftpcmd
-      ::OS32::CheckReadOnly $sock $ftpcmd
-      ::OS32::NoTransmit $sock "500 Make directory not supported by OS/32"
+      CheckNotAllowed $sock $ftpcmd
+      CheckReadOnly $sock $ftpcmd
+      NoTransmit $sock "500 Make directory not supported by OS/32"
    }
 
    proc ::ftpd::command::RMD { sock prm } {
       set ftpcmd RMD
-      ::OS32::CheckNotAllowed $sock $ftpcmd
-      ::OS32::CheckReadOnly $sock $ftpcmd
-      ::OS32::NoTransmit $sock "500 Remove directory not supported by OS/32"
+      CheckNotAllowed $sock $ftpcmd
+      CheckReadOnly $sock $ftpcmd
+      NoTransmit $sock "500 Remove directory not supported by OS/32"
    }
 
    proc ::ftpd::command::XRMD { sock prm } {
       set ftpcmd XRMD
-      ::OS32::CheckNotAllowed $sock $ftpcmd
-      ::OS32::CheckReadOnly $sock $ftpcmd
-      ::OS32::NoTransmit $sock "500 Remove directory not supported by OS/32"
+      CheckNotAllowed $sock $ftpcmd
+      CheckReadOnly $sock $ftpcmd
+      NoTransmit $sock "500 Remove directory not supported by OS/32"
    }
 
    proc ::ftpd::command::SIZE { sock prm } {
       set ftpcmd SIZE
-      ::OS32::CheckNotAllowed $sock $ftpcmd
-      ::OS32::NoTransmit $sock "500 File size not supported (record oriented filesystem)"
+      CheckNotAllowed $sock $ftpcmd
+      NoTransmit $sock "500 File size not supported (record oriented filesystem)"
    }
 
 ;######################################################################
@@ -82,22 +90,22 @@ namespace eval OS32 {
 
    proc ::ftpd::command::MDTM {sock prm} {
       set ftpcmd MDTM
-      ::OS32::CheckNotAllowed $sock $ftpcmd
-      ::OS32::NoTransmit $sock "500 Rarely used"
+      CheckNotAllowed $sock $ftpcmd
+      NoTransmit $sock "500 Rarely used"
    }
 
    proc ::ftpd::command::APPE {sock prm} {
       set ftpcmd STOU
-      ::OS32::CheckNotAllowed $sock $ftpcmd
-      ::OS32::CheckReadOnly $sock $ftpcmd
-      ::OS32::NoTransmit $sock "500 Rarely used"
+      CheckNotAllowed $sock $ftpcmd
+      CheckReadOnly $sock $ftpcmd
+      NoTransmit $sock "500 Rarely used"
    }
 
    proc ::ftpd::command::STOU {sock prm} {
       set ftpcmd STOU
-      ::OS32::CheckNotAllowed $sock $ftpcmd
-      ::OS32::CheckReadOnly $sock $ftpcmd
-      ::OS32::NoTransmit $sock "500 Rarely used"
+      CheckNotAllowed $sock $ftpcmd
+      CheckReadOnly $sock $ftpcmd
+      NoTransmit $sock "500 Rarely used"
    }
 
 ;######################################################################
@@ -116,7 +124,7 @@ namespace eval OS32 {
 
    namespace eval CWD {
 
-      upvar #0 [namespace parent]::ftpsok ftpsok
+      upvar #0 [namespace parent]::sock sock
 
       proc ::ftpd::command::CWD { sock dir } {
          ::OS32::CWD::TopHalf $sock $dir CWD
@@ -124,23 +132,23 @@ namespace eval OS32 {
 
       proc TopHalf { sock dir ftpcmd } {
 
-         ::OS32::CheckNotAllowed $sock $ftpcmd
+         CheckNotAllowed $sock $ftpcmd
 
          upvar #0 ::ftpd::$sock data
 
          # Handle immediate errors
          set dir [string toupper $dir]
          if { ![regexp {^([A-Z][A-Z0-9]{0,3}:?)?/?([0-9]+)?$} $dir -> vol act] } {
-            puts $sock "550 Not a directory (must be NUMBER, VOLUME, or VOLUME:/NUMBER)"
+            NoTransmit $sock "550 Not a directory (must be NUMBER, VOLUME, or VOLUME:/NUMBER)"
             return
          }
          if { $act != "" } {
             if { $act > 65535 } {
-               puts $sock "550 Not a directory, account must be less than 65536"
+               NoTransmit $sock "550 Not a directory, account must be less than 65536"
                return
             }
             if { [lsearch $data(acl) $act] < 0 && [lsearch -exact $data(acl) *] < 0 } {
-               puts $sock "550 Access denied, your ACL is ([join $data(acl) ,])"
+               NoTransmit $sock "550 Access denied, your ACL is ([join $data(acl) ,])"
                return
             }
          }
@@ -148,15 +156,15 @@ namespace eval OS32 {
          # Immediate success
          if { $vol == "" } {
             set data(cwd) $act
-            puts $sock "250 Directory is now [::OS32::CurrentWorkingDirectory $sock]"
+            NoTransmit $sock "250 Directory is now [CurrentWorkingDirectory $sock]"
             return
          }
 
          # Or bottom half if we have to check the volume exists
-         ::OS32::CheckOperatorBusy $sock
+         CheckOperatorBusy $sock
          set data(rvol) $vol
          if { $act != "" } { set data(ract) $act }
-         ::OS32::BottomHalf $sock $ftpcmd "FTP CHECKVOL,[lindex [split $vol :] 0]"
+         BottomHalf $sock $ftpcmd "FTP CHECKVOL,[lindex [split $vol :] 0]"
       }
 
       proc LinePatternMatch { line } {
@@ -164,16 +172,16 @@ namespace eval OS32 {
          awkward $line {
 
             BEGIN {
-               variable ftpsok
+               variable sock
                variable dimmeris
-               upvar #0 ::ftpd::$ftpsok data
+               upvar #0 ::ftpd::$sock data
             }
             "^\\*=== BEGIN CHECKVOL (.*) ===" {
                dimmer on $0
             }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
-                  NoTransmit $ftpsok "450 Command line error, try again"
+                  NoTransmit $sock "450 Command line error, try again"
                } else {
                   set data(error) "550 $1"
                }
@@ -189,7 +197,7 @@ namespace eval OS32 {
                   if { [info exists data(ract)] } {
                      unset data(ract)
                   }
-                  NoTransmit $ftpsok $data(error)
+                  NoTransmit $sock $data(error)
                   unset data(rvol)
                   unset data(error)
                } else {
@@ -200,7 +208,7 @@ namespace eval OS32 {
                   set data(vol) $data(rvol)
                   if { ![string match *: $data(vol)] } { append data(vol) : }
                   unset data(rvol)
-                  puts $ftpsock "250 Directory is now [::OS32::CurrentWorkingDirectory $sock]"
+                  NoTransmit "250 Directory is now [CurrentWorkingDirectory $sock]"
                }
             }
          }
@@ -217,14 +225,14 @@ namespace eval OS32 {
 
    namespace eval CDUP {
       proc ::ftpd::command::CDUP { sock list } {
-         ::OS32::CheckNotAllowed $sock CDUP
+         CheckNotAllowed $sock CDUP
          upvar #0 ::ftpd::$sock data
          set act [lindex $data(acl) 0]
          if { $act == "*" } {
             set act 0
          }
          ::ftpd::command::CWD $sock $act
-         # mention ::OS32::CheckNotAllowed to match ::ftpd::command above
+         # mention CheckNotAllowed to match ::ftpd::command above
       }
    }
 
@@ -239,20 +247,20 @@ namespace eval OS32 {
 
       # Bring parent variables into scope
       upvar #0 [namespace parent]::ftpcmd ftpcmd
-      upvar #0 [namespace parent]::ftpsok ftpsok
+      upvar #0 [namespace parent]::sock sock
 
       proc ::ftpd::command::DELE { sock fnam } {
          ::OS32::DELE::TopHalf $sock $fnam DELE
       }
 
       proc TopHalf { sock fnam ftpcmd } {
-         ::OS32::CheckReadOnly $sock $ftpcmd
-         ::OS32::CheckNotAllowed $sock $ftpcmd
-         ::OS32::CheckOperatorBusy $sock
-         set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
+         CheckReadOnly $sock $ftpcmd
+         CheckNotAllowed $sock $ftpcmd
+         CheckOperatorBusy $sock
+         set fnam [WildFile $sock [string toupper $fnam] $ftpcmd]
          upvar #0 ::ftpd::$sock data
          set data(fnam) $fnam
-         ::OS32::BottomHalf $sock $ftpcmd "FTP DELETE,$fnam"
+         BottomHalf $sock $ftpcmd "FTP DELETE,$fnam"
       }
 
       proc LinePatternMatch { line } {
@@ -261,9 +269,9 @@ namespace eval OS32 {
 
             BEGIN {
                variable ftpcmd
-               variable ftpsok
+               variable sock
                variable dimmeris
-               upvar #0 ::ftpd::$ftpsok data
+               upvar #0 ::ftpd::$sock data
             }
             "^\\*=== BEGIN DELETE (.*) ===" {
                dimmer on $0
@@ -279,7 +287,7 @@ namespace eval OS32 {
             }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
-                  NoTransmit $ftpsok "450 Command line error, try again"
+                  NoTransmit $sock "450 Command line error, try again"
                } else {
                   set data(error) "550 $1"
                }
@@ -287,10 +295,10 @@ namespace eval OS32 {
             "^\\*=== END DELETE (.*) ===" {
                dimmer off  $0
                if { [info exists data(error)] } {
-                  NoTransmit $ftpsok $data(error)
+                  NoTransmit $sock $data(error)
                   unset data(error)
                } else {
-                  NoTransmit $ftpsok "250 Delete $data(fnam) successful"
+                  NoTransmit $sock "250 Delete $data(fnam) successful"
                }
                unset data(fnam)
             }
@@ -314,19 +322,19 @@ namespace eval OS32 {
 
       # Bring parent variables into scope
       upvar #0 [namespace parent]::ftpcmd ftpcmd
-      upvar #0 [namespace parent]::ftpsok ftpsok
+      upvar #0 [namespace parent]::sock sock
 
       proc ::ftpd::command::LIST { sock fnam } {
          ::OS32::LIST::TopHalf $sock $fnam LIST
       }
 
       proc TopHalf { sock fnam ftpcmd } {
-         ::OS32::CheckNotAllowed $sock $ftpcmd
-         ::OS32::CheckOperatorBusy $sock
-         set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
+         CheckNotAllowed $sock $ftpcmd
+         CheckOperatorBusy $sock
+         set fnam [WildFile $sock [string toupper $fnam] $ftpcmd]
          upvar #0 ::ftpd::$sock data
          set data(fnam) $fnam
-         ::OS32::BottomHalf $sock $ftpcmd "FTP DIR,$fnam"
+         BottomHalf $sock $ftpcmd "FTP DIR,$fnam"
       }
 
       proc LinePatternMatch { line } {
@@ -335,9 +343,9 @@ namespace eval OS32 {
 
             BEGIN {
                variable ftpcmd
-               variable ftpsok
+               variable sock
                variable dimmeris
-               upvar #0 ::ftpd::$ftpsok data
+               upvar #0 ::ftpd::$sock data
             }
             "^\\*=== BEGIN DIR .*? ===" {
                dimmer on $0
@@ -347,13 +355,13 @@ namespace eval OS32 {
             }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
-                  NoTransmit $ftpsok "450 Command line error, try again"
+                  NoTransmit $sock "450 Command line error, try again"
                } else {
                   set data(error) "550 $1"
                }
             }
             "^\\*(VOLUME= .*)" {
-               BeginTransmit $ftpsok "DIR $data(fnam)"
+               BeginTransmit $sock "DIR $data(fnam)"
                if { $ftpcmd == "LIST" } {
                   puts -nonewline $data(sock2) "$1\r\n"
                }
@@ -376,10 +384,10 @@ namespace eval OS32 {
             "^\\*=== END DIR .*? ===" {
                dimmer off $0
                if { [info exists data(error)] } {
-                  NoTransmit $ftpsok $data(error)
+                  NoTransmit $sock $data(error)
                   unset data(error)
                } else {
-                  EndTransmit $ftpsok "DIR $data(fnam)"
+                  EndTransmit $sock "DIR $data(fnam)"
                }
                unset data(fnam)
             }
@@ -400,7 +408,7 @@ namespace eval OS32 {
 
       proc ::ftpd::command::NLST { sock fnam } {
          set ftpcmd NLST
-         ::OS32::CheckNotAllowed $sock $ftpcmd
+         CheckNotAllowed $sock $ftpcmd
          ::OS32::LIST::TopHalf $sock $fnam $ftpcmd
       }
 
@@ -424,8 +432,8 @@ namespace eval OS32 {
 
       proc ::ftpd::command::PASS { sock pass } {
 
-         # Note: ::OS32::CheckNotAllowed not possible this early
-         ::OS32::CheckOperatorBusy $sock
+         # Note: CheckNotAllowed not possible this early
+         CheckOperatorBusy $sock
 
          upvar #0 ::ftpd::$sock data
          upvar #0 ::OS32::config::numericlogins numericlogins
@@ -441,8 +449,8 @@ namespace eval OS32 {
          #
 
          if { [string is integer $user] && !$numericlogins } {
-            ::OS32::trafficlight red "FTP USER $user FAILED LOGIN (numeric logins disabled)"
-            puts $sock "551 Access denied, numeric logins disabled"
+            trafficlight red "FTP USER $user FAILED LOGIN (numeric logins disabled)"
+            NoTransmit $sock "551 Access denied, numeric logins disabled"
             return
          }
 
@@ -454,8 +462,8 @@ namespace eval OS32 {
          #
 
          if { ![info exists access($user)] && ![string is integer $user] } {
-            ::OS32::trafficlight red "FTP USER $user FAILED LOGIN (not in config::access)"
-            puts $sock "551 Access denied"
+            trafficlight red "FTP USER $user FAILED LOGIN (not in config::access)"
+            NoTransmit $sock "551 Access denied"
             return
          }
 
@@ -465,8 +473,8 @@ namespace eval OS32 {
          #
 
          if { [info exists access($user)] && ![llength [set access($user)]] } {
-            ::OS32::trafficlight red "FTP USER $user FAILED LOGIN (empty acl)"
-            puts $sock "551 User $user is denied ftp access"
+            trafficlight red "FTP USER $user FAILED LOGIN (empty acl)"
+            NoTransmit $sock "551 User $user is denied ftp access"
             return
          }
 
@@ -503,13 +511,13 @@ namespace eval OS32 {
             set md5 [string tolower [::md5::md5 -hex "$user/$pass\n"]]
             if { [array names passwords -exact $user] == $user &&
                  [set passwords($user)] == $md5 } {
-               ::OS32::trafficlight green "FTP USER $user LOGGED IN USING MD5"
-               puts $sock "230 Password accepted, directory is [::OS32::CurrentWorkingDirectory $sock]"
+               trafficlight green "FTP USER $user LOGGED IN USING MD5"
+               NoTransmit $sock "230 Password accepted, directory is [CurrentWorkingDirectory $sock]"
                set data(access) 1
                return
             } else {
-               ::OS32::trafficlight red "FTP USER $user FAILED LOGIN USING MD5"
-               puts $sock "551 Access denied"
+               trafficlight red "FTP USER $user FAILED LOGIN USING MD5"
+               NoTransmit $sock "551 Access denied"
                return
             }
          }
@@ -526,13 +534,13 @@ namespace eval OS32 {
          }
          set erno [::OS32::PASS::AuthenticateMTM $acct $pass ermes]
          if { $erno == 0 } {
-            ::OS32::trafficlight green "FTP USER $user LOGGED IN USING MTM"
-            puts $sock "230 MTM login successful, directory is [::OS32::CurrentWorkingDirectory $sock]"
+            trafficlight green "FTP USER $user LOGGED IN USING MTM"
+            NoTransmit $sock "230 MTM login successful, directory is [CurrentWorkingDirectory $sock]"
             set data(access) 1
             return
          } else {
-            ::OS32::trafficlight red "FTP USER $user FAILED LOGIN USING MTM ($ermes)"
-            puts $sock "551 Access denied"
+            trafficlight red "FTP USER $user FAILED LOGIN USING MTM ($ermes)"
+            NoTransmit $sock "551 Access denied"
             return
          }
       }
@@ -573,10 +581,10 @@ namespace eval OS32 {
 
    namespace eval PWD {
       proc ::ftpd::command::PWD { sock argument } {
-         ::OS32::CheckNotAllowed $sock PWD
+         CheckNotAllowed $sock PWD
          upvar #0 ::ftpd::$sock data
-         set cwd [::OS32::CurrentWorkingDirectory $sock]
-         puts $sock "250 Current directory is $cwd"
+         set cwd [CurrentWorkingDirectory $sock]
+         NoTransmit $sock "250 Current directory is $cwd"
       }
    }
 
@@ -601,19 +609,19 @@ namespace eval OS32 {
    namespace eval RETR {
 
       upvar #0 [namespace parent]::ftpcmd ftpcmd
-      upvar #0 [namespace parent]::ftpsok ftpsok
+      upvar #0 [namespace parent]::sock sock
 
       proc ::ftpd::command::RETR { sock fnam } {
          ::OS32::RETR::TopHalf $sock $fnam RETR
       }
 
       proc TopHalf { sock fnam ftpcmd } {
-         ::OS32::CheckNotAllowed $sock $ftpcmd
-         ::OS32::CheckOperatorBusy $sock
-         set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
+         CheckNotAllowed $sock $ftpcmd
+         CheckOperatorBusy $sock
+         set fnam [WildFile $sock [string toupper $fnam] $ftpcmd]
          upvar #0 ::ftpd::$sock data
          set data(fnam) $fnam
-         ::OS32::BottomHalf $sock RETR "FTP COPYOUT,$fnam"
+         BottomHalf $sock RETR "FTP COPYOUT,$fnam"
       }
 
       proc LinePatternMatch { line } {
@@ -622,20 +630,20 @@ namespace eval OS32 {
 
             BEGIN {
                variable ftpcmd
-               variable ftpsok
+               variable sock
                variable dimmeris
-               upvar #0 ::ftpd::$ftpsok data
+               upvar #0 ::ftpd::$sock data
             }
             "^\\*=== BEGIN COPYOUT .*? ===" {
                dimmer on $0
-               BeginTransmit $ftpsok $data(fnam)
+               BeginTransmit $sock $data(fnam)
             }
             "^\\*FILE NOT FOUND" {
                set data(error) "550 File not found, $data(fnam)"
             }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
-                  NoTransmit $ftpsok "450 Command line error, try again"
+                  NoTransmit $sock "450 Command line error, try again"
                } else {
                   set data(error) "550 $1"
                }
@@ -652,10 +660,10 @@ namespace eval OS32 {
             "^\\*=== END COPYOUT .*? ===" {
                dimmer off $0
                if { [info exists data(error)] } {
-                  NoTransmit $ftpsok $data(error)
+                  NoTransmit $sock $data(error)
                   unset data(error)
                } else {
-                  EndTransmit $ftpsok $data(fnam)
+                  EndTransmit $sock $data(fnam)
                }
             }
          }
@@ -670,7 +678,7 @@ namespace eval OS32 {
    namespace eval RNFR {
 
       upvar #0 [namespace parent]::ftpcmd ftpcmd
-      upvar #0 [namespace parent]::ftpsok ftpsok
+      upvar #0 [namespace parent]::sock sock
       upvar #0 [namespace parent]::osline osline
 
       proc ::ftpd::command::RNFR { sock fnam } {
@@ -678,19 +686,19 @@ namespace eval OS32 {
       }
 
       proc TopHalf { sock fnam ftpcmd } {
-         ::OS32::CheckReadOnly $sock $ftpcmd
-         ::OS32::CheckNotAllowed $sock $ftpcmd
+         CheckReadOnly $sock $ftpcmd
+         CheckNotAllowed $sock $ftpcmd
          upvar #0 ::ftpd::$sock data
-         set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
+         set fnam [WildFile $sock [string toupper $fnam] $ftpcmd]
          set data(fnam1) $fnam
-         puts $sock "350 RNFR OK"
+         NoTransmit $sock "350 RNFR OK"
       }
    }
 
    namespace eval RNTO {
 
       upvar #0 [namespace parent]::ftpcmd ftpcmd
-      upvar #0 [namespace parent]::ftpsok ftpsok
+      upvar #0 [namespace parent]::sock sock
       upvar #0 [namespace parent]::osline osline
 
       proc ::ftpd::command::RNTO { sock fnam } {
@@ -698,13 +706,13 @@ namespace eval OS32 {
       }
 
       proc TopHalf { sock fnam ftpcmd } {
-         ::OS32::CheckReadOnly $sock $ftpcmd
-         ::OS32::CheckNotAllowed $sock $ftpcmd
-         ::OS32::CheckOperatorBusy $sock
+         CheckReadOnly $sock $ftpcmd
+         CheckNotAllowed $sock $ftpcmd
+         CheckOperatorBusy $sock
          upvar #0 ::ftpd::$sock data
-         set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
+         set fnam [WildFile $sock [string toupper $fnam] $ftpcmd]
          set data(fnam2) $fnam
-         ::OS32::BottomHalf $sock $ftpcmd "FTP RENAME,$data(fnam1),$data(fnam2)"
+         BottomHalf $sock $ftpcmd "FTP RENAME,$data(fnam1),$data(fnam2)"
       }
 
       proc LinePatternMatch { line } {
@@ -712,9 +720,9 @@ namespace eval OS32 {
          awkward $line {
             BEGIN {
                variable ftpcmd
-               variable ftpsok
+               variable sock
                variable dimmeris
-               upvar #0 ::ftpd::$ftpsok data
+               upvar #0 ::ftpd::$sock data
             }
             "^\\*=== BEGIN RENAME (.*) (.*) ===" {
                dimmer on $0
@@ -727,7 +735,7 @@ namespace eval OS32 {
             }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
-                  NoTransmit $ftpsok "450 Command line error, try again"
+                  NoTransmit $sock "450 Command line error, try again"
                } else {
                   set data(error) "550 $1"
                }
@@ -738,10 +746,10 @@ namespace eval OS32 {
             "^\\*=== END RENAME (.*) (.*) ===" {
                dimmer off $0
                if { [info exists data(error)] } {
-                  NoTransmit $ftpsok $data(error)
+                  NoTransmit $sock $data(error)
                   unset data(error)
                } else {
-                  NoTransmit $ftpsok "250 $data(fnam1) renamed $data(fnam2)"
+                  NoTransmit $sock "250 $data(fnam1) renamed $data(fnam2)"
                }
                unset data(fnam1)
                unset data(fnam2)
@@ -769,7 +777,7 @@ namespace eval OS32 {
    namespace eval STOR {
 
       upvar #0 [namespace parent]::ftpcmd ftpcmd
-      upvar #0 [namespace parent]::ftpsok ftpsok
+      upvar #0 [namespace parent]::sock sock
       upvar #0 [namespace parent]::osline osline
 
       proc ::ftpd::command::STOR { sock fnam } {
@@ -777,14 +785,14 @@ namespace eval OS32 {
       }
 
       proc TopHalf { sock fnam ftpcmd } {
-         ::OS32::CheckReadOnly $sock $ftpcmd
-         ::OS32::CheckNotAllowed $sock $ftpcmd
-         ::OS32::CheckOperatorBusy $sock
+         CheckReadOnly $sock $ftpcmd
+         CheckNotAllowed $sock $ftpcmd
+         CheckOperatorBusy $sock
          upvar #0 ::ftpd::$sock data
-         set fnam [::OS32::WildFile $sock [string toupper $fnam] $ftpcmd]
+         set fnam [WildFile $sock [string toupper $fnam] $ftpcmd]
          set data(fnam) $fnam
          # This command will fail with a USAGE error
-         ::OS32::BottomHalf $sock $ftpcmd "FTP $ftpcmd,$fnam"
+         BottomHalf $sock $ftpcmd "FTP $ftpcmd,$fnam"
       }
 
       proc LinePatternMatch { line } {
@@ -793,14 +801,14 @@ namespace eval OS32 {
 
             BEGIN {
                variable ftpcmd
-               variable ftpsok
+               variable sock
                variable dimmeris
-               upvar #0 ::ftpd::$ftpsok data
+               upvar #0 ::ftpd::$sock data
             }
             # Now we can read all the data to work out record length
             "^\\*STOR GO AHEAD" {
                dimmer on $0
-               BeginTransmit $ftpsok $data(fnam)
+               BeginTransmit $sock $data(fnam)
                set data(reclen) 80
                set data(nrec) 0
                set data(ccc) 0
@@ -824,7 +832,7 @@ namespace eval OS32 {
             }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
-                  NoTransmit $ftpsok "450 Command line error, try again"
+                  NoTransmit $sock "450 Command line error, try again"
                } else {
                   set data(error) "550 $1"
                }
@@ -832,10 +840,10 @@ namespace eval OS32 {
             "^\\*=== END COPYIN .*? ===" {
                dimmer off $0
                if { [info exists data(error)] } {
-                  NoTransmit $ftpsok $data(error)
+                  NoTransmit $sock $data(error)
                   unset data(error)
                } else {
-                  EndTransmit $ftpsok "$data(fnam), $data(nrec) records, $data(reclen) chars reclen"
+                  EndTransmit $sock "$data(fnam), $data(nrec) records, $data(reclen) chars reclen"
                }
                unset data(reclen)
                unset data(nrec)
@@ -849,9 +857,9 @@ namespace eval OS32 {
          awkward $line {
 
             BEGIN {
-               variable ftpsok
+               variable sock
                variable osline
-               upvar #0 ::ftpd::$ftpsok data
+               upvar #0 ::ftpd::$sock data
             }
             "^\\*.+\\.BG:.+\\.BG>" {
                if { $data(ccc) < $data(nrec) } {
@@ -883,9 +891,9 @@ namespace eval OS32 {
 
    namespace eval SYST {
       proc ::ftpd::command::SYST { sock list } {
-         ::OS32::CheckNotAllowed $sock SYST
+         CheckNotAllowed $sock SYST
          upvar #0 ::OS32::config::ostype ostype
-         puts $sock "215 $ostype"
+         NoTransmit $sock "215 $ostype"
       }
    }
 
@@ -900,7 +908,7 @@ namespace eval OS32 {
    namespace eval USER {
 
       # Using default ::ftpd::command::USER proc
-      # Note: ::OS32::CheckNotAllowed not possible this early
+      # Note: CheckNotAllowed not possible this early
 
       proc AuthIpCallback { ip } {
          upvar #0 ::OS32::config::allowip allowip
@@ -912,11 +920,11 @@ namespace eval OS32 {
                }
             }
             # Outsiders!
-            ::OS32::trafficlight red "FTP CONNECTION ($ip) REJECTED"
+            trafficlight red "FTP CONNECTION ($ip) REJECTED"
             return 0
          } else {
             # free for all!
-            ::OS32::trafficlight green "FTP CONNECTION ($ip) ACCEPTED"
+            trafficlight green "FTP CONNECTION ($ip) ACCEPTED"
             return 1
          }
       }
@@ -944,14 +952,14 @@ namespace eval OS32 {
 
       if { $fnam == "" } {
          if { $acceptnull == 0 } {
-            puts $sock "501 Missing filename"
+            NoTransmit $sock "501 Missing filename"
             return -level 2
          }
       } elseif { ![regexp $re $fnam -> nam ext] } {
-         puts $sock $err
+         NoTransmit $sock $err
          return -level 2                  ;# extension inc dot -----v
       } elseif { [string length $nam] > 8 || [string length $ext] > 4 } {
-         puts $sock "501 Invalid filename $fnam, 8.3 max"
+         NoTransmit $sock "501 Invalid filename $fnam, 8.3 max"
          return -level 2
       }
 
@@ -962,7 +970,7 @@ namespace eval OS32 {
    proc CheckOperatorBusy {sock} {
       variable taskcount
       if { $taskcount > 0 } {
-         puts $sock "450 Operator busy, do not disturb"
+         NoTransmit $sock "450 Operator busy, do not disturb"
          return -level 2
       }
    }
@@ -972,7 +980,7 @@ namespace eval OS32 {
       upvar #0 ::ftpd::$sock data
       if { [lsearch $data(acl) RO] >= 0 &&
            [lsearch $data(acl) +$ftpcmd] < 0 } {
-         puts $sock "550 Permission denied (user is read only)"
+         NoTransmit $sock "550 Permission denied (user is read only)"
          return -level 2
       }
    }
@@ -981,14 +989,14 @@ namespace eval OS32 {
    proc CheckNotAllowed { sock ftpcmd } {
       upvar #0 ::ftpd::$sock data
       if { [lsearch $data(acl) -$ftpcmd] >= 0 } {
-         puts $sock "550 Permission denied ($ftpcmd not allowed)"
+         NoTransmit $sock "550 Permission denied ($ftpcmd not allowed)"
          return -level 2
       }
    }
 
-   proc BottomHalf { sock ftpcm oscmd } {
-      variable ftpcmd $ftpcm
-      variable ftpsok $sock
+   proc BottomHalf { sock ftpcmd oscmd } {
+      set ::OS32::ftpcmd $ftpcmd
+      set ::OS32::sock $sock
       send -- "$oscmd\r"
    }
 
@@ -1004,8 +1012,8 @@ namespace eval OS32 {
    proc NoTransmit { sock mess } {
       ::ftpd::FinishData $sock
       puts $sock $mess
-      variable ftpcmd ""
-      variable ftpsok ""
+      set ::OS32::ftpcmd ""
+      set ::OS32::sock ""
    }
 
    proc LogNothing { severity wot } {
@@ -1076,11 +1084,6 @@ namespace eval OS32 {
       return $match
    }
 
-   # reference 'awkward' in the global namespace for convenience
-   proc ::awkward { 0 awk } {
-      return [::OS32::awkward $0 $awk]
-   }
-
 ;######################################################################
    #
    # FTP start, stop, users
@@ -1142,7 +1145,7 @@ namespace eval OS32 {
          return
       }
 
-      puts ""
+      dimmer off
       set socks [info vars ::ftpd::sock*]
       if { [llength $socks] > 0 } {
          foreach sock $socks {
@@ -1155,6 +1158,7 @@ namespace eval OS32 {
       puts -nonewline "Closing listening socket"
       chan close $serviceSock
       unset serviceSock
+      set ::OS32::ftpcmd ""
    }
 
    proc ShowFTP {} {
@@ -1197,6 +1201,12 @@ namespace eval OS32 {
                   incr ::OS32::taskcount
                } elseif { [string match "*:END OF TASK*" $osline] } {
                   incr ::OS32::taskcount -1
+               } elseif { $osline == "*START FTP SERVER" } {
+                  ::OS32::StartFTP
+               } elseif { $osline == "*STOP FTP SERVER" } {
+                  ::OS32::StopFTP
+               } elseif { $osline == "*SHOW FTP USERS" } {
+                  ::OS32::ShowFTP
                }
                upvar #0 ::OS32::ftpcmd ftpcmd
                if { $ftpcmd != "" } {
@@ -1204,12 +1214,6 @@ namespace eval OS32 {
                   if { [info procs $LinePatternMatch] != "" } {
                      $LinePatternMatch $osline
                   }
-               } elseif { $osline == "*START FTP SERVER" } {
-                  ::OS32::StartFTP
-               } elseif { $osline == "*STOP FTP SERVER" } {
-                  ::OS32::StopFTP
-               } elseif { $osline == "*SHOW FTP USERS" } {
-                  ::OS32::ShowFTP
                }
                puts ""
                set osline ""
@@ -1235,14 +1239,26 @@ namespace eval OS32 {
                   }
                }
             }
+            timeout 10 {
+               if { $ftpcmd != "" } {
+                  trafficlight red "*** TIMEOUT ***"
+                  dimmer off
+                  send "FTP RESET\r"
+               }
+            }
          }
       }
    }
+}
 
 ;######################################################################
    #
    # Main program
    #
+
+namespace import OS32::*
+
+namespace eval OS32 {
 
    dimmer off
 
