@@ -448,7 +448,7 @@ namespace eval OS32 {
 
          #
          # Named users  must be  listed in  the access  array so  we can
-         # assign them to  numeric accounts. However, we do  NOT want to
+         # assign them to numeric accounts. However, we  DO NOT  want to
          # tell the client that their  username is invalid -- that's bad
          # practice these days.
          #
@@ -1097,14 +1097,26 @@ namespace eval OS32 {
 
    proc StartFTP {} {
 
-      CheckWeHaveFTP
-
       upvar #0 ::ftpd::serviceSock serviceSock
 
       if { [info exists serviceSock] } {
          puts -nonewline "\nFTP server already running"
          return
       }
+
+      puts ""
+
+      namespace eval ::OS32 {
+         if { [file exists ftpd.config] } {
+            puts "$vt100(green)Sourcing ftpd.config$vt100(normal)"
+            source ftpd.config
+         } else {
+            puts "$vt100(red)Cannot find ftpd.config$vt100(normal)"
+            exit
+         }
+      }
+
+      CheckWeHaveFTP
 
       set ::ftpd::welcome $config::welcome
       set ::ftpd::contact $config::contact
@@ -1116,7 +1128,7 @@ namespace eval OS32 {
       ftpd::server $config::host
 
       variable vt100
-      puts -nonewline "\n$vt100(green)$config::welcome on $config::host port $config::port$vt100(normal)"
+      puts -nonewline "$vt100(green)$config::welcome on $config::host port $config::port$vt100(normal)"
    }
 
    proc StopFTP {} {
@@ -1234,17 +1246,9 @@ namespace eval OS32 {
 
    dimmer off
 
-   if { [file exists ftpd.config] } {
-      puts "$vt100(green)Sourcing ftpd.config$vt100(normal)"
-      source ftpd.config
-      StartFTP
-      puts ""
-   } else {
-      puts "$vt100(red)Cannot find ftpd.config$vt100(normal)"
-      exit
-   }
-
+   StartFTP
    namespace eval :: {
+      puts ""
       catch { exec killall -9 id32 }
       spawn ./id32 $::OS32::config::inifile
    }
