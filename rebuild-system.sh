@@ -622,7 +622,7 @@ set cpu idle
    expect ".CMDP>" send "$ifx @1.ftp\r";c
    expect ".CMDP>" send "   delete @1.ftp\r";c
    expect ".CMDP>" send "   $write === BEGIN DIR @2 ===\r";c
-   expect ".CMDP>" send "   @1 @2\r";c
+   expect ".CMDP>" send "   dir @2\r";c
    expect ".CMDP>" send "   $write === END DIR @2 ===\r";c
    expect ".CMDP>" send "   $exit\r";c
    expect ".CMDP>" send "$endc\r";c
@@ -667,7 +667,7 @@ set cpu idle
    expect ".CMDP>" send "   $exit\r";c
    expect ".CMDP>" send "$endc\r";c
    expect ".CMDP>" send "delete copyin.ftp\r";c
-   expect ".CMDP>" send "*** STOR [COPYIN] ********************************************\r";c
+   expect ".CMDP>" send "*** STOR (COPYIN) ********************************************\r";c
    expect ".CMDP>" send "xallocate stor.ftp,index,80\r";c
    expect ".CMDP>" send "$ifx @1.ftp\r";c
    expect ".CMDP>" send "   delete @1.ftp\r";c
@@ -681,7 +681,13 @@ set cpu idle
    expect ".CMDP>" send "$ifx @1.ftp\r";c
    expect ".CMDP>" send "   delete @1.ftp\r";c
    expect ".CMDP>" send "   $write === BEGIN CHECKVOL @2 ===\r";c
-   expect ".CMDP>" send "   checkvol @2\r";c
+   expect ".CMDP>" send "   $job\r";c
+   expect ".CMDP>" send "      display volume ,@2\r";c
+   expect ".CMDP>" send "      $write VOLUME @2 OK\r";c
+   expect ".CMDP>" send "   $termjob\r";c
+   expect ".CMDP>" send "   $ifne 0\r";c
+   expect ".CMDP>" send "      $write VOLUME @2 NOT FOUND\r";c
+   expect ".CMDP>" send "   $endc\r";c
    expect ".CMDP>" send "   $write === END CHECKVOL @2 ===\r";c
    expect ".CMDP>" send "   $exit\r";c
    expect ".CMDP>" send "$endc\r";c
