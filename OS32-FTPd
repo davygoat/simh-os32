@@ -12,7 +12,7 @@
 # - ABOR for Ctrl/C.
 # - Binary and contiguous files?
 # - Don't "die" on the client.
-# - Don't leave the Dimmer on.
+# - Don't leave the dimmer on.
 # - Return errors to the client.
 #
 # FIXME
@@ -1152,18 +1152,27 @@ namespace eval OS32 {
       }
 
       Dimmer off
+
+      puts -nonewline "\nClosing listening socket"
+      catch { close $serviceSock }
+      unset serviceSock
+
       set socks [info vars ::ftpd::sock*]
+
       if { [llength $socks] > 0 } {
          foreach sock $socks {
-            puts "Closing client socket $sock"
+            upvar #0 $sock data
+            if { $data(sock2) != {} } {
+               puts -nonewline "\nClosing $data(user)@$data(ip) passive socket"
+               catch { close $data(sock2) }
+            }
             regsub ::ftpd:: $sock {} sock
-            chan close $sock
-            array unset ::ftpd::$sock
+            puts -nonewline "\nClosing $data(user)@$data(ip) command socket"
+            catch { close $sock }
+            array unset data
          }
       }
-      puts -nonewline "Closing listening socket"
-      chan close $serviceSock
-      unset serviceSock
+
       set ::OS32::ftpcmd ""
    }
 
