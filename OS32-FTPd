@@ -668,6 +668,10 @@ namespace eval OS32 {
             "^\\*FILE NOT FOUND" {
                set data(error) "550 File not found, $data(fnam)"
             }
+            "^FILE STUCK - TRY ABORT\$" {
+               Dimmer off $0
+               ReplyCommandSocket $sock "451 Whoops, file got stuck midway..."
+            }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
                   ReplyCommandSocket $sock "450 Command line error, try again"
@@ -1315,8 +1319,7 @@ namespace eval OS32 {
             timeout $::OS32::config::timeout {
                if { $ftpcmd != "" } {
                   TrafficLight red "*** TIMEOUT ***"
-                  Dimmer off
-                  send "FTP RESET\r"
+                  send "\$WRITE FILE STUCK - TRY ABORT\r"
                }
             }
          }
