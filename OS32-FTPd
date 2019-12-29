@@ -1312,7 +1312,7 @@ namespace eval OS32 {
                   }
                }
             }
-            timeout 10 {
+            timeout $::OS32::config::timeout {
                if { $ftpcmd != "" } {
                   TrafficLight red "*** TIMEOUT ***"
                   Dimmer off
