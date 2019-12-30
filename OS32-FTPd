@@ -463,7 +463,7 @@ namespace eval OS32 {
 
          set user $data(user)
          set data(pass) $pass
-         set data(acl) {}
+         set data(acl) -vt
 
          #
          # Numeric logins  can be disabled  because they are  too easily
@@ -510,7 +510,7 @@ namespace eval OS32 {
          set data(cwd) -1
 
          if { [string is integer $user] } {
-            set data(acl) $user
+            set data(acl) "$user -vt"
             set data(cwd) $user
          } else {
             set data(acl) [set access($user)]
