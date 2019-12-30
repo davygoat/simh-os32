@@ -383,7 +383,7 @@ namespace eval OS32 {
                }
             }
             "^\\*(VOLUME= .*)" {
-               BeginData $sock "DIR $data(fnam)"
+               BeginData $sock 150 "Transmitting DIR $data(fnam)"
                if { $ftpcmd == "LIST" } {
                   SendData $sock "$1"
                }
@@ -409,7 +409,7 @@ namespace eval OS32 {
                   ReplyCommand $sock [lindex $data(error) 0] [lindex $data(error) 1]
                   unset data(error)
                } else {
-                  EndData $sock "DIR $data(fnam)"
+                  EndData $sock 226 "DIR $data(fnam) received"
                }
                unset data(fnam)
             }
@@ -669,14 +669,19 @@ namespace eval OS32 {
             }
             "^\\*=== BEGIN COPYOUT .*? ===" {
                Dimmer on $0
-               BeginData $sock $data(fnam)
+               BeginData $sock 150 "Transmitting $data(fnam)"
+               set data(nrec) 0
             }
             "^\\*FILE NOT FOUND" {
                set data(error) [list 550 "File not found, $data(fnam)"]
             }
             "^FILE STUCK - TRY ABORT\$" {
                Dimmer off $0
-               ReplyCommand $sock 451 "Whoops, file got stuck midway..."
+               if { ![info exists data(nrec)] } {
+                  set data(nrec) 0
+               }
+               ReplyCommand $sock 451 "Whoops, file got stuck at $data(nrec) records"
+               unset data(nrec)
             }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
@@ -693,15 +698,20 @@ namespace eval OS32 {
             }
             "^\\*.*\\.BG:(.*)" {
                SendData $sock "$1"
+               incr data(nrec)
             }
             "=== END COPYOUT .*? ===" {
                Dimmer off $0
+               if { ![info exists data(nrec)] } {
+                  set data(nrec) 0
+               }
                if { [info exists data(error)] } {
                   ReplyCommand $sock [lindex $data(error) 0] [lindex $data(error) 1]
                   unset data(error)
                } else {
-                  EndData $sock $data(fnam)
+                  EndData $sock 226 "$data(fnam) downloaded, $data(nrec) records"
                }
+               unset data(nrec)
             }
          }
       }
@@ -845,7 +855,7 @@ namespace eval OS32 {
             # Now we can read all the data to work out record length
             "^\\*STOR GO AHEAD" {
                Dimmer on $0
-               BeginData $sock $data(fnam)
+               BeginData $sock 150 "Transmitting $data(fnam)"
                set data(reclen) 80
                set data(nrec) 0
                set data(ccc) 0
@@ -866,7 +876,7 @@ namespace eval OS32 {
             }
             "^FILE STUCK - TRY ABORT\$" {
                Dimmer off $0
-               ReplyCommand $sock 451 "Whoops, file got stuck midway..."
+               ReplyCommand $sock 451 "Whoops, file got stuck at record $data(ccc) of $data(nrec)"
             }
             "^\\*(DELE-ERR  TYPE=PROT)" {
                set data(error) [list 550 "Cannot upload file because it is write protected"]
@@ -884,7 +894,7 @@ namespace eval OS32 {
                   ReplyCommand $sock [lindex $data(error) 0] [lindex $data(error) 1]
                   unset data(error)
                } else {
-                  EndData $sock "$data(fnam), $data(nrec) records, $data(reclen) chars reclen"
+                  EndData $sock 226 "$data(fnam) uploaded, $data(ccc) records, $data(reclen) chars reclen"
                }
                unset data(reclen)
                unset data(nrec)
@@ -1044,8 +1054,12 @@ namespace eval OS32 {
       send -- "$oscmd\r"
    }
 
-   proc BeginData { sock ftpcmd } {
-      puts $sock "150 Begin $ftpcmd"
+   proc BeginData { sock err ftpcmd } {
+      if { $err != 150 } {
+         puts "\n\n*** BeginData must always be called with 150 ***\n\n"
+         expr {"abcxyz"+1}
+      }
+      puts $sock "150 $ftpcmd"
       ::ftpd::PasvCheckAndWait $sock
    }
 
@@ -1054,8 +1068,12 @@ namespace eval OS32 {
       puts -nonewline $data(sock2) "$line\r\n"
    }
 
-   proc EndData { sock ftpcmd } {
-      ReplyCommand $sock 226 "End $ftpcmd"
+   proc EndData { sock err ftpcmd } {
+      if { $err != 226 } {
+         puts "\n\n*** BeginData must always be called with 226 ***\n\n"
+         expr {"abcxyz"+1}
+      }
+      ReplyCommand $sock $err "$ftpcmd"
    }
 
    proc ReplyCommand { sock err mess { colours 1 } } {
