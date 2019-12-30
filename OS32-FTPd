@@ -463,6 +463,7 @@ namespace eval OS32 {
 
          set user $data(user)
          set data(pass) $pass
+         set data(acl) {}
 
          #
          # Numeric logins  can be disabled  because they are  too easily
