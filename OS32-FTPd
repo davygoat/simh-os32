@@ -36,6 +36,7 @@ namespace eval OS32 {
    namespace export ReplyCommand
    namespace export CurrentWorkingDirectory
    namespace export InitialAccount
+   namespace export CdBlacklist
    namespace export WildFile
    namespace export ShowACL
    namespace export HaveACE
@@ -58,6 +59,7 @@ namespace eval OS32 {
       array set access        {}
       array set passwords     {}
       variable  allowip       127.0.0.1
+      variable  cdblacklist   255
       variable  welcome       "OS/32 FTP server"
       variable  ostype        "OS/32 Version 8.1"
       variable  contact       "nobody@nowhere.not"
@@ -169,6 +171,10 @@ namespace eval OS32 {
          if { $act != "" } {
             if { $act > 65535 } {
                ReplyCommand $sock 550 "Not a directory, account must be less than 65536"
+               return
+            }
+            if { [CdBlacklist $act] } {
+               ReplyCommand $sock 550 "Access denied, cd $act is not allowed"
                return
             }
             if { ![HaveACE $sock $act] && ![HaveACE $sock *] } {
@@ -472,7 +478,7 @@ namespace eval OS32 {
 
          if { [string is integer $user] && !$numericlogins } {
             TrafficLight red "FTP USER $user FAILED LOGIN (numeric logins disabled)"
-            ReplyCommand $sock 551 "Access denied, numeric logins disabled"
+            ReplyCommand $sock 551 "Access denied"
             return
          }
 
@@ -503,7 +509,8 @@ namespace eval OS32 {
          #
          # Set up defaults. Named users  start in the first account that
          # is listed in  their acl. Numeric users will  be restricted to
-         # just the account they give.
+         # just the  account they  sign on with.  But don't  let default
+         # their way around the cd blacklist.
          #
 
          set data(vol) "SYS:"
@@ -512,9 +519,24 @@ namespace eval OS32 {
          if { [string is integer $user] } {
             set data(acl) "$user -vt"
             set data(cwd) $user
+            if { [CdBlacklist $data(cwd)] } {
+               TrafficLight red "FTP USER $user FAILED LOGIN (numeric login on cd blacklist)"
+               ReplyCommand $sock 551 "Access denied"
+               return
+            }
          } else {
             set data(acl) [set access($user)]
             set data(cwd) [InitialAccount $sock]
+            if { [CdBlacklist $data(cwd)] } {
+               TrafficLight red "FTP USER $user FAILED LOGIN (initial account on cd blacklist)"
+               ReplyCommand $sock 551 "Access denied"
+               return
+            }
+         }
+         if { $data(cwd) < 0 } {
+            TrafficLight red "FTP USER $user FAILED LOGIN (no account)"
+            ReplyCommand $sock 551 "Access denied"
+            return
          }
 
          #
@@ -574,10 +596,31 @@ namespace eval OS32 {
       }
 
       proc AuthenticateMTM { acct pass errvar } {
-         set exp [info nameofexecutable]
+
          upvar 1 $errvar ermes
+
+         # MTM accounts must  be <= 255 by default. I'm  going to narrow
+         # that a little  bit more, because 255 is  privileged, and owns
+         # the MTM Authorized  User File. Account 0 is  allowed, but not
+         # recommended.
+         if { $acct < 0 || $acct >= 255 } {
+            set ermes "out of range account"
+            return -1
+         }
+         # According  to  the EOU  help  on  PASSWORD: "All  alphabetic,
+         # numeric  and special  characters, except  blanks, commas,  or
+         # semi-colons are  allowed." I'm  also going to  reject control
+         # characters and nasty shell escapes.
+         set badchar "\x00-\x20\x7f-\xff"
+         append badchar {,;\\|$^`\[\]\{\}\"}
+         if { [regexp "\[$badchar\]" $pass] } {
+            set ermes "bad characters in password"
+            return -1
+         }
+
+         set exp [info nameofexecutable]
          catch {
-            # yes, password could be visible to ps...
+            # Yes, password could be visible to ps. That's unfortunate...
             upvar #0 ::OS32::mtmport mtmport
             set out [exec $exp mtmcheckpass.tcl $mtmport $acct $pass]]
          } err
@@ -1028,13 +1071,20 @@ namespace eval OS32 {
       return $data(vol)$fnam/$data(cwd)
    }
 
+   proc CdBlacklist { acct } {
+      upvar #0 ::OS32::config::cdblacklist cdblacklist
+      if { [lsearch $cdblacklist $acct] >= 0 } {
+         return 1
+      } else {
+         return 0
+      }
+   }
+
    proc InitialAccount { sock } {
       upvar #0 ::ftpd::$sock data
-      set act [lindex $data(acl) 0]
-      if { [string is integer $act] } {
-         return $act
-      } elseif { $act == "*" } {
-         return 0
+      set i [lsearch -regexp $data(acl) {[0-9]+}]
+      if { $i >= 0 } {
+         return [lindex $data(acl) $i]
       } else {
          return -1
       }

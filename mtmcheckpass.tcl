@@ -7,7 +7,7 @@ if { $argc < 3 } {
 }
 
 #
-# port: must be numeric
+# Port: must be numeric.
 #
 set port [lindex $argv 0]
 if { ![string is integer $port] || $port < 1 } {
@@ -16,19 +16,23 @@ if { ![string is integer $port] || $port < 1 } {
 }
 
 #
-# account: must be numeric
+# Account: must be numeric.
 #
 set acct [lindex $argv 1]
-if { ![string is integer $acct] || $acct < 0 || $acct >= 255 } {
+if { ![string is integer $acct] || $acct <= 0 || $acct >= 255 } {
    puts stderr "*** FAIL 99 (BAD INPUT) ***"
    exit 99
 }
 
 #
-# password: anything goes, but weed out high and low values
+# Password:   Basically,  anything   goes   except   blanks  commas   or
+# semilcolons. But also  I'm weeding out high and low  values, and shell
+# escape characters.
 #
 set pass [lindex $argv 2]
-if { [regexp "\[\x00-\x19\x7f-\xff\]" $pass] } {
+set badchar "\x00-\x20\x7f-\xff"
+append badchar {,;\\|$^`\[\]\{\}\"}
+if { [regexp "\[$badchar\]" $pass] } {
    puts stderr "*** FAIL 99 (BAD INPUT) ***"
    exit 99
 }
