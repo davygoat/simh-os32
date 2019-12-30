@@ -313,7 +313,7 @@ namespace eval OS32 {
                }
             }
             "^\\*=== END DELETE (.*) ===" {
-               Dimmer off  $0
+               Dimmer off $0
                if { [info exists data(error)] } {
                   ReplyCommand $sock [lindex $data(error) 0] [lindex $data(error) 1]
                   unset data(error)
@@ -588,7 +588,7 @@ namespace eval OS32 {
             puts ""
             puts "=========================================================================="
             puts " FIXME -- MTM password check returned success, but output says otherwise"
-            puts $err
+            puts -- $err
             puts "=========================================================================="
             puts ""
             return -1
@@ -855,7 +855,15 @@ namespace eval OS32 {
                set data(reclen) 80
                set data(nrec) 0
                set data(ccc) 0
-               while { [gets $data(sock2) line] > 0 } {
+               while {1} {
+                  set ret -1
+                  if { [catch {
+                                 set ret [gets $data(sock2) line]
+                              } msg] } {
+                     BrokenSocket $sock
+                     return
+                  }
+                  if { $ret <= 0 } break
                   set line [string trimright $line]
                   lappend data(storme) $line
                   set len [string length $line]
@@ -1078,13 +1086,23 @@ namespace eval OS32 {
          puts "\n\n*** BeginData must always be called with 150 ***\n\n"
          expr {"abcxyz"+1}
       }
-      puts $sock "150 $ftpcmd"
-      ::ftpd::PasvCheckAndWait $sock
+      if { [catch {
+                     puts $sock "$err $ftpcmd"
+                     ::ftpd::PasvCheckAndWait $sock
+                  } msg] } {
+         BrokenSocket $sock
+         return -code return
+      }
    }
 
    proc SendData { sock line } {
       upvar #0 ::ftpd::$sock data
-      puts -nonewline $data(sock2) "$line\r\n"
+      if { [catch {
+                     puts -nonewline $data(sock2) "$line\r\n"
+                  } msg] } {
+         BrokenSocket $sock
+         return -code return
+      }
    }
 
    proc EndData { sock err ftpcmd } {
@@ -1096,6 +1114,9 @@ namespace eval OS32 {
    }
 
    proc ReplyCommand { sock err mess { colorme 1 } } {
+
+      ::ftpd::FinishData $sock
+
       variable vt100
       if { $colorme && ![HaveACE $sock -vt] } {
          set vt $vt100(normal)
@@ -1111,10 +1132,30 @@ namespace eval OS32 {
          set vt ""
          set vt0 ""
       }
-      ::ftpd::FinishData $sock
-      puts $sock "$err $vt$mess$vt0"
+
+      if { [catch {
+                     puts $sock "$err $vt$mess$vt0"
+                  } msg] } {
+         BrokenSocket $sock
+         return -status return 0
+      }
+
       set ::OS32::ftpcmd ""
       set ::OS32::sock ""
+
+      return 1
+   }
+
+   proc BrokenSocket { sock } {
+      set ::OS32::ftpcmd ""
+      set ::OS32::sock ""
+      upvar #0 ::ftpd::$sock data
+      variable vt100
+      puts stderr "\n$vt100(red)*** BROKEN SOCK ***$vt100(normal)\n"
+      Dimmer off ""
+      catch { close $data(sock2) }
+      catch { close $sock }
+      catch { unset data }
    }
 
    proc unesc { str } {
