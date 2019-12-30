@@ -947,8 +947,11 @@ namespace eval OS32 {
    namespace eval SYST {
       proc ::ftpd::command::SYST { sock list } {
          CheckNotAllowed $sock SYST
+         upvar #0 ::ftpd::$sock data
          upvar #0 ::OS32::config::ostype ostype
-         ReplyCommand $sock 215 "$ostype" 0
+         upvar #0 ::OS32::SYST::notfirsttime notfirsttime
+         ReplyCommand $sock 215 "$ostype" [info exists data(notfirsttime)]
+         set data(notfirsttime) 1
       }
    }
 
