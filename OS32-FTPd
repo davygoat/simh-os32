@@ -1092,6 +1092,20 @@ namespace eval OS32 {
       puts -nonewline "\r*$cn$message$dm\n*"
    }
 
+   proc DumpConfig {} {
+      puts =================================================================
+      foreach var [info vars config::*] {
+         if { [array exists $var] } {
+            parray $var
+         } else {
+            regsub -all "\r?\n" [set $var] { } $var
+            regsub -all { +}    [set $var] { } $var
+            puts "$var = [string trim [set $var]]"
+         }
+      }
+      puts =================================================================
+   }
+
 ;######################################################################
    #
    # Our awk-like pattern matching construct
@@ -1166,24 +1180,8 @@ namespace eval OS32 {
          } else {
             puts "$vt100(green)No ftpd.config$vt100(normal)"
          }
-         namespace eval config {
-            if {$debugconfig} {
-               proc dumpconfig {} {
-                  puts =================================================================
-                  foreach var [info vars [namespace current]::*] {
-                     if { [array exists $var] } {
-                        parray $var
-                     } else {
-                        regsub -all "\r?\n" [set $var] { } $var
-                        regsub -all { +}    [set $var] { } $var
-                        puts "$var = [string trim [set $var]]"
-                     }
-                  }
-                  puts =================================================================
-               }
-               dumpconfig
-               rename dumpconfig {}
-            }
+         if {$config::debugconfig} {
+            DumpConfig
          }
       }
 
