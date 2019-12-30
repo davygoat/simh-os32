@@ -1,12 +1,17 @@
 
+- Is STOR timeout working?
+
 - STOR should check DELE permission before overwriting existing files.
+
+- Look out for BROKEN SOCK errors slipping through and bringing the
+  whole thing down.
 
 - Anonymous FTP using email address.
 
 - MicroEMACS.
 
-- Check for  command in progress before proceeding  with client request.
-  Can't have  overlapping requests.  FTP to return 400 series "FTP busy"
+- Check for command in progress before proceeding with client request.
+  Can't have overlapping requests. FTP to return 400 series "FTP busy"
   (try again) response to client.
 
 - Add global try/except and bgerror to:
