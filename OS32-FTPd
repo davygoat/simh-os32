@@ -35,7 +35,10 @@ namespace eval OS32 {
    namespace export EndData
    namespace export ReplyCommand
    namespace export CurrentWorkingDirectory
+   namespace export InitialAccount
    namespace export WildFile
+   namespace export ShowACL
+   namespace export HaveACE
    namespace export TrafficLight
    namespace export Dimmer
    namespace export awkward
@@ -44,12 +47,11 @@ namespace eval OS32 {
    variable sock  ""
 
    namespace eval config {
-      array set vt100       { red    "\x1b\[31;1m"
-                              green  "\x1b\[32m"
-                              grey   "\x1b\[2m"
-                              normal "\x1b\[0m"
+      array set vt100       { red    ""
+                              green  ""
                               on     "\x1b\[2m"
-                              off    "\x1b\[0m" }
+                              off    "\x1b\[0m"
+                              normal "\x1b\[0m" }
       variable  host          "localhost"
       variable  port          2121
       variable  numericlogins 1
@@ -169,8 +171,8 @@ namespace eval OS32 {
                ReplyCommand $sock 550 "Not a directory, account must be less than 65536"
                return
             }
-            if { [lsearch $data(acl) $act] < 0 && [lsearch -exact $data(acl) *] < 0 } {
-               ReplyCommand $sock 550 "Access denied, your ACL is ([join $data(acl) ,])"
+            if { ![HaveACE $sock $act] && ![HaveACE $sock *] } {
+               ReplyCommand $sock 550 "Access denied, your ACL is [ShowACL $sock]"
                return
             }
          }
@@ -246,14 +248,10 @@ namespace eval OS32 {
    #
 
    namespace eval CDUP {
+
       proc ::ftpd::command::CDUP { sock list } {
          CheckNotAllowed $sock CDUP
-         upvar #0 ::ftpd::$sock data
-         set act [lindex $data(acl) 0]
-         if { $act == "*" } {
-            set act 0
-         }
-         ::ftpd::command::CWD $sock $act
+         ::ftpd::command::CWD $sock [InitialAccount $sock]
          # mention CheckNotAllowed to match ::ftpd::command above
       }
    }
@@ -515,10 +513,7 @@ namespace eval OS32 {
             set data(cwd) $user
          } else {
             set data(acl) [set access($user)]
-            set data(cwd) [lindex $data(acl) 0]
-            if { $data(cwd) == "*" } {
-               set data(cwd) 0
-            }
+            set data(cwd) [InitialAccount $sock]
          }
 
          #
@@ -625,8 +620,8 @@ namespace eval OS32 {
       upvar #0 ::ftpd::$sock data
       set vol $data(vol)
       set cwd $data(cwd)
-      set acl [join $data(acl) ,]
-      return "$vol/$cwd, ACL=($acl)"
+      set acl [ShowACL $sock]
+      return "$vol/$cwd, ACL=$acl"
    }
 
 ;######################################################################
@@ -1021,6 +1016,18 @@ namespace eval OS32 {
       return $data(vol)$fnam/$data(cwd)
    }
 
+   proc InitialAccount { sock } {
+      upvar #0 ::ftpd::$sock data
+      set act [lindex $data(acl) 0]
+      if { [string is integer $act] } {
+         return $act
+      } elseif { $act == "*" } {
+         return 0
+      } else {
+         return -1
+      }
+   }
+
    proc CheckOperatorBusy {sock} {
       variable taskcount
       if { $taskcount > 0 } {
@@ -1031,9 +1038,7 @@ namespace eval OS32 {
 
    # Note: must be called BEFORE CheckNotAllowed
    proc CheckReadOnly { sock ftpcmd } {
-      upvar #0 ::ftpd::$sock data
-      if { [lsearch $data(acl) RO] >= 0 &&
-           [lsearch $data(acl) +$ftpcmd] < 0 } {
+      if { [HaveACE $sock RO] && ![HaveACE $sock +$ftpcmd] } {
          ReplyCommand $sock 550 "Permission denied (user is read only)"
          return -level 2
       }
@@ -1041,11 +1046,24 @@ namespace eval OS32 {
 
    # Note: must be called AFTER CheckReadOnly
    proc CheckNotAllowed { sock ftpcmd } {
-      upvar #0 ::ftpd::$sock data
-      if { [lsearch $data(acl) -$ftpcmd] >= 0 } {
+      if { [HaveACE $sock -$ftpcmd] } {
          ReplyCommand $sock 550 "Permission denied ($ftpcmd not allowed)"
          return -level 2
       }
+   }
+
+   proc HaveACE { sock check } {
+      upvar #0 ::ftpd::$sock data
+      if { [lsearch -exact $data(acl) $check] >= 0 } {
+         return 1
+      } else {
+         return 0
+      }
+   }
+
+   proc ShowACL { sock } {
+      upvar #0 ::ftpd::$sock data
+      return "([join $data(acl) ,])"
    }
 
    proc BottomHalf { sock ftpcmd oscmd } {
@@ -1076,9 +1094,9 @@ namespace eval OS32 {
       ReplyCommand $sock $err "$ftpcmd"
    }
 
-   proc ReplyCommand { sock err mess { colours 1 } } {
+   proc ReplyCommand { sock err mess { colorme 1 } } {
       variable vt100
-      if { $colours } {
+      if { $colorme && ![HaveACE $sock -vt] } {
          set vt $vt100(normal)
          set vt0 $vt100(normal)
          for {set n 3} {$n >= 1} {incr n -1} {
