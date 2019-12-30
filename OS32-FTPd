@@ -30,10 +30,10 @@ namespace eval OS32 {
    namespace export CheckNotAllowed
    namespace export CheckOperatorBusy
    namespace export BottomHalf
-   namespace export BeginDataSocket
-   namespace export SendDataSocket
-   namespace export EndDataSocket
-   namespace export ReplyCommandSocket
+   namespace export BeginData
+   namespace export SendData
+   namespace export EndData
+   namespace export ReplyCommand
    namespace export CurrentWorkingDirectory
    namespace export WildFile
    namespace export TrafficLight
@@ -75,34 +75,34 @@ namespace eval OS32 {
       set ftpcmd MKD
       CheckNotAllowed $sock $ftpcmd
       CheckReadOnly $sock $ftpcmd
-      ReplyCommandSocket $sock 500 "Make directory not supported by OS/32"
+      ReplyCommand $sock 500 "Make directory not supported by OS/32"
    }
 
    proc ::ftpd::command::XMKD { sock prm } {
       set ftpcmd XMKD
       CheckNotAllowed $sock $ftpcmd
       CheckReadOnly $sock $ftpcmd
-      ReplyCommandSocket $sock 500 "Make directory not supported by OS/32"
+      ReplyCommand $sock 500 "Make directory not supported by OS/32"
    }
 
    proc ::ftpd::command::RMD { sock prm } {
       set ftpcmd RMD
       CheckNotAllowed $sock $ftpcmd
       CheckReadOnly $sock $ftpcmd
-      ReplyCommandSocket $sock 500 "Remove directory not supported by OS/32"
+      ReplyCommand $sock 500 "Remove directory not supported by OS/32"
    }
 
    proc ::ftpd::command::XRMD { sock prm } {
       set ftpcmd XRMD
       CheckNotAllowed $sock $ftpcmd
       CheckReadOnly $sock $ftpcmd
-      ReplyCommandSocket $sock 500 "Remove directory not supported by OS/32"
+      ReplyCommand $sock 500 "Remove directory not supported by OS/32"
    }
 
    proc ::ftpd::command::SIZE { sock prm } {
       set ftpcmd SIZE
       CheckNotAllowed $sock $ftpcmd
-      ReplyCommandSocket $sock 500 "File size not supported (record oriented filesystem)"
+      ReplyCommand $sock 500 "File size not supported (record oriented filesystem)"
    }
 
 ;######################################################################
@@ -113,21 +113,21 @@ namespace eval OS32 {
    proc ::ftpd::command::MDTM {sock prm} {
       set ftpcmd MDTM
       CheckNotAllowed $sock $ftpcmd
-      ReplyCommandSocket $sock 500 "Rarely used"
+      ReplyCommand $sock 500 "Rarely used"
    }
 
    proc ::ftpd::command::APPE {sock prm} {
       set ftpcmd STOU
       CheckNotAllowed $sock $ftpcmd
       CheckReadOnly $sock $ftpcmd
-      ReplyCommandSocket $sock 500 "Rarely used"
+      ReplyCommand $sock 500 "Rarely used"
    }
 
    proc ::ftpd::command::STOU {sock prm} {
       set ftpcmd STOU
       CheckNotAllowed $sock $ftpcmd
       CheckReadOnly $sock $ftpcmd
-      ReplyCommandSocket $sock 500 "Rarely used"
+      ReplyCommand $sock 500 "Rarely used"
    }
 
 ;######################################################################
@@ -141,7 +141,7 @@ namespace eval OS32 {
    # If the request includes a volume  name, we schedule a BottomHalf to
    # run a CHECKVOL script, with  awk-like pattern matching to determine
    # success  or  failure.  The  final response  is  returned  with  the
-   # ReplyCommandSocket proc.
+   # ReplyCommand proc.
    #
 
    namespace eval CWD {
@@ -161,16 +161,16 @@ namespace eval OS32 {
          # Handle immediate errors
          set dir [string toupper $dir]
          if { ![regexp {^([A-Z][A-Z0-9]{0,3}:?)?/?([0-9]+)?$} $dir -> vol act] } {
-            ReplyCommandSocket $sock 550 "Not a directory (must be NUMBER, VOLUME, or VOLUME:/NUMBER)"
+            ReplyCommand $sock 550 "Not a directory (must be NUMBER, VOLUME, or VOLUME:/NUMBER)"
             return
          }
          if { $act != "" } {
             if { $act > 65535 } {
-               ReplyCommandSocket $sock 550 "Not a directory, account must be less than 65536"
+               ReplyCommand $sock 550 "Not a directory, account must be less than 65536"
                return
             }
             if { [lsearch $data(acl) $act] < 0 && [lsearch -exact $data(acl) *] < 0 } {
-               ReplyCommandSocket $sock 550 "Access denied, your ACL is ([join $data(acl) ,])"
+               ReplyCommand $sock 550 "Access denied, your ACL is ([join $data(acl) ,])"
                return
             }
          }
@@ -178,7 +178,7 @@ namespace eval OS32 {
          # Immediate success
          if { $vol == "" } {
             set data(cwd) $act
-            ReplyCommandSocket $sock 250 "Directory is now [CurrentWorkingDirectory $sock]"
+            ReplyCommand $sock 250 "Directory is now [CurrentWorkingDirectory $sock]"
             return
          }
 
@@ -203,7 +203,7 @@ namespace eval OS32 {
             }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
-                  ReplyCommandSocket $sock 450 "Command line error, try again"
+                  ReplyCommand $sock 450 "Command line error, try again"
                } else {
                   set data(error) [list 550 $1]
                }
@@ -219,7 +219,7 @@ namespace eval OS32 {
                   if { [info exists data(ract)] } {
                      unset data(ract)
                   }
-                  ReplyCommandSocket $sock [lindex $data(error) 0] [lindex $data(error) 1]
+                  ReplyCommand $sock [lindex $data(error) 0] [lindex $data(error) 1]
                   unset data(rvol)
                   unset data(error)
                } else {
@@ -230,7 +230,7 @@ namespace eval OS32 {
                   set data(vol) $data(rvol)
                   if { ![string match *: $data(vol)] } { append data(vol) : }
                   unset data(rvol)
-                  ReplyCommandSocket $sock 250 "Directory is now [CurrentWorkingDirectory $sock]"
+                  ReplyCommand $sock 250 "Directory is now [CurrentWorkingDirectory $sock]"
                }
             }
          }
@@ -309,7 +309,7 @@ namespace eval OS32 {
             }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
-                  ReplyCommandSocket $sock 450 "Command line error, try again"
+                  ReplyCommand $sock 450 "Command line error, try again"
                } else {
                   set data(error) [list 550 $1]
                }
@@ -317,10 +317,10 @@ namespace eval OS32 {
             "^\\*=== END DELETE (.*) ===" {
                Dimmer off  $0
                if { [info exists data(error)] } {
-                  ReplyCommandSocket $sock [lindex $data(error) 0] [lindex $data(error) 1]
+                  ReplyCommand $sock [lindex $data(error) 0] [lindex $data(error) 1]
                   unset data(error)
                } else {
-                  ReplyCommandSocket $sock 250 "Delete $data(fnam) successful"
+                  ReplyCommand $sock 250 "Delete $data(fnam) successful"
                }
                unset data(fnam)
             }
@@ -336,8 +336,8 @@ namespace eval OS32 {
    # wildcards.  Asterisks are  converted to  dashes, question  marks to
    # asterisks.
    #
-   # This command uses the passive mode socket, with BeginDataSocket and
-   # EndDataSocket, or ReplyCommandSocket on error.
+   # This command  uses the passive  mode socket, calling  BeginData and
+   # EndData to transmit the directory list, or ReplyCommand on error.
    #
 
    namespace eval LIST {
@@ -377,39 +377,39 @@ namespace eval OS32 {
             }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
-                  ReplyCommandSocket $sock 450 "Command line error, try again"
+                  ReplyCommand $sock 450 "Command line error, try again"
                } else {
                   set data(error) [list 550 $1]
                }
             }
             "^\\*(VOLUME= .*)" {
-               BeginDataSocket $sock "DIR $data(fnam)"
+               BeginData $sock "DIR $data(fnam)"
                if { $ftpcmd == "LIST" } {
-                  SendDataSocket $sock "$1"
+                  SendData $sock "$1"
                }
             }
             "^\\* (FILENAME...........+)" {
                if { $ftpcmd == "LIST" } {
-                  SendDataSocket $sock " $1"
+                  SendData $sock " $1"
                }
             }
             "^\\* (........).(...)/(.....) (.. .+)" {
                if { $ftpcmd == "LIST" } {
-                  SendDataSocket $sock " $1.$2/$3 $4"
+                  SendData $sock " $1.$2/$3 $4"
                }
                if { $ftpcmd == "NLST" } {
                   set nam [string trim $1]
                   set ext [string trim $2]
-                  SendDataSocket $sock [string tolower "$nam.$ext"]
+                  SendData $sock [string tolower "$nam.$ext"]
                }
             }
             "^\\*=== END DIR .*? ===" {
                Dimmer off $0
                if { [info exists data(error)] } {
-                  ReplyCommandSocket $sock [lindex $data(error) 0] [lindex $data(error) 1]
+                  ReplyCommand $sock [lindex $data(error) 0] [lindex $data(error) 1]
                   unset data(error)
                } else {
-                  EndDataSocket $sock "DIR $data(fnam)"
+                  EndData $sock "DIR $data(fnam)"
                }
                unset data(fnam)
             }
@@ -473,7 +473,7 @@ namespace eval OS32 {
 
          if { [string is integer $user] && !$numericlogins } {
             TrafficLight red "FTP USER $user FAILED LOGIN (numeric logins disabled)"
-            ReplyCommandSocket $sock 551 "Access denied, numeric logins disabled"
+            ReplyCommand $sock 551 "Access denied, numeric logins disabled"
             return
          }
 
@@ -486,7 +486,7 @@ namespace eval OS32 {
 
          if { ![info exists access($user)] && ![string is integer $user] } {
             TrafficLight red "FTP USER $user FAILED LOGIN (not in config::access)"
-            ReplyCommandSocket $sock 551 "Access denied"
+            ReplyCommand $sock 551 "Access denied"
             return
          }
 
@@ -497,7 +497,7 @@ namespace eval OS32 {
 
          if { [info exists access($user)] && ![llength [set access($user)]] } {
             TrafficLight red "FTP USER $user FAILED LOGIN (empty acl)"
-            ReplyCommandSocket $sock 551 "User $user is denied ftp access"
+            ReplyCommand $sock 551 "User $user is denied ftp access"
             return
          }
 
@@ -535,12 +535,12 @@ namespace eval OS32 {
             if { [array names passwords -exact $user] == $user &&
                  [set passwords($user)] == $md5 } {
                TrafficLight green "FTP USER $user LOGGED IN USING MD5"
-               ReplyCommandSocket $sock 230 "Password accepted, directory is [CurrentWorkingDirectory $sock]"
+               ReplyCommand $sock 230 "Password accepted, directory is [CurrentWorkingDirectory $sock]"
                set data(access) 1
                return
             } else {
                TrafficLight red "FTP USER $user FAILED LOGIN USING MD5"
-               ReplyCommandSocket $sock 551 "Access denied"
+               ReplyCommand $sock 551 "Access denied"
                return
             }
          }
@@ -559,12 +559,12 @@ namespace eval OS32 {
             set erno [::OS32::PASS::AuthenticateMTM $acct $pass ermes]
             if { $erno == 0 } {
                TrafficLight green "FTP USER $user LOGGED IN USING MTM"
-               ReplyCommandSocket $sock 230 "MTM login successful, directory is [CurrentWorkingDirectory $sock]"
+               ReplyCommand $sock 230 "MTM login successful, directory is [CurrentWorkingDirectory $sock]"
                set data(access) 1
                return
             } else {
                TrafficLight red "FTP USER $user FAILED LOGIN USING MTM ($ermes)"
-               ReplyCommandSocket $sock 551 "Access denied"
+               ReplyCommand $sock 551 "Access denied"
                return
             }
          }
@@ -573,7 +573,7 @@ namespace eval OS32 {
          # Now what?
          #
 
-         ReplyCommandSocket $sock 551 "Cannot authenticate using MTM"
+         ReplyCommand $sock 551 "Cannot authenticate using MTM"
          return
       }
 
@@ -617,7 +617,7 @@ namespace eval OS32 {
          CheckNotAllowed $sock PWD
          upvar #0 ::ftpd::$sock data
          set cwd [CurrentWorkingDirectory $sock]
-         ReplyCommandSocket $sock 250 "Current directory is $cwd"
+         ReplyCommand $sock 250 "Current directory is $cwd"
       }
    }
 
@@ -669,18 +669,18 @@ namespace eval OS32 {
             }
             "^\\*=== BEGIN COPYOUT .*? ===" {
                Dimmer on $0
-               BeginDataSocket $sock $data(fnam)
+               BeginData $sock $data(fnam)
             }
             "^\\*FILE NOT FOUND" {
                set data(error) [list 550 "File not found, $data(fnam)"]
             }
             "^FILE STUCK - TRY ABORT\$" {
                Dimmer off $0
-               ReplyCommandSocket $sock 451 "Whoops, file got stuck midway..."
+               ReplyCommand $sock 451 "Whoops, file got stuck midway..."
             }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
-                  ReplyCommandSocket $sock 450 "Command line error, try again"
+                  ReplyCommand $sock 450 "Command line error, try again"
                } else {
                   set data(error) [list 550 $1]
                }
@@ -692,15 +692,15 @@ namespace eval OS32 {
                # ignore
             }
             "^\\*.*\\.BG:(.*)" {
-               SendDataSocket $sock "$1"
+               SendData $sock "$1"
             }
             "=== END COPYOUT .*? ===" {
                Dimmer off $0
                if { [info exists data(error)] } {
-                  ReplyCommandSocket $sock [lindex $data(error) 0] [lindex $data(error) 1]
+                  ReplyCommand $sock [lindex $data(error) 0] [lindex $data(error) 1]
                   unset data(error)
                } else {
-                  EndDataSocket $sock $data(fnam)
+                  EndData $sock $data(fnam)
                }
             }
          }
@@ -728,7 +728,7 @@ namespace eval OS32 {
          upvar #0 ::ftpd::$sock data
          set fnam [WildFile $sock [string toupper $fnam] $ftpcmd]
          set data(fnam1) $fnam
-         ReplyCommandSocket $sock 350 "RNFR OK"
+         ReplyCommand $sock 350 "RNFR OK"
       }
    }
 
@@ -772,7 +772,7 @@ namespace eval OS32 {
             }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
-                  ReplyCommandSocket $sock 450 "Command line error, try again"
+                  ReplyCommand $sock 450 "Command line error, try again"
                } else {
                   set data(error) [list 550 $1]
                }
@@ -783,10 +783,10 @@ namespace eval OS32 {
             "^\\*=== END RENAME (.*) (.*) ===" {
                Dimmer off $0
                if { [info exists data(error)] } {
-                  ReplyCommandSocket $sock $data(error)
+                  ReplyCommand $sock $data(error)
                   unset data(error)
                } else {
-                  ReplyCommandSocket $sock 250 "$data(fnam1) renamed $data(fnam2)"
+                  ReplyCommand $sock 250 "$data(fnam1) renamed $data(fnam2)"
                }
                unset data(fnam1)
                unset data(fnam2)
@@ -845,7 +845,7 @@ namespace eval OS32 {
             # Now we can read all the data to work out record length
             "^\\*STOR GO AHEAD" {
                Dimmer on $0
-               BeginDataSocket $sock $data(fnam)
+               BeginData $sock $data(fnam)
                set data(reclen) 80
                set data(nrec) 0
                set data(ccc) 0
@@ -866,14 +866,14 @@ namespace eval OS32 {
             }
             "^FILE STUCK - TRY ABORT\$" {
                Dimmer off $0
-               ReplyCommandSocket $sock 451 "Whoops, file got stuck midway..."
+               ReplyCommand $sock 451 "Whoops, file got stuck midway..."
             }
             "^\\*(DELE-ERR  TYPE=PROT)" {
                set data(error) [list 550 "Cannot upload file because it is write protected"]
             }
             "^\\*?(....-ERR.*)" {
                if { $dimmeris == "off" } {
-                  ReplyCommandSocket $sock 450 "Command line error, try again"
+                  ReplyCommand $sock 450 "Command line error, try again"
                } else {
                   set data(error) [list 550 $1]
                }
@@ -881,10 +881,10 @@ namespace eval OS32 {
             "^\\*=== END COPYIN .*? ===" {
                Dimmer off $0
                if { [info exists data(error)] } {
-                  ReplyCommandSocket $sock [lindex $data(error) 0] [lindex $data(error) 1]
+                  ReplyCommand $sock [lindex $data(error) 0] [lindex $data(error) 1]
                   unset data(error)
                } else {
-                  EndDataSocket $sock "$data(fnam), $data(nrec) records, $data(reclen) chars reclen"
+                  EndData $sock "$data(fnam), $data(nrec) records, $data(reclen) chars reclen"
                }
                unset data(reclen)
                unset data(nrec)
@@ -934,7 +934,7 @@ namespace eval OS32 {
       proc ::ftpd::command::SYST { sock list } {
          CheckNotAllowed $sock SYST
          upvar #0 ::OS32::config::ostype ostype
-         ReplyCommandSocket $sock 215 "$ostype" 0
+         ReplyCommand $sock 215 "$ostype" 0
       }
    }
 
@@ -996,14 +996,14 @@ namespace eval OS32 {
 
       if { $fnam == "" } {
          if { $acceptnull == 0 } {
-            ReplyCommandSocket $sock 501 "Missing filename"
+            ReplyCommand $sock 501 "Missing filename"
             return -level 2
          }
       } elseif { ![regexp $re $fnam -> nam ext] } {
-         ReplyCommandSocket $sock [lindex $err 0] [lindex $err 1]
+         ReplyCommand $sock [lindex $err 0] [lindex $err 1]
          return -level 2                  ;# extension inc dot -----v
       } elseif { [string length $nam] > 8 || [string length $ext] > 4 } {
-         ReplyCommandSocket $sock 501 "Invalid filename $fnam, 8.3 max"
+         ReplyCommand $sock 501 "Invalid filename $fnam, 8.3 max"
          return -level 2
       }
 
@@ -1014,7 +1014,7 @@ namespace eval OS32 {
    proc CheckOperatorBusy {sock} {
       variable taskcount
       if { $taskcount > 0 } {
-         ReplyCommandSocket $sock 450 "Operator busy, do not disturb"
+         ReplyCommand $sock 450 "Operator busy, do not disturb"
          return -level 2
       }
    }
@@ -1024,7 +1024,7 @@ namespace eval OS32 {
       upvar #0 ::ftpd::$sock data
       if { [lsearch $data(acl) RO] >= 0 &&
            [lsearch $data(acl) +$ftpcmd] < 0 } {
-         ReplyCommandSocket $sock 550 "Permission denied (user is read only)"
+         ReplyCommand $sock 550 "Permission denied (user is read only)"
          return -level 2
       }
    }
@@ -1033,7 +1033,7 @@ namespace eval OS32 {
    proc CheckNotAllowed { sock ftpcmd } {
       upvar #0 ::ftpd::$sock data
       if { [lsearch $data(acl) -$ftpcmd] >= 0 } {
-         ReplyCommandSocket $sock 550 "Permission denied ($ftpcmd not allowed)"
+         ReplyCommand $sock 550 "Permission denied ($ftpcmd not allowed)"
          return -level 2
       }
    }
@@ -1044,21 +1044,21 @@ namespace eval OS32 {
       send -- "$oscmd\r"
    }
 
-   proc BeginDataSocket { sock ftpcmd } {
+   proc BeginData { sock ftpcmd } {
       puts $sock "150 Begin $ftpcmd"
       ::ftpd::PasvCheckAndWait $sock
    }
 
-   proc SendDataSocket { sock line } {
+   proc SendData { sock line } {
       upvar #0 ::ftpd::$sock data
       puts -nonewline $data(sock2) "$line\r\n"
    }
 
-   proc EndDataSocket { sock ftpcmd } {
-      ReplyCommandSocket $sock 226 "End $ftpcmd"
+   proc EndData { sock ftpcmd } {
+      ReplyCommand $sock 226 "End $ftpcmd"
    }
 
-   proc ReplyCommandSocket { sock err mess { colours 1 } } {
+   proc ReplyCommand { sock err mess { colours 1 } } {
       variable vt100
       if { $colours } {
          set vt $vt100(normal)
