@@ -858,6 +858,10 @@ namespace eval OS32 {
             }
             "^\\*=== BEGIN COPYIN .*? ===" {
             }
+            "^FILE STUCK - TRY ABORT\$" {
+               Dimmer off $0
+               ReplyCommandSocket $sock "451 Whoops, file got stuck midway..."
+            }
             "^\\*(DELE-ERR  TYPE=PROT)" {
                set data(error) "550 Cannot upload file because it is write protected"
             }
@@ -976,6 +980,9 @@ namespace eval OS32 {
          set acceptnull 1
          set err "501 Invalid filename or wildcard pattern"
       } else {
+         if { $cmd == "STOR" || $cmd == "APPE" } {
+            regexp {([^/]+)$} $fnam -> fnam
+         }
          set re {^([A-Z][A-Z0-9]*)(\.[A-Z0-9]*)?$}
          set acceptnull 0
          set err "501 Invalid filename $fnam, must be letters, digits, 8.3 max"
