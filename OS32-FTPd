@@ -1136,6 +1136,10 @@ namespace eval OS32 {
    }
 
    proc BottomHalf { sock ftpcmd oscmd } {
+      if { $::OS32::ftpcmd != "" } {
+         ReplyCommand $sock 450 "FTP command in progress, try again" fip
+         return
+      }
       set ::OS32::ftpcmd $ftpcmd
       set ::OS32::sock $sock
       send -- "$oscmd\r"
@@ -1173,12 +1177,20 @@ namespace eval OS32 {
       ReplyCommand $sock $err "$ftpcmd"
    }
 
-   proc ReplyCommand { sock err mess { colorme 1 } } {
+   proc ReplyCommand { sock err mess { opt "" } } {
+
+      #
+      # opt values:
+      #
+      # - 0    do not include VT100 sequences (SYST first only)
+      # - 1    DO include VT100 sequences (SYST subsequent calls)
+      # - fip  FTP command in progress, do not clobber ftpcmd
+      #
 
       ::ftpd::FinishData $sock
 
       variable vt100
-      if { $colorme && ![HaveACE $sock -vt] } {
+      if { $opt != "0" && ![HaveACE $sock -vt] } {
          set vt $vt100(normal)
          set vt0 $vt100(normal)
          for {set n 3} {$n >= 1} {incr n -1} {
@@ -1200,8 +1212,10 @@ namespace eval OS32 {
          return -status return 0
       }
 
-      set ::OS32::ftpcmd ""
-      set ::OS32::sock ""
+      if { $opt != "fip" } {
+         set ::OS32::ftpcmd ""
+         set ::OS32::sock ""
+      }
 
       return 1
    }
