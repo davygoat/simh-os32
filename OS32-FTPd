@@ -48,6 +48,17 @@ namespace eval OS32 {
    variable sock  ""
 
    namespace eval config {
+      #
+      # "Compiled-in" defaults:.
+      #
+      # - No VT100 colours on the console.
+      # - No VT100 colours in error messages to the client.
+      # - Loopback only, no external users.
+      # - High numbered port, no root required.
+      # - "Usernames" are the numeric OS/32 accounts, e.g. 25.
+      # - MTM takes care of password checking.
+      # - Assuming "simh kit" distribution.
+      #
       array set vt100       { red    ""
                               green  ""
                               on     "\x1b\[2m"
@@ -66,6 +77,12 @@ namespace eval OS32 {
       variable  inifile       "os32.ini"
       variable  debugconfig   1
       variable  timeout       10
+      variable  defaultvolume SYS:
+      #
+      # Some of  these will be  overridden by ftpd.config. The  user can
+      # further override them with their  own shadow.config, e.g. to log
+      # in using their everyday username.
+      #
    }
 
 ;######################################################################
@@ -249,8 +266,8 @@ namespace eval OS32 {
    #
    # CDUP -- Go up one directory level
    #
-   # OS/32 directories cannot  be nested, so we'll simply  return to the
-   # initial or default directory.
+   # OS/32 directories cannot be nested,  so we'll return to the initial
+   # or default directory instead.
    #
 
    namespace eval CDUP {
@@ -451,7 +468,7 @@ namespace eval OS32 {
    #
    # - If the username is listed in the passwords array, do an MD5 check.
    # - If the username is numeric, do a straight MTM signon.
-   # - If the username is not numeric, do a lookup, and then try MTM.
+   # - If the username is not numeric, do an account lookup, then go MTM.
    #
 
    namespace eval PASS {
@@ -486,7 +503,7 @@ namespace eval OS32 {
          # Named users  must be  listed in  the access  array so  we can
          # assign them to numeric accounts. However, we  DO NOT  want to
          # tell the client that their  username is invalid -- that's bad
-         # practice these days.
+         # practice.
          #
 
          if { ![info exists access($user)] && ![string is integer $user] } {
@@ -496,8 +513,8 @@ namespace eval OS32 {
          }
 
          #
-         # On the  other hand, you  may want to explicitly  disable some
-         # users. In that case it makes sense to tell them off.
+         # On the other hand, you might  have a need to explicitly block
+         # some users. In that case it makes sense to tell them off.
          #
 
          if { [info exists access($user)] && ![llength [set access($user)]] } {
@@ -509,11 +526,11 @@ namespace eval OS32 {
          #
          # Set up defaults. Named users  start in the first account that
          # is listed in  their acl. Numeric users will  be restricted to
-         # just the  account they  sign on with.  But don't  let default
-         # their way around the cd blacklist.
+         # just  the account  they  sign  on with.  But  don't let  them
+         # default their way around the cd blacklist.
          #
 
-         set data(vol) "SYS:"
+         set data(vol) $::OS32::config::defaultvolume
          set data(cwd) -1
 
          if { [string is integer $user] } {
@@ -564,15 +581,15 @@ namespace eval OS32 {
          }
 
          #
-         # Otherwise we'll use MTM to authenticate. This shells out to a
-         # separate expect script.
+         # No password? Then we'll use  MTM to authenticate. This shells
+         # out to a separate expect script.
          #
 
          if { $mtmport > 0 } {
-            if { ![string is integer $user] } {
-               set acct [lindex [set access($user)] 0]
-            } else {
+            if { [string is integer $user] } {
                set acct $user
+            } else {
+               set acct $data(cwd)
             }
             set erno [::OS32::PASS::AuthenticateMTM $acct $pass ermes]
             if { $erno == 0 } {
@@ -600,9 +617,9 @@ namespace eval OS32 {
          upvar 1 $errvar ermes
 
          # MTM accounts must  be <= 255 by default. I'm  going to narrow
-         # that a little  bit more, because 255 is  privileged, and owns
-         # the MTM Authorized  User File. Account 0 is  allowed, but not
-         # recommended.
+         # that a  little bit  further, because  255 is  privileged, and
+         # owns the  MTM Authorized User  File. Account 0  is permitted,
+         # but not really recommended.
          if { $acct < 0 || $acct >= 255 } {
             set ermes "out of range account"
             return -1
@@ -610,7 +627,7 @@ namespace eval OS32 {
          # According  to  the EOU  help  on  PASSWORD: "All  alphabetic,
          # numeric  and special  characters, except  blanks, commas,  or
          # semi-colons are  allowed." I'm  also going to  reject control
-         # characters and nasty shell escapes.
+         # characters and nasty shell escapes out of hand.
          set badchar "\x00-\x20\x7f-\xff"
          append badchar {,;\\|$^`\[\]\{\}\"}
          if { [regexp "\[$badchar\]" $pass] } {
@@ -675,7 +692,7 @@ namespace eval OS32 {
    # TYPE the file,  and capture the meanful bits. Because  OS/32 has no
    # built-in  TYPE command,  we  are  using a  CSS  to  run COPY32  and
    # copy  the  file  to  the  console. It  also  wraps  the  output  in
-   # ===BEGIN===/===END=== markers.
+   # hand ===BEGIN===/===END=== markers.
    #
 
    namespace eval RETR {
@@ -857,12 +874,12 @@ namespace eval OS32 {
    # Invoke  EDIT/32  through  a  CSS that  allocates  and  renames  the
    # temporary  files,  and   cleans  up  after  itself.   This  one  is
    # complicated by  the fact that we  do not know the  record length in
-   # the  top half,  and we  cannot receive  data while  in that  socket
-   # event.
+   # the top  half, and we  cannot receive data  while in that  top half
+   # socket event.
    #
-   # This is where we introduce  a proc called PromptPatternMatch, which
-   # checks for  prompts, before we  get the carriage return  that would
-   # trigger LinePatternMatch.
+   # This is also  where we introduce a  proc called PromptPatternMatch,
+   # which checks for prompts, which we get before we receive a carriage
+   # return that can trigger LinePatternMatch.
    #
 
    namespace eval STOR {
@@ -896,9 +913,10 @@ namespace eval OS32 {
                variable dimmeris
                upvar #0 ::ftpd::$sock data
             }
-            # Now we can read all the data to work out record length
+            # Now we're  in the bottom half,  we can read all  the data,
+            # and work out record length.
             "^\\*STOR (EXISTS|NEWFILE)" {
-               # Check permission to *replace* the file
+               # Check additional permission to *replace* the file
                if { $1 == "EXISTS" } {
                   if { [HaveACE $sock RO] && ![HaveACE $sock $ftpcmd+] } {
                      ReplyCommand $sock 550 "Permission denied (lack permission to replace existing file)"
@@ -973,7 +991,7 @@ namespace eval OS32 {
                variable osline
                upvar #0 ::ftpd::$sock data
             }
-            "^\\*.+\\.BG:.+\\.BG>" {
+            "^\\*.+?\\.BG:.+?\\.BG>" {
                if { $data(ccc) < $data(nrec) } {
                   set line [lindex $data(storme) $data(ccc)]
                   incr data(nchar) [string length $line]
