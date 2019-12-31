@@ -710,6 +710,7 @@ namespace eval OS32 {
                Dimmer on $0
                BeginData $sock 150 "Transmitting $data(fnam)"
                set data(nrec) 0
+               set data(nchar) 0
             }
             "^\\*FILE NOT FOUND" {
                set data(error) [list 550 "File not found, $data(fnam)"]
@@ -718,8 +719,9 @@ namespace eval OS32 {
                Dimmer off $0
                if { ![info exists data(nrec)] } {
                   set data(nrec) 0
+                  set data(nchar) 0
                }
-               ReplyCommand $sock 451 "Whoops, file got stuck at $data(nrec) records"
+               ReplyCommand $sock 451 "Whoops, file got stuck at $data(nchar) characters ($data(nrec) records)"
                unset data(nrec)
             }
             "^\\*?(....-ERR.*)" {
@@ -738,6 +740,8 @@ namespace eval OS32 {
             "^\\*.*\\.BG:(.*)" {
                SendData $sock "$1"
                incr data(nrec)
+               incr data(nchar) [string length "$1"]
+               incr data(nchar) 2 ;# CRLF
             }
             "=== END COPYOUT .*? ===" {
                Dimmer off $0
@@ -748,9 +752,10 @@ namespace eval OS32 {
                   ReplyCommand $sock [lindex $data(error) 0] [lindex $data(error) 1]
                   unset data(error)
                } else {
-                  EndData $sock 226 "$data(fnam) downloaded, $data(nrec) records"
+                  EndData $sock 226 "$data(fnam) downloaded, $data(nchar) characters, $data(nrec) records"
                }
                unset data(nrec)
+               unset data(nchar)
             }
          }
       }
@@ -923,6 +928,7 @@ namespace eval OS32 {
                if { [expr $data(reclen)%4] > 0 } {
                   incr data(reclen) [expr 4-$data(reclen)%4]
                }
+               set data(nchar) 0
                # This command should work now
                send -- "FTP COPYIN,$data(fnam),$data(reclen)\r"
             }
@@ -948,10 +954,11 @@ namespace eval OS32 {
                   ReplyCommand $sock [lindex $data(error) 0] [lindex $data(error) 1]
                   unset data(error)
                } else {
-                  EndData $sock 226 "$data(fnam) uploaded, $data(ccc) records, $data(reclen) chars reclen"
+                  EndData $sock 226 "$data(fnam) uploaded, $data(nchar) characters, $data(ccc) records, $data(reclen) chars reclen"
                }
                unset data(reclen)
                unset data(nrec)
+               unset data(nchar)
                unset data(ccc)
             }
          }
@@ -969,6 +976,8 @@ namespace eval OS32 {
             "^\\*.+\\.BG:.+\\.BG>" {
                if { $data(ccc) < $data(nrec) } {
                   set line [lindex $data(storme) $data(ccc)]
+                  incr data(nchar) [string length $line]
+                  incr data(nchar) 2 ;# CRLF
                   if { $line == "" } { set line " " }
                   send -- "$line\r"
                   incr data(ccc)
