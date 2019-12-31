@@ -73,7 +73,7 @@ namespace eval OS32 {
       variable  cdblacklist   255
       variable  welcome       "OS/32 FTP server"
       variable  ostype        "OS/32 Version 8.1"
-      variable  contact       "nobody@nowhere.not"
+      variable  contact       "$tcl_platform(user)@[info hostname]"
       variable  inifile       "os32.ini"
       variable  debugconfig   1
       variable  timeout       10
@@ -495,7 +495,7 @@ namespace eval OS32 {
 
          if { [string is integer $user] && !$numericlogins } {
             TrafficLight red "FTP USER $user FAILED LOGIN (numeric logins disabled)"
-            ReplyCommand $sock 551 "Access denied"
+            ReplyCommand $sock 530 "Access denied"
             return
          }
 
@@ -508,7 +508,7 @@ namespace eval OS32 {
 
          if { ![info exists access($user)] && ![string is integer $user] } {
             TrafficLight red "FTP USER $user FAILED LOGIN (not in config::access)"
-            ReplyCommand $sock 551 "Access denied"
+            ReplyCommand $sock 530 "Access denied"
             return
          }
 
@@ -519,7 +519,7 @@ namespace eval OS32 {
 
          if { [info exists access($user)] && ![llength [set access($user)]] } {
             TrafficLight red "FTP USER $user FAILED LOGIN (empty acl)"
-            ReplyCommand $sock 551 "User $user is denied ftp access"
+            ReplyCommand $sock 530 "User $user is denied ftp access"
             return
          }
 
@@ -538,7 +538,7 @@ namespace eval OS32 {
             set data(cwd) $user
             if { [CdBlacklist $data(cwd)] } {
                TrafficLight red "FTP USER $user FAILED LOGIN (numeric login on cd blacklist)"
-               ReplyCommand $sock 551 "Access denied"
+               ReplyCommand $sock 530 "Access denied"
                return
             }
          } else {
@@ -546,13 +546,13 @@ namespace eval OS32 {
             set data(cwd) [InitialAccount $sock]
             if { [CdBlacklist $data(cwd)] } {
                TrafficLight red "FTP USER $user FAILED LOGIN (initial account on cd blacklist)"
-               ReplyCommand $sock 551 "Access denied"
+               ReplyCommand $sock 530 "Access denied"
                return
             }
          }
          if { $data(cwd) < 0 } {
             TrafficLight red "FTP USER $user FAILED LOGIN (no account)"
-            ReplyCommand $sock 551 "Access denied"
+            ReplyCommand $sock 530 "Access denied"
             return
          }
 
@@ -575,7 +575,7 @@ namespace eval OS32 {
                return
             } else {
                TrafficLight red "FTP USER $user FAILED LOGIN USING MD5"
-               ReplyCommand $sock 551 "Access denied"
+               ReplyCommand $sock 530 "Access denied"
                return
             }
          }
@@ -599,7 +599,7 @@ namespace eval OS32 {
                return
             } else {
                TrafficLight red "FTP USER $user FAILED LOGIN USING MTM ($ermes)"
-               ReplyCommand $sock 551 "Access denied"
+               ReplyCommand $sock 530 "Access denied"
                return
             }
          }
@@ -608,7 +608,7 @@ namespace eval OS32 {
          # Now what?
          #
 
-         ReplyCommand $sock 551 "Cannot authenticate using MTM"
+         ReplyCommand $sock 530 "Cannot authenticate using MTM"
          return
       }
 
@@ -738,7 +738,7 @@ namespace eval OS32 {
                   set data(nrec) 0
                   set data(nchar) 0
                }
-               ReplyCommand $sock 451 "Whoops, file got stuck at $data(nchar) characters ($data(nrec) records)"
+               ReplyCommand $sock 551 "Whoops, $data(fnam) got stuck at $data(nchar) characters ($data(nrec) records)"
                unset data(nrec)
             }
             "^\\*?(....-ERR.*)" {
@@ -818,6 +818,10 @@ namespace eval OS32 {
          CheckNotAllowed $sock $ftpcmd
          CheckOperatorBusy $sock
          upvar #0 ::ftpd::$sock data
+         if { ![info exists $data(fnam1)] } {
+            ReplyCommand $sock 503 "Bad command sequence, missing RNFR"
+            return
+         }
          set fnam [WildFile $sock [string toupper $fnam] $ftpcmd]
          set data(fnam2) $fnam
          BottomHalf $sock $ftpcmd "FTP RENAME,$data(fnam1),$data(fnam2)"
@@ -954,7 +958,7 @@ namespace eval OS32 {
             }
             "^FILE STUCK - TRY ABORT\$" {
                Dimmer off $0
-               ReplyCommand $sock 451 "Whoops, file got stuck at record $data(ccc) of $data(nrec)"
+               ReplyCommand $sock 551 "Whoops, $data(fnam) got stuck at record $data(ccc) of $data(nrec)"
             }
             "^\\*(DELE-ERR  TYPE=PROT)" {
                set data(error) [list 550 "Cannot upload file because it is write protected"]
