@@ -1040,100 +1040,8 @@ namespace eval OS32 {
 
 ;######################################################################
    #
-   # Bottom half and convenience routines.
+   # These procs revolve around the bottom half queue.
    #
-
-   proc WildFile { sock fnam cmd } {
-
-      set fnam [string toupper $fnam]
-
-      if { $cmd == "LIST" || $cmd == "NLST" } {
-         set re {^([-*A-Z][-*A-Z0-9]*)(\.[-*A-Z0-9]*)?$}
-         set fnam [string map { * - ? * } $fnam]
-         set acceptnull 1
-         set err [list 501 "Invalid filename or wildcard pattern"]
-      } else {
-         if { $cmd == "STOR" || $cmd == "APPE" } {
-            regexp {([^/]+)$} $fnam -> fnam
-         }
-         set re {^([A-Z][A-Z0-9]*)(\.[A-Z0-9]*)?$}
-         set acceptnull 0
-         set err [list 501 "Invalid filename $fnam, must be letters, digits, 8.3 max"]
-      }
-
-      if { $fnam == "" } {
-         if { $acceptnull == 0 } {
-            ReplyCommand $sock 501 "Missing filename"
-            return -level 2
-         }
-      } elseif { ![regexp $re $fnam -> nam ext] } {
-         ReplyCommand $sock [lindex $err 0] [lindex $err 1]
-         return -level 2                  ;# extension inc dot -----v
-      } elseif { [string length $nam] > 8 || [string length $ext] > 4 } {
-         ReplyCommand $sock 501 "Invalid filename $fnam, 8.3 max"
-         return -level 2
-      }
-
-      upvar #0 ::ftpd::$sock data
-      return $data(vol)$fnam/$data(cwd)
-   }
-
-   proc CdBlacklist { acct } {
-      upvar #0 ::OS32::config::cdblacklist cdblacklist
-      if { [lsearch $cdblacklist $acct] >= 0 } {
-         return 1
-      } else {
-         return 0
-      }
-   }
-
-   proc InitialAccount { sock } {
-      upvar #0 ::ftpd::$sock data
-      set i [lsearch -regexp $data(acl) {[0-9]+}]
-      if { $i >= 0 } {
-         return [lindex $data(acl) $i]
-      } else {
-         return -1
-      }
-   }
-
-   proc CheckOperatorBusy {sock} {
-      variable taskcount
-      if { $taskcount > 0 } {
-         ReplyCommand $sock 450 "Operator busy, do not disturb"
-         return -level 2
-      }
-   }
-
-   # Note: must be called BEFORE CheckNotAllowed
-   proc CheckReadOnly { sock ftpcmd { plus "" } } {
-      if { [HaveACE $sock RO] && ![HaveACE $sock +$ftpcmd] && ![HaveACE $sock $ftpcmd+] } {
-         ReplyCommand $sock 550 "Permission denied (user is read only)"
-         return -level 2
-      }
-   }
-
-   # Note: must be called AFTER CheckReadOnly
-   proc CheckNotAllowed { sock ftpcmd } {
-      if { [HaveACE $sock -$ftpcmd] } {
-         ReplyCommand $sock 550 "Permission denied ($ftpcmd not allowed)"
-         return -level 2
-      }
-   }
-
-   proc HaveACE { sock check } {
-      upvar #0 ::ftpd::$sock data
-      if { [lsearch -exact $data(acl) $check] >= 0 } {
-         return 1
-      } else {
-         return 0
-      }
-   }
-
-   proc ShowACL { sock } {
-      upvar #0 ::ftpd::$sock data
-      return "([join $data(acl) ,])"
-   }
 
    variable bottomhalfqueue {}
 
@@ -1165,38 +1073,6 @@ namespace eval OS32 {
          set bottomhalfqueue [lreplace $bottomhalfqueue 0 2]
          BottomHalf $sock $ftpcmd $oscmd
       }
-   }
-
-   proc BeginData { sock err ftpcmd } {
-      if { $err != 150 } {
-         puts "\n\n*** BeginData must always be called with 150 ***\n\n"
-         expr {"abcxyz"+1}
-      }
-      if { [catch {
-                     puts $sock "$err $ftpcmd"
-                     ::ftpd::PasvCheckAndWait $sock
-                  } msg] } {
-         BrokenSocket $sock
-         return -code return
-      }
-   }
-
-   proc SendData { sock line } {
-      upvar #0 ::ftpd::$sock data
-      if { [catch {
-                     puts -nonewline $data(sock2) "$line\r\n"
-                  } msg] } {
-         BrokenSocket $sock
-         return -code return
-      }
-   }
-
-   proc EndData { sock err ftpcmd } {
-      if { $err != 226 } {
-         puts "\n\n*** BeginData must always be called with 226 ***\n\n"
-         expr {"abcxyz"+1}
-      }
-      ReplyCommand $sock $err "$ftpcmd"
    }
 
    proc ReplyCommand { sock err mess { colorme 1 } } {
@@ -1244,6 +1120,151 @@ namespace eval OS32 {
       catch { unset data }
       BottomHalfDEQ
    }
+
+;######################################################################
+   #
+   # These have to do with the secondary/passive data socket.
+   #
+
+   proc BeginData { sock err ftpcmd } {
+      if { $err != 150 } {
+         puts "\n\n*** BeginData must always be called with 150 ***\n\n"
+         expr {"abcxyz"+1}
+      }
+      if { [catch {
+                     puts $sock "$err $ftpcmd"
+                     ::ftpd::PasvCheckAndWait $sock
+                  } msg] } {
+         BrokenSocket $sock
+         return -code return
+      }
+   }
+
+   proc SendData { sock line } {
+      upvar #0 ::ftpd::$sock data
+      if { [catch {
+                     puts -nonewline $data(sock2) "$line\r\n"
+                  } msg] } {
+         BrokenSocket $sock
+         return -code return
+      }
+   }
+
+   proc EndData { sock err ftpcmd } {
+      if { $err != 226 } {
+         puts "\n\n*** BeginData must always be called with 226 ***\n\n"
+         expr {"abcxyz"+1}
+      }
+      ReplyCommand $sock $err "$ftpcmd"
+   }
+
+;######################################################################
+   #
+   # These involve permissions and sanity checks.
+   #
+
+   proc CheckOperatorBusy {sock} {
+      variable taskcount
+      if { $taskcount > 0 } {
+         ReplyCommand $sock 450 "Operator busy, do not disturb"
+         return -level 2
+      }
+   }
+
+   # Note: must be called BEFORE CheckNotAllowed
+   proc CheckReadOnly { sock ftpcmd { plus "" } } {
+      if { [HaveACE $sock RO] && ![HaveACE $sock +$ftpcmd] && ![HaveACE $sock $ftpcmd+] } {
+         ReplyCommand $sock 550 "Permission denied (user is read only)"
+         return -level 2
+      }
+   }
+
+   # Note: must be called AFTER CheckReadOnly
+   proc CheckNotAllowed { sock ftpcmd } {
+      if { [HaveACE $sock -$ftpcmd] } {
+         ReplyCommand $sock 550 "Permission denied ($ftpcmd not allowed)"
+         return -level 2
+      }
+   }
+
+   proc HaveACE { sock check } {
+      upvar #0 ::ftpd::$sock data
+      if { [lsearch -exact $data(acl) $check] >= 0 } {
+         return 1
+      } else {
+         return 0
+      }
+   }
+
+   proc ShowACL { sock } {
+      upvar #0 ::ftpd::$sock data
+      return "([join $data(acl) ,])"
+   }
+
+   proc CdBlacklist { acct } {
+      upvar #0 ::OS32::config::cdblacklist cdblacklist
+      if { [lsearch $cdblacklist $acct] >= 0 } {
+         return 1
+      } else {
+         return 0
+      }
+   }
+
+;######################################################################
+   #
+   # This one specifically checks filenames and wildcards. It is obviously
+   # rather specific to OS/32.
+   #
+
+   proc WildFile { sock fnam cmd } {
+
+      set fnam [string toupper $fnam]
+
+      if { $cmd == "LIST" || $cmd == "NLST" } {
+         set re {^([-*A-Z][-*A-Z0-9]*)(\.[-*A-Z0-9]*)?$}
+         set fnam [string map { * - ? * } $fnam]
+         set acceptnull 1
+         set err [list 501 "Invalid filename or wildcard pattern"]
+      } else {
+         if { $cmd == "STOR" || $cmd == "APPE" } {
+            regexp {([^/]+)$} $fnam -> fnam
+         }
+         set re {^([A-Z][A-Z0-9]*)(\.[A-Z0-9]*)?$}
+         set acceptnull 0
+         set err [list 501 "Invalid filename $fnam, must be letters, digits, 8.3 max"]
+      }
+
+      if { $fnam == "" } {
+         if { $acceptnull == 0 } {
+            ReplyCommand $sock 501 "Missing filename"
+            return -level 2
+         }
+      } elseif { ![regexp $re $fnam -> nam ext] } {
+         ReplyCommand $sock [lindex $err 0] [lindex $err 1]
+         return -level 2                  ;# extension inc dot -----v
+      } elseif { [string length $nam] > 8 || [string length $ext] > 4 } {
+         ReplyCommand $sock 501 "Invalid filename $fnam, 8.3 max"
+         return -level 2
+      }
+
+      upvar #0 ::ftpd::$sock data
+      return $data(vol)$fnam/$data(cwd)
+   }
+
+   proc InitialAccount { sock } {
+      upvar #0 ::ftpd::$sock data
+      set i [lsearch -regexp $data(acl) {[0-9]+}]
+      if { $i >= 0 } {
+         return [lindex $data(acl) $i]
+      } else {
+         return -1
+      }
+   }
+
+;######################################################################
+   #
+   # Various other routines/conveniences
+   #
 
    proc unesc { str } {
       regsub -all "\x1b" $str <ESC> str
