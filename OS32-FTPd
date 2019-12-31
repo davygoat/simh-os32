@@ -1135,14 +1135,36 @@ namespace eval OS32 {
       return "([join $data(acl) ,])"
    }
 
+   variable bottomhalfqueue {}
+
    proc BottomHalf { sock ftpcmd oscmd } {
-      if { $::OS32::ftpcmd != "" } {
-         ReplyCommand $sock 450 "FTP command in progress, try again" fip
-         return
-      }
+
+      BottomHalfENQ $sock $ftpcmd $oscmd
+
       set ::OS32::ftpcmd $ftpcmd
       set ::OS32::sock $sock
       send -- "$oscmd\r"
+   }
+
+   proc BottomHalfENQ { sock ftpcmd oscmd } {
+
+      variable bottomhalfqueue
+
+      if { $::OS32::ftpcmd != "" } {
+         lappend bottomhalfqueue $sock $ftpcmd $oscmd
+         return -code return
+      }
+   }
+
+   proc BottomHalfDEQ {} {
+
+      variable bottomhalfqueue
+
+      if { [llength $bottomhalfqueue] > 0 } {
+         foreach { sock ftpcmd oscmd } $bottomhalfqueue break
+         set bottomhalfqueue [lreplace $bottomhalfqueue 0 2]
+         BottomHalf $sock $ftpcmd $oscmd
+      }
    }
 
    proc BeginData { sock err ftpcmd } {
@@ -1177,20 +1199,12 @@ namespace eval OS32 {
       ReplyCommand $sock $err "$ftpcmd"
    }
 
-   proc ReplyCommand { sock err mess { opt "" } } {
-
-      #
-      # opt values:
-      #
-      # - 0    do not include VT100 sequences (SYST first only)
-      # - 1    DO include VT100 sequences (SYST subsequent calls)
-      # - fip  FTP command in progress, do not clobber ftpcmd
-      #
+   proc ReplyCommand { sock err mess { colorme 1 } } {
 
       ::ftpd::FinishData $sock
 
       variable vt100
-      if { $opt != "0" && ![HaveACE $sock -vt] } {
+      if { $colorme != 0 && ![HaveACE $sock -vt] } {
          set vt $vt100(normal)
          set vt0 $vt100(normal)
          for {set n 3} {$n >= 1} {incr n -1} {
@@ -1209,15 +1223,13 @@ namespace eval OS32 {
                      puts $sock "$err $vt$mess$vt0"
                   } msg] } {
          BrokenSocket $sock
-         return -status return 0
+         return -code return
       }
 
-      if { $opt != "fip" } {
-         set ::OS32::ftpcmd ""
-         set ::OS32::sock ""
-      }
+      set ::OS32::ftpcmd ""
+      set ::OS32::sock ""
 
-      return 1
+      BottomHalfDEQ
    }
 
    proc BrokenSocket { sock } {
@@ -1230,6 +1242,7 @@ namespace eval OS32 {
       catch { close $data(sock2) }
       catch { close $sock }
       catch { unset data }
+      BottomHalfDEQ
    }
 
    proc unesc { str } {
