@@ -1,8 +1,6 @@
 
 - Is STOR timeout working?
 
-- STOR should check DELE permission before overwriting existing files.
-
 - Look out for BROKEN SOCK errors slipping through and bringing the
   whole thing down.
 
