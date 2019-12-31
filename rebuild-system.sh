@@ -610,6 +610,7 @@ set cpu idle
    expect ".CMDP>" send "*** FTP RESET ************************************************\r";c
    expect ".CMDP>" send "xallocate reset.ftp,index,80\r";c
    expect ".CMDP>" send "$ifx @1.ftp\r";c
+   expect ".CMDP>" send "   $write SHOW FTP USERS\r";c
    expect ".CMDP>" send "   $write STOP FTP SERVER\r";c
    expect ".CMDP>" send "   $write START FTP SERVER\r";c
    expect ".CMDP>" send "   delete reset.ftp\r";c
@@ -671,7 +672,11 @@ set cpu idle
    expect ".CMDP>" send "xallocate stor.ftp,index,80\r";c
    expect ".CMDP>" send "$ifx @1.ftp\r";c
    expect ".CMDP>" send "   delete @1.ftp\r";c
-   expect ".CMDP>" send "   $write STOR GO AHEAD\r";c
+   expect ".CMDP>" send "   $ifx @2\r";c
+   expect ".CMDP>" send "      $write STOR EXISTS\r";c
+   expect ".CMDP>" send "   $else\r";c
+   expect ".CMDP>" send "      $write STOR NEWFILE\r";c
+   expect ".CMDP>" send "   $endc\r";c
    expect ".CMDP>" send "   $exit\r";c
    expect ".CMDP>" send "$endc\r";c
    expect ".CMDP>" send "delete stor.ftp\r";c
