@@ -1,16 +1,27 @@
 
-- Is STOR timeout working?
+OS/32 kit :
 
-- Look out for BROKEN SOCK errors slipping through and bringing the
-  whole thing down.
+   - MicroEMACS.
 
-- Anonymous FTP using email address.
+   - Ratfor
 
-- MicroEMACS.
+   - EIEIO
 
-- Add global try/except and bgerror to:
+   - Write-up
 
-  - Avoid dying.
-  - Avoid leaving the dimmer on.
-  - Avoid leaving temporary files around.
+
+FTP server :
+
+   - Is STOR timeout working?
+
+   - Look out for BROKEN SOCK errors slipping through and bringing the
+     whole thing down.
+
+   - Add global try/except and bgerror to:
+
+     - Avoid dying.
+     - Avoid leaving the dimmer on.
+     - Avoid leaving temporary files around.
+
+   - APPE, STOU
 
