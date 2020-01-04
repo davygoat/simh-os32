@@ -528,9 +528,9 @@ namespace eval OS32 {
 
          #
          # Set up defaults. Named users  start in the first account that
-         # is listed in  their acl. Numeric users will  be restricted to
-         # just  the account  they  sign  on with.  But  don't let  them
-         # default their way around the cd blacklist.
+         # is listed in their acl. Numeric users will be confined to the
+         # account they sign  on with.  But don't let them default their
+         # way past the cd blacklist.
          #
 
          set data(vol) $::OS32::config::defaultvolume
@@ -560,10 +560,10 @@ namespace eval OS32 {
          }
 
          #
-         # If the  user/account is  listed in passwords,  do an  md5 and
-         # check  the hash.  Note  that  we salt  with  the username  to
-         # prevent hash collisions, and we also terminate with a newline
-         # because the echo command pipes one in by default.
+         # If  the  user/account is  listed  in  passwords, compare  md5
+         # hashes. Note that  we salt with the username  to prevent hash
+         # collisions, and we also terminate  with a newline because the
+         # echo command pipes one in by default.
          #
          #  $ echo "myid/my password" | md5sum
          #
@@ -696,7 +696,7 @@ namespace eval OS32 {
    # TYPE the file,  and capture the meanful bits. Because  OS/32 has no
    # built-in  TYPE command,  we  are  using a  CSS  to  run COPY32  and
    # copy  the  file  to  the  console. It  also  wraps  the  output  in
-   # hand ===BEGIN===/===END=== markers.
+   # handy ===BEGIN===/===END=== markers.
    #
 
    namespace eval RETR {
