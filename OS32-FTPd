@@ -244,7 +244,8 @@ namespace eval OS32 {
                   if { [info exists data(ract)] } {
                      unset data(ract)
                   }
-                  ReplyControl $sock [lindex $data(error) 0] [lindex $data(error) 1]
+                  foreach { n mess } $data(error) break
+                  ReplyControl $sock $n $mess
                   unset data(rvol)
                   unset data(error)
                } else {
@@ -338,7 +339,8 @@ namespace eval OS32 {
             "^\\*=== END DELETE (.*) ===" {
                Dimmer off $0
                if { [info exists data(error)] } {
-                  ReplyControl $sock [lindex $data(error) 0] [lindex $data(error) 1]
+                  foreach { n mess } $data(error) break
+                  ReplyControl $sock $n $mess
                   unset data(error)
                } else {
                   ReplyControl $sock 250 "Delete $data(fnam) successful"
@@ -427,7 +429,8 @@ namespace eval OS32 {
             "^\\*=== END DIR .*? ===" {
                Dimmer off $0
                if { [info exists data(error)] } {
-                  ReplyControl $sock [lindex $data(error) 0] [lindex $data(error) 1]
+                  foreach { n mess } $data(error) break
+                  ReplyControl $sock $n $mess
                   unset data(error)
                } else {
                   EndData $sock 226 "DIR $data(fnam) received"
@@ -769,7 +772,8 @@ namespace eval OS32 {
                   set data(nchar) 0
                }
                if { [info exists data(error)] } {
-                  ReplyControl $sock [lindex $data(error) 0] [lindex $data(error) 1]
+                  foreach { n mess } $data(error) break
+                  ReplyControl $sock $n $mess
                   unset data(error)
                } else {
                   EndData $sock 226 "$data(fnam) downloaded, $data(nchar) characters, $data(nrec) records"
@@ -965,7 +969,8 @@ namespace eval OS32 {
             "^\\*=== END COPYIN .*? ===" {
                Dimmer off $0
                if { [info exists data(error)] } {
-                  ReplyControl $sock [lindex $data(error) 0] [lindex $data(error) 1]
+                  foreach { n mess } $data(error) break
+                  ReplyControl $sock $n $mess
                   unset data(error)
                } else {
                   EndData $sock 226 "$data(fnam) uploaded, $data(nchar) characters, $data(ccc) records, $data(reclen) chars reclen"
