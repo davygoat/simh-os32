@@ -797,6 +797,51 @@ set cpu idle
    expect "DSC4:  SYS" send "volume sys\r";c
    expect "*";c
    expect "*" send "volume sys/temp\r";c
+   # MAKE.CSS/25
+   expect "\r\n*" send "build make.css\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$if ch \"@1\" eq \"clean\"\r";c
+   expect ".CMDP>" send "   $goto clean\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$write\r";c
+   expect ".CMDP>" send "$write *********** CAL ******************\r";c
+   expect ".CMDP>" send "$write\r";c
+   expect ".CMDP>" send "cal\r";c
+   expect ".CMDP>" send "compile helloa\r";c
+   expect ".CMDP>" send "link\r";c
+   expect ".CMDP>" send "exec\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$write\r";c
+   expect ".CMDP>" send "$write *********** FORTRAN **************\r";c
+   expect ".CMDP>" send "$write\r";c
+   expect ".CMDP>" send "fort hellof\r";c
+   expect ".CMDP>" send "exec\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$write\r";c
+   expect ".CMDP>" send "$write *********** PASCAL ***************\r";c
+   expect ".CMDP>" send "$write\r";c
+   expect ".CMDP>" send "pascal\r";c
+   expect ".CMDP>" send "exec hellop.pas\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$write\r";c
+   expect ".CMDP>" send "$write *********** C ********************\r";c
+   expect ".CMDP>" send "$write\r";c
+   expect ".CMDP>" send "cc helloc\r";c
+   expect ".CMDP>" send "helloc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$label clean\r";c
+   expect ".CMDP>" send "$write *********** MAKE CLEAN ***********\r";c
+   expect ".CMDP>" send "xdelete helloa.obj,helloa.tsk\r";c
+   expect ".CMDP>" send "xdelete helloc.obj,helloc.tsk,helloc.map,helloc.css\r";c
+   expect ".CMDP>" send "xdelete hellof.obj,hellof.tsk\r";c
+   expect ".CMDP>" send "xdelete hellop.obj,hellop.tsk\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "endb\r";c
+   expect "\r\n*"  send "rename make.css,make.css/25\r";c
    # HELLOA.CAL
    expect "\r\n*" send "build helloa.cal\r";c
    expect ".CMDP>" send "         svc   1,say\r";c
