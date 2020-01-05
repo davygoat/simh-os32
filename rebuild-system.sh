@@ -551,6 +551,376 @@ set cpu idle
    expect ".CMDP>" send "$exit\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "endb\r";c
+   # WILD.CSS/25
+   expect "\r\n*" send "build wild.css\r";c
+   expect ".CMDP>" send "sys:wild/s \"@1\",@2\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "endb\r";c
+   expect "\r\n*" send "repro wild.css,ff00 ; rename wild.css,wild.css/25\r";c
+   # SEARCH.CSS/25
+   expect "\r\n*" send "build search.css\r";c
+   expect ".CMDP>" send "sys:search/s @1,\"@2\",,@4\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "endb\r";c
+   expect "\r\n*" send "repro search.css,ff00 ; rename search.css,search.css/25\r";c
+   # WILD.CSS
+   expect "\r\n*" send "build wild.css\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "mtmonly\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "* Check parameters present\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$ifnull @1\r";c
+   expect ".CMDP>" send "   load sys:wild,10\r";c
+   expect ".CMDP>" send "   task wild\r";c
+   expect ".CMDP>" send "   start\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "$ifnull @2\r";c
+   expect ".CMDP>" send "   load sys:wild,10\r";c
+   expect ".CMDP>" send "   task wild\r";c
+   expect ".CMDP>" send "   start\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$end\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "* Use DISPLAY FILES to write WILD.TSK input\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$job\r";c
+   expect ".CMDP>" send "   xalloc wildin.tmp,index,80\r";c
+   expect ".CMDP>" send "   xalloc wildtmp.css,index,128\r";c
+   expect ".CMDP>" send "   display files ,@2,wildin.tmp\r";c
+   expect ".CMDP>" send "$termjob\r";c
+   expect ".CMDP>" send "$ifne 0\r";c
+   expect ".CMDP>" send "   xdelete wildin.tmp\r";c
+   expect ".CMDP>" send "   xdelete wildtmp.css\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "* Convert to CSS using WILD.TSK\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$job\r";c
+   expect ".CMDP>" send "   load sys:wild,10\r";c
+   expect ".CMDP>" send "   task wild\r";c
+   expect ".CMDP>" send "   assign 0,wildin.tmp,ero\r";c
+   expect ".CMDP>" send "   assign 1,wildtmp.css,ewo\r";c
+   expect ".CMDP>" send "   start ,\"@1\",@2\r";c
+   expect ".CMDP>" send "$termjob\r";c
+   expect ".CMDP>" send "$ifne 0\r";c
+   expect ".CMDP>" send "   xdelete wildin.css\r";c
+   expect ".CMDP>" send "   xdelete wildtmp.css\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "* Run CSS\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$job\r";c
+   expect ".CMDP>" send "   wildtmp\r";c
+   expect ".CMDP>" send "$termjob\r";c
+   expect ".CMDP>" send "$ifne 0\r";c
+   expect ".CMDP>" send "   $write THERE WERE A FEW PROBLEMS\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "* Cleanup\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "xdelete wildin.tmp\r";c
+   expect ".CMDP>" send "xdelete wildtmp.css\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "endb\r";c
+   # SEARCH.CSS
+   expect "\r\n*" send "build search.css\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$ifnnull @4\r";c
+   expect ".CMDP>" send "   $goto dofile\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "*** WILDCARD *************************************\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "mtmonly\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$ifnull @1\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write USAGE: SEARCH WILDCARD,\"STRING\"\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write NOTE:  TO SEARCH FOR $, USE $$\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$ifnull @2\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write USAGE: SEARCH WILDCARD,\"STRING\"\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write NOTE:  TO SEARCH FOR $, USE $$\r";c
+   expect ".CMDP>" send "   $exit\r";c
+   expect ".CMDP>" send "$endc\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "wild \"search $V:$F,@2,,go\",@1\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "*** SINGLE FILE **********************************\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$label dofile\r";c
+   expect ".CMDP>" send "prevent etm\r";c
+   expect ".CMDP>" send "load .bg,sys:search,10\r";c
+   expect ".CMDP>" send "task .bg\r";c
+   expect ".CMDP>" send "assign 0,@1\r";c
+   expect ".CMDP>" send "assign 1,con:\r";c
+   expect ".CMDP>" send "assign 2,con:\r";c
+   expect ".CMDP>" send "start ,@1,\"@2\"\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$exit\r";c
+   expect ".CMDP>" send "endb\r";c
+   # WILD.C/25
+   expect "\r\n*" send "build wild.c\r";c
+   expect ".CMDP>" send "/*\r";c
+   expect ".CMDP>" send " * This program converts fixed-format DISPLAY FILES output into\r";c
+   expect ".CMDP>" send " * whatever you ask. Its primary use will be in generating CSS scripts\r";c
+   expect ".CMDP>" send " * that can delete or rename object files and other such clutter en\r";c
+   expect ".CMDP>" send " * masse. OS/32 does not make that sort of thing terribly easy.\r";c
+   expect ".CMDP>" send " */\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "#include <stdio.h>\r";c
+   expect ".CMDP>" send "#include <ctype.h>\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "#define strchr(s,c) index((s),(c))\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "int usage()\r";c
+   expect ".CMDP>" send "{\r";c
+   expect ".CMDP>" send "   printf (\"\\n\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"Usage: WILD \\\"command\\\",wildcard\\n\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"   'command' is an OS/32 command or CSS \");\r";c
+   expect ".CMDP>" send "   printf (\"to run on each file.\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"   'wildcard' is an OS/32 wildcard pattern.\\n\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"Placeholders:\\n\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"   $V  volume\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"   $N  file NAME\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"   $X  extension\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"   $A  account (/P, /G, or /S)\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"   $F  file name, extension and account\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"   $T  type\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"   $D  dbs\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"   $I  ibs\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"   $L  record LENGTH\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"   $R  records\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"   $C  created date (ctime)\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"   $W  written date (mtime)\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"   $K  keys (protection)\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"   $:  semicolon\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"   $$  dollar sign\\n\");\r";c
+   expect ".CMDP>" send "   printf (\"\\n\");\r";c
+   expect ".CMDP>" send "   return (1);\r";c
+   expect ".CMDP>" send "}\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "int memcmp(p1,p2,len)\r";c
+   expect ".CMDP>" send "   char *p1, *p2;\r";c
+   expect ".CMDP>" send "   int len;\r";c
+   expect ".CMDP>" send "{\r";c
+   expect ".CMDP>" send "   while (--len > 0 && *p1 == *p2)\r";c
+   expect ".CMDP>" send "   {\r";c
+   expect ".CMDP>" send "      p1++;\r";c
+   expect ".CMDP>" send "      p2++;\r";c
+   expect ".CMDP>" send "   }\r";c
+   expect ".CMDP>" send "   return (*p1-*p2);\r";c
+   expect ".CMDP>" send "}\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "char *rtrim (str)\r";c
+   expect ".CMDP>" send "   char *str;\r";c
+   expect ".CMDP>" send "{\r";c
+   expect ".CMDP>" send "   char *p = str;\r";c
+   expect ".CMDP>" send "   while (*p) p++;\r";c
+   expect ".CMDP>" send "   while (p >= str && *p <= ' ') *p-- = 0;\r";c
+   expect ".CMDP>" send "   return (str);\r";c
+   expect ".CMDP>" send "}\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "int toupper(ch)\r";c
+   expect ".CMDP>" send "   int ch;\r";c
+   expect ".CMDP>" send "{\r";c
+   expect ".CMDP>" send "   if (islower(ch)) ch -= 'a' - 'A';\r";c
+   expect ".CMDP>" send "   return (ch);\r";c
+   expect ".CMDP>" send "}\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "int main (argc, argv)\r";c
+   expect ".CMDP>" send "   int argc;\r";c
+   expect ".CMDP>" send "   char **argv;\r";c
+   expect ".CMDP>" send "{\r";c
+   expect ".CMDP>" send "   char line[90], *p;\r";c
+   expect ".CMDP>" send "   char volbuf[80], *vol;\r";c
+   expect ".CMDP>" send "   char *cmd, *wild, *act;\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "   if (argc < 3) return usage();\r";c
+   expect ".CMDP>" send "   cmd = argv[1];\r";c
+   expect ".CMDP>" send "   wild = argv[2];\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "   act = strchr (wild, '/');\r";c
+   expect ".CMDP>" send "   if (act) act++;\r";c
+   expect ".CMDP>" send "   else act = \"P\";\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "   while ( fgets(line,sizeof(line),stdin) && !feof(stdin) )\r";c
+   expect ".CMDP>" send "   {\r";c
+   expect ".CMDP>" send "      int dolcnt = 0;\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "      char *nam = line+1;\r";c
+   expect ".CMDP>" send "      char *ext = line+10;\r";c
+   expect ".CMDP>" send "      char *typ = line+20;\r";c
+   expect ".CMDP>" send "      char *dbs = line+23;\r";c
+   expect ".CMDP>" send "      char *ibs = line+27;\r";c
+   expect ".CMDP>" send "      char *len = line+31;\r";c
+   expect ".CMDP>" send "      char *rex = line+37;\r";c
+   expect ".CMDP>" send "      char *cre = line+45;\r";c
+   expect ".CMDP>" send "      char *wri = line+60;\r";c
+   expect ".CMDP>" send "      char *key = line+75;\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "      if (!memcmp(line,\"VOLUME=\",7))\r";c
+   expect ".CMDP>" send "      {\r";c
+   expect ".CMDP>" send "         strcpy (vol=volbuf, rtrim(line+7));\r";c
+   expect ".CMDP>" send "         while (*vol > 0 && *vol <= ' ') vol++;\r";c
+   expect ".CMDP>" send "         continue;\r";c
+   expect ".CMDP>" send "      }\r";c
+   expect ".CMDP>" send "      if (!memcmp(line,\" FILENAME...\",12)) continue;\r";c
+   expect ".CMDP>" send "      if (*line != ' ')\r";c
+   expect ".CMDP>" send "      {\r";c
+   expect ".CMDP>" send "         fprintf (stderr, \"%%s\", line);\r";c
+   expect ".CMDP>" send "         exit (1);\r";c
+   expect ".CMDP>" send "      }\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "      nam[8] = ext[3] = typ[2] = dbs[3] = ibs[3] = 0;\r";c
+   expect ".CMDP>" send "      len[5] = rex[7] = cre[14] = wri[14] = key[4] = 0;\r";c
+   expect ".CMDP>" send "      rtrim (ext);\r";c
+   expect ".CMDP>" send "      rtrim (nam);\r";c
+   expect ".CMDP>" send "      while (*dbs != 0 && *dbs <= ' ') dbs++;\r";c
+   expect ".CMDP>" send "      while (*ibs != 0 && *ibs <= ' ') ibs++;\r";c
+   expect ".CMDP>" send "      while (*rex != 0 && *rex <= ' ') rex++;\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "      for (p=cmd; *p; p++)\r";c
+   expect ".CMDP>" send "      {\r";c
+   expect ".CMDP>" send "         if (*p == '$')\r";c
+   expect ".CMDP>" send "         {\r";c
+   expect ".CMDP>" send "            switch (toupper(p[1]))\r";c
+   expect ".CMDP>" send "            {\r";c
+   expect ".CMDP>" send "               case 'V':  printf(\"%%s\",vol); p++; break;;\r";c
+   expect ".CMDP>" send "               case 'N':  printf(\"%%s\",nam); p++; break;;\r";c
+   expect ".CMDP>" send "               case 'X':  printf(\"%%s\",ext); p++; break;;\r";c
+   expect ".CMDP>" send "               case 'A':  printf(\"%%s\",act); p++; break;;\r";c
+   expect ".CMDP>" send "               case 'T':  printf(\"%%s\",typ); p++; break;;\r";c
+   expect ".CMDP>" send "               case 'D':  printf(\"%%s\",dbs); p++; break;;\r";c
+   expect ".CMDP>" send "               case 'I':  printf(\"%%s\",ibs); p++; break;;\r";c
+   expect ".CMDP>" send "               case 'L':  printf(\"%%s\",len); p++; break;;\r";c
+   expect ".CMDP>" send "               case 'R':  printf(\"%%s\",rex); p++; break;;\r";c
+   expect ".CMDP>" send "               case 'C':  printf(\"%%s\",cre); p++; break;;\r";c
+   expect ".CMDP>" send "               case 'W':  printf(\"%%s\",wri); p++; break;;\r";c
+   expect ".CMDP>" send "               case 'K':  printf(\"%%s\",key); p++; break;;\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "               case 'F':\r";c
+   expect ".CMDP>" send "                  printf (\"%%s.%%s/%%s\", nam, ext, act);\r";c
+   expect ".CMDP>" send "                  p++;\r";c
+   expect ".CMDP>" send "                  break;\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "               case ':':\r";c
+   expect ".CMDP>" send "                  putchar (';');\r";c
+   expect ".CMDP>" send "                  p++;\r";c
+   expect ".CMDP>" send "                  break;\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "               case '$':\r";c
+   expect ".CMDP>" send "                  putchar ('$');\r";c
+   expect ".CMDP>" send "                  p++;\r";c
+   expect ".CMDP>" send "                  break;\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "               default:\r";c
+   expect ".CMDP>" send "                  fprintf (stderr, \"Invalid placeholder '%%c'\\n\", *p);\r";c
+   expect ".CMDP>" send "                  exit (1);\r";c
+   expect ".CMDP>" send "            }\r";c
+   expect ".CMDP>" send "            dolcnt++;\r";c
+   expect ".CMDP>" send "         }\r";c
+   expect ".CMDP>" send "         else\r";c
+   expect ".CMDP>" send "            putchar (*p);\r";c
+   expect ".CMDP>" send "      }\r";c
+   expect ".CMDP>" send "      if (dolcnt == 0) printf (\" %%s.%%s/%%s\", nam, ext, act);\r";c
+   expect ".CMDP>" send "      putchar ('\\n');\r";c
+   expect ".CMDP>" send "   }\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "   printf (\"$exit\\n\");\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "   return (0);\r";c
+   expect ".CMDP>" send "}\r";c
+   expect ".CMDP>" send "endb\r";c
+   expect "\r\n*" send "xdelete wild.c/25 ; rename wild.c,wild.c/25\r";c
+   # SEARCH.C/25
+   expect "\r\n*" send "build search.c\r";c
+   expect ".CMDP>" send "#include <stdio.h>\r";c
+   expect ".CMDP>" send "#include <ctype.h>\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "int toupper(ch)\r";c
+   expect ".CMDP>" send "   int ch;\r";c
+   expect ".CMDP>" send "{\r";c
+   expect ".CMDP>" send "   if (islower(ch)) ch -= 'a' - 'A';\r";c
+   expect ".CMDP>" send "   return (ch);\r";c
+   expect ".CMDP>" send "}\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "char *stristr (haystack,needle)\r";c
+   expect ".CMDP>" send "   char *haystack;\r";c
+   expect ".CMDP>" send "   char *needle;\r";c
+   expect ".CMDP>" send "{\r";c
+   expect ".CMDP>" send "   char *hs, *p, *q;\r";c
+   expect ".CMDP>" send "   for (hs=haystack; *hs; hs++)\r";c
+   expect ".CMDP>" send "   {\r";c
+   expect ".CMDP>" send "      if (toupper(*hs) == toupper(*needle))\r";c
+   expect ".CMDP>" send "      {\r";c
+   expect ".CMDP>" send "         p = needle;\r";c
+   expect ".CMDP>" send "         q = hs;\r";c
+   expect ".CMDP>" send "         while ( *p > 0 &&\r";c
+   expect ".CMDP>" send "                 *q > 0 &&\r";c
+   expect ".CMDP>" send "                 toupper(*p) == toupper(*q) )\r";c
+   expect ".CMDP>" send "         {\r";c
+   expect ".CMDP>" send "            p++;\r";c
+   expect ".CMDP>" send "            q++;\r";c
+   expect ".CMDP>" send "         }\r";c
+   expect ".CMDP>" send "         if (*p == 0) return (hs);\r";c
+   expect ".CMDP>" send "      }\r";c
+   expect ".CMDP>" send "   }\r";c
+   expect ".CMDP>" send "   return (NULL);\r";c
+   expect ".CMDP>" send "}\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "int main (argc,argv)\r";c
+   expect ".CMDP>" send "   int argc;\r";c
+   expect ".CMDP>" send "   char **argv;\r";c
+   expect ".CMDP>" send "{\r";c
+   expect ".CMDP>" send "   char *fnam, *str, line[256];\r";c
+   expect ".CMDP>" send "   int lc, mc, i;\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "   if (argc < 3)\r";c
+   expect ".CMDP>" send "   {\r";c
+   expect ".CMDP>" send "      fprintf (stderr, \"Usage: $ search FILENAME,STRING\\n\");\r";c
+   expect ".CMDP>" send "      exit (0);\r";c
+   expect ".CMDP>" send "   }\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "   fnam = argv[1];\r";c
+   expect ".CMDP>" send "   str = argv[2];\r";c
+   expect ".CMDP>" send "   lc = mc = 0;\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "   while ( fgets(line,sizeof(line),stdin) && !feof(stdin) )\r";c
+   expect ".CMDP>" send "   {\r";c
+   expect ".CMDP>" send "      lc++;\r";c
+   expect ".CMDP>" send "      if (stristr(line,str))\r";c
+   expect ".CMDP>" send "      {\r";c
+   expect ".CMDP>" send "         if (!mc++)\r";c
+   expect ".CMDP>" send "         {\r";c
+   expect ".CMDP>" send "            printf (\"\\n\\n====== \");\r";c
+   expect ".CMDP>" send "            printf (\"%%s \", fnam);\r";c
+   expect ".CMDP>" send "            for (i=71-strlen(fnam); i>0; i--) putc ('=', stdout);\r";c
+   expect ".CMDP>" send "            printf (\"\\n\\n\");\r";c
+   expect ".CMDP>" send "         }\r";c
+   expect ".CMDP>" send "         printf (\"%%6d %%s\", lc, line);\r";c
+   expect ".CMDP>" send "      }\r";c
+   expect ".CMDP>" send "   }\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "   if (mc > 0)\r";c
+   expect ".CMDP>" send "      printf (\"\\nFound %%d matches for \\\"%%s\\\".\", mc, str);\r";c
+   expect ".CMDP>" send " \r";c
+   expect ".CMDP>" send "   return (0);\r";c
+   expect ".CMDP>" send "}\r";c
+   expect ".CMDP>" send "endb\r";c
+   expect "\r\n*" send "xdelete search.c/25 ; rename search.c,search.c/25\r";c
    # FTP.CSS
    expect "\r\n*" send "build ftp.css\r";c
    expect ".CMDP>" send "*\r";c
