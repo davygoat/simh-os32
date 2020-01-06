@@ -8,6 +8,14 @@ Tips/quirks :
   between accounts.
 
 
+BREAK :
+
+- Hit telnet escape char, Ctrl/]
+- Type SEND BRK.
+- Wait for asterisk prompt.
+- Type CANCEL.
+
+
 SIGNON :
 
 - SIGNON name,account,password.
