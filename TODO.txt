@@ -1,10 +1,6 @@
 
 OS/32 kit :
 
-   - MicroEMACS.
-
-   - Ratfor
-
    - EIEIO
 
    - Write-up

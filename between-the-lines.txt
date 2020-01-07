@@ -1,5 +1,20 @@
 vim:set nowrap:
 
+Tapes :
+
+- C_Deb_Pas		installed (C). Debugger? Pascal?
+- OS32_Pascal		installed: pascal compiler.
+- FortranVII		installed: development and optimising compiler
+- UnvFortrSwPkg		universal Fortran compiler
+
+- sortMergeII		reads ok, but implies COBOL
+- DMS32			reads ok, but implies COBOL, possibly Fortran
+- OS32Medit		reads ok, needs terminal config
+- IUG tapes		software tools works, lots of things don't (3200?)
+
+- sort-merge		does not read
+- COBOLupgrd		does not read
+
 Tips/quirks :
 
 - MTM copy, rename, etc. cannot "see" file with /99 type account ref.

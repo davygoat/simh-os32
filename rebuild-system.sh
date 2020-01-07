@@ -34,8 +34,13 @@ set cpu idle
    if not exist tapes/04-082M71R16_OS32_8.1.tap       set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/OS32_8.1/04-082M71R16_OS32_8.1.tap.gz
    if not exist tapes/04-083M71R10_OS32MTM8.1.tap     set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/OS32_8.1/04-083M71R10_OS32MTM8.1.tap.gz
    if not exist tapes/04-101M31R09_FortranVII.tap     set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/04-101M31R09_FortranVII.tap.gz
+   if not exist tapes/04-149M31R01_UnvFortSwPgk.tap   set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/04-149M31R01_UnvFortSwPgk.tap.gz
+   if not exist tapes/04-081M71R02_sortMergeII.tap    set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/04-081M71R02_sortMergeII.tap
+   if not exist tapes/04-108M31R05_DMS32.tap          set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/04-108M31R05_DMS32.tap
+   if not exist tapes/04-199M71R01_OS32Medit.tap      set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/04-199M71R01_OS32Medit.tap.gz
    if not exist tapes/OS32_pascal.tap                 set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/OS32_pascal.tap.gz
    if not exist tapes/C_Deb_Bas_Pas.tap               set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/32bit/os32/C_Deb_Bas_Pas.tap.gz
+   if not exist tapes/iug0165.tap                     set environ MISSING=true ; echo wget http://bitsavers.org/bits/Interdata/interchange/iug0165.tap.gz
 
    if "%MISSING%" == "" echo ALL TAPES PRESENT AND CORRECT ; goto install-os32
 
@@ -282,7 +287,7 @@ set cpu idle
    expect "TSKID = COPY32" send "start\r";c
    expect "COPY32>" send "copy cal32.tsk,cal32.tsk/10\r";c
    expect "COPY32>" send "end\r";c
-   # Fortran tape goes into /11
+   # Fortran tape (Development and Global/Optimizing) goes into /11
    expect "COPY32:END OF TASK" attach -e -r mt0 tapes/04-101M31R09_FortranVII.tap ; send "load backup\r";c
    expect "TSKID = BACKUP" send "start ,in=mag1:,out=dsc4:,ac=11,verify,list=con:\r";c
    expect "BACKUP:END OF TASK" send "load copy32\r";c
@@ -297,40 +302,70 @@ set cpu idle
    expect "COPY32>" send "copy f7lib51a.obj/11,f7lib51a.obj/0\r";c
    expect "COPY32>" send "copy pem51a.obj/11,pem51a.obj/0\r";c
    expect "COPY32>" send "end\r";c
-   # Pascal tape goes to /12
-   expect "COPY32:END OF TASK" attach -e -r mt0 tapes/OS32_pascal.tap ; send "load backup\r";c
+   # Universal Fortran tape goes into /12
+   expect "COPY32:END OF TASK" attach -e -r mt0 tapes/04-149M31R01_UnvFortSwPgk.tap ; send "load backup\r";c
    expect "TSKID = BACKUP" send "start ,in=mag1:,out=dsc4:,ac=12,verify,list=con:\r";c
-   expect "BACKUP:TASK PAUSED" send "cancel backup\r";c
    expect "BACKUP:END OF TASK" send "load copy32\r";c
    expect "TSKID = COPY32" send "start\r";c
-   expect "COPY32>" send "copy pascal.tsk/12,pascal.tsk/0\r";c
-   expect "COPY32>" send "copy pasrtl.obj/12,pasrtl.obj/0\r";c
-   expect "COPY32>" send "copy prefix.pas/12,prefix.pas/0\r";c
-   expect "COPY32>" send "copy prefix.pas/12,prefix.pas/0\r";c
-   expect "COPY32>" send "copy primes.pas/12,primes.pas/0\r";c
-   expect "COPY32>" send "copy smplsvcs.pas/12,smplsvcs.pas/0\r";c
-   expect "COPY32>" send "copy pemath.obj/12,pemath.obj/0\r";c  ;# Needed for EOU
-   expect "COPY32>" send "copy f7rtl.obj/12,f7rtl51.obj/0\r";c  ;# Needed for EOU
    expect "COPY32>" send "end\r";c
-   # Whitesmiths goes to /13
-   expect "COPY32:END OF TASK" attach -e -r mt0 tapes/C_Deb_Bas_Pas.tap ; send "load backup\r";c
+   # Pascal tape goes to /13
+   expect "COPY32:END OF TASK" attach -e -r mt0 tapes/OS32_pascal.tap ; send "load backup\r";c
    expect "TSKID = BACKUP" send "start ,in=mag1:,out=dsc4:,ac=13,verify,list=con:\r";c
    expect "BACKUP:TASK PAUSED" send "cancel backup\r";c
    expect "BACKUP:END OF TASK" send "load copy32\r";c
    expect "TSKID = COPY32" send "start\r";c
-   expect "COPY32>" send "copy pp.tsk/13,pp.tsk/0\r";c
-   expect "COPY32>" send "copy p1.tsk/13,p1.tsk/0\r";c
-   expect "COPY32>" send "copy p2.tsk/13,p2.tsk/0\r";c
-   expect "COPY32>" send "copy lister.tsk/13,lister.tsk/0\r";c
-   expect "COPY32>" send "copy libe.obj/13,libe.obj/0\r";c
-   expect "COPY32>" send "copy libu.obj/13,libu.obj/0\r";c
-   expect "COPY32>" send "copy libw.obj/13,libw.obj/0\r";c
-   expect "COPY32>" send "copy cinit.obj/13,cinit.obj/0\r";c
-   expect "COPY32>" send "copy cfinit.obj/13,cfinit.obj/0\r";c
-   expect "COPY32>" send "copy eouc.css/13,eouc.css/0\r";c
-   expect "COPY32>" send "copy chloc.css/13,chloc.css/0\r";c
+   expect "COPY32>" send "copy pascal.tsk/13,pascal.tsk/0\r";c
+   expect "COPY32>" send "copy pasrtl.obj/13,pasrtl.obj/0\r";c
+   expect "COPY32>" send "copy prefix.pas/13,prefix.pas/0\r";c
+   expect "COPY32>" send "copy prefix.pas/13,prefix.pas/0\r";c
+   expect "COPY32>" send "copy primes.pas/13,primes.pas/0\r";c
+   expect "COPY32>" send "copy smplsvcs.pas/13,smplsvcs.pas/0\r";c
+   expect "COPY32>" send "copy pemath.obj/13,pemath.obj/0\r";c  ;# Needed for EOU
+   expect "COPY32>" send "copy f7rtl.obj/13,f7rtl51.obj/0\r";c  ;# Needed for EOU
+   expect "COPY32>" send "end\r";c
+   # C, Pascal, Debugger (and BASIC?) goes to /14
+   expect "COPY32:END OF TASK" attach -e -r mt0 tapes/C_Deb_Bas_Pas.tap ; send "load backup\r";c
+   expect "TSKID = BACKUP" send "start ,in=mag1:,out=dsc4:,ac=14,verify,list=con:\r";c
+   expect "BACKUP:TASK PAUSED" send "cancel backup\r";c
+   expect "BACKUP:END OF TASK" send "load copy32\r";c
+   expect "TSKID = COPY32" send "start\r";c
+   expect "COPY32>" send "copy pp.tsk/14,pp.tsk/0\r";c
+   expect "COPY32>" send "copy p1.tsk/14,p1.tsk/0\r";c
+   expect "COPY32>" send "copy p2.tsk/14,p2.tsk/0\r";c
+   expect "COPY32>" send "copy lister.tsk/14,lister.tsk/0\r";c
+   expect "COPY32>" send "copy libe.obj/14,libe.obj/0\r";c
+   expect "COPY32>" send "copy libu.obj/14,libu.obj/0\r";c
+   expect "COPY32>" send "copy libw.obj/14,libw.obj/0\r";c
+   expect "COPY32>" send "copy cinit.obj/14,cinit.obj/0\r";c
+   expect "COPY32>" send "copy cfinit.obj/14,cfinit.obj/0\r";c
+   expect "COPY32>" send "copy eouc.css/14,eouc.css/0\r";c
+   expect "COPY32>" send "copy chloc.css/14,chloc.css/0\r";c
    expect "COPY32>" send "option noterm,nopsfm\r";c
-   expect "COPY32>" send "copy chfiles.css/13,chfiles.css/0\r";c
+   expect "COPY32>" send "copy chfiles.css/14,chfiles.css/0\r";c
+   expect "COPY32>" send "end\r";c
+   # SORT/MERGE-II goes to /15 (probably needs COBOL)
+   expect "COPY32:END OF TASK" attach -e -r mt0 tapes/04-081M71R02_sortMergeII.tap ; send "load backup\r";c
+   expect "TSKID = BACKUP" send "start ,in=mag1:,out=dsc4:,ac=15,verify,list=con:\r";c
+   expect "BACKUP:END OF TASK" send "load copy32\r";c
+   expect "TSKID = COPY32" send "start\r";c
+   expect "COPY32>" send "end\r";c
+   # DMS/32 goes to /16 (probably needs COBOL, but might work with Fortran)
+   expect "COPY32:END OF TASK" attach -e -r mt0 tapes/04-108M31R05_DMS32.tap ; send "load backup\r";c
+   expect "TSKID = BACKUP" send "start ,in=mag1:,out=dsc4:,ac=16,verify,list=con:\r";c
+   expect "BACKUP:END OF TASK" send "load copy32\r";c
+   expect "TSKID = COPY32" send "start\r";c
+   expect "COPY32>" send "end\r";c
+   # MEDIT goes to /17 (someone might prefer this to the EDIT/32 line editor, needs terminal config)
+   expect "COPY32:END OF TASK" attach -e -r mt0 tapes/04-199M71R01_OS32Medit.tap ; send "load backup\r";c
+   expect "TSKID = BACKUP" send "start ,in=mag1:,out=dsc4:,ac=17,delete,verify,list=con:\r";c
+   expect "BACKUP:END OF TASK" send "load copy32\r";c
+   expect "TSKID = COPY32" send "start\r";c
+   expect "COPY32>" send "end\r";c
+   # IUG-165 (MicroEMACS) goes to /18 (lots of people might like this, needs termcap setup)
+   expect "COPY32:END OF TASK" attach -e -r mt0 tapes/iug0165.tap ; send "load backup\r";c
+   expect "TSKID = BACKUP" send "start ,in=mag1:,out=dsc4:,ac=18,verify,delete,list=con:\r";c
+   expect "BACKUP:END OF TASK" send "load copy32\r";c
+   expect "TSKID = COPY32" send "start\r";c
    expect "COPY32>" send "end\r";c
    expect "COPY32:END OF TASK" send "chloc ; chfiles ; mark dsc4:,off ; display devices\r";c
    expect "DSC5  FE 0000   OFF" detach mt0 ; detach dm0 ; goto startup-shutdown-scripts
