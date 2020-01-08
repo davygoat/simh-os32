@@ -602,6 +602,15 @@ set cpu idle
    expect "\r\n*" send "build wild.css\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "mtmonly\r";c
+   expect ".CMDP>" send "$ifnx wild.tsk/s\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write CANNOT FIND WILD.TSK\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write CC WILD\r";c
+   expect ".CMDP>" send "   $write RENAME WILD.TSK,WILD.TSK/S\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $clear\r";c
+   expect ".CMDP>" send "$endc\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "* Check parameters present\r";c
    expect ".CMDP>" send "*\r";c
@@ -663,6 +672,16 @@ set cpu idle
    expect ".CMDP>" send "endb\r";c
    # SEARCH.CSS
    expect "\r\n*" send "build search.css\r";c
+   expect ".CMDP>" send "*\r";c
+   expect ".CMDP>" send "$ifnx sys:search.tsk/s\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write CANNOT FIND SEARCH.TSK\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $write CC SEARCH\r";c
+   expect ".CMDP>" send "   $write RENAME SEARCH.TSK,SEARCH.TSK/S\r";c
+   expect ".CMDP>" send "   $write\r";c
+   expect ".CMDP>" send "   $clear\r";c
+   expect ".CMDP>" send "$endc\r";c
    expect ".CMDP>" send "*\r";c
    expect ".CMDP>" send "$ifnnull @4\r";c
    expect ".CMDP>" send "   $goto dofile\r";c
@@ -879,7 +898,7 @@ set cpu idle
    expect ".CMDP>" send "   return (0);\r";c
    expect ".CMDP>" send "}\r";c
    expect ".CMDP>" send "endb\r";c
-   expect "\r\n*" send "xdelete wild.c/25 ; rename wild.c,wild.c/25\r";c
+   expect "\r\n*" send "rename wild.c,wild.c/25\r";c
    # SEARCH.C/25
    expect "\r\n*" send "build search.c\r";c
    expect ".CMDP>" send "#include <stdio.h>\r";c
@@ -955,7 +974,7 @@ set cpu idle
    expect ".CMDP>" send "   return (0);\r";c
    expect ".CMDP>" send "}\r";c
    expect ".CMDP>" send "endb\r";c
-   expect "\r\n*" send "xdelete search.c/25 ; rename search.c,search.c/25\r";c
+   expect "\r\n*" send "rename search.c,search.c/25\r";c
    # FTP.CSS
    expect "\r\n*" send "build ftp.css\r";c
    expect ".CMDP>" send "*\r";c

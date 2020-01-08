@@ -1,4 +1,14 @@
 *
+$ifnx sys:search.tsk/s
+   $write
+   $write CANNOT FIND SEARCH.TSK
+   $write
+   $write CC SEARCH
+   $write RENAME SEARCH.TSK,SEARCH.TSK/S
+   $write
+   $clear
+$endc
+*
 $ifnnull @4
    $goto dofile
    $exit
