@@ -19,8 +19,8 @@ if { $numfiles < 1 } {
    puts stderr ""
    puts stderr "Usage: $ make-sim \[ACCOUNT\] FILENAME..."
    puts stderr ""
-   puts stderr "   UNIX:     ./make-sim *.css >wop"
-   puts stderr "   WINDOWS:  tclsh.exe make-sim  25 wild.c search.c >wop"
+   puts stderr "   UNIX:     ./make-sim.tcl *.css >wop"
+   puts stderr "   WINDOWS:  tclsh.exe make-sim.tcl  25 wild.c search.c >wop"
    puts stderr "   simh:     <Ctrl/E> do wop"
    puts stderr ""
    exit
