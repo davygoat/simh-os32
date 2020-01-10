@@ -6,6 +6,7 @@ doc/
 *.out
 *.lst
 *.zip
+.~*
 delme*
 wop
 wot
