@@ -643,7 +643,7 @@ namespace eval OS32 {
          catch {
             # Yes, password could be visible to ps. That's unfortunate...
             upvar #0 ::OS32::mtmport mtmport
-            set out [exec $exp mtmcheckpass.tcl $mtmport $acct $pass]]
+            set out [exec $exp mtmcheckpass.tcl $mtmport $acct $pass]
          } err
          if { [regexp {\*\*\* FAIL ([0-9]+) \((.*?)\) \*\*\*} $err -> n reas] } {
             set ermes [string totitle $reas]
@@ -652,7 +652,7 @@ namespace eval OS32 {
             puts stderr ""
             puts stderr "=========================================================================="
             puts stderr " FIXME -- MTM password check returned success, but output says otherwise"
-            puts stderr -- $err
+            puts stderr $err
             puts stderr "=========================================================================="
             puts stderr ""
             return -1
