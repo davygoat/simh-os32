@@ -78,6 +78,7 @@ namespace eval OS32 {
       variable  debugconfig   1
       variable  timeout       10
       variable  defaultvolume SYS:
+      variable  autostart     1
       #
       # Some of  these will be  overridden by ftpd.config. The  user can
       # further override them with their  own shadow.config, e.g. to log
@@ -1446,6 +1447,13 @@ namespace eval OS32 {
          if {$config::debugconfig} {
             DumpConfig
          }
+         if { [info exists startup] } {
+            unset startup
+            if { !$config::autostart } {
+               puts -nonewline stderr "$vt100(green)Autostart disabled, type FTP ON to manually start the FTP server$vt100(normal)"
+               return
+            }
+         }
       }
 
       CheckWeHaveFTP
@@ -1599,6 +1607,7 @@ namespace eval OS32 {
 
    Dimmer off
 
+   set startup "unsetme"
    StartFTP
 
    set fd [ open $::OS32::config::inifile r ]
