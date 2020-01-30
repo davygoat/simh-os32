@@ -13,7 +13,7 @@ dist::	os32doc.zip os32src.zip os32kit.zip
 
 FTPDOC=Adding\ an\ FTP\ server\ to\ your\ SimH\ project
 
-FILES=OS32-FTPd ftpd.config *.sim make-sim.sh
+FILES=OS32-FTPd os32.ini ftpd.config example.shadow.config *.sim *.tcl
 
 doc/${FTPDOC}.pdf: ${FTPDOC}.odt
 	libreoffice6.2 --convert-to pdf ${FTPDOC}.odt
