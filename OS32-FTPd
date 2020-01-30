@@ -66,7 +66,6 @@ namespace eval OS32 {
                               normal "\x1b\[0m" }
       variable  host          "localhost"
       variable  port          2121
-      variable  numericlogins 1
       array set access        {}
       array set passwords     {}
       variable  allowip       127.0.0.1
@@ -75,10 +74,11 @@ namespace eval OS32 {
       variable  ostype        "OS/32 Version 8.1"
       variable  contact       "$tcl_platform(user)@[info hostname]"
       variable  inifile       "os32.ini"
-      variable  debugconfig   1
       variable  timeout       10
       variable  defaultvolume SYS:
-      variable  autostart     1
+      variable  debugconfig   true
+      variable  numericlogins true
+      variable  autostart     true
       #
       # Some of  these will be  overridden by ftpd.config. The  user can
       # further override them with their  own shadow.config, e.g. to log
@@ -1448,7 +1448,6 @@ namespace eval OS32 {
             DumpConfig
          }
          if { [info exists startup] } {
-            unset startup
             if { !$config::autostart } {
                puts -nonewline stderr "$vt100(green)Autostart disabled, type FTP ON to manually start the FTP server$vt100(normal)"
                return
@@ -1609,6 +1608,7 @@ namespace eval OS32 {
 
    set startup "unsetme"
    StartFTP
+   unset startup
 
    set fd [ open $::OS32::config::inifile r ]
    set schluck [ read $fd ]
