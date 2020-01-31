@@ -8,6 +8,12 @@ OS/32 kit :
 
 FTP server :
 
+   - Configurable autostop. FTP STOP after this many minutes.
+
+   - Option to [temporarily] open up for one connection, then close the
+     listening socket. Already connected client sockets can carry on as
+     long as they remain connected.
+
    - Is STOR timeout working?
 
    - Look out for BROKEN SOCK errors slipping through and bringing the
