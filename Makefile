@@ -25,7 +25,7 @@ os32kit.zip: $(FILES) dsk4.dsk
 	rm -f os32kit.zip
 	zip -r9 os32kit $^ "doc/Getting Started with Interdata OS32.pdf" doc/${FTPDOC}.pdf
 
-os32src.zip: $(FILES) rebuild-system.sh tapes/eou.tap wild.c* search.c* ftp.css
+os32src.zip: $(FILES) rebuild-system.sh stage-*.ini tapes/eou.tap wild.c* search.c* ftp.css
 	rm -f os32src.zip
 	zip -r9 os32src $^
 
