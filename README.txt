@@ -160,6 +160,8 @@ Useful SimH scripts (operator console only) :-
 
 Using the FTP server (UNIX/Linux only) :-
 
+   Note: Windows users may be able to use Cygwin or MobaXterm -- YMMV.
+
    Required packages: tcl, expect, tcllib
    Copy example.shadow.config to shadow.config
    Edit according to your needs, note md5sum command for named users
