@@ -2,7 +2,7 @@
 ## vim:set syntax=tcl:
 
 if { $argc < 3 } {
-   puts stderr "Usage: $ mtmcheckpass.tcl PORT ACCOUNT PASS"
+   puts stderr "Usage: $ expect mtmcheckpass.tcl PORT ACCOUNT PASS"
    exit 99
 }
 
