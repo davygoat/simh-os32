@@ -58,9 +58,9 @@ Startup :-
       id32 os32.ini
 
       Unfortunately you cannot use OS32-FTPd  under Windows, as there is
-      no longer a version of expect that runs natively. You may, Windows
-      10  users may  be able  to run  it in  the "Windows  Subsystem for
-      Linux". Another option is to use Cygwin or MobaXterm. Anyway, YMMV.
+      no longer a version of expect that runs natively. Windows 10 users
+      might be able  to  run it  in the  "Windows  Subsystem for  Linux".
+      Another option is to use Cygwin or MobaXterm. Anyway, YMMV.
 
 
 Remote logins (aka. MTM) :-
@@ -90,7 +90,7 @@ Basic file handling commands :-
    DELETE filename	cannot use wildcards
    RENAME from,to       again, no wildcards allowed
 
-   Note: there is no COPY or TYPE (but see CSS below).
+   Note: there is no COPY or TYPE command (but see CSS below).
 
    Note: wildcards are '-' (multiple characters) and '*' (single char).
 
@@ -100,21 +100,21 @@ Program development (aka. EOU -- under MTM only) :-
    EDIT filename	line editor, but quite nice actually; has help
 
    FORT hellof		enter Fortran environment, filename hellof.ftn
-   COMPILE		compile hellof.ftn to hellof.obj
-   LINK			link hello.obj to hellof.tsk
-   EXEC			load hellof.tsk, and run it
+   COMPILE		compile hellof.FTN to hellof.OBJ
+   LINK			link hello.OBJ to hellof.TSK
+   EXEC			load hellof.TSK, and run it
 
-   PASCAL hellop	enter Pascal environment, filename hellop.pas
+   PASCAL hellop	enter Pascal environment, filename hellop.PAS
    COMPILE
    LINK
    EXEC			btw, you can skip COMPILE and LINK step
 
-   CC helloc		compile and link helloc.c, and produce helloc.css
-   helloc		invokes helloc.css to run helloc.tsk
+   CC helloc		compile and link helloc.C, and produce helloc.CSS
+   helloc		invokes helloc.CSS to run helloc.TSK
 
    HELP *		help
 
-    **************************** WARNING ******************************
+    ***************************** WARNING ******************************
 
     EOU has a nasty habit of locking up. For example, you cannot use the
     compile  commands in  more than  one  MTM terminal,  and you  cannot
@@ -127,12 +127,16 @@ Program development (aka. EOU -- under MTM only) :-
     - Type MTMDOWN
     - Type MTMUP
     - Log back into your kicked-off MTM sessions
-    - Do not try to COMPILE in more than one session
+    - Do not try to COMPILE or LINK in more than one session
 
-    **************************** WARNING ******************************
+    ***************************** WARNING ******************************
+
+
+Switching 'directories' :-
 
    SET PRIVATE n	set current account to n (like UNIX cd command)
    SET GROUP n		set current group to n (also like cd command)
+   VOLUME fred/USR	set current user device to fred (also like cd)
    DIR /P               list PRIVATE files (cf. SET PRIVATE)
    DIR /G		list GROUP files (cf. SET GROUP)
    DIR /S               list SYSTEM files (files owned by /0 account)
@@ -170,9 +174,9 @@ Operator commands :-
    DISPLAY DEVICES	show devices, including disks
    MARK DSCn:,ON        mount a disk, e.g. a second disk on DSC3
    MARK DSCn:,OFF       dismount disk
-   MTMDOWN		stop MTM
+   MTMDOWN		stop MTM (timesharing)
    MTMUP		start MTM
-   SHUTDOWN		stop tasks, mark disks off, exit SimH
+   SHUTDOWN		a CSS to stop tasks, mark disks off, exit SimH
 
    
 Useful SimH scripts (operator console only) :-
@@ -180,17 +184,17 @@ Useful SimH scripts (operator console only) :-
    Ctrl/E		break to SimH prompt, then...
 
    DO fixdisk		fix disk after an unclean shutdown
-   DO makedisk		create a 67MB disk pack
+   DO makedisk		create and mount a clean 67MB disk pack
    DO iug		copy an Interdata User Group tape to IUG: disk
 
-   !tclsh make-sim 25 *.ftn >wop   generate EXPECT/SEND sequences ...
-   DO wop			   ... to upload *.ftn into account 25
+   !tclsh make-sim.tcl 25 *.ftn >wop   generate EXPECT/SEND sequences ...
+   DO wop			      ... to upload *.ftn into account 25
 
 
 Using the FTP server (UNIX/Linux only) :-
 
    Note: Windows users may be able to use Cygwin or MobaXterm -- YMMV.
-   A better option would be to run inside a VM or Docker.
+   A better option would be to run Linux or BSD inside a VM or Docker.
 
    Required packages: tcl, expect, tcllib
    Copy example.shadow.config to shadow.config
@@ -201,7 +205,7 @@ Using the FTP server (UNIX/Linux only) :-
    Username: 25
    Password: user1
 
-   or (if your shadow.config has named users)
+   (if shadow.config has a named user yourname with password yourpass)
 
    ftp localhost 2121
    Username: yourname
