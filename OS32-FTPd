@@ -73,6 +73,7 @@ namespace eval OS32 {
       variable  welcome       "OS/32 FTP server"
       variable  ostype        "OS/32 Version 8.1"
       variable  contact       "$tcl_platform(user)@[info hostname]"
+      variable  simulator     "./id32"
       variable  inifile       "os32.ini"
       variable  timeout       10
       variable  defaultvolume SYS:
@@ -1622,8 +1623,8 @@ namespace eval OS32 {
 
    namespace eval :: {
       puts stderr ""
-      catch { exec killall -9 id32 }
-      spawn ./id32 $::OS32::config::inifile
+      catch { exec killall -9 [file tail $::OS32::config::simulator] }
+      spawn $::OS32::config::simulator $::OS32::config::inifile
    }
 
    unset fd
