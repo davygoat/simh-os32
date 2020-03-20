@@ -43,7 +43,14 @@ Contents :-
    
 Startup :-
 
+   You will need id32 (id32.exe) from SIMH v4.0 Current.
+
    UNIX:
+
+      git clone https://github.com/simh/simh.git
+      cd simh
+      make id32
+      cp id32 <wherever>
 
       Without FTP server:
 
@@ -55,12 +62,18 @@ Startup :-
 
    Windows:
 
+      Build your own id32.exe using the Visual Studio Solution.
+      git clone https://github.com/simh/simh.git
+
+      Or download the most recent zipped-up Windows binaries.
+      https://github.com/simh/Win32-Development-Binaries
+
       id32 os32.ini
 
       Unfortunately you cannot use OS32-FTPd  under Windows, as there is
-      no longer a version of expect that runs natively. Windows 10 users
-      might be able  to  run it  in the  "Windows  Subsystem for  Linux".
-      Another option is to use Cygwin or MobaXterm. Anyway, YMMV.
+      no longer  a native version of  expect. Windows 10 users  might be
+      able  to run  it in  the  "Windows Subsystem  for Linux".  Another
+      option is to use Cygwin or MobaXterm. Anyway, YMMV.
 
 
 Remote logins (aka. MTM) :-
@@ -193,7 +206,8 @@ Useful SimH scripts (operator console only) :-
 
 Using the FTP server (UNIX/Linux only) :-
 
-   Note: Windows users may be able to use Cygwin or MobaXterm -- YMMV.
+   Note: Windows 10 users may be able to do this in the Windows Subsystem
+   for Linux. Other Windows users could try Cygwin or MobaXterm -- YMMV.
    A better option would be to run Linux or BSD inside a VM or Docker.
 
    Required packages: tcl, expect, tcllib
