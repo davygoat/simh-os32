@@ -14,23 +14,23 @@ FTPDOC=Adding\ an\ FTP\ server\ to\ your\ SimH\ project
 
 FILES=README.txt OS32-FTPd os32.ini ftpd.config example.shadow.config *.sim *.tcl
 
-doc/${FTPDOC}.pdf: ${FTPDOC}.odt
-	libreoffice6.2 --convert-to pdf ${FTPDOC}.odt
-	mv ${FTPDOC}.pdf doc/
+doc/$(FTPDOC).pdf: $(FTPDOC).odt
+	libreoffice6.2 --convert-to pdf $(FTPDOC).odt
+	mv $(FTPDOC).pdf doc/
 
 doc::	doc/$(FTPDOC).pdf
 
 os32kit.zip: $(FILES) dsk4.dsk
 	rm -f os32kit.zip
-	zip -r9 os32kit $^ "doc/Getting Started with Interdata OS32.pdf" doc/${FTPDOC}.pdf
+	zip -r9 os32kit $^ doc/$(FTPDOC).pdf
 
 os32src.zip: $(FILES) rebuild-system.sh stage-*.ini tapes/eou.tap wild.c* search.c* ftp.css
 	rm -f os32src.zip
-	zip -r9 os32src $^
+	zip -r9 os32src $^ $(FTPDOC).odt
 
-os32doc.zip: doc/* doc/${FTPDOC}.pdf
+os32doc.zip: doc/* doc/$(FTPDOC).pdf
 	rm -f os32doc.zip
-	zip -r9 os32doc doc/ -x $(FTPDOC)
+	zip -r9 os32doc doc/ -x doc/$(FTPDOC).pdf
 
 dsk4.dsk:
 	[ -x dsk4.dsk ] || ./rebuild-system.sh
