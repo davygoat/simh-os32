@@ -10,7 +10,7 @@ Contents :-
    Fortran, Pascal and C
    Common Assembly Language (CAL) and Macro Assembler (MACRO)
    MTM 8.1 with Ease of Use (EOU) program development utilities
-   Up to 8 MTM logins (telnet sessions) on port 2323
+   Up to 8 MTM logins (telnet sessions) on port 1026
    Optionally (UNIX only), an FTP 'server' on port 2121
 
    The following compilers are 'installed' in the system account so they
@@ -65,7 +65,7 @@ Startup :-
 
 Remote logins (aka. MTM) :-
 
-   Telnet localhost 2323
+   Telnet localhost 1026
    Wait for asterisk, hit return if necessary
    Type SIGNON whatever,25,user1
    Use account number 25
@@ -74,7 +74,7 @@ Remote logins (aka. MTM) :-
 
    or
 
-   Telnet localhost 2323
+   Telnet localhost 1026
    Wait for asterisk
    Type SIGNON without parameters
    At USERID prompt, type whatever (must be unique)
