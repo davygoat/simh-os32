@@ -1,6 +1,5 @@
 
-xyzzy::
-	@echo Nothing happens...
+all::	dsk4.dsk
 
 clean::
 	rm -f *.zip *.out delme* wop
