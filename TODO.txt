@@ -1,6 +1,12 @@
 
 OS/32 kit :
 
+   - Extract PDF bookmarks.
+
+   - Add Makefile steps to bookmark PDFs from bitsavers source.
+
+   - Make available on github.
+
    - EIEIO
 
 

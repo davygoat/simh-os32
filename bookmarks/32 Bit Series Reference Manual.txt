@@ -1,0 +1,301 @@
+32 Bit Series Reference Manual (1973)/1,Black,bold,notItalic,open,FitPage
+	Title Page/2,Black,notBold,notItalic,open,FitPage
+	Table of Contents/3,Black,notBold,notItalic,open,FitPage
+	Chapter 1 - System Description/9,Black,notBold,notItalic,closed,FitPage
+		Memory System/9,Black,notBold,notItalic,closed,FitPage
+			Direct Memory Access/10,Black,notBold,notItalic,open,FitPage
+			Selector Channel/10,Black,notBold,notItalic,open,FitPage
+			Relocation and Protection/10,Black,notBold,notItalic,open,FitPage
+		Multiplexor Input/Output Bus/10,Black,notBold,notItalic,open,FitPage
+		Peripherals/10,Black,notBold,notItalic,closed,FitPage
+			Digital Multiplexor/10,Black,notBold,notItalic,open,FitPage
+			Intertape Cassette Type/11,Black,notBold,notItalic,open,FitPage
+			Industry Compatible Magnetic Tape Systems/11,Black,notBold,notItalic,open,FitPage
+			Alphanumeric Data Displays/11,Black,notBold,notItalic,open,FitPage
+			Data Communications Equipment/11,Black,notBold,notItalic,open,FitPage
+			High Speed Paper Tape System/11,Black,notBold,notItalic,open,FitPage
+			System Modules/11,Black,notBold,notItalic,open,FitPage
+		Processor/12,Black,notBold,notItalic,closed,FitPage
+			Program Status Word/12,Black,notBold,notItalic,closed,FitPage
+				Wait State/12,Black,notBold,notItalic,open,FitPage
+				Immediate Interrupt Mask/12,Black,notBold,notItalic,open,FitPage
+				Machine Malfunction Interrupt Mask/13,Black,notBold,notItalic,open,FitPage
+				Arithmetic Fault Interrupt Mask/13,Black,notBold,notItalic,open,FitPage
+				Relocation Protection Interrupt Mask/13,Black,notBold,notItalic,open,FitPage
+				System Queue Service Interrupt Mask/13,Black,notBold,notItalic,open,FitPage
+				Protect Mode/13,Black,notBold,notItalic,open,FitPage
+				Register Set Select/13,Black,notBold,notItalic,open,FitPage
+				Condition Code/13,Black,notBold,notItalic,open,FitPage
+				Location Counter/13,Black,notBold,notItalic,open,FitPage
+			General Registers/14,Black,notBold,notItalic,open,FitPage
+			Floating Point Registers/14,Black,notBold,notItalic,open,FitPage
+			Reserved Memory Locations/14,Black,notBold,notItalic,open,FitPage
+			Processor Operations/15,Black,notBold,notItalic,open,FitPage
+		Data Formats/15,Black,notBold,notItalic,open,FitPage
+			Fixed Point Data/15,Black,notBold,notItalic,open,FitPage
+			Floating Point Data/15,Black,notBold,notItalic,open,FitPage
+			Logical Data/15,Black,notBold,notItalic,open,FitPage
+		Instruction Formats/16,Black,notBold,notItalic,open,FitPage
+			Register to Register (RR) Format/17,Black,notBold,notItalic,open,FitPage
+			Short Form (SF) Format/17,Black,notBold,notItalic,open,FitPage
+			Register and Indexed Storage One (RX1) Format/17,Black,notBold,notItalic,open,FitPage
+			Register and Indexed Storage Two (RX2) Format/18,Black,notBold,notItalic,open,FitPage
+			Register and Indexed Storage Three (RX3) Format/18,Black,notBold,notItalic,open,FitPage
+			Register and Immediate Storage One (RI1) Format/19,Black,notBold,notItalic,open,FitPage
+			Register and Immediate Storage Two (RI2) Format/19,Black,notBold,notItalic,open,FitPage
+			Branch Instruction Formats/19,Black,notBold,notItalic,open,FitPage
+			Programming Note/19,Black,notBold,notItalic,open,FitPage
+	Chapter 2 - Logical Operations/20,Black,notBold,notItalic,closed,FitPage
+		Data Formats/20,Black,notBold,notItalic,open,FitPage
+		Operations/21,Black,notBold,notItalic,open,FitPage
+			Boolean Operations/21,Black,notBold,notItalic,open,FitPage
+			Translation/21,Black,notBold,notItalic,open,FitPage
+			List Processing/22,Black,notBold,notItalic,open,FitPage
+		Logical Instruction Formats/23,Black,notBold,notItalic,open,FitPage
+		Logical Instructions/23,Black,notBold,notItalic,open,FitPage
+			Load/25,Black,notBold,notItalic,open,FitPage
+			Load Register/25,Black,notBold,notItalic,open,FitPage
+			Load Immediate/25,Black,notBold,notItalic,open,FitPage
+			Load Immediate Short/25,Black,notBold,notItalic,open,FitPage
+			Load Complement Short/25,Black,notBold,notItalic,open,FitPage
+			Load Halfword/26,Black,notBold,notItalic,open,FitPage
+			Load Halfword Immediate/26,Black,notBold,notItalic,open,FitPage
+			Load Address/27,Black,notBold,notItalic,open,FitPage
+			Load Halfword Logical/28,Black,notBold,notItalic,open,FitPage
+			Load Multiple/29,Black,notBold,notItalic,open,FitPage
+			Load Byte/30,Black,notBold,notItalic,open,FitPage
+			Load Byte Register/30,Black,notBold,notItalic,open,FitPage
+			Exchange Halfword Register/31,Black,notBold,notItalic,open,FitPage
+			Exchange Byte Register/32,Black,notBold,notItalic,open,FitPage
+			Store/33,Black,notBold,notItalic,open,FitPage
+			Store Halfword/34,Black,notBold,notItalic,open,FitPage
+			Store Multiple/35,Black,notBold,notItalic,open,FitPage
+			Store Byte/36,Black,notBold,notItalic,open,FitPage
+			Store Byte Register/36,Black,notBold,notItalic,open,FitPage
+			Compare Logical/37,Black,notBold,notItalic,open,FitPage
+			Compare Logical Register/37,Black,notBold,notItalic,open,FitPage
+			Compare Logical Immediate/37,Black,notBold,notItalic,open,FitPage
+			Compare Logical Halfword/38,Black,notBold,notItalic,open,FitPage
+			Compare Logical Halfword Immediate/38,Black,notBold,notItalic,open,FitPage
+			Compare Logical Byte/39,Black,notBold,notItalic,open,FitPage
+			AND/40,Black,notBold,notItalic,open,FitPage
+			AND Register/40,Black,notBold,notItalic,open,FitPage
+			AND Immediate/40,Black,notBold,notItalic,open,FitPage
+			AND Halfword/41,Black,notBold,notItalic,open,FitPage
+			AND Halfword Immediate/41,Black,notBold,notItalic,open,FitPage
+			OR/42,Black,notBold,notItalic,open,FitPage
+			OR Register/42,Black,notBold,notItalic,open,FitPage
+			Or Immediate/42,Black,notBold,notItalic,open,FitPage
+			OR Halfword/43,Black,notBold,notItalic,open,FitPage
+			OR Halfword Immediate/43,Black,notBold,notItalic,open,FitPage
+			Exclusive OR/44,Black,notBold,notItalic,open,FitPage
+			Exclusive OR Register/44,Black,notBold,notItalic,open,FitPage
+			Exclusive OR Immediate/44,Black,notBold,notItalic,open,FitPage
+			Exclusive OR Halfword/45,Black,notBold,notItalic,open,FitPage
+			Exclusive OR Halfword Immediate/45,Black,notBold,notItalic,open,FitPage
+			Test Immediate/46,Black,notBold,notItalic,open,FitPage
+			Test Halfword Immediate/47,Black,notBold,notItalic,open,FitPage
+			Shift Left Logical/48,Black,notBold,notItalic,open,FitPage
+			Shift Left Logical Short/48,Black,notBold,notItalic,open,FitPage
+			Shift Right Logical/49,Black,notBold,notItalic,open,FitPage
+			Shift Right Logical Short/49,Black,notBold,notItalic,open,FitPage
+			Shift Left Halfword Logical/50,Black,notBold,notItalic,open,FitPage
+			Shift Left Halfword Logical Short/50,Black,notBold,notItalic,open,FitPage
+			Shift Right Halfword Logical/51,Black,notBold,notItalic,open,FitPage
+			Shift Right Halfword Logical Short/51,Black,notBold,notItalic,open,FitPage
+			Rotate Left Logical/52,Black,notBold,notItalic,open,FitPage
+			Rorate Right Logical/53,Black,notBold,notItalic,open,FitPage
+			Test and Set/54,Black,notBold,notItalic,open,FitPage
+			Test Bit/55,Black,notBold,notItalic,open,FitPage
+			Set Bit/56,Black,notBold,notItalic,open,FitPage
+			Complement Bit/57,Black,notBold,notItalic,open,FitPage
+			Reset Bit/58,Black,notBold,notItalic,open,FitPage
+			Cyclic Redundancy Check Modulo 12/59,Black,notBold,notItalic,open,FitPage
+			Cyclic Redundancy Check Modulo 16/59,Black,notBold,notItalic,open,FitPage
+			Translate/60,Black,notBold,notItalic,open,FitPage
+			Add to Top of List/61,Black,notBold,notItalic,open,FitPage
+			Add to Bottom of List/61,Black,notBold,notItalic,open,FitPage
+			Remove from Top of List/62,Black,notBold,notItalic,open,FitPage
+			Remove from Bottom of List/62,Black,notBold,notItalic,open,FitPage
+	Chapter 3 - Branching/63,Black,notBold,notItalic,closed,FitPage
+		Operations/63,Black,notBold,notItalic,open,FitPage
+			Decision Making/63,Black,notBold,notItalic,open,FitPage
+			Subroutine Linkage/63,Black,notBold,notItalic,open,FitPage
+		Branch Instruction Formats/63,Black,notBold,notItalic,open,FitPage
+		Branch Instructions/64,Black,notBold,notItalic,open,FitPage
+			Branch on False Condition/65,Black,notBold,notItalic,open,FitPage
+			Branch on False Condition Register/65,Black,notBold,notItalic,open,FitPage
+			Branch on False Condition Backward Short/65,Black,notBold,notItalic,open,FitPage
+			Branch on False Condition Forward Short/65,Black,notBold,notItalic,open,FitPage
+			Branch on True Condition/66,Black,notBold,notItalic,open,FitPage
+			Branch on True Condition Register/66,Black,notBold,notItalic,open,FitPage
+			Branch on True Condition Backward Short/66,Black,notBold,notItalic,open,FitPage
+			Branch on True Condition Forward Short/66,Black,notBold,notItalic,open,FitPage
+			Branch and Link/67,Black,notBold,notItalic,open,FitPage
+			Branch and Link Register/67,Black,notBold,notItalic,open,FitPage
+			Branch on Index Low or Equal/68,Black,notBold,notItalic,open,FitPage
+			Branch on Index High/69,Black,notBold,notItalic,open,FitPage
+	Chapter 4 - Fixed Point Arithmetic [page missing, jumps straight to Condition Code]/70,Black,notBold,notItalic,closed,FitPage
+		Data Formats [on missing page 65]/-1,Black,notBold,italic,open,Unknown
+		Operations [on missing page 65]/-1,Black,notBold,italic,open,Unknown
+		Condition code/70,Black,notBold,notItalic,open,FitPage
+		Fixed Point Instruction Formats/70,Black,notBold,notItalic,open,FitPage
+		Fixed Point Instructions/70,Black,notBold,notItalic,open,FitPage
+			Add/71,Black,notBold,notItalic,open,FitPage
+			Add Register/71,Black,notBold,notItalic,open,FitPage
+			Add Immediate/71,Black,notBold,notItalic,open,FitPage
+			Add Immediate Short/71,Black,notBold,notItalic,open,FitPage
+			Add Halfword/72,Black,notBold,notItalic,open,FitPage
+			Add Halfword Immediate/72,Black,notBold,notItalic,open,FitPage
+			Add to Memory/73,Black,notBold,notItalic,open,FitPage
+			Add Halfword to Memory/74,Black,notBold,notItalic,open,FitPage
+			Subtract/75,Black,notBold,notItalic,open,FitPage
+			Subtract Register/75,Black,notBold,notItalic,open,FitPage
+			Subtract Immediate/75,Black,notBold,notItalic,open,FitPage
+			Subtract Immediate Short/75,Black,notBold,notItalic,open,FitPage
+			Subtract Halfword/76,Black,notBold,notItalic,open,FitPage
+			Subtract Halfword Immediate/76,Black,notBold,notItalic,open,FitPage
+			Compare/77,Black,notBold,notItalic,open,FitPage
+			Compare Register/77,Black,notBold,notItalic,open,FitPage
+			Compare Immediate/77,Black,notBold,notItalic,open,FitPage
+			Compare Halfword/78,Black,notBold,notItalic,open,FitPage
+			Compare Halfword Immediate/78,Black,notBold,notItalic,open,FitPage
+			Multiply/79,Black,notBold,notItalic,open,FitPage
+			Multiply Register/79,Black,notBold,notItalic,open,FitPage
+			Multiply Halfword/80,Black,notBold,notItalic,open,FitPage
+			Multiply Halfword Register/80,Black,notBold,notItalic,open,FitPage
+			Divide/81,Black,notBold,notItalic,open,FitPage
+			Divide Register/81,Black,notBold,notItalic,open,FitPage
+			Divide Halfword/82,Black,notBold,notItalic,open,FitPage
+			Divide Halfword Register/82,Black,notBold,notItalic,open,FitPage
+			Shift Left Arithmetic/83,Black,notBold,notItalic,open,FitPage
+			Shift Left Halfword Arithmetic/84,Black,notBold,notItalic,open,FitPage
+			Shift Right Arithmetic/85,Black,notBold,notItalic,open,FitPage
+			Shift Right Halfword Arithmetic/86,Black,notBold,notItalic,open,FitPage
+			Convert to Halfword Value Register/87,Black,notBold,notItalic,open,FitPage
+	Chapter 5 - Floating Point Arithmetic/89,Black,notBold,notItalic,closed,FitPage
+		Data Formats/89,Black,notBold,notItalic,open,FitPage
+			Normalization/89,Black,notBold,notItalic,open,FitPage
+			Exponent Overflow and Underflow/89,Black,notBold,notItalic,open,FitPage
+			Conversion from Decimal/90,Black,notBold,notItalic,open,FitPage
+		Condition Code/90,Black,notBold,notItalic,open,FitPage
+		Floating Point Instruction Formats/90,Black,notBold,notItalic,open,FitPage
+		Floating Point Instructions/91,Black,notBold,notItalic,open,FitPage
+			Load/92,Black,notBold,notItalic,open,FitPage
+			Load Register/92,Black,notBold,notItalic,open,FitPage
+			Load Multiple/93,Black,notBold,notItalic,open,FitPage
+			Store/94,Black,notBold,notItalic,open,FitPage
+			Store Multiple/95,Black,notBold,notItalic,open,FitPage
+			Add/96,Black,notBold,notItalic,open,FitPage
+			Add Register/96,Black,notBold,notItalic,open,FitPage
+			Subtract/97,Black,notBold,notItalic,open,FitPage
+			Subtract Register/97,Black,notBold,notItalic,open,FitPage
+			Compare/98,Black,notBold,notItalic,open,FitPage
+			Compare Register/98,Black,notBold,notItalic,open,FitPage
+			Multiply/99,Black,notBold,notItalic,open,FitPage
+			Multiply Register/99,Black,notBold,notItalic,open,FitPage
+			Divide/100,Black,notBold,notItalic,open,FitPage
+			Divide Register/100,Black,notBold,notItalic,open,FitPage
+			Fix Register/101,Black,notBold,notItalic,open,FitPage
+			Float Register/102,Black,notBold,notItalic,open,FitPage
+	Chapter 6 - Status Switching and Interrupts/103,Black,notBold,notItalic,closed,FitPage
+		Program Status Word/103,Black,notBold,notItalic,open,FitPage
+			Wait State/104,Black,notBold,notItalic,open,FitPage
+			Protect Mode/104,Black,notBold,notItalic,open,FitPage
+			Register Set Selection/104,Black,notBold,notItalic,open,FitPage
+		Interrupt System/105,Black,notBold,notItalic,open,FitPage
+			Immediate Interrupt/106,Black,notBold,notItalic,open,FitPage
+			Console Interrupt/106,Black,notBold,notItalic,open,FitPage
+			Simulated Interrupt/106,Black,notBold,notItalic,open,FitPage
+			Machine Malfunction Interrupt/107,Black,notBold,notItalic,open,FitPage
+			Arithmetic Fault Interrupt/107,Black,notBold,notItalic,open,FitPage
+			Relocation/Protection Interrupt/108,Black,notBold,notItalic,open,FitPage
+			System Queue Service Interrupt/108,Black,notBold,notItalic,open,FitPage
+			Protect Mode Violation Interrupt/109,Black,notBold,notItalic,open,FitPage
+			Illegal Instruction Interrupt/109,Black,notBold,notItalic,open,FitPage
+			Supervisor Call Interrupt/109,Black,notBold,notItalic,open,FitPage
+		Status Switching Instruction Formats/110,Black,notBold,notItalic,open,FitPage
+		Status Switching Instructions/110,Black,notBold,notItalic,open,FitPage
+			Load Program Status Word/111,Black,notBold,notItalic,open,FitPage
+			Load Program Status Word Register/112,Black,notBold,notItalic,open,FitPage
+			Exhange Program Status Register/113,Black,notBold,notItalic,open,FitPage
+			Simulate Interrupt/114,Black,notBold,notItalic,open,FitPage
+			Supervisor Call/115,Black,notBold,notItalic,open,FitPage
+	Chapter 7 - Input Output Operations/116,Black,notBold,notItalic,closed,FitPage
+		Device Controllers/116,Black,notBold,notItalic,open,FitPage
+			Device Addressing/116,Black,notBold,notItalic,open,FitPage
+			Processor/Controller Communication/116,Black,notBold,notItalic,open,FitPage
+			Device Priorities/117,Black,notBold,notItalic,open,FitPage
+		Interrupt Service Pointer Table/117,Black,notBold,notItalic,open,FitPage
+		I/O Instruction Formats/118,Black,notBold,notItalic,open,FitPage
+		I/O Instructions/118,Black,notBold,notItalic,open,FitPage
+			Sense Status/119,Black,notBold,notItalic,open,FitPage
+			Sense Status Register/119,Black,notBold,notItalic,open,FitPage
+			Output Command/120,Black,notBold,notItalic,open,FitPage
+			Output Command Register/120,Black,notBold,notItalic,open,FitPage
+			Read Data/121,Black,notBold,notItalic,open,FitPage
+			Read Data Register/121,Black,notBold,notItalic,open,FitPage
+			Read Halfword/122,Black,notBold,notItalic,open,FitPage
+			Read Halfword Register/122,Black,notBold,notItalic,open,FitPage
+			Read Block/123,Black,notBold,notItalic,open,FitPage
+			Read Block Register/124,Black,notBold,notItalic,open,FitPage
+			Write Data/125,Black,notBold,notItalic,open,FitPage
+			Write Data Register/125,Black,notBold,notItalic,open,FitPage
+			Write Halfword/126,Black,notBold,notItalic,open,FitPage
+			Write Halfword Register/126,Black,notBold,notItalic,open,FitPage
+			Write Block/127,Black,notBold,notItalic,open,FitPage
+			Write Block Register/128,Black,notBold,notItalic,open,FitPage
+			Autoload/129,Black,notBold,notItalic,open,FitPage
+			Simulate Channel Program/130,Black,notBold,notItalic,open,FitPage
+		Control of I/O Operations/131,Black,notBold,notItalic,open,FitPage
+		Status Monitoring I/O/131,Black,notBold,notItalic,open,FitPage
+		Interrupt Driven I/O/132,Black,notBold,notItalic,open,FitPage
+		Selector Channel I/O/133,Black,notBold,notItalic,open,FitPage
+			Selector Channel Devices/133,Black,notBold,notItalic,open,FitPage
+			Selector Channel Operation/133,Black,notBold,notItalic,open,FitPage
+			Selector Channel Programming/134,Black,notBold,notItalic,open,FitPage
+		Auto Driver Channel/134,Black,notBold,notItalic,open,FitPage
+		Channel Control Block/135,Black,notBold,notItalic,open,FitPage
+			Subroutine Address/135,Black,notBold,notItalic,open,FitPage
+			Buffers/136,Black,notBold,notItalic,open,FitPage
+			Translation/136,Black,notBold,notItalic,open,FitPage
+			Check Word/136,Black,notBold,notItalic,open,FitPage
+			Channel Control Word/137,Black,notBold,notItalic,open,FitPage
+				Status Mask/137,Black,notBold,notItalic,open,FitPage
+				Execute Bit (E)/137,Black,notBold,notItalic,open,FitPage
+				Fast Bit (F)/137,Black,notBold,notItalic,open,FitPage
+				Read/Write Bit (R/W)/137,Black,notBold,notItalic,open,FitPage
+				Translate Bit (T)/137,Black,notBold,notItalic,open,FitPage
+				Check Type Bit (C)/138,Black,notBold,notItalic,open,FitPage
+				Buffer Switch Bit (B)/138,Black,notBold,notItalic,open,FitPage
+			Valid Channel Command Codes/138,Black,notBold,notItalic,open,FitPage
+	Chapter 8 - Memory Management/139,Black,notBold,notItalic,closed,FitPage
+		Block Address Convention/140,Black,notBold,notItalic,open,FitPage
+		Segmentation Register/140,Black,notBold,notItalic,open,FitPage
+		Segmentation Register Selection/141,Black,notBold,notItalic,open,FitPage
+		Function of the Control Field/142,Black,notBold,notItalic,open,FitPage
+		Interrupts/143,Black,notBold,notItalic,open,FitPage
+	Illustrations/144,Black,notBold,notItalic,closed,FitPage
+		Figure 1 - System Diagram/9,Black,notBold,notItalic,open,FitPage
+		Figure 2 - Program Status Word/12,Black,notBold,notItalic,open,FitPage
+		Figure 3 - Instruction Formats/16,Black,notBold,notItalic,open,FitPage
+		Figure 4 - Logical Data/20,Black,notBold,notItalic,open,FitPage
+		Figure 5 - Translation Table Entry/21,Black,notBold,notItalic,open,FitPage
+		Figure 6 - Circular List Definition/22,Black,notBold,notItalic,open,FitPage
+		Figure 7 - Circular List/22,Black,notBold,notItalic,open,FitPage
+		Figure 8 - Fixed Point Data Words Formats [on missing page 65]/70,Black,notBold,italic,open,FitPage
+		Figure 10 - Program Status Word/103,Black,notBold,notItalic,open,FitPage
+		FIgure 11 - Channel Command Block/135,Black,notBold,notItalic,open,FitPage
+		Figure 12 - Channel Command Word/137,Black,notBold,notItalic,open,FitPage
+		FIgure 13 - Program Address/140,Black,notBold,notItalic,open,FitPage
+		FIgure 14 - Real Address/140,Black,notBold,notItalic,open,FitPage
+		Figure 15 - Segmentation Register/140,Black,notBold,notItalic,open,FitPage
+		Figure 16 - Program Addresses/141,Black,notBold,notItalic,open,FitPage
+		Figure 17 - Limit and Relocation Fields/141,Black,notBold,notItalic,open,FitPage
+		Figure 18 - Segment Control Field/142,Black,notBold,notItalic,open,FitPage
+	Appendices/144,Black,notBold,notItalic,closed,FitPage
+		Appendix 1 - Index/144,Black,notBold,notItalic,open,FitPage
+		Appendix 2 - Instruction Summary - Alphabetical/152,Black,notBold,notItalic,open,FitPage
+		Appendix 3 - Instruction Summary - Numerical/155,Black,notBold,notItalic,open,FitPage
+		Appendix 4 - Extended Branch Mnemonics/159,Black,notBold,notItalic,open,FitPage
+		Appendix 5 - Arithmetic References/161,Black,notBold,notItalic,open,FitPage

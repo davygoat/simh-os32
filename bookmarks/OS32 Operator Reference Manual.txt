@@ -1,0 +1,208 @@
+OS/32 Operator Reference Manual (1985)/1,Black,bold,notItalic,open,FitPage
+Table of Contents/4,Black,notBold,notItalic,open,FitPage
+Preface/12,Black,notBold,notItalic,open,FitPage
+Chapter 1 - Introduction to Computer Operations under OS/32/13,Black,notBold,notItalic,closed,FitPage
+	1.1 Introduction/13,Black,notBold,notItalic,open,FitPage
+	1.2 Minimum Hardware Configurations/13,Black,notBold,notItalic,open,FitPage
+	1.3 The OS/32 Environment/14,Black,notBold,notItalic,open,FitPage
+		1.3.1 The Operator in an OS/32 Environment/15,Black,notBold,notItalic,open,FitPage
+	1.4 System Console Use/15,Black,notBold,notItalic,open,FitPage
+		1.4.1 Prompts/16,Black,notBold,notItalic,open,FitPage
+		1.4.2 BREAK key/16,Black,notBold,notItalic,open,FitPage
+	1.5 General Syntax Rules/17,Black,notBold,notItalic,open,FitPage
+		1.5.1 Statement Syntax Conventions/17,Black,notBold,notItalic,open,FitPage
+		1.5.2 Upper-Case and Lower-Case Characters/19,Black,notBold,notItalic,open,FitPage
+		1.5.3 Decimal and Hexadecimal Numbers/19,Black,notBold,notItalic,open,FitPage
+		1.5.4 Task Identifiers/19,Black,notBold,notItalic,open,FitPage
+	1.6 Error Response/22,Black,notBold,notItalic,open,FitPage
+Chapter 2 - Loading OS/32/23,Black,notBold,notItalic,closed,FitPage
+	2.1 Introduction/23,Black,notBold,notItalic,open,FitPage
+		2.1.1 Starter Systems/23,Black,notBold,notItalic,open,FitPage
+	2.2 OS/32 Bootstrap Puncher for Model 7/32 and 8/32 Processors/24,Black,notBold,notItalic,closed,FitPage
+		2.2.1 Starting the Bootstrap Puncher/24,Black,notBold,notItalic,open,FitPage
+		2.2.2 Messages for Bootstrap Puncher/25,Black,notBold,notItalic,open,FitPage
+	2.3 Loading OS/32 for Model 7/32 and 8/32 Systems/26,Black,notBold,notItalic,closed,FitPage
+		2.3.1 Loading OS/32 Using the Relocating (REL) Loader/26,Black,notBold,notItalic,open,FitPage
+		2.3.2 Relocating (REL) Loader Error Check Procedure and Error Codes/28,Black,notBold,notItalic,open,FitPage
+		2.3.3 Loading OS/32 Using the Direct Access Bootstrap (BOOT) Loader/29,Black,notBold,notItalic,open,FitPage
+		2.3.4 Direct Access Bootstrap (BOOT) Loader Error Check Procedure and Error Codes/31,Black,notBold,notItalic,open,FitPage
+		2.3.5 Loading OS/32 Using the Loader Storage Unit (LSU)/33,Black,notBold,notItalic,open,FitPage
+			2.3.6 Loader Storage Unit (LSU) Error Check Procedure and Error Codes/34,Black,notBold,notItalic,open,FitPage
+	2.4 Loading OS/32 for Series 3200 Systems/35,Black,notBold,notItalic,closed,FitPage
+		2.4.1 Loading OS/32 Using the Relocating (REL) Loader/35,Black,notBold,notItalic,open,FitPage
+		2.4.2 Reloating (REL) Loader Error Check Procedure and Error Codes/38,Black,notBold,notItalic,open,FitPage
+		2.4.3 Loading OS/32 Using the 2kb Loader Storage Unit (LSU)/39,Black,notBold,notItalic,open,FitPage
+			2.4.3.1 2kb Loader Storage Unit (LSU) Messages/42,Black,notBold,notItalic,open,FitPage
+		2.4.4 Loading OS/32 Using the 8kb Loader Storage Unit (LSU)/43,Black,notBold,notItalic,open,FitPage
+			2.4.4.1 Examples of Loading OS/32 from Different Devices/50,Black,notBold,notItalic,open,FitPage
+			2.4.4.2 8kb Loader Storage Unit (LSU) Messages/53,Black,notBold,notItalic,open,FitPage
+			2.4.4.3 Loading OS/32 Using the 8kb Loader Storage Unit (LSU) in an Input/Output Processor (IOP)-Configured Model 3200MPS System/55,Black,notBold,notItalic,open,FitPage
+		2.4.5 Loading OS/32 Using the Control/Diagnostic System (CDS) in a Model 3280 System/56,Black,notBold,notItalic,open,FitPage
+			2.5.4.1 Interactive Session/59,Black,notBold,notItalic,open,FitPage
+			2.4.5.2 Examples of Loading OS/32 - Model 3280 System/63,Black,notBold,notItalic,open,FitPage
+			2.4.5.3 Initial Program Load (IPL) Error Messages/68,Black,notBold,notItalic,open,FitPage
+		2.4.6 Loading OS/32 - Model 3203 System/69,Black,notBold,notItalic,open,FitPage
+			2.4.6.1 Automatic Loading Operation/69,Black,notBold,notItalic,open,FitPage
+			2.4.6.2 Interactive Session/70,Black,notBold,notItalic,open,FitPage
+			2.4.6.3 Examples of the Automatic Loading Operation/74,Black,notBold,notItalic,open,FitPage
+	2.5 Memory Configuration Error/77,Black,notBold,notItalic,open,FitPage
+	2.6 Modifying OS/32 for Other Peripheral Configurations/78,Black,notBold,notItalic,open,FitPage
+		2.6.1 Modification of the Console Device Address/78,Black,notBold,notItalic,open,FitPage
+		2.6.2 Modification of Nonconsole Device Addresses/79,Black,notBold,notItalic,open,FitPage
+		2.6.3 Modification of the Selector Channel (SELCH) Address/80,Black,notBold,notItalic,open,FitPage
+		2.6.4 Modification of the Controller Address/80,Black,notBold,notItalic,open,FitPage
+		2.6.5 Modificatio of the Console Device Name/Type/81,Black,notBold,notItalic,open,FitPage
+Chapter 3 - Console Use and Operator Commands/82,Black,notBold,notItalic,closed,FitPage
+	3.1 Introduction/82,Black,notBold,notItalic,open,FitPage
+	3.2 ALLOCATE command/83,Black,notBold,notItalic,open,FitPage
+	3.3 APC command/88,Black,notBold,notItalic,open,FitPage
+	3.4 ASSIGN command/93,Black,notBold,notItalic,open,FitPage
+	3.5 ATTN command/100,Black,notBold,notItalic,open,FitPage
+	3.6 BFILE command/101,Black,notBold,notItalic,open,FitPage
+	3.7 BIAS command/103,Black,notBold,notItalic,open,FitPage
+	3.8 BRECORD command/105,Black,notBold,notItalic,open,FitPage
+	3.9 BUILD and ENDB commands/107,Black,notBold,notItalic,open,FitPage
+	3.10 CANCEL command/109,Black,notBold,notItalic,open,FitPage
+	3.11 CLOSE command/111,Black,notBold,notItalic,open,FitPage
+	3.12 CONTINUE command/113,Black,notBold,notItalic,open,FitPage
+	3.13 DELETE command/114,Black,notBold,notItalic,open,FitPage
+	3.14 DISPLAY ACCOUNTING command/116,Black,notBold,notItalic,open,FitPage
+	3.15 DISPLAY BLOCKS command/118,Black,notBold,notItalic,open,FitPage
+	3.16 DISPLAY DEVICES command/120,Black,notBold,notItalic,open,FitPage
+	3.17 DISPLAY DFLOAT command/123,Black,notBold,notItalic,open,FitPage
+	3.18 DISPLAY ERRORS command/125,Black,notBold,notItalic,open,FitPage
+	3.19 DISPLAY FILES command/127,Black,notBold,notItalic,open,FitPage
+	3.20 DISPLAY FLOAT command/133,Black,notBold,notItalic,open,FitPage
+	3.21 DISPLAY ITAMTERM command/135,Black,notBold,notItalic,open,FitPage
+	3.22 DISPLAY LOG command/138,Black,notBold,notItalic,open,FitPage
+	3.23 DISPLAY LU command/140,Black,notBold,notItalic,open,FitPage
+	3.24 DISPLAY MAP command/142,Black,notBold,notItalic,open,FitPage
+	3.25 DISPLAY PARAMETERS command/147,Black,notBold,notItalic,open,FitPage
+	3.26 DISPLAY REGISTERS command/154,Black,notBold,notItalic,open,FitPage
+	3.27 DISPLAY SLICE command/156,Black,notBold,notItalic,open,FitPage
+	3.28 DISPLAY STATUS command/158,Black,notBold,notItalic,open,FitPage
+	3.29 DISPLAY TASKS command/161,Black,notBold,notItalic,open,FitPage
+	3.30 DISPLAY TIME command/164,Black,notBold,notItalic,open,FitPage
+	3.31 DISPLAY VOLUME command/166,Black,notBold,notItalic,open,FitPage
+	3.32 ERROR LOG command/170,Black,notBold,notItalic,open,FitPage
+	3.33 ERROR PERIOD command/173,Black,notBold,notItalic,open,FitPage
+	3.34 ERROR RECORDING command/175,Black,notBold,notItalic,open,FitPage
+	3.35 EXAMINE command/177,Black,notBold,notItalic,open,FitPage
+	3.36 FFILE command/179,Black,notBold,notItalic,open,FitPage
+	3.37 FRECORD command/181,Black,notBold,notItalic,open,FitPage
+	3.38 INIT command/183,Black,notBold,notItalic,open,FitPage
+	3.39 IRBUFFER command/186,Black,notBold,notItalic,open,FitPage
+	3.40 LOAD command/188,Black,notBold,notItalic,open,FitPage
+	3.41 LPU command/193,Black,notBold,notItalic,open,FitPage
+	3.42 MARK command/197,Black,notBold,notItalic,open,FitPage
+	3.43 MEMORY command/214,Black,notBold,notItalic,open,FitPage
+	3.44 MODIFY command/223,Black,notBold,notItalic,open,FitPage
+	3.45 OPTIONS command/225,Black,notBold,notItalic,open,FitPage
+	3.46 PAUSE command/228,Black,notBold,notItalic,open,FitPage
+	3.47 QUEUE command/229,Black,notBold,notItalic,open,FitPage
+	3.48 REMOVE command/233,Black,notBold,notItalic,open,FitPage
+	3.49 RENAME command/234,Black,notBold,notItalic,open,FitPage
+	3.50 REPROTECT command/236,Black,notBold,notItalic,open,FitPage
+	3.51 REWIND and RW commands/238,Black,notBold,notItalic,open,FitPage
+	3.52 RVOLUME command/240,Black,notBold,notItalic,open,FitPage
+	3.53 SEND command/241,Black,notBold,notItalic,open,FitPage
+	3.54 SET BLOCKS command/243,Black,notBold,notItalic,open,FitPage
+	3.55 SET LOG command/245,Black,notBold,notItalic,open,FitPage
+	3.56 SET PRIORITY command/248,Black,notBold,notItalic,open,FitPage
+	3.57 SET SLICE command/250,Black,notBold,notItalic,open,FitPage
+	3.58 SET SYS command/252,Black,notBold,notItalic,open,FitPage
+	3.59 SET TIME command/254,Black,notBold,notItalic,open,FitPage
+	3.60 SPOOLFILE command/257,Black,notBold,notItalic,open,FitPage
+	3.61 START command/260,Black,notBold,notItalic,open,FitPage
+	3.62 SWOP command/262,Black,notBold,notItalic,open,FitPage
+	3.63 TASK command/263,Black,notBold,notItalic,open,FitPage
+	3.64 TCOM command/265,Black,notBold,notItalic,open,FitPage
+	3.65 TEMPFILE command/267,Black,notBold,notItalic,open,FitPage
+	3.66 VOLUME command/271,Black,notBold,notItalic,open,FitPage
+	3.67 WFILE command/273,Black,notBold,notItalic,open,FitPage
+	3.68 XALLOCATE command/275,Black,notBold,notItalic,open,FitPage
+	3.69 XDELETE command/279,Black,notBold,notItalic,open,FitPage
+Chapter 4 - System Error Handling/281,Black,notBold,notItalic,closed,FitPage
+	4.1 Error Types/281,Black,notBold,notItalic,open,FitPage
+	4.2 System Failure Recovery/281,Black,notBold,notItalic,open,FitPage
+		4.2.1 Submitting Problems for Investigation/282,Black,notBold,notItalic,open,FitPage
+	4.3 Power Fail/Restore/283,Black,notBold,notItalic,open,FitPage
+		4.3.1 Shared Memory Power Failure/284,Black,notBold,notItalic,open,FitPage
+	4.4 Disk Input/Output (I/O) Errors/284,Black,notBold,notItalic,open,FitPage
+	4.5 System Shutdown and Restart/285,Black,notBold,notItalic,open,FitPage
+	4.6 OS/32 Panic Dump Restore/285,Black,notBold,notItalic,open,FitPage
+		4.6.1 Electing to Perform a Panic Dump/285,Black,notBold,notItalic,open,FitPage
+		4.6.2 Disk Utilisation/290,Black,notBold,notItalic,open,FitPage
+		4.6.3 Examples of Panic Dump Device Specifications/291,Black,notBold,notItalic,open,FitPage
+		4.6.4 Panic Dump Messages/293,Black,notBold,notItalic,open,FitPage
+Chapter 5 - The Command Substitution System (CSS)/295,Black,notBold,notItalic,closed,FitPage
+	5.1 Introduction/295,Black,notBold,notItalic,open,FitPage
+	5.2 Command Substitution System (CSS) Files/295,Black,notBold,notItalic,open,FitPage
+		5.2.1 Calling Command Substitution System (CSS) Files/296,Black,notBold,notItalic,open,FitPage
+		5.2.2 One Command Substitution System (CSS) File Calling Another/296,Black,notBold,notItalic,open,FitPage
+	5.3 Using Command Substitution System (CSS) for Batch Control/297,Black,notBold,notItalic,open,FitPage
+		5.3.1 Job Control Decks/297,Black,notBold,notItalic,open,FitPage
+		5.3.2 Separation of Jobs/298,Black,notBold,notItalic,open,FitPage
+		5.3.3 Program Pauses and Other Interactions/298,Black,notBold,notItalic,open,FitPage
+		5.3.4 $PAUSE, $CONTINUE and $WAIT commands/299,Black,notBold,notItalic,open,FitPage
+	5.4 Using Command Substitution System (CSS) to Avoid Repetitious Actions/300,Black,notBold,notItalic,open,FitPage
+	5.5 Using Command Substitution System (CSS) to Build Complex Commands/301,Black,notBold,notItalic,open,FitPage
+		5.5.1 Passing Arguments to Command Substitution System (CSS) Files/301,Black,notBold,notItalic,open,FitPage
+		5.5.2 Testing Arguments for Existence/303,Black,notBold,notItalic,open,FitPage
+		5.5.3 Testing Files for Existence/304,Black,notBold,notItalic,open,FitPage
+		5.5.4 Multilevel Parameter Passing/306,Black,notBold,notItalic,open,FitPage
+		5.5.5 End of Task Codes and Error Handling/306,Black,notBold,notItalic,open,FitPage
+		5.5.6 Logging Messages to the Console/308,Black,notBold,notItalic,open,FitPage
+	5.6 Creating Command Substitution System (CSS) Files on Disk/309,Black,notBold,notItalic,open,FitPage
+	5.7 Building Task Control Files/310,Black,notBold,notItalic,open,FitPage
+	5.8 Exiting from Command Substitution System (CSS) Files/312,Black,notBold,notItalic,open,FitPage
+	5.9 Using Standard File Extensions/312,Black,notBold,notItalic,open,FitPage
+	5.10 Interaction of Command Substitution System (CSS) with Foreground/Background Systems/313,Black,notBold,notItalic,open,FitPage
+	5.11 Command Substitution System (CSS) Command Summary/314,Black,notBold,notItalic,open,FitPage
+	5.12 Command Substitution System (CSS) Error Conditions/315,Black,notBold,notItalic,open,FitPage
+Chapter 6 - Accounting Data Collection and Reporting/318,Black,notBold,notItalic,closed,FitPage
+	6.1 Introduction/318,Black,notBold,notItalic,open,FitPage
+	6.2 Establishing the Accounting Facility in a Multi-Terminal Monitor (MTM) Environment/318,Black,notBold,notItalic,open,FitPage
+	6.3 Establishing the Accounting Facility in a Non-Multi-Terminal Monitor (MTM) Environment/318,Black,notBold,notItalic,open,FitPage
+Appendices/1,Black,notBold,notItalic,closed,FitPage
+	Appendix A - Operator Command Summary/320,Black,notBold,notItalic,open,FitPage
+	Appendix B - Operator Command Message Summary/330,Black,notBold,notItalic,open,FitPage
+	Appendix C - System Messages/352,Black,notBold,notItalic,closed,FitPage
+		C.1 Introduction/352,Black,notBold,notItalic,open,FitPage
+		C.2 User Task (U-Task) System Messages/352,Black,notBold,notItalic,open,FitPage
+		C.3 General System Messages/359,Black,notBold,notItalic,open,FitPage
+			C.3.1 Model 3200MPS System Messages/360,Black,notBold,notItalic,open,FitPage
+			C.3.2 Input/Output Processor (IOP) System Messages/361,Black,notBold,notItalic,open,FitPage
+	Appendix D - System Crash Codes/364,Black,notBold,notItalic,open,FitPage
+	Appendix E - Control Summary for Bidirectional Input/Output Control (BIOC) CRT Driver/387,Black,notBold,notItalic,open,FitPage
+	Appendix F - Virtual Console Facility (VCF)/395,Black,notBold,notItalic,closed,FitPage
+		F.1 Introduction/395,Black,notBold,notItalic,open,FitPage
+		F.2 Requirements/396,Black,notBold,notItalic,open,FitPage
+		F.3 VCF START command/397,Black,notBold,notItalic,open,FitPage
+		F.5 Consoleless System Operation/398,Black,notBold,notItalic,open,FitPage
+		F.5 User Terminal As the System Console/399,Black,notBold,notItalic,open,FitPage
+		F.6 Password Protection for Console Access/399,Black,notBold,notItalic,open,FitPage
+		F.7 VCF Log File/399,Black,notBold,notItalic,open,FitPage
+		F.8 VCF Log File Commands/400,Black,notBold,notItalic,closed,FitPage
+			F.8.1 TOP command/400,Black,notBold,notItalic,open,FitPage
+			F.8.1 BOTTOM command/400,Black,notBold,notItalic,open,FitPage
+			F.8.2 PREVIOUS command/401,Black,notBold,notItalic,open,FitPage
+			F.8.4 NEXT command/401,Black,notBold,notItalic,open,FitPage
+			F.8.5 LOGFILE command/401,Black,notBold,notItalic,open,FitPage
+			F.8.6 NEWLOG command/401,Black,notBold,notItalic,open,FitPage
+			F.8.7 QUIT command/402,Black,notBold,notItalic,open,FitPage
+			F.8.8 EXIT command/402,Black,notBold,notItalic,open,FitPage
+		F.9 VCF "^^" Commands/402,Black,notBold,notItalic,closed,FitPage
+			F.9.1 ^^LOG command/402,Black,notBold,notItalic,open,FitPage
+			F.9.2 ^^LOGFILE command/403,Black,notBold,notItalic,open,FitPage
+			F.9.3 ^^NEWLOG command/403,Black,notBold,notItalic,open,FitPage
+			F.9.4 ^^EXIT command/404,Black,notBold,notItalic,open,FitPage
+			F.9.5 ^^PASSWORD command/404,Black,notBold,notItalic,open,FitPage
+		F.10 Console Recovery/404,Black,notBold,notItalic,closed,FitPage
+			F.10.1 DROP Message/405,Black,notBold,notItalic,open,FitPage
+			F.10.2 QUIESCE Message/405,Black,notBold,notItalic,open,FitPage
+			F.10.3 ABORT message/405,Black,notBold,notItalic,open,FitPage
+		F.11 Error Handling/406,Black,notBold,notItalic,open,FitPage
+		F.12 End of Task (EOT) Codes/406,Black,notBold,notItalic,open,FitPage
+Index/407,Black,notBold,notItalic,open,FitPage
+Publication Comment Form/413,Black,notBold,notItalic,open,FitPage

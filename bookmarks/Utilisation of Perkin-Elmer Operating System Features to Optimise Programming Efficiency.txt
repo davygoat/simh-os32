@@ -1,0 +1,27 @@
+Gray, L.S. and Morris, A.S. (1982) Utilisation of Perkin-Elmer Operating System Features to Optimise Programming Efficiency. University of Sheffield./1,Black,bold,notItalic,open,FitPage
+Title page/2,Black,notBold,notItalic,open,FitPage
+1. Introduction/3,Black,notBold,notItalic,open,FitPage
+2. OS/32 Organization/4,Black,notBold,notItalic,open,FitPage
+	2.1 System Manager (Command Processor)/5,Black,notBold,notItalic,open,FitPage
+	2.2 Executive/5,Black,notBold,notItalic,open,FitPage
+	2.3 Task Manager/5,Black,notBold,notItalic,open,FitPage
+	2.4 Timer Manager/5,Black,notBold,notItalic,open,FitPage
+	2.5 Memory Manager/5,Black,notBold,notItalic,open,FitPage
+	2.6 File Manager/5,Black,notBold,notItalic,open,FitPage
+	2.7 I/O Subsystem/6,Black,notBold,notItalic,open,FitPage
+	2.8 Resident Loader/6,Black,notBold,notItalic,open,FitPage
+	2.9 Multi-Terminal Monitor (MTM)/6,Black,notBold,notItalic,open,FitPage
+	2.10 Spooler/6,Black,notBold,notItalic,open,FitPage
+3. User Tasks and Memory Management/7,Black,notBold,notItalic,open,FitPage
+4. File Structure and Data Organization/10,Black,notBold,notItalic,open,FitPage
+5. Filestore Dumps/16,Black,notBold,notItalic,open,FitPage
+6. Hints on Use of MTM/17,Black,notBold,notItalic,open,FitPage
+	6.1 Batch Jobs/17,Black,notBold,notItalic,open,FitPage
+	6.2 CSS Files/18,Black,notBold,notItalic,open,FitPage
+	Table 1 - MTM Command Summary/22,Black,notBold,notItalic,open,FitPage
+	Table 2 - Additional MTM Commands for use in CSS Files Only/24,Black,notBold,notItalic,open,FitPage
+7. Using Overlays in Fortran with the Link Editor/26,Black,notBold,notItalic,open,FitPage
+	7.1 Is Your Program Suitable for Overlaying?/26,Black,notBold,notItalic,open,FitPage
+	7.2 The Link Commands Necessary to Create a Overlaid Task/28,Black,notBold,notItalic,open,FitPage
+	7.3 Calling a Subroutine from an Overlaid Segment in Fortran/30,Black,notBold,notItalic,open,FitPage
+8. Summary/31,Black,notBold,notItalic,open,FitPage

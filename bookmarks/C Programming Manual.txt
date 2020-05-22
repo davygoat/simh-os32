@@ -1,0 +1,349 @@
+C Programming Manual (1984)/1,Black,bold,notItalic,open,FitPage
+Table of Contents/3,Black,notBold,notItalic,open,FitPage
+Preface/9,Black,notBold,notItalic,open,FitPage
+Chapter 1 - The C Lanuage/10,Black,notBold,notItalic,closed,FitPage
+	Introduction/11,Black,notBold,notItalic,open,FitPage
+	Syntax/13,Black,notBold,notItalic,open,FitPage
+	Identifiers/18,Black,notBold,notItalic,open,FitPage
+	Declarations/24,Black,notBold,notItalic,open,FitPage
+	Initializers/30,Black,notBold,notItalic,open,FitPage
+	Statements/33,Black,notBold,notItalic,open,FitPage
+	Expressions/36,Black,notBold,notItalic,open,FitPage
+	Constants/43,Black,notBold,notItalic,open,FitPage
+	Preprocessor/45,Black,notBold,notItalic,open,FitPage
+	Style/48,Black,notBold,notItalic,open,FitPage
+	Portability/54,Black,notBold,notItalic,open,FitPage
+	Differences/57,Black,notBold,notItalic,open,FitPage
+	Diagnostics/59,Black,notBold,notItalic,open,FitPage
+Chapter 2 - Edition VII Compatible C Run-Time Library (RTL)/63,Black,notBold,notItalic,open,FitPage
+	By Table of Content (grouped)/63,Black,notBold,notItalic,closed,FitPage
+		assert - Program Verification/64,Black,notBold,notItalic,open,FitPage
+		abs - Integer Absolute Value/65,Black,notBold,notItalic,open,FitPage
+		atof - Convert ASCII to Numbers/66,Black,notBold,notItalic,open,FitPage
+		crypt - DES Encryption/67,Black,notBold,notItalic,open,FitPage
+		ctype - Character Classification/68,Black,notBold,notItalic,open,FitPage
+		ecvt - Output Conversion/69,Black,notBold,notItalic,open,FitPage
+		exp - Exponential Functions/70,Black,notBold,notItalic,open,FitPage
+		fclose - Close or Flush a Stream/71,Black,notBold,notItalic,open,FitPage
+		feof - Stream Status Inquiries/72,Black,notBold,notItalic,open,FitPage
+		fabs - Absolute Value, Floor, Ceiling Functions/73,Black,notBold,notItalic,open,FitPage
+		fopen - Open a Stream/74,Black,notBold,notItalic,open,FitPage
+		frexp - Split into Mantissa and Exponent/76,Black,notBold,notItalic,open,FitPage
+		fseek - Reposition a Stream/77,Black,notBold,notItalic,open,FitPage
+		getc - Get Character or Word from Stream/78,Black,notBold,notItalic,open,FitPage
+		getlogin - Get Login Name/79,Black,notBold,notItalic,open,FitPage
+		gets - Get a String from a Stream/80,Black,notBold,notItalic,open,FitPage
+		hypot - Euclidean Distance/81,Black,notBold,notItalic,open,FitPage
+		malloc - Main Memory Allocator/82,Black,notBold,notItalic,open,FitPage
+		mktemp - Make a Unique File Name/83,Black,notBold,notItalic,open,FitPage
+		perror - System Error Messages/84,Black,notBold,notItalic,open,FitPage
+		printf - Formatted Output Conversion/85,Black,notBold,notItalic,open,FitPage
+		putc - Put Character or Word on a Stream/88,Black,notBold,notItalic,open,FitPage
+		puts - Put a String on a Stream/90,Black,notBold,notItalic,open,FitPage
+		qsort - Quicker Sort/91,Black,notBold,notItalic,open,FitPage
+		rand - Random Number Generator/92,Black,notBold,notItalic,open,FitPage
+		scanf - Formatted Input Conversion/93,Black,notBold,notItalic,open,FitPage
+		setbuf - Assign Buffering to a Stream/97,Black,notBold,notItalic,open,FitPage
+		setjmp, longjmp - Nonlocal Goto/98,Black,notBold,notItalic,open,FitPage
+		sin - Trigonometric Functions/99,Black,notBold,notItalic,open,FitPage
+		sinh - Hyperbolic Functions/100,Black,notBold,notItalic,open,FitPage
+		sleep - Suspend Execution for Interval/101,Black,notBold,notItalic,open,FitPage
+		stdio - Standard Buffered I/O Package/102,Black,notBold,notItalic,open,FitPage
+		string - String Operations/104,Black,notBold,notItalic,open,FitPage
+		ttyname - Find Name of a Terminal/106,Black,notBold,notItalic,open,FitPage
+		ungetc - Push Caracter Back into Input Stream/107,Black,notBold,notItalic,open,FitPage
+	By Name (full list)/63,Black,notBold,notItalic,open,FitPage
+		assert/64,Black,notBold,notItalic,open,FitPage
+		abs/65,Black,notBold,notItalic,open,FitPage
+		acos/99,Black,notBold,notItalic,open,FitPage
+		asin/99,Black,notBold,notItalic,open,FitPage
+		atan/99,Black,notBold,notItalic,open,FitPage
+		atan2/99,Black,notBold,notItalic,open,FitPage
+		atof/66,Black,notBold,notItalic,open,FitPage
+		atoi/66,Black,notBold,notItalic,open,FitPage
+		atol/66,Black,notBold,notItalic,open,FitPage
+		cabs/81,Black,notBold,notItalic,open,FitPage
+		calloc/82,Black,notBold,notItalic,open,FitPage
+		ceil/73,Black,notBold,notItalic,open,FitPage
+		clearerr/72,Black,notBold,notItalic,open,FitPage
+		cos/99,Black,notBold,notItalic,open,FitPage
+		cosh/100,Black,notBold,notItalic,open,FitPage
+		crypt/67,Black,notBold,notItalic,open,FitPage
+		ecvt/69,Black,notBold,notItalic,open,FitPage
+		encrypt/67,Black,notBold,notItalic,open,FitPage
+		exp/70,Black,notBold,notItalic,open,FitPage
+		fabs/73,Black,notBold,notItalic,open,FitPage
+		fdopen/74,Black,notBold,notItalic,open,FitPage
+		feof/72,Black,notBold,notItalic,open,FitPage
+		ferror/72,Black,notBold,notItalic,open,FitPage
+		fclose/71,Black,notBold,notItalic,open,FitPage
+		fcvt/69,Black,notBold,notItalic,open,FitPage
+		fflush/71,Black,notBold,notItalic,open,FitPage
+		fgetc/78,Black,notBold,notItalic,open,FitPage
+		fgets/80,Black,notBold,notItalic,open,FitPage
+		fileno/72,Black,notBold,notItalic,open,FitPage
+		floor/73,Black,notBold,notItalic,open,FitPage
+		fopen/74,Black,notBold,notItalic,open,FitPage
+		fprintf/85,Black,notBold,notItalic,open,FitPage
+		free/82,Black,notBold,notItalic,open,FitPage
+		freopen/74,Black,notBold,notItalic,open,FitPage
+		frexp/76,Black,notBold,notItalic,open,FitPage
+		fseek/77,Black,notBold,notItalic,open,FitPage
+		ftell/77,Black,notBold,notItalic,open,FitPage
+		fputc/88,Black,notBold,notItalic,open,FitPage
+		fscanf/93,Black,notBold,notItalic,open,FitPage
+		gcvt/69,Black,notBold,notItalic,open,FitPage
+		getc/78,Black,notBold,notItalic,open,FitPage
+		getchar/78,Black,notBold,notItalic,open,FitPage
+		getlogin/79,Black,notBold,notItalic,open,FitPage
+		gets/80,Black,notBold,notItalic,open,FitPage
+		hypot/81,Black,notBold,notItalic,open,FitPage
+		index/104,Black,notBold,notItalic,open,FitPage
+		isascii/68,Black,notBold,notItalic,open,FitPage
+		isalpha/68,Black,notBold,notItalic,open,FitPage
+		isalnum/68,Black,notBold,notItalic,open,FitPage
+		isatty/106,Black,notBold,notItalic,open,FitPage
+		iscntrl/68,Black,notBold,notItalic,open,FitPage
+		isdigit/68,Black,notBold,notItalic,open,FitPage
+		islower/68,Black,notBold,notItalic,open,FitPage
+		isprint/68,Black,notBold,notItalic,open,FitPage
+		ispunct/68,Black,notBold,notItalic,open,FitPage
+		isspace/68,Black,notBold,notItalic,open,FitPage
+		isupper/68,Black,notBold,notItalic,open,FitPage
+		ldexp/76,Black,notBold,notItalic,open,FitPage
+		log/70,Black,notBold,notItalic,open,FitPage
+		log10/70,Black,notBold,notItalic,open,FitPage
+		longjmp/98,Black,notBold,notItalic,open,FitPage
+		malloc/82,Black,notBold,notItalic,open,FitPage
+		mktemp/83,Black,notBold,notItalic,open,FitPage
+		modf/76,Black,notBold,notItalic,open,FitPage
+		perror/84,Black,notBold,notItalic,open,FitPage
+		pow/70,Black,notBold,notItalic,open,FitPage
+		printf/85,Black,notBold,notItalic,open,FitPage
+		putc/88,Black,notBold,notItalic,open,FitPage
+		putchar/88,Black,notBold,notItalic,open,FitPage
+		puts/90,Black,notBold,notItalic,open,FitPage
+		putw/88,Black,notBold,notItalic,open,FitPage
+		qsort/91,Black,notBold,notItalic,open,FitPage
+		rand/92,Black,notBold,notItalic,open,FitPage
+		rewind/77,Black,notBold,notItalic,open,FitPage
+		rindex/104,Black,notBold,notItalic,open,FitPage
+		scanf/93,Black,notBold,notItalic,open,FitPage
+		setkey/67,Black,notBold,notItalic,open,FitPage
+		setjmp/98,Black,notBold,notItalic,open,FitPage
+		sinh/100,Black,notBold,notItalic,open,FitPage
+		sleep/101,Black,notBold,notItalic,open,FitPage
+		sprintf/85,Black,notBold,notItalic,open,FitPage
+		sscanf/93,Black,notBold,notItalic,open,FitPage
+		stderr/102,Black,notBold,notItalic,open,FitPage
+		stdin/102,Black,notBold,notItalic,open,FitPage
+		stdout/102,Black,notBold,notItalic,open,FitPage
+		strcat/104,Black,notBold,notItalic,open,FitPage
+		strcmp/104,Black,notBold,notItalic,open,FitPage
+		strcpy/104,Black,notBold,notItalic,open,FitPage
+		strlen/104,Black,notBold,notItalic,open,FitPage
+		strncpy/104,Black,notBold,notItalic,open,FitPage
+		strncat/104,Black,notBold,notItalic,open,FitPage
+		strncmp/104,Black,notBold,notItalic,open,FitPage
+		strand/92,Black,notBold,notItalic,open,FitPage
+		sqrt/70,Black,notBold,notItalic,open,FitPage
+		sys_errlist/84,Black,notBold,notItalic,open,FitPage
+		sys_nerr/84,Black,notBold,notItalic,open,FitPage
+		tan/99,Black,notBold,notItalic,open,FitPage
+		tanh/100,Black,notBold,notItalic,open,FitPage
+		ttyname/106,Black,notBold,notItalic,open,FitPage
+		ttyslot/106,Black,notBold,notItalic,open,FitPage
+		ungetc/107,Black,notBold,notItalic,open,FitPage
+Chapter 3 - Idris Compatible C Run-Time Library (RTL)/108,Black,notBold,notItalic,closed,FitPage
+	Table of Contents/108,Black,notBold,notItalic,open,FitPage
+	Conventions - Using C With the Standard Libraries/111,Black,notBold,notItalic,open,FitPage
+	std.h - Standard Header File/112,Black,notBold,notItalic,open,FitPage
+	Cio - C I/O Subroutines/114,Black,notBold,notItalic,open,FitPage
+	FIO - The File I/O Structure/116,Black,notBold,notItalic,open,FitPage
+	abs - Convert Buffer to Integer/118,Black,notBold,notItalic,open,FitPage
+	alloc - Allocate Space on the Heap/119,Black,notBold,notItalic,open,FitPage
+	amatch - Look for Anchored Match of Regular Expression/120,Black,notBold,notItalic,open,FitPage
+	arctan - Arctangent/122,Black,notBold,notItalic,open,FitPage
+	bldks - Build Key Schedule From Key/123,Black,notBold,notItalic,open,FitPage
+	btod - Convert Buffer to Double/124,Black,notBold,notItalic,open,FitPage
+	btoi - Convert Buffer to Integer/126,Black,notBold,notItalic,open,FitPage
+	btol - Convert Buffer to Long/127,Black,notBold,notItalic,open,FitPage
+	btos - Convert Buffer to Short Integer/129,Black,notBold,notItalic,open,FitPage
+	buybuf - Allocate a Cell and Copy in Text Buffer/130,Black,notBold,notItalic,open,FitPage
+	cmpbuf - Compare Two Buffers for Equality/131,Black,notBold,notItalic,open,FitPage
+	cmpstr - Compare Two Strings for Equality/132,Black,notBold,notItalic,open,FitPage
+	cos - Cosine in Radians/133,Black,notBold,notItalic,open,FitPage
+	cpybuf - Copy One Buffer to Another/134,Black,notBold,notItalic,open,FitPage
+	cpystr - Copy Multiple Strings/135,Black,notBold,notItalic,open,FitPage
+	decode - Convert Arguments to Text Under Format Control/136,Black,notBold,notItalic,open,FitPage
+	decrypt - Decode Encrypted Block of Text/137,Black,notBold,notItalic,open,FitPage
+	doesc - Process Character Escape Sequences/138,Black,notBold,notItalic,open,FitPage
+	dtento - Multiply Double by a Power of Ten/139,Black,notBold,notItalic,open,FitPage
+	dtoe - Convert Double to Buffer in Exponential Format/140,Black,notBold,notItalic,open,FitPage
+	dtof - Convert Double to Buffer in Fixed Point Format/141,Black,notBold,notItalic,open,FitPage
+	encode - Convert Text to Arguments Under Format Control/142,Black,notBold,notItalic,open,FitPage
+	encrypt - Encode Block of Text/143,Black,notBold,notItalic,open,FitPage
+	enter - Enter a Control Region/144,Black,notBold,notItalic,open,FitPage
+	errfmt - Format Output to Error File/146,Black,notBold,notItalic,open,FitPage
+	error - Print Error Message and Exit/147,Black,notBold,notItalic,open,FitPage
+	exp - Exponential/148,Black,notBold,notItalic,open,FitPage
+	fclose - Close a File Controlled by FIO Buffer/149,Black,notBold,notItalic,open,FitPage
+	fcreate - Create a File and Initialize a Control Buffer/150,Black,notBold,notItalic,open,FitPage
+	fill - Propagate Fill Character Throughout Buffer/151,Black,notBold,notItalic,open,FitPage
+	finit - Initialize an FIO Control Buffer/152,Black,notBold,notItalic,open,FitPage
+	fopen - Open a File and Initialize a Control Buffer/153,Black,notBold,notItalic,open,FitPage
+	fread - Read Until Full Count/154,Black,notBold,notItalic,open,FitPage
+	free - Free Space on the Heap/155,Black,notBold,notItalic,open,FitPage
+	frelst - Free a List of Allocated Cells/157,Black,notBold,notItalic,open,FitPage
+	getbfiles - Collect Files from Command Line/158,Black,notBold,notItalic,open,FitPage
+	getc - Get a Character from Input Buffer/160,Black,notBold,notItalic,open,FitPage
+	getch - Get a Character from Input Buffer stdin/161,Black,notBold,notItalic,open,FitPage
+	getf - Read Formatted Input/162,Black,notBold,notItalic,open,FitPage
+	getfiles - Collect Text Files from Command Line/167,Black,notBold,notItalic,open,FitPage
+	getflags - Collect Flags from Command Line/169,Black,notBold,notItalic,open,FitPage
+	getfmt - Format Input from stdin/172,Black,notBold,notItalic,open,FitPage
+	getl - Get a Text Line into the Input Buffer/173,Black,notBold,notItalic,open,FitPage
+	getlin - Get a Text Line from stdin/174,Black,notBold,notItalic,open,FitPage
+	inbuf - Find First Occurrence in Buffer of Character in Set/175,Black,notBold,notItalic,open,FitPage
+	instr - Find First Occurrence in String of Character in Set/176,Black,notBold,notItalic,open,FitPage
+	isalpha - Test for Alphabetic Character/177,Black,notBold,notItalic,open,FitPage
+	isdigit - Test for Digit/178,Black,notBold,notItalic,open,FitPage
+	islower - Test for Lower-Case Character/179,Black,notBold,notItalic,open,FitPage
+	isupper - Test for Upper-Case Character/180,Black,notBold,notItalic,open,FitPage
+	iswhite - Test for Whitespace Character/181,Black,notBold,notItalic,open,FitPage
+	itob - Convert Integer to Text in Buffer/182,Black,notBold,notItalic,open,FitPage
+	itols - Convert Integer to Leading Low-Byte String/183,Black,notBold,notItalic,open,FitPage
+	leave - Leave a Control Region/184,Black,notBold,notItalic,open,FitPage
+	lenstr - Find Length of a String/185,Black,notBold,notItalic,open,FitPage
+	ln - Natural Logarithm/186,Black,notBold,notItalic,open,FitPage
+	lower - Convert Characters in Buffer to Lower-Case/187,Black,notBold,notItalic,open,FitPage
+	lstoi - Convert Leading Low-Byte String to Integer/188,Black,notBold,notItalic,open,FitPage
+	lstol - Convert Filesystem Date to Long/189,Black,notBold,notItalic,open,FitPage
+	ltob - Convert Long to Text in Buffer/190,Black,notBold,notItalic,open,FitPage
+	ltols - Convert Long to Filesystem Date/191,Black,notBold,notItalic,open,FitPage
+	mapchar - Map Single Character to Printable Representation mapchar/192,Black,notBold,notItalic,open,FitPage
+	match - Match a Regular Expression/193,Black,notBold,notItalic,open,FitPage
+	max - Test for Maximum/194,Black,notBold,notItalic,open,FitPage
+	min - Test for Minimum/195,Black,notBold,notItalic,open,FitPage
+	mkord - Make an Ordering Function/196,Black,notBold,notItalic,open,FitPage
+	nalloc - Allocate Space on the Heap/199,Black,notBold,notItalic,open,FitPage
+	notbuf - Find First Occurrence of Character Not in Set/200,Black,notBold,notItalic,open,FitPage
+	notstr - Find First occurrence in String of Character Not In Set/201,Black,notBold,notItalic,open,FitPage
+	ordbuf - Compare Two NUL-Padded Buffers for Lexical Order/202,Black,notBold,notItalic,open,FitPage
+	pathnm - Complete a Pathname/203,Black,notBold,notItalic,open,FitPage
+	pattern - Build a Regular Expression Pattern/204,Black,notBold,notItalic,open,FitPage
+	prefix - Test if One String is a Prefix of the Other/207,Black,notBold,notItalic,open,FitPage
+	putc - Put a Character to Output Buffer/208,Black,notBold,notItalic,open,FitPage
+	putch - Put a Character to stdout Buffer/209,Black,notBold,notItalic,open,FitPage
+	putf - Output Arguments Formatted/211,Black,notBold,notItalic,open,FitPage
+	putfmt - Format Arguments to stdout/215,Black,notBold,notItalic,open,FitPage
+	putl - Put a Text Line from Buffer/216,Black,notBold,notItalic,open,FitPage
+	putlin - Put a Text Line to stdout/217,Black,notBold,notItalic,open,FitPage
+	putstr - Copy Multiple Strings to File/218,Black,notBold,notItalic,open,FitPage
+	remark - Print Nonfatal Error Message/219,Black,notBold,notItalic,open,FitPage
+	scnbuf - Scan Buffer for Character/220,Black,notBold,notItalic,open,FitPage
+	scnstr - Scan String for Character/221,Black,notBold,notItalic,open,FitPage
+	sin - Sine in Radians/222,Black,notBold,notItalic,open,FitPage
+	sort - Sort Items in Memory/223,Black,notBold,notItalic,open,FitPage
+	sqrt - Real Square Root/225,Black,notBold,notItalic,open,FitPage
+	squeeze - Delete Specified Character from Buffer/226,Black,notBold,notItalic,open,FitPage
+	stdin - The Standard Input Control Buffer/227,Black,notBold,notItalic,open,FitPage
+	stdout - The Standard Output Control Buffer/228,Black,notBold,notItalic,open,FitPage
+	stob - Convert Short to Text in Buffer/229,Black,notBold,notItalic,open,FitPage
+	subbuf - Find Occurrence of Substring in Buffer/230,Black,notBold,notItalic,open,FitPage
+	substr - Find Occurrence of Substring/231,Black,notBold,notItalic,open,FitPage
+	tolower - Convert Character to Lower-Case if Necessary/232,Black,notBold,notItalic,open,FitPage
+	toupper - Convert Character to Upper-Case if Necessary/233,Black,notBold,notItalic,open,FitPage
+	usage - Output Standard Usage Information/234,Black,notBold,notItalic,open,FitPage
+Chapter 4 - System Interface Library/235,Black,notBold,notItalic,closed,FitPage
+	By Table of Content (grouped)/235,Black,notBold,notItalic,closed,FitPage
+		Cint - C Interface to Operating System/236,Black,notBold,notItalic,open,FitPage
+		main - Enter a Program/238,Black,notBold,notItalic,open,FitPage
+		_pname - Program Name/239,Black,notBold,notItalic,open,FitPage
+		brk - Change Core Allocation/240,Black,notBold,notItalic,open,FitPage
+		chdir - Change Default Volume and Account/241,Black,notBold,notItalic,open,FitPage
+		close - Close a File/242,Black,notBold,notItalic,open,FitPage
+		creat - Create a New File/243,Black,notBold,notItalic,open,FitPage
+		create - Open an Empty Instance of a File/244,Black,notBold,notItalic,open,FitPage
+		ctime - Convert Date and Time to ASCII/245,Black,notBold,notItalic,open,FitPage
+		envir - C Run-Time Environment/247,Black,notBold,notItalic,open,FitPage
+		exit - Terminate Process/249,Black,notBold,notItalic,open,FitPage
+		getuid - Get User and Group Identity/250,Black,notBold,notItalic,open,FitPage
+		lseek - Move Read/Write Pointer/251,Black,notBold,notItalic,open,FitPage
+		onexit - Call Function on Program Exit/252,Black,notBold,notItalic,open,FitPage
+		open - Open a File/253,Black,notBold,notItalic,open,FitPage
+		pause - Pause Process/254,Black,notBold,notItalic,open,FitPage
+		read - Read Characters From a File/255,Black,notBold,notItalic,open,FitPage
+		remove - Remove a File/256,Black,notBold,notItalic,open,FitPage
+		sbreak - Set System Break/257,Black,notBold,notItalic,open,FitPage
+		time - Get Date and Time/258,Black,notBold,notItalic,open,FitPage
+		uname - Create a Unique Filename/259,Black,notBold,notItalic,open,FitPage
+		unlink - Remove Directory Entry/260,Black,notBold,notItalic,open,FitPage
+		write - Write Characters to a File/261,Black,notBold,notItalic,open,FitPage
+	By Name (full list)/235,Black,notBold,notItalic,closed,FitPage
+		Cint - C Interface to Operating System/236,Black,notBold,notItalic,open,FitPage
+		main - Enter a Program/238,Black,notBold,notItalic,open,FitPage
+		_pname - Program Name/239,Black,notBold,notItalic,open,FitPage
+		asctime/245,Black,notBold,notItalic,open,FitPage
+		brk/240,Black,notBold,notItalic,open,FitPage
+		sbrk/240,Black,notBold,notItalic,open,FitPage
+		chdir/241,Black,notBold,notItalic,open,FitPage
+		close/242,Black,notBold,notItalic,open,FitPage
+		creat/243,Black,notBold,notItalic,open,FitPage
+		create/244,Black,notBold,notItalic,open,FitPage
+		ctime/245,Black,notBold,notItalic,open,FitPage
+		envir/247,Black,notBold,notItalic,open,FitPage
+		exit/249,Black,notBold,notItalic,open,FitPage
+		_exit/249,Black,notBold,notItalic,open,FitPage
+		getegid/250,Black,notBold,notItalic,open,FitPage
+		geteuid/250,Black,notBold,notItalic,open,FitPage
+		getgid/250,Black,notBold,notItalic,open,FitPage
+		getuid/250,Black,notBold,notItalic,open,FitPage
+		gmtime/245,Black,notBold,notItalic,open,FitPage
+		localtime/245,Black,notBold,notItalic,open,FitPage
+		timezone/245,Black,notBold,notItalic,open,FitPage
+		lseek/251,Black,notBold,notItalic,open,FitPage
+		tell/251,Black,notBold,notItalic,open,FitPage
+		onexit/252,Black,notBold,notItalic,open,FitPage
+		open/253,Black,notBold,notItalic,open,FitPage
+		pause/254,Black,notBold,notItalic,open,FitPage
+		read/255,Black,notBold,notItalic,open,FitPage
+		remove/256,Black,notBold,notItalic,open,FitPage
+		sbreak/257,Black,notBold,notItalic,open,FitPage
+		time/258,Black,notBold,notItalic,open,FitPage
+		uname/259,Black,notBold,notItalic,open,FitPage
+		unlink/260,Black,notBold,notItalic,open,FitPage
+		write/261,Black,notBold,notItalic,open,FitPage
+Chapter 5 - C Machine Interface Library/262,Black,notBold,notItalic,closed,FitPage
+	Conventions/263,Black,notBold,notItalic,open,FitPage
+	_addexp - Scale Double Exponent/264,Black,notBold,notItalic,open,FitPage
+	_domain - Report Domain Error/265,Black,notBold,notItalic,open,FitPage
+	_domerr - Domain Error Condition/266,Black,notBold,notItalic,open,FitPage
+	_dtens - Powers of Ten/267,Black,notBold,notItalic,open,FitPage
+	_dzero - Double Zero/268,Black,notBold,notItalic,open,FitPage
+	_frac - Extract Integer from Fraction Part/269,Black,notBold,notItalic,open,FitPage
+	_huge - Largest Double Number/270,Black,notBold,notItalic,open,FitPage
+	_norm - Convert Double to Normalized Text String/271,Black,notBold,notItalic,open,FitPage
+	_ntens - Number of Powers of Ten/272,Black,notBold,notItalic,open,FitPage
+	_poly - Compute Polynomial/273,Black,notBold,notItalic,open,FitPage
+	_raise - Raise an Exception/274,Black,notBold,notItalic,open,FitPage
+	_ranerr - Range Error Condition/276,Black,notBold,notItalic,open,FitPage
+	_range - Report Range Error/277,Black,notBold,notItalic,open,FitPage
+	_round - Round Off a Fraction String/278,Black,notBold,notItalic,open,FitPage
+	_tiny - Smallest Double Number/279,Black,notBold,notItalic,open,FitPage
+	_unpack - Extract Fraction from Exponent Part/280,Black,notBold,notItalic,open,FitPage
+	_when - Handle Exceptions/281,Black,notBold,notItalic,open,FitPage
+Appendixes/283,Black,notBold,notItalic,closed,FitPage
+	Appendix A - OS/32 File System Input/Output (I/O) Interface and Run-Time Environment/283,Black,notBold,notItalic,open,FitPage
+	Appendix B - Operating Procedures/290,Black,notBold,notItalic,closed,FitPage
+		Table of Contents/290,Black,notBold,notItalic,open,FitPage
+		Introduction/291,Black,notBold,notItalic,open,FitPage
+		CC - Compile, Assemble and Link a C Program/292,Black,notBold,notItalic,open,FitPage
+		CU - Assemble a Porgram/294,Black,notBold,notItalic,open,FitPage
+		LISTER - List Source and Errors/295,Black,notBold,notItalic,open,FitPage
+		LN - Link a C Program to Run on OS/32/296,Black,notBold,notItalic,open,FitPage
+		PP - Preprocess Defines and Includes/297,Black,notBold,notItalic,open,FitPage
+		PONE - Parse C Programs/299,Black,notBold,notItalic,open,FitPage
+		PTWO - Generate Code for OS/32 C Program/301,Black,notBold,notItalic,open,FitPage
+Bibliography/303,Black,notBold,notItalic,open,FitPage
+Index/304,Black,notBold,notItalic,open,FitPage

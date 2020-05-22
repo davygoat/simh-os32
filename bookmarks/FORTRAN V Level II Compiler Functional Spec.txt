@@ -1,0 +1,159 @@
+FORTRAN V Level II Compiler Functional Specification (1975)/1,Black,bold,notItalic,open,FitPage
+1 to 4.4 Introductory Formalities/2,Black,notBold,notItalic,open,FitPage
+5 Detailed Description/3,Black,notBold,notItalic,open,FitPage
+	5.1 Notation/3,Black,notBold,notItalic,open,FitPage
+	5.2 Fortran Concepts/4,Black,notBold,notItalic,closed,FitPage
+		5.2.1 Programs/4,Black,notBold,notItalic,open,FitPage
+		5.2.2 Statements, Comments and Lines/4,Black,notBold,notItalic,open,FitPage
+		5.2.3 Names and Options/5,Black,notBold,notItalic,open,FitPage
+	5.3 Characters, Lines, and Execution Sequence/6,Black,notBold,notItalic,closed,FitPage
+		5.3.1 Fortran Character Set/6,Black,notBold,notItalic,open,FitPage
+		5.3.2 Lines/6,Black,notBold,notItalic,open,FitPage
+		5.3.3 Statements/9,Black,notBold,notItalic,open,FitPage
+		5.3.4 Statement Labels/10,Black,notBold,notItalic,open,FitPage
+		5.3.5 Order of Statements and Lines/10,Black,notBold,notItalic,open,FitPage
+		5.3.6 Normal Execution Sequence/12,Black,notBold,notItalic,open,FitPage
+	5.4 Data Types, Constants, and Storage/12,Black,notBold,notItalic,closed,FitPage
+		5.4.1 Data Types/12,Black,notBold,notItalic,open,FitPage
+		5.4.2 Constants/14,Black,notBold,notItalic,open,FitPage
+		5.4.3 INTEGER or INTEGER*2 Type/14,Black,notBold,notItalic,open,FitPage
+		5.4.4 REAL Type/15,Black,notBold,notItalic,open,FitPage
+		5.4.5 DOUBLE PRECISION Type/15,Black,notBold,notItalic,open,FitPage
+		5.4.6 Complex Constant/16,Black,notBold,notItalic,open,FitPage
+		5.4.7 Logical Type/16,Black,notBold,notItalic,open,FitPage
+		5.4.8 Character Constant/16,Black,notBold,notItalic,open,FitPage
+		5.4.9 Hollerith Type/17,Black,notBold,notItalic,open,FitPage
+		5.4.10 Bit Type/17,Black,notBold,notItalic,open,FitPage
+		5.4.11 Address Constants/17,Black,notBold,notItalic,open,FitPage
+		5.4.12 Storage/18,Black,notBold,notItalic,open,FitPage
+	5.5 Arrays/18,Black,notBold,notItalic,closed,FitPage
+		5.5.1 Array Declarator/18,Black,notBold,notItalic,open,FitPage
+		5.5.2 Properties of an Array/20,Black,notBold,notItalic,open,FitPage
+		5.5.3 Array Element Names/21,Black,notBold,notItalic,open,FitPage
+		5.5.4 Subscripts/21,Black,notBold,notItalic,open,FitPage
+		5.5.5 Dummy Arrays/23,Black,notBold,notItalic,open,FitPage
+		5.5.6 Use of Array Names and Array Element Names/24,Black,notBold,notItalic,open,FitPage
+	5.6 Expressions/25,Black,notBold,notItalic,closed,FitPage
+		5.6.1 Arithmetic Expressions/25,Black,notBold,notItalic,open,FitPage
+		5.6.2 Character Expressions/35,Black,notBold,notItalic,open,FitPage
+		5.6.3 Relational Expressions/37,Black,notBold,notItalic,open,FitPage
+		5.6.4 Logical Expressions/38,Black,notBold,notItalic,open,FitPage
+		5.6.5 Evaluation of Expressions/40,Black,notBold,notItalic,open,FitPage
+	5.7 Executable or Nonexecutable Statement Classification/43,Black,notBold,notItalic,closed,FitPage
+		5.7.1 Executable Statements/43,Black,notBold,notItalic,open,FitPage
+		5.7.2 Nonexecutable Statements/43,Black,notBold,notItalic,open,FitPage
+	5.8 Specification Statements/44,Black,notBold,notItalic,closed,FitPage
+		5.8.1 DIMENSION Statement/44,Black,notBold,notItalic,open,FitPage
+		5.8.2 COMMON Statement/44,Black,notBold,notItalic,open,FitPage
+		5.8.3 EQUIVALENCE Statement/46,Black,notBold,notItalic,open,FitPage
+		5.8.4 Type-Statements/48,Black,notBold,notItalic,open,FitPage
+		5.8.5 IMPLICIT Statement/50,Black,notBold,notItalic,open,FitPage
+		5.8.6 PARAMETER Statement/51,Black,notBold,notItalic,open,FitPage
+		5.8.7 EXTERNAL Statement/51,Black,notBold,notItalic,open,FitPage
+		5.8.8 INTRINSIC Statement/52,Black,notBold,notItalic,open,FitPage
+		5.8.9 SAVE Statement/53,Black,notBold,notItalic,open,FitPage
+		5.8.10 STACK Statement/53,Black,notBold,notItalic,open,FitPage
+	5.9 DATA statement/54,Black,notBold,notItalic,closed,FitPage
+		5.9.1 Implied-DO in DATA Statement/56,Black,notBold,notItalic,open,FitPage
+		5.9.2 Character Constants in DATA Statements/56,Black,notBold,notItalic,open,FitPage
+		5.9.3 Hollerith Constants in DATA Statements/57,Black,notBold,notItalic,open,FitPage
+	5.10 Assignment Statements/58,Black,notBold,notItalic,closed,FitPage
+		5.10.1 Arithmetic Assignment Statement/58,Black,notBold,notItalic,open,FitPage
+		5.10.2 Logical Assignment Statement/60,Black,notBold,notItalic,open,FitPage
+		5.10.3 Statement Label Assignment (ASSIGN) Statement/60,Black,notBold,notItalic,open,FitPage
+		5.10.4 Character Assignment Statement/61,Black,notBold,notItalic,open,FitPage
+		5.10.5 Address Assignment Statements/61,Black,notBold,notItalic,open,FitPage
+	5.11 Control Statements/62,Black,notBold,notItalic,closed,FitPage
+		5.11.1 Uncondition GO TO Statement/62,Black,notBold,notItalic,open,FitPage
+		5.11.2 Assigned GO TO Statement/63,Black,notBold,notItalic,open,FitPage
+		5.11.3 Computed GO TO Statement/63,Black,notBold,notItalic,open,FitPage
+		5.11.4 Arithmetic IF Statement/63,Black,notBold,notItalic,open,FitPage
+		5.11.5 Logical IF Statement/64,Black,notBold,notItalic,open,FitPage
+		5.11.6 DO Statement/64,Black,notBold,notItalic,open,FitPage
+	5.12 Input/Output Statements/69,Black,notBold,notItalic,closed,FitPage
+		5.12.1 Records/70,Black,notBold,notItalic,open,FitPage
+			5.12.1.1 Formatted Records/70,Black,notBold,notItalic,open,FitPage
+			5.12.1.2 Unformatted Records/70,Black,notBold,notItalic,open,FitPage
+			5.12.1.3 Free-Field Records/71,Black,notBold,notItalic,open,FitPage
+			5.12.1.4 Endfile Records/71,Black,notBold,notItalic,open,FitPage
+		5.12.2 Files/71,Black,notBold,notItalic,open,FitPage
+			5.12.2.1 File Existence/71,Black,notBold,notItalic,open,FitPage
+			5.12.2.2 File Names/72,Black,notBold,notItalic,open,FitPage
+			5.12.2.3 Sequential Files/72,Black,notBold,notItalic,open,FitPage
+			5.12.2.4 Direct Access Files/73,Black,notBold,notItalic,open,FitPage
+			5.12.2.5 Storage Files/74,Black,notBold,notItalic,open,FitPage
+		5.12.3 Units/75,Black,notBold,notItalic,open,FitPage
+		5.12.4 Format Identifiers/76,Black,notBold,notItalic,open,FitPage
+		5.12.5 Control Information Specifiers/76,Black,notBold,notItalic,open,FitPage
+		5.12.6 Input/Output Lists/79,Black,notBold,notItalic,open,FitPage
+		5.12.7 Executionof Input/Output Statements/80,Black,notBold,notItalic,open,FitPage
+		5.12.8 Unformatted Input/Output Statements/81,Black,notBold,notItalic,open,FitPage
+		5.12.9 Formatted-Input/Output Statements/84,Black,notBold,notItalic,closed,FitPage
+			5.12.9.1 Formatted Input Statements/84,Black,notBold,notItalic,closed,FitPage
+				5.12.9.1.1 Sequential Formatted READ Statement/84,Black,notBold,notItalic,open,FitPage
+				5.12.9.1.2 Direct Access Formatted READ Statement/85,Black,notBold,notItalic,open,FitPage
+			5.12.9.2 Formatted Output Statements/85,Black,notBold,notItalic,closed,FitPage
+				5.12.9.2.1 Sequential Formatted Output Statement/86,Black,notBold,notItalic,open,FitPage
+				5.12.9.2.2 Direct Access Formatted WRITE Statement/86,Black,notBold,notItalic,open,FitPage
+			5.12.9.3 Printing of Formatted Records/87,Black,notBold,notItalic,open,FitPage
+		5.12.10 List-Directed Input/Output Statements/88,Black,notBold,notItalic,closed,FitPage
+			5.12.10.1 Free-Field Records/88,Black,notBold,notItalic,open,FitPage
+			5.12.10.2 List-Directed READ Statement/89,Black,notBold,notItalic,open,FitPage
+			5.12.10.3 List-Directed Output Statement/91,Black,notBold,notItalic,open,FitPage
+		5.12.11 Auxiliary Input/Output Statements/94,Black,notBold,notItalic,open,FitPage
+			5.12.11.1 OPEN Statement/94,Black,notBold,notItalic,open,FitPage
+			5.12.11.2 CLOSE Statement/96,Black,notBold,notItalic,open,FitPage
+			5.12.11.3 INQUIRE Statement/97,Black,notBold,notItalic,open,FitPage
+			5.12.11.4 REWIND Statement/100,Black,notBold,notItalic,open,FitPage
+			5.12.11.5 BACKSPACE Statement/100,Black,notBold,notItalic,open,FitPage
+			5.12.11.6 ENDFILE Statement/101,Black,notBold,notItalic,open,FitPage
+			5.12.11.7 BACKFILE Statement/101,Black,notBold,notItalic,open,FitPage
+			5.12.11.8 SKIPFILE Statement/102,Black,notBold,notItalic,open,FitPage
+		5.12.12 Restrictions on Function References and List Items/102,Black,notBold,notItalic,open,FitPage
+		5.12.13 Restriction on Input/Output Statements/104,Black,notBold,notItalic,open,FitPage
+		5.12.14 ENCODE/DECODE Statements/104,Black,notBold,notItalic,open,FitPage
+		5.12.15 INCLUE statement/105,Black,notBold,notItalic,open,FitPage
+	5.13 Format Specification/106,Black,notBold,notItalic,closed,FitPage
+		5.13.1 [Untitled]/106,Black,notBold,notItalic,open,FitPage
+			5.13.1.1 Character Format Specifications/106,Black,notBold,notItalic,open,FitPage
+			5.12.1.2 FORMAT Statements/106,Black,notBold,notItalic,open,FitPage
+			5.13.1.3 Hollerith Format Specifications/106,Black,notBold,notItalic,open,FitPage
+		5.13.2 Format Specifications/107,Black,notBold,notItalic,open,FitPage
+			5.13.2.1 Field Descriptors/107,Black,notBold,notItalic,open,FitPage
+			5.13.2.2 Field Separators/108,Black,notBold,notItalic,open,FitPage
+			5.13.2.3 Repeat Specifications/109,Black,notBold,notItalic,open,FitPage
+		5.13.3 Basic Field Descriptors/109,Black,notBold,notItalic,open,FitPage
+			5.13.3.1 Scale Factor/109,Black,notBold,notItalic,open,FitPage
+			5.13.3.2 Numeric Conversions/110,Black,notBold,notItalic,open,FitPage
+			5.13.3.3 Logical Conversion/114,Black,notBold,notItalic,open,FitPage
+			5.13.3.4 Character Field Descriptors/114,Black,notBold,notItalic,open,FitPage
+			5.13.3.5 Hollerith Field Descriptors/115,Black,notBold,notItalic,open,FitPage
+			5.13.3.6 X Field Descriptor/115,Black,notBold,notItalic,open,FitPage
+			5.13.3.7 T Field Descriptor/116,Black,notBold,notItalic,open,FitPage
+			5.13.3.8 S Field Descriptor/116,Black,notBold,notItalic,open,FitPage
+		5.13.4 Interaction Between I/O Lists and Format/116,Black,notBold,notItalic,open,FitPage
+	5.14 PROGRAM, PUSH and PULL Statements/118,Black,notBold,notItalic,open,FitPage
+	5.15 Definition and Reference of Subroutines and Functions/118,Black,notBold,notItalic,closed,FitPage
+		5.15.1 Introduction/118,Black,notBold,notItalic,open,FitPage
+		5.15.2 Statement Functions/119,Black,notBold,notItalic,open,FitPage
+		5.15.3 Intrinsic Functions/119,Black,notBold,notItalic,open,FitPage
+		5.15.4 External Functions/122,Black,notBold,notItalic,open,FitPage
+		5.15.5 Generic Functions/122,Black,notBold,notItalic,open,FitPage
+		5.15.6 Subroutines/124,Black,notBold,notItalic,open,FitPage
+		5.15.7 Dummy and Actual Arguments/124,Black,notBold,notItalic,open,FitPage
+		5.15.8 Common Storage Areas/129,Black,notBold,notItalic,open,FitPage
+		5.15.9 CALL Statement and Subroutine Reference/130,Black,notBold,notItalic,open,FitPage
+		5.15.10 Function Reference/131,Black,notBold,notItalic,closed,FitPage
+			5.15.10.1 Referencing External Functions/131,Black,notBold,notItalic,open,FitPage
+			5.15.10.2 Referencing Statement Functions/132,Black,notBold,notItalic,open,FitPage
+			5.15.10.3 Referencing Intrinsic Functions/132,Black,notBold,notItalic,open,FitPage
+		5.15.11 RETURN Statement/132,Black,notBold,notItalic,open,FitPage
+		5.15.12 SUBROUTINE Statement/133,Black,notBold,notItalic,open,FitPage
+		5.15.13 Subroutine Subprogram Restrictions/134,Black,notBold,notItalic,open,FitPage
+		5.15.15 Function Subprogram Restrictions/134,Black,notBold,notItalic,open,FitPage
+		5.15.16 ENTRY Statement/135,Black,notBold,notItalic,open,FitPage
+		5.15.17 Definition of Statement Functions/136,Black,notBold,notItalic,open,FitPage
+	5.16 Block Data Subprogram/137,Black,notBold,notItalic,closed,FitPage
+		5.16.1 BLOCK DATA Statements/137,Black,notBold,notItalic,open,FitPage
+		5.16.2 BLOCK DATA Restrictions/138,Black,notBold,notItalic,open,FitPage
+6 to 10 Closing Formalities/144,Black,notBold,notItalic,open,FitPage

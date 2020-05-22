@@ -1,0 +1,44 @@
+OS/32 8.1 Software Installation Guide (1985)/1,Black,bold,notItalic,open,FitPage
+	Table of Contents/3,Black,notBold,notItalic,open,FitPage
+	1 - Product Identification/5,Black,notBold,notItalic,open,FitPage
+	2 - General Information/5,Black,notBold,notItalic,open,FitPage
+	3 - Available Packages/7,Black,notBold,notItalic,open,FitPage
+	4 - Related Software/Hardware Requirements/8,Black,notBold,notItalic,closed,FitPage
+		4.1 Software Requirements/8,Black,notBold,notItalic,open,FitPage
+		4.2 Hardware Requirements/9,Black,notBold,notItalic,open,FitPage
+	5 - Documentation/10,Black,notBold,notItalic,open,FitPage
+	6 - File Program Package/12,Black,notBold,notItalic,open,FitPage
+	7 - Unpackaging and Installation/21,Black,notBold,notItalic,closed,FitPage
+		7.1 Magnetic Tape Organization/21,Black,notBold,notItalic,open,FitPage
+			7.1.1 Streamer Tape Organization/21,Black,notBold,notItalic,open,FitPage
+			7.1.2 9-Track Magnetic Tape Organization/21,Black,notBold,notItalic,open,FitPage
+		7.2 Start-up Procedures/22,Black,notBold,notItalic,closed,FitPage
+			7.2.1 7/32 and 8/32 Systems/22,Black,notBold,notItalic,open,FitPage
+			7.2.2 Perkin-Elmer 3200 Family Processors/22,Black,notBold,notItalic,open,FitPage
+		7.3 System Initialization/22,Black,notBold,notItalic,closed,FitPage
+			7.3.1 7/32 and 8/32 Systems/22,Black,notBold,notItalic,open,FitPage
+			7.3.2 3203 Processor Auto Load Feature/24,Black,notBold,notItalic,closed,FitPage
+				7.3.2.1 Steps for the Perkin-Elmer 3203 Processor/24,Black,notBold,notItalic,open,FitPage
+				7.3.2.2 3203 Manual Boot/25,Black,notBold,notItalic,open,FitPage
+				7.3.2.3 Streamer Tape Unpackaging/26,Black,notBold,notItalic,open,FitPage
+			7.3.3 Perkin-Elmer 3200 Family Processor (except 3203)/27,Black,notBold,notItalic,closed,FitPage
+				7.3.3.1 Procedure for a Matching Hardware Configuration/27,Black,notBold,notItalic,open,FitPage
+				7.3.3.2 Procedure for a Non-Matching Hardware Configuration/28,Black,notBold,notItalic,open,FitPage
+			7.3.4 Common Steps for the 7/32, 8/32 and the Perkin-Elmer 3200 Family Processor/29,Black,notBold,notItalic,open,FitPage
+		7.4 Unpackaging to a New (Empty) Disk/29,Black,notBold,notItalic,open,FitPage
+		7.5 Additional Options/30,Black,notBold,notItalic,open,FitPage
+		7.6 System Generation (SYSGEN)/30,Black,notBold,notItalic,open,FitPage
+			7.6.1 SYSGEN32/30,Black,notBold,notItalic,open,FitPage
+			7.6.2 Start Custom OS/30,Black,notBold,notItalic,open,FitPage
+		7.7 Unpackaging Files/31,Black,notBold,notItalic,open,FitPage
+			7.7.1 Disk Unpackaging/31,Black,notBold,notItalic,open,FitPage
+			7.7.2 Magnetic Tape Unpackaging/31,Black,notBold,notItalic,open,FitPage
+			7.7.3 Post-Installation Procedures/32,Black,notBold,notItalic,open,FitPage
+	8 - Starter Systems/33,Black,notBold,notItalic,open,FitPage
+	Appendices/37,Black,notBold,notItalic,closed,FitPage
+		Appendix A - Task Establishment Options/37,Black,notBold,notItalic,open,FitPage
+		Appendix B - Conversion Requirements and New Features/45,Black,notBold,notItalic,open,FitPage
+		Appendix C - Known Problems/Avoidance Procedures/51,Black,notBold,notItalic,open,FitPage
+		Appendix D - Tables of Object Libraries/57,Black,notBold,notItalic,open,FitPage
+		Appendix E - Formatting Disks for Use with OS/32/59,Black,notBold,notItalic,open,FitPage
+		Appendix F - Starter System Modification/63,Black,notBold,notItalic,open,FitPage

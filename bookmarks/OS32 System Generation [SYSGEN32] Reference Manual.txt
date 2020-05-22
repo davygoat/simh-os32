@@ -1,0 +1,136 @@
+System Generation/32 (SYSGEN/32) Reference Manual (1984, version 7.2)/1,Black,bold,notItalic,open,FitPage
+Table of Contents/3,Black,notBold,notItalic,open,FitPage
+Preface/9,Black,notBold,notItalic,open,FitPage
+Chapter 1 - Introduction to System Generation/32 (SYSGEN/32)/10,Black,notBold,notItalic,closed,FitPage
+	1.1 Introduction/10,Black,notBold,notItalic,open,FitPage
+	1.2 Creating an Operating System Using the System Generation (SYSGEN) Command Substitution System (CSS)/12,Black,notBold,notItalic,closed,FitPage
+		1.2.1 Starting the System Generation (Sysgen) Command Substitution System (CSS)/14,Black,notBold,notItalic,open,FitPage
+		1.2.2 Components of the System Generation (Sysgen) Command Substitution System (CSS)/16,Black,notBold,notItalic,closed,FitPage
+			1.2.2.1 Executing the SYSGEN32 Command Substitution System (CSS)/16,Black,notBold,notItalic,open,FitPage
+			1.2.2.2 Executing the SYSMACRO Command Substitution System (CSS)/17,Black,notBold,notItalic,open,FitPage
+			1.2.2.3 Executing the SYSLINK Command Substitution System (CSS)/18,Black,notBold,notItalic,open,FitPage
+	1.3 Using the System Generation/32 (SYSGEN/32) Program/19,Black,notBold,notItalic,closed,FitPage
+		1.3.1 Loading and Starting the System Generation/32 (Sysgen/32) Program/19,Black,notBold,notItalic,open,FitPage
+			1.3.1.1 LOAD Command/20,Black,notBold,notItalic,open,FitPage
+			1.3.1.2 START Command/21,Black,notBold,notItalic,open,FitPage
+	1.4 System Generation/32 (SYSGEN/32) Commands/23,Black,notBold,notItalic,open,FitPage
+		1.4.1 INPUT Command/24,Black,notBold,notItalic,open,FitPage
+		1.4.2 OUTPUT Command/25,Black,notBold,notItalic,open,FitPage
+		1.4.3 CONVERSATIONAL Command/26,Black,notBold,notItalic,open,FitPage
+		1.4.4 EDIT Command/28,Black,notBold,notItalic,open,FitPage
+		1.4.5 HELP Command/29,Black,notBold,notItalic,open,FitPage
+		1.4.6 PAUSE Command/31,Black,notBold,notItalic,open,FitPage
+		1.4.7 PROCESS Command/32,Black,notBold,notItalic,open,FitPage
+		1.4.8 END Command/33,Black,notBold,notItalic,open,FitPage
+Chapter 2 - System Generation/32 (SYSGEN/32) Configuration Statements/34,Black,notBold,notItalic,closed,FitPage
+	2.1 Introduction/34,Black,notBold,notItalic,open,FitPage
+	2.2 System Generation (SYSGEN) Configuration Statements/34,Black,notBold,notItalic,open,FitPage
+		2.2.1 ACCOUNTING Statement/35,Black,notBold,notItalic,open,FitPage
+		2.2.2 BACKGROUND Statement/37,Black,notBold,notItalic,open,FitPage
+		2.2.3 CLOCK Statement/38,Black,notBold,notItalic,open,FitPage
+		2.2.4 CMDLEN Statement/39,Black,notBold,notItalic,open,FitPage
+		2.2.5 COORDINATION Statement/40,Black,notBold,notItalic,open,FitPage
+		2.2.6 COPY Statement/42,Black,notBold,notItalic,open,FitPage
+		2.2.7 CPU Statement/43,Black,notBold,notItalic,open,FitPage
+		2.2.7 CSS Statement/44,Black,notBold,notItalic,open,FitPage
+		2.2.9 DATE Statement/45,Black,notBold,notItalic,open,FitPage
+		2.2.10 DEVADS Statement/46,Black,notBold,notItalic,open,FitPage
+		2.2.11 DEVICES...ENDD Statements/47,Black,notBold,notItalic,closed,FitPage
+			2.2.11.1 Coding Examples of Device Statements/62,Black,notBold,notItalic,open,FitPage
+			2.2.11.2 Configuring Data Communication Devices/63,Black,notBold,notItalic,open,FitPage
+			2.2.11.3 Configuring Zero-Bit Insertion/Deletion (ZBID) Data Link Control (ZDLC) Devices/68,Black,notBold,notItalic,open,FitPage
+		2.2.12 DIRECTORY Statement/70,Black,notBold,notItalic,open,FitPage
+		2.2.13 DISCBLOCK Statement/71,Black,notBold,notItalic,open,FitPage
+		2.2.14 DSYS Statement/73,Black,notBold,notItalic,open,FitPage
+		2.2.15 ENDC Statement/74,Black,notBold,notItalic,open,FitPage
+		2.2.16 ERRORREC Statement/75,Black,notBold,notItalic,open,FitPage
+		2.2.17 FLOAT Statement/77,Black,notBold,notItalic,open,FitPage
+		2.2.18 ILEVEL Statement/78,Black,notBold,notItalic,open,FitPage
+		2.2.19 INTERCEPT Statement/80,Black,notBold,notItalic,open,FitPage
+		2.2.20 IOCLASS Statement/81,Black,notBold,notItalic,open,FitPage
+		2.2.21 IREADER Statement/83,Black,notBold,notItalic,open,FitPage
+		2.2.22 ITAM Statement/84,Black,notBold,notItalic,open,FitPage
+		2.2.23 JOURNAL Statement/85,Black,notBold,notItalic,open,FitPage
+		2.2.24 LOGLEN Statement/86,Black,notBold,notItalic,open,FitPage
+		2.2.25 LPU Statement/87,Black,notBold,notItalic,open,FitPage
+		2.2.26 MAXAPU Statement/88,Black,notBold,notItalic,open,FitPage
+		2.2.27 MAXTASK Statement/90,Black,notBold,notItalic,open,FitPage
+		2.2.28 MCONFIG Statement/91,Black,notBold,notItalic,open,FitPage
+		2.2.29 MEMCHECK Statement/94,Black,notBold,notItalic,open,FitPage
+		2.2.30 MEMORY Statement/95,Black,notBold,notItalic,open,FitPage
+		2.2.30A MIRROR Statement/96,Black,notBold,notItalic,open,FitPage
+		2.2.31 MODULE...ENDM Statements/97,Black,notBold,notItalic,open,FitPage
+		2.2.32 NOSEG Statement/98,Black,notBold,notItalic,open,FitPage
+		2.2.33 POWERFAIL Statement/99,Black,notBold,notItalic,open,FitPage
+		2.2.34 QUEUE Statement/100,Black,notBold,notItalic,open,FitPage
+		2.2.35 ROLL Statement/101,Black,notBold,notItalic,open,FitPage
+		2.2.36 SLICE Statement/102,Black,notBold,notItalic,open,FitPage
+		2.2.37 SPOOL Statement/103,Black,notBold,notItalic,open,FitPage
+		2.2.38 SPL32 Statement/104,Black,notBold,notItalic,open,FitPage
+		2.2.39 SSTABLE Statement/105,Black,notBold,notItalic,open,FitPage
+		2.2.40 STARTUP...ENDS Statements/106,Black,notBold,notItalic,open,FitPage
+		2.2.41 TCOM Statement/108,Black,notBold,notItalic,open,FitPage
+		2.2.42 TEMP Statement/110,Black,notBold,notItalic,open,FitPage
+		2.2.43 TGD Statement/111,Black,notBold,notItalic,open,FitPage
+		2.2.44 VERSION Statement/112,Black,notBold,notItalic,open,FitPage
+		2.2.45 VOLUME Statement/113,Black,notBold,notItalic,open,FitPage
+Chapter 3 - Libraries Required for System Generation (SYSGEN)/114,Black,notBold,notItalic,closed,FitPage
+	3.1 Introduction/114,Black,notBold,notItalic,open,FitPage
+	3.2 Standard Libraries (Operating System)/114,Black,notBold,notItalic,closed,FitPage
+		3.2.1 Standard System Library (SYS.LIB)/115,Black,notBold,notItalic,open,FitPage
+		3.2.2 Standard Driver Library (DRIVER.LIB)/127,Black,notBold,notItalic,open,FitPage
+	3.3 Standard Communication Libraries/127,Black,notBold,notItalic,closed,FitPage
+		3.3.1 Standard Communications System Libraries/127,Black,notBold,notItalic,open,FitPage
+		3.3.2 Standard Communications Driver Libraries/128,Black,notBold,notItalic,open,FitPage
+	3.4 User-Defined Libraries/128,Black,notBold,notItalic,closed,FitPage
+		3.4.1 User-Defined System Library/128,Black,notBold,notItalic,open,FitPage
+		3.4.2 User-Defined Driver Library/129,Black,notBold,notItalic,open,FitPage
+		3.4.3 User-Defined Driver Device Control Block (DCB) Macro Library/129,Black,notBold,notItalic,open,FitPage
+	3.5 Macro Libraries/129,Black,notBold,notItalic,open,FitPage
+	3.6 Including User-Written Drivers/133,Black,notBold,notItalic,closed,FitPage
+		3.6.1 Creating the DCBxxx Macro/134,Black,notBold,notItalic,open,FitPage
+	3.7 Including User-Written Modules/135,Black,notBold,notItalic,open,FitPage
+	3.8 Source-Level System Generation (SYSGEN) Example/137,Black,notBold,notItalic,open,FitPage
+Chapter 4 - Standard OS/32-Supported Devices/140,Black,notBold,notItalic,closed,FitPage
+	4.1 Introduction/140,Black,notBold,notItalic,open,FitPage
+	4.2 OS/32-Supported Local and Remote Devices/140,Black,notBold,notItalic,open,FitPage
+	4.3 Devices Using Current Loop Interface (CLI)/153,Black,notBold,notItalic,open,FitPage
+	4.4 Devices Using Standard RS-232C Interface (PALS, PASLA, 2- or 8-Line Communications Multiplexor) or Current Loop Communications Multiplexor (CLCM)/153,Black,notBold,notItalic,closed,FitPage
+		4.4.1 The Biderectional Input/Output Control (BIOC)/155,Black,notBold,notItalic,open,FitPage
+	4.5 Intertape Cassettes/157,Black,notBold,notItalic,open,FitPage
+	4.6 Card Readers/157,Black,notBold,notItalic,open,FitPage
+	4.7 Card Punches/158,Black,notBold,notItalic,open,FitPage
+	4.8 Line Printers/159,Black,notBold,notItalic,open,FitPage
+	4.9 High-Speed Paper Tape Reader/Punch/159,Black,notBold,notItalic,open,FitPage
+	4.10 Magnetic Tape Controllers and Tapes/160,Black,notBold,notItalic,open,FitPage
+	4.11 Disks/160,Black,notBold,notItalic,closed,FitPage
+		4.11.1 Moving-Head Disks/161,Black,notBold,notItalic,open,FitPage
+		4.11.2 Mass Storage Media (MSM) Disks/162,Black,notBold,notItalic,closed,FitPage
+			4.11.2.1 Mass Storage Media (MSM) Dual Port Options/163,Black,notBold,notItalic,open,FitPage
+			4.11.2.2 Mass Storage media (MSM) Virtual Disk Option/163,Black,notBold,notItalic,open,FitPage
+		4.11.3 Direct Memory Access (DMA) Coordination Nodes/167,Black,notBold,notItalic,open,FitPage
+		4.11.4 Floppy Disk Subsystems/167,Black,notBold,notItalic,open,FitPage
+		4.11.5 50MB Cartridge Disk Drive (CDD50) Subsystem/169,Black,notBold,notItalic,open,FitPage
+	4.12 8-Line Interrupt Module/169,Black,notBold,notItalic,open,FitPage
+	4.13 Sysggening a System with a Communications Multiplexor (COMM MUX)/169,Black,notBold,notItalic,open,FitPage
+	4.14 Covnersion Equipment Controller (Mini Input/Output (I/O) System)/170,Black,notBold,notItalic,open,FitPage
+Chapter 5 - Sample System Generation/32 (SYSGEN/32) Sessions/171,Black,notBold,notItalic,closed,FitPage
+	5.1 Introduction/171,Black,notBold,notItalic,open,FitPage
+	5.2 System Generation/32 (SYSGEN/32) Start-Up Situations/171,Black,notBold,notItalic,closed,FitPage
+		5.2.1 Processing a Previously Created Configuration Input File/172,Black,notBold,notItalic,open,FitPage
+		5.2.2 Creating a Configuration Input File Conversationally and Processing the Input File/172,Black,notBold,notItalic,open,FitPage
+		5.2.3 Creating a Configuration Input File Interactively and Processing the Input File/173,Black,notBold,notItalic,open,FitPage
+	5.3 Creating a Configuration Input File/174,Black,notBold,notItalic,open,FitPage
+		5.3.1 Using the Conversational Mode/174,Black,notBold,notItalic,closed,FitPage
+			5.3.1.1 Accessing the HELP File in Conversational Mode/178,Black,notBold,notItalic,open,FitPage
+		5.3.2 A Configuration Input File Created Interactively/179,Black,notBold,notItalic,closed,FitPage
+			5.3.2.1 Accessing the HELP File in Interactive Mode/180,Black,notBold,notItalic,open,FitPage
+		5.3.3 Modifying a Configuration Input File Via Edit/32/181,Black,notBold,notItalic,open,FitPage
+Appendices/183,Black,notBold,notItalic,closed,FitPage
+	Appendix A - Comparison of System Generation/32 (SYSGEN/32) and OS/32 Configuration Utility Program (CUP) Configuration Statement Defaults/183,Black,notBold,notItalic,open,FitPage
+	Appendix B - System Generation/32 (SYSGEN/32) Messages/185,Black,notBold,notItalic,open,FitPage
+	Appendix C - System Generation/32 (SYSGEN/32) Command and Statement Summary/192,Black,notBold,notItalic,open,FitPage
+	Appendix D - System Generation/32 (SYSGEN/32) and OS/32 Configuration Utility Program (CUP) Statement Comparisons/199,Black,notBold,notItalic,open,FitPage
+Index/209,Black,notBold,notItalic,open,FitPage
+Documentation Change Notice/213,Black,notBold,notItalic,open,FitPage
+Publication Comment Form/214,Black,notBold,notItalic,open,FitPage

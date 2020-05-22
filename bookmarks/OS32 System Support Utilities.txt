@@ -1,0 +1,94 @@
+OS/32 System Support Utilities Reference Manual (1984)/1,Black,bold,notItalic,open,FitPage
+Table of Contents/3,Black,notBold,notItalic,open,FitPage
+Preface/7,Black,notBold,notItalic,open,FitPage
+Chapter 1 - System Support Utilities/8,Black,notBold,notItalic,closed,FitPage
+	1.1 Introduction/8,Black,notBold,notItalic,open,FitPage
+Chapter 2 - OS/32 Spooler/10,Black,notBold,notItalic,closed,FitPage
+	2.1 Introduction/10,Black,notBold,notItalic,open,FitPage
+	2.2 Input Spooling/11,Black,notBold,notItalic,open,FitPage
+	2.3 Output Spooling/12,Black,notBold,notItalic,open,FitPage
+	2.4 Operating Instructions/13,Black,notBold,notItalic,open,FitPage
+		2.4.1 Starting the Spooler/14,Black,notBold,notItalic,open,FitPage
+		2.4.2 .SPL Command/20,Black,notBold,notItalic,open,FitPage
+	2.5 Memory Requirements/26,Black,notBold,notItalic,open,FitPage
+	2.6 Spooler Messages/27,Black,notBold,notItalic,open,FitPage
+Chapter 3 - Disk Backup Utility/33,Black,notBold,notItalic,closed,FitPage
+	3.1 General Description/33,Black,notBold,notItalic,open,FitPage
+	3.2 Disk Backup Utility Magnetic Tape Format/35,Black,notBold,notItalic,open,FitPage
+	3.3 Disk Backup Utility Requirements/37,Black,notBold,notItalic,open,FitPage
+	3.4 Operating Procedures/37,Black,notBold,notItalic,closed,FitPage
+		3.4.1 Multiple Disk Back-Up/51,Black,notBold,notItalic,open,FitPage
+	3.5 Messages/52,Black,notBold,notItalic,open,FitPage
+Chapter 4 - OS/32 Accounting Reporting Utility/57,Black,notBold,notItalic,closed,FitPage
+	4.1 Introduction/57,Black,notBold,notItalic,closed,FitPage
+		4.1.1 Data Collection/59,Black,notBold,notItalic,open,FitPage
+		4.1.2 Starting the Data Collection for an Operating System Without Multi-Terminal Monitor (MTM)/59,Black,notBold,notItalic,open,FitPage
+	4.2 Compiling, Establishing and Starting the Accounting Reporting Utility/60,Black,notBold,notItalic,closed,FitPage
+		4.2.1 LOAD Command/61,Black,notBold,notItalic,open,FitPage
+		4.2.2 START Command/62,Black,notBold,notItalic,open,FitPage
+	4.3 Accounting Reporting Utility Commands/64,Black,notBold,notItalic,closed,FitPage
+		4.3.1 GET Command/65,Black,notBold,notItalic,open,FitPage
+		4.3.2 SELECT Command/67,Black,notBold,notItalic,open,FitPage
+		4.3.2 OPTION Command/69,Black,notBold,notItalic,open,FitPage
+		4.3.4 CHARGE Command/73,Black,notBold,notItalic,open,FitPage
+		4.3.5 REPORT Command/76,Black,notBold,notItalic,open,FitPage
+		4.3.6 SAVE Command/85,Black,notBold,notItalic,open,FitPage
+		4.3.7 PAUSE Command/87,Black,notBold,notItalic,open,FitPage
+		4.3.8 END Command/88,Black,notBold,notItalic,open,FitPage
+	4.4 Accounting Reporting Utility Task Termination Codes/89,Black,notBold,notItalic,open,FitPage
+	4.5 Accounting Utility Message Summary/89,Black,notBold,notItalic,open,FitPage
+Chapter 5 - Error Reporting Utility/95,Black,notBold,notItalic,closed,FitPage
+	5.1 General Description/95,Black,notBold,notItalic,open,FitPage
+	5.2 Describing Memory to Interpret Errors/95,Black,notBold,notItalic,open,FitPage
+	5.3 Loading and Starting the Error Reporting Utility/100,Black,notBold,notItalic,open,FitPage
+	5.4 Specifying the Input File/100,Black,notBold,notItalic,open,FitPage
+	5.5 Defining Memory Configuration/101,Black,notBold,notItalic,open,FitPage
+	5.6 Selecting Specific Data/107,Black,notBold,notItalic,open,FitPage
+	5.7 Generating an Error Report/109,Black,notBold,notItalic,closed,FitPage
+		5.7.1 List Reports/109,Black,notBold,notItalic,closed,FitPage
+			5.7.1.1 Bulk Device Input/Output (I/O) Error Report/110,Black,notBold,notItalic,open,FitPage
+			5.7.1.2 File Manager-Detected Errors/111,Black,notBold,notItalic,open,FitPage
+			5.7.1.3 System-Detected Errors/114,Black,notBold,notItalic,open,FitPage
+			5.7.1.4 System Milestones/119,Black,notBold,notItalic,open,FitPage
+			5.7.1.5 Memory Errors/122,Black,notBold,notItalic,open,FitPage
+		5.7.2 Summary Reports/124,Black,notBold,notItalic,closed,FitPage
+			5.7.2.1 Summary of System Errors and Milestones Report/124,Black,notBold,notItalic,open,FitPage
+			5.7.2.2 Summary of Device Errors/127,Black,notBold,notItalic,open,FitPage
+			5.7.2.3 Memory Errors Summary Report/128,Black,notBold,notItalic,open,FitPage
+	5.8 Saving Information to an Archival File/130,Black,notBold,notItalic,open,FitPage
+	5.9 Pausing a Task/131,Black,notBold,notItalic,open,FitPage
+	5.10 Ending a Task/131,Black,notBold,notItalic,open,FitPage
+	5.11 Messages/131,Black,notBold,notItalic,open,FitPage
+Chapter 6 - Disk Dump Utility/134,Black,notBold,notItalic,closed,FitPage
+	6.1 General Description/134,Black,notBold,notItalic,open,FitPage
+	6.2 Disk Dump Utility Requirements/134,Black,notBold,notItalic,open,FitPage
+	6.3 Operating Procedures/135,Black,notBold,notItalic,open,FitPage
+Chapter 7 - Dump Print Utility/144,Black,notBold,notItalic,closed,FitPage
+	7.1 General Description/144,Black,notBold,notItalic,open,FitPage
+	7.2 Using a Temporary or Permanent File/145,Black,notBold,notItalic,open,FitPage
+	7.3 Executing the Dump Print Utility/145,Black,notBold,notItalic,open,FitPage
+	7.4 Dump Print Example/148,Black,notBold,notItalic,open,FitPage
+	7.5 Corrupt System Pointer Table (SPT)/149,Black,notBold,notItalic,open,FitPage
+	7.6 Dump Print Structure Display/149,Black,notBold,notItalic,open,FitPage
+	7.7 Auxiliary Processing Unit (APU) Queue Parameter Block (QPB) Summary Display/150,Black,notBold,notItalic,open,FitPage
+	7.8 Auxiliary Processing Unit (APU) Auxiliary Processor Block (APB) Summary Display/151,Black,notBold,notItalic,open,FitPage
+	7.9 Dump Print Messages/152,Black,notBold,notItalic,open,FitPage
+Chapter 8 - Mirror Disk Synchronization Utility/154,Black,notBold,notItalic,closed,FitPage
+	8.1 Mirror Disk Facilty/154,Black,notBold,notItalic,open,FitPage
+	8.2 Overview/155,Black,notBold,notItalic,open,FitPage
+	8.3 Function/155,Black,notBold,notItalic,open,FitPage
+	8.4 Operating Procedures/156,Black,notBold,notItalic,closed,FitPage
+		8.4.1 Preliminary Steps/156,Black,notBold,notItalic,open,FitPage
+		8.4.2 LOading DISCSYNC/157,Black,notBold,notItalic,open,FitPage
+		8.4.3 Starting DISCSYNC/157,Black,notBold,notItalic,open,FitPage
+		8.4.4 End of Task Codes/159,Black,notBold,notItalic,open,FitPage
+		8.4.5 Efficient Operation/159,Black,notBold,notItalic,open,FitPage
+	8.5 Messages/161,Black,notBold,notItalic,open,FitPage
+Appendices/164,Black,notBold,notItalic,closed,FitPage
+	Appendix A - Contents of Magnetic Tape Produced by a Stand-Alone Dump/164,Black,notBold,notItalic,open,FitPage
+	Appendix B - Contents of Memory Produced by a Panic Dump/177,Black,notBold,notItalic,open,FitPage
+Index/207,Black,notBold,notItalic,open,FitPage
+Documentation Change Notice/211,Black,notBold,notItalic,closed,FitPage
+	Chapter 3 - Disk Backup Utility (R01, superseded)/212,Black,notBold,notItalic,open,FitPage
+	Appendix B - Disk Integrity Check Utility (R01, superseded)/233,Black,notBold,notItalic,open,FitPage
+Publication Comment Form/241,Black,notBold,notItalic,open,FitPage

@@ -1,0 +1,15 @@
+OS/32 8.1 Multi-Terminal Monitor (MTM) Software Installation Guide (1985)/1,Black,bold,notItalic,open,FitPage
+	Table of Contents/3,Black,notBold,notItalic,open,FitPage
+	1 - Product Inforrmation/5,Black,notBold,notItalic,open,FitPage
+	2 - General Information/5,Black,notBold,notItalic,open,FitPage
+	3 - Available Packages/6,Black,notBold,notItalic,open,FitPage
+	4 - Documentation/7,Black,notBold,notItalic,open,FitPage
+	5 - File Program Package/7,Black,notBold,notItalic,open,FitPage
+	6 - Unpackaging and Installation/9,Black,notBold,notItalic,open,FitPage
+		6.1 Disk Unpackaging (16 and 25Mb)/9,Black,notBold,notItalic,open,FitPage
+		6.2 Magnetic Tape (800 and 1600 BPI) and Streaming Tape (1/4" cartridge)/9,Black,notBold,notItalic,open,FitPage
+		6.3 Post-Installation Procedures/10,Black,notBold,notItalic,open,FitPage
+	Appendices/11,Black,notBold,notItalic,open,FitPage
+		Appendix A - Functional Changes/11,Black,notBold,notItalic,open,FitPage
+			Read this section!/11,Black,notBold,italic,open,FitPage
+		Appendix B - Linkage Instructions/13,Black,notBold,notItalic,open,FitPage

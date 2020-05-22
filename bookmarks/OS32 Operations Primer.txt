@@ -1,0 +1,78 @@
+OS/32 Operations Primer (1984)/1,Black,bold,notItalic,open,FitPage
+Table of Contents/5,Black,notBold,notItalic,open,FitPage
+Preface/11,Black,notBold,notItalic,open,FitPage
+Chapter 1 - Computer Organization/13,Black,notBold,notItalic,closed,FitPage
+	Introduction/13,Black,notBold,notItalic,open,FitPage
+	Computer Hardware/13,Black,notBold,notItalic,open,FitPage
+	Central Processing Unit (CPU)/14,Black,notBold,notItalic,open,FitPage
+	Input/Output (I/O) Devices/15,Black,notBold,notItalic,closed,FitPage
+		Magnetic Tapes/16,Black,notBold,notItalic,open,FitPage
+		Magnetic Tape Units/16,Black,notBold,notItalic,open,FitPage
+		Magnetic Disk/19,Black,notBold,notItalic,open,FitPage
+		Removable and Fixed Disks/22,Black,notBold,notItalic,open,FitPage
+	Installing a Disk Pack/22,Black,notBold,notItalic,open,FitPage
+	Computer Software/24,Black,notBold,notItalic,open,FitPage
+	Software Languages/26,Black,notBold,notItalic,closed,FitPage
+		Assembler Languages/26,Black,notBold,notItalic,open,FitPage
+		High-Level Languages/27,Black,notBold,notItalic,open,FitPage
+	Computer Programs/27,Black,notBold,notItalic,closed,FitPage
+		System Programs/27,Black,notBold,notItalic,open,FitPage
+		Utility Programs/28,Black,notBold,notItalic,open,FitPage
+		Application Programs/28,Black,notBold,notItalic,open,FitPage
+Chapter 2 - The OS/32 Operating System/29,Black,notBold,notItalic,closed,FitPage
+	Introduction/29,Black,notBold,notItalic,open,FitPage
+	OS/32 as a Task/29,Black,notBold,notItalic,open,FitPage
+	A Multitasking Environment/29,Black,notBold,notItalic,open,FitPage
+	Task States/31,Black,notBold,notItalic,open,FitPage
+	The Operator in an OS/32 Environment/32,Black,notBold,notItalic,open,FitPage
+	System Console/32,Black,notBold,notItalic,closed,FitPage
+		Prompts/33,Black,notBold,notItalic,open,FitPage
+		BREAK Key/34,Black,notBold,notItalic,open,FitPage
+	Files/34,Black,notBold,notItalic,open,FitPage
+	Command Substitution System (CSS)/34,Black,notBold,notItalic,open,FitPage
+	System Failure/35,Black,notBold,notItalic,open,FitPage
+Chapter 3 - Power-Up/Power-Down Procedure/37,Black,notBold,notItalic,closed,FitPage
+	Introduction/37,Black,notBold,notItalic,open,FitPage
+	Power Switches/37,Black,notBold,notItalic,open,FitPage
+	Location of Power Switches/37,Black,notBold,notItalic,closed,FitPage
+		Series 3200 Processors/38,Black,notBold,notItalic,open,FitPage
+		Line Printer/38,Black,notBold,notItalic,open,FitPage
+		Cartridge Disk Drive/38,Black,notBold,notItalic,open,FitPage
+		Magnetic Tape Drive/39,Black,notBold,notItalic,open,FitPage
+		Perkin-Elmer Model 1100, 1200, 1250 and 1251 Terminals/39,Black,notBold,notItalic,open,FitPage
+		Perkin-Elmer Model 550 and 6100 Video Display Units (VDUs)/39,Black,notBold,notItalic,open,FitPage
+	Power-Up Procedure/39,Black,notBold,notItalic,open,FitPage
+	Power-Down Procedure/40,Black,notBold,notItalic,open,FitPage
+Chapter 4 - Loading the Operating System/43,Black,notBold,notItalic,closed,FitPage
+	Introduction/43,Black,notBold,notItalic,open,FitPage
+	System Consolette Indicators/43,Black,notBold,notItalic,closed,FitPage
+		Key-Operated Security Lock/45,Black,notBold,notItalic,open,FitPage
+		Control Switches/45,Black,notBold,notItalic,open,FitPage
+	Loading OS/32 Using the 2KB Loader Storage Unit (LSU)/46,Black,notBold,notItalic,open,FitPage
+	2KB Loader Storage Unit (LSU) Messages/53,Black,notBold,notItalic,open,FitPage
+	Loading OS/32 Using the 8KB Loader Storage Unit (LSU)/54,Black,notBold,notItalic,open,FitPage
+	8KB Loader Storage Unit (LSU) Messages/56,Black,notBold,notItalic,open,FitPage
+	Setting the Date and Time/66,Black,notBold,notItalic,open,FitPage
+	Marking Devices On/66,Black,notBold,notItalic,open,FitPage
+Chapter 5 - Special Tasks that Require OS/32 Maintenance/69,Black,notBold,notItalic,closed,FitPage
+	Introduction/69,Black,notBold,notItalic,open,FitPage
+	Multi-Terminal Monitor (MTM)/70,Black,notBold,notItalic,closed,FitPage
+		Multi-Terminal Monitor (MTM) Mode of Use/71,Black,notBold,notItalic,open,FitPage
+		Loading and Establishing the Multi-Terminal Monitor (MTM)/72,Black,notBold,notItalic,open,FitPage
+	Environmental Control Monitor (ECM/32)/74,Black,notBold,notItalic,closed,FitPage
+		Environmental Control Monitor (ECM/32) Mode of Use/74,Black,notBold,notItalic,open,FitPage
+		Operating Instructions/75,Black,notBold,notItalic,open,FitPage
+	PENnet (Perkin-Elmer Network)/76,Black,notBold,notItalic,closed,FitPage
+		Operating Instructions/76,Black,notBold,notItalic,open,FitPage
+Chapter 6 - System Utilities/77,Black,notBold,notItalic,closed,FitPage
+	Introduction/77,Black,notBold,notItalic,open,FitPage
+	The Spooler/77,Black,notBold,notItalic,open,FitPage
+	Back-Up/78,Black,notBold,notItalic,open,FitPage
+	Accounting Reporting Utility/79,Black,notBold,notItalic,open,FitPage
+	Error Reporting Utility/80,Black,notBold,notItalic,open,FitPage
+	Formatting Disks/80,Black,notBold,notItalic,open,FitPage
+	Initializing Disks/81,Black,notBold,notItalic,open,FitPage
+	FASTCHEK Utility/81,Black,notBold,notItalic,open,FitPage
+	Panic Dump Utility/82,Black,notBold,notItalic,open,FitPage
+Glossary/85,Black,notBold,notItalic,open,FitPage
+Index/99,Black,notBold,notItalic,open,FitPage

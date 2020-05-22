@@ -1,0 +1,14 @@
+Don Stalkowski (2016) Getting Started with Interdata OS/32/1,Black,notBold,notItalic,open,FitPage
+Table of Contents/1,Black,notBold,notItalic,open,FitPage
+1. Installing OS/32 8.1/2,Black,notBold,notItalic,open,FitPage
+2. Usage/6,Black,notBold,notItalic,open,FitPage
+3. SYSGEN/8,Black,notBold,notItalic,open,FitPage
+4. Installing MTM/13,Black,notBold,notItalic,open,FitPage
+5. CAL, Fortran, and Pascal/14,Black,notBold,notItalic,open,FitPage
+	5.1 "Hello world" in CAL32/15,Black,notBold,notItalic,open,FitPage
+	5.2 Fortran "Hello world"/16,Black,notBold,notItalic,open,FitPage
+	5.3 Pascal "Hello world"/18,Black,notBold,notItalic,open,FitPage
+6. Notes/19,Black,notBold,notItalic,open,FitPage
+	6.1 Disks/19,Black,notBold,notItalic,open,FitPage
+	6.2 Memory/19,Black,notBold,notItalic,open,FitPage
+	6.3 Transferring Files to id32/20,Black,notBold,notItalic,open,FitPage
