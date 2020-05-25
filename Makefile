@@ -14,12 +14,6 @@ FTPDOC=Adding\ an\ FTP\ server\ to\ your\ SimH\ project
 
 FILES=README.txt OS32-FTPd os32.ini ftpd.config example.shadow.config *.sim *.tcl
 
-doc/$(FTPDOC).pdf: $(FTPDOC).odt
-	libreoffice6.2 --convert-to pdf $(FTPDOC).odt
-	mv $(FTPDOC).pdf doc/
-
-doc::	bookmark
-
 os32kit.zip: $(FILES) dsk4.dsk
 	rm -f os32kit.zip
 	zip -r9 os32kit $^ doc/$(FTPDOC).pdf
@@ -35,20 +29,24 @@ os32doc.zip: doc/* doc/$(FTPDOC).pdf
 dsk4.dsk:
 	[ -x dsk4.dsk ] || ./rebuild-system.sh
 
-###########################################################################################################################
+###################################################################################################################
 
-bookmark::	doc/32\ Bit\ Series\ Reference\ Manual.pdf                                                                \
-		doc/C\ Programming\ Manual.pdf                                                                            \
-		doc/FORTRAN\ V\ Level\ II\ Compiler\ Functional\ Spec.pdf                                                 \
-		doc/Getting\ Started\ with\ Interdata\ OS32.pdf                                                           \
-		doc/Pascal\ User\ Guide,\ Language\ Reference,\ and\ Run\ Time\ Support.pdf                               \
-		doc/OS32\ MTM\ Installation.pdf                                                                           \
-		doc/OS32\ Operations\ Primer.pdf                                                                          \
-		doc/OS32\ Operator\ Reference\ Manual.pdf                                                                 \
-		doc/OS32\ System\ Generation\ [SYSGEN32]\ Reference\ Manual.pdf                                           \
-		doc/OS32\ System\ Support\ Utilities.pdf                                                                  \
-		doc/OS32\ v8.1\ Software\ Installation\ Guide.pdf                                                         \
-		doc/Utilisation\ of\ Perkin-Elmer\ Operating\ System\ Features\ to\ Optimise\ Programming\ Efficiency.pdf
+doc::	doc/32\ Bit\ Series\ Reference\ Manual.pdf                                                                \
+	doc/C\ Programming\ Manual.pdf                                                                            \
+	doc/FORTRAN\ V\ Level\ II\ Compiler\ Functional\ Spec.pdf                                                 \
+	doc/Getting\ Started\ with\ Interdata\ OS32.pdf                                                           \
+	doc/Pascal\ User\ Guide,\ Language\ Reference,\ and\ Run\ Time\ Support.pdf                               \
+	doc/OS32\ MTM\ Installation.pdf                                                                           \
+	doc/OS32\ Operations\ Primer.pdf                                                                          \
+	doc/OS32\ Operator\ Reference\ Manual.pdf                                                                 \
+	doc/OS32\ System\ Generation\ [SYSGEN32]\ Reference\ Manual.pdf                                           \
+	doc/OS32\ System\ Support\ Utilities.pdf                                                                  \
+	doc/OS32\ v8.1\ Software\ Installation\ Guide.pdf                                                         \
+	doc/Utilisation\ of\ Perkin-Elmer\ Operating\ System\ Features\ to\ Optimise\ Programming\ Efficiency.pdf
+
+doc/$(FTPDOC).pdf: $(FTPDOC).odt
+	libreoffice6.2 --convert-to pdf $(FTPDOC).odt
+	mv $(FTPDOC).pdf doc/
 
 doc/32\ Bit\ Series\ Reference\ Manual.pdf: \
 			bookmarks/32\ Bit\ Series\ Reference\ Manual.txt
@@ -64,7 +62,7 @@ doc/C\ Programming\ Manual.pdf: \
 	-jpdfbookmarks --apply "$^" 48-103F00R00_C_PgmgRef_1984.pdf --out "$@"
 	rm 48-103F00R00_C_PgmgRef_1984.pdf
 
-doc/FORTRAN\ V\ Level\ II\ Compiler\ Functional\ Spec.pdf:	\
+doc/FORTRAN\ V\ Level\ II\ Compiler\ Functional\ Spec.pdf: \
 			bookmarks/FORTRAN\ V\ Level\ II\ Compiler\ Functional\ Spec.txt
 	rm -f "$@"
 	wget http://bitsavers.org/pdf/interdata/32bit/os32/lang/FORTRAN_V_Level_II_Compiler_Functional_Spec_Jan75.pdf
