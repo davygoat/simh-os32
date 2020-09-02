@@ -15,10 +15,6 @@
 # - Don't leave the dimmer on.
 # - Return errors to the client.
 #
-# Known problems:
-#
-# - Some ?large FTP get requests stuck midway, esp. with mget.
-#
 
 package require Expect
 package require ftpd
