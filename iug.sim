@@ -27,9 +27,9 @@
 :usage
 
    echof ""
-   echof "Usage: sim> do iug NUMBER [ACCOUNT]"
+   echof " Usage: sim> do iug NUMBER [ACCOUNT]"
    echof ""
-   echof "Note:  NUMBER is three digits between 100 and 534"
+   echof " Note:  NUMBER is three digits between 100 and 534"
    echof "       ACCOUNT is the destination account, if it differs from NUMBER"
    echof ""
    goto bottom

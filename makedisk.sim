@@ -24,10 +24,14 @@
 :usage
 
    echof ""
-   echof "Usage: sim> do makedisk VOLUME FILENAME"
+   echof " Usage: sim> do makedisk VOLUME FILENAME"
    echof ""
-   echof "Note:  VOLUME is four chars max"
-   echof "       FILENAME is a file on the host"
+   echof " Note:  VOLUME is the volume label, e.g. IUG (four chars max)."
+   echof "        FILENAME is a file on the host."
+   echof ""
+   echof " Note:  Do not confuse volume label with device name. If you use"
+   echof "        something like DSC3 as the volume label, you will not be"
+   echof "        able to mark it on."
    echof ""
    goto bottom
 

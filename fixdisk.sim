@@ -21,9 +21,9 @@
 :usage
 
    echof ""
-   echof "Usage: sim> do fixdisk FNAM"
+   echof " Usage: sim> do fixdisk FNAM"
    echof ""
-   echof "Note:  FNAM must exists, and will be mounted on DSC3/DM1."
+   echof " Note:  FNAM must exists, and will be mounted on DSC3/DM1."
    echof ""
    goto bottom
 
