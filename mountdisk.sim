@@ -10,7 +10,7 @@
 :automate
 
    attach -e dm1 %FNAM%
-   expect "\r\n*" send "mark dsc3:,on\r";c
+   expect "\r\n*" send "mark dsc3:,off ; mark dsc3:,on\r";c
    send "\r"
    continue
    goto bottom

@@ -9,11 +9,17 @@
    if "%VOL%" == "" goto usage
    if "%FNAM%" == "" goto usage
 
+   if "%VOL%" == "dsc3" goto badvol
+   if "%VOL%" == "DSC3" goto badvol
+   if "%VOL%" == "dsk3" goto badvol
+   if "%VOL%" == "DSK3" goto badvol
+
    if exist "%FNAM%" goto trample
 
 :automate
 
    attach -n dm1 %FNAM%
+   expect "\r\n*" send "mark dsc3,off\r";c
    expect "\r\n*" send "load fastchek\r";c
    expect "TSKID = FASTCHEK" send "start ,init=dsc3:,vol=%VOL%,li=con:\r";c
    expect "FASTCHEK:END OF TASK" send "mark dsc3:,on\r";c
@@ -41,6 +47,12 @@
    echof "ERROR: File %FNAM% already exists. You don't want to trample on it."
    echof "\n"
    goto bottom
+
+:badvol
+
+   echof "\n"
+   echof "ERROR: you can't use DSC3 as the volume label\n"
+   echof "\n"
 
 :bottom
 
