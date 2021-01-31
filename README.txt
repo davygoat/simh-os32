@@ -197,7 +197,8 @@ Useful SimH scripts (operator console only) :-
    Ctrl/E		break to SimH prompt, then...
 
    DO fixdisk		fix disk after an unclean shutdown
-   DO makedisk		create and mount a clean 67MB disk pack
+   DO makedisk		create and mount a clean 67MB disk pack on DSC3
+   DO mountdisk		mount a 67MB disk pack on DSC3
    DO iug		copy an Interdata User Group tape to IUG: disk
 
    !tclsh make-sim.tcl 25 *.ftn >wop   generate EXPECT/SEND sequences ...

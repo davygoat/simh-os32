@@ -1,0 +1,28 @@
+# vim:set nowrap:
+# vim:set syntax=sh:
+
+:params
+
+   set env FNAM=%1
+
+   if "%FNAM%" == "" goto usage
+
+:automate
+
+   attach -e dm1 %FNAM%
+   expect "\r\n*" send "mark dsc3:,on\r";c
+   send "\r"
+   continue
+   goto bottom
+
+:usage
+
+   echof ""
+   echof " Usage: sim> do mountdisk FILENAME"
+   echof ""
+   echof " Note:  FILENAME is a file on the host."
+   echof ""
+   goto bottom
+
+:bottom
+

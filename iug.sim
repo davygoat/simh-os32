@@ -2,7 +2,8 @@
 # vim:set syntax=sh:
 #
 # This file assumes that a disk labelled IUG is marked on as DSC3.
-# A clean disk can be created with the 'do makedisk' script.
+# The disk can be created and marked on with the 'do makedisk' script.
+# An existing disk can be marked on with the 'do mountdisk' script.
 #
 
 :params
