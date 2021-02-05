@@ -5,8 +5,12 @@ OS/32 kit :
 
    - EIEIO
 
+   - BATCH support. Want to SUBMIT jobs. Does this require SPOOLER?
+
 
 FTP server :
+
+   - FTP ADD[USER] command.
 
    - Configurable autostop. FTP STOP after this many minutes.
 
