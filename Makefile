@@ -26,7 +26,7 @@ os32doc.zip: doc/* doc/$(FTPDOC).pdf
 	rm -f os32doc.zip
 	zip -r9 os32doc doc/ -x doc/$(FTPDOC).pdf
 
-dsk4.dsk:
+dsk4.dsk: stage-??-*.ini
 	[ -x dsk4.dsk ] || ./rebuild-system.sh
 
 ###################################################################################################################
