@@ -79,6 +79,15 @@ FASTCHEK strings, possible start options?
 - YES
 
 
+Some preinstalled programs :
+
+- ECM: Environment Control Manager
+- VCF: Virtual Console Faciltiy
+- FXH: Series 7000/3200 File Transfer Handler
+- IPCARCH: IPC Archive Utility
+- MLU32: Macro Library Utility
+
+
 Problems :
 
 - MTM seems to do a lot of "busy work". CPU usage can get quite high
