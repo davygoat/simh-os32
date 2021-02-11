@@ -1637,7 +1637,7 @@ namespace eval OS32 {
             break
          } elseif { $ans != "N" && $ans != "NO" } {
             puts stderr "YES OR NO. TRY AGAIN."
-            break
+            continue
          } else {
             puts "OK, NEVER MIND."
             return
