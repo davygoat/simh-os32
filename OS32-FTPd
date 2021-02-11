@@ -1214,7 +1214,7 @@ namespace eval OS32 {
    }
 
    # Note: must be called BEFORE CheckNotAllowed
-   proc CheckReadOnly { sock ftpcmd { plus "" } } {
+   proc CheckReadOnly { sock ftpcmd } {
       if { [HaveACE $sock RO] && ![HaveACE $sock +$ftpcmd] && ![HaveACE $sock $ftpcmd+] } {
          ReplyControl $sock 550 "Permission denied (user is read only)"
          return -level 2
