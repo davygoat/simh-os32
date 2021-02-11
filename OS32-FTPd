@@ -1532,7 +1532,10 @@ namespace eval OS32 {
       # user name
       puts -nonewline stderr "\nUSERNAME: "
       set usrnam [string trim [gets stdin]]
-      if { $usrnam == "" } return
+      if { $usrnam == "" } {
+         puts stderr "OK, NEVER MIND."
+         return
+      }
       # password
       set pass1 {}
       set pass2 {}
@@ -1545,7 +1548,10 @@ namespace eval OS32 {
          }
          puts -nonewline stderr "REPEAT: "
          set pass2 [string trim [gets stdin]]
-         if { $pass2 == "" } return
+         if { $pass2 == "" } {
+            puts stderr "OK, NEVER MIND."
+            return
+         }
          if { $pass1 != $pass2 } {
             puts stderr "PASSWORDS DON'T MATCH. TRY AGAIN."
             continue
@@ -1556,7 +1562,10 @@ namespace eval OS32 {
       while {1} {
          puts -nonewline stderr "ACCOUNT: "
          set acct [string trim [gets stdin]]
-         if { $acct == "" } return
+         if { $acct == "" } {
+            puts stderr "OK, NEVER MIND."
+            return
+         }
          if { ![string is integer $acct] } {
             puts stderr "MUST BE NUMERIC: '$acct'. TRY AGAIN."
             continue
@@ -1617,7 +1626,7 @@ namespace eval OS32 {
       while {1} {
          puts -nonewline stderr "OK TO ADD THIS USER ? "
          set ans [string toupper [string trim [gets stdin]]]
-         if { $ans == "Y" || $ans == "YES" } {
+         if { $ans == "Y" || $ans == "YES" || $ans == "OK" } {
             set fd [open shadow.config a]
             puts $fd $stuff
             close $fd
@@ -1630,6 +1639,7 @@ namespace eval OS32 {
             puts stderr "YES OR NO. TRY AGAIN."
             break
          } else {
+            puts "OK, NEVER MIND."
             return
          }
       }
