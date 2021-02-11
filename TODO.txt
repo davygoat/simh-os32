@@ -10,8 +10,6 @@ OS/32 kit :
 
 FTP server :
 
-   - FTP ADD[USER] command.
-
    - Configurable autostop. FTP STOP after this many minutes.
 
    - Option to [temporarily] open up for one connection, then close the

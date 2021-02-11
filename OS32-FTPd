@@ -567,7 +567,7 @@ namespace eval OS32 {
          #
 
          if { [info exists passwords($user)] } {
-            set md5 [string tolower [::md5::md5 -hex "$user/$pass\n"]]
+            set md5 [::OS32::PasswordHash $user $pass]
             if { [array names passwords -exact $user] == $user &&
                  [set passwords($user)] == $md5 } {
                TrafficLight green "FTP USER $user LOGGED IN USING MD5"
@@ -1252,6 +1252,10 @@ namespace eval OS32 {
       }
    }
 
+   proc PasswordHash { user pass } {
+      return [string tolower [::md5::md5 -hex "$user/$pass\n"]]
+   }
+
 ;######################################################################
    #
    # This one specifically checks filenames and wildcards. It is obviously
@@ -1524,6 +1528,113 @@ namespace eval OS32 {
       puts -nonewline stderr "$n CONNECTED"
    }
 
+   proc AddUserFTP {} {
+      # user name
+      puts -nonewline stderr "\nUSERNAME: "
+      set usrnam [string trim [gets stdin]]
+      if { $usrnam == "" } return
+      # password
+      set pass1 {}
+      set pass2 {}
+      while {1} {
+         puts -nonewline stderr "PASSWORD: "
+         set pass1 [string trim [gets stdin]]
+         if { $pass1 == "" } {
+            puts stderr "WILL DEFAULT TO MTM AUTH USING NUMERIC ACCOUNT."
+            break
+         }
+         puts -nonewline stderr "REPEAT: "
+         set pass2 [string trim [gets stdin]]
+         if { $pass2 == "" } return
+         if { $pass1 != $pass2 } {
+            puts stderr "PASSWORDS DON'T MATCH. TRY AGAIN."
+            continue
+         }
+         break
+      }
+      # account
+      while {1} {
+         puts -nonewline stderr "ACCOUNT: "
+         set acct [string trim [gets stdin]]
+         if { $acct == "" } return
+         if { ![string is integer $acct] } {
+            puts stderr "MUST BE NUMERIC: '$acct'. TRY AGAIN."
+            continue
+         }
+         break
+      }
+      # additional accounts
+      while {1} {
+         set probs 0
+         puts -nonewline stderr "ADDITIONAL ACCOUNTS: "
+         set addacc [string trim [gets stdin]]
+         foreach x $addacc {
+            if { $x == "*" } continue
+            if { ![string is integer $x] } {
+               puts stderr "MUST BE NUMERIC: '$x'. TRY AGAIN."
+               set probs 1
+               break
+            }
+         }
+         if { !$probs } break
+      }
+      # options
+      while {1} {
+         set probs 0
+         puts -nonewline stderr "OPTIONS: "
+         set opts [string trim [gets stdin]]
+         foreach x $opts {
+            if { $x == "RO" } continue
+            if { [regexp {[-+][A-Z]{4}} $x -> cmd] ||
+                 [regexp {[A-Z]{4}[-+]} $x -> cmd] } {
+               if { [info procs ::ftpd::command::$cmd] == "" } {
+                  puts stderr "NOT AN FTP COMMAND: '$cmd'. TRY AGAIN."
+                  set probs 1
+                  break
+               }
+            } else {
+               puts stderr "NOT AN FTP COMMAND: '$x'. TRY AGAIN."
+               set probs 1
+               break
+            }
+         }
+         if { !$probs } break
+      }
+
+      set access [string trim [regsub -all { +} "$acct $addacc $opts" { }]]
+      set stuff "# added [clock format [clock seconds]]\n"
+      append stuff "namespace eval config {\n"
+      append stuff "   array unset access $usrnam\n"
+      append stuff "   array unset passwords $usrnam\n"
+      append stuff "   set access($usrnam) { $access }\n"
+      if { $pass1 != "" } {
+         set hash [::OS32::PasswordHash $usrnam $pass1]
+         append stuff "   set passwords($usrnam) $hash\n"
+      }
+      append stuff "}"
+      puts stderr $stuff
+
+      while {1} {
+         puts -nonewline stderr "OK TO ADD THIS USER ? "
+         set ans [string toupper [string trim [gets stdin]]]
+         if { $ans == "Y" || $ans == "YES" } {
+            set fd [open shadow.config a]
+            puts $fd $stuff
+            close $fd
+            file attributes shadow.config -permissions 0600
+            StopFTP
+            StartFTP
+            puts stderr ""
+            break
+         } elseif { $ans != "N" && $ans != "NO" } {
+            puts stderr "YES OR NO. TRY AGAIN."
+            break
+         } else {
+            return
+         }
+      }
+   }
+
 ;######################################################################
    #
    # The interact/expect loop
@@ -1549,6 +1660,9 @@ namespace eval OS32 {
                   ::OS32::StopFTP
                } elseif { $osline == "*SHOW FTP USERS" } {
                   ::OS32::ShowFTP
+               } elseif { $osline == "*ADD FTP USER" } {
+                  set ::OS32::adduser 1
+                  return
                }
                upvar #0 ::OS32::ftpcmd ftpcmd
                if { $ftpcmd != "" } {
@@ -1592,6 +1706,7 @@ namespace eval OS32 {
    }
 }
 
+
 ;######################################################################
    #
    # Main program
@@ -1626,7 +1741,16 @@ namespace eval OS32 {
    unset fd
    unset schluck
 
-   DoExpect
+   while {1} {
+      set adduser 0
+      DoExpect
+      if { $adduser } {
+         AddUserFTP
+         set adduser 0
+      } else {
+         break
+      }
+   }
 
    Dimmer off
 }

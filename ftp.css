@@ -8,6 +8,7 @@ $ifnull @1
    $write FTP OFF
    $write FTP RESET
    $write FTP USERS
+   $write FTP ADDUSER
    $write
    $write ALL OTHER COMMANDS ARE RESERVED FOR THE FTP SERVER.
    $write
@@ -20,6 +21,7 @@ xdelete on.ftp,up.ftp,start.ftp
 xdelete copyout.ftp,copyin.ftp
 xdelete delete.ftp,rename.ftp
 xdelete dir.ftp,checkvol.ftp
+xdelete add.ftp,adduser.ftp
 *
 *** FTP USERS ************************************************
 xallocate users.ftp,index,80
@@ -62,6 +64,16 @@ $ifx @1.ftp
    $exit
 $endc
 delete reset.ftp
+*
+*** FTP ADD *************************************************
+xallocate add.ftp,index,80
+xallocate adduser.ftp,index,80
+$ifx @1.ftp
+   delete add.ftp,adduser.ftp
+   $write ADD FTP USER
+   $exit
+$endc
+delete add.ftp,adduser.ftp
 *
 *** DIR ******************************************************
 xallocate dir.ftp,index,80
