@@ -1594,6 +1594,7 @@ namespace eval OS32 {
          set opts [string trim [gets stdin]]
          foreach x $opts {
             if { $x == "RO" } continue
+            if { $x == "-vt" } continue
             if { [regexp {[-+][A-Z]{4}} $x -> cmd] ||
                  [regexp {[A-Z]{4}[-+]} $x -> cmd] } {
                if { [info procs ::ftpd::command::$cmd] == "" } {
