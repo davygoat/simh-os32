@@ -17,7 +17,9 @@ foreach arg $argv {
 
 if { $numfiles < 1 } {
    puts stderr ""
-   puts stderr "Usage: $ make-sim \[ACCOUNT\] FILENAME..."
+   puts stderr "Usage:     $ make-sim \[OPTIONS\] \[ACCOUNT\] FILENAME..."
+   puts stderr ""
+   puts stderr "Options:   -n  do not add 'make it happen' code"
    puts stderr ""
    puts stderr "   UNIX:     ./make-sim.tcl *.css >wop"
    puts stderr "   WINDOWS:  tclsh.exe make-sim.tcl  25 wild.c search.c >wop"
@@ -26,9 +28,20 @@ if { $numfiles < 1 } {
    exit
 }
 
+set makeithappen 1
+foreach arg $argv {
+   if { $arg == "-n" } {
+      set makeithappen 0
+      continue
+   }
+}
+
 foreach arg $argv {
    if { [string is integer $arg] } {
       set acct $arg
+      continue
+   }
+   if { $arg == "-n" } {
       continue
    }
    set fnam $arg
@@ -50,10 +63,16 @@ foreach arg $argv {
    }
    puts "   expect \".CMDP>\" send \"endb\\r\";c"
    if { $acct } {
-      puts "   expect \"\\r\\n*\" send \"xdelete $fnam/$acct ; rename $fnam,$fnam/$acct\\r\";c"
+      if { $makeithappen } {
+         puts "   expect \"\\r\\n*\" send \"xdelete $fnam/$acct ; rename $fnam,$fnam/$acct\\r\";c"
+      } else {
+         puts "   expect \"\\r\\n*\" send \"rename $fnam,$fnam/$acct\\r\";c"
+      }
    }
 }
 
-puts "   # make it happen!"
-puts "   send \"\\r\""
-puts "   continue"
+if { $makeithappen } {
+   puts "   # make it happen!"
+   puts "   send \"\\r\""
+   puts "   continue"
+}
