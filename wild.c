@@ -1,8 +1,8 @@
 /*
- * This program converts fixed-format DISPLAY FILES output into
- * whatever you ask. Its primary use will be in generating CSS scripts
- * that can delete or rename object files and other such clutter en
- * masse. OS/32 does not make that sort of thing terribly easy.
+ * This program converts fixed-format DISPLAY FILES output into a
+ * CSS script that operates on those files, for example to delete
+ * object files and other such clutter en masse. OS/32 does not
+ * make that sort of thing terribly easy.
  */
 
 #include <stdio.h>
