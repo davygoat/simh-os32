@@ -1,11 +1,8 @@
 *
 mtmonly
-$ifnx wild.tsk/s
+$ifnx sys:wild.tsk/s
    $write
    $write CANNOT FIND WILD.TSK
-   $write
-   $write CC WILD
-   $write RENAME WILD.TSK,WILD.TSK/S
    $write
    $clear
 $endc
