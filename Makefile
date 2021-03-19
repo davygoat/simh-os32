@@ -1,5 +1,5 @@
 
-all::	dsk4.dsk
+all::	os32.dsk
 
 clean::
 	rm -f *.zip *.out delme* wop
@@ -14,7 +14,7 @@ FTPDOC=Adding\ an\ FTP\ server\ to\ your\ SimH\ project
 
 FILES=README.txt OS32-FTPd os32.ini ftpd.config example.shadow.config *.sim *.tcl
 
-os32kit.zip: $(FILES) dsk4.dsk
+os32kit.zip: $(FILES) os32.dsk
 	rm -f os32kit.zip
 	zip -r9 os32kit $^ doc/$(FTPDOC).pdf
 
@@ -26,8 +26,8 @@ os32doc.zip: doc/* doc/$(FTPDOC).pdf
 	rm -f os32doc.zip
 	zip -r9 os32doc doc/ -x doc/$(FTPDOC).pdf
 
-dsk4.dsk: stage-??-*.ini
-	[ -x dsk4.dsk ] || ./rebuild-system.sh
+os32.dsk: stage-??-*.ini
+	[ -x os32.dsk ] || ./rebuild-system.sh
 
 ###################################################################################################################
 
