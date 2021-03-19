@@ -28,10 +28,9 @@ Contents :-
    started.
 
    SYS:/12	Fortran-VII universal compiler
-   SYS:/14	BAS32D, presumably a BASIC interpreter
-   		Debugger
+   SYS:/14	Debugger
    SYS:/15	SORT/MERGE, may need COBOL for this
-   SYS:/16	DMS/32 database management system, but we have no COBOL
+   SYS:/16	DMS/32 database management system, but lack documentation
    SYS:/17	MEDIT, a full screen editor
    SYS:/18	Micro EMACS, a full screen editor, needs termcap setup
 
@@ -165,6 +164,7 @@ Some handy CSS scripts :-
    TYPE filename	runs COPY32 to copy filename to CON:
    SEARCH -.c,include	handy search utility
    WILD delete,-.tsk	run the DELETE command on all files -.tsk
+   WHOAMI               what name are you logged in as
 
 
 To log out of your MTM session :-
@@ -213,8 +213,10 @@ Using the FTP server (UNIX/Linux only) :-
 
    Required packages: tcl, expect, tcllib
    Copy example.shadow.config to shadow.config
-   Edit according to your needs, note md5sum command for named users
+   Edit according to your needs.
    Start SimH by running the OS32-FTPd script
+   Type FTP for help.
+   Use FTP ADDUSER to add a user.
 
    ftp localhost 2121
    Username: 25
