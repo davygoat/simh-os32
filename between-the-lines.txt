@@ -45,7 +45,11 @@ $DEFINE command:
   - pattern matching?
   - LD2
   - GO0
-  - CL(T) ?
+  - CL(T)
+
+- $DEF G8,SILENT,ST(@*G8) LD2 ST(1) GO0 CL(T)
+
+  - CL(T) -- ternary: IF @*G8 not set THEN set to 1 ELSE clear(true) ?
 
 - See also "Utilisation of Perkin-Elmer Operating System Features" table
   2 (p22) for $IF operators.
