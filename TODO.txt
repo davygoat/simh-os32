@@ -1,7 +1,13 @@
 
-- Publish on github.
+- MicroEMACS
 
-- EIEIO
+- Write-up: "Writing Code under OS/32".
+
+- Write-up: "User Guide" for the FTP server.
+
+- Try porting an old vi to Whitesmiths C.
+
+- Publish on github.
 
 - Ability to SUBMIT jobs. Does this require SPOOLER?
 
