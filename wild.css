@@ -52,12 +52,7 @@ $endc
 *
 * Run CSS
 *
-$job
-   wildtmp
-$termjob
-$ifne 0
-   $write THERE WERE A FEW PROBLEMS
-$endc
+wildtmp
 *
 * Cleanup
 *

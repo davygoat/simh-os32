@@ -38,12 +38,19 @@ $exit
 *** SINGLE FILE **********************************
 *
 $label dofile
+$job
 prevent etm
-load .bg,sys:search,10
-task .bg
-assign 0,@1,sro
-assign 1,con:
-assign 2,con:
-start ,@1,"@2"
+   load .bg,sys:search,10
+   task .bg
+   assign 0,@1,sro
+   assign 1,con:
+   assign 2,con:
+   start ,@1,"@2"
+$term
+$ifne 0
+   cancel
+   $write ==== @1 ==============================================
+   $write THERE WAS A PROBLEM READING @1
+$endc
 *
 $exit
