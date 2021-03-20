@@ -41,7 +41,7 @@ $label dofile
 prevent etm
 load .bg,sys:search,10
 task .bg
-assign 0,@1
+assign 0,@1,sro
 assign 1,con:
 assign 2,con:
 start ,@1,"@2"
