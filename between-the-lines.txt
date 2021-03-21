@@ -25,6 +25,10 @@ Tips/quirks :
 
 $DEFINE command:
 
+ (Gleaned mostly from reading CSS files, also MTMMAC hexdump.)
+
+- $DEF 1,<NAME>,ST( )         give variable a name (must be uppercase)
+
 - $DEF 1,,ST(Hello world)     string value
 - $DEF 1,,ST(@1) LD0 ST(@2)   null coalescing
 - $DEF 1,,CUR(USER)           MTM user name (process name)
@@ -38,7 +42,10 @@ $DEFINE command:
 - $DEF 1,,EXT(FD)             extension component of file name
 - $DEF 1,,ACC(FD)             account component of file name
 - $DEF 1,,REQ(COOKIE)         GIVE COOKIE (must be uppercase)
-- $DEF 1,,HC(4000-@2)         hexadecimal calculation (is there a DC?)
+- $DEF 1,,HC(4000-@2)         hexadecimal computation
+- $DEF 1,,DC(4000-@2)         decimal computation exists, but does it work?
+- $DEF 1,,UPPER(@*1)          convert string to uppercase
+- $DEF 1,,LOWER(@*1)          convert string to lowercase
 
 - $DEF 1,,ST(@@=/I.NPLACE/) LD2 ST(OFF) GO0 CL(T) ST(ON)
 
@@ -49,10 +56,45 @@ $DEFINE command:
 
 - $DEF G8,SILENT,ST(@*G8) LD2 ST(1) GO0 CL(T)
 
-  - CL(T) -- ternary: IF @*G8 not set THEN set to 1 ELSE clear(true) ?
+  - ternary: IF @*G8 not set THEN STRING(1) ELSE CLEAR(?TRUE)
+
+  (From MTMMAC.TSK hexdump.)
+
+- VOLUMENAME(fd)                         filename components
+- FILENAME(fd)                                   "
+- EXTENSION(fd)                                  "
+- ACCOUNT(fd)                                    "
+- DVOLUMENAME(SYS|CSS)                   SET VOLUME or SET CSS names
+- CURRENT                                see below
+- DCOMPUTE(expr), HCOMPUTE(expr)         dec/hex calculate
+- DHCONVERT, HDCONVERT                   dec/hex conversions
+- CONVERT, UPPERCASE, LOWERCASE, LENGTH  string functions
+- CLEAR                                  unset a variable
+- LD, TD, LU, TU, GO                     logical operators?
+- REQUIRED(<SOMETHING>)                  GIVE SOMETHING (must be uppercase)
+- STRING(hello world)                    string literal
+- SEARCH, POSITION, SUBSTRING            more string functions
+
+- CURRENT(PRIVATE|GROUP|CSS)             SET PRIVATE, GROUP, CSS accounts
+- CURRENT(USERNAME)                      username (MTM session name)
+- CURRENT(INTERACTIVE)                   terminal id
+- CURRENT(BATCH)                         always returns null in interactive
+- CURRENT(DATE|TIME)                     current date or time
+- CURRENT(EOT)                           exit status of last task
 
 - See also "Utilisation of Perkin-Elmer Operating System Features" table
   2 (p22) for $IF operators.
+
+
+MTM operator commands:
+
+  (By reading MTMMAC.TSK hexdump.)
+
+- .mtm add <tt>
+- .mtm remove <tt>
+- .mtm status
+- .mtm broadcast <message>
+- .mtm message <user> <message> (and MESSAGE .OP <message> to reply)
 
 
 BREAK :
