@@ -1,0 +1,37 @@
+*
+$ifnull @1
+   $write MISSING FILENAME
+   $clear
+$endc
+*
+$ifnx @1
+   $write FILE NOT FOUND
+   $clear
+$endc
+*
+$define 2,,filename(@1)string(.hex)
+*
+xdelete hex.tmp
+xdelete @*2
+alloc @*2,in,80
+*
+$build hex.tmp
+   list @*2
+   display @1
+   end
+$endb
+*
+$job
+   load copy32
+   start ,command=hex.tmp
+$termjob
+$ifne 0
+   xdelete hex.tmp
+   $clear
+$end
+*
+xdelete hex.tmp
+display files ,@*2
+*
+$exit
+*
