@@ -25,10 +25,9 @@ Tips/quirks :
 
 $DEFINE command:
 
- (Gleaned mostly from reading CSS files, also MTMMAC hexdump.)
+ (Gleaned mostly from reading CSS files)
 
 - $DEF 1,<NAME>,ST( )         give variable a name (must be uppercase)
-
 - $DEF 1,,ST(Hello world)     string value
 - $DEF 1,,ST(@1) LD0 ST(@2)   null coalescing
 - $DEF 1,,CUR(USER)           MTM user name (process name)
@@ -43,22 +42,25 @@ $DEFINE command:
 - $DEF 1,,ACC(FD)             account component of file name
 - $DEF 1,,REQ(COOKIE)         GIVE COOKIE (must be uppercase)
 - $DEF 1,,HC(4000-@2)         hexadecimal computation
-- $DEF 1,,DC(4000-@2)         decimal computation exists, but does it work?
-- $DEF 1,,UPPER(@*1)          convert string to uppercase
-- $DEF 1,,LOWER(@*1)          convert string to lowercase
 
 - $DEF 1,,ST(@@=/I.NPLACE/) LD2 ST(OFF) GO0 CL(T) ST(ON)
 
-  - pattern matching?
-  - LD2
-  - GO0
-  - CL(T)
+  pattern matching?
+  LD2 ?
+  GO0 ?
+  CL(T) ?
+
+  (MTMMAC.TSK hexdump record 200)
+
+- $DEF 1,,DC(4000-@2)         decimal computation exists, but does it work?
+- $DEF 1,,UPPER(@*1)          convert string to uppercase
+- $DEF 1,,LOWER(@*1)          convert string to lowercase
 
 - $DEF G8,SILENT,ST(@*G8) LD2 ST(1) GO0 CL(T)
 
   - ternary: IF @*G8 not set THEN STRING(1) ELSE CLEAR(?TRUE)
 
-  (From MTMMAC.TSK hexdump.)
+  (MTMMAC.TSK hexdump records 199-200)
 
 - VOLUMENAME(fd)                         filename components
 - FILENAME(fd)                                   "
@@ -75,6 +77,8 @@ $DEFINE command:
 - STRING(hello world)                    string literal
 - SEARCH, POSITION, SUBSTRING            more string functions
 
+  (MTMMAC.TSK hexdump record 204)
+
 - CURRENT(PRIVATE|GROUP|CSS)             SET PRIVATE, GROUP, CSS accounts
 - CURRENT(USERNAME)                      username (MTM session name)
 - CURRENT(INTERACTIVE)                   terminal id
@@ -88,13 +92,28 @@ $DEFINE command:
 
 MTM operator commands:
 
-  (By reading MTMMAC.TSK hexdump.)
+  (MTMMAC.TSK hexdump record 3)
 
-- .mtm add <tt>
-- .mtm remove <tt>
-- .mtm status
-- .mtm broadcast <message>
-- .mtm message <user> <message> (and MESSAGE .OP <message> to reply)
+- .mtm add <tt>                   enable terminal
+- .mtm broadcast <message>        send message to all logged-in users
+- .mtm message <user> <message>   send message to single user
+- .mtm inquire                    report batch status
+- .mtm purge <fd>                 remove batch job
+- .mtm submit <td>                submit batch job
+- .mtm remove <tt>                disable terminal
+- .mtm terminate <tt>             kick user off
+- .mtm quiesce                    no more logins, end MTM when all off
+- .mtm status                     report interactive and batch status
+- .mtm atf <fd>                   ?
+- .mtm psm                        needs to be SYSGEN'd in
+- .mtm lle                        3200 only, and requires PSM
+
+
+Some more clustered MTM strings:
+
+- MTMMAC.TSK hex record 203: SYSTEM, SPOOL, ROLL, TEMP, PRIVATE, CSS.
+
+  Looks like disks or accounts for certain files (ROLL=swap).
 
 
 BREAK :
