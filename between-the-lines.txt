@@ -58,33 +58,41 @@ $DEFINE command:
 
 - $DEF G8,SILENT,ST(@*G8) LD2 ST(1) GO0 CL(T)
 
-  - ternary: IF @*G8 not set THEN STRING(1) ELSE CLEAR(?TRUE)
+  - ternary: IF @*G8 not set THEN STRING(1) ELSE CLEAR(T)
 
   (MTMMAC.TSK hexdump records 199-200)
 
-- VOLUMENAME(fd)                         filename components
-- FILENAME(fd)                                   "
-- EXTENSION(fd)                                  "
-- ACCOUNT(fd)                                    "
-- DVOLUMENAME(SYS|CSS)                   SET VOLUME or SET CSS names
-- CURRENT                                see below
-- DCOMPUTE(expr), HCOMPUTE(expr)         dec/hex calculate
-- DHCONVERT, HDCONVERT                   dec/hex conversions
-- CONVERT, UPPERCASE, LOWERCASE, LENGTH  string functions
-- CLEAR                                  unset a variable
-- LD, TD, LU, TU, GO                     logical operators?
-- REQUIRED(<SOMETHING>)                  GIVE SOMETHING (must be uppercase)
-- STRING(hello world)                    string literal
-- SEARCH, POSITION, SUBSTRING            more string functions
+- VOLUMENAME(fd)                  filename components
+- FILENAME(fd)                            "
+- EXTENSION(fd)                           "
+- ACCOUNT(fd)                             "
+- DVOLUMENAME(SYS|CSS)            SET VOLUME or SET CSS names
+- CURRENT                         see below
+- HCOMPUTE(expr)                  hexadecimal calculation
+- DCOMPUTE(expr)                  decimal calculation
+- DHCONVERT(dec)                  dec to hex conversion
+- HDCONVERT(hex)                  hex to dec conversion
+- UPPERCASE(@1)                   convert string to upper
+- LOWERCASE(@1)                   convert string to lower
+- LENGTH(@1)                      string length
+- REQUIRED(<SOMETHING>)           GIVE SOMETHING (must be uppercase)
+- STRING(hello world)             string literal
+- SEARCH, POSITION, SUBSTRING     string functions (syntax eludes me)
+
+  (Some special semantics here: L/T, D/U, and CLEAR with T/L.)
+
+- CLEAR(L)                        unset a variable
+- CLEAR(T)                        unset a variable
+- LD, TD, LU, TU, GO              logical operators, with digit suffix
 
   (MTMMAC.TSK hexdump record 204)
 
-- CURRENT(PRIVATE|GROUP|CSS)             SET PRIVATE, GROUP, CSS accounts
-- CURRENT(USERNAME)                      username (MTM session name)
-- CURRENT(INTERACTIVE)                   terminal id
-- CURRENT(BATCH)                         always returns null in interactive
-- CURRENT(DATE|TIME)                     current date or time
-- CURRENT(EOT)                           exit status of last task
+- CURRENT(PRIVATE|GROUP|CSS)      SET PRIVATE, GROUP, CSS accounts
+- CURRENT(USERNAME)               username (MTM session name)
+- CURRENT(INTERACTIVE)            terminal id
+- CURRENT(BATCH)                  always returns null in interactive
+- CURRENT(DATE|TIME)              current date or time
+- CURRENT(EOT)                    exit status of last task
 
 - See also "Utilisation of Perkin-Elmer Operating System Features" table
   2 (p22) for $IF operators.
@@ -105,7 +113,7 @@ MTM operator commands:
 - .mtm quiesce                    no more logins, end MTM when all off
 - .mtm status                     report interactive and batch status
 - .mtm atf <fd>                   ?
-- .mtm psm                        needs to be SYSGEN'd in
+- .mtm psm                        PSM scheduler, needs to be SYSGEN'd in
 - .mtm lle                        3200 only, and requires PSM
 
 
