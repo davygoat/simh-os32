@@ -18,7 +18,7 @@ os32kit.zip: $(FILES) os32.dsk
 	rm -f os32kit.zip
 	zip -r9 os32kit $^ doc/$(FTPDOC).pdf
 
-os32src.zip: $(FILES) rebuild-system.sh stage-*.ini tapes/eou.tap wild.c* search.c* ftp.css bookmarks
+os32src.zip: $(FILES) rebuild-system.sh stage-*.ini wild.c* search.c* ftp.css bookmarks
 	rm -f os32src.zip
 	zip -r9 os32src $^ $(FTPDOC).odt
 
