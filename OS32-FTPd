@@ -1541,13 +1541,17 @@ namespace eval OS32 {
       set pass2 {}
       while {1} {
          puts -nonewline stderr "PASSWORD: "
-         set pass1 [string trim [gets stdin]]
+         stty -echo
+         gets stdin pass1
+         stty echo ; puts stderr ""
          if { $pass1 == "" } {
             puts stderr "WILL DEFAULT TO MTM AUTH USING NUMERIC ACCOUNT."
             break
          }
          puts -nonewline stderr "REPEAT: "
-         set pass2 [string trim [gets stdin]]
+         stty -echo
+         gets stdin pass2
+         stty echo ; puts stderr ""
          if { $pass2 == "" } {
             puts stderr "OK, NEVER MIND."
             return
