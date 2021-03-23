@@ -1,6 +1,4 @@
 
-- Make it work with Bob Supnik's SimH.
-
 - MicroEMACS
 
 - Write-up: "Writing Code under OS/32".

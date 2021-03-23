@@ -1674,6 +1674,12 @@ namespace eval OS32 {
                } elseif { $osline == "*ADD FTP USER" } {
                   set ::OS32::adduser 1
                   return
+               } elseif { $osline == "*MARK DSC4 OFF BEFORE YOU GO" } {
+                  if { $simh(classic) } {
+                     puts stderr ""
+                     set simh(shutdown) 1
+                     return
+                  }
                }
                upvar #0 ::OS32::ftpcmd ftpcmd
                if { $ftpcmd != "" } {
@@ -1707,6 +1713,7 @@ namespace eval OS32 {
                }
             }
             timeout $::OS32::config::timeout {
+               upvar #0 ::OS32::ftpcmd ftpcmd
                if { $ftpcmd != "" } {
                   TrafficLight red "*** TIMEOUT ***"
                   send "\$WRITE FILE STUCK\r"
@@ -1715,6 +1722,103 @@ namespace eval OS32 {
          }
       }
    }
+}
+
+;######################################################################
+   #
+   # SimH V3 "Classic" support
+   #
+   # Bob Supnik's Interdata simulator does not have V4's new EXPECT/SEND
+   # commands.  If we're using V3, we'll handle the prompts in Expect to
+   # save ourselves a bit of inconvenience.
+   #
+
+proc HandleSimH_V3_Startup {} {
+
+   global simh
+   array set simh {
+      classic 0
+      shutdown 0
+   }
+
+   expect {
+      "Interdata 32b simulator V4" {
+         return
+      }
+      "Interdata 32b simulator V3" {
+         TrafficLight green "BEGIN SimH V3 \"Classic\" boot automation"
+         array set simh {
+            classic 1
+            needfastchek 0
+            needcont 0
+            shutdown 0
+         }
+      }
+   }
+
+   expect "ENTER DATE AND TIME" ; expect -ex "*"
+   set now [clock format [clock seconds] -format %m/%d/%y,%H:%M]
+   send "set time $now\r"
+   set simh(timesent) 1
+
+   expect -ex "*" ; send "mark dsc4:,on\r"
+
+   expect {
+      "NOFF-ERR" {
+         set simh(needfastchek) 1
+      }
+      -ex "*" {
+         set simh(needfastchek) 0
+      }
+   }
+
+   if { $simh(needfastchek) } {
+      expect -ex "*" ; send "mark dsc4:,on,protect\r"
+      expect -ex "*" ; send "load sys:fastchek\r"
+      expect -ex "*" ; send "mark dsc4:,off\r"
+      expect -ex "*" ; send "start ,ch=dsc4:,nor,ext,li=con:\r"
+      expect {
+         "FASTCHEK:END OF TASK" {
+            set simh(needcont) 0
+         }
+         "FASTCHEK:TASK PAUSED" {
+            set simh(needcont) 1
+         }
+      }
+      if { $simh(needcont) } {
+         expect -ex "*" ; send "\$continue\r"
+      }
+      expect -ex "*" ; send "mark dsc4:,on\r"
+      expect -ex "*"
+   }
+
+   send "startup\r"
+   expect "MTMAST"
+   expect -ex "*"
+   TrafficLight green "END SimH V3 \"Classic\" boot automation"
+}
+
+proc HandleSimH_V3_Shutdown {} {
+
+   global simh
+
+   TrafficLight green "BEGIN SimH V3 \"Classic\" shutdown"
+   expect -ex "*" ; send "mark dsc4:,off\r"
+   expect -ex "*" ; send "display devices\r"
+   expect {
+      "DSC4  FC 0000   OFF" {
+         set simh(dsc4off) 1
+      }
+      -ex "*" {
+         set simh(dsc4off) 0
+      }
+   }
+   if { $simh(dsc4off) } {
+      expect -ex "*" ; send "\005"
+      expect "sim> " ; send "quit\r\n"
+   }
+   puts stderr "quit"
+   TrafficLight green "END SimH V3 \"Classic\" shutdown"
 }
 
 
@@ -1747,6 +1851,7 @@ namespace eval OS32 {
       puts stderr ""
       catch { exec killall -9 [file tail $::OS32::config::simulator] }
       spawn $::OS32::config::simulator $::OS32::config::inifile
+      HandleSimH_V3_Startup
    }
 
    unset fd
@@ -1755,7 +1860,11 @@ namespace eval OS32 {
    while {1} {
       set adduser 0
       DoExpect
-      if { $adduser } {
+      global simh
+      if { $simh(shutdown) } {
+         HandleSimH_V3_Shutdown
+         break
+      } elseif { $adduser } {
          AddUserFTP
          set adduser 0
       } else {
