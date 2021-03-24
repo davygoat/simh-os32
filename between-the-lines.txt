@@ -124,6 +124,21 @@ Some more clustered MTM strings:
   Looks like disks or accounts for certain files (ROLL=swap).
 
 
+MTM ACTUTY commands:
+
+    (ACTUTY.TSK hexdump record 3)
+
+- ACCOUNTS [maxnum]
+- ADD      act,grp,pass,name,*,*,priv
+- CHANGE   act,grp,pass,name,*,*,priv
+- DELETE   act
+- LIST     [act]
+- MODE     [CREATE|UPDATE|REPORT]
+- TOTAL                           (in MODE REPORT only)
+- PAUSE                           (type CONT to return)
+- END
+
+
 BREAK :
 
 - Hit telnet escape char, Ctrl/]

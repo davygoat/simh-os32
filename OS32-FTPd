@@ -65,6 +65,7 @@ namespace eval OS32 {
       array set access        {}
       array set passwords     {}
       variable  allowip       127.0.0.1
+      variable  accountlimit  1023
       variable  cdblacklist   255
       variable  welcome       "OS/32 FTP server"
       variable  ostype        "OS/32 Version 8.1"
@@ -617,12 +618,14 @@ namespace eval OS32 {
       proc AuthenticateMTM { acct pass errvar } {
 
          upvar 1 $errvar ermes
+         upvar #0 ::OS32::config::accountlimit accountlimit
 
-         # MTM accounts must  be <= 255 by default. I'm  going to narrow
-         # that a  little bit  further, because  255 is  privileged, and
-         # owns the  MTM Authorized User File.  Account 0  is permitted,
-         # but not really recommended.
-         if { $acct < 0 || $acct >= 255 } {
+         # MTM accounts must be <= 255 by default,  but the limit can be
+         # increased with  the ACTUTY  ACCOUNTS command. Account  255 is
+         # forbidden,  regardless of the limit,  as it owns owns the MTM
+         # Authorized User  File.  Account 0 is permitted but definitely
+         # not recommended for FTP use.
+         if { $acct < 0 || $acct > $accountlimit || $acct == 255 } {
             set ermes "out of range account"
             return -1
          }

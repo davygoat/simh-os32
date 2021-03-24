@@ -19,7 +19,7 @@ if { ![string is integer $port] || $port < 1 } {
 # Account: must be numeric.
 #
 set acct [lindex $argv 1]
-if { ![string is integer $acct] || $acct <= 0 || $acct >= 255 } {
+if { ![string is integer $acct] || $acct < 0 || $acct > 65535 } {
    puts stderr "*** FAIL 99 (BAD INPUT) ***"
    exit 99
 }
