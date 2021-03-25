@@ -6,6 +6,15 @@
    set env FNAM=%1
 
    if "%FNAM%" == "" goto usage
+   if exist "%FNAM%" goto automate
+
+   set env FNAM=%FNAM%.dsk
+   if exist "%FNAM%" goto automate
+
+   echof ""
+   echof " File not found: %1 or %FNAM%"
+   echof ""
+   goto bottom
 
 :automate
 
