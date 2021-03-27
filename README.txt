@@ -22,6 +22,11 @@ Contents :-
    SYS:/13	Pascal
    SYS:/14	Whitesmiths C
 
+   The following Interdata User Group (IUG) tapes have also been placed
+   on SYS:.
+
+   SYS:/104	IUG-104 Object Library Utilities
+
    The following packages are also on the disk, but not 'installed'. You
    may be able to get them to work if you try hard enough. Documentation
    is  lacking... The  two editors  have textfiles  that should  get you
@@ -32,7 +37,7 @@ Contents :-
    SYS:/15	SORT/MERGE, may need COBOL for this
    SYS:/16	DMS/32 database management system, but lack documentation
    SYS:/17	MEDIT, a full screen editor
-   SYS:/18	Micro EMACS, a full screen editor, needs termcap setup
+   SYS:/165	Micro EMACS, a full screen editor, needs termcap setup
 
    Unfortunately, there are  no COBOL or RPG tapes. (Not  sure if anyone
    will miss  RPG.) Reliance ECM  (transaction monitor) and  spooler are
