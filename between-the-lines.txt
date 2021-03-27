@@ -98,6 +98,16 @@ $DEFINE command:
   2 (p22) for $IF operators.
 
 
+'Undocumented' MTM commands:
+
+  (Probably in the missing MTM manuals, but I got these from the IUG-104
+   LIBTOOLS tape)
+
+- $LOCAL @name(length), @nam2(length), ...    (lowercase is ok)
+- $SET @name = world                          (lowercase is ok)
+- $WRITE Hello @name
+
+
 MTM operator commands:
 
   (MTMMAC.TSK hexdump record 3)
@@ -137,6 +147,14 @@ MTM ACTUTY commands:
 - TOTAL                           (in MODE REPORT only)
 - PAUSE                           (type CONT to return)
 - END
+
+
+LIBLDR commands:
+
+    (LIBLDR.TSK hexdump records 30-31)
+
+- PB, LC, BC, TO, BI, XO, GO, EN, PA, OU, RO, MA, AM, LI, LO
+  LF ,ED, RW, FF, BF, FR, BR, WF, FI, LA, DU, CO, TA, LG
 
 
 BREAK :
