@@ -25,7 +25,8 @@ Contents :-
    The following Interdata User Group (IUG) tapes have also been placed
    on SYS:.
 
-   SYS:/104	IUG-104 Object Library Utilities
+   SYS:/104	IUG-104 object library utilities
+   SYS:/200	IUG-200 HLAL2 high level assembler macros
 
    The following packages are also on the disk, but not 'installed'. You
    may be able to get them to work if you try hard enough. Documentation
@@ -99,6 +100,20 @@ Remote logins (aka. MTM) :-
    At PASSWORD, type user1 (does not echo)
    Leave ENVIRONMENT blank, or enter name of a CSS file
 
+   If you want to use the EOU commands (COMPILE, LINK, EXECUTE, EDIT),
+   you MUST signon as 'EOU', as follows:
+
+   SIGNON eou,25,user1
+
+   For anything else, including additional logins under the 25 account,
+   use whatever name you like, for example:
+
+   SIGNON fred,25,user1      -- good for everything, including non EOU
+   SIGNON wilma,25,user1        C programming using the 'cc' command,
+   SIGNON barney,25,user1       and for general OS/32 commands.
+
+   SIGNON mtm,255,pass1      -- note account 255 for MTM user admin
+
 
 Basic file handling commands :-
 
@@ -126,10 +141,10 @@ Program development (aka. EOU -- under MTM only) :-
    LINK
    EXEC			btw, you can skip COMPILE and LINK step
 
-   CC helloc		compile and link helloc.C, and produce helloc.CSS
-   helloc		invokes helloc.CSS to run helloc.TSK
-
-   HELP *		help
+   PASCAL helloc	enter C environment, filename hellop.C
+   COMPILE
+   LINK
+   EXEC
 
     ***************************** WARNING ******************************
 
@@ -146,14 +161,29 @@ Program development (aka. EOU -- under MTM only) :-
     - Log back into your kicked-off MTM sessions
     - Do not try to COMPILE or LINK in more than one session
 
+    That  said, I  have  'hacked'  the EOUINIT  command  to prevent  you
+    inadvertently  using EOU  unless you  are logged  in under  the name
+    'EOU'.
+
+    - SIGNON eou,25,user1
+
     ***************************** WARNING ******************************
+
+   HELP *		help
+
+
+Whitesmiths C has a convenient alternative to EOU -:
+
+   CC helloc		compile and link helloc.C, and produce helloc.CSS
+   helloc		invokes helloc.CSS to run helloc.TSK
 
 
 Switching 'directories' :-
 
    SET PRIVATE n	set current account to n (like UNIX cd command)
    SET GROUP n		set current group to n (also like cd command)
-   VOLUME fred/USR	set current user device to fred (also like cd)
+   VOLUME fred    	set current user device to FRED (also like cd)
+   VOLUME sys     	set current user device back to SYS
    DIR /P               list PRIVATE files (cf. SET PRIVATE)
    DIR /G		list GROUP files (cf. SET GROUP)
    DIR /S               list SYSTEM files (files owned by /0 account)
@@ -169,6 +199,7 @@ Some handy CSS scripts :-
    TYPE filename	runs COPY32 to copy filename to CON:
    SEARCH -.c,include	handy search utility
    WILD delete,-.tsk	run the DELETE command on all files -.tsk
+   HEX mtmmac.tsk/s     produce a hex dump of the MTM daemon
    WHOAMI               what name are you logged in as
 
 
@@ -221,7 +252,7 @@ Using the FTP server (UNIX/Linux only) :-
    Edit according to your needs.
    Start SimH by running the OS32-FTPd script
    Type FTP for help.
-   Use FTP ADDUSER to add a user.
+   Use FTP ADDUSER to add a user, and follow the prompts.
 
    ftp localhost 2121
    Username: 25
