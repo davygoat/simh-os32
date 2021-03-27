@@ -14,27 +14,28 @@ Tip for vim users: Map one of your function keys to /^L^Mzt to quickly
 Note there are about 520 IUG tapes.  You cannot install all of them on
 one 67MB disk. To install individual tapes:
 
-* Create a disk labelled IUG  by typing 'do makedisk iug dsk3-iug.dsk'
-at  the simh  prompt.  The newly-created  disk  will automatically  be
-marked  on by  the sim  script. If  you want  to keep  the IUG  volume
-'mounted' after a reboot, do the following:
+* Create a disk labelled IUG by typing  'do makedisk iug'  at the simh
+  prompt.  The newly-created disk  will automatically  be marked on by
+  the sim script. If you want to keep the IUG volume 'mounted' after a
+  reboot, do the following:
 
   Host:  Uncomment the 'attach  dm1' statement in os32.sim
   OS/32: Uncomment the 'mark dsc3:,on' statement in STARTUP.CSS.  
 
+* If your IUG disk is not mounted on startup, you can also type this at
+  the simh prompt:
+
+  do mountdisk iug
+
 * To restore  the  SOFTWARE TOOLS  tape  (e.g. to  use  lex,  yacc  or
-ratfor), type 'do iug 523'  and the files will go  onto the IUG volume
-under account number 523. But note...
+  ratfor), type 'do iug 523' and the files will go onto the IUG volume
+  under account number 523.
 
-* MTM's  SET PRIVATE  cannot handle account  numbers that  are greater
-than 255. In that case, type 'do  iug 523 99' or something similar for
-a more suitable account.
+* Under MTM, type the following  commands to see the files in IUG:/523,
+  and to return to your usual SYS:/25 directory.
 
-* Under MTM, type the following  commands to see the files in IUG:/99,
-and to return to your usual SYS:/25 directory.
-
-  VOLUME IUG/USR    VOLUME SYS/USR
-  SET PRIVATE 99    SET PRIVATE 25
+  VOLUME IUG           VOLUME SYS
+  SET PRIVATE 523      SET PRIVATE 25
 
 
 
