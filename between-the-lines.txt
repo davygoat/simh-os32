@@ -207,7 +207,7 @@ MTM privileges :
 
  Also note left nybble:
 
- 0f000  isolated developer as above, cannot edit /S files, but can SET
+ 0ff00  isolated developer as above, cannot edit /S files, but can SET
         PRIVATE and then edit them as if private (like sudo)
  ff000  no SET PRIVATE, but can edit /S files directly, dangerous.
 
