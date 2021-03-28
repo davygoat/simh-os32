@@ -138,12 +138,13 @@ MTM ACTUTY commands:
 
     (ACTUTY.TSK hexdump record 3)
 
-- ACCOUNTS [maxnum]
-- ADD      act,grp,pass,name,*,*,priv
-- CHANGE   act,grp,pass,name,*,*,priv
-- DELETE   act
-- LIST     [act]
-- MODE     [CREATE|UPDATE|REPORT]
+- ACCOUNTS  [maxnum]
+- ADD       act,grp,pass,name,*,*,priv
+- CHANGE    act,[grp],[pass],[name],,,[priv]
+- PRIVILEGE [act[,priv]]
+- DELETE    act
+- LIST      [act]
+- MODE      [CREATE|UPDATE|REPORT]
 - TOTAL                           (in MODE REPORT only)
 - PAUSE                           (type CONT to return)
 - END
@@ -181,11 +182,36 @@ SIGNON :
 
 MTM privileges :
 
+  (Referred to in literature.)
+
 - SET GROUP
 - SET PRIVATE
-- EXTENDED ACCOUNT ACCESS (80808080 ?)
+- EXTENDED ACCOUNT ACCESS
 - PRIVILEGED
-- Others? Which bits mean what?
+
+  (Trial and error, using MTM PRIVILEGE command)
+
+- 0000  no privileges             -- bog standard user
+- F...  can run private CSS       -- good for isolated developer
+- .F.,  SET PRIVATE and SET GROUP -- extended account access (can do damage)
+- ..F.  privileged?               -- can do serious damage
+- ...F  another privilege?        -- can do serious damage
+- FFFF  every privilege           -- can do serious damage
+
+ The useful ones seem to be:
+
+ 0      bog standard user, can write code, but not own CSS
+ f000   isolated developer limited to private account, with CSS
+ ff00   system programmer with extended account access, dangerous
+ fff0   full privileges, not recommended
+
+ Also note left nybble:
+
+ 0f000  isolated developer as above, cannot edit /S files, but can SET
+        PRIVATE and then edit them as if private (like sudo)
+ ff000  no SET PRIVATE, but can edit /S files directly, dangerous.
+
+- Others? Which bits mean what? Can SET PRIVATE and SET GROUP be decoupled?
 
 
 FASTCHEK strings, possible start options?
