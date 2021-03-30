@@ -45,7 +45,7 @@ $DEFINE command:
 
 - $DEF 1,,ST(@@=/I.NPLACE/) LD2 ST(OFF) GO0 CL(T) ST(ON)
 
-  pattern matching?
+  Keyword argument I(NPLACE)=1, double 'at' for up a CSS level.
   LD2 ?
   GO0 ?
   CL(T) ?
@@ -77,7 +77,7 @@ $DEFINE command:
 - LENGTH(@1)                      string length
 - REQUIRED(<SOMETHING>)           GIVE SOMETHING (must be uppercase)
 - STRING(hello world)             string literal
-- SEARCH, POSITION, SUBSTRING     string functions (syntax eludes me)
+- SEARCH, POSITION, SUBSTRING     string functions (see below)
 
   (Some special semantics here: L/T, D/U, and CLEAR with T/L.)
 
@@ -98,14 +98,75 @@ $DEFINE command:
   2 (p22) for $IF operators.
 
 
+Quirky $DEFINE syntax for string functions:
+
+  (Found in IUG-161 OS/32 AND UTILITY DEVELOPMENT CSS PROCEDURES.
+   Match parameter against a list of values, note strange delimiters.)
+
+    $DEF 1,,SEARCH('#',ONE'TWO'THREE'FOUR'FIVE,@1)
+    $IFNNULL @*1
+       $WRITE PARAMETER 1 IS VALID, MATCHES '@*1'
+    $ELSE
+       $WRITE PARAMETER 1 INVALID
+    $ENDC
+
+  (Referred to in MTM Software Installation Guide, examples found in
+   IUG-161. Similarly quirky: note required terminator char '#' after
+   param 2 of substr.)
+
+    $DEF 1,,STR('Hello world!')
+    $DEF 2,,SUBSTR('#',@*1#,7,5)
+    $WRITE '@*1' SUSTRING RETURNS '@*2'
+
+  (Also in mentioned in MTM Software Installation Guide. Examples in
+   IUG-192 HERCULES UTILITIES. Note again requires you to specify a
+   terminator character.)
+
+    $DEF 1,,POSITION('#',:#,@1#)    ;* find position of colon
+    $DEF 2,,SUBSTR('#',@1#,0,@*1)   ;* extract device from before colon
+
+   ***
+   *** Do not use spaces after commas, because they are interpreted as
+   *** part of the string to search!
+   ***
+   *** SEARCH p2 list must be uppercase. SUBSTR and POSITION p2 need not
+   *** be a variable, may be uppercase or lowercase string literal. Just
+   *** don't include quotes or STRING operator, just text and the required
+   *** terminator character.
+   ***
+
+
 'Undocumented' MTM commands:
 
   (Probably in the missing MTM manuals, but I got these from the IUG-104
-   LIBTOOLS tape)
+   LIBTOOLS tape. Much more readable than the $DEFINE command.)
 
-- $LOCAL @name(length), @nam2(length), ...    (lowercase is ok)
-- $SET @name = world                          (lowercase is ok)
-- $WRITE Hello @name
+    $LOCAL @name(length), @nam2(length), ...    (lowercase is ok)
+    $SET @name = world                          (lowercase is ok)
+    $WRITE Hello @name
+
+  (But also note syntax for using IV/GV names, see IUG-118 HANDY CSS'S)
+
+    $define 1,HELLO,str(Hello world!)
+    $display ivars
+    $write greeting='@*/HELLO/'
+
+  ('Keyword arguments', examples in IUG-118, IUG-161.)
+
+    $define 1,,str(@=/OPT/)       returns value if OPT=value is passed
+                                  on the command line, null if option is
+                                  absent
+    $define 2,,str(@=/O.PTION/)   dot allows keyword to be abbreviated
+
+    $ifnnull @=/OPT/
+       $write OPT present: '@=/OPT/'
+    $else
+       $write OPT absent
+    $endc
+
+    Positional parameters must come BEFORE any keyword arguments. If you
+    pass a positional parameter after a keyword argument, you'll get a
+    KEYW-ERR and a slightly confusing explanation.
 
 
 MTM operator commands:
