@@ -117,6 +117,8 @@ int main (argc, argv)
       while (*ibs != 0 && *ibs <= ' ') ibs++;
       while (*rex != 0 && *rex <= ' ') rex++;
 
+      if (!strcmp(nam,"WILDTMP") && !strcmp(ext,"CSS")) continue;
+
       for (p=cmd; *p; p++)
       {
          if (*p == '$')
