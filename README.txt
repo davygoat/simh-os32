@@ -201,6 +201,7 @@ Some handy CSS scripts :-
    WILD delete,-.tsk	run the DELETE command on all files -.tsk
    HEX mtmmac.tsk/s     produce a hex dump of the MTM daemon
    WHOAMI               what name are you logged in as
+   CD [vol:]/acct       switch 'directory', possibly on another volume
 
 
 To log out of your MTM session :-

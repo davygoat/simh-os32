@@ -1,0 +1,66 @@
+
+mtmonly
+
+$ifnull @1
+   $goto usage
+$endc
+
+*
+* Does it have a colon?
+*
+$define 1, POS, position('#',:#,@1#)
+$ifnnull @*/POS/
+   * Extract volume
+   $define 1, LEN,     dc(@*/POS/-1)
+   $define 2, VOLUME,  substring('#',@1#,1,@*/LEN/)
+   * Extract account
+   $define 1, START,   position('#',:#,@1#)
+   $define 1, START,   dc(@*/START/+1)
+   $define 3, LEN,     length(@1)
+   $define 3, LEN,     dc(@*/LEN/-@*/START/+1)
+   $define 3, ACCOUNT, substring('#',@1#,@*/START/,@*/LEN/)
+   * Remove slash
+   $define 1, SLASH,   substring('#',@*/ACCOUNT/#,1,1)
+   $if ch "@*/SLASH/" eq "/"
+      $define 1, LEN,     length(@1)
+      $define 1, LEN,     dc(@*/LEN/-1)
+      $define 3, ACCOUNT, substring('#',@*/ACCOUNT/#,2,@*/LEN/)
+   $endc
+   $goto doit
+$endc
+
+*
+* Is it numeric?
+*
+$define 1, SLASH, substring('#',@1#,1,1)
+$if char "@*/SLASH/" eq "/"
+   $define 1, LEN,     length(@1)
+   $define 1, LEN,     dc(@*/LEN/-1)
+   $define 3, ACCOUNT, substring('#',@1#,2,@*/LEN/)
+$else
+   $define 3, ACCOUNT, string(@1)
+$endc
+$define 1, FIRST,   substring('#',@*/ACCOUNT/#,1,1)
+$define 1, ISDIGIT, position('#',@*/FIRST/#,0123456789#)
+$ifnnull @*/ISDIGIT/
+   $goto doit
+$endc
+
+*
+* Whatever it is, it's invalid.
+*
+$label usage
+
+   $write USAGE: CD [VOL:]/ACT
+   $clear
+
+*
+* Do SET PRIVATE and VOLUME.
+*
+$label doit
+
+   set private @*/ACCOUNT/
+   $ifnnull @*/VOLUME/
+      volume @*/VOLUME/
+   $endc
+   $exit
