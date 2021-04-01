@@ -114,7 +114,7 @@ Quirky $DEFINE syntax for string functions:
    IUG-161. Similarly quirky: note required terminator char '#' after
    param 2 of substr.)
 
-    $DEF 1,,STR('Hello world!')
+    $DEF 1,,STR(Hello world!)
     $DEF 2,,SUBSTR('#',@*1#,7,5)
     $WRITE '@*1' SUSTRING RETURNS '@*2'
 
@@ -273,6 +273,12 @@ MTM privileges :
  ff000  no SET PRIVATE, but can edit /S files directly, dangerous.
 
 - Others? Which bits mean what? Can SET PRIVATE and SET GROUP be decoupled?
+
+
+FORTRAN VII inline assembly:
+
+- See IUG-214 MULTI FILE SEARCH.
+- Also has a wildcard matcher / directory reader without using CSS.
 
 
 FASTCHEK strings, possible start options?
