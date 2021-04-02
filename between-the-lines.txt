@@ -148,8 +148,11 @@ Quirky $DEFINE syntax for string functions:
   (But also note syntax for using IV/GV names, see IUG-118 HANDY CSS'S)
 
     $define 1,HELLO,str(Hello world!)
+    $define g9,NINES,str(9999)
     $display ivars
-    $write greeting='@*/HELLO/'
+    $write greet='@*/HELLO/'   ;* internal variable (implicit)
+    $write greet='@*i/HELLO/'  ;* internal variable (explicit)
+    $write nines='@*g/NINES/'  ;* global variable (requires explicit)
 
   ('Keyword arguments', examples in IUG-118, IUG-161.)
 
