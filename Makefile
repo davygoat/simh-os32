@@ -12,7 +12,7 @@ dist::	os32doc.zip os32src.zip os32kit.zip
 
 FTPDOC=Adding\ an\ FTP\ server\ to\ your\ SimH\ project
 
-FILES=README.txt OS32-FTPd os32.ini ftpd.config example.shadow.config *.sim *.tcl
+FILES=README.txt OS32-FTPd os32.ini supnik.ini ftpd.config example.shadow.config *.sim *.tcl
 
 os32kit.zip: $(FILES) os32.dsk
 	rm -f os32kit.zip
