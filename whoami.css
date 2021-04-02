@@ -1,8 +1,0 @@
-$job
-   $define 1,,cur(user)
-   $write @*1
-$term
-$ifne 0
-   $write NO PROBLEM, YOU ARE AT THE SYSTEM CONSOLE
-$endc
-$exit
