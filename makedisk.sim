@@ -5,24 +5,41 @@
 
    set env VOL=%1
    set env FNAM=%2
+   set env DEV=%3
 
    if "%VOL%" == "" goto usage
-   if "%FNAM%" == "" set env FNAM=%1.dsk
+   if "%FNAM%" == "" goto usage
+
+   if exist "%FNAM%" goto trample
+
+:checkdev
+
+   if "%DEV%" == ""     set env DEV=dsc3
+   if "%DEV%" == "dsc3" set env SDEV=dm1; set env ODEV=dsc3; goto checkvol
+   if "%DEV%" == "DSC3" set env SDEV=dm1; set env ODEV=dsc3; goto checkvol
+   if "%DEV%" == "dsc5" set env SDEV=dm2; set env ODEV=dsc5; goto checkvol
+   if "%DEV%" == "DSC5" set env SDEV=dm2; set env ODEV=dsc5; goto checkvol
+   goto usage
+
+:checkvol
 
    if "%VOL%" == "dsc3" goto badvol
    if "%VOL%" == "DSC3" goto badvol
    if "%VOL%" == "dsk3" goto badvol
    if "%VOL%" == "DSK3" goto badvol
-
-   if exist "%FNAM%" goto trample
+   if "%VOL%" == "dsc5" goto badvol
+   if "%VOL%" == "DSC5" goto badvol
+   if "%VOL%" == "dsk5" goto badvol
+   if "%VOL%" == "DSK5" goto badvol
+   goto automate
 
 :automate
 
-   attach -n dm1 %FNAM%
-   expect "\r\n*" send "mark dsc3,off\r";c
+   attach -n %SDEV% %FNAM%
+   expect "\r\n*" send "mark %ODEV%,off\r";c
    expect "\r\n*" send "load fastchek\r";c
-   expect "TSKID = FASTCHEK" send "start ,init=dsc3:,vol=%VOL%,li=con:\r";c
-   expect "FASTCHEK:END OF TASK" send "mark dsc3:,on\r";c
+   expect "TSKID = FASTCHEK" send "start ,init=%ODEV%:,vol=%VOL%,li=con:\r";c
+   expect "FASTCHEK:END OF TASK" send "mark %ODEV%:,on\r";c
    send "\r"
    continue
    goto bottom
@@ -30,10 +47,11 @@
 :usage
 
    echof ""
-   echof " Usage: sim> do makedisk VOLUME [FILENAME]"
+   echof " Usage: sim> do makedisk VOLUME FILENAME [DEVICE]"
    echof ""
    echof " Note:  VOLUME is the volume label, e.g. IUG (four chars max)."
-   echof "        FILENAME is a file on the host, default is volume with extension '.dsk'."
+   echof "        FILENAME is a file on the host, default extension '.dsk'."
+   echof "        DEVICE is DSC3 or DSC5, default is DSC3."
    echof ""
    echof " Note:  Do not confuse volume label with device name. If you use"
    echof "        something like DSC3 as the volume label, you will not be"
@@ -51,7 +69,7 @@
 :badvol
 
    echof "\n"
-   echof "ERROR: you can't use DSC3 as the volume label\n"
+   echof "ERROR: you can't use DSC3 or DSC5 as the volume label\n"
    echof "\n"
 
 :bottom

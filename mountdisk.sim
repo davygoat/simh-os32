@@ -4,6 +4,18 @@
 :params
 
    set env FNAM=%1
+   set env DEV=%2
+
+:checkdev
+
+   if "%DEV%" == ""     set env DEV=dsc3
+   if "%DEV%" == "dsc3" set env SDEV=dm1; set env ODEV=dsc3; goto checkfnam
+   if "%DEV%" == "DSC3" set env SDEV=dm1; set env ODEV=dsc3; goto checkfnam
+   if "%DEV%" == "dsc5" set env SDEV=dm2; set env ODEV=dsc5; goto checkfnam
+   if "%DEV%" == "DSC5" set env SDEV=dm2; set env ODEV=dsc5; goto checkfnam
+   goto usage
+
+:checkfnam
 
    if "%FNAM%" == "" goto usage
    if exist "%FNAM%" goto automate
@@ -18,8 +30,8 @@
 
 :automate
 
-   attach -e dm1 %FNAM%
-   expect "\r\n*" send "mark dsc3:,off ; mark dsc3:,on\r";c
+   attach -e %SDEV% %FNAM%
+   expect "\r\n*" send "mark %ODEV%:,off ; mark %ODEV%:,on\r";c
    send "\r"
    continue
    goto bottom
@@ -27,9 +39,10 @@
 :usage
 
    echof ""
-   echof " Usage: sim> do mountdisk FILENAME"
+   echof " Usage: sim> do mountdisk FILENAME [DEVICE]"
    echof ""
    echof " Note:  FILENAME is a file on the host."
+   echof " Note:  DEVICE is DSC3 or DSC5, default is DSC3."
    echof ""
    goto bottom
 
