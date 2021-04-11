@@ -1,0 +1,228 @@
+OS/32 Driver Writer's Guide (1985)/1,Black,bold,italic,open,FitPage
+	Part I - Tutorial/1,Black,notBold,notItalic,closed,FitPage
+		Contents/2,Black,notBold,notItalic,closed,FitPage
+		Preface/3,Black,notBold,notItalic,closed,FitPage
+		Chapter 1 - Introduction/4,Black,notBold,notItalic,open,FitPage
+			List of Figures/5,Black,notBold,notItalic,closed,FitPage
+			1.1 Basic Concepts/6,Black,notBold,notItalic,closed,FitPage
+			1.2 Terminology/7,Black,notBold,notItalic,closed,FitPage
+			1.3 Components of a Device Driver/8,Black,notBold,notItalic,closed,FitPage
+			1.4 OS/32 Driver Interface Routines/11,Black,notBold,notItalic,closed,FitPage
+			1.5 Driver Communication with the Total Computer System/13,Black,notBold,notItalic,closed,FitPage
+			1.6 A Special Note on Device Time-Outs/16,Black,notBold,notItalic,closed,FitPage
+		Chapter 2 - Writing the Driver/17,Black,notBold,notItalic,open,FitPage
+			2.1 Introduction/18,Black,notBold,notItalic,closed,FitPage
+			2.2 Writing Driver Code/18,Black,notBold,notItalic,closed,FitPage
+				Step 1: The Simplest Case/18,Black,notBold,notItalic,closed,FitPage
+				Step 2: Scheduling Event Service Routine (ESR)/18,Black,notBold,notItalic,closed,FitPage
+				Step 3: Setting Up Entry To ISRs/19,Black,notBold,notItalic,closed,FitPage
+				Step 4: Executing a Sequence of ISR/21,Black,notBold,notItalic,closed,FitPage
+				Step 5: Setting Up Device Time-outs and User Status/23,Black,notBold,notItalic,closed,FitPage
+				Step 6: Selection Channel (SELCH) I/O, Data Buffer Addresses, and Length of Transfer/26,Black,notBold,notItalic,closed,FitPage
+				Step 7: Data Transfer Using Autodriver Channel Programming/31,Black,notBold,notItalic,closed,FitPage
+				Step 8: Generating User-Level Task Traps/36,Black,notBold,notItalic,closed,FitPage
+			2.3 Writing Device Control Block/Channel Control Block (DCB/CCB) Specifications/38,Black,notBold,notItalic,closed,FitPage
+		Chapter 3 - Including the Drvier in your Operating System/44,Black,notBold,notItalic,open,FitPage
+			3.1 Introduction/45,Black,notBold,notItalic,closed,FitPage
+			3.2 Expanding and Assembling Drivers/45,Black,notBold,notItalic,closed,FitPage
+			3.3 System Generation (SYSGEN) With CUPMT/47,Black,notBold,notItalic,closed,FitPage
+			3.4 System Generation (SYSGEN) with SYSGEN/32/54,Black,notBold,notItalic,closed,FitPage
+			3.5 CUPMT vs. SYSGEN/32/60,Black,notBold,notItalic,closed,FitPage
+		Chapter 4 - Sample Drivers/61,Black,notBold,notItalic,open,FitPage
+			4.1 Introduction/62,Black,notBold,notItalic,closed,FitPage
+			4.2 Sample Driver for Digital Input/Output (DIO) Interface/62,Black,notBold,notItalic,closed,FitPage
+			4.3 TELEX Tridensity Magnetic Tape Driver/69,Black,notBold,notItalic,closed,FitPage
+		Chapter 5 - Advanced Driver Concepts/123,Black,notBold,notItalic,open,FitPage
+			5.1 Introduction/124,Black,notBold,notItalic,closed,FitPage
+			5.2 The Translation Table/124,Black,notBold,notItalic,closed,FitPage
+				5.2.1 The TLATE Instruction/124,Black,notBold,notItalic,closed,FitPage
+				5.2.2 Function and Design of a Translation Table/124,Black,notBold,notItalic,closed,FitPage
+				5.2.3 Driver Code for the Translation Table/125,Black,notBold,notItalic,closed,FitPage
+			5.3 Nonphysical Device Drivers/129,Black,notBold,notItalic,closed,FitPage
+				5.3.1 Purpose of a Nonphysical Device Driver/129,Black,notBold,notItalic,closed,FitPage
+				5.3.2 Coding a Nonphysical Device Driver/129,Black,notBold,notItalic,closed,FitPage
+			5.4 Supervisor Call 6 (SVC6) and Trap Generating Device Drivers/143,Black,notBold,notItalic,closed,FitPage
+				5.4.1 Function of a Trap Generating Device Driver/143,Black,notBold,notItalic,closed,FitPage
+				5.4.2 Coding a Trap Generating Device Driver/143,Black,notBold,notItalic,closed,FitPage
+		Appendix A - Review of Assembly Language Input/Output (I/O) Commands/147,Black,notBold,notItalic,closed,FitPage
+		Appendix B - Debug Techniques/148,Black,notBold,notItalic,closed,FitPage
+		Appendix C - Crash Code Analysis/149,Black,notBold,notItalic,closed,FitPage
+	Part II - Input/Output (I/O) Subsystem Reference Information/150,Black,notBold,notItalic,closed,FitPage
+		Contents/151,Black,notBold,notItalic,closed,FitPage
+		Preface/152,Black,notBold,notItalic,closed,FitPage
+		Chapter 1 - Introduction/153,Black,notBold,notItalic,open,FitPage
+			1.1 Introduction/154,Black,notBold,notItalic,closed,FitPage
+			1.2 Purpose of a Driver/154,Black,notBold,notItalic,closed,FitPage
+			1.3 Basic Information/155,Black,notBold,notItalic,closed,FitPage
+				1.3.1 The Perkin-Elmer Series 3200 Processor Input/Output (I/O) Architecture/155,Black,notBold,notItalic,closed,FitPage
+				1.3.2 OS/32 Input/Output (I/O) Subsystem Architecture/155,Black,notBold,notItalic,closed,FitPage
+				1.3.3 Programming Attributes of Physical Devices/156,Black,notBold,notItalic,closed,FitPage
+				1.3.4 Logical Devices Projected by a Driver/156,Black,notBold,notItalic,closed,FitPage
+				1.3.5 Including a Driver in the Operating System/156,Black,notBold,notItalic,closed,FitPage
+		Chapter 2 - Series 3200 Input/Output (I/O) Architecture/157,Black,notBold,notItalic,open,FitPage
+			List of Figures/158,Black,notBold,notItalic,closed,FitPage
+			List of Tables/159,Black,notBold,notItalic,closed,FitPage
+			2.1 Introduction/160,Black,notBold,notItalic,closed,FitPage
+			2.2 Multiplexor (MUX BUS)/161,Black,notBold,notItalic,closed,FitPage
+				2.2.1 Device Address/161,Black,notBold,notItalic,closed,FitPage
+				2.2.2 Device Commands/161,Black,notBold,notItalic,closed,FitPage
+				2.2.3 Device Status/163,Black,notBold,notItalic,closed,FitPage
+				2.2.4 Data/163,Black,notBold,notItalic,closed,FitPage
+			2.3 Program Status Word (PSW) and Machine States/164,Black,notBold,notItalic,closed,FitPage
+			2.4 Input/Output (I/O) Instructions/165,Black,notBold,notItalic,closed,FitPage
+				2.4.1 Output Command (OC) Instructions/165,Black,notBold,notItalic,closed,FitPage
+				2.4.2 Sense Status (SS)/166,Black,notBold,notItalic,closed,FitPage
+				2.4.3 Write Data (WD)/Write Data Halfword (WH)/166,Black,notBold,notItalic,closed,FitPage
+				2.4.4 Read Data (RD)/Read Data Halfword (RH)/167,Black,notBold,notItalic,closed,FitPage
+				2.4.5 Other Input/Output (I/O) Related Instructions/168,Black,notBold,notItalic,closed,FitPage
+			2.5 Interrupts/168,Black,notBold,notItalic,closed,FitPage
+				2,5,1 External Interrupts/169,Black,notBold,notItalic,open,FitPage
+					2.5.1.1 Interrupt Service Pointer Table (ISPT)/169,Black,notBold,notItalic,closed,FitPage
+					2.5.1.2 Immediate Interrupt Service/171,Black,notBold,notItalic,closed,FitPage
+					2.5.1.3 Auto Driver Channel/172,Black,notBold,notItalic,closed,FitPage
+						2.5.1.3.1 Channel Control Block (CCB)/173,Black,notBold,notItalic,closed,FitPage
+						5.2.1.3.2 Channel Control Word (CCW)/174,Black,notBold,notItalic,closed,FitPage
+						2.5.1.3.3 Channel Control Block (CCB) Buffers/176,Black,notBold,notItalic,closed,FitPage
+						2.5.1.3.4 Check Word/176,Black,notBold,notItalic,closed,FitPage
+						2.5.1.3.5 Translation Table/176,Black,notBold,notItalic,closed,FitPage
+						2.5.1.3.6 Interrupt Service Routine (ISR) Subroutine Address (SUBA)/177,Black,notBold,notItalic,closed,FitPage
+				5.2.2 Internal Interrupts/177,Black,notBold,notItalic,open,FitPage
+					2.5.2.1 Supervisor Call (SVC) Interrupt/178,Black,notBold,notItalic,closed,FitPage
+					2.5.2.2 System Queue Service (SQS)/178,Black,notBold,notItalic,closed,FitPage
+		Chapter 3 - Input/Output (I/O) Programming Methods/180,Black,notBold,notItalic,open,FitPage
+			3.1 Introduction/181,Black,notBold,notItalic,closed,FitPage
+			3.2 Programmed Input/Output (I/O)/182,Black,notBold,notItalic,closed,FitPage
+				3.2.1 Status Loop Monitoring/182,Black,notBold,notItalic,closed,FitPage
+				3.2.2 Interrupt-Driven Programmed Input/Output (I/O)/184,Black,notBold,notItalic,open,FitPage
+					3.2.2.1 Immediate Interrupt Service/185,Black,notBold,notItalic,closed,FitPage
+					3.2.2.2 Auto Driver Channel Programming/186,Black,notBold,notItalic,closed,FitPage
+			3.3 Direct Memory Access (DMA) Programmng/189,Black,notBold,notItalic,closed,FitPage
+				3.3.1 The Selector Channel (SELCH)/189,Black,notBold,notItalic,closed,FitPage
+				3.3.2 Programming the Selector Channel (SELCH)/190,Black,notBold,notItalic,closed,FitPage
+		Chapter 4 - The Input/Output (I/O) Subsystem Architecture/192,Black,notBold,notItalic,open,FitPage
+			List of Figures/194,Black,notBold,notItalic,closed,FitPage
+			List of Tables/195,Black,notBold,notItalic,closed,FitPage
+			4.1 Introduction/196,Black,notBold,notItalic,closed,FitPage
+			4.2 Supervisor Call 1 (SVC1) Synopsis/196,Black,notBold,notItalic,closed,FitPage
+				4.2.1 Description of Special Supervisor Call 1 (SVC1) Functions/199,Black,notBold,notItalic,closed,FitPage
+					4.2.1.1 Command/Data Transfer/199,Black,notBold,notItalic,closed,FitPage
+					4.2.1.2 Read/Write/199,Black,notBold,notItalic,closed,FitPage
+					4.2.1.3 Wait Read/Write/199,Black,notBold,notItalic,closed,FitPage
+					4.2.1.4 Proceed Read/Write/199,Black,notBold,notItalic,closed,FitPage
+					4.2.1.5 Uncondition Proceed Read/Write/200,Black,notBold,notItalic,closed,FitPage
+					4.2.1.6 Wait-Only/200,Black,notBold,notItalic,closed,FitPage
+					5.2.1.7 Test Input/Output (I/O) Completion/200,Black,notBold,notItalic,closed,FitPage
+					4.2.1.8 Halt Input/Output (I/O)/200,Black,notBold,notItalic,closed,FitPage
+					4.2.1.9 Test and Set/200,Black,notBold,notItalic,closed,FitPage
+			4.3 The Device Control Block (DCB)/200,Black,notBold,notItalic,closed,FitPage
+				4.3.1 The Device Mnemonic Table/201,Black,notBold,notItalic,closed,FitPage
+				4.3.2 Device-Independent Status Values/203,Black,notBold,notItalic,closed,FitPage
+				4.3.3 The Input/Output Block (IOB)/205,Black,notBold,notItalic,closed,FitPage
+				4.3.4 Supervisor Call 1 (SVC1) Exits/206,Black,notBold,notItalic,open,FitPage
+					4.3.4.1 Normal Exits/207,Black,notBold,notItalic,closed,FitPage
+					4.3.4.2 Error Exits/207,Black,notBold,notItalic,closed,FitPage
+			4.4 System Queue Service (SQS)/207,Black,notBold,notItalic,closed,FitPage
+			4.5 The Event Tree (EVT)/208,Black,notBold,notItalic,closed,FitPage
+				4.5.1 Resource Nodes/213,Black,notBold,notItalic,closed,FitPage
+				4.5.2 Extended Direct Memory Access (EDMA) Node/213,Black,notBold,notItalic,open,FitPage
+				4.5.3 System Queue Service (SQS) Executors/213,Black,notBold,notItalic,open,FitPage
+					4.5.3.1 Single Level Device Dispatch (SQS.SLV)/213,Black,notBold,notItalic,closed,FitPage
+					4.5.3.2 Multilevel Device Dispatch (SQS.MLV)/213,Black,notBold,notItalic,closed,FitPage
+			4.6 Driver Service Routines/214,Black,notBold,notItalic,closed,FitPage
+				4.6.1 EVMOD/214,Black,notBold,notItalic,closed,FitPage
+				4.6.2 EVREL/214,Black,notBold,notItalic,closed,FitPage
+			4.7 Driver Exits/215,Black,notBold,notItalic,closed,FitPage
+				4.7.1 DIRDONE/215,Black,notBold,notItalic,closed,FitPage
+				4.7.2 EVRTE/215,Black,notBold,notItalic,closed,FitPage
+				4.7.3 IODONE/215,Black,notBold,notItalic,open,FitPage
+					4.7.3.1 IODGST/216,Black,notBold,notItalic,closed,FitPage
+					4.7.3.2 IODTWT/216,Black,notBold,notItalic,closed,FitPage
+					4.7.3.3 IODONE2/216,Black,notBold,notItalic,closed,FitPage
+			4.8 Other Utility Routines/216,Black,notBold,notItalic,closed,FitPage
+				4.8.1 Timer Services/216,Black,notBold,notItalic,open,FitPage
+					4.8.1.1 TOCHON/217,Black,notBold,notItalic,closed,FitPage
+					4.8.1.2 TOCHOFF/217,Black,notBold,notItalic,closed,FitPage
+				4.8.2 Queueing Routines/218,Black,notBold,notItalic,closed,FitPage
+		Chapter 5 - Structure of a Driver/219,Black,notBold,notItalic,open,FitPage
+			List of Tables/220,Black,notBold,notItalic,closed,FitPage
+			5.1 Introduction/221,Black,notBold,notItalic,closed,FitPage
+			5.2 The Input/Output Handlers (IOH)/222,Black,notBold,notItalic,closed,FitPage
+			5.3 Driver Initialization Routine/225,Black,notBold,notItalic,closed,FitPage
+			5.4 Interrupt Service Routine (ISR)/226,Black,notBold,notItalic,closed,FitPage
+			5.5 Final Interrupt Service Routine (ISR)/228,Black,notBold,notItalic,closed,FitPage
+			5.6 Event Service Routine (ESR) (Intermediate and Termination)/228,Black,notBold,notItalic,closed,FitPage
+		Chapter 6 - Components of the Device Control Block (DCB) and Channel Control Block (CCB)/230,Black,notBold,notItalic,open,FitPage
+			List of Tables/231,Black,notBold,notItalic,closed,FitPage
+			6.1 Introduction/232,Black,notBold,notItalic,closed,FitPage
+			6.2 The Macro Prototype Statement/233,Black,notBold,notItalic,closed,FitPage
+			6.3 Environment Initialization/235,Black,notBold,notItalic,closed,FitPage
+			6.4 Unique DCB ID Generation/236,Black,notBold,notItalic,closed,FitPage
+			6.5 Device Control Block (DCB) Storage Allocation/Initialization/237,Black,notBold,notItalic,closed,FitPage
+			6.7 Channel Control Block (CCB) Storage Allocation/Initialization/239,Black,notBold,notItalic,closed,FitPage
+			6.8 Device Mnemonic Table (DMT) and Leaf Linkage/240,Black,notBold,notItalic,closed,FitPage
+			6.9 Miscellaneous (Optional) Storage Allocation/Initialization/241,Black,notBold,notItalic,closed,FitPage
+			6.10 Macro Termination/243,Black,notBold,notItalic,closed,FitPage
+		Chapter 7 - Differences for Drivers Written Under Input/Output Processor (IOP)/244,Black,notBold,notItalic,open,FitPage
+			7.1 Introduction/245,Black,notBold,notItalic,closed,FitPage
+			7.2 Central Processing Unit (CPU) Input/Output Processor (IOP) Differences/245,Black,notBold,notItalic,closed,FitPage
+			7.3 Building the Device Control Block (DCB)/246,Black,notBold,notItalic,closed,FitPage
+			7.4 Code Changes/247,Black,notBold,notItalic,closed,FitPage
+				7.4.1 Add to System Queue Macro (ADDSQ)/247,Black,notBold,notItalic,closed,FitPage
+				7.4.2 Intrerrupt Service Pointer Modification (ISPMOD)/248,Black,notBold,notItalic,closed,FitPage
+		Appendix A - Description of Data Structures/250,Black,notBold,notItalic,closed,FitPage
+			Table A-1. Device Control Block (DCB)/250,Black,notBold,notItalic,closed,FitPage
+			Table A-2. Channel Control Block (CCB)/257,Black,notBold,notItalic,closed,FitPage
+			Table A-3. Input/Output (I/O) Block/260,Black,notBold,notItalic,closed,FitPage
+			Table A-4. Event Coordination Node/263,Black,notBold,notItalic,closed,FitPage
+		Appendix B - Machine States/264,Black,notBold,notItalic,closed,FitPage
+			Event Service (ES) State/264,Black,notBold,notItalic,closed,FitPage
+			Nonreentrant System (NS) State/264,Black,notBold,notItalic,closed,FitPage
+			User Task (UT) State/265,Black,notBold,notItalic,closed,FitPage
+			Interrupt Service (IS) State/265,Black,notBold,notItalic,closed,FitPage
+			Reentrant System (RS) State/266,Black,notBold,notItalic,closed,FitPage
+		Appendix C - OS/32 Macros/269,Black,notBold,notItalic,closed,FitPage
+			The SYSGEN/32 Macro Output FIle/269,Black,notBold,notItalic,closed,FitPage
+			The Device Code::: Macro/271,Black,notBold,notItalic,closed,FitPage
+			The DCBI Macro/276,Black,notBold,notItalic,closed,FitPage
+			The CCBI Macro/280,Black,notBold,notItalic,closed,FitPage
+			The USERINIT Macro/282,Black,notBold,notItalic,closed,FitPage
+			The USEREND Macro/283,Black,notBold,notItalic,closed,FitPage
+			IOP Macros/283,Black,notBold,notItalic,closed,FitPage
+				ISPMOD/283,Black,notBold,notItalic,closed,FitPage
+				ADDSQ/284,Black,notBold,notItalic,closed,FitPage
+		Appendix D - OS/32 Subroutine Definitons/285,Black,notBold,notItalic,closed,FitPage
+			Service Routines/285,Black,notBold,notItalic,open,FitPage
+				IODGST/285,Black,notBold,notItalic,closed,FitPage
+				IODTWT/286,Black,notBold,notItalic,closed,FitPage
+			Utility Routines/287,Black,notBold,notItalic,open,FitPage
+				EVMOD/287,Black,notBold,notItalic,closed,FitPage
+				EVREL/288,Black,notBold,notItalic,closed,FitPage
+				GETIOB/289,Black,notBold,notItalic,closed,FitPage
+				RELIOB/290,Black,notBold,notItalic,closed,FitPage
+				SQSMLV/291,Black,notBold,notItalic,closed,FitPage
+			Exit Routines/292,Black,notBold,notItalic,open,FitPage
+				DIRDONE/292,Black,notBold,notItalic,closed,FitPage
+				EVRTE/293,Black,notBold,notItalic,closed,FitPage
+				IODONE/294,Black,notBold,notItalic,closed,FitPage
+			Queueing Routines/295,Black,notBold,notItalic,open,FitPage
+				COMDIS/295,Black,notBold,notItalic,closed,FitPage
+				COMFIFO/296,Black,notBold,notItalic,closed,FitPage
+				COMQ/297,Black,notBold,notItalic,closed,FitPage
+				DISKNODE/298,Black,notBold,notItalic,closed,FitPage
+				DISKQ/299,Black,notBold,notItalic,closed,FitPage
+				EDMACON/300,Black,notBold,notItalic,closed,FitPage
+				EDMADIS/301,Black,notBold,notItalic,closed,FitPage
+				EDMAQCON/302,Black,notBold,notItalic,closed,FitPage
+				LEAFCON/303,Black,notBold,notItalic,closed,FitPage
+				LEAFQ/304,Black,notBold,notItalic,closed,FitPage
+				LFIFO/305,Black,notBold,notItalic,closed,FitPage
+				NFIFO/306,Black,notBold,notItalic,closed,FitPage
+				NLIFO/307,Black,notBold,notItalic,closed,FitPage
+				NODECON/308,Black,notBold,notItalic,closed,FitPage
+				NODEDIS/309,Black,notBold,notItalic,closed,FitPage
+				NODEDEQCON/310,Black,notBold,notItalic,closed,FitPage
+				PRTYQ/311,Black,notBold,notItalic,closed,FitPage
+				SEEKCHK/312,Black,notBold,notItalic,closed,FitPage
+		Appendix E - Skeleton Driver and Associate DCBxxx Macro/313,Black,notBold,notItalic,closed,FitPage
+			INITSKEL/313,Black,notBold,notItalic,closed,FitPage
+			Associated DCBxxx Macro/320,Black,notBold,notItalic,closed,FitPage

@@ -1,0 +1,67 @@
+OS/32 System Support Run-Time Library Reference Manual (1984)/1,Black,bold,italic,open,FitPage
+	Table of Contents/3,Black,notBold,notItalic,open,FitPage
+	Preface/6,Black,notBold,notItalic,closed,FitPage
+	Chapter 1 - Intrinsic Routines/7,Black,notBold,notItalic,open,FitPage
+		1.1 Introduction/7,Black,notBold,notItalic,closed,FitPage
+		1.2 GOAPU Subroutine/7,Black,notBold,notItalic,closed,FitPage
+		1.3 GOCPU Subroutine/8,Black,notBold,notItalic,closed,FitPage
+		1.4 GENSIG Subroutine/9,Black,notBold,notItalic,closed,FitPage
+		1.5 IRTCNT Function/10,Black,notBold,notItalic,closed,FitPage
+		1.6 RSCHDL Subroutine/11,Black,notBold,notItalic,closed,FitPage
+	Chapter 2 - Run-Time Library (RTL) Subroutines/12,Black,notBold,notItalic,open,FitPage
+		2.1 Introduction/12,Black,notBold,notItalic,closed,FitPage
+		2.2 APUDABL Subroutine/13,Black,notBold,notItalic,closed,FitPage
+		2.3 APUENAB Subroutine/13,Black,notBold,notItalic,closed,FitPage
+		2.4 ASGNQUE Subroutine/14,Black,notBold,notItalic,closed,FitPage
+		2.5 ASLPU Subroutine/15,Black,notBold,notItalic,closed,FitPage
+		2.6 CNTLAPU Subroutine/16,Black,notBold,notItalic,closed,FitPage
+		2.7 HALTAPU Subroutine/17,Black,notBold,notItalic,closed,FitPage
+		2.8 IDAPU Function/18,Black,notBold,notItalic,closed,FitPage
+		2.9 LPUPREF Subroutine/18,Black,notBold,notItalic,closed,FitPage
+		2.10 LPUQUE Subroutine/19,Black,notBold,notItalic,closed,FitPage
+		2.11 MAPQUE Subroutine/20,Black,notBold,notItalic,closed,FitPage
+		2.12 MAPTABL Subroutine/21,Black,notBold,notItalic,closed,FitPage
+		2.13 QUEOFF Subroutine/23,Black,notBold,notItalic,closed,FitPage
+		2.14 QUEON Subroutine/23,Black,notBold,notItalic,closed,FitPage
+		2.15 QUEXON Subroutine/24,Black,notBold,notItalic,closed,FitPage
+		2.16 RELCNTL Subroutine/25,Black,notBold,notItalic,closed,FitPage
+		2.17 RELMAP Subroutine/26,Black,notBold,notItalic,closed,FitPage
+		2.18 REMQUE Subroutine/27,Black,notBold,notItalic,closed,FitPage
+		2.19 RSCHAPU Subroutine/28,Black,notBold,notItalic,closed,FitPage
+		2.20 SETQUED Subroutine/29,Black,notBold,notItalic,closed,FitPage
+		2.21 STAQUE Subroutine/30,Black,notBold,notItalic,closed,FitPage
+		2.22 STATAPU Subroutine/33,Black,notBold,notItalic,closed,FitPage
+		2.23 STOPAPU Subroutine/35,Black,notBold,notItalic,closed,FitPage
+		2.24 STRTAPU Subroutine/36,Black,notBold,notItalic,closed,FitPage
+		2.25 TRLPU Subroutine/37,Black,notBold,notItalic,closed,FitPage
+	Figures/4,Black,notBold,notItalic,closed,FitPage
+		2-1 Format of Elements in the Array BUFFER Used by the MAPTABL Subroutine/22,Black,notBold,notItalic,closed,FitPage
+		2-2 Layout of Information Returned by STAQUE to BUFFER/32,Black,notBold,notItalic,closed,FitPage
+		2-3 Layout of Information Returned by STATAPU to BUFFER/34,Black,notBold,notItalic,closed,FitPage
+	Tables/4,Black,notBold,notItalic,closed,FitPage
+		1-1 Status Codes for the GENSIG Subroutine/10,Black,notBold,notItalic,closed,FitPage
+		1-2 Status Codes for the IRCNT Function/10,Black,notBold,notItalic,closed,FitPage
+		2-1 Status Codes for the APUDABL Subroutine/13,Black,notBold,notItalic,closed,FitPage
+		2-2 Status Codes for the APUENAB Subroutine/14,Black,notBold,notItalic,closed,FitPage
+		2-3 Status Codes for the ASGNQUE Subroutine/15,Black,notBold,notItalic,closed,FitPage
+		2-4 Status Codes for the ASLPU Subroutine/16,Black,notBold,notItalic,closed,FitPage
+		2-5 Status Codes for the CNTLAPU Subroutine/17,Black,notBold,notItalic,closed,FitPage
+		2-6 Status Codes for the HALTAPU Subroutine/18,Black,notBold,notItalic,closed,FitPage
+		2-7 Status Codes for the LPUPREF Subroutine/19,Black,notBold,notItalic,closed,FitPage
+		2-8 Status Codes for the LPUQUE Subroutine/20,Black,notBold,notItalic,closed,FitPage
+		2-9 Status Codes for the MAPQUE Subroutine/21,Black,notBold,notItalic,closed,FitPage
+		2-10 Status Codes for the MAPTABL Subroutine/22,Black,notBold,notItalic,closed,FitPage
+		2-11 Status Codes for the QUEOFF Subroutine/23,Black,notBold,notItalic,closed,FitPage
+		2-12 Status Codes for the QUEON Subroutine/24,Black,notBold,notItalic,closed,FitPage
+		2-13 Status Codes for the QUEXON Subroutine/25,Black,notBold,notItalic,closed,FitPage
+		2-14 Status Codes for the RELCNT Subroutine/26,Black,notBold,notItalic,closed,FitPage
+		2-15 Status Codes for the RELMAP Subroutine/27,Black,notBold,notItalic,closed,FitPage
+		2-16 Status Codes for the REMQUE Subroutine/28,Black,notBold,notItalic,closed,FitPage
+		2-17 Status Codes for the RSCHAPU Subroutine/29,Black,notBold,notItalic,closed,FitPage
+		2-18 Status Codes for the SETQUED Subroutine/30,Black,notBold,notItalic,closed,FitPage
+		2-19 Status Codes for the STAQUE Subroutine/33,Black,notBold,notItalic,closed,FitPage
+		2-20 Status Codes for the STATAPU Subroutine/35,Black,notBold,notItalic,closed,FitPage
+		2-21 Status Codes for the STOPAPU Subroutine/36,Black,notBold,notItalic,closed,FitPage
+		2-22 Status Codes for the STRTAPU Subroutine/37,Black,notBold,notItalic,closed,FitPage
+		2-23 Status Codes for the TRLPU Subroutine/38,Black,notBold,notItalic,closed,FitPage
+	Index/39,Black,notBold,notItalic,closed,FitPage
