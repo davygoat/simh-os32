@@ -83,6 +83,14 @@ Startup :-
 
 Remote logins (aka. MTM) :-
 
+   Default passwords:
+
+	ACT   PASSWORD  DESCRIPTION
+	----  --------  ----------------------------------------------
+	255   pass1     super user, use only for MTM administration !!
+	25    user1     power user, has SET PRIVATE and SET GROUP
+	165   emacs     example user, restricted to their own account
+
    Telnet localhost 1026
    Wait for asterisk, hit return if necessary
    Type SIGNON whatever,25,user1
@@ -129,6 +137,8 @@ Basic file handling commands :-
 
 Program development (aka. EOU -- under MTM only) :-
 
+   To use these commands, you MUST SIGNON AS EOU, see warning below.
+
    EDIT filename	line editor, but quite nice actually; has help
 
    FORT hellof		enter Fortran environment, filename hellof.ftn
@@ -141,17 +151,28 @@ Program development (aka. EOU -- under MTM only) :-
    LINK
    EXEC			btw, you can skip COMPILE and LINK step
 
-   PASCAL helloc	enter C environment, filename hellop.C
+   C helloc	        enter C environment, filename hellop.C
+   COMPILE
+   LINK
+   EXEC
+
+   CAL helloa           enter CAL/32 assembler environment, filename.CAL
+   COMPILE
+   LINK
+   EXEC
+
+   MACRO hellom         enter MACRO/32 assembler environment, filename.MAC
    COMPILE
    LINK
    EXEC
 
     ***************************** WARNING ******************************
 
-    EOU has a nasty habit of locking up. For example, you cannot use the
-    compile  commands in  more than  one  MTM terminal,  and you  cannot
-    signon if  anyone is using the  EDIT command.  MTM will go into some
-    kind of deadlock if you do that...
+    EOU has a nasty  habit of locking up if used in  more than one login
+    session. For  example, you cannot  use the compile commands  in more
+    than one MTM terminal, and you  cannot signon if anyone is using the
+    EDIT  command. MTM  will go  into some  kind of  deadlock if  you do
+    that...
   
     If you find yourself in this sticky situation:
   
@@ -165,17 +186,37 @@ Program development (aka. EOU -- under MTM only) :-
     inadvertently  using EOU  unless you  are logged  in under  the name
     'EOU'.
 
-    - SIGNON eou,25,user1
+    - SIGNON EOU,99,xyzzy   assuming you have created an account 99 with
+                            password xyzzy using the ACTUTY command in
+                            the MTM administrator account 255.
+
+    - SIGNON EOU,25,user1   account 25 can use SET PRIVATE and SET GROUP
+    - SIGNON EOU,165,emacs  account 165 is restricted to their own account
 
     ***************************** WARNING ******************************
 
+   With that out of the way, the HELP command is perfectly safe to use,
+   even if you are not signed on as EOU. It's well worth reading these.
+
    HELP *		help
+   HELP FORT		help about the Fortran language environment
+   HELP PASCAL		help about the Pascal language environment
+   HELP C		help about the Whitesmiths C language environment
+   HELP CAL		help about the CAL/32 language environment
+   HELP MACRO		help about the MACRO/32 language environment
 
 
-Whitesmiths C has a convenient alternative to EOU -:
+Whitesmiths C has a convenient alternative to EOU :-
 
    CC helloc		compile and link helloc.C, and produce helloc.CSS
    helloc		invokes helloc.CSS to run helloc.TSK
+
+
+The other high level languages also have their High Level Operator
+Commands (HLOC), which can be used if you change your 'PATH'.
+
+   SET CSS 11		Fortran
+   SET CSS 13		Pascal
 
 
 Switching 'directories' :-
@@ -200,7 +241,7 @@ Some handy CSS scripts :-
    SEARCH -.c,include	handy search utility
    WILD delete,-.tsk	run the DELETE command on all files -.tsk
    HEX mtmmac.tsk/s     produce a hex dump of the MTM daemon
-   WHOAMI               what name are you logged in as
+   WHOAMI               what name are you logged in as, e.g. 'EOU'.
    CD [vol:]/acct       switch 'directory', possibly on another volume
 
 
@@ -283,4 +324,11 @@ Using the FTP server (UNIX/Linux only) :-
    cd 11		switch to account 11 (assuming you have access)
    cd iug		switch to volume IUG (assuming it is mounted)
    cd iug/78		switch to account 78 on volume IUG
+
+
+Adding user accounts :-
+
+   SIGNON mtm,255,pass1
+   ACTUTY		I've provided a handy summary of commands
+   LISTAUF users.auf	handy CSS if you've forgotten a password
 
