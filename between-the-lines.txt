@@ -172,6 +172,19 @@ Quirky $DEFINE syntax for string functions:
     KEYW-ERR and a slightly confusing explanation.
 
 
+CSS verbs that don't work in MTM:
+
+  $TRANSFER
+
+  And various operator commands:
+
+  DISPLAY ACCOUNTING (not SYSGEN'd anyway)
+  DISPLAY MAP        (not short for MEMORY)
+  DISPLAY STATUS
+  DISPLAY TASKS
+  DISPLAY VOLUMES
+
+
 MTM operator commands:
 
   (MTMMAC.TSK hexdump record 3)
