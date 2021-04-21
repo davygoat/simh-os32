@@ -139,11 +139,13 @@ Quirky $DEFINE syntax for string functions:
 'Undocumented' MTM commands:
 
   (Probably in the missing MTM manuals, but I got these from the IUG-104
-   LIBTOOLS tape. Much more readable than the $DEFINE command.)
+   LIBTOOLS tape. Much more readable than the $DEFINE command. The Fortran
+   tape also has examples in EOU61F7.CSS/12.)
 
     $LOCAL @name(length), @nam2(length), ...    (lowercase is ok)
     $SET @name = world                          (lowercase is ok)
     $WRITE Hello @name
+    $FREE @name
 
   (But also note syntax for using IV/GV names, see IUG-118 HANDY CSS'S)
 
@@ -291,9 +293,45 @@ MTM privileges :
 - Others? Which bits mean what? Can SET PRIVATE and SET GROUP be decoupled?
 
 
-FORTRAN VII inline assembly:
+CAL and MACRO:
 
-- See IUG-214 MULTI FILE SEARCH.
+- CAL allows lowercase, but MACRO seems to be case sensitive, so probably
+  best to stick to upppercase (standard convention).
+
+- Labels and names must start in column zero, "commands" must NOT start in
+  column zero (must be preceded by at least one space).
+
+
+FORTRAN VII:
+
+- Lowercase is fine.
+
+- END IF is supported, as per FORTRAN 77.
+
+- END DO is not, so labeled DOs are still a thing.
+
+- IMPLICIT NONE is available.
+
+- There is a $INCLUDE directive.
+
+- Semicolon starts an end-of-line comment.
+
+- Start options:
+
+  - BATCH, HOL, SYNTAX, TCOM.
+  - N/ALST, N/COMP, N/DEBUG, N/LIST, N/OPTIMIZE, N/TRACE, N/XREF.
+
+  Some of these can also be specified in FORTRAN file with $ in column
+  zero, e.g. $BATCH, $DEBUG. But no option to forbid Holleriths or
+  implicit typing.
+
+- UFLS.M95 Appendix D "Usage and Descriptionof DEBUG/32". Refers to
+  "compiler options" DEBUG and NDEBUG.
+
+- See IUG-214 MULTI FILE SEARCH for example of inline assembly. (Also
+  "FORTRAN V Level 2 Compiler Functional Spec" section 5.3.2.5b. Inline
+  assembly goes between $ASSM and $FORT.)
+
 - Also has a wildcard matcher / directory reader without using CSS.
 
 
