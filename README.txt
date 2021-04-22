@@ -40,10 +40,10 @@ Contents :-
    SYS:/17	MEDIT, a full screen editor
    SYS:/165	Micro EMACS, a full screen editor, needs termcap setup
 
-   Unfortunately, there are  no COBOL or RPG tapes. (Not  sure if anyone
-   will miss  RPG.) Reliance ECM  (transaction monitor) and  spooler are
-   there, but I don't know how to get them working. Again, the available
-   documentation is somewhat sparse.
+   Sadly, the other two languages, COBOL and RPG, are nowhere to be found.
+   Reliance ECM (transaction monitor) and  spooler are on the disk, but I
+   don't know how to get them working. Again, available documentation is
+   rather scarce.
 
    
 Startup :-
@@ -79,6 +79,16 @@ Startup :-
       no longer  a native version of  expect. Windows 10 users  might be
       able  to run  it in  the  "Windows Subsystem  for Linux".  Another
       option is to use Cygwin or MobaXterm. Anyway, YMMV.
+
+   SimH Classic
+
+      If you want  to use Bob Supnik's "Classic" SimH,  which comes with
+      many Linux distributions,  I have added a  little file, supnik.ini
+      without any of  the unsupported/unavailable SEND/EXPECT sequences.
+      OS32-FTPd takes care of the OS/32  startup sequence for you if you
+      are using Classic.  But if you are running without  the FTP server
+      (e.g. in Microsoft Windows), then you  will have to type SET TIME,
+      MARK DSC4:,ON and STARTUP yourself.
 
 
 Remote logins (aka. MTM) :-
@@ -120,7 +130,7 @@ Remote logins (aka. MTM) :-
    SIGNON wilma,25,user1        C programming using the 'cc' command,
    SIGNON barney,25,user1       and for general OS/32 commands.
 
-   SIGNON mtm,255,pass1      -- note account 255 for MTM user admin
+   SIGNON mtm,255,pass1      -- use account 255 for MTM user admin only
 
 
 Basic file handling commands :-
@@ -182,9 +192,9 @@ Program development (aka. EOU -- under MTM only) :-
     - Log back into your kicked-off MTM sessions
     - Do not try to COMPILE or LINK in more than one session
 
-    That  said, I  have  'hacked'  the EOUINIT  command  to prevent  you
-    inadvertently  using EOU  unless you  are logged  in under  the name
-    'EOU'.
+    That said,  I have  'sabotaged' the EOUINIT  command to  prevent you
+    inadvertently using  EOU in more than  one session.  To use EOU, you
+    must signon as 'EOU'.
 
     - SIGNON EOU,99,xyzzy   assuming you have created an account 99 with
                             password xyzzy using the ACTUTY command in
@@ -201,9 +211,12 @@ Program development (aka. EOU -- under MTM only) :-
    HELP *		help
    HELP FORT		help about the Fortran language environment
    HELP PASCAL		help about the Pascal language environment
-   HELP C		help about the Whitesmiths C language environment
    HELP CAL		help about the CAL/32 language environment
    HELP MACRO		help about the MACRO/32 language environment
+   HELP EDIT 		help about the starting the EDIT/32 line editor
+   HELP COMPILE         help about compiling a file
+   HELP LINK            help about linking, or task establishing
+   HELP EXEC            help about executing your program
 
 
 Whitesmiths C has a convenient alternative to EOU :-
@@ -225,9 +238,9 @@ Switching 'directories' :-
    SET GROUP n		set current group to n (also like cd command)
    VOLUME fred    	set current user device to FRED (also like cd)
    VOLUME sys     	set current user device back to SYS
-   DIR /P               list PRIVATE files (cf. SET PRIVATE)
-   DIR /G		list GROUP files (cf. SET GROUP)
-   DIR /S               list SYSTEM files (files owned by /0 account)
+   DISPLAY FILES ,/P    list PRIVATE files (cf. SET PRIVATE)
+   DISPLAY FILES ,/G	list GROUP files (cf. SET GROUP)
+   DISPLAY FILES ,/S    list SYSTEM files (files owned by /0 account)
 
 
 Some handy CSS scripts :-
@@ -255,6 +268,9 @@ To shutdown the system :-
    Go back to the operator console (SimH window)
    Type SHUTDOWN (a CSS file)
 
+   SimH Classic users: don't forget to MARK DSC4:,OFF before you hit
+   Ctrl/E to quit SimH.
+
 
 Operator commands :-
 
@@ -281,6 +297,8 @@ Useful SimH scripts (operator console only) :-
 
    !tclsh make-sim.tcl 25 *.ftn >wop   generate EXPECT/SEND sequences ...
    DO wop			      ... to upload *.ftn into account 25
+
+   Note: These only work with the new SimH 4.0, not SimH Classic.
 
 
 Using the FTP server (UNIX/Linux only) :-
@@ -326,9 +344,9 @@ Using the FTP server (UNIX/Linux only) :-
    cd iug/78		switch to account 78 on volume IUG
 
 
-Adding user accounts :-
+Account 255 -- adding user accounts :-
 
    SIGNON mtm,255,pass1
    ACTUTY		I've provided a handy summary of commands
-   LISTAUF users.auf	handy CSS if you've forgotten a password
+   LISTAUF USERS.AUF	in case you've forgotten your password
 
