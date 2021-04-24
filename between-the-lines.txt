@@ -316,17 +316,42 @@ FORTRAN VII:
 
 - Semicolon starts an end-of-line comment.
 
+- The default destination for both WRITE and PRINT is LU3.
+
+  WRITE *, 'Hello world'
+  PRINT *, 'Hello world'
+
+  By default this will (eventually) show up on the printer, but you can
+  also redirect LU3 to your terminal with an ASSIGN command:
+
+  LOAD prog
+  ASSIGN 3,CON:
+  START
+
+  FORTRAN makes much use of logical unit numbers for general I/O, so it
+  so it is a good idea to use an ancilliary .ASN file to ASSIGN any LUs
+  your program will be needing.  The EXEC command runs this file, if it
+  exists, before it starts your program.
+
+  BUILD prog.ASN
+  ASSIGN 0,inputs.csv
+  ASSIGN 1,output.txt
+  ASSIGN 3,CON:
+  ASSIGN 6,PR:
+  $EXIT
+  ENDB
+
+- UFLS.M95/12 Appendix D "Usage and Description of DEBUG/32" refers to
+  "compiler options" DEBUG and NDEBUG.
+
 - Start options:
 
   - BATCH, HOL, SYNTAX, TCOM.
   - N/ALST, N/COMP, N/DEBUG, N/LIST, N/OPTIMIZE, N/TRACE, N/XREF.
 
   Some of these can also be specified in FORTRAN file with $ in column
-  zero, e.g. $BATCH, $DEBUG. But no option to forbid Holleriths or
-  implicit typing.
-
-- UFLS.M95 Appendix D "Usage and Descriptionof DEBUG/32". Refers to
-  "compiler options" DEBUG and NDEBUG.
+  zero, e.g. $BATCH, $DEBUG. But there is no option to forbid implicit
+  typing to check that you haven't forgotten to use IMPLICIT NONE.
 
 - See IUG-214 MULTI FILE SEARCH for example of inline assembly. (Also
   "FORTRAN V Level 2 Compiler Functional Spec" section 5.3.2.5b. Inline
