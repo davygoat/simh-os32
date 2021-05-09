@@ -55,7 +55,7 @@ Startup :-
       git clone https://github.com/simh/simh.git
       cd simh
       make id32
-      cp id32 <wherever>
+      mv BIN/id32 ..
 
       Without FTP server:
 
