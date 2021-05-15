@@ -477,9 +477,6 @@ namespace eval OS32 {
 
       proc ::ftpd::command::PASS { sock pass } {
 
-         # Note: CheckNotAllowed not possible this early
-         CheckOperatorBusy $sock
-
          upvar #0 ::ftpd::$sock data
          upvar #0 ::OS32::mtmport mtmport
          upvar #0 ::OS32::config::numericlogins numericlogins
@@ -489,6 +486,17 @@ namespace eval OS32 {
          set user $data(user)
          set data(pass) $pass
          set data(acl) -vt
+
+         #
+         # There's no particular  reason we couldn't let  new clients in
+         # even though the operator is busy (we're not going to be using
+         # *send*  on the  console and  MTM auth  goes through  a telnet
+         # session). But it  makes sense to put up the  "do not disturb"
+         # sign  so  we're not  messing  up  the operator's  application
+         # prompts.
+         #
+
+         CheckOperatorBusy $sock
 
          #
          # Numeric logins  can be disabled  because they are  too easily
