@@ -316,22 +316,29 @@ FORTRAN VII:
 
 - Semicolon starts an end-of-line comment.
 
-- The default destination for both WRITE and PRINT is LU3.
+- The default destination for PRINT and WRITE is LU 3.
 
   WRITE *, 'Hello world'
   PRINT *, 'Hello world'
 
-  By default this will (eventually) show up on the printer, but you can
+  By default these will (eventually) show up on the printer, but you can
   also redirect LU3 to your terminal with an ASSIGN command:
 
   LOAD prog
   ASSIGN 3,CON:
   START
 
-  FORTRAN makes much use of logical unit numbers for general I/O, so it
-  so it is a good idea to use an ancilliary .ASN file to ASSIGN any LUs
-  your program will be needing.  The EXEC command runs this file, if it
-  exists, before it starts your program.
+- The TYPE statement always goes to LU 4, which defaults to the terminal:
+
+  TYPE *, 'Hello world'
+
+  You can ASSIGN 4 to a file, but lines will be indented by a single space
+  (i.e. Fortran carriage control, like a printer).
+
+- FORTRAN makes much use of logical unit numbers for general I/O, so it so
+  it is a good idea to use an ancilliary .ASN file to ASSIGN any LUs your
+  program will be needing.  The EXEC command runs this file, if it exists,
+  before it starts your program.
 
   BUILD prog.ASN
   ASSIGN 0,inputs.csv
@@ -344,7 +351,7 @@ FORTRAN VII:
 - UFLS.M95/12 Appendix D "Usage and Description of DEBUG/32" refers to
   "compiler options" DEBUG and NDEBUG.
 
-- Start options:
+- Start options are:
 
   - BATCH, HOL, SYNTAX, TCOM.
   - N/ALST, N/COMP, N/DEBUG, N/LIST, N/OPTIMIZE, N/TRACE, N/XREF.
@@ -357,7 +364,7 @@ FORTRAN VII:
   "FORTRAN V Level 2 Compiler Functional Spec" section 5.3.2.5b. Inline
   assembly goes between $ASSM and $FORT.)
 
-- Also has a wildcard matcher / directory reader without using CSS.
+- IUG-214 also has a wildcard matcher / directory reader without using CSS.
 
 
 FASTCHEK strings, possible start options?
