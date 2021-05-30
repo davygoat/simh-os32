@@ -13,6 +13,7 @@ dist::	os32doc.zip os32src.zip os32kit.zip
 FTPDOC=Adding\ an\ FTP\ server\ to\ your\ SimH\ project
 MANDOC=SimH\ OS32\ FTP\ Server\ User\ Guide
 PRGDOC=Program\ Development\ under\ OS32
+HLADOC=HLAL2\ High\ Level\ Assembler\ Language\ Macros
 
 FILES=README.txt OS32-FTPd os32.ini supnik.ini ftpd.config example.shadow.config *.sim *.tcl
 
@@ -52,12 +53,20 @@ doc::	pdf/1974\ -\ 32\ Bit\ Series\ Reference\ Manual.pdf                       
 	pdf/1985\ -\ OS32\ Operator\ Reference\ Manual.pdf                                                                 \
 	pdf/1985\ -\ OS32\ v8.1\ Internals\ Student\ Guide.pdf                                                             \
 	pdf/1985\ -\ OS32\ v8.1\ Software\ Installation\ Guide.pdf                                                         \
+	pdf/1985\ -\ $(HLADOC).pdf                                                                                         \
 	pdf/2016\ -\ Getting\ Started\ with\ Interdata\ OS32.pdf                                                           \
 	pdf/2020\ -\ Adding\ an\ FTP\ server\ to\ your\ SimH\ project.pdf
 
 pdf/2020\ -\ $(FTPDOC).pdf: doc/$(FTPDOC).odt
+	rm -f "$@"
 	libreoffice6.2 --convert-to pdf doc/$(FTPDOC).odt
 	mv $(FTPDOC).pdf pdf/2020\ -\ $(FTPDOC).pdf
+
+pdf/1985\ -\ $(HLADOC).pdf: doc/$(HLADOC).odt bookmarks/$(HLADOC).txt
+	rm -f "$@"
+	libreoffice6.2 --convert-to pdf doc/$(HLADOC).odt
+	-jpdfbookmarks --apply bookmarks/$(HLADOC).txt $(HLADOC).pdf --out "$@"
+	rm $(HLADOC).pdf
 
 pdf/1974\ -\ 32\ Bit\ Series\ Reference\ Manual.pdf: \
 			bookmarks/32\ Bit\ Series\ Reference\ Manual.txt
