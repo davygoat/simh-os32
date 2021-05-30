@@ -140,7 +140,9 @@ Quirky $DEFINE syntax for string functions:
 
   (Probably in the missing MTM manuals, but I got these from the IUG-104
    LIBTOOLS tape. Much more readable than the $DEFINE command. The Fortran
-   tape also has examples in EOU61F7.CSS/12.)
+   tape also has examples in EOU61F7.CSS/11. Interestingly, EOU62F7.CSS/11
+   does not use $LOCAL, so perhaps it was deprecated in favour of more
+   powerful but cumbersome $DEFINE syntax.)
 
     $LOCAL @name(length), @nam2(length), ...    (lowercase is ok)
     $SET @name = world                          (lowercase is ok)
@@ -348,8 +350,9 @@ FORTRAN VII:
   $EXIT
   ENDB
 
-- UFLS.M95/12 Appendix D "Usage and Description of DEBUG/32" refers to
-  "compiler options" DEBUG and NDEBUG.
+- UFLS.M95 (on Universal Fortran tape, Fortran VII Z) Appendix D "Usage
+  and Description of DEBUG/32" refers to "compiler options" DEBUG and
+  NDEBUG.
 
 - Start options are:
 

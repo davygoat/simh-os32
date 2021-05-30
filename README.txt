@@ -33,7 +33,6 @@ Contents :-
    is  lacking... The  two editors  have textfiles  that should  get you
    started.
 
-   SYS:/12	Fortran-VII universal compiler
    SYS:/14	Debugger
    SYS:/15	SORT/MERGE, may need COBOL for this
    SYS:/16	DMS/32 database management system, but lack documentation
