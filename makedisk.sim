@@ -42,7 +42,7 @@
    expect "FASTCHEK:END OF TASK" send "mark %ODEV%:,on\r";c
    send "\r"
    continue
-   goto bottom
+   goto :eof
 
 :usage
 
@@ -57,20 +57,18 @@
    echof "        something like DSC3 as the volume label, you will not be"
    echof "        able to mark it on."
    echof ""
-   goto bottom
+   goto :eof
 
 :trample
 
    echof "\n"
    echof "ERROR: File %FNAM% already exists. You don't want to trample on it."
    echof "\n"
-   goto bottom
+   goto :eof
 
 :badvol
 
    echof "\n"
    echof "ERROR: you can't use DSC3 or DSC5 as the volume label\n"
    echof "\n"
-
-:bottom
 

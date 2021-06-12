@@ -26,7 +26,7 @@
    echof ""
    echof " File not found: %1 or %FNAM%"
    echof ""
-   goto bottom
+   goto :eof
 
 :automate
 
@@ -34,7 +34,7 @@
    expect "\r\n*" send "mark %ODEV%:,off ; mark %ODEV%:,on\r";c
    send "\r"
    continue
-   goto bottom
+   goto :eof
 
 :usage
 
@@ -44,7 +44,5 @@
    echof " Note:  FILENAME is a file on the host."
    echof " Note:  DEVICE is DSC3 or DSC5, default is DSC3."
    echof ""
-   goto bottom
-
-:bottom
+   goto :eof
 

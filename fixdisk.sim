@@ -16,7 +16,7 @@
    expect "FASTCHEK:END OF TASK" send "mark dsc3:,on\r";c
    send "\r"
    continue
-   goto bottom
+   goto :eof
 
 :usage
 
@@ -25,7 +25,5 @@
    echof ""
    echof " Note:  FNAM must exists, and will be mounted on DSC3/DM1."
    echof ""
-   goto bottom
-
-:bottom
+   goto :eof
 
