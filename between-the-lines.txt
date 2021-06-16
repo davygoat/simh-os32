@@ -330,11 +330,11 @@ FORTRAN VII:
   ASSIGN 3,CON:
   START
 
-- The TYPE statement always goes to LU 4, which defaults to the terminal:
+- The TYPE statement goes to LU 5, which defaults to the terminal:
 
   TYPE *, 'Hello world'
 
-  You can ASSIGN 4 to a file, but lines will be indented by a single space
+  You can ASSIGN 5 to a file, but lines will be indented by a single space
   (i.e. Fortran carriage control, like a printer).
 
 - FORTRAN makes much use of logical unit numbers for general I/O, so it so
