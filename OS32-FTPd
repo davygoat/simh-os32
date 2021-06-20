@@ -1741,14 +1741,14 @@ namespace eval OS32 {
 
 ;######################################################################
    #
-   # SimH V3 "Classic" support
+   # SimH V3 "Classic" or V4 "github" support
    #
    # Bob Supnik's Interdata simulator does not have V4's new EXPECT/SEND
    # commands.  If we're using V3, we'll handle the prompts in Expect to
    # save ourselves a bit of inconvenience.
    #
 
-proc HandleSimH_V3_Startup {} {
+proc HandleSimH_Startup {} {
 
    global simh
    array set simh {
@@ -1758,10 +1758,13 @@ proc HandleSimH_V3_Startup {} {
 
    expect {
       "Interdata 32b simulator V4" {
+         TrafficLight green "SimH V4 \"github\""
+         send "do os32.ini\r"
          return
       }
       "Interdata 32b simulator V3" {
-         TrafficLight green "BEGIN SimH V3 \"Classic\" boot automation"
+         send "do supnik.ini\r"
+         TrafficLight green "SimH V3 \"Classic\" boot automation (begin)"
          array set simh {
             classic 1
             needfastchek 0
@@ -1810,14 +1813,14 @@ proc HandleSimH_V3_Startup {} {
    send "startup\r"
    expect "MTMAST"
    expect -ex "*"
-   TrafficLight green "END SimH V3 \"Classic\" boot automation"
+   TrafficLight green "SimH V3 \"Classic\" boot automation (end)"
 }
 
 proc HandleSimH_V3_Shutdown {} {
 
    global simh
 
-   TrafficLight green "BEGIN SimH V3 \"Classic\" shutdown"
+   TrafficLight green "SimH V3 \"Classic\" shutdown (begin)"
    expect -ex "*" ; send "mark dsc4:,off\r"
    expect -ex "*" ; send "display devices\r"
    expect {
@@ -1833,7 +1836,7 @@ proc HandleSimH_V3_Shutdown {} {
       expect "sim> " ; send "quit\r\n"
    }
    puts stderr "quit"
-   TrafficLight green "END SimH V3 \"Classic\" shutdown"
+   TrafficLight green "SimH V3 \"Classic\" shutdown (end)"
 }
 
 
@@ -1865,8 +1868,8 @@ namespace eval OS32 {
    namespace eval :: {
       puts stderr ""
       catch { exec killall -9 [file tail $::OS32::config::simulator] }
-      spawn $::OS32::config::simulator $::OS32::config::inifile
-      HandleSimH_V3_Startup
+      spawn $::OS32::config::simulator
+      HandleSimH_Startup
    }
 
    unset fd
