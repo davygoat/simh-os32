@@ -7,6 +7,7 @@ pdf/
 *.lst
 *.zip
 .~*
+css/
 delme*
 wop
 wot
