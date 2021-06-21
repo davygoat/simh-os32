@@ -71,7 +71,6 @@ namespace eval OS32 {
       variable  ostype        "OS/32 Version 8.1"
       variable  contact       "$tcl_platform(user)@[info hostname]"
       variable  simulator     "./id32"
-      variable  inifile       "os32.ini"
       variable  timeout       10
       variable  defaultvolume SYS:
       variable  debugconfig   true
@@ -1758,14 +1757,13 @@ proc HandleSimH_Startup {} {
 
    expect {
       "Interdata 32b simulator V4" {
-         TrafficLight green "SimH V4 \"github\""
-         send "do os32.ini\r"
-         return
+         array set simh {
+            inifile "os32.ini"
+         }
       }
       "Interdata 32b simulator V3" {
-         send "do supnik.ini\r"
-         TrafficLight green "SimH V3 \"Classic\" boot automation (begin)"
          array set simh {
+            inifile "supnik.ini"
             classic 1
             needfastchek 0
             needcont 0
@@ -1774,46 +1772,71 @@ proc HandleSimH_Startup {} {
       }
    }
 
-   expect "ENTER DATE AND TIME" ; expect -ex "*"
-   set now [clock format [clock seconds] -format %m/%d/%y,%H:%M]
-   send "set time $now\r"
-   set simh(timesent) 1
-
-   expect -ex "*" ; send "mark dsc4:,on\r"
-
-   expect {
-      "NOFF-ERR" {
-         set simh(needfastchek) 1
-      }
-      -ex "*" {
-         set simh(needfastchek) 0
-      }
+   upvar #0 ::OS32::mtmport mtmport
+   upvar #0 ::OS32::config::vt100 vt100
+   set fd [ open $simh(inifile) r ]
+   set schluck [ read $fd ]
+   if { [regexp -nocase {\s*att[^ ]* +pas +([0-9]+)} $schluck -> mtmport] } {
+      puts stderr "\n$vt100(green)PAS device for MTM authentication on port $mtmport$vt100(normal)"
+   } else {
+      set mtmport -1
+      puts stderr "\n$vt100(red)Cannot find PAS attach command -> no MTM authentication$vt100(normal)"
    }
+   close $fd
+   unset fd
+   unset schluck
 
-   if { $simh(needfastchek) } {
-      expect -ex "*" ; send "mark dsc4:,on,protect\r"
-      expect -ex "*" ; send "load sys:fastchek\r"
-      expect -ex "*" ; send "mark dsc4:,off\r"
-      expect -ex "*" ; send "start ,ch=dsc4:,nor,ext,li=con:\r"
-      expect {
-         "FASTCHEK:END OF TASK" {
-            set simh(needcont) 0
-         }
-         "FASTCHEK:TASK PAUSED" {
-            set simh(needcont) 1
-         }
-      }
-      if { $simh(needcont) } {
-         expect -ex "*" ; send "\$continue\r"
-      }
+   if { $simh(classic) } {
+
+      send "do $simh(inifile)\r"
+      TrafficLight green "SimH V3 \"Classic\" boot automation (begin)"
+
+      expect "ENTER DATE AND TIME" ; expect -ex "*"
+      set now [clock format [clock seconds] -format %m/%d/%y,%H:%M]
+      send "set time $now\r"
+      set simh(timesent) 1
+
       expect -ex "*" ; send "mark dsc4:,on\r"
-      expect -ex "*"
-   }
 
-   send "startup\r"
-   expect "MTMAST"
-   expect -ex "*"
-   TrafficLight green "SimH V3 \"Classic\" boot automation (end)"
+      expect {
+         "NOFF-ERR" {
+            set simh(needfastchek) 1
+         }
+         -ex "*" {
+            set simh(needfastchek) 0
+         }
+      }
+
+      if { $simh(needfastchek) } {
+         expect -ex "*" ; send "mark dsc4:,on,protect\r"
+         expect -ex "*" ; send "load sys:fastchek\r"
+         expect -ex "*" ; send "mark dsc4:,off\r"
+         expect -ex "*" ; send "start ,ch=dsc4:,nor,ext,li=con:\r"
+         expect {
+            "FASTCHEK:END OF TASK" {
+               set simh(needcont) 0
+            }
+            "FASTCHEK:TASK PAUSED" {
+               set simh(needcont) 1
+            }
+         }
+         if { $simh(needcont) } {
+            expect -ex "*" ; send "\$continue\r"
+         }
+         expect -ex "*" ; send "mark dsc4:,on\r"
+         expect -ex "*"
+      }
+
+      send "startup\r"
+      expect "MTMAST"
+      expect -ex "*"
+      TrafficLight green "SimH V3 \"Classic\" boot automation (end)"
+
+   } else {
+
+      TrafficLight green "SimH V4 \"github\""
+      send "do $simh(inifile)\r"
+   }
 }
 
 proc HandleSimH_V3_Shutdown {} {
@@ -1855,25 +1878,12 @@ namespace eval OS32 {
    StartFTP
    unset startup
 
-   set fd [ open $::OS32::config::inifile r ]
-   set schluck [ read $fd ]
-   if { [regexp -nocase {\s*att[^ ]* +pas +([0-9]+)} $schluck -> mtmport] } {
-      puts stderr "\n$vt100(green)PAS device for MTM authentication on port $mtmport$vt100(normal)"
-   } else {
-      set mtmport -1
-      puts stderr "\n$vt100(red)Cannot find PAS attach command -> no MTM authentication$vt100(normal)"
-   }
-   close $fd
-
    namespace eval :: {
       puts stderr ""
       catch { exec killall -9 [file tail $::OS32::config::simulator] }
       spawn $::OS32::config::simulator
       HandleSimH_Startup
    }
-
-   unset fd
-   unset schluck
 
    while {1} {
       set adduser 0
