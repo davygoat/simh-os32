@@ -51,7 +51,7 @@ Chapter 2 - Loading OS/32/23,Black,notBold,notItalic,closed,FitPage
 		2.6.2 Modification of Nonconsole Device Addresses/79,Black,notBold,notItalic,open,FitPage
 		2.6.3 Modification of the Selector Channel (SELCH) Address/80,Black,notBold,notItalic,open,FitPage
 		2.6.4 Modification of the Controller Address/80,Black,notBold,notItalic,open,FitPage
-		2.6.5 Modificatio of the Console Device Name/Type/81,Black,notBold,notItalic,open,FitPage
+		2.6.5 Modification of the Console Device Name/Type/81,Black,notBold,notItalic,open,FitPage
 Chapter 3 - Console Use and Operator Commands/82,Black,notBold,notItalic,closed,FitPage
 	3.1 Introduction/82,Black,notBold,notItalic,open,FitPage
 	3.2 ALLOCATE command/83,Black,notBold,notItalic,open,FitPage
