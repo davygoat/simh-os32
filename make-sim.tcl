@@ -53,7 +53,7 @@ foreach arg $argv {
    } else {
        puts "   # [string toupper $fnam]"
    }
-   puts "   expect \"\\r\\n*\" send \"build $fnam\\r\";c"
+   puts "   expect \"\\r\\n*\" send \"alloc $fnam,in,80 ; build $fnam,append\\r\";c"
    foreach line [split $schluck \n] {
       set line [string trimright $line]
       regsub -all {[\\"]} $line {\\&} line
