@@ -312,7 +312,7 @@ FORTRAN VII:
 
 - END DO is not, so labeled DOs are still a thing.
 
-- IMPLICIT NONE is available.
+- IMPLICIT NONE is available, but no start option to make it the default.
 
 - There is a $INCLUDE directive.
 
@@ -356,8 +356,35 @@ FORTRAN VII:
 
 - Start options are:
 
-  - BATCH, HOL, SYNTAX, TCOM.
-  - N/ALST, N/COMP, N/DEBUG, N/LIST, N/OPTIMIZE, N/TRACE, N/XREF.
+  BABORT
+  BASE
+  CAL
+  CONTIN
+  DICT
+  ELIST
+  HOLL
+  INLIB
+  LABEL
+  LCNT
+  N/ALST
+  N/APU
+  N/BATCH
+  N/COMP
+  N/DEBUG
+  N/INLINE
+  N/LIST
+  N/OPTIMIZE
+  N/TRACE
+  N/XREF
+  NELIST
+  NMAP
+  NRXT
+  NTEST
+  NWARN
+  SYNTAX
+  TCOM
+  TEST
+  XMAP
 
   Some of these can also be specified in FORTRAN file with $ in column
   zero, e.g. $BATCH, $DEBUG. But there is no option to forbid implicit
