@@ -272,27 +272,40 @@ MTM privileges :
 
   (Trial and error, using MTM PRIVILEGE command)
 
-- 0000  no privileges             -- bog standard user
-- F...  can run private CSS       -- good for isolated developer
-- .F.,  SET PRIVATE and SET GROUP -- extended account access (can do damage)
-- ..F.  privileged?               -- can do serious damage
-- ...F  another privilege?        -- can do serious damage
-- FFFF  every privilege           -- can do serious damage
+- 0000 0000  no privileges             -- bog standard user
+- 0000 F...  can run private CSS       -- good for isolated developer
+- 0000 .F.,  SET PRIVATE and SET GROUP -- can do damage
+- 0000 ..F.
+- 0000 ...F
+- F... ....
+- .F.. ....
+- ..F. ....
+- ...F ....  EXTENDED ACCOUNT ACCESS   --
+- FFFF FFFF  everything?
 
- The useful ones seem to be:
+  The useful ones seem to be:
 
- 0      bog standard user, can write code, but not own CSS
- f000   isolated developer limited to private account, with CSS
- ff00   system programmer with extended account access, dangerous
- fff0   full privileges, not recommended
+  0      bog standard user, can write code, but not own CSS
+  f000   isolated developer limited to private account, with CSS
+  ff00   system programmer with SET PRIVATE and SET GROUP privilege, risky
+  fff0   more privileges? not recommended
 
- Also note left nybble:
+  Also note left nybble:
 
- 0ff00  isolated developer as above, cannot edit /S files, but can SET
-        PRIVATE and then edit them as if private (like sudo)
- ff000  no SET PRIVATE, but can edit /S files directly, dangerous.
+  0ff00  isolated developer as above, cannot edit /S files, but can SET
+         PRIVATE and then edit them as if private (like sudo)
+  fff00  EXTENDED ACCOUNT ACCESS. Tasks can fopen "inform.css/17" direct,
+         if linked with OPTION ACP. MTM has to use SET PRIVATE or SET
+         GROUP for that, but can EDIT/32 can save /S files directly.
+  ff000  EXTENDED ACCOUNT ACCESS without SET PRIVATE
 
 - Others? Which bits mean what? Can SET PRIVATE and SET GROUP be decoupled?
+
+  Note: On programs with extended account access, see C manual p. A-3,
+  but don't mess with fsacp global. Program must be linked with OPTION ACP
+  in the link control file (.LNK file). An ACP enabled program can open
+  a file with a numeric file class, e.g. "inform.css/17", if the user has
+  extended account access privilege.
 
 
 CAL and MACRO:
