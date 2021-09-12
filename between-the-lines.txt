@@ -235,8 +235,8 @@ LIBLDR commands:
 
     (LIBLDR.TSK hexdump records 30-31)
 
-- PB, LC, BC, TO, BI, XO, GO, EN, PA, OU, RO, MA, AM, LI, LO
-  LF ,ED, RW, FF, BF, FR, BR, WF, FI, LA, DU, CO, TA, LG
+  AM, BC, BF, BI, BR, CO, DU, ED, EN, FF, FI, FR, GO, LA, LC,
+  LF, LG, LI, LO, MA, OU, PA, PB, RO, RW, TA, TO, WF, XO
 
 
 BREAK :
