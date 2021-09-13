@@ -307,6 +307,34 @@ MTM privileges :
   a file with a numeric file class, e.g. "inform.css/17", if the user has
   extended account access privilege.
 
+LINK options:
+
+  (From linker produced map file.)
+
+  UTASK             user task (default)
+  ETASK             executive task
+  N/ACCOUNTING      disable accounting
+  N/ACPRIVILEGE     extended account privilege
+  N/AFPAUSE
+  N/APCONTROL
+  N/APMAPPING
+  N/APUONLY         auxiliary processing unit
+  N/COMMUNICATE
+  N/CONTROL
+  N/DFLOAT          double precision floating point
+  N/DISC
+  N/DTABLES
+  N/FLOAT           floating point
+  N/INTERCEPT       SVC intercepts
+  N/KEYCHECK
+  N/RESIDENT        stays in memory
+  N/ROLL            swappable
+  N/SEGMENTED       using overlays?
+  N/SVCPAUSE        disable SVC pausing
+  N/UNIVERSAL       3200 series
+  N/VFC
+  N/XSVC1
+
 
 CAL and MACRO:
 
