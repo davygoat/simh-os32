@@ -307,6 +307,18 @@ MTM privileges :
   a file with a numeric file class, e.g. "inform.css/17", if the user has
   extended account access privilege.
 
+- MTMSTRUC.MLB
+
+  PRV.ELOM EQU PRV.COMM!PRV.CONM!PRV.ETLM
+  PRV.ACTB EQU 8                   ALLOW ACCT# FOR ASSIGN,REN,CSS,LOAD
+  PRV.ACPM EQU Y'00080000'
+  PRV.OPTM EQU Y'0000000E'         MASK OF THESE ACROSS A HWD
+  PRV.CSSB EQU 18                  ALLOW PRIVATE CSS CALLS
+  PRV.PRIB EQU 21                  ALLOW PRIOR 1-11 FROM PRIVATE CSS
+  PRV.PRVM EQU Y'00000100'         (SET PR/GR;SEE ALL BATCH;+MORE)
+  PRV.SMNB EQU 26                  PE MUNICH EXCLUSIVE
+  PRV.255M EQU Y'FFFFFFFF'         ACCOUNT 255 PRIVILEGES
+
 LINK options:
 
   (From linker produced map file.)
@@ -343,6 +355,8 @@ CAL and MACRO:
 
 - Labels and names must start in column zero, "commands" must NOT start in
   column zero (must be preceded by at least one space).
+
+- Column 72 is continuation char.
 
 
 FORTRAN VII:
