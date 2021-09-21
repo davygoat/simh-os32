@@ -239,6 +239,21 @@ LIBLDR commands:
   LF, LG, LI, LO, MA, OU, PA, PB, RO, RW, TA, TO, WF, XO
 
 
+MLU32 commands:
+
+  GET fd               e.g. GET mtmstruc.mlb
+  DIRECTORY            list entries
+  LIST [fd] [,entry]   e.g. SAVE priv.mac,$PRIV - default fd is CON:
+  INCLUDE fd
+  DELETE entry         entries are case sensitive
+  ESTABLISH fd         e.g. ESTABLISH fred.mlb
+  PAUSE
+  ABEND
+  SAVE *               save
+  SNAP
+  BF/FF/REW/RW/RFM     tape commands
+
+
 BREAK :
 
 - Hit telnet escape char, Ctrl/]
@@ -511,7 +526,6 @@ Some preinstalled programs :
 - VCF: Virtual Console Faciltiy
 - FXH: Series 7000/3200 File Transfer Handler
 - IPCARCH: IPC Archive Utility
-- MLU32: Macro Library Utility
 
 
 Problems :
