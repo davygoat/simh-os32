@@ -251,7 +251,7 @@ MLU32 commands:
   ABEND
   SAVE *               save
   SNAP
-  BF/FF/REW/RW/RFM     tape commands
+  BF/FF/REW/RW/WFM     tape commands
 
 
 BREAK :
