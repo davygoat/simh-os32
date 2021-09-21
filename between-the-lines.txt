@@ -274,7 +274,7 @@ MTM privileges :
 
 - 0000 0000  no privileges             -- bog standard user
 - 0000 F...  can run private CSS       -- good for isolated developer
-- 0000 .F.,  SET PRIVATE and SET GROUP -- can do damage
+- 0000 .F.,  SET PRIVATE and SET GROUP -- can do damage (SET PRIVATE 0)
 - 0000 ..F.
 - 0000 ...F
 - F... ....
@@ -296,12 +296,10 @@ MTM privileges :
          PRIVATE and then edit them as if private (like sudo)
   fff00  EXTENDED ACCOUNT ACCESS. Tasks can fopen "inform.css/17" direct,
          if linked with OPTION ACP. MTM has to use SET PRIVATE or SET
-         GROUP for that, but can EDIT/32 can save /S files directly.
+         GROUP for that, but EDIT/32 can save /S files directly.
   ff000  EXTENDED ACCOUNT ACCESS without SET PRIVATE
 
-- Others? Which bits mean what? Can SET PRIVATE and SET GROUP be decoupled?
-
-  Note: On programs with extended account access, see C manual p. A-3,
+- Note: On programs with extended account access, see C manual p. A-3,
   but don't mess with fsacp global. Program must be linked with OPTION ACP
   in the link control file (.LNK file). An ACP enabled program can open
   a file with a numeric file class, e.g. "inform.css/17", if the user has
@@ -318,6 +316,32 @@ MTM privileges :
   PRV.PRVM EQU Y'00000100'         (SET PR/GR;SEE ALL BATCH;+MORE)
   PRV.SMNB EQU 26                  PE MUNICH EXCLUSIVE
   PRV.255M EQU Y'FFFFFFFF'         ACCOUNT 255 PRIVILEGES
+
+- Which bits mean what? According to MTMSTRUC.MLB:
+
+  Bit  8  0x..8.....  Allow account number for ASSIGN, RENAME, CSS, LOAD
+  Bit 12  0x...8....  ACP privilege (extended account access)
+  Bit 18  0x....2...  Allow private CSS files
+  Bit 21  0x.....4..  Allow priority 1-11 from private CSS
+  Bit 23  0x.....1..  Allow SET PRIVATE and SET GROUP
+  Bit 26  0x......2.  Exclusive to PE Munich
+
+                         (21)
+                        PRIOR
+                         1-11
+                          CSS
+                            | (23)
+          (8)         (18)  | SET (26)
+          ACT  (12)    OWN  | PRV PE
+           NO   ACP    CSS  | GRP MUNICH
+            |    |      |   | |   |
+            v    v      v   v v   v
+  0000 0000 1000 1000 0010 0101 0010 0000
+
+  Can SET PRIVATE and SET GROUP be decoupled? It seems not.
+
+  Other privilege bits?
+
 
 LINK options:
 
@@ -346,6 +370,10 @@ LINK options:
   N/UNIVERSAL       3200 series
   N/VFC
   N/XSVC1
+
+  See also CLU.TSK (Compatible Link Utility), which has built-in help;
+  and PATH.TSK, which also has help. Both programs are mentioned in
+  Don Stalkowski's write-up.
 
 
 CAL and MACRO:
