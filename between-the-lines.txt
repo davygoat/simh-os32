@@ -332,30 +332,75 @@ MTM privileges :
   PRV.SMNB EQU 26                  PE MUNICH EXCLUSIVE
   PRV.255M EQU Y'FFFFFFFF'         ACCOUNT 255 PRIVILEGES
 
-- Which bits mean what? According to MTMSTRUC.MLB:
+- Which bits mean what? According to MTMSTRUC.MLB
 
-  Bit  8  0x..8.....  Allow account number for ASSIGN, RENAME, CSS, LOAD
-  Bit 12  0x...8....  ACP privilege (extended account access)
-  Bit 18  0x....2...  Allow private CSS files
-  Bit 21  0x.....4..  Allow priority 1-11 from private CSS
-  Bit 23  0x.....1..  Allow SET PRIVATE and SET GROUP
-  Bit 26  0x......2.  Exclusive to PE Munich
+  *load mlu32
+  *start
+  MLU >list con:,$PRIV:
+           MACRO
+           $PRIV
+  PRV.COMB EQU   0                   (ALLOW) SVC 6 COMMS
+  PRV.COMM EQU   Y'80000000'
+  PRV.ETLB EQU   4                   (ALLOW) LOAD ETASKS
+  PRV.ETLM EQU   Y'08000000'
+  PRV.CONB EQU   5                   (ALLOW) SVC 6 CONTROL
+  PRV.CONM EQU   Y'04000000'
+  PRV.ELOM EQU   PRV.COMM!PRV.CONM!PRV.ETLM
+  PRV.TIPB EQU   6                   PE MUNICH EXCLUSIVE
+  PRV.TIPM EQU   Y'02000000'
+  PRV.DLNB EQU   7                   PE MUNICH EXCLUSIVE
+  PRV.DLNM EQU   Y'01000000'
+  PRV.ACTB EQU   8                   ALLOW ACCT# FOR ASSIGN,REN,CSS,LOAD
+  PRV.ACTM EQU   Y'00800000'
+  PRV.GRPB EQU   9                   ALLOW SET GROUP COMMAND
+  PRV.GRPM EQU   Y'00400000'
+           SPACE
+  PRV.ACPB EQU   12                  ALLOW ACCT PRIVS TO RUN
+  PRV.ACPM EQU   Y'00080000'
+  PRV.BARB EQU   13                  ALLOW BARE DISC ACCESS PRIVS
+  PRV.BARM EQU   Y'00040000'
+  PRV.UNVB EQU   14                  ALLOW TO BE UNIVERSAL COMMS
+  PRV.UNVM EQU   Y'00020000'
+  PRV.OPTM EQU   Y'0000000E'         MASK OF THESE ACROSS A HWD
+           SPACE
+  PRV.ENVB EQU   16                  ALLOW "ENV=" IN SIGNON
+  PRV.ENVM EQU   Y'00008000'
+  PRV.DFSB EQU   17                  ALLOW SEE &.. AND @.. FILENAMES
+  PRV.DFSM EQU   Y'00004000'
+  PRV.CSSB EQU   18                  ALLOW PRIVATE CSS CALLS
+  PRV.CSSM EQU   Y'00002000'
+  PRV.PWDB EQU   19                  ALLOW CHANGE PASSWORD
+  PRV.PWDM EQU   Y'00001000'
+           SPACE
+  PRV.RENB EQU   20                  ALLOW RENAME TO /G, /S
+  PRV.RENM EQU   Y'00000800'
+  PRV.PRIB EQU   21                  ALLOW PRIOR 1-11 FROM PRIVATE CSS
+  PRV.PRIM EQU   Y'00000400'
+  PRV.BPRB EQU   22                  ALLOW BATCH PRIO=INTERACTIVE PRIO
+  PRV.BPRM EQU   Y'00000200'
+  PRV.PRVB EQU   23                  ALLOW PRIVILEGED USER
+  PRV.PRVM EQU   Y'00000100'         (SET PR/GR;SEE ALL BATCH;+MORE)
+           SPACE
+  PRV.FGRB EQU   24                  ALLOW USE OF GENERAL $FGRND INTERF
+  PRV.FGRM EQU   Y'00000080'
+  PRV.HSPB EQU   25                  ALLOW $HASP INTERFACE
+  PRV.HSPM EQU   Y'00000040'
+  PRV.SMNB EQU   26                  PE MUNICH EXCLUSIVE
+  PRV.SMNM EQU   Y'00000020'
+  PRV.RMTB EQU   27                  PE MUNICH EXCLUSIVE
+  PRV.RMTM EQU   Y'00000010'
+           SPACE 2
+  PRV.ACLM EQU   Y'0000000F'         MASK FOR ACCTG USER CLASS
+  PRV.255M EQU   Y'FFFFFFFF'         ACCOUNT 255 PRIVILEGES
+           MEND
+  MLU >list priv.mac,$PRIV
+  1 MACRO LISTED TO NEW FILE SYS:PRIV.MAC
+  MLU >end
 
-                         (21)
-                        PRIOR
-                         1-11
-                          CSS
-                            | (23)
-          (8)         (18)  | SET (26)
-          ACT  (12)    OWN  | PRV PE
-           NO   ACP    CSS  | GRP MUNICH
-            |    |      |   | |   |
-            v    v      v   v v   v
-  0000 0000 1000 1000 0010 0101 0010 0000
+  Can SET PRIVATE and SET GROUP be decoupled? Maybe!
 
-  Can SET PRIVATE and SET GROUP be decoupled? It seems not.
-
-  Other privilege bits?
+  0x00000100  SET GR/PR  (SET PRIVATE with implied SET GROUP)
+  0x00400000  SET GROUP  (SET GROUP only)
 
 
 LINK options:
