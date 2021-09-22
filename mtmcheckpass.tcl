@@ -26,7 +26,7 @@ if { ![string is integer $acct] || $acct < 0 || $acct > 65535 } {
 
 #
 # Password:   Basically,  anything   goes   except   blanks  commas   or
-# semilcolons. But also  I'm weeding out high and low  values, and shell
+# semicolons. But also  I'm weeding out high and low  values, and shell
 # escape characters.
 #
 set pass [lindex $argv 2]
