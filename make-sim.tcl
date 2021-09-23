@@ -48,6 +48,7 @@ foreach arg $argv {
    set fd [open $fnam r]
    set schluck [string trimright [read $fd]]
    set fnam [file tail $fnam]
+   if { [string first $fnam .] == -1 } { append fnam . }
    if { $acct } {
        puts "   # [string toupper $fnam]/$acct"
    } else {
