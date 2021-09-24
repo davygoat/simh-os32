@@ -436,6 +436,32 @@ LINK options:
   Don Stalkowski's write-up.
 
 
+Whitesmiths C bugs:
+
+- fgets() does not return NULL at end of file. Workaround is to precede
+  with feof() call.
+
+- atoi() does not work. Use my fix.
+
+- Identifiers and functions are significant to eight chars only, not
+  just for externals. Example: teststricmp and teststristr collide
+  with an error message such as "function redefined s2" where "s2" is
+  one of the *parameters* to the second function. Adding static does
+  not help.
+
+- The headers are not #ifdef protected, and symbolic constants like
+  READ and IBINARY are defined in more than one place, leading to
+  warnings about the constants being redefined.
+
+- Some functions are in LIBU (UNIX V7), others in LIBW (IDRIS compat).
+  You cannot use fread() on an fopen()'d file because the two libraries
+  are not always compatible.
+
+- rename() is called mv(), and does not appear in the manual.
+
+- The manual is for a later version than the extant compiler/library.
+
+
 CAL and MACRO:
 
 - CAL allows lowercase, but MACRO seems to be case sensitive, so probably
