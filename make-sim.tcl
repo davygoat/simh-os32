@@ -49,12 +49,9 @@ foreach arg $argv {
    set schluck [string trimright [read $fd]]
    set fnam [file tail $fnam]
    if { [string first . $fnam] == -1 } { append fnam . }
-   if { $acct } {
-       puts "   # [string toupper $fnam]/$acct"
-   } else {
-       puts "   # [string toupper $fnam]"
-   }
-   puts "   expect \"\\r\\n*\" send \"alloc $fnam,in,80 ; build $fnam,append\\r\";c"
+   puts "   # [string toupper $fnam]/$acct"
+   puts "   expect \"\\r\\n*\" send \"***** UPLOADING ***** [string toupper $fnam]/$acct *****\\r\";c"
+   puts "   expect \"\\r\\n*\" send \"xdelete z.z ; alloc z.z,in,80 ; build z.z,append\\r\";c"
    foreach line [split $schluck \n] {
       set line [string trimright $line]
       regsub -all {[\\"]} $line {\\&} line
@@ -63,13 +60,7 @@ foreach arg $argv {
       puts "   expect \".CMDP>\" send \"$line\\r\";c"
    }
    puts "   expect \".CMDP>\" send \"endb\\r\";c"
-   if { $acct } {
-      if { $makeithappen } {
-         puts "   expect \"\\r\\n*\" send \"xdelete $fnam/$acct ; rename $fnam,$fnam/$acct\\r\";c"
-      } else {
-         puts "   expect \"\\r\\n*\" send \"rename $fnam,$fnam/$acct\\r\";c"
-      }
-   }
+   puts "   expect \"\\r\\n*\" send \"xdelete $fnam/$acct ; rename z.z,$fnam/$acct\\r\";c"
 }
 
 if { $makeithappen } {
