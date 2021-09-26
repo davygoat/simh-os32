@@ -1450,7 +1450,8 @@ namespace eval OS32 {
                puts stderr "$vt100(green)Sourcing ftpd.config$vt100(normal)"
                source ftpd.config
             } else {
-               puts stderr "$vt100(red)Ignoring ftpd.config, must be chmod 600 or 400$vt100(normal)"
+               puts stderr "$vt100(red)ftpd.config must be chmod 600 or 400$vt100(normal)"
+               exit 1
             }
          } else {
             puts stderr "$vt100(green)No ftpd.config$vt100(normal)"
