@@ -437,12 +437,17 @@ LINK options:
   Don Stalkowski's write-up.
 
 
-Whitesmiths C bugs:
+Whitesmiths C bugs/quirks:
 
 - fgets() does not return NULL at end of file. Workaround is to precede
   with feof() call.
 
 - atoi() does not work. Use my fix.
+
+- Adjacent string literals [printf ("Hello " "world\n")] are not
+  concatenated, but might be an ANSI C feature. For multi line strings,
+  end the line with backslash and continue on the next line (messy
+  indentation).
 
 - Identifiers and functions are significant to eight chars only, not
   just for externals. Example: teststricmp and teststristr collide
