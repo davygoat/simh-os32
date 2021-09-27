@@ -265,7 +265,7 @@ BREAK :
 
 SIGNON :
 
-- SIGNON name,account,password.
+- SIGNON name,account,password [,env=cssfile].
 - Ctrl/E before password disables echoing during password.
 - Or type SIGNON without parameters for dialog version.
 
