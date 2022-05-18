@@ -1,6 +1,12 @@
 # vim:set nowrap:
 # vim:set syntax=sh:
 
+goto params
+echo
+echo THIS SCRIPT ONLY WORKS WITH SIMH V4.
+echo
+exit
+
 :params
 
    set env VOL=%1
@@ -42,7 +48,7 @@
    expect "FASTCHEK:END OF TASK" send "mark %ODEV%:,on\r";c
    send "\r"
    continue
-   goto :eof
+   goto bottom
 
 :usage
 
@@ -57,18 +63,20 @@
    echof "        something like DSC3 as the volume label, you will not be"
    echof "        able to mark it on."
    echof ""
-   goto :eof
+   goto bottom
 
 :trample
 
    echof "\n"
    echof "ERROR: File %FNAM% already exists. You don't want to trample on it."
    echof "\n"
-   goto :eof
+   goto bottom
 
 :badvol
 
    echof "\n"
    echof "ERROR: you can't use DSC3 or DSC5 as the volume label\n"
    echof "\n"
+
+:bottom
 

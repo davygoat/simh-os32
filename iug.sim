@@ -6,6 +6,12 @@
 # An existing disk can be marked on with the 'do mountdisk' script.
 #
 
+goto params
+echo
+echo THIS SCRIPT ONLY WORKS WITH SIMH V4.
+echo
+exit
+
 :params
 
    set env IUG=%1

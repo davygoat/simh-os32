@@ -1,6 +1,12 @@
 # vim:set nowrap:
 # vim:set syntax=sh:
 
+goto params
+echo
+echo THIS SCRIPT ONLY WORKS WITH SIMH V4.
+echo
+exit
+
 :params
 
    set env FNAM=%1
@@ -26,7 +32,7 @@
    echof ""
    echof " File not found: %1 or %FNAM%"
    echof ""
-   goto :eof
+   goto bottom
 
 :automate
 
@@ -34,7 +40,7 @@
    expect "\r\n*" send "mark %ODEV%:,off ; mark %ODEV%:,on\r";c
    send "\r"
    continue
-   goto :eof
+   goto bottom
 
 :usage
 
@@ -44,5 +50,7 @@
    echof " Note:  FILENAME is a file on the host."
    echof " Note:  DEVICE is DSC3 or DSC5, default is DSC3."
    echof ""
-   goto :eof
+   goto bottom
+
+:bottom
 

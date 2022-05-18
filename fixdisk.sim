@@ -1,5 +1,11 @@
 # vim:set syntax=sh:
 
+goto params
+echo
+echo THIS SCRIPT ONLY WORKS WITH SIMH V4.
+echo
+exit
+
 :params
 
    set env FNAM=%1
@@ -16,7 +22,7 @@
    expect "FASTCHEK:END OF TASK" send "mark dsc3:,on\r";c
    send "\r"
    continue
-   goto :eof
+   goto bottom
 
 :usage
 
@@ -25,5 +31,7 @@
    echof ""
    echof " Note:  FNAM must exists, and will be mounted on DSC3/DM1."
    echof ""
-   goto :eof
+   goto bottom
+
+:bottom
 

@@ -9,7 +9,5 @@
 
 - Try porting an old vi to Whitesmiths C.
 
-- Publish on github.
-
-- Ability to SUBMIT jobs. Does this require SPOOLER?
+- OS/32 support for SUBMIT jobs. Does this require SPOOLER?
 
