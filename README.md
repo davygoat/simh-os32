@@ -1,6 +1,6 @@
 # SimH Interdata OS/32 kit
 
-This repository holds the source code and build files for a SimH software kit with a working OS/32 system with two assemblers, four high level languages, and a handy Tcl/Expect based FTP server front-end. The kit is built with bitsavers tapes using SimH 4.0, but the ready-made disk also works with SimH 3.X "Classic".
+This repository holds the source code and build files for a SimH software kit with a working OS/32 system with two assemblers, four high level languages, and a handy Tcl/Expect based FTP server front-end. The kit is built from bitsavers tapes with SimH 4.0, but the ready-made disk also works with SimH 3.X "Classic".
 
 OS/32 base system and software development tools:
 
@@ -22,10 +22,10 @@ The following items exist on the disk, but have not been tested in any way, sinc
 - SORT/MERGE-II, in SYS:/15, if you know how to use it without COBOL.
 - DMS/32, a CODASYL-type database management system, in SYS:/16. Again, this probably depends on having COBOL.
 - IUG-523 Software Tools is on a separate disk labelled STUG.
-- IUG-165 MicroEMACS in SYS:/165 if you want to try and get it working.
+- IUG-165 MicroEMACS in SYS:/165 in case you want to try and get it working.
 - MEDIT, another full screen editor, in SYS:/17.
 - VCF (Virtual Console Facility)
-- Reliance/ECM (Environment Control Manager, a transaction processor)
+- Reliance/ECM (Environment Control Manager, a transaction handler)
 
 As already hinted at, COBOL and RPG are not installed because there are no available tapes or documentation. But I doubt many people would miss RPG anyway.
 
@@ -60,7 +60,7 @@ Some useful additions of my own:
 - `cd sim` and `make id32`
 - `cp BIN/id32 ..` and `cd ..`
 - `./id32 supnik.ini`
-- Manually enter the following commands at the asterisk prompt to finish booting and bring up MTM. Take notice of the commas in command lines.
+- Manually enter the following commands at the asterisk prompt to finish booting and bring up MTM. Take care to use a comma in the first two commands.
 - `set time 05/16/22,19:00`
 - `mark dsc4:,on`
 - `startup`
@@ -86,7 +86,7 @@ Account 255 -- the MTM administrator
 - Account 255 has every privilege in the OS/32 world, even if you revoke them all!
 - Type `actuty` to launch the account utility, which is used to create and manage MTM users. My CSS script also provides handy summary (gleaned from hex dumps and MACRO sources). When you have finished, type `end` to return to the MTM prompt.
 - Type `display files` or `dir` at the MTM/asterisk prompt to list the contents of the 255 account.
-- Type `auflist` to list the password database. Encryption was not a thing in those days. The source code for auflist.c is in account 25.
+- Type `auflist` to list the password database. Encryption was not a thing in those days. The source code for auflist.c can be found in account 25.
 
 Account 165 -- low-privilege user and MicroEMACS sources
 
@@ -95,7 +95,7 @@ Account 165 -- low-privilege user and MicroEMACS sources
 
 Special case -- Ease of Use scripts
 
-- EOU has an unfortunate propensity to lock up MTM if you try to COMPILE, LINK or RUN in more than one MTM session. If your USERINIT.CSS calls EOUINIT, and someone else (including yourself) happens to be running EDIT at the same time, you will even lock up when you try try to log in.
+- EOU has an unfortunate propensity to lock up MTM if you try to COMPILE, LINK or RUN in more than one MTM session. If your USERINIT.CSS calls EOUINIT, and someone else (even yourself) happens to be running EDIT at the same time, you will even lock up when you try try to log in.
 - If you want to use the FORT, PASCAL, COMPILE, LINK, RUN and other EOU commands, or use the EDIT command to launch EDIT/32, then you should SIGNON as 'EOU', e.g. `signon eou,25,user1`. User names must be unique, so only one user can ever be signed on as 'EOU' at any given time. That at least mitigates the risk of MTM locking up on you.
 - Or, if you want to live dangerously, go ahead and type `eouinit!` (EOU dammit) to bypass my safety hack. If MTM locks up, go over to the OS/32 console and type `mtmdown` followed by `mtmup`.
 
@@ -138,7 +138,7 @@ For any real work, you will also have to familiarize yourself with the `BUILD`, 
 
 ## EDIT/32 line editor
 
-Despite its obvious quirks, the default editor is surprisingly pleasant to use.
+Despite its obvious quirks, and despite being a line editor, EDIT/32 is surprisingly pleasant to use.
 
 Starting the editor:
 
@@ -170,16 +170,16 @@ Ranges:
 #
 # Programming
 
-There are various ways of compiling and linking tasks:
+There are various ways of compiling and linking ('establishing') tasks:
 
-1. Directly run the compiler and link editor using the `LOAD`, `ASSIGN` and `START`. This is the most efficient method with the least overhead, but it's not as easy on the fingers and the mind.
+1. Directly run the compiler and link editor using `LOAD`, `ASSIGN` and `START`. This is the most efficient method with the least overhead, but it's not as easy on the fingers and the mind. Nevertheless, you should try it, because it is a good way to learn about the basic process for running programs under OS/32.
 
 2. Use the so-called High Level Operator Commands (HLOCs) provided with the compilers. These are a bit quirky, and default to listing on the (non-working) PR: device, which requires ACCT privilege.
    - Pascal: `SET CSS 13`, `PASCAL hellop,null:`.
    - Fortran: `SET CSS 11`, `F7CE D,hellof,,null:`.
    - There is also the `CC` command, but it can only handle one file, and has a few bugs. But it is incredibly convenient!
 
-3. Use the Ease Of Use (EOU) commands `FORT`, `PASCAL`, `CAL`, `MACRO`, `COMPILE`, `LINK` and `EXEC`. These are quite nice, and can handle multi-file projects with the `ENV` command. But they _will_ lock up MTM if you are not careful. If you want to give these a go, log in to with the username 'EOU', e.g. `SIGNON EOU,25,pass1`, or type `EOUINIT!` and expect to deadlock at some point.
+3. Use the Ease Of Use (EOU) commands `FORT`, `PASCAL`, `CAL`, `MACRO`, `COMPILE`, `LINK` and `EXEC`. These are quite nice, and can handle multi-file projects if you use the `ENV` command. But they _will_ lock up MTM if you are not careful. If you want to give these a go, log in to with the username 'EOU', e.g. `SIGNON EOU,25,pass1`, or type `EOUINIT!` and expect to deadlock at some point.
 
 4. Use my compile-link-and-go scripts. These are a little friendlier to newcomers like myself.
    - Pascal: `PASC`, `PASL`, `PASCL`, `PASCLG`, `PASGO`.
