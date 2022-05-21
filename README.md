@@ -6,7 +6,7 @@ OS/32 base system and software development tools:
 
 - Perkin-Elmer **OS/32** V8.1.
 - **MTM** 8.1 with Ease of Use (**EOU**) program development utilities and **HELP** files.
-- **Fortran VII** R0.5-01.00 (Development and Optimising compilers).
+- **Fortran V II** R0.5-01.00 (Development and Optimising compilers).
 - Perkin-Elmer **Pascal** R01-00.
 - OS/32 **C Compiler** 04-193R00-00 (aka. **Whitesmiths C**).
 - **RATFOR** from the Software Tools tape (IUG-523).
