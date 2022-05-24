@@ -47,18 +47,14 @@ Some useful additions of my own:
 ### SimH 4.0 "GitHub" users (Windows and UNIX)
 
 - Unzip the kit into a suitable directory
-- `git clone https://github.com/simh/simh`
-- `cd simh` and `make id32`
-- `cp BIN/id32 ..` and `cd ..`
+- `make v4`
 - `./id32 os32.ini`
 - The ini file will take care of the boot sequence.
 
 ### SimH 3.X "Classic" users (Windows and UNIX)
 
 - Unzip the kit into a suitable directory
-- `wget http://simh.trailing-edge.com/sources/simhv312-2.zip`
-- `cd sim` and `make id32`
-- `cp BIN/id32 ..` and `cd ..`
+- `make v3`
 - `./id32 supnik.ini`
 - Manually enter the following commands at the asterisk prompt to finish booting and bring up MTM. Take care to use a comma in the first two commands.
 - `set time 05/16/22,19:00`
@@ -67,6 +63,8 @@ Some useful additions of my own:
 
 ### Both SimH versions (UNIX only)
 
+- Unzip the kit into a suitable directory
+- `make v3` or `make v4`
 - `./OS32-FTPd`
 - This script takes care of the boot sequence even if you use SimH "Classic" !
 

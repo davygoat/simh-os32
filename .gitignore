@@ -1,6 +1,8 @@
 id32
 tapes/
 pdf/
+v3/
+v4/
 *.swp
 *.dsk
 *.out
