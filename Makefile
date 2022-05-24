@@ -15,7 +15,7 @@ MANDOC=SimH\ OS32\ FTP\ Server\ User\ Guide
 PRGDOC=Program\ Development\ under\ OS32
 HLADOC=HLAL2\ High\ Level\ Assembler\ Language\ Macros
 
-FILES=README.txt OS32-FTPd os32.ini supnik.ini ftpd.config example.shadow.config *.sim *.tcl
+FILES=README.md README.txt OS32-FTPd os32.ini supnik.ini ftpd.config example.shadow.config *.sim *.tcl
 
 os32kit.zip: $(FILES) os32.dsk doc
 	rm -f os32kit.zip
