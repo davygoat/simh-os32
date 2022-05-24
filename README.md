@@ -104,6 +104,7 @@ Special case -- Ease of Use scripts
 - Log off all your MTM sessions.
 - At the OS/32 console (i.e. the SimH session), type `shutdown`.
 - If you are using SimH "Classic" *and* you are not using the OS32-FTPd script, then don't forget to type `mark dsc4:,off` before you hit Ctrl/E to exit the simulator.
+- If you forget to mark a disk off, check fixdisk.sim for details of how to recover.
 
 
 #
@@ -152,13 +153,14 @@ Inside the editor:
 - `SC[REEN]` to display a screenful at a time.
 - `n`, `TO[P]`, `B[OTTOM]`, `-` (minus), `+` (plus or enter) to move around.
 - `FI[ND] /str/ [,range]` to search for a string.
-- `CH[ANGE] /str1/,/str2/ [,range]` to replace str1 with str2 (note commas)
-- `BE[FORE] /str1/str2/ [range]` to insert str1 before str2 (note lack of commas)
-- `AF[TER] /str1/str2/ [range]` to insert str1 after str2 (note lack of commas)
-- `INS[ERT] [n]` to insert lines after the current line or after line n, end with an empty newline. For a blank line, enter a space.
-- `A[PPEND]` to add lines to the end of the file finish with empty newline.
+- `CH[ANGE] /str1/,/str2/ [,range]` to replace str1 with str2 (note commas).
+- `SU[BSTITUTE] /str1/str2/[range]` to replace str1 with str2 (without commas).
+- `BE[FORE] /str1/str2/ [range]` to insert str1 before str2.
+- `AF[TER] /str1/str2/ [range]` to insert str1 after str2.
+- `INS[ERT] [n]` to insert lines after the current line or after line n, end with an empty newline. To insert a blank line, enter a space.
+- `A[PPEND]` to add lines to the end of the file, finish with an empty newline.
+- `S[AVE] fd` to save and give the file a name.
 - `S[AVE] *` to save the file if it already has a name.
-- `S[AVE] fd` to save to give the file a name.
 - `DO[NE]` to save and quit.
 - `END` to quit without saving (type `END` again to confirm).
 
