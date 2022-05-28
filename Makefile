@@ -7,7 +7,7 @@ clean::
 clobber:: clean
 	rm -f *.dsk
 
-dist::	os32doc.zip os32src.zip os32kit.zip
+dist::	os32doc.zip os32kit.zip
 	@for f in $^; do echo ; echo ===== $$f ===================== ; echo ; unzip -lv $$f; done
 
 FTPDOC=Adding\ an\ FTP\ server\ to\ your\ SimH\ project
@@ -39,10 +39,6 @@ v4/BIN/id32:
 os32kit.zip: $(FILES) os32.dsk doc
 	rm -f os32kit.zip
 	zip -r9 os32kit $(FILES) os32.dsk pdf/2020\ -\ $(FTPDOC).pdf
-
-os32src.zip: $(FILES) rebuild-system.sh stage-*.ini bookmarks doc
-	rm -f os32src.zip
-	zip -r9 os32src $(FILES) rebuild-system.sh stage-*.ini bookmarks doc/$(FTPDOC).odt
 
 os32doc.zip: doc
 	rm -f os32doc.zip
