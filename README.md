@@ -1,12 +1,12 @@
 # SimH Interdata OS/32 kit
 
-This repository holds the source code and build files for a SimH software kit with a working OS/32 system with two assemblers, four high level languages, and a handy Tcl/Expect based FTP server front-end. The kit is built from bitsavers tapes with SimH 4.0, but the ready-made disk also works with SimH 3.X "Classic".
+This repository holds the source code and build files for a SimH software kit with a working OS/32 system, two assemblers, four high level languages, and a handy Tcl/Expect based FTP server front-end. The kit is built from bitsavers tapes with SimH 4.0, but the ready-made disk also works with SimH 3.X "Classic".
 
 OS/32 base system and software development tools:
 
 - Perkin-Elmer **OS/32** V8.1.
 - **MTM** 8.1 with Ease of Use (**EOU**) program development utilities and **HELP** files.
-- **Fortran V II** R0.5-01.00 (Development and Optimising compilers).
+- **Fortran V II** R05-01.00 (Development and Optimising compilers).
 - Perkin-Elmer **Pascal** R01-00.
 - OS/32 **C Compiler** 04-193R00-00 (aka. **Whitesmiths C**).
 - **RATFOR** from the Software Tools tape (IUG-523).
@@ -179,7 +179,7 @@ There are various ways of compiling and linking ('establishing') tasks:
    - Fortran: `SET CSS 11`, `F7CE D,hellof,,null:`.
    - There is also the `CC` command, but it can only handle one file, and has a few bugs. But it is incredibly convenient!
 
-3. Use the Ease Of Use (EOU) commands `FORT`, `PASCAL`, `CAL`, `MACRO`, `COMPILE`, `LINK` and `EXEC`. These are quite nice, and can handle multi-file projects if you use the `ENV` command. But they _will_ lock up MTM if you are not careful. If you want to give these a go, log in to with the username 'EOU', e.g. `SIGNON EOU,25,pass1`, or type `EOUINIT!` and expect to deadlock at some point.
+3. Use the Ease Of Use (EOU) commands `FORT`, `PASCAL`, `CAL`, `MACRO`, `COMPILE`, `LINK` and `EXEC`. These are quite nice, and can handle multi-file projects if you use the `ENV` command. But they _will_ lock up MTM if you are not careful. If you want to give these a go, log in to with the username 'EOU', e.g. `SIGNON EOU,25,user1`, or type `EOUINIT!` and expect to deadlock at some point.
 
 4. Use my compile-link-and-go scripts. These are a little friendlier to newcomers like myself.
    - Pascal: `PASC`, `PASL`, `PASCL`, `PASCLG`, `PASGO`.
