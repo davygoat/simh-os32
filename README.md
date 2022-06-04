@@ -1,6 +1,6 @@
 # SimH Interdata OS/32 kit
 
-This repository holds the source code and build files for a SimH software kit with a working OS/32 system, two assemblers, four high level languages, and a handy Tcl/Expect based FTP server front-end. The kit is built from bitsavers tapes with SimH 4.0, but the ready-made disk also works with SimH 3.X "Classic".
+This repository holds the source code and build files for a SimH software kit with a working OS/32 system, two assemblers, four high level languages, and a handy Tcl/Expect based FTP server front-end. The kit is built from bitsavers tapes with SimH 4.0 or Open SimH, but the ready-made disk also works with SimH 3.X "Classic". The kit can be downloaded from the [Releases](https://github.com/davygoat/simh-os32/releases) page.
 
 OS/32 base system and software development tools:
 
@@ -44,16 +44,24 @@ Some useful additions of my own:
 
 ## Starting OS/32
 
-### SimH 4.0 "GitHub" users (Windows and UNIX)
+A ready-made kit can be downloaded from the [Releases](https://github.com/davygoat/simh-os32/releases) page, but you will have to build your own preferred `id32` or `id32.exe` binary from SimH sources.
 
-- Unzip the kit into a suitable directory
-- `make v4` or copy the id32 executable into the kit directory
+|Project|Location|To Build|
+|-------|--------|--------|
+|Open SimH|https://github.com/open-simh/simh|`make open`|
+|SimH 4.0|https://github.com/simh/simh|`make v4`|
+|SimH "Classic"|http://simh.trailing-edge.com|`make v3`|
+
+### SimH 4.0 and Open SimH users (Windows and UNIX)
+
+- Unzip the [kit](https://github.com/davygoat/simh-os32/releases) into a suitable directory
+- `make v4` or `make open` or copy the id32 executable into the kit directory
 - `./id32 os32.ini`
 - The ini file will take care of the boot sequence.
 
 ### SimH 3.X "Classic" users (Windows and UNIX)
 
-- Unzip the kit into a suitable directory
+- Unzip the [kit](https://github.com/davygoat/simh-os32/releases) into a suitable directory
 - `make v3` or copy the id32 executable into the kit directory
 - `./id32 supnik.ini`
 - Manually enter the following commands at the asterisk prompt to finish booting and bring up MTM. Take care to use a comma in the first two commands.
@@ -63,8 +71,8 @@ Some useful additions of my own:
 
 ### Both SimH versions (UNIX only)
 
-- Unzip the kit into a suitable directory
-- `make v3` or `make v4` or copy the id32 executable into the kit directory
+- Unzip the [kit](https://github.com/davygoat/simh-os32/releases) into a suitable directory
+- `make v3`, `make v4`, `make open`, or copy the id32 executable into the kit directory
 - `./OS32-FTPd`
 - This script takes care of the boot sequence even if you use SimH "Classic" !
 

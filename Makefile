@@ -15,12 +15,15 @@ MANDOC=SimH\ OS32\ FTP\ Server\ User\ Guide
 PRGDOC=Program\ Development\ under\ OS32
 HLADOC=HLAL2\ High\ Level\ Assembler\ Language\ Macros
 
-FILES=README.md README.txt OS32-FTPd os32.ini supnik.ini ftpd.config example.shadow.config *.sim *.tcl Makefile
+FILES=README.md README.txt OS32-FTPd os32.ini supnik.ini ftpd.config example.shadow.config *.sim *.tcl Makefile between-the-lines.txt
 
 v3:: v3/BIN/id32
 	cp $< ./
 
 v4:: v4/BIN/id32
+	cp $< ./
+
+open:: open/BIN/id32
 	cp $< ./
 
 v3/BIN/id32:
@@ -35,6 +38,12 @@ v4/BIN/id32:
 	git clone https://github.com/simh/simh
 	mv simh v4
 	cd v4 ; make id32
+
+open/BIN/id32:
+	rm -rf open
+	git clone https://github.com/open-simh/simh
+	mv simh open
+	cd open ; make id32
 
 os32kit.zip: $(FILES) os32.dsk doc
 	rm -f os32kit.zip
