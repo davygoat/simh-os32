@@ -12,7 +12,6 @@ dist::	os32doc.zip os32kit.zip
 
 FTPDOC=Adding\ an\ FTP\ server\ to\ your\ SimH\ project
 MANDOC=SimH\ OS32\ FTP\ Server\ User\ Guide
-PRGDOC=Program\ Development\ under\ OS32
 HLADOC=HLAL2\ High\ Level\ Assembler\ Language\ Macros
 
 FILES=README.md README.txt OS32-FTPd os32.ini supnik.ini ftpd.config example.shadow.config *.sim *.tcl Makefile between-the-lines.txt
@@ -80,6 +79,7 @@ doc::	pdf/1974\ -\ 32\ Bit\ Series\ Reference\ Manual.pdf                       
 	pdf/1985\ -\ OS32\ v8.1\ Internals\ Student\ Guide.pdf                                                             \
 	pdf/1985\ -\ OS32\ v8.1\ Software\ Installation\ Guide.pdf                                                         \
 	pdf/1985\ -\ $(HLADOC).pdf                                                                                         \
+	pdf/1990\ -\ Developing\ Programs\ With\ FORTRAN\ VII.pdf                                                          \
 	pdf/2016\ -\ Getting\ Started\ with\ Interdata\ OS32.pdf                                                           \
 	pdf/2020\ -\ Adding\ an\ FTP\ server\ to\ your\ SimH\ project.pdf
 
@@ -142,6 +142,13 @@ pdf/1975\ -\ FORTRAN\ V\ Level\ II\ Compiler\ Functional\ Spec.pdf: \
 	-jpdfbookmarks --apply "$^" FORTRAN_V_Level_II_Compiler_Functional_Spec_Jan75.pdf --out "$@"
 	rm FORTRAN_V_Level_II_Compiler_Functional_Spec_Jan75.pdf
 
+pdf/1990\ -\ Developing\ Programs\ With\ FORTRAN\ VII.pdf: \
+			bookmarks/Developing\ Programs\ With\ FORTRAN\ VII.txt
+	rm -f "$@"
+	mkdir -p pdf/
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/lang/48-010F00R04_Developing_Programs_With_Fortran_VII_1990.pdf
+	-jpdfbookmarks --apply "$^" 48-010F00R04_Developing_Programs_With_Fortran_VII_1990.pdf --out "$@"
+	rm 48-010F00R04_Developing_Programs_With_Fortran_VII_1990.pdf
 
 pdf/1982\ -\ Pascal\ User\ Guide,\ Language\ Reference,\ and\ Run\ Time\ Support.pdf: \
 			bookmarks/Pascal\ User\ Guide,\ Language\ Reference,\ and\ Run\ Time\ Support.txt
