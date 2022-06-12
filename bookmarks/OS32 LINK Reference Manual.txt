@@ -1,0 +1,119 @@
+OS/32 Link Reference Manual/1,Black,bold,notItalic,closed,FitPage
+Table of Contents/3,Black,notBold,notItalic,closed,FitPage
+Syntax Conventions/9,Black,notBold,notItalic,closed,FitPage
+Preface/15,Black,notBold,notItalic,closed,FitPage
+Chapter 1 - OS/32 Link/17,Black,notBold,notItalic,open,FitPage
+	1.1 Introduction/17,Black,notBold,notItalic,closed,FitPage
+	1.2 Image File Format/17,Black,notBold,notItalic,closed,FitPage
+	1.3 Link Symbol Table/20,Black,notBold,notItalic,closed,FitPage
+	1.4 Using Link-Defined Symbols/21,Black,notBold,notItalic,closed,FitPage
+		1.4.1 Program Development Using Link-Defined Symbols/21,Black,notBold,notItalic,closed,FitPage
+	1.5 System Requirements/22,Black,notBold,notItalic,closed,FitPage
+	1.6 Link Command Syntax/23,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - Building and Starting Link/25,Black,notBold,notItalic,open,FitPage
+	2.1 Building Link/25,Black,notBold,notItalic,closed,FitPage
+	2.2 Loading Link/25,Black,notBold,notItalic,open,FitPage
+		2.2.1 Loading Link From the System Console/25,Black,notBold,notItalic,closed,FitPage
+		2.2.2 Loading Link From an Multi-Terminal Monitor (MTM) Terminal/26,Black,notBold,notItalic,closed,FitPage
+		2.2.3 Assigning Workspace for Link/27,Black,notBold,notItalic,closed,FitPage
+	2.3 Link Input/Output Files/27,Black,notBold,notItalic,closed,FitPage
+	2.4 Starting Link/29,Black,notBold,notItalic,closed,FitPage
+Chapter 3 - Link Commands/31,Black,notBold,notItalic,open,FitPage
+	3.1 Introduction/31,Black,notBold,notItalic,open,FitPage
+	3.2 Backspace (BFILE) Command/34,Black,notBold,notItalic,closed,FitPage
+	3.3 BUILD Command/35,Black,notBold,notItalic,closed,FitPage
+	3.4 Define Command (DCMD) Command/38,Black,notBold,notItalic,closed,FitPage
+	3.5 END Command/41,Black,notBold,notItalic,closed,FitPage
+	3.6 ESTABLISH Command/42,Black,notBold,notItalic,closed,FitPage
+	3.7 EXTERNAL Comand/46,Black,notBold,notItalic,closed,FitPage
+	3.8 Forward File (FFILE) Command/47,Black,notBold,notItalic,closed,FitPage
+	3.9 HELP Command/48,Black,notBold,notItalic,closed,FitPage
+	3.10 INCLUDE Command/50,Black,notBold,notItalic,closed,FitPage
+	3.11 LIBRARY Command/52,Black,notBold,notItalic,closed,FitPage
+	3.12 LOCAL Command/54,Black,notBold,notItalic,closed,FitPage
+	3.13 LOG Command/55,Black,notBold,notItalic,closed,FitPage
+	3.14 MAP Command/56,Black,notBold,notItalic,closed,FitPage
+	3.15 NCMD Command/61,Black,notBold,notItalic,closed,FitPage
+	3.16 No Log (NLOG) Command/62,Black,notBold,notItalic,closed,FitPage
+	3.17 OPTION Command/63,Black,notBold,notItalic,closed,FitPage
+	3.18 OVERLAY Command/81,Black,notBold,notItalic,closed,FitPage
+	3.19 PAUSE Command/83,Black,notBold,notItalic,closed,FitPage
+	3.20 POSITION Command/84,Black,notBold,notItalic,closed,FitPage
+	3.21 RESOLVE Command/86,Black,notBold,notItalic,closed,FitPage
+	3.22 REWIND Command/92,Black,notBold,notItalic,closed,FitPage
+	3.23 TITLE Command/93,Black,notBold,notItalic,closed,FitPage
+	3.24 VOLUME Command/94,Black,notBold,notItalic,closed,FitPage
+	3.25 WFILE Command/95,Black,notBold,notItalic,closed,FitPage
+Chapter 4 - Using Link/97,Black,notBold,notItalic,open,FitPage
+	4.1 Introduction/97,Black,notBold,notItalic,closed,FitPage
+	4.2 Building a Task Image/97,Black,notBold,notItalic,closed,FitPage
+	4.3 Building FORTRAN, COBOL, and Common Assembly Language/32 (CAL/32) Task Images/98,Black,notBold,notItalic,closed,FitPage
+		4.3.1 Building a COBOL Task Image/98,Black,notBold,notItalic,closed,FitPage
+		4.3.2 Building a FORTRAN Task Image/99,Black,notBold,notItalic,closed,FitPage
+		4.3.3 Building a Common Assembly Language/32 (CAL/32) Task Image Using Embedded Link Commands/99,Black,notBold,notItalic,closed,FitPage
+	4.4 Building Overlayed Task Images/100,Black,notBold,notItalic,closed,FitPage
+		4.4.1 Oerlaying a Program Using Link/100,Black,notBold,notItalic,closed,FitPage
+		4.4.2 Moving Common Blocks/103,Black,notBold,notItalic,closed,FitPage
+	4.5 Building Partial Images/104,Black,notBold,notItalic,closed,FitPage
+		4.5.1 Linking and Using Shared Data Areas/104,Black,notBold,notItalic,closed,FitPage
+		4.5.2 Linking and Using Shared Code Segments/108,Black,notBold,notItalic,closed,FitPage
+	4.6 Building a Task Image Referring to Partial Images/109,Black,notBold,notItalic,closed,FitPage
+	4.7 Building an Operating System Image/111,Black,notBold,notItalic,closed,FitPage
+Chapter 5 - Virtual Task Management (VTM)/113,Black,notBold,notItalic,open,FitPage
+	5.1 Introduction/113,Black,notBold,notItalic,closed,FitPage
+	5.2 System Requirements/113,Black,notBold,notItalic,closed,FitPage
+	5.3 User Interface to Virtual Task Management (VTM)/113,Black,notBold,notItalic,closed,FitPage
+		5.3.1 Declaring a Virtual Task Management (VTM) Task/113,Black,notBold,notItalic,closed,FitPage
+		5.3.2 Virtual Task Management (VTM) Secondary Storage/114,Black,notBold,notItalic,closed,FitPage
+		5.3.3 Including the Virtual Task Management (VTM) Module/114,Black,notBold,notItalic,closed,FitPage
+		5.3.4 Virtual Task Workspace/114,Black,notBold,notItalic,closed,FitPage
+		5.3.5 Example of Virtual Task Management (VTM) Link Procedures/115,Black,notBold,notItalic,open,FitPage
+		5.3.6 Virtual Task Management (VTM) Logical Units/115,Black,notBold,notItalic,closed,FitPage
+		5.3.7 Rolling of Virtual Task Management (VTM) Tasks/115,Black,notBold,notItalic,closed,FitPage
+		5.3.8 Absolute Code/115,Black,notBold,notItalic,closed,FitPage
+	5.4 FORTRAN Operational Rules/116,Black,notBold,notItalic,closed,FitPage
+	5.5 Common Assembly Language/32 (CAL/32) Restrictions/116,Black,notBold,notItalic,closed,FitPage
+	5.6 PASCAL Code Restrictions/116,Black,notBold,notItalic,closed,FitPage
+	5.7 Performance Measurement/116,Black,notBold,notItalic,closed,FitPage
+	5.8 Virtual Task Management (VTM) Error Conditions/116,Black,notBold,notItalic,closed,FitPage
+Chapter 6 - Relocation Within Executive Tasks (E-Tasks)/117,Black,notBold,notItalic,open,FitPage
+	6.1 Introduction/117,Black,notBold,notItalic,closed,FitPage
+	6.2 Writing and Linking a Relocatable Executive Task (E-Task)/117,Black,notBold,notItalic,open,FitPage
+		6.2.1 Features of and Restrictions on Relocation/117,Black,notBold,notItalic,closed,FitPage
+		6.2.2 Declaring an Executive Task (E-Task) as Relocatable/118,Black,notBold,notItalic,closed,FitPage
+		6.2.3 Example of Linking a Relocatable Executive Task (E-Task)/118,Black,notBold,notItalic,closed,FitPage
+	6.3 Functional Details/119,Black,notBold,notItalic,closed,FitPage
+	6.4 Memory Requirements/119,Black,notBold,notItalic,closed,FitPage
+Chapter 7 - The OBJECT/32 Utility/121,Black,notBold,notItalic,open,FitPage
+	7.1 Introduction/121,Black,notBold,notItalic,closed,FitPage
+	7.2 OBJECT/32 Functionality/121,Black,notBold,notItalic,closed,FitPage
+	7.3 Loading and Starting OBJECT/32/122,Black,notBold,notItalic,closed,FitPage
+		7.3.1 Loading OBJECT/32/122,Black,notBold,notItalic,closed,FitPage
+		7.3.2 Starting OBJECT/32/123,Black,notBold,notItalic,closed,FitPage
+	7.4 OBJECT/32 Commands/124,Black,notBold,notItalic,open,FitPage
+	7.5 COMMAND Command/125,Black,notBold,notItalic,closed,FitPage
+	7.6 DELETE Command/126,Black,notBold,notItalic,closed,FitPage
+	7.7 DIRECTORY Command/127,Black,notBold,notItalic,closed,FitPage
+	7.8 DONE Command/130,Black,notBold,notItalic,closed,FitPage
+	7.9 END Command/131,Black,notBold,notItalic,closed,FitPage
+	7.10 ESTABLISH Command/132,Black,notBold,notItalic,closed,FitPage
+	7.11 EXTRACT Command/133,Black,notBold,notItalic,closed,FitPage
+	7.12 GET Command/134,Black,notBold,notItalic,closed,FitPage
+	7.13 HELP Command/135,Black,notBold,notItalic,closed,FitPage
+	7.14 INCLUDE Command/137,Black,notBold,notItalic,closed,FitPage
+	7.15 LIST Command/138,Black,notBold,notItalic,closed,FitPage
+	7.16 LOG Command/139,Black,notBold,notItalic,closed,FitPage
+	7.17 PAUSE Command/140,Black,notBold,notItalic,closed,FitPage
+	7.18 REPLACE Command/141,Black,notBold,notItalic,closed,FitPage
+	7.19 SAVE Command/142,Black,notBold,notItalic,closed,FitPage
+	7.20 TITLE Command/143,Black,notBold,notItalic,closed,FitPage
+	7.21 Sample OBJECT/32 Sessions/144,Black,notBold,notItalic,closed,FitPage
+Appendixes/147,Black,notBold,notItalic,open,FitPage
+	Appendix A - Link and OBJECT/32 Command Summary/147,Black,notBold,notItalic,closed,FitPage
+		LINK Commands/147,Black,notBold,notItalic,closed,FitPage
+		OBJECT/32 Commands/151,Black,notBold,notItalic,closed,FitPage
+	Appendix B - Error Message Summary/153,Black,notBold,notItalic,closed,FitPage
+	Appendix C - Virtual Task Management (VTM) Message Summary/169,Black,notBold,notItalic,closed,FitPage
+	Appendix D - Object Module Format/171,Black,notBold,notItalic,closed,FitPage
+Index/179,Black,notBold,notItalic,closed,FitPage
+Comment Form/185,Black,notBold,notItalic,closed,FitPage
