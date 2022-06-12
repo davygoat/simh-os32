@@ -80,6 +80,7 @@ doc::	capcheck \
 	pdf/1985\ -\ OS32\ v8.1\ Internals\ Student\ Guide.pdf                                                             \
 	pdf/1985\ -\ OS32\ v8.1\ Software\ Installation\ Guide.pdf                                                         \
 	pdf/1985\ -\ $(HLADOC).pdf                                                                                         \
+	pdf/1986\ -\ OS32\ AIDS\ User\ Guide.pdf                                                                           \
 	pdf/1990\ -\ Developing\ Programs\ With\ FORTRAN\ VII.pdf                                                          \
 	pdf/2016\ -\ Getting\ Started\ with\ Interdata\ OS32.pdf                                                           \
 	pdf/2020\ -\ Adding\ an\ FTP\ server\ to\ your\ SimH\ project.pdf
@@ -100,6 +101,14 @@ pdf/1985\ -\ $(HLADOC).pdf: doc/$(HLADOC).odt bookmarks/$(HLADOC).txt
 	libreoffice6.2 --convert-to pdf doc/$(HLADOC).odt
 	-jpdfbookmarks --apply bookmarks/$(HLADOC).txt $(HLADOC).pdf --out "$@"
 	rm $(HLADOC).pdf
+
+pdf/1986\ -\ OS32\ AIDS\ User\ Guide.pdf: \
+			bookmarks/OS32\ AIDS\ User\ Guide.txt
+	rm -f "$@"
+	mkdir -p pdf/
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1986_8.1.2/48-087F00R00_OS32_AIDS_User_Guide_1986.pdf
+	-jpdfbookmarks --apply "$^" 48-087F00R00_OS32_AIDS_User_Guide_1986.pdf --out "$@"
+	rm 48-087F00R00_OS32_AIDS_User_Guide_1986.pdf
 
 pdf/1974\ -\ 32\ Bit\ Series\ Reference\ Manual.pdf: \
 			bookmarks/32\ Bit\ Series\ Reference\ Manual.txt
