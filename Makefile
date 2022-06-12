@@ -75,6 +75,7 @@ doc::	pdf/1974\ -\ 32\ Bit\ Series\ Reference\ Manual.pdf                       
 	pdf/1985\ -\ OS32\ Driver\ Writers\ Guide.pdf                                                                      \
 	pdf/1985\ -\ OS32\ MTM\ Installation.pdf                                                                           \
 	pdf/1985\ -\ OS32\ MTM\ Reference\ Manual.pdf                                                                      \
+	pdf/1985\ -\ OS32\ MTM\ System\ Planning\ and\ Operator\ Reference\ Manual.pdf                                     \
 	pdf/1985\ -\ OS32\ Operator\ Reference\ Manual.pdf                                                                 \
 	pdf/1985\ -\ OS32\ v8.1\ Internals\ Student\ Guide.pdf                                                             \
 	pdf/1985\ -\ OS32\ v8.1\ Software\ Installation\ Guide.pdf                                                         \
@@ -165,6 +166,14 @@ pdf/1985\ -\ OS32\ MTM\ Reference\ Manual.pdf: \
 	wget http://bitsavers.org/pdf/interdata/32bit/os32/1985_8.1.0/48-043F00R03_MTM_R08.1_Reference_Manual_1985.pdf
 	-jpdfbookmarks --apply "$^" 48-043F00R03_MTM_R08.1_Reference_Manual_1985.pdf --out "$@"
 	rm 48-043F00R03_MTM_R08.1_Reference_Manual_1985.pdf
+
+pdf/1985\ -\ OS32\ MTM\ System\ Planning\ and\ Operator\ Reference\ Manual.pdf: \
+			bookmarks/OS32\ MTM\ System\ Planning\ and\ Operator\ Reference\ Manual.txt
+	rm -f "$@"
+	mkdir -p pdf/
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1985_8.1.0/48-023F01R03_MTM_R08.1_System_Planning_and_Operator_Reference_Manual_1985.pdf
+	-jpdfbookmarks --apply "$^" 48-023F01R03_MTM_R08.1_System_Planning_and_Operator_Reference_Manual_1985.pdf --out "$@"
+	rm 48-023F01R03_MTM_R08.1_System_Planning_and_Operator_Reference_Manual_1985.pdf
 
 pdf/1984\ -\ OS32\ Operations\ Primer.pdf: \
 			bookmarks/OS32\ Operations\ Primer.txt
