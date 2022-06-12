@@ -113,7 +113,7 @@ pdf/1976\ -\ OS32\ MT\ Program\ Logic\ Manual.pdf: \
 			bookmarks/OS32\ MT\ Program\ Logic\ Manual.txt
 	rm -f "$@"
 	mkdir -p pdf/
-	wget http://bitsavers.org/pdf/interdata/32bit/os32/2.0_Nov76/B29-391R02_OS32MT_ProgramLogic_Apr76.pdf
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1976_2.0/B29-391R02_OS32MT_ProgramLogic_Apr76.pdf
 	-jpdfbookmarks --apply "$^" B29-391R02_OS32MT_ProgramLogic_Apr76.pdf --out "$@"
 	rm B29-391R02_OS32MT_ProgramLogic_Apr76.pdf
 
@@ -121,7 +121,7 @@ pdf/1976\ -\ OS32\ MT\ Program\ Reference\ Manual.pdf: \
 			bookmarks/OS32\ MT\ Program\ Reference\ Manual.txt
 	rm -f "$@"
 	mkdir -p pdf/
-	wget http://bitsavers.org/pdf/interdata/32bit/os32/2.0_Nov76/29-390R05_OS32MT_PgmRef_Nov76.pdf
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1976_2.0/29-390R05_OS32MT_PgmRef_Nov76.pdf
 	-jpdfbookmarks --apply "$^" 29-390R05_OS32MT_PgmRef_Nov76.pdf --out "$@"
 	rm 29-390R05_OS32MT_PgmRef_Nov76.pdf
 
@@ -154,7 +154,7 @@ pdf/1985\ -\ OS32\ MTM\ Installation.pdf: \
 			bookmarks/OS32\ MTM\ Installation.txt
 	rm -f "$@"
 	mkdir -p pdf/
-	wget http://bitsavers.org/pdf/interdata/32bit/os32/8.1.0_1985/04-083M95R10_OS32_MTM_Installation_May85.pdf
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1985_8.1.0/04-083M95R10_OS32_MTM_Installation_May85.pdf
 	-jpdfbookmarks --apply "$^" 04-083M95R10_OS32_MTM_Installation_May85.pdf --out "$@"
 	rm 04-083M95R10_OS32_MTM_Installation_May85.pdf
 
@@ -170,7 +170,7 @@ pdf/1984\ -\ OS32\ Operations\ Primer.pdf: \
 			bookmarks/OS32\ Operations\ Primer.txt
 	rm -f "$@"
 	mkdir -p pdf/
-	wget http://bitsavers.org/pdf/interdata/32bit/os32/7.2_1984/48-076F00R00_OS32OperationsPrimer_1984.pdf
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1984_7.2/48-076F00R00_OS32OperationsPrimer_1984.pdf
 	-jpdfbookmarks --apply "$^" 48-076F00R00_OS32OperationsPrimer_1984.pdf --out "$@"
 	rm 48-076F00R00_OS32OperationsPrimer_1984.pdf
 
@@ -178,7 +178,7 @@ pdf/1985\ -\ OS32\ Operator\ Reference\ Manual.pdf: \
 			bookmarks/OS32\ Operator\ Reference\ Manual.txt
 	rm -f "$@"
 	mkdir -p pdf/
-	wget http://bitsavers.org/pdf/interdata/32bit/os32/8.1.0_1985/48-030F00R03_8.1_Operator_1985.pdf
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1985_8.1.0/48-030F00R03_8.1_Operator_1985.pdf
 	-jpdfbookmarks --apply "$^" 48-030F00R03_8.1_Operator_1985.pdf --out "$@"
 	rm 48-030F00R03_8.1_Operator_1985.pdf
 
@@ -186,7 +186,7 @@ pdf/1984\ -\ OS32\ Network\ Drivers\ Programming\ Reference\ Manual.pdf: \
 			bookmarks/OS32\ Network\ Drivers\ Programming\ Reference\ Manual.txt
 	rm -f "$@"
 	mkdir -p pdf/
-	wget http://bitsavers.org/pdf/interdata/32bit/os32/7.2_1984/48-079F00R00_OS32_NetworkDrivers_1984.pdf
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1984_7.2/48-079F00R00_OS32_NetworkDrivers_1984.pdf
 	-jpdfbookmarks --apply "$^" 48-079F00R00_OS32_NetworkDrivers_1984.pdf --out "$@"
 	rm 48-079F00R00_OS32_NetworkDrivers_1984.pdf
 
@@ -194,7 +194,7 @@ pdf/1984\ -\ OS32\ System\ Generation\ [SYSGEN32]\ Reference\ Manual.pdf: \
 			bookmarks/OS32\ System\ Generation\ [SYSGEN32]\ Reference\ Manual.txt
 	rm -f "$@"
 	mkdir -p pdf/
-	wget http://bitsavers.org/pdf/interdata/32bit/os32/7.2_1984/48-037F00R02_SYSGEN32_7.2_1984.pdf
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1984_7.2/48-037F00R02_SYSGEN32_7.2_1984.pdf
 	-jpdfbookmarks --apply "$^" 48-037F00R02_SYSGEN32_7.2_1984.pdf --out "$@"
 	rm 48-037F00R02_SYSGEN32_7.2_1984.pdf
 
@@ -202,7 +202,7 @@ pdf/1984\ -\ OS32\ System\ Support\ Utilities.pdf: \
 			bookmarks/OS32\ System\ Support\ Utilities.txt
 	rm -f "$@"
 	mkdir -p pdf/
-	wget http://bitsavers.org/pdf/interdata/32bit/os32/7.2_1984/48-031F00R02_SysSupportUtil_1984.pdf
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1984_7.2/48-031F00R02_SysSupportUtil_1984.pdf
 	-jpdfbookmarks --apply "$^" 48-031F00R02_SysSupportUtil_1984.pdf --out "$@"
 	rm 48-031F00R02_SysSupportUtil_1984.pdf
 
@@ -210,7 +210,7 @@ pdf/1985\ -\ OS32\ Driver\ Writers\ Guide.pdf: \
 			bookmarks/OS32\ Driver\ Writers\ Guide.txt
 	rm -f "$@"
 	mkdir -p pdf/
-	wget http://bitsavers.org/pdf/interdata/32bit/os32/8.1.0_1985/48-190f00r00_DriverWritersGuide.pdf
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1985_8.1.0/48-190f00r00_DriverWritersGuide.pdf
 	-jpdfbookmarks --apply "$^" 48-190f00r00_DriverWritersGuide.pdf --out "$@"
 	rm 48-190f00r00_DriverWritersGuide.pdf
 
@@ -218,7 +218,7 @@ pdf/1984\ -\ OS32\ System\ Support\ Run-Time\ Library\ Reference\ Manual.pdf: \
 			bookmarks/OS32\ System\ Support\ Run-Time\ Library\ Reference\ Manual.txt
 	rm -f "$@"
 	mkdir -p pdf/
-	wget http://bitsavers.org/pdf/interdata/32bit/os32/7.2_1984/48-152F00R00_SystemSupportRTL_1984.pdf
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1984_7.2/48-152F00R00_SystemSupportRTL_1984.pdf
 	-jpdfbookmarks --apply "$^" 48-152F00R00_SystemSupportRTL_1984.pdf --out "$@"
 	rm 48-152F00R00_SystemSupportRTL_1984.pdf
 
@@ -226,7 +226,7 @@ pdf/1985\ -\ OS32\ v8.1\ Software\ Installation\ Guide.pdf: \
 			bookmarks/OS32\ v8.1\ Software\ Installation\ Guide.txt
 	rm -f "$@"
 	mkdir -p pdf/
-	wget http://bitsavers.org/pdf/interdata/32bit/os32/8.1.0_1985/04-082M95R16_OS32v8.1Installation_May85.pdf
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1985_8.1.0/04-082M95R16_OS32v8.1Installation_May85.pdf
 	-jpdfbookmarks --apply "$^" 04-082M95R16_OS32v8.1Installation_May85.pdf --out "$@"
 	rm 04-082M95R16_OS32v8.1Installation_May85.pdf
 
@@ -234,7 +234,7 @@ pdf/1985\ -\ OS32\ v8.1\ Internals\ Student\ Guide.pdf: \
 			bookmarks/OS32\ v8.1\ Internals\ Student\ Guide.txt
 	rm -f "$@"
 	mkdir -p pdf/
-	wget http://bitsavers.org/pdf/interdata/32bit/os32/8.1.0_1985/OS32v8.1_Internals_Aug85.pdf
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1985_8.1.0/OS32v8.1_Internals_Aug85.pdf
 	-jpdfbookmarks --apply "$^" OS32v8.1_Internals_Aug85.pdf --out "$@"
 	rm OS32v8.1_Internals_Aug85.pdf
 
