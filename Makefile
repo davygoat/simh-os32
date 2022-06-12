@@ -74,6 +74,7 @@ doc::	pdf/1974\ -\ 32\ Bit\ Series\ Reference\ Manual.pdf                       
 	pdf/1984\ -\ OS32\ System\ Support\ Utilities.pdf                                                                  \
 	pdf/1985\ -\ OS32\ Driver\ Writers\ Guide.pdf                                                                      \
 	pdf/1985\ -\ OS32\ MTM\ Installation.pdf                                                                           \
+	pdf/1985\ -\ OS32\ MTM\ Reference\ Manual.pdf                                                                      \
 	pdf/1985\ -\ OS32\ Operator\ Reference\ Manual.pdf                                                                 \
 	pdf/1985\ -\ OS32\ v8.1\ Internals\ Student\ Guide.pdf                                                             \
 	pdf/1985\ -\ OS32\ v8.1\ Software\ Installation\ Guide.pdf                                                         \
@@ -156,6 +157,14 @@ pdf/1985\ -\ OS32\ MTM\ Installation.pdf: \
 	wget http://bitsavers.org/pdf/interdata/32bit/os32/8.1.0_1985/04-083M95R10_OS32_MTM_Installation_May85.pdf
 	-jpdfbookmarks --apply "$^" 04-083M95R10_OS32_MTM_Installation_May85.pdf --out "$@"
 	rm 04-083M95R10_OS32_MTM_Installation_May85.pdf
+
+pdf/1985\ -\ OS32\ MTM\ Reference\ Manual.pdf: \
+			bookmarks/OS32\ MTM\ Reference\ Manual.txt
+	rm -f "$@"
+	mkdir -p pdf/
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1985_8.1.0/48-043F00R03_MTM_R08.1_Reference_Manual_1985.pdf
+	-jpdfbookmarks --apply "$^" 48-043F00R03_MTM_R08.1_Reference_Manual_1985.pdf --out "$@"
+	rm 48-043F00R03_MTM_R08.1_Reference_Manual_1985.pdf
 
 pdf/1984\ -\ OS32\ Operations\ Primer.pdf: \
 			bookmarks/OS32\ Operations\ Primer.txt
