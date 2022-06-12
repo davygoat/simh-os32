@@ -57,7 +57,8 @@ os32.dsk: stage-??-*.ini
 
 ############################################################################################################################
 
-doc::	pdf/1974\ -\ 32\ Bit\ Series\ Reference\ Manual.pdf                                                                \
+doc::	capcheck \
+	pdf/1974\ -\ 32\ Bit\ Series\ Reference\ Manual.pdf                                                                \
 	pdf/1975\ -\ FORTRAN\ V\ Level\ II\ Compiler\ Functional\ Spec.pdf                                                 \
 	pdf/1976\ -\ Model\ 832\ Micro-Instruction\ Reference\ Manual.pdf                                                  \
 	pdf/1976\ -\ OS32\ MT\ Program\ Logic\ Manual.pdf                                                                  \
@@ -82,6 +83,12 @@ doc::	pdf/1974\ -\ 32\ Bit\ Series\ Reference\ Manual.pdf                       
 	pdf/1990\ -\ Developing\ Programs\ With\ FORTRAN\ VII.pdf                                                          \
 	pdf/2016\ -\ Getting\ Started\ with\ Interdata\ OS32.pdf                                                           \
 	pdf/2020\ -\ Adding\ an\ FTP\ server\ to\ your\ SimH\ project.pdf
+
+capcheck:
+	-grep '[A-Z][A-Z][a-z]' bookmarks/* | egrep -v '(DCBx|SVCs|ISRs|RTLs|VDUs|PENnet|CCs)' >.delme.txt
+	cat .delme.txt
+	[ ! -s .delme.txt ] || ( echo ; cat .delme.txt ; rm .delme.txt ; printf "\nCHeck CApital LEtters\n\n" ; exit 1 )
+	rm -f .delme.txt
 
 pdf/2020\ -\ $(FTPDOC).pdf: doc/$(FTPDOC).odt
 	rm -f "$@"
