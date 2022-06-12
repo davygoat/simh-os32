@@ -64,7 +64,7 @@ OS/32 Network Drivers Programming Reference Manual (1984)/1,Black,bold,italic,op
 				3.3.2.4 DISCONNECT Command/32,Black,notBold,notItalic,open,FitPage
 			3.3.3 READ-Type Commands/32,Black,notBold,notItalic,closed,FitPage
 				3.3.3.1 READ BUFFER Command/32,Black,notBold,notItalic,open,FitPage
-				3.3.3.2 SELECTIVE READ COmmand/33,Black,notBold,notItalic,open,FitPage
+				3.3.3.2 SELECTIVE READ Command/33,Black,notBold,notItalic,open,FitPage
 			3.3.4 WRITE-Type Commands/33,Black,notBold,notItalic,closed,FitPage
 				3.3.4.1 WRITE BUFFER Command/33,Black,notBold,notItalic,open,FitPage
 				3.3.4.2 WRITE IMAGE Command/33,Black,notBold,notItalic,open,FitPage
@@ -74,7 +74,7 @@ OS/32 Network Drivers Programming Reference Manual (1984)/1,Black,bold,italic,op
 				3.3.5.2 MODE CMD2 Command/34,Black,notBold,notItalic,open,FitPage
 				3.3.5.3 MODE RCMD and MODE WCMD Commands/34,Black,notBold,notItalic,open,FitPage
 				3.3.5.4 MODE RDIS and MODE WDIS Commands/35,Black,notBold,notItalic,open,FitPage
-				3.3.5.5 MODE DISC COmmand/35,Black,notBold,notItalic,open,FitPage
+				3.3.5.5 MODE DISC Command/35,Black,notBold,notItalic,open,FitPage
 				3.3.5.6 MODE ADDR Command/35,Black,notBold,notItalic,open,FitPage
 		3.4 Supervisor Call 15 (SVC15) Error Handling/35,Black,notBold,notItalic,open,FitPage
 		3.5 Chained/Queued Buffer Link Word Flag Byte/38,Black,notBold,notItalic,open,FitPage
@@ -108,7 +108,7 @@ OS/32 Network Drivers Programming Reference Manual (1984)/1,Black,bold,italic,op
 				5.3.3.2 READ1 Command/61,Black,notBold,notItalic,open,FitPage
 			5.3.4 WRITE-Type Commands/61,Black,notBold,notItalic,closed,FitPage
 				5.3.4.1 WRITE BUFFER Command/61,Black,notBold,notItalic,open,FitPage
-				5.3.4.2 WRITE IMAGE COmmand/62,Black,notBold,notItalic,open,FitPage
+				5.3.4.2 WRITE IMAGE Command/62,Black,notBold,notItalic,open,FitPage
 				5.3.4.3 WRITE1 Command/63,Black,notBold,notItalic,open,FitPage
 				5.3.4.4 WRITE IDLELINE Command/63,Black,notBold,notItalic,open,FitPage
 			5.3.5 MODE-Type Commands/63,Black,notBold,notItalic,closed,FitPage

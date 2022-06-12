@@ -181,7 +181,7 @@ OS/32 Driver Writer's Guide (1985)/1,Black,bold,italic,open,FitPage
 			Interrupt Service (IS) State/265,Black,notBold,notItalic,closed,FitPage
 			Reentrant System (RS) State/266,Black,notBold,notItalic,closed,FitPage
 		Appendix C - OS/32 Macros/269,Black,notBold,notItalic,closed,FitPage
-			The SYSGEN/32 Macro Output FIle/269,Black,notBold,notItalic,closed,FitPage
+			The SYSGEN/32 Macro Output File/269,Black,notBold,notItalic,closed,FitPage
 			The Device Code::: Macro/271,Black,notBold,notItalic,closed,FitPage
 			The DCBI Macro/276,Black,notBold,notItalic,closed,FitPage
 			The CCBI Macro/280,Black,notBold,notItalic,closed,FitPage

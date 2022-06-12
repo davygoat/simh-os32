@@ -17,7 +17,7 @@ OS/32-MT Program Reference Manual (1976)/1,Black,notBold,notItalic,open,FitPage
 		Overview/13,Black,notBold,notItalic,open,FitPage
 		Hardware Considerations/14,Black,notBold,notItalic,closed,FitPage
 			Floating Point Support/14,Black,notBold,notItalic,open,FitPage
-			Using Writable COntrol Store/14,Black,notBold,notItalic,open,FitPage
+			Using Writable Control Store/14,Black,notBold,notItalic,open,FitPage
 	Chapter 2 - System Operation/15,Black,notBold,notItalic,open,FitPage
 		System Generation/15,Black,notBold,notItalic,open,FitPage
 		System Startup/15,Black,notBold,notItalic,open,FitPage

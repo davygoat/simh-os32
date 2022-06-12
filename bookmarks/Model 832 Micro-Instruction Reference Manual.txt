@@ -151,4 +151,4 @@ Model 8/32 Micro-Instruction Reference Manual (1976)/1,Black,bold,italic,open,Fi
 	Listings/3,Black,notBold,notItalic,closed,FitPage
 		05-058R02A13 - Micro-Program Listing/109,Black,notBold,notItalic,closed,FitPage
 		05-058F02A13 - Micro-Program Listing/167,Black,notBold,notItalic,closed,FitPage
-		05-069A13 - ROM MIcro-Program Listing/237,Black,notBold,notItalic,closed,FitPage
+		05-069A13 - ROM Micro-Program Listing/237,Black,notBold,notItalic,closed,FitPage

@@ -79,7 +79,7 @@ Chapter 8 - Mirror Disk Synchronization Utility/154,Black,notBold,notItalic,clos
 	8.3 Function/155,Black,notBold,notItalic,open,FitPage
 	8.4 Operating Procedures/156,Black,notBold,notItalic,closed,FitPage
 		8.4.1 Preliminary Steps/156,Black,notBold,notItalic,open,FitPage
-		8.4.2 LOading DISCSYNC/157,Black,notBold,notItalic,open,FitPage
+		8.4.2 Loading DISCSYNC/157,Black,notBold,notItalic,open,FitPage
 		8.4.3 Starting DISCSYNC/157,Black,notBold,notItalic,open,FitPage
 		8.4.4 End of Task Codes/159,Black,notBold,notItalic,open,FitPage
 		8.4.5 Efficient Operation/159,Black,notBold,notItalic,open,FitPage

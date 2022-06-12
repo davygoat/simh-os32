@@ -285,10 +285,10 @@
 		Figure 7 - Circular List/22,Black,notBold,notItalic,open,FitPage
 		Figure 8 - Fixed Point Data Words Formats [on missing page 65]/70,Black,notBold,italic,open,FitPage
 		Figure 10 - Program Status Word/103,Black,notBold,notItalic,open,FitPage
-		FIgure 11 - Channel Command Block/135,Black,notBold,notItalic,open,FitPage
+		Figure 11 - Channel Command Block/135,Black,notBold,notItalic,open,FitPage
 		Figure 12 - Channel Command Word/137,Black,notBold,notItalic,open,FitPage
-		FIgure 13 - Program Address/140,Black,notBold,notItalic,open,FitPage
-		FIgure 14 - Real Address/140,Black,notBold,notItalic,open,FitPage
+		Figure 13 - Program Address/140,Black,notBold,notItalic,open,FitPage
+		Figure 14 - Real Address/140,Black,notBold,notItalic,open,FitPage
 		Figure 15 - Segmentation Register/140,Black,notBold,notItalic,open,FitPage
 		Figure 16 - Program Addresses/141,Black,notBold,notItalic,open,FitPage
 		Figure 17 - Limit and Relocation Fields/141,Black,notBold,notItalic,open,FitPage

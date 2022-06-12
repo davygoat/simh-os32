@@ -192,7 +192,7 @@ OS/32-MT Program Logic Manual (1976)/1,Black,bold,italic,open,FitPage
 		7.5 Event Service Routines/100,Black,notBold,notItalic,closed,FitPage
 		7.6 Driver Timeout/101,Black,notBold,notItalic,closed,FitPage
 		7.7 Halt I/O Routine (TIMEOUT)/101,Black,notBold,notItalic,closed,FitPage
-	Chapter 8 - System FLow Examples/102,Black,notBold,notItalic,open,FitPage
+	Chapter 8 - System Flow Examples/102,Black,notBold,notItalic,open,FitPage
 		8.1 System Startup UP/102,Black,notBold,notItalic,closed,FitPage
 		8.2 I/O Request/102,Black,notBold,notItalic,closed,FitPage
 		8.3 Log Message/105,Black,notBold,notItalic,closed,FitPage
