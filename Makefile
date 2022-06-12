@@ -83,6 +83,7 @@ doc::	capcheck \
 	pdf/1985\ -\ $(HLADOC).pdf                                                                                         \
 	pdf/1986\ -\ OS32\ AIDS\ User\ Guide.pdf                                                                           \
 	pdf/1988\ -\ OS32\ Application\ Level\ Programmer\ Reference\ Manual.pdf                                           \
+	pdf/1988\ -\ OS32\ System\ Level\ Programmer\ Reference\ Manual.pdf                                                \
 	pdf/1990\ -\ Developing\ Programs\ With\ FORTRAN\ VII.pdf                                                          \
 	pdf/2016\ -\ Getting\ Started\ with\ Interdata\ OS32.pdf                                                           \
 	pdf/2020\ -\ Adding\ an\ FTP\ server\ to\ your\ SimH\ project.pdf
@@ -295,6 +296,14 @@ pdf/1988\ -\ OS32\ Application\ Level\ Programmer\ Reference\ Manual.pdf: \
 	wget http://bitsavers.org/pdf/interdata/32bit/os32/1988_8.2/48-039F00R03_OS32_R08.2_Application_Level_Programmer_Reference_Manual_1988.pdf
 	-jpdfbookmarks --apply "$^" 48-039F00R03_OS32_R08.2_Application_Level_Programmer_Reference_Manual_1988.pdf --out "$@"
 	rm 48-039F00R03_OS32_R08.2_Application_Level_Programmer_Reference_Manual_1988.pdf
+
+pdf/1988\ -\ OS32\ System\ Level\ Programmer\ Reference\ Manual.pdf: \
+			bookmarks/OS32\ System\ Level\ Programmer\ Reference\ Manual.txt
+	rm -f "$@"
+	mkdir -p pdf/
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1988_8.2/48-040F00R05_OS32_R08.2_Programer_Reference_Manual_1986.pdf
+	-jpdfbookmarks --apply "$^" 48-040F00R05_OS32_R08.2_Programer_Reference_Manual_1986.pdf --out "$@"
+	rm 48-040F00R05_OS32_R08.2_Programer_Reference_Manual_1986.pdf
 
 pdf/1982\ -\ Utilisation\ of\ Perkin-Elmer\ Operating\ System\ Features\ to\ Optimise\ Programming\ Efficiency.pdf: \
 			bookmarks/Utilisation\ of\ Perkin-Elmer\ Operating\ System\ Features\ to\ Optimise\ Programming\ Efficiency.txt
