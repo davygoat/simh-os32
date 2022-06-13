@@ -57,7 +57,7 @@ os32.dsk: stage-??-*.ini
 
 ############################################################################################################################
 
-doc::	capcheck \
+doc::	capscheck \
 	pdf/1974\ -\ 32\ Bit\ Series\ Reference\ Manual.pdf                                                                \
 	pdf/1975\ -\ FORTRAN\ V\ Level\ II\ Compiler\ Functional\ Spec.pdf                                                 \
 	pdf/1976\ -\ Model\ 832\ Micro-Instruction\ Reference\ Manual.pdf                                                  \
@@ -82,6 +82,7 @@ doc::	capcheck \
 	pdf/1985\ -\ OS32\ v8.1\ Software\ Installation\ Guide.pdf                                                         \
 	pdf/1985\ -\ $(HLADOC).pdf                                                                                         \
 	pdf/1986\ -\ OS32\ AIDS\ User\ Guide.pdf                                                                           \
+	pdf/1986\ -\ Common\ Assembly\ Language\ [CAL32]\ Reference\ Manual.pdf                                            \
 	pdf/1988\ -\ OS32\ Application\ Level\ Programmer\ Reference\ Manual.pdf                                           \
 	pdf/1988\ -\ OS32\ System\ Level\ Programmer\ Reference\ Manual.pdf                                                \
 	pdf/1988\ -\ OS32\ LINK\ Reference\ Manual.pdf                                                                     \
@@ -89,8 +90,8 @@ doc::	capcheck \
 	pdf/2016\ -\ Getting\ Started\ with\ Interdata\ OS32.pdf                                                           \
 	pdf/2020\ -\ Adding\ an\ FTP\ server\ to\ your\ SimH\ project.pdf
 
-capcheck:
-	-grep '[A-Z][A-Z][a-z]' bookmarks/* | egrep -v '(DCBx|SVCs|ISRs|RTLs|VDUs|PENnet|CCs)' >.delme.txt
+capscheck:
+	-grep '[A-Z][A-Z][a-z]' bookmarks/* | egrep -v '(DCBx|SVCs|ISRs|RTLs|VDUs|PENnet|CCs|IFx)' >.delme.txt
 	cat .delme.txt
 	[ ! -s .delme.txt ] || ( echo ; cat .delme.txt ; rm .delme.txt ; printf "\nCHeck CApital LEtters\n\n" ; exit 1 )
 	rm -f .delme.txt
@@ -313,6 +314,14 @@ pdf/1988\ -\ OS32\ LINK\ Reference\ Manual.pdf: \
 	wget http://bitsavers.org/pdf/interdata/32bit/os32/1988_8.2/48-005F00R05_OS32_LINK_R8-03_Reference_Manual_1989.pdf
 	-jpdfbookmarks --apply "$^" 48-005F00R05_OS32_LINK_R8-03_Reference_Manual_1989.pdf --out "$@"
 	rm 48-005F00R05_OS32_LINK_R8-03_Reference_Manual_1989.pdf
+
+pdf/1986\ -\ Common\ Assembly\ Language\ [CAL32]\ Reference\ Manual.pdf: \
+			bookmarks/Common\ Assembly\ Language\ [CAL32]\ Reference\ Manual.txt
+	rm -f "$@"
+	mkdir -p pdf/
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1986_8.1.2/48-050F00R03_Common_Assembly_Language_CAL32_R08.2_Reference_Manual_1986.pdf
+	-jpdfbookmarks --apply "$^" 48-050F00R03_Common_Assembly_Language_CAL32_R08.2_Reference_Manual_1986.pdf --out "$@"
+	rm 48-050F00R03_Common_Assembly_Language_CAL32_R08.2_Reference_Manual_1986.pdf
 
 pdf/1982\ -\ Utilisation\ of\ Perkin-Elmer\ Operating\ System\ Features\ to\ Optimise\ Programming\ Efficiency.pdf: \
 			bookmarks/Utilisation\ of\ Perkin-Elmer\ Operating\ System\ Features\ to\ Optimise\ Programming\ Efficiency.txt
