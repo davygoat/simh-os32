@@ -82,7 +82,8 @@ doc::	capscheck \
 	pdf/1985\ -\ OS32\ v8.1\ Software\ Installation\ Guide.pdf                                                         \
 	pdf/1985\ -\ $(HLADOC).pdf                                                                                         \
 	pdf/1986\ -\ OS32\ AIDS\ User\ Guide.pdf                                                                           \
-	pdf/1986\ -\ Common\ Assembly\ Language\ [CAL32]\ Reference\ Manual.pdf                                            \
+	pdf/1986\ -\ Common\ Assembly\ Language\ CAL32\ Reference\ Manual.pdf                                              \
+	pdf/1986\ -\ Common\ Assembly\ Language\ MACRO32\ Reference\ Manual.pdf                                            \
 	pdf/1988\ -\ OS32\ Application\ Level\ Programmer\ Reference\ Manual.pdf                                           \
 	pdf/1988\ -\ OS32\ System\ Level\ Programmer\ Reference\ Manual.pdf                                                \
 	pdf/1988\ -\ OS32\ LINK\ Reference\ Manual.pdf                                                                     \
@@ -91,7 +92,7 @@ doc::	capscheck \
 	pdf/2020\ -\ Adding\ an\ FTP\ server\ to\ your\ SimH\ project.pdf
 
 capscheck:
-	-grep '[A-Z][A-Z][a-z]' bookmarks/* | egrep -v '(DCBx|SVCs|ISRs|RTLs|VDUs|PENnet|CCs|IFx)' >.delme.txt
+	-grep '[A-Z][A-Z][a-z]' bookmarks/* | egrep -v '(DCBx|SVCs|ISRs|RTLs|VDUs|PENnet|CCs|IFx|GBLx|LCLx|SETx)' >.delme.txt
 	cat .delme.txt
 	[ ! -s .delme.txt ] || ( echo ; cat .delme.txt ; rm .delme.txt ; printf "\nCHeck CApital LEtters\n\n" ; exit 1 )
 	rm -f .delme.txt
@@ -315,8 +316,8 @@ pdf/1988\ -\ OS32\ LINK\ Reference\ Manual.pdf: \
 	-jpdfbookmarks --apply "$^" 48-005F00R05_OS32_LINK_R8-03_Reference_Manual_1989.pdf --out "$@"
 	rm 48-005F00R05_OS32_LINK_R8-03_Reference_Manual_1989.pdf
 
-pdf/1986\ -\ Common\ Assembly\ Language\ [CAL32]\ Reference\ Manual.pdf: \
-			bookmarks/Common\ Assembly\ Language\ [CAL32]\ Reference\ Manual.txt
+pdf/1986\ -\ Common\ Assembly\ Language\ CAL32\ Reference\ Manual.pdf: \
+			bookmarks/Common\ Assembly\ Language\ CAL32\ Reference\ Manual.txt
 	rm -f "$@"
 	mkdir -p pdf/
 	wget http://bitsavers.org/pdf/interdata/32bit/os32/1986_8.1.2/48-050F00R03_Common_Assembly_Language_CAL32_R08.2_Reference_Manual_1986.pdf
@@ -330,6 +331,14 @@ pdf/1982\ -\ Utilisation\ of\ Perkin-Elmer\ Operating\ System\ Features\ to\ Opt
 	wget "http://eprints.whiterose.ac.uk/76197/1/report 180.pdf"
 	-jpdfbookmarks --apply "$^" report\ 180.pdf --out "$@"
 	rm report\ 180.pdf
+
+pdf/1986\ -\ Common\ Assembly\ Language\ MACRO32\ Reference\ Manual.pdf: \
+			bookmarks/Common\ Assembly\ Language\ MACRO32\ Reference\ Manual.txt
+	rm -f "$@"
+	mkdir -p pdf/
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1986_8.1.2/48-057F00R00_Common_Assembly_Language_MACRO32_Processor_Library_Utility_Reference_1986.pdf
+	-jpdfbookmarks --apply "$^" 48-057F00R00_Common_Assembly_Language_MACRO32_Processor_Library_Utility_Reference_1986.pdf --out "$@"
+	rm 48-057F00R00_Common_Assembly_Language_MACRO32_Processor_Library_Utility_Reference_1986.pdf
 
 pdf/2016\ -\ Getting\ Started\ with\ Interdata\ OS32.pdf: \
 			bookmarks/Getting\ Started\ with\ Interdata\ OS32.txt
