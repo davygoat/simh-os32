@@ -74,7 +74,7 @@ doc::	capscheck \
 	pdf/1984\ -\ OS32\ System\ Generation\ [SYSGEN32]\ Reference\ Manual.pdf                                           \
 	pdf/1984\ -\ OS32\ System\ Support\ Run-Time\ Library\ Reference\ Manual.pdf                                       \
 	pdf/1984\ -\ OS32\ System\ Support\ Utilities.pdf                                                                  \
-	pdf/1984\ -\ OS32\ Edit\ User\ Guide.pdf                                                                           \
+	pdf/1984\ -\ OS32\ EDIT\ User\ Guide.pdf                                                                           \
 	pdf/1985\ -\ OS32\ Driver\ Writers\ Guide.pdf                                                                      \
 	pdf/1985\ -\ OS32\ MTM\ Installation.pdf                                                                           \
 	pdf/1985\ -\ OS32\ MTM\ Reference\ Manual.pdf                                                                      \
@@ -198,8 +198,8 @@ pdf/1982\ -\ Pascal\ User\ Guide,\ Language\ Reference,\ and\ Run\ Time\ Support
 	-jpdfbookmarks --apply "$^" 48-021R01_Pascal_May82.pdf --out "$@"
 	rm 48-021R01_Pascal_May82.pdf
 
-pdf/1984\ -\ OS32\ Edit\ User\ Guide.pdf: \
-			bookmarks/OS32\ Edit\ User\ Guide.txt
+pdf/1984\ -\ OS32\ EDIT\ User\ Guide.pdf: \
+			bookmarks/OS32\ EDIT\ User\ Guide.txt
 	rm -f "$@"
 	mkdir -p pdf/
 	wget http://bitsavers.org/pdf/interdata/32bit/os32/1984_7.2/48-008F01R02_OS32_R7.02_Edit_1984.pdf
