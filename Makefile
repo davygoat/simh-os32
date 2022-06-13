@@ -67,6 +67,7 @@ doc::	capscheck \
 	pdf/1982\ -\ System\ Mathematical\ Run\ Time\ Library\ Reference\ Manual.pdf                                       \
 	pdf/1982\ -\ Utilisation\ of\ Perkin-Elmer\ Operating\ System\ Features\ to\ Optimise\ Programming\ Efficiency.pdf \
 	pdf/1984\ -\ C\ Programming\ Manual.pdf                                                                            \
+	pdf/1984\ -\ OS32\ PATCH\ Reference\ Manual.pdf                                                                    \
 	pdf/1984\ -\ OS32\ Network\ Drivers\ Programming\ Reference\ Manual.pdf                                            \
 	pdf/1984\ -\ OS32\ Operations\ Primer.pdf                                                                          \
 	pdf/1984\ -\ OS32\ System\ Generation\ [SYSGEN32]\ Reference\ Manual.pdf                                           \
@@ -147,6 +148,14 @@ pdf/1976\ -\ OS32\ MT\ Program\ Reference\ Manual.pdf: \
 	wget http://bitsavers.org/pdf/interdata/32bit/os32/1976_2.0/29-390R05_OS32MT_PgmRef_Nov76.pdf
 	-jpdfbookmarks --apply "$^" 29-390R05_OS32MT_PgmRef_Nov76.pdf --out "$@"
 	rm 29-390R05_OS32MT_PgmRef_Nov76.pdf
+
+pdf/1984\ -\ OS32\ PATCH\ Reference\ Manual.pdf: \
+			bookmarks/OS32\ PATCH\ Reference\ Manual.txt
+	rm -f "$@"
+	mkdir -p pdf/
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1984_7.2/48-016F00R01_OS32_R7.02_Patch_1984.pdf
+	-jpdfbookmarks --apply "$^" 48-016F00R01_OS32_R7.02_Patch_1984.pdf --out "$@"
+	rm 48-016F00R01_OS32_R7.02_Patch_1984.pdf
 
 pdf/1984\ -\ C\ Programming\ Manual.pdf: \
 			bookmarks/C\ Programming\ Manual.txt

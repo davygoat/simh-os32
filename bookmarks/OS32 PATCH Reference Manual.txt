@@ -1,0 +1,79 @@
+OS/32 PATCH Reference Manual (1984)/1,Black,bold,notItalic,closed,FitPage
+Table of Contents/3,Black,notBold,notItalic,closed,FitPage
+Preface/7,Black,notBold,notItalic,closed,FitPage
+Chapter 1 - OS/32 Patch/9,Black,notBold,notItalic,open,FitPage
+	1.1 Introduction/9,Black,notBold,notItalic,closed,FitPage
+	1.2 Image Patching/9,Black,notBold,notItalic,closed,FitPage
+	1.3 Object Patching/10,Black,notBold,notItalic,closed,FitPage
+	1.4 Object Libraries and Compound Overlay Files/10,Black,notBold,notItalic,closed,FitPage
+	1.5 History Feature/10,Black,notBold,notItalic,closed,FitPage
+	1.6 Patch Requirements/11,Black,notBold,notItalic,closed,FitPage
+	1.7 Statement Syntax Conventions/11,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - Starting Patch/15,Black,notBold,notItalic,open,FitPage
+	2.1 Building the Patch Image Load Module/15,Black,notBold,notItalic,closed,FitPage
+	2.2 Loading Patch/16,Black,notBold,notItalic,closed,FitPage
+		2.2.1 Loading Patch into an Operating System Environment/16,Black,notBold,notItalic,closed,FitPage
+		2.2.2 Loading Patch into a Multi-Terminal Monitor (MTM) Environment/16,Black,notBold,notItalic,closed,FitPage
+	2.3 Starting patch/18,Black,notBold,notItalic,closed,FitPage
+Chapter 3 - Patch Commands/19,Black,notBold,notItalic,open,FitPage
+	3.1 Introduction/19,Black,notBold,notItalic,closed,FitPage
+	3.2 BIAS Command/22,Black,notBold,notItalic,closed,FitPage
+	3.3 BLOCK Command/24,Black,notBold,notItalic,closed,FitPage
+	3.4 COMMAND Command/25,Black,notBold,notItalic,closed,FitPage
+	3.5 DISPLAY Command/27,Black,notBold,notItalic,closed,FitPage
+	3.6 DUMP Command/29,Black,notBold,notItalic,closed,FitPage
+		3.6.1 Object Dump/30,Black,notBold,notItalic,closed,FitPage
+		3.6.2 Image Dump/32,Black,notBold,notItalic,closed,FitPage
+	3.7 END Command/33,Black,notBold,notItalic,closed,FitPage
+	3.8 EXAMINE Command/34,Black,notBold,notItalic,closed,FitPage
+		3.8.1 Image Mode/35,Black,notBold,notItalic,closed,FitPage
+		3.8.2 Object Mode/36,Black,notBold,notItalic,closed,FitPage
+		3.8.3 Common Blocks/37,Black,notBold,notItalic,closed,FitPage
+		3.8.4 Block Data Subprogram/37,Black,notBold,notItalic,closed,FitPage
+	3.9 EXPAND Command/38,Black,notBold,notItalic,closed,FitPage
+	3.10 GET Command/40,Black,notBold,notItalic,closed,FitPage
+	3.11 HELP Command/43,Black,notBold,notItalic,closed,FitPage
+	3.12 IDNO Command/45,Black,notBold,notItalic,closed,FitPage
+	3.13 IMAGE Command/47,Black,notBold,notItalic,closed,FitPage
+	3.14 LIB Command/49,Black,notBold,notItalic,closed,FitPage
+	3.15 LIST Command/50,Black,notBold,notItalic,closed,FitPage
+	3.16 LOG Command/51,Black,notBold,notItalic,closed,FitPage
+	3.17 MAXLU Command/52,Black,notBold,notItalic,closed,FitPage
+	3.18 MODIFY Command/53,Black,notBold,notItalic,closed,FitPage
+	3.19 MXSPACE Command/59,Black,notBold,notItalic,closed,FitPage
+	3.20 NAME Command/60,Black,notBold,notItalic,closed,FitPage
+	3.21 NEWIDNO Command/61,Black,notBold,notItalic,closed,FitPage
+	3.22 OBJECT Command/63,Black,notBold,notItalic,closed,FitPage
+	3.23 OPTION Command/65,Black,notBold,notItalic,closed,FitPage
+	3.24 OVERLAY Command/70,Black,notBold,notItalic,closed,FitPage
+	3.25 PAUSE Command/72,Black,notBold,notItalic,closed,FitPage
+	3.26 PRIORITY Command/73,Black,notBold,notItalic,closed,FitPage
+	3.27 RANGE Command/74,Black,notBold,notItalic,closed,FitPage
+	3.28 REVISION Command/76,Black,notBold,notItalic,closed,FitPage
+	3.29 SAVE Command/78,Black,notBold,notItalic,closed,FitPage
+	3.30 SEND STOP Command/80,Black,notBold,notItalic,closed,FitPage
+	3.31 SHARED Command/81,Black,notBold,notItalic,closed,FitPage
+	3.32 TABLE Command/83,Black,notBold,notItalic,closed,FitPage
+	3.33 TRANSFER Command/84,Black,notBold,notItalic,closed,FitPage
+	3.34 TSW Command/85,Black,notBold,notItalic,closed,FitPage
+	3.25 VARIABLE Command/87,Black,notBold,notItalic,closed,FitPage
+	3.36 VERIFY Command/89,Black,notBold,notItalic,closed,FitPage
+Chapter 4 - Patching Image Modules/91,Black,notBold,notItalic,open,FitPage
+	4.1 Introduction/91,Black,notBold,notItalic,closed,FitPage
+	4.2 Patching a Task Image Module/91,Black,notBold,notItalic,closed,FitPage
+	4.3 Adding Code to Image Modules/93,Black,notBold,notItalic,closed,FitPage
+	4.4 Modifying Compound Overlay Files Created by TET/95,Black,notBold,notItalic,closed,FitPage
+	4.5 Modifying Tree-Structured Overlays/97,Black,notBold,notItalic,closed,FitPage
+Chapter 5 - Patching Object Modules/101,Black,notBold,notItalic,open,FitPage
+	5.1 Introduction/101,Black,notBold,notItalic,closed,FitPage
+	5.2 Patching an Object Module/101,Black,notBold,notItalic,closed,FitPage
+	5.3 Patching a Block Data Subprogram/102,Black,notBold,notItalic,closed,FitPage
+	5.4 Adding Code to Object Modules/103,Black,notBold,notItalic,closed,FitPage
+	5.5 Modifying Object Libraries/106,Black,notBold,notItalic,closed,FitPage
+Appendixes/107,Black,notBold,notItalic,open,FitPage
+	Appendix A - Command Summary/107,Black,notBold,notItalic,closed,FitPage
+	Appendix B - Patch Message Summary/111,Black,notBold,notItalic,closed,FitPage
+	Appendix C - Perkin-Elmer 32-Bit Object Format/123,Black,notBold,notItalic,closed,FitPage
+	Appendix D - Perkin-Elmer 32-Bit Image Format/127,Black,notBold,notItalic,closed,FitPage
+Index/135,Black,notBold,notItalic,closed,FitPage
+Comment Form/137,Black,notBold,notItalic,closed,FitPage
