@@ -69,6 +69,7 @@ doc::	capscheck \
 	pdf/1982\ -\ Utilisation\ of\ Perkin-Elmer\ Operating\ System\ Features\ to\ Optimise\ Programming\ Efficiency.pdf \
 	pdf/1984\ -\ C\ Programming\ Manual.pdf                                                                            \
 	pdf/1984\ -\ OS32\ PATCH\ Reference\ Manual.pdf                                                                    \
+	pdf/1984\ -\ OS32\ Environment\ Control\ Monitor\ ECM32\ Programming\ and\ Operations\ Manual.pdf                  \
 	pdf/1984\ -\ OS32\ Network\ Drivers\ Programming\ Reference\ Manual.pdf                                            \
 	pdf/1984\ -\ OS32\ Operations\ Primer.pdf                                                                          \
 	pdf/1984\ -\ OS32\ System\ Generation\ [SYSGEN32]\ Reference\ Manual.pdf                                           \
@@ -158,6 +159,14 @@ pdf/1979\ -\ OS32\ COPY\ User\ Guide.pdf: \
 	wget http://bitsavers.org/pdf/interdata/32bit/os32/1979/S29-676_OS32_COPY_User_Guide_1979.pdf
 	-jpdfbookmarks --apply "$^" S29-676_OS32_COPY_User_Guide_1979.pdf --out "$@"
 	rm S29-676_OS32_COPY_User_Guide_1979.pdf
+
+pdf/1984\ -\ OS32\ Environment\ Control\ Monitor\ ECM32\ Programming\ and\ Operations\ Manual.pdf: \
+			bookmarks/OS32\ Environment\ Control\ Monitor\ ECM32\ Programming\ and\ Operations\ Manual.txt
+	rm -f "$@"
+	mkdir -p pdf/
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1984_7.2/48-065F01R01_OS32_R7.02_Environment_Control_Monitor_ECM32_Programming_and_Operations_Manual_198402.pdf
+	-jpdfbookmarks --apply "$^" 48-065F01R01_OS32_R7.02_Environment_Control_Monitor_ECM32_Programming_and_Operations_Manual_198402.pdf --out "$@"
+	rm 48-065F01R01_OS32_R7.02_Environment_Control_Monitor_ECM32_Programming_and_Operations_Manual_198402.pdf
 
 pdf/1984\ -\ OS32\ PATCH\ Reference\ Manual.pdf: \
 			bookmarks/OS32\ PATCH\ Reference\ Manual.txt

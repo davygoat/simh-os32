@@ -1,0 +1,31 @@
+Environment Control Monitor/32 (ECM/32) Systems Programming and Operations Manual (1984)/1,Black,bold,notItalic,closed,FitPage
+Preface/3,Black,notBold,notItalic,closed,FitPage
+Restricted Rights/4,Black,notBold,notItalic,closed,FitPage
+Table of Contents/5,Black,notBold,notItalic,closed,FitPage
+Chapter 1 - The Environment Control Monitor/7,Black,notBold,notItalic,open,FitPage
+	1.1 Summary of Facilities/7,Black,notBold,notItalic,open,FitPage
+		1.1.1 Function/7,Black,notBold,notItalic,closed,FitPage
+		1.1.2 Action/7,Black,notBold,notItalic,closed,FitPage
+		1.1.3 Mode of Use/7,Black,notBold,notItalic,closed,FitPage
+	1.2 Operating Instructions/8,Black,notBold,notItalic,open,FitPage
+		1.2.1 Environment/8,Black,notBold,notItalic,closed,FitPage
+		1.2.2 Error Messages/8,Black,notBold,notItalic,closed,FitPage
+	1.3 Definition of Commands/9,Black,notBold,notItalic,open,FitPage
+		SEND ADD/9,Black,notBold,notItalic,closed,FitPage
+		SEND BROADCAST/10,Black,notBold,notItalic,closed,FitPage
+		SEND DISABLECONF/11,Black,notBold,notItalic,closed,FitPage
+		SEND ENABLECONF/12,Black,notBold,notItalic,closed,FitPage
+		SEND QUIESCE/13,Black,notBold,notItalic,closed,FitPage
+		SEND READOPTIONS/14,Black,notBold,notItalic,closed,FitPage
+		SEND REMOVE/15,Black,notBold,notItalic,closed,FitPage
+		SEND STATUS/16,Black,notBold,notItalic,closed,FitPage
+		SEND SWEEP/18,Black,notBold,notItalic,closed,FitPage
+		START/19,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - User Written Monitor Requirements/21,Black,notBold,notItalic,open,FitPage
+	2.1 Introduction/21,Black,notBold,notItalic,closed,FitPage
+	2.2 ECM/32 Communication and Terminal Handling/21,Black,notBold,notItalic,closed,FitPage
+Appendixes/23,Black,notBold,notItalic,open,FitPage
+	A1 Operational and Error Messages/23,Black,notBold,notItalic,open,FitPage
+		A1.1 ECM/32 Messages/23,Black,notBold,notItalic,closed,FitPage
+Index/29,Black,notBold,notItalic,closed,FitPage
+Comment Form/31,Black,notBold,notItalic,closed,FitPage
