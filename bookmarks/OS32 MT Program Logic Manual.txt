@@ -182,7 +182,7 @@ Chapter 6 - File Management System/78,Black,notBold,notItalic,open,FitPage
 			6.7.2.2 Data Transfer for Chain Files (CHAIN)/89,Black,notBold,notItalic,closed,FitPage
 			6.7.2.3 Command Requests For Files (CMD.CH)/89,Black,notBold,notItalic,closed,FitPage
 			6.7.2.4 Errror Recovery For Chain Files/90,Black,notBold,notItalic,closed,FitPage
-Chapter 7 Driver Description/91,Black,notBold,notItalic,open,FitPage
+Chapter 7 - Driver Description/91,Black,notBold,notItalic,open,FitPage
 	7.1 Drivers/91,Black,notBold,notItalic,closed,FitPage
 	7.2 Driver Control Blocks/92,Black,notBold,notItalic,closed,FitPage
 		7.2.1 Device Control Block (DCB)/92,Black,notBold,notItalic,closed,FitPage
