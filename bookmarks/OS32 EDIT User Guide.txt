@@ -1,80 +1,80 @@
 OS/32 EDIT User Guide (1984)/1,Black,bold,notItalic,open,FitPage
-	Table of Contents/3,Black,notBold,notItalic,closed,FitPage
-	Preface/7,Black,notBold,notItalic,closed,FitPage
-	Chapter 1 - Operating System/32 (OS/32) Edit/9,Black,notBold,notItalic,open,FitPage
-		1.1 Introduction/9,Black,notBold,notItalic,closed,FitPage
-		1.2 Edit Requirements/9,Black,notBold,notItalic,closed,FitPage
-		1.3 System Environments/9,Black,notBold,notItalic,closed,FitPage
-			1.3.1 Interactive Environment/9,Black,notBold,notItalic,open,FitPage
-				1.3.1.1 Prompts/10,Black,notBold,notItalic,closed,FitPage
-				1.3.1.2 Control Characters/10,Black,notBold,notItalic,closed,FitPage
-			1.3.2 Batch Environment/11,Black,notBold,notItalic,closed,FitPage
-		1.4 Files/11,Black,notBold,notItalic,closed,FitPage
-			1.4.1 File Descriptors/11,Black,notBold,notItalic,closed,FitPage
-		1.5 Edit Features/12,Black,notBold,notItalic,closed,FitPage
-			1.5.1 ASCII and Hexadecimal Editing/12,Black,notBold,notItalic,closed,FitPage
-			1.5.2 Identifying Data/12,Black,notBold,notItalic,open,FitPage
-				1.5.2.1 Line Numbers/13,Black,notBold,notItalic,closed,FitPage
-				1.5.2.2 Character Strings/13,Black,notBold,notItalic,closed,FitPage
-				1.5.2.3 Current Line/14,Black,notBold,notItalic,closed,FitPage
-				1.5.2.4 Delimiters/14,Black,notBold,notItalic,closed,FitPage
-				1.5.2.5 Ranges/14,Black,notBold,notItalic,closed,FitPage
-				1.5.2.6 Carriage Return/16,Black,notBold,notItalic,closed,FitPage
-			1.5.3 Formatting Data/16,Black,notBold,notItalic,open,FitPage
-				1.5.3.1 Line Length/16,Black,notBold,notItalic,open,FitPage
-				1.5.3.2 Text Display/16,Black,notBold,notItalic,closed,FitPage
-				1.5.3.3 Tab Settings/17,Black,notBold,notItalic,closed,FitPage
-				1.5.3.4 Column Display/17,Black,notBold,notItalic,closed,FitPage
-		1.6 Verification/17,Black,notBold,notItalic,closed,FitPage
-		1.7 Commands/17,Black,notBold,notItalic,closed,FitPage
-			1.7.1 Edit Command Syntax/17,Black,notBold,notItalic,closed,FitPage
-			1.7.2 Statement Syntax Conventions/18,Black,notBold,notItalic,closed,FitPage
-		1.8 Messages/19,Black,notBold,notItalic,closed,FitPage
-	Chapter 2 - Building, Loading, and Starting the Editor/21,Black,notBold,notItalic,open,FitPage
-		2.1 Building Edit as a System Load Module/21,Black,notBold,notItalic,closed,FitPage
-		2.2 Loading Edit from an MTM Terminal/21,Black,notBold,notItalic,closed,FitPage
-		2.3 Loading Edit from the System Console/22,Black,notBold,notItalic,closed,FitPage
-		2.4 Starting Edit/23,Black,notBold,notItalic,closed,FitPage
-	Chapter 3 - OS/32 Edit Commands/25,Black,notBold,notItalic,open,FitPage
-		3.1 Introduction/25,Black,notBold,notItalic,closed,FitPage
-		3.2 AFTER Command/26,Black,notBold,notItalic,closed,FitPage
-		3.3 AGAIN Command/28,Black,notBold,notItalic,closed,FitPage
-		3.4 ALTER Command/29,Black,notBold,notItalic,closed,FitPage
-		3.5 APPEND Command/34,Black,notBold,notItalic,closed,FitPage
-		3.6 BEFORE Command/35,Black,notBold,notItalic,closed,FitPage
-		3.7 BOTTOM Command/37,Black,notBold,notItalic,closed,FitPage
-		3.8 CHANGE Command/38,Black,notBold,notItalic,closed,FitPage
-		3.9 COLUMN Command/40,Black,notBold,notItalic,closed,FitPage
-		3.10 DELETE Command/42,Black,notBold,notItalic,closed,FitPage
-		3.11 DONE Command/44,Black,notBold,notItalic,closed,FitPage
-		3.12 END Command/45,Black,notBold,notItalic,closed,FitPage
-		3.13 FIND Command/46,Black,notBold,notItalic,closed,FitPage
-		3.14 GET Command/48,Black,notBold,notItalic,closed,FitPage
-		3.15 HELP Command/50,Black,notBold,notItalic,closed,FitPage
-		3.16 INCLUDE Command/51,Black,notBold,notItalic,closed,FitPage
-		3.17 INSERT Command/54,Black,notBold,notItalic,closed,FitPage
-		3.18 Line Number Command/56,Black,notBold,notItalic,closed,FitPage
-		3.19 MOVE Command/57,Black,notBold,notItalic,closed,FitPage
-		3.20 NOFIND Command/59,Black,notBold,notItalic,closed,FitPage
-		3.21 NOTRUNCATE Command/61,Black,notBold,notItalic,closed,FitPage
-		3.22 OPTION Command/62,Black,notBold,notItalic,closed,FitPage
-		3.23 PAUSE Command/72,Black,notBold,notItalic,closed,FitPage
-		3.24 REPLACE Command/73,Black,notBold,notItalic,closed,FitPage
-		3.25 RULER Command/75,Black,notBold,notItalic,closed,FitPage
-		3.26 SAVE Command/76,Black,notBold,notItalic,closed,FitPage
-		2.37 SCREEN Command/79,Black,notBold,notItalic,closed,FitPage
-		3.28 SEND STOP Command/80,Black,notBold,notItalic,closed,FitPage
-		3.29 SUBSTITUTE Command/81,Black,notBold,notItalic,closed,FitPage
-		3.30 TOP Command/83,Black,notBold,notItalic,closed,FitPage
-		3.31 TRUNCATE Command/84,Black,notBold,notItalic,closed,FitPage
-		3.32 TYPE Command/85,Black,notBold,notItalic,closed,FitPage
-		3.33 Plus Sign Command/87,Black,notBold,notItalic,closed,FitPage
-		3.34 Minus Sign Command/88,Black,notBold,notItalic,closed,FitPage
-	Chapter 4 - Sample Edit Sessions/89,Black,notBold,notItalic,closed,FitPage
-	Appendixes/93,Black,notBold,notItalic,open,FitPage
-		Appendix A - Command Summary/93,Black,notBold,notItalic,closed,FitPage
-		Appendix B - Messages/99,Black,notBold,notItalic,closed,FitPage
-		Appendix C - ASCII-EBCDIC Conversion Tables/107,Black,notBold,notItalic,closed,FitPage
-		Appendix D - Bidirectional Input/Output Control (BIOC) Functions Applicable to OS/32 Edit/111,Black,notBold,notItalic,closed,FitPage
-	Index/117,Black,notBold,notItalic,closed,FitPage
-	Comment Form/119,Black,notBold,notItalic,closed,FitPage
+Table of Contents/3,Black,notBold,notItalic,closed,FitPage
+Preface/7,Black,notBold,notItalic,closed,FitPage
+Chapter 1 - Operating System/32 (OS/32) Edit/9,Black,notBold,notItalic,open,FitPage
+	1.1 Introduction/9,Black,notBold,notItalic,closed,FitPage
+	1.2 Edit Requirements/9,Black,notBold,notItalic,closed,FitPage
+	1.3 System Environments/9,Black,notBold,notItalic,closed,FitPage
+		1.3.1 Interactive Environment/9,Black,notBold,notItalic,open,FitPage
+			1.3.1.1 Prompts/10,Black,notBold,notItalic,closed,FitPage
+			1.3.1.2 Control Characters/10,Black,notBold,notItalic,closed,FitPage
+		1.3.2 Batch Environment/11,Black,notBold,notItalic,closed,FitPage
+	1.4 Files/11,Black,notBold,notItalic,closed,FitPage
+		1.4.1 File Descriptors/11,Black,notBold,notItalic,closed,FitPage
+	1.5 Edit Features/12,Black,notBold,notItalic,closed,FitPage
+		1.5.1 ASCII and Hexadecimal Editing/12,Black,notBold,notItalic,closed,FitPage
+		1.5.2 Identifying Data/12,Black,notBold,notItalic,open,FitPage
+			1.5.2.1 Line Numbers/13,Black,notBold,notItalic,closed,FitPage
+			1.5.2.2 Character Strings/13,Black,notBold,notItalic,closed,FitPage
+			1.5.2.3 Current Line/14,Black,notBold,notItalic,closed,FitPage
+			1.5.2.4 Delimiters/14,Black,notBold,notItalic,closed,FitPage
+			1.5.2.5 Ranges/14,Black,notBold,notItalic,closed,FitPage
+			1.5.2.6 Carriage Return/16,Black,notBold,notItalic,closed,FitPage
+		1.5.3 Formatting Data/16,Black,notBold,notItalic,open,FitPage
+			1.5.3.1 Line Length/16,Black,notBold,notItalic,open,FitPage
+			1.5.3.2 Text Display/16,Black,notBold,notItalic,closed,FitPage
+			1.5.3.3 Tab Settings/17,Black,notBold,notItalic,closed,FitPage
+			1.5.3.4 Column Display/17,Black,notBold,notItalic,closed,FitPage
+	1.6 Verification/17,Black,notBold,notItalic,closed,FitPage
+	1.7 Commands/17,Black,notBold,notItalic,closed,FitPage
+		1.7.1 Edit Command Syntax/17,Black,notBold,notItalic,closed,FitPage
+		1.7.2 Statement Syntax Conventions/18,Black,notBold,notItalic,closed,FitPage
+	1.8 Messages/19,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - Building, Loading, and Starting the Editor/21,Black,notBold,notItalic,open,FitPage
+	2.1 Building Edit as a System Load Module/21,Black,notBold,notItalic,closed,FitPage
+	2.2 Loading Edit from an MTM Terminal/21,Black,notBold,notItalic,closed,FitPage
+	2.3 Loading Edit from the System Console/22,Black,notBold,notItalic,closed,FitPage
+	2.4 Starting Edit/23,Black,notBold,notItalic,closed,FitPage
+Chapter 3 - OS/32 Edit Commands/25,Black,notBold,notItalic,open,FitPage
+	3.1 Introduction/25,Black,notBold,notItalic,closed,FitPage
+	3.2 AFTER Command/26,Black,notBold,notItalic,closed,FitPage
+	3.3 AGAIN Command/28,Black,notBold,notItalic,closed,FitPage
+	3.4 ALTER Command/29,Black,notBold,notItalic,closed,FitPage
+	3.5 APPEND Command/34,Black,notBold,notItalic,closed,FitPage
+	3.6 BEFORE Command/35,Black,notBold,notItalic,closed,FitPage
+	3.7 BOTTOM Command/37,Black,notBold,notItalic,closed,FitPage
+	3.8 CHANGE Command/38,Black,notBold,notItalic,closed,FitPage
+	3.9 COLUMN Command/40,Black,notBold,notItalic,closed,FitPage
+	3.10 DELETE Command/42,Black,notBold,notItalic,closed,FitPage
+	3.11 DONE Command/44,Black,notBold,notItalic,closed,FitPage
+	3.12 END Command/45,Black,notBold,notItalic,closed,FitPage
+	3.13 FIND Command/46,Black,notBold,notItalic,closed,FitPage
+	3.14 GET Command/48,Black,notBold,notItalic,closed,FitPage
+	3.15 HELP Command/50,Black,notBold,notItalic,closed,FitPage
+	3.16 INCLUDE Command/51,Black,notBold,notItalic,closed,FitPage
+	3.17 INSERT Command/54,Black,notBold,notItalic,closed,FitPage
+	3.18 Line Number Command/56,Black,notBold,notItalic,closed,FitPage
+	3.19 MOVE Command/57,Black,notBold,notItalic,closed,FitPage
+	3.20 NOFIND Command/59,Black,notBold,notItalic,closed,FitPage
+	3.21 NOTRUNCATE Command/61,Black,notBold,notItalic,closed,FitPage
+	3.22 OPTION Command/62,Black,notBold,notItalic,closed,FitPage
+	3.23 PAUSE Command/72,Black,notBold,notItalic,closed,FitPage
+	3.24 REPLACE Command/73,Black,notBold,notItalic,closed,FitPage
+	3.25 RULER Command/75,Black,notBold,notItalic,closed,FitPage
+	3.26 SAVE Command/76,Black,notBold,notItalic,closed,FitPage
+	2.37 SCREEN Command/79,Black,notBold,notItalic,closed,FitPage
+	3.28 SEND STOP Command/80,Black,notBold,notItalic,closed,FitPage
+	3.29 SUBSTITUTE Command/81,Black,notBold,notItalic,closed,FitPage
+	3.30 TOP Command/83,Black,notBold,notItalic,closed,FitPage
+	3.31 TRUNCATE Command/84,Black,notBold,notItalic,closed,FitPage
+	3.32 TYPE Command/85,Black,notBold,notItalic,closed,FitPage
+	3.33 Plus Sign Command/87,Black,notBold,notItalic,closed,FitPage
+	3.34 Minus Sign Command/88,Black,notBold,notItalic,closed,FitPage
+Chapter 4 - Sample Edit Sessions/89,Black,notBold,notItalic,closed,FitPage
+Appendixes/93,Black,notBold,notItalic,open,FitPage
+	Appendix A - Command Summary/93,Black,notBold,notItalic,closed,FitPage
+	Appendix B - Messages/99,Black,notBold,notItalic,closed,FitPage
+	Appendix C - ASCII-EBCDIC Conversion Tables/107,Black,notBold,notItalic,closed,FitPage
+	Appendix D - Bidirectional Input/Output Control (BIOC) Functions Applicable to OS/32 Edit/111,Black,notBold,notItalic,closed,FitPage
+Index/117,Black,notBold,notItalic,closed,FitPage
+Comment Form/119,Black,notBold,notItalic,closed,FitPage
