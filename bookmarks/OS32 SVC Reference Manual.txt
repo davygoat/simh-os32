@@ -1,0 +1,233 @@
+OS/32 Supervisor Call (SVC) Reference Manual (1984)/1,Black,bold,notItalic,closed,FitPage
+Table of Contents/3,Black,notBold,notItalic,closed,FitPage
+Preface/15,Black,notBold,notItalic,closed,FitPage
+Chapter 1 - Supervisor Calls (SVCs)/17,Black,notBold,notItalic,open,FitPage
+	1.1 Introduction/17,Black,notBold,notItalic,closed,FitPage
+		1.1.1 Supervisor Call (SVC) Parameter Block/19,Black,notBold,notItalic,closed,FitPage
+	1.2 Supervisor Call (SVC) Errors/22,Black,notBold,notItalic,closed,FitPage
+		1.2.1 Supervisor Call (SVC) Error Messages/22,Black,notBold,notItalic,closed,FitPage
+		1.2.2 Supervisor Call (SVC) Status Codes/24,Black,notBold,notItalic,closed,FitPage
+	1.3 SVC0: User-Written Supervisor Call (SVC)/25,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - Input/Output (I/O) Request Supervisor Call 1 (SVC1)/27,Black,notBold,notItalic,open,FitPage
+	2.1 Introduction/27,Black,notBold,notItalic,closed,FitPage
+	2.2 Supervisor Call 1 (SVC1)/29,Black,notBold,notItalic,closed,FitPage
+		2.2.1 Data Transfer Requests/31,Black,notBold,notItalic,open,FitPage
+			2.2.1.1 Test and Set/34,Black,notBold,notItalic,closed,FitPage
+			2.2.1.2 Input/Output (I/O) Proceed/40,Black,notBold,notItalic,closed,FitPage
+			2.2.1.3 Queueing Input/Output (I/O) Requests/41,Black,notBold,notItalic,closed,FitPage
+			2.2.1.4 Conditional Proceed/42,Black,notBold,notItalic,closed,FitPage
+			2.2.1.5 Unconditional Proceed/42,Black,notBold,notItalic,closed,FitPage
+			2.2.1.6 Wait Input/Output (I/O)/42,Black,notBold,notItalic,closed,FitPage
+			2.2.1.7 Wait Only/43,Black,notBold,notItalic,closed,FitPage
+		2.2.2 Command Function Requests/43,Black,notBold,notItalic,open,FitPage
+			2.2.2.1 Halt Input/Output (I/O)/44,Black,notBold,notItalic,closed,FitPage
+		2.2.3 Logical Unit (lu)/45,Black,notBold,notItalic,closed,FitPage
+		2.2.4 Device-Independent Status/45,Black,notBold,notItalic,closed,FitPage
+		2.2.5 Device-Dependent Status/46,Black,notBold,notItalic,closed,FitPage
+		2.2.6 Buffer Start/Buffer End Addresses/47,Black,notBold,notItalic,closed,FitPage
+		2.2.7 Extended Options/47,Black,notBold,notItalic,open,FitPage
+			2.2.7.1 Nonmagnetic Tape Devices/48,Black,notBold,notItalic,closed,FitPage
+			2.2.7.2 Magnetic Tape Devices/51,Black,notBold,notItalic,closed,FitPage
+			2.2.7.3 Device-Dependent Status Codes for Magnetic Tape Operations/56,Black,notBold,notItalic,closed,FitPage
+	2.3 Gapless Input/Output (I/O) Operations/59,Black,notBold,notItalic,closed,FitPage
+		2.3.1 Gapless Mode Supervisor Call 1 (SVC1) Parameter Block 1/59,Black,notBold,notItalic,closed,FitPage
+		2.3.2 Standard Function Code Format - Gapless Mode/62,Black,notBold,notItalic,closed,FitPage
+		2.3.3 Logical Unit (lu)/64,Black,notBold,notItalic,closed,FitPage
+		2.3.4 Device-Independent Status Codes/65,Black,notBold,notItalic,closed,FitPage
+		2.3.5 Device-Dependent Status Codes/65,Black,notBold,notItalic,closed,FitPage
+		2.3.6 Buffer Queues/66,Black,notBold,notItalic,open,FitPage
+			2.3.6.1 Using the Buffer Queue/68,Black,notBold,notItalic,closed,FitPage
+			2.3.6.2 Trap-Causing Events Resulting from Gapless Input/Output (I/O) Operations/68,Black,notBold,notItalic,closed,FitPage
+		2.3.7 Buffer Length/69,Black,notBold,notItalic,closed,FitPage
+		2.3.8 Length of Last Buffer/69,Black,notBold,notItalic,closed,FitPage
+		2.3.9 Extended Options Field/69,Black,notBold,notItalic,closed,FitPage
+	2.4 Series 3200 Input/Output (I/O) Bus Switch/70,Black,notBold,notItalic,closed,FitPage
+		2.4.1 Normal Request Contention Mode/70,Black,notBold,notItalic,closed,FitPage
+		2.4.2 Master Request Contention Mode/70,Black,notBold,notItalic,closed,FitPage
+		2.4.3 Multiple Master Request Contention Mode/70,Black,notBold,notItalic,closed,FitPage
+		2.4.4 Programming Considerations/74,Black,notBold,notItalic,closed,FitPage
+Chapter 3 - General Service Functions Supervisor Call 2 (SVC2)/79,Black,notBold,notItalic,open,FitPage
+	3.1 Introduction/79,Black,notBold,notItalic,closed,FitPage
+	3.2 SVC2 Code 0: Make Journal Entries/83,Black,notBold,notItalic,closed,FitPage
+	3.3 SVC2 Code 1: Pause/85,Black,notBold,notItalic,closed,FitPage
+	3.4 SVC2 Code 2: Get Storage/87,Black,notBold,notItalic,closed,FitPage
+		3.4.1 SVC2 Code 2, Option X'00'/89,Black,notBold,notItalic,closed,FitPage
+		3.4.2 SVC2 Code 2, Option X'80'/91,Black,notBold,notItalic,closed,FitPage
+	3.5 SVC2 Code 3: Release Storage/92,Black,notBold,notItalic,closed,FitPage
+	3.6 SVC2 Code 4: Set Status/95,Black,notBold,notItalic,closed,FitPage
+		3.6.1 SVC2 Code 4, Option X'00'/97,Black,notBold,notItalic,closed,FitPage
+		3.6.2 SVC2 Code 4, Option X'80'/98,Black,notBold,notItalic,closed,FitPage
+	3.7 SVC2 Code 5: Fetch Pointer/99,Black,notBold,notItalic,closed,FitPage
+	3.8 SVC2 Code 6: Convert Binary Number to ASCII Hexadecimal or ASCII Decimal/102,Black,notBold,notItalic,closed,FitPage
+		3.8.1 SVC2 Code 6, Option X'00'+n/104,Black,notBold,notItalic,closed,FitPage
+		3.8.2 SVC2 Code 6, Option X'40'+n/104,Black,notBold,notItalic,closed,FitPage
+		3.8.3 SVC2 Code 6, Option X'80'+n/105,Black,notBold,notItalic,closed,FitPage
+		3.8.4 SVC2 Code 6, Option X'C0'+n/105,Black,notBold,notItalic,closed,FitPage
+	3.9 SVC2 Code 7: Log Message/106,Black,notBold,notItalic,closed,FitPage
+		3.9.1 SVC2 Code 7, Option X'00'/108,Black,notBold,notItalic,closed,FitPage
+		3.9.2 SVC2 Code 7, Option X'20'/109,Black,notBold,notItalic,closed,FitPage
+		3.9.3 SVC2 Code 7, Option X'40'/109,Black,notBold,notItalic,closed,FitPage
+		3.9.4 SVC2 Code 7, Option X'60'/109,Black,notBold,notItalic,closed,FitPage
+		3.9.5 SVC2 Code 7, Option X'80'/109,Black,notBold,notItalic,closed,FitPage
+		3.9.6 SVC2 Code 7, Option X'A0'/110,Black,notBold,notItalic,closed,FitPage
+		3.9.7 SVC2 Code 7, Option X'C0'/111,Black,notBold,notItalic,closed,FitPage
+		3.9.8 SVC2 Code 7, Option X'E0'/111,Black,notBold,notItalic,closed,FitPage
+	3.10 SVC2 Code 8: Interrogate Clock/112,Black,notBold,notItalic,closed,FitPage
+		3.10.1 SVC2 Code 8, Option X'00'/113,Black,notBold,notItalic,closed,FitPage
+		3.10.2 SVC2 Code 8, Option X'80'/114,Black,notBold,notItalic,closed,FitPage
+		3.10.3 SVC2 Code 8, Option X'40'/115,Black,notBold,notItalic,closed,FitPage
+		3.10.4 SVC2 Code 8, Option X'C0'/115,Black,notBold,notItalic,closed,FitPage
+	3.11 SVC2 Code 9: Fetch Date/117,Black,notBold,notItalic,closed,FitPage
+	3.12 SVC2 Code 10: Time of Day Wait/120,Black,notBold,notItalic,closed,FitPage
+	3.13 SVC2 Code 11: Interval Wait/123,Black,notBold,notItalic,closed,FitPage
+	3.14 SVC2 Code 14: Internal Reader/125,Black,notBold,notItalic,closed,FitPage
+		3.14.1 SVC2 Code 14, Parameter Block for Option 0/125,Black,notBold,notItalic,closed,FitPage
+		3.14.2 SVC2 Code 14, Parameter Block for Option 1/127,Black,notBold,notItalic,closed,FitPage
+		3.14.3 SVC2 Code 14, Status Codes/129,Black,notBold,notItalic,closed,FitPage
+		3.14.4 SVC2 Code 14, Programming Considerations/129,Black,notBold,notItalic,closed,FitPage
+	3.15 SVC2 Code 15: Convert ASCII Hexadecimal or ASCII Decimal to Binary/131,Black,notBold,notItalic,closed,FitPage
+		3.15.1 SVC2 Code 15, Option X'00'/132,Black,notBold,notItalic,closed,FitPage
+		3.15.2 SVC2 Code 15, Option X'40'/134,Black,notBold,notItalic,closed,FitPage
+		3.15.3 SVC2 Code 15, Option X'80'/135,Black,notBold,notItalic,closed,FitPage
+		3.15.4 SVC2 Code 15, Option X'C0'/137,Black,notBold,notItalic,closed,FitPage
+	3.16 SVC2 Code 16: Pack File Descriptor/138,Black,notBold,notItalic,closed,FitPage
+		3.16.1 SVC2 Code 16, Option X'00'/147,Black,notBold,notItalic,closed,FitPage
+		3.16.2 SVC2 Code 16, Option X'40'/148,Black,notBold,notItalic,closed,FitPage
+		3.16.3 SVC2 Code 16, Option X'10'/149,Black,notBold,notItalic,closed,FitPage
+		3.16.4 SVC2 Code 16, Option X'50'/151,Black,notBold,notItalic,closed,FitPage
+		3.16.5 SVC2 Code 16, Option X'20'/151,Black,notBold,notItalic,closed,FitPage
+		3.16.6 SVC2 Code 16, Option X'60'/153,Black,notBold,notItalic,closed,FitPage
+		3.16.7 SVC2 Code 16, Option X'80'/154,Black,notBold,notItalic,closed,FitPage
+		3.16.8 SVC2 Code 16, Option X'C0'/157,Black,notBold,notItalic,closed,FitPage
+		3.16.9 SVC2 Code 16, Options for Privileged Tasks/158,Black,notBold,notItalic,closed,FitPage
+	3.17 SVC2 Code 17: Scan Mnemonic Table/160,Black,notBold,notItalic,closed,FitPage
+		3.17.1 Building a Mnemonic Table/162,Black,notBold,notItalic,closed,FitPage
+		3.17.2 Executing SVC2 Code 17/162,Black,notBold,notItalic,closed,FitPage
+	3.18 SVC2 Code 18: SVC2 Code 18: Move ASCII Characters/168,Black,notBold,notItalic,closed,FitPage
+		3.18.1 SVC2 Code 18, Option X'00'+n/170,Black,notBold,notItalic,closed,FitPage
+		3.18.2 SVC2 Code 18, Option X'80'+n/171,Black,notBold,notItalic,closed,FitPage
+	3.19 SVC2 Code 19: Peek/176,Black,notBold,notItalic,closed,FitPage
+		3.19.1 Parameter Block for Option X'00'/176,Black,notBold,notItalic,closed,FitPage
+		3.19.2 Parameter Block for Option X'01'/182,Black,notBold,notItalic,closed,FitPage
+		3.19.3 Parameter Block for Option X'02'/188,Black,notBold,notItalic,closed,FitPage
+		3.19.4 Parameter Block for Option X'03'/190,Black,notBold,notItalic,closed,FitPage
+		3.19.5 Parameter Block for Option X'04'/196,Black,notBold,notItalic,closed,FitPage
+	3.20 SVC2 Code 20: Expand Allocation/199,Black,notBold,notItalic,closed,FitPage
+	3.21 SVC2 Code 21: Contract Allocation/201,Black,notBold,notItalic,closed,FitPage
+	3.22 SVC2 Code 23: Timer Management/202,Black,notBold,notItalic,closed,FitPage
+		3.22.1 SVC2 Code 23, Parameter Block for Option X'00'/202,Black,notBold,notItalic,closed,FitPage
+		3.22.2 SVC2 Code 23, Parameter Block for Option X'80'/205,Black,notBold,notItalic,closed,FitPage
+		3.22.3 SVC2 Code 23, Parameter Block for Option X'40'/207,Black,notBold,notItalic,closed,FitPage
+		3.22.4 SVC2 Code 23, Parameter Block for Option X'20'/211,Black,notBold,notItalic,closed,FitPage
+	3.23 SVC2 Code 24: Set Accounting Information/216,Black,notBold,notItalic,closed,FitPage
+	3.24 SVC2 Code 25: Fetch Accounting Information/218,Black,notBold,notItalic,closed,FitPage
+	3.25 SVC2 Code 26: Fetch Device Name/221,Black,notBold,notItalic,closed,FitPage
+	3.26 SVC2 Code 27: Memory Management/223,Black,notBold,notItalic,closed,FitPage
+	3.27 SVC2 Code 29: Unpack File Descriptor/226,Black,notBold,notItalic,closed,FitPage
+Chapter 4 - End of Task Supervisor Call 3 (SVC3)/231,Black,notBold,notItalic,open,FitPage
+	3.1 Introduction/231,Black,notBold,notItalic,closed,FitPage
+	3.2 SVC3: End of Task/231,Black,notBold,notItalic,closed,FitPage
+Chapter 5 - Fetch Overlay Supervisor Call 5 (SVC5)/233,Black,notBold,notItalic,open,FitPage
+	5.1 Introduction/233,Black,notBold,notItalic,closed,FitPage
+	5.2 SVC5: Fetch Overlay/233,Black,notBold,notItalic,closed,FitPage
+Chapter 6 - Intertask Communications Supervisor Call 6 (SVC6)/237,Black,notBold,notItalic,open,FitPage
+	6.1 Introduction/237,Black,notBold,notItalic,closed,FitPage
+	6.2 SVC6: Intertask Communications/238,Black,notBold,notItalic,open,FitPage
+		6.2.1 Function Code (SVC6.FUN)/241,Black,notBold,notItalic,closed,FitPage
+		6.2.2 Direction (SFUN.DOM, SFUN.DSM)/246,Black,notBold,notItalic,closed,FitPage
+		6.2.3 End Task (SFUN.ECM, SFUN.EDM) Function/246,Black,notBold,notItalic,closed,FitPage
+		6.2.4 Load Task Functions/247,Black,notBold,notItalic,closed,FitPage
+			6.2.4.1 Load Task (SFUN.LM) Function/248,Black,notBold,notItalic,closed,FitPage
+			6.2.4.2 Load Task with Extended Load Options (SFUN.LXM) Function/249,Black,notBold,notItalic,closed,FitPage
+		6.2.5 Task Resident (SFUN.HM) Function/252,Black,notBold,notItalic,closed,FitPage
+		6.2.6 Suspend (SFUN.SM) Function/253,Black,notBold,notItalic,closed,FitPage
+		6.2.7 Send Data (SFUN.DM) Function/253,Black,notBold,notItalic,closed,FitPage
+			6.2.7.1 SendData Message Buffer for Sending Task/253,Black,notBold,notItalic,closed,FitPage
+			6.2.7.2 Free Send Data Message Buffers for Receiving Task/255,Black,notBold,notItalic,closed,FitPage
+			6.2.7.3 Sample Programs Using SVC6 Send Data Function/257,Black,notBold,notItalic,closed,FitPage
+		6.2.8 Send Message (SFUN.MM) Function/261,Black,notBold,notItalic,closed,FitPage
+			6.2.8.1 Message Buffers/262,Black,notBold,notItalic,closed,FitPage
+		6.2.9 Queue Parameter (SFUN.QM) Function/270,Black,notBold,notItalic,closed,FitPage
+		6.2.10 Change Priority (SFUN.PM) Function/271,Black,notBold,notItalic,closed,FitPage
+		6.2.11 Send Logical Unit (lu) (SFUN.XSM) Function/271,Black,notBold,notItalic,closed,FitPage
+		6.2.12 Receive Logical Unit (lu) (SFUN.XRM) Function/272,Black,notBold,notItalic,closed,FitPage
+		6.2.13 Connect (SFUN.OM) Function/272,Black,notBold,notItalic,closed,FitPage
+		6.2.14 Thaw (SFUN.TM) Function/273,Black,notBold,notItalic,closed,FitPage
+		6.2.15 Sint (SFUN.IM) Function/273,Black,notBold,notItalic,closed,FitPage
+		6.2.16 Freeze (SFUN.FM) Function/274,Black,notBold,notItalic,closed,FitPage
+		6.2.17 Unconnect (SFUN.UM) Function/274,Black,notBold,notItalic,closed,FitPage
+		6.2.18 Assign Logical Processing Unit (LPU) Function (SFUN.LPU) Function/275,Black,notBold,notItalic,closed,FitPage
+		6.2.19 Transfer to Logical Processing Unit (LPU) (SFUN.TL) Function/275,Black,notBold,notItalic,closed,FitPage
+		6.2.20 Transfer to Central Processing Unit (CPU) (SFUN.TC) Function/276,Black,notBold,notItalic,closed,FitPage
+		6.2.21 Release (SFUN.RM) Function/277,Black,notBold,notItalic,closed,FitPage
+		6.2.22 Nonresident (SFUN.NM) Function/277,Black,notBold,notItalic,closed,FitPage
+		6.2.23 Rollable (SFUN.RLM) Function/277,Black,notBold,notItalic,closed,FitPage
+		6.2.24 Nonrollable (SFUN.NRM) Function/278,Black,notBold,notItalic,closed,FitPage
+		6.2.25 Start (Bit Positions 29, 30, 31) Function/278,Black,notBold,notItalic,closed,FitPage
+		6.2.26 Start Function for SVC6 (SFUN.SIM) Function/279,Black,notBold,notItalic,closed,FitPage
+		6.2.27 Start Function with Start Options for SVC6 (SFUN.SOM) Function/279,Black,notBold,notItalic,closed,FitPage
+		6.2.28 Delay Start Function for SVC6 (SFUN.SDM) Function/279,Black,notBold,notItalic,closed,FitPage
+		6.2.29 Delay Start Function with Start Options for SVC6 (SFUN.SDM, SFUN.SOM)/280,Black,notBold,notItalic,closed,FitPage
+		6.2.30 Wait Status Field (SVC6.TST)/280,Black,notBold,notItalic,closed,FitPage
+		6.2.31 Error Codes (SVC6.STA)/281,Black,notBold,notItalic,closed,FitPage
+Chapter 7 - File Handling Services Supervisor Call 7 (SVC7)/287,Black,notBold,notItalic,open,FitPage
+	7.1 Introduction/287,Black,notBold,notItalic,closed,FitPage
+	7.2 SVC7: File Handling Services/288,Black,notBold,notItalic,open,FitPage
+		7.2.1 Function Code Field (SVC7.OPT)/291,Black,notBold,notItalic,open,FitPage
+			7.2.1.1 Allocate Function/297,Black,notBold,notItalic,closed,FitPage
+			7.2.1.2 Assign Function/298,Black,notBold,notItalic,closed,FitPage
+				7.2.1.2.1 Temporary File Allocation and Assignment Function/299,Black,notBold,notItalic,closed,FitPage
+			7.2.1.3 Change Access Privileges Function/299,Black,notBold,notItalic,closed,FitPage
+			7.2.1.4 Rename Function/300,Black,notBold,notItalic,closed,FitPage
+			7.2.1.5 Reprotect Function/300,Black,notBold,notItalic,closed,FitPage
+			7.2.1.6 Close Function/301,Black,notBold,notItalic,closed,FitPage
+			7.2.1.7 Delete Function/301,Black,notBold,notItalic,closed,FitPage
+			7.2.1.8 Checkpoint Function/302,Black,notBold,notItalic,closed,FitPage
+			7.2.1.9 Fetch Attributes Function/302,Black,notBold,notItalic,closed,FitPage
+			7.2.1.10 Vertical Forms Control (VFC) Function/305,Black,notBold,notItalic,closed,FitPage
+			7.2.1.11 Fetch Time and Date Attributes from Disk Directory Function/306,Black,notBold,notItalic,closed,FitPage
+			7.2.1.12 Fetch Logical Attributes of Open File Function/309,Black,notBold,notItalic,closed,FitPage
+			7.2.1.13 Spoolfile Assign to Pseudo Device Function/310,Black,notBold,notItalic,closed,FitPage
+			7.2.1.14 Extended Assign to Spoolfile Function/312,Black,notBold,notItalic,closed,FitPage
+			7.2.1.15 Assign to Pseudo Device Function/313,Black,notBold,notItalic,closed,FitPage
+			7.2.1.16 Access Privileges/313,Black,notBold,notItalic,closed,FitPage
+			7.2.1.17 Change Terminal Mode/315,Black,notBold,notItalic,closed,FitPage
+			7.2.1.18 Data Communications Access Methods/315,Black,notBold,notItalic,closed,FitPage
+			7.2.1.19 File Types/316,Black,notBold,notItalic,closed,FitPage
+			7.2.1.20 Read/Write Key Fields (SVC7.RKY/SVC7.WKY)/317,Black,notBold,notItalic,closed,FitPage
+			7.2.1.21 File Size Field (SVC7.SIZ)/318,Black,notBold,notItalic,closed,FitPage
+	7.3 SVC7: Extended Functions for Privileged Tasks/319,Black,notBold,notItalic,open,FitPage
+		7.3.1 SVC7: Bare Disk Assignment/320,Black,notBold,notItalic,closed,FitPage
+		7.3.2 SVC7 Code 0: Fetch Attributes for Bare Disk Devices/323,Black,notBold,notItalic,closed,FitPage
+		7.3.3 SVC7: Device Rename/325,Black,notBold,notItalic,closed,FitPage
+		7.3.4 SVC7: Device Reprotect/326,Black,notBold,notItalic,closed,FitPage
+		7.3.5 SVC7 Code X'FF80': Extended Close Function/328,Black,notBold,notItalic,closed,FitPage
+	7.4 SVC7 Error Codes/330,Black,notBold,notItalic,closed,FitPage
+Chapter 8 - Load Task Status Word (TSW) Supervisor Call 9 (SVC9)/333,Black,notBold,notItalic,open,FitPage
+	8.1 Introduction/333,Black,notBold,notItalic,closed,FitPage
+	8.2 SVC9: Load Task Status Word (TSW)/334,Black,notBold,notItalic,closed,FitPage
+		8.2.1 Function and Description of the Task Status Word (TSW)/335,Black,notBold,notItalic,closed,FitPage
+Chapter 9 - Overloay Loading Supervisor Call 10 (SVC10)/341,Black,notBold,notItalic,open,FitPage
+	9.1 SVC10: Overloay Loading/341,Black,notBold,notItalic,closed,FitPage
+	9.2 Messages/341,Black,notBold,notItalic,closed,FitPage
+Chapter 10 - Auxiliary Processing Unit (APU) Control Supervisor Call 13 (SVC13)/345,Black,notBold,notItalic,open,FitPage
+	10.1 SVC13: Auxiliary Processing Unit (APU) Services/345,Black,notBold,notItalic,closed,FitPage
+	10.2 SVC13 Code 0: Read Auxiliary Processing Unit (APU) Assignment and Mapping Information/346,Black,notBold,notItalic,closed,FitPage
+	10.3 SVC13 Code 1: Read Auxiliary Processing Unit (APU)/APU Queue Status/349,Black,notBold,notItalic,closed,FitPage
+	10.4 SVC13 Code 2: Auxiliary Procesing Unit (APU) Mapping Functions/360,Black,notBold,notItalic,closed,FitPage
+	10.5 SVC13 Code 3: Auxiliary Processing Unit (APU) Control/364,Black,notBold,notItalic,closed,FitPage
+	10.6 SVC13 Auxiliary Processing Unit (APU) Hardware Status Field (SVC13.APS)/371,Black,notBold,notItalic,closed,FitPage
+	10.7 SVC13 Error Status Code Field (SVC13.ERR)/375,Black,notBold,notItalic,closed,FitPage
+	10.8 Typical Option Coding Sequences for SVC13 Code 2 and Code 3/378,Black,notBold,notItalic,closed,FitPage
+		10.8.1 Auxiliary Processing Unit (APU) Initialization and Start-Up/378,Black,notBold,notItalic,closed,FitPage
+		10.8.2 Auxiliary Processing Unit (APU) Queue Mark On/378,Black,notBold,notItalic,closed,FitPage
+		10.8.3 Setting Auxiliary Processing Unit (APU) Queue Discipline/379,Black,notBold,notItalic,closed,FitPage
+		10.8.4 Assigning Auxiliary Processing Unit (APU) to a Queue/379,Black,notBold,notItalic,closed,FitPage
+		10.8.5 Task Scheduling on the Auxiliary Processing Unit (APU)/379,Black,notBold,notItalic,closed,FitPage
+		10.8.6 Auxiliary Processing Unit (APU) Queue Mark Off/381,Black,notBold,notItalic,closed,FitPage
+Chapter 11 - User Supervisor Call 14 (SVC14)/383,Black,notBold,notItalic,open,FitPage
+	11.1 SVC14: User/383,Black,notBold,notItalic,closed,FitPage
+Chapter 12 - Data Communications Device-Dependent Input/Output (I/O) Supervisor Call 15 (SVC15)/385,Black,notBold,notItalic,open,FitPage
+	12.1 SVC15: Data Communications Device-Dependent Input/Output (I/O)/385,Black,notBold,notItalic,closed,FitPage
+Index/387,Black,notBold,notItalic,closed,FitPage
+Comment Form/393,Black,notBold,notItalic,closed,FitPage

@@ -74,6 +74,7 @@ doc::	capscheck \
 	pdf/1984\ -\ OS32\ System\ Generation\ [SYSGEN32]\ Reference\ Manual.pdf                                           \
 	pdf/1984\ -\ OS32\ System\ Support\ Run-Time\ Library\ Reference\ Manual.pdf                                       \
 	pdf/1984\ -\ OS32\ System\ Support\ Utilities.pdf                                                                  \
+	pdf/1984\ -\ OS32\ SVC\ Reference\ Manual.pdf                                                                      \
 	pdf/1984\ -\ OS32\ EDIT\ User\ Guide.pdf                                                                           \
 	pdf/1985\ -\ OS32\ Driver\ Writers\ Guide.pdf                                                                      \
 	pdf/1985\ -\ OS32\ MTM\ Installation.pdf                                                                           \
@@ -96,7 +97,7 @@ doc::	capscheck \
 capscheck:
 	-grep '[A-Z][A-Z][a-z]' bookmarks/* | egrep -v '(DCBx|SVCs|ISRs|RTLs|VDUs|PENnet|CCs|IFx|GBLx|LCLx|SETx)' >.delme.txt
 	cat .delme.txt
-	[ ! -s .delme.txt ] || ( echo ; cat .delme.txt ; rm .delme.txt ; printf "\nCHeck CApital LEtters\n\n" ; exit 1 )
+	@[ ! -s .delme.txt ] || ( echo ; cat .delme.txt ; rm .delme.txt ; printf "\nCHeck CApital LEtters\n\n" ; exit 1 )
 	rm -f .delme.txt
 
 pdf/2020\ -\ $(FTPDOC).pdf: doc/$(FTPDOC).odt
@@ -197,6 +198,14 @@ pdf/1982\ -\ Pascal\ User\ Guide,\ Language\ Reference,\ and\ Run\ Time\ Support
 	wget http://bitsavers.org/pdf/interdata/32bit/os32/lang/48-021R01_Pascal_May82.pdf
 	-jpdfbookmarks --apply "$^" 48-021R01_Pascal_May82.pdf --out "$@"
 	rm 48-021R01_Pascal_May82.pdf
+
+pdf/1984\ -\ OS32\ SVC\ Reference\ Manual.pdf: \
+			bookmarks/OS32\ SVC\ Reference\ Manual.txt
+	rm -f "$@"
+	mkdir -p pdf/
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1984_7.2/48-038F00R02_OS32_R7.02_SVC_Reference_1984.pdf
+	-jpdfbookmarks --apply "$^" 48-038F00R02_OS32_R7.02_SVC_Reference_1984.pdf --out "$@"
+	rm 48-038F00R02_OS32_R7.02_SVC_Reference_1984.pdf
 
 pdf/1984\ -\ OS32\ EDIT\ User\ Guide.pdf: \
 			bookmarks/OS32\ EDIT\ User\ Guide.txt
