@@ -68,6 +68,7 @@ doc::	capscheck \
 	pdf/1982\ -\ Utilisation\ of\ Perkin-Elmer\ Operating\ System\ Features\ to\ Optimise\ Programming\ Efficiency.pdf \
 	pdf/1983\ -\ OS32\ COPY\ User\ Guide.pdf                                                                           \
 	pdf/1983\ -\ OS32\ FASTBACK\ User\ Guide.pdf                                                                       \
+	pdf/1983\ -\ OS32\ SPL32\ Spooler\ System\ Administration\ Reference.pdf                                           \
 	pdf/1984\ -\ C\ Programming\ Manual.pdf                                                                            \
 	pdf/1984\ -\ OS32\ PATCH\ Reference\ Manual.pdf                                                                    \
 	pdf/1984\ -\ OS32\ Environment\ Control\ Monitor\ ECM32\ Programming\ and\ Operations\ Manual.pdf                  \
@@ -168,6 +169,14 @@ pdf/1983\ -\ OS32\ FASTBACK\ User\ Guide.pdf: \
 	wget http://bitsavers.org/pdf/interdata/32bit/os32/1983_6.2/48-063F00R00_OS32_R06.2_Fastback_Users_Guide_1983.pdf
 	-jpdfbookmarks --apply "$^" 48-063F00R00_OS32_R06.2_Fastback_Users_Guide_1983.pdf --out "$@"
 	rm 48-063F00R00_OS32_R06.2_Fastback_Users_Guide_1983.pdf
+
+pdf/1983\ -\ OS32\ SPL32\ Spooler\ System\ Administration\ Reference.pdf: \
+			bookmarks/OS32\ SPL32\ Spooler\ System\ Administration\ Reference.txt
+	rm -f "$@"
+	mkdir -p pdf/
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1983_6.2/48-056F00R00_OS32_SPL32_Spooler_System_Administration_Reference_1983.pdf
+	-jpdfbookmarks --apply "$^" 48-056F00R00_OS32_SPL32_Spooler_System_Administration_Reference_1983.pdf --out "$@"
+	rm 48-056F00R00_OS32_SPL32_Spooler_System_Administration_Reference_1983.pdf
 
 pdf/1984\ -\ OS32\ Environment\ Control\ Monitor\ ECM32\ Programming\ and\ Operations\ Manual.pdf: \
 			bookmarks/OS32\ Environment\ Control\ Monitor\ ECM32\ Programming\ and\ Operations\ Manual.txt
