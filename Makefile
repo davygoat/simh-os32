@@ -92,6 +92,7 @@ doc::	capscheck \
 	pdf/1986\ -\ OS32\ AIDS\ User\ Guide.pdf                                                                           \
 	pdf/1986\ -\ Common\ Assembly\ Language\ CAL32\ Reference\ Manual.pdf                                              \
 	pdf/1986\ -\ Common\ Assembly\ Language\ MACRO32\ Reference\ Manual.pdf                                            \
+	pdf/1986\ -\ OS32\ Asynchronous\ Communications\ Reference\ Manual.pdf                                             \
 	pdf/1988\ -\ OS32\ Application\ Level\ Programmer\ Reference\ Manual.pdf                                           \
 	pdf/1988\ -\ OS32\ System\ Level\ Programmer\ Reference\ Manual.pdf                                                \
 	pdf/1988\ -\ OS32\ LINK\ Reference\ Manual.pdf                                                                     \
@@ -123,6 +124,14 @@ pdf/1986\ -\ OS32\ AIDS\ User\ Guide.pdf: \
 	wget http://bitsavers.org/pdf/interdata/32bit/os32/1986_8.1.2/48-087F00R00_OS32_AIDS_User_Guide_1986.pdf
 	-jpdfbookmarks --apply "$^" 48-087F00R00_OS32_AIDS_User_Guide_1986.pdf --out "$@"
 	rm 48-087F00R00_OS32_AIDS_User_Guide_1986.pdf
+
+pdf/1986\ -\ OS32\ Asynchronous\ Communications\ Reference\ Manual.pdf: \
+			bookmarks/OS32\ Asynchronous\ Communications\ Reference\ Manual.txt
+	rm -f "$@"
+	mkdir -p pdf/
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1986_8.1.2/48-047F00R01_OS32_Asynchronous_Communications_Reference_Manual_1986.pdf
+	-jpdfbookmarks --apply "$^" 48-047F00R01_OS32_Asynchronous_Communications_Reference_Manual_1986.pdf --out "$@"
+	rm 48-047F00R01_OS32_Asynchronous_Communications_Reference_Manual_1986.pdf
 
 pdf/1974\ -\ 32\ Bit\ Series\ Reference\ Manual.pdf: \
 			bookmarks/32\ Bit\ Series\ Reference\ Manual.txt

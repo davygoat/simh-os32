@@ -1,0 +1,103 @@
+OS/32 Asynchronous Communications Reference Manual (1986)/1,Black,bold,notItalic,closed,FitPage
+Table of Contents/3,Black,notBold,notItalic,closed,FitPage
+Preface/9,Black,notBold,notItalic,closed,FitPage
+Chapter 1 - General Information/11,Black,notBold,notItalic,open,FitPage
+	1.1 Introduction/11,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - Hardware and Software Configuration Procedures/13,Black,notBold,notItalic,open,FitPage
+	2.1 Hardware/13,Black,notBold,notItalic,closed,FitPage
+		2.1.1 Data Set Adapters/15,Black,notBold,notItalic,closed,FitPage
+		2.1.2 Strapping Options/15,Black,notBold,notItalic,closed,FitPage
+		2.1.3 Terminals/17,Black,notBold,notItalic,closed,FitPage
+		3.1.4 Modems/17,Black,notBold,notItalic,closed,FitPage
+		2.1.5 Cables/18,Black,notBold,notItalic,closed,FitPage
+		2.1.6 DMA I/O Subsystem (DIOS)/19,Black,notBold,notItalic,closed,FitPage
+	2.2 Software/19,Black,notBold,notItalic,closed,FitPage
+		2.2.1 Conversational VDU/TTY/20,Black,notBold,notItalic,closed,FitPage
+		2.2.2 Model 1200 Editing VDU/24,Black,notBold,notItalic,closed,FitPage
+		2.2.3 Models 1250/1251 Point-to-Point VDUs/25,Black,notBold,notItalic,closed,FitPage
+		2.2.4 Models 1250/1251 Multidrop VDU/25,Black,notBold,notItalic,closed,FitPage
+		2.2.5 Supervisor Call 15 (SVC 15) Only Asynchronous/25,Black,notBold,notItalic,closed,FitPage
+		2.2.6 Sigma 10 Terminal/26,Black,notBold,notItalic,closed,FitPage
+		2.2.7 Remote Line Printer DCOD 145/26,Black,notBold,notItalic,closed,FitPage
+		2.2.8 Module Specification/26,Black,notBold,notItalic,closed,FitPage
+Chapter 3 - Asynchronous Line Driver/27,Black,notBold,notItalic,open,FitPage
+	3.1 Introduction/27,Black,notBold,notItalic,closed,FitPage
+	3.2 Asynchronous Line Driver and SVC 15/27,Black,notBold,notItalic,closed,FitPage
+	3.3 Command Supported/33,Black,notBold,notItalic,closed,FitPage
+	3.4 Special Character Processing/42,Black,notBold,notItalic,closed,FitPage
+	3.5 Default Values/44,Black,notBold,notItalic,closed,FitPage
+	3.6 Buffers and Traps/44,Black,notBold,notItalic,closed,FitPage
+		3.6.1 Buffer Types/46,Black,notBold,notItalic,closed,FitPage
+		3.6.2 Direct Buffers (Data Code X'00')/46,Black,notBold,notItalic,closed,FitPage
+		3.6.3 Indirect Buffers (Data Code X'04')/47,Black,notBold,notItalic,closed,FitPage
+		3.6.4 Chained Buffers (Data Code X'08')/48,Black,notBold,notItalic,closed,FitPage
+		3.6.5 Queued Buffers (Data Code X'0A')/50,Black,notBold,notItalic,closed,FitPage
+		3.6.6 Traps/53,Black,notBold,notItalic,closed,FitPage
+	3.7 How to Use the Asynchronous Line Driver/55,Black,notBold,notItalic,closed,FitPage
+Chapter 4 - Teletype (TTY)/Video Display Unit (VDU) Terminal Manager/57,Black,notBold,notItalic,open,FitPage
+	4.1 Introduction/57,Black,notBold,notItalic,closed,FitPage
+	4.2 Terminals/58,Black,notBold,notItalic,closed,FitPage
+	4.3 Supported Attributes/59,Black,notBold,notItalic,closed,FitPage
+	4.4 Supported Functions/59,Black,notBold,notItalic,closed,FitPage
+	4.5 The Perkin-Elmer Carousel 300 Terminal/60,Black,notBold,notItalic,closed,FitPage
+		4.5.1 System Characteristics/66,Black,notBold,notItalic,open,FitPage
+			4.5.1.1 Character Structure/66,Black,notBold,notItalic,closed,FitPage
+			4.5.1.2 Modem Connection/66,Black,notBold,notItalic,closed,FitPage
+	4.6 Perkin-Elmer Model 1100 VDU/67,Black,notBold,notItalic,closed,FitPage
+		4.6.1 Operational Characteristics/67,Black,notBold,notItalic,closed,FitPage
+		4.6.2 Controls/68,Black,notBold,notItalic,closed,FitPage
+		4.6.3 Options (All Factory Installed)/69,Black,notBold,notItalic,closed,FitPage
+		4.6.4 Principles of Operation/70,Black,notBold,notItalic,closed,FitPage
+		4.6.5 Local Control Keys/70,Black,notBold,notItalic,closed,FitPage
+		4.6.6 Single-Character ASCII Functions/71,Black,notBold,notItalic,closed,FitPage
+		4.6.7 Multicode Sequences/73,Black,notBold,notItalic,closed,FitPage
+	4.7 Encoded Error Messages/75,Black,notBold,notItalic,closed,FitPage
+Chapter 5 - Models 1200/1250/1251 Editing Video Display Unit (VDU) Terminal Managers/79,Black,notBold,notItalic,open,FitPage
+	5.1 Introduction/79,Black,notBold,notItalic,closed,FitPage
+	5.2 Functional Description/79,Black,notBold,notItalic,closed,FitPage
+		5.2.1 Device Assignment/79,Black,notBold,notItalic,open,FitPage
+			5.2.1.1 GENERATE Command/80,Black,notBold,notItalic,closed,FitPage
+			5.2.1.2 GENERATE Macro/80,Black,notBold,notItalic,closed,FitPage
+			5.2.1.3 XFMPCB Macro/82,Black,notBold,notItalic,closed,FitPage
+			5.2.1.4 ELIMINATE Command/83,Black,notBold,notItalic,closed,FitPage
+			5.2.1.5 ELIMINATE Macro/83,Black,notBold,notItalic,closed,FitPage
+		5.2.2 SVC 1 Interface/84,Black,notBold,notItalic,closed,FitPage
+		5.2.3 SVC 1 Extended Options/84,Black,notBold,notItalic,closed,FitPage
+	5.3 Using the Models 1200/1250/1251 VDU Terminal Managers/92,Black,notBold,notItalic,closed,FitPage
+		5.3.1 Models 1250/1251 Terminal Configuration/92,Black,notBold,notItalic,closed,FitPage
+		5.3.2 Terminal Features and Special Character Format/92,Black,notBold,notItalic,open,FitPage
+			5.3.2.1 Multicode Sequence/93,Black,notBold,notItalic,closed,FitPage
+			5.3.2.2 Attribute Characters/94,Black,notBold,notItalic,closed,FitPage
+			5.3.2.3 Line Drawing Characters/95,Black,notBold,notItalic,closed,FitPage
+			5.3.2.4 Status and Option Bytes/96,Black,notBold,notItalic,closed,FitPage
+			5.3.2.5 Function Keys and Attention Identifier (AID) Characters/98,Black,notBold,notItalic,closed,FitPage
+		5.3.3 Modes of Operation/99,Black,notBold,notItalic,open,FitPage
+			5.3.3.1 Conversational Mode/99,Black,notBold,notItalic,closed,FitPage
+			5.3.3.2 Image Mode/100,Black,notBold,notItalic,closed,FitPage
+			5.3.3.3 Editing Mode/100,Black,notBold,notItalic,closed,FitPage
+			5.3.3.4 Concept of Request-to-Send (RQS) and Immediate/100,Black,notBold,notItalic,closed,FitPage
+			5.3.3.5 Types of Data Read Formats/101,Black,notBold,notItalic,closed,FitPage
+			5.3.3.6 Types of Data Write Formats/108,Black,notBold,notItalic,closed,FitPage
+			5.3.3.7 Cursor Addressing and Random Addressing/109,Black,notBold,notItalic,closed,FitPage
+			5.3.3.8 Horizontal Tabulation/109,Black,notBold,notItalic,closed,FitPage
+			5.3.3.9 Printer Options/110,Black,notBold,notItalic,closed,FitPage
+		5.3.4 Sysgen and Environment/110,Black,notBold,notItalic,open,FitPage
+			5.3.4.1 Special Parity Requirement/111,Black,notBold,notItalic,closed,FitPage
+			5.3.4.2 Extended Device Code Specification/111,Black,notBold,notItalic,closed,FitPage
+			5.3.4.3 Default Extended Functions/Options/112,Black,notBold,notItalic,closed,FitPage
+			5.3.4.4 Terminal Switch and Strap Settings/114,Black,notBold,notItalic,closed,FitPage
+	5.4 Internal Terminal Manager Design/114,Black,notBold,notItalic,closed,FitPage
+		5.4.1 Relationship to Operating System and Asynchronous Line Driver/114,Black,notBold,notItalic,closed,FitPage
+		5.4.2 Internal Structure/118,Black,notBold,notItalic,open,FitPage
+			5.4.2.1 Initialization and Function Code Interpretation/119,Black,notBold,notItalic,closed,FitPage
+			5.4.2.2 Preparation for I/O, Control, and Enter SVC 15/120,Black,notBold,notItalic,closed,FitPage
+			5.4.2.3 Final Clean Up/120,Black,notBold,notItalic,closed,FitPage
+	5.5 Typical Problem Checklist/120,Black,notBold,notItalic,closed,FitPage
+	5.6 Multidrop Feature/121,Black,notBold,notItalic,closed,FitPage
+	5.7 Light Pen/121,Black,notBold,notItalic,closed,FitPage
+	5.8 Encoded Error Messages/121,Black,notBold,notItalic,closed,FitPage
+Appendixes/125,Black,notBold,notItalic,open,FitPage
+	Appendix A - Driver Command Word (DCW) Format/125,Black,notBold,notItalic,closed,FitPage
+	Appendix B - Standard ASCII Code/127,Black,notBold,notItalic,closed,FitPage
+Index/129,Black,notBold,notItalic,closed,FitPage
+Comment Form/133,Black,notBold,notItalic,closed,FitPage
