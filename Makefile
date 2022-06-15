@@ -67,6 +67,7 @@ doc::	capscheck \
 	pdf/1982\ -\ Pascal\ User\ Guide,\ Language\ Reference,\ and\ Run\ Time\ Support.pdf                               \
 	pdf/1982\ -\ System\ Mathematical\ Run\ Time\ Library\ Reference\ Manual.pdf                                       \
 	pdf/1982\ -\ Utilisation\ of\ Perkin-Elmer\ Operating\ System\ Features\ to\ Optimise\ Programming\ Efficiency.pdf \
+	pdf/1983\ -\ OS32\ System\ Macro\ Library\ Reference.pdf                                                           \
 	pdf/1983\ -\ OS32\ COPY\ User\ Guide.pdf                                                                           \
 	pdf/1983\ -\ OS32\ FASTBACK\ User\ Guide.pdf                                                                       \
 	pdf/1983\ -\ OS32\ SPL32\ Spooler\ System\ Administration\ Reference.pdf                                           \
@@ -154,6 +155,14 @@ pdf/1976\ -\ OS32\ MT\ Program\ Reference\ Manual.pdf: \
 	wget http://bitsavers.org/pdf/interdata/32bit/os32/1976_2.0/29-390R05_OS32MT_PgmRef_Nov76.pdf
 	-jpdfbookmarks --apply "$^" 29-390R05_OS32MT_PgmRef_Nov76.pdf --out "$@"
 	rm 29-390R05_OS32MT_PgmRef_Nov76.pdf
+
+pdf/1983\ -\ OS32\ System\ Macro\ Library\ Reference.pdf: \
+			bookmarks/OS32\ System\ Macro\ Library\ Reference.txt
+	rm -f "$@"
+	mkdir -p pdf/
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1983_7.1/48-006F00R02_OS32_R07.1_System_Macro_Library_Reference_1983.pdf
+	-jpdfbookmarks --apply "$^" 48-006F00R02_OS32_R07.1_System_Macro_Library_Reference_1983.pdf --out "$@"
+	rm 48-006F00R02_OS32_R07.1_System_Macro_Library_Reference_1983.pdf
 
 pdf/1983\ -\ OS32\ COPY\ User\ Guide.pdf: \
 			bookmarks/OS32\ COPY\ User\ Guide.txt
