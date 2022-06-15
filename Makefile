@@ -63,6 +63,7 @@ doc::	capscheck \
 	pdf/1976\ -\ Model\ 832\ Micro-Instruction\ Reference\ Manual.pdf                                                  \
 	pdf/1976\ -\ OS32\ MT\ Program\ Logic\ Manual.pdf                                                                  \
 	pdf/1976\ -\ OS32\ MT\ Program\ Reference\ Manual.pdf                                                              \
+	pdf/1980\ -\ OS32\ Library\ Loader\ Reference\ Manual.pdf                                                          \
 	pdf/1982\ -\ Pascal\ User\ Guide,\ Language\ Reference,\ and\ Run\ Time\ Support.pdf                               \
 	pdf/1982\ -\ System\ Mathematical\ Run\ Time\ Library\ Reference\ Manual.pdf                                       \
 	pdf/1982\ -\ Utilisation\ of\ Perkin-Elmer\ Operating\ System\ Features\ to\ Optimise\ Programming\ Efficiency.pdf \
@@ -217,6 +218,14 @@ pdf/1990\ -\ Developing\ Programs\ With\ FORTRAN\ VII.pdf: \
 	wget http://bitsavers.org/pdf/interdata/32bit/os32/lang/48-010F00R04_Developing_Programs_With_Fortran_VII_1990.pdf
 	-jpdfbookmarks --apply "$^" 48-010F00R04_Developing_Programs_With_Fortran_VII_1990.pdf --out "$@"
 	rm 48-010F00R04_Developing_Programs_With_Fortran_VII_1990.pdf
+
+pdf/1980\ -\ OS32\ Library\ Loader\ Reference\ Manual.pdf: \
+			bookmarks/OS32\ Library\ Loader\ Reference\ Manual.txt
+	rm -f "$@"
+	mkdir -p pdf/
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1980/48-020R00_OS32_R05.2_Library_Loader_Reference_Manual_1980.pdf
+	-jpdfbookmarks --apply "$^" 48-020R00_OS32_R05.2_Library_Loader_Reference_Manual_1980.pdf --out "$@"
+	rm 48-020R00_OS32_R05.2_Library_Loader_Reference_Manual_1980.pdf
 
 pdf/1982\ -\ Pascal\ User\ Guide,\ Language\ Reference,\ and\ Run\ Time\ Support.pdf: \
 			bookmarks/Pascal\ User\ Guide,\ Language\ Reference,\ and\ Run\ Time\ Support.txt

@@ -1,0 +1,47 @@
+OS/32 Library Loader (1980)/1,Black,bold,notItalic,open,FitPage
+Notice/3,Black,notBold,notItalic,closed,FitPage
+Page Revision Status Sheet/5,Black,notBold,notItalic,closed,FitPage
+Preface/7,Black,notBold,notItalic,closed,FitPage
+Table of Contents/9,Black,notBold,notItalic,closed,FitPage
+Chapter 1 - The Operating System/32 (OS/32) Library Loader/13,Black,notBold,notItalic,open,FitPage
+	1.1 Introduction/13,Black,notBold,notItalic,closed,FitPage
+	1.2 OS/32 Library Loading Operation/13,Black,notBold,notItalic,closed,FitPage
+	1.3 Program Loading with Pure and Impure Segments/14,Black,notBold,notItalic,closed,FitPage
+	1.4 Statement Syntax Conventions/15,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - Library Loader Command/19,Black,notBold,notItalic,open,FitPage
+	2.1 Introduction/19,Black,notBold,notItalic,closed,FitPage
+	2.2 AMAP Command/20,Black,notBold,notItalic,closed,FitPage
+	2.3 BF (Backspace File) Command/21,Black,notBold,notItalic,closed,FitPage
+	2.4 BR (Backspace Record) Command/22,Black,notBold,notItalic,closed,FitPage
+	2.5 BIAS Command/23,Black,notBold,notItalic,closed,FitPage
+	2.6 BC (Blank Common) Command/24,Black,notBold,notItalic,closed,FitPage
+	2.7 COPY Command/25,Black,notBold,notItalic,closed,FitPage
+	2.8 DUPE Command/26,Black,notBold,notItalic,closed,FitPage
+	2.9 EDIT Command/27,Black,notBold,notItalic,closed,FitPage
+	2.10 END Command/29,Black,notBold,notItalic,closed,FitPage
+	2.11 FIND Command/30,Black,notBold,notItalic,closed,FitPage
+	2.12 FF (Forward File) Command/31,Black,notBold,notItalic,closed,FitPage
+	2.13 FR (Forward Record) Command/32,Black,notBold,notItalic,closed,FitPage
+	2.14 GO Command/33,Black,notBold,notItalic,closed,FitPage
+	2.15 LABEL Command/34,Black,notBold,notItalic,closed,FitPage
+	2.16 LC (Labelled Common) Command/35,Black,notBold,notItalic,closed,FitPage
+	2.17 LINK Command/36,Black,notBold,notItalic,closed,FitPage
+	2.18 LF (Linkfile) Command/37,Black,notBold,notItalic,closed,FitPage
+	2.19 LOAD Command/38,Black,notBold,notItalic,closed,FitPage
+	2.20 LG (Log) Command/39,Black,notBold,notItalic,closed,FitPage
+	2.11 MAP Command/40,Black,notBold,notItalic,closed,FitPage
+	2.22 OUT Command/41,Black,notBold,notItalic,closed,FitPage
+	2.23 PAUSE Command/42,Black,notBold,notItalic,closed,FitPage
+	2.24 PB (Pure Bias) Command/43,Black,notBold,notItalic,closed,FitPage
+	2.25 RW (Rewind) Command/44,Black,notBold,notItalic,closed,FitPage
+	2.26 TABLE Command/45,Black,notBold,notItalic,closed,FitPage
+	2.27 TOP Command/46,Black,notBold,notItalic,closed,FitPage
+	2.28 WF (Write-Filemark) Command/47,Black,notBold,notItalic,closed,FitPage
+	2.29 XOUT Command/48,Black,notBold,notItalic,closed,FitPage
+Appendixes/49,Black,notBold,notItalic,open,FitPage
+	Appendix A - Command Summary/49,Black,notBold,notItalic,closed,FitPage
+	Appendix B - Library Loader Message Summary/51,Black,notBold,notItalic,closed,FitPage
+	Appendix C - Sample Command Sequence/55,Black,notBold,notItalic,closed,FitPage
+	Appendix D - Sample Library Creation/57,Black,notBold,notItalic,closed,FitPage
+Index/59,Black,notBold,notItalic,closed,FitPage
+Comment Form/61,Black,notBold,notItalic,closed,FitPage
