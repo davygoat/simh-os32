@@ -63,10 +63,10 @@ doc::	capscheck \
 	pdf/1976\ -\ Model\ 832\ Micro-Instruction\ Reference\ Manual.pdf                                                  \
 	pdf/1976\ -\ OS32\ MT\ Program\ Logic\ Manual.pdf                                                                  \
 	pdf/1976\ -\ OS32\ MT\ Program\ Reference\ Manual.pdf                                                              \
-	pdf/1979\ -\ OS32\ COPY\ User\ Guide.pdf                                                                           \
 	pdf/1982\ -\ Pascal\ User\ Guide,\ Language\ Reference,\ and\ Run\ Time\ Support.pdf                               \
 	pdf/1982\ -\ System\ Mathematical\ Run\ Time\ Library\ Reference\ Manual.pdf                                       \
 	pdf/1982\ -\ Utilisation\ of\ Perkin-Elmer\ Operating\ System\ Features\ to\ Optimise\ Programming\ Efficiency.pdf \
+	pdf/1983\ -\ OS32\ COPY\ User\ Guide.pdf                                                                           \
 	pdf/1984\ -\ C\ Programming\ Manual.pdf                                                                            \
 	pdf/1984\ -\ OS32\ PATCH\ Reference\ Manual.pdf                                                                    \
 	pdf/1984\ -\ OS32\ Environment\ Control\ Monitor\ ECM32\ Programming\ and\ Operations\ Manual.pdf                  \
@@ -152,13 +152,13 @@ pdf/1976\ -\ OS32\ MT\ Program\ Reference\ Manual.pdf: \
 	-jpdfbookmarks --apply "$^" 29-390R05_OS32MT_PgmRef_Nov76.pdf --out "$@"
 	rm 29-390R05_OS32MT_PgmRef_Nov76.pdf
 
-pdf/1979\ -\ OS32\ COPY\ User\ Guide.pdf: \
+pdf/1983\ -\ OS32\ COPY\ User\ Guide.pdf: \
 			bookmarks/OS32\ COPY\ User\ Guide.txt
 	rm -f "$@"
 	mkdir -p pdf/
-	wget http://bitsavers.org/pdf/interdata/32bit/os32/1979/S29-676_OS32_COPY_User_Guide_1979.pdf
-	-jpdfbookmarks --apply "$^" S29-676_OS32_COPY_User_Guide_1979.pdf --out "$@"
-	rm S29-676_OS32_COPY_User_Guide_1979.pdf
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1983_6.2/48-101F00R00_OS32_Copy_Users_Guide_1983.pdf
+	-jpdfbookmarks --apply "$^" 48-101F00R00_OS32_Copy_Users_Guide_1983.pdf --out "$@"
+	rm 48-101F00R00_OS32_Copy_Users_Guide_1983.pdf
 
 pdf/1984\ -\ OS32\ Environment\ Control\ Monitor\ ECM32\ Programming\ and\ Operations\ Manual.pdf: \
 			bookmarks/OS32\ Environment\ Control\ Monitor\ ECM32\ Programming\ and\ Operations\ Manual.txt
