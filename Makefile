@@ -67,6 +67,7 @@ doc::	capscheck \
 	pdf/1982\ -\ System\ Mathematical\ Run\ Time\ Library\ Reference\ Manual.pdf                                       \
 	pdf/1982\ -\ Utilisation\ of\ Perkin-Elmer\ Operating\ System\ Features\ to\ Optimise\ Programming\ Efficiency.pdf \
 	pdf/1983\ -\ OS32\ COPY\ User\ Guide.pdf                                                                           \
+	pdf/1983\ -\ OS32\ FASTBACK\ User\ Guide.pdf                                                                       \
 	pdf/1984\ -\ C\ Programming\ Manual.pdf                                                                            \
 	pdf/1984\ -\ OS32\ PATCH\ Reference\ Manual.pdf                                                                    \
 	pdf/1984\ -\ OS32\ Environment\ Control\ Monitor\ ECM32\ Programming\ and\ Operations\ Manual.pdf                  \
@@ -159,6 +160,14 @@ pdf/1983\ -\ OS32\ COPY\ User\ Guide.pdf: \
 	wget http://bitsavers.org/pdf/interdata/32bit/os32/1983_6.2/48-101F00R00_OS32_Copy_Users_Guide_1983.pdf
 	-jpdfbookmarks --apply "$^" 48-101F00R00_OS32_Copy_Users_Guide_1983.pdf --out "$@"
 	rm 48-101F00R00_OS32_Copy_Users_Guide_1983.pdf
+
+pdf/1983\ -\ OS32\ FASTBACK\ User\ Guide.pdf: \
+			bookmarks/OS32\ FASTBACK\ User\ Guide.txt
+	rm -f "$@"
+	mkdir -p pdf/
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1983_6.2/48-063F00R00_OS32_R06.2_Fastback_Users_Guide_1983.pdf
+	-jpdfbookmarks --apply "$^" 48-063F00R00_OS32_R06.2_Fastback_Users_Guide_1983.pdf --out "$@"
+	rm 48-063F00R00_OS32_R06.2_Fastback_Users_Guide_1983.pdf
 
 pdf/1984\ -\ OS32\ Environment\ Control\ Monitor\ ECM32\ Programming\ and\ Operations\ Manual.pdf: \
 			bookmarks/OS32\ Environment\ Control\ Monitor\ ECM32\ Programming\ and\ Operations\ Manual.txt
