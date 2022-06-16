@@ -63,6 +63,7 @@ doc::	capscheck \
 	pdf/1976\ -\ Model\ 832\ Micro-Instruction\ Reference\ Manual.pdf                                                  \
 	pdf/1976\ -\ OS32\ MT\ Program\ Logic\ Manual.pdf                                                                  \
 	pdf/1976\ -\ OS32\ MT\ Program\ Reference\ Manual.pdf                                                              \
+	pdf/1979\ -\ OS32\ Character\ Synchronous\ Communications\ Reference\ Manual.pdf                                   \
 	pdf/1980\ -\ OS32\ Library\ Loader\ Reference\ Manual.pdf                                                          \
 	pdf/1982\ -\ Pascal\ User\ Guide,\ Language\ Reference,\ and\ Run\ Time\ Support.pdf                               \
 	pdf/1982\ -\ System\ Mathematical\ Run\ Time\ Library\ Reference\ Manual.pdf                                       \
@@ -236,6 +237,14 @@ pdf/1990\ -\ Developing\ Programs\ With\ FORTRAN\ VII.pdf: \
 	wget http://bitsavers.org/pdf/interdata/32bit/os32/lang/48-010F00R04_Developing_Programs_With_Fortran_VII_1990.pdf
 	-jpdfbookmarks --apply "$^" 48-010F00R04_Developing_Programs_With_Fortran_VII_1990.pdf --out "$@"
 	rm 48-010F00R04_Developing_Programs_With_Fortran_VII_1990.pdf
+
+pdf/1979\ -\ OS32\ Character\ Synchronous\ Communications\ Reference\ Manual.pdf: \
+			bookmarks/OS32\ Character\ Synchronous\ Communications\ Reference\ Manual.txt
+	rm -f "$@"
+	mkdir -p pdf/
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1979/S29-543R02_OS32_Character_Synchronous_Communications_Reference_Manual_1979.pdf
+	-jpdfbookmarks --apply "$^" S29-543R02_OS32_Character_Synchronous_Communications_Reference_Manual_1979.pdf --out "$@"
+	rm S29-543R02_OS32_Character_Synchronous_Communications_Reference_Manual_1979.pdf
 
 pdf/1980\ -\ OS32\ Library\ Loader\ Reference\ Manual.pdf: \
 			bookmarks/OS32\ Library\ Loader\ Reference\ Manual.txt
