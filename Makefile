@@ -73,6 +73,7 @@ doc::	capscheck \
 	pdf/1983\ -\ OS32\ FASTBACK\ User\ Guide.pdf                                                                       \
 	pdf/1983\ -\ OS32\ SPL32\ Spooler\ System\ Administration\ Reference.pdf                                           \
 	pdf/1984\ -\ C\ Programming\ Manual.pdf                                                                            \
+	pdf/1984\ -\ OS32\ Basic\ Data\ Communications\ Reference.pdf                                                      \
 	pdf/1984\ -\ OS32\ PATCH\ Reference\ Manual.pdf                                                                    \
 	pdf/1984\ -\ OS32\ Environment\ Control\ Monitor\ ECM32\ Programming\ and\ Operations\ Manual.pdf                  \
 	pdf/1984\ -\ OS32\ Network\ Drivers\ Programming\ Reference\ Manual.pdf                                            \
@@ -102,7 +103,7 @@ doc::	capscheck \
 	pdf/2020\ -\ Adding\ an\ FTP\ server\ to\ your\ SimH\ project.pdf
 
 capscheck:
-	-grep '[A-Z][A-Z][a-z]' bookmarks/* | egrep -v '(DCBx|SVCs|ISRs|RTLs|VDUs|PENnet|CCs|IFx|GBLx|LCLx|SETx)' >.delme.txt
+	-grep '[A-Z][A-Z][a-z]' bookmarks/* | egrep -v '(DCBx|SVCs|ISRs|RTLs|VDUs|PENnet|CCs|IFx|GBLx|LCLx|SETx|MUXs)' >.delme.txt
 	cat .delme.txt
 	@[ ! -s .delme.txt ] || ( echo ; cat .delme.txt ; rm .delme.txt ; printf "\nCHeck CApital LEtters\n\n" ; exit 1 )
 	rm -f .delme.txt
@@ -197,6 +198,14 @@ pdf/1983\ -\ OS32\ SPL32\ Spooler\ System\ Administration\ Reference.pdf: \
 	wget http://bitsavers.org/pdf/interdata/32bit/os32/1983_6.2/48-056F00R00_OS32_SPL32_Spooler_System_Administration_Reference_1983.pdf
 	-jpdfbookmarks --apply "$^" 48-056F00R00_OS32_SPL32_Spooler_System_Administration_Reference_1983.pdf --out "$@"
 	rm 48-056F00R00_OS32_SPL32_Spooler_System_Administration_Reference_1983.pdf
+
+pdf/1984\ -\ OS32\ Basic\ Data\ Communications\ Reference.pdf: \
+			bookmarks/OS32\ Basic\ Data\ Communications\ Reference.txt
+	rm -f "$@"
+	mkdir -p pdf/
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1984_7.2/48-077F00R00_OS32_R7.02_Basic_Data_Communications_Reference_1984.pdf
+	-jpdfbookmarks --apply "$^" 48-077F00R00_OS32_R7.02_Basic_Data_Communications_Reference_1984.pdf --out "$@"
+	rm 48-077F00R00_OS32_R7.02_Basic_Data_Communications_Reference_1984.pdf
 
 pdf/1984\ -\ OS32\ Environment\ Control\ Monitor\ ECM32\ Programming\ and\ Operations\ Manual.pdf: \
 			bookmarks/OS32\ Environment\ Control\ Monitor\ ECM32\ Programming\ and\ Operations\ Manual.txt
