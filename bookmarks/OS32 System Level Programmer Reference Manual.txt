@@ -1,0 +1,86 @@
+OS/32 System Level Programmer Reference Manual (1988)/1,Black,notBold,notItalic,closed,FitPage
+Table of Contents/3,Black,notBold,notItalic,closed,FitPage
+Preface/7,Black,notBold,notItalic,open,FitPage
+Chapter 1 - OS/32 Subsystems/9,Black,notBold,notItalic,open,FitPage
+	1.1 Introduction/9,Black,notBold,notItalic,open,FitPage
+		1.1.1 OS/32 Multiprocessing Support/10,Black,notBold,notItalic,closed,FitPage
+	1.2 Software Subsystems/11,Black,notBold,notItalic,open,FitPage
+		1.2.1 Task Management Subsystem/14,Black,notBold,notItalic,closed,FitPage
+			1.2.1.1 Task Scheduling on the 3200MPS Family of Processors/19,Black,notBold,notItalic,closed,FitPage
+		1.2.2 Job Accounting Subsystem/22,Black,notBold,notItalic,closed,FitPage
+		1.2.3 Memory Management Subsystem/22,Black,notBold,notItalic,closed,FitPage
+		1.2.4 Timer Management Subsystem/23,Black,notBold,notItalic,closed,FitPage
+		1.2.5 File Managment Subsystem/24,Black,notBold,notItalic,closed,FitPage
+		1.2.6 Input/Output (I/O) Subsystem/25,Black,notBold,notItalic,closed,FitPage
+		1.2.7 Error Recording Subsystem/25,Black,notBold,notItalic,closed,FitPage
+		1.2.8 Memory Diagnostics Subsystem/26,Black,notBold,notItalic,closed,FitPage
+		1.2.9 Loader and Segmentation Subsystem/26,Black,notBold,notItalic,closed,FitPage
+		1.2.10 Basic Data Communications Subsystem/27,Black,notBold,notItalic,closed,FitPage
+		1.2.11 Console Monitor Subsystem/27,Black,notBold,notItalic,closed,FitPage
+		1.2.12 Command Processor Subsystem/28,Black,notBold,notItalic,closed,FitPage
+		1.2.13 System Initialization Subsystem/28,Black,notBold,notItalic,closed,FitPage
+		1.2.14 Internal Interrupt Subsystem/29,Black,notBold,notItalic,closed,FitPage
+		1.2.15 Optional User Supervisor Call (SVC) Subsystem/29,Black,notBold,notItalic,closed,FitPage
+		1.2.16 Floating Point Subsystem/29,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - Privileged Tasks/31,Black,notBold,notItalic,open,FitPage
+	2.1 Introduction/31,Black,notBold,notItalic,closed,FitPage
+	2.2 Executive Tasks (E-Tasks)/32,Black,notBold,notItalic,closed,FitPage
+		2.2.1 Relocatable Executive Tasks (E-Tasks)/32,Black,notBold,notItalic,closed,FitPage
+		2.2.2 Writing Executive Tasks (E-Tasks)/32,Black,notBold,notItalic,closed,FitPage
+		2.2.3 Writing Relocatable Executive Tasks (E-Tasks)/33,Black,notBold,notItalic,closed,FitPage
+		2.2.4 OS/32 Data Structures Used by Executive Tasks/34,Black,notBold,notItalic,closed,FitPage
+	2.3 Privileged User Tasks (U-Tasks)/38,Black,notBold,notItalic,closed,FitPage
+	2.4 Diagnostic Tasks (D-Tasks)/39,Black,notBold,notItalic,closed,FitPage
+Chapter 3 - Programming in the 3200MPS Family of Processors Multiprocessing Environment/41,Black,notBold,notItalic,open,FitPage
+	3.1 Introduction/41,Black,notBold,notItalic,closed,FitPage
+	3.2 Designing Tasks to Run on a Multiprocessing System/42,Black,notBold,notItalic,closed,FitPage
+	3.3 Preparing an Auxiliary Processing Unit (APU) For Task Execution/43,Black,notBold,notItalic,closed,FitPage
+		3.3.1 Queue Assignments/43,Black,notBold,notItalic,closed,FitPage
+		3.3.2 Auxiliary Processing Unit (APU) Operating States/43,Black,notBold,notItalic,closed,FitPage
+		3.3.3 APU-Only Queue Operating States/44,Black,notBold,notItalic,closed,FitPage
+		3.3.4 Logical Processing Unit (LPU) Mapping/46,Black,notBold,notItalic,closed,FitPage
+	3.4 Assigning Tasks to a Processor Queue/47,Black,notBold,notItalic,closed,FitPage
+	3.5 Controlling Task Order of Execution/48,Black,notBold,notItalic,closed,FitPage
+		3.5.1 Changing Auxiliary Processing Unit (APU) Task Queue Ordering/48,Black,notBold,notItalic,closed,FitPage
+		3.5.2 Monitoring and Preempting Auxiliary Processing Unit (APU) Task Execution/50,Black,notBold,notItalic,closed,FitPage
+		3.5.3 Transferring a Task from an Auxiliary Processing Unit (APU) to the Central Processing Unit (CPU)/56,Black,notBold,notItalic,closed,FitPage
+		3.5.4 Internal Task Control of Auxiliary Processing Unit (APU) Execution/57,Black,notBold,notItalic,closed,FitPage
+		3.5.5 Verifying Task Transfer to an Auxiliary Processing Unit (APU)/58,Black,notBold,notItalic,closed,FitPage
+		3.5.6 Customizing Auxiliary Processing Unit (APU) Fault and Supervisor Call (SVC) Handling/59,Black,notBold,notItalic,closed,FitPage
+	3.6 Preventing Memory Access Conflicts/60,Black,notBold,notItalic,closed,FitPage
+		3.6.1 Avoiding System Deadlock/61,Black,notBold,notItalic,closed,FitPage
+	3.7 Measuring Real-Time Performance on the 3200MPS Family of Processors/62,Black,notBold,notItalic,closed,FitPage
+	3.8 Where To Go For More Information/64,Black,notBold,notItalic,closed,FitPage
+Chapter 4 - Supervisor Call (SVC) Interception/67,Black,notBold,notItalic,open,FitPage
+	4.1 Introduction/67,Black,notBold,notItalic,closed,FitPage
+	4.2 How Supervisor Call (SVC) Interception Works/68,Black,notBold,notItalic,closed,FitPage
+	4.3 Preparing a Task for Supervisor Call (SVC) Interception/69,Black,notBold,notItalic,closed,FitPage
+		4.3.1 Request Descriptor Block (RDB) Buffers/70,Black,notBold,notItalic,closed,FitPage
+		4.3.2 Circular List for Request Descriptor Block (RDB) Buffers/72,Black,notBold,notItalic,closed,FitPage
+		4.3.3 Task Event Trap/74,Black,notBold,notItalic,closed,FitPage
+	4.4 Creating Intercept Paths (ICREATE)/74,Black,notBold,notItalic,closed,FitPage
+	4.5 How to Create a Pseudo Device or Task with ICREATE/74,Black,notBold,notItalic,closed,FitPage
+	4.6 Use of Generic Naming for Pseudo Devices and Tasks/75,Black,notBold,notItalic,closed,FitPage
+	4.7 Functional Summary of Supervisor Call (SVC) Interception/76,Black,notBold,notItalic,closed,FitPage
+	4.8 Full and Monitor Control Intercept Paths/77,Black,notBold,notItalic,closed,FitPage
+	4.9 How Intercept Paths Handle Supervisor Calls (SVCs) Occurring at End of Task/79,Black,notBold,notItalic,closed,FitPage
+	4.10 Terminating the Intercepted Supervisor Calls (SVCs)/79,Black,notBold,notItalic,closed,FitPage
+	4.11 How to Remove Intercept Paths/80,Black,notBold,notItalic,closed,FitPage
+	4.12 Error Handling/80,Black,notBold,notItalic,closed,FitPage
+	4.13 Macros Used with Supervisor Call (SVC) Interception/82,Black,notBold,notItalic,closed,FitPage
+		4.13.1 ICREATE Macro/82,Black,notBold,notItalic,closed,FitPage
+		4.13.2 IREMOVE Macro/90,Black,notBold,notItalic,closed,FitPage
+		4.13.3 IGET Macro/91,Black,notBold,notItalic,closed,FitPage
+		4.13.4 IPUT Macro/93,Black,notBold,notItalic,closed,FitPage
+		4.14.5 ICONT Macro/94,Black,notBold,notItalic,closed,FitPage
+		4.13.6 IPROCEED Macro/95,Black,notBold,notItalic,closed,FitPage
+		4.13.7 IROLL Macro/96,Black,notBold,notItalic,closed,FitPage
+		4.13.8 ITERM Macro/97,Black,notBold,notItalic,closed,FitPage
+		4.13.9 ITRAP Macro/98,Black,notBold,notItalic,closed,FitPage
+		4.13.10 IERRTST Macro/100,Black,notBold,notItalic,closed,FitPage
+		4.13.11 $RDB Macro/102,Black,notBold,notItalic,closed,FitPage
+	4.14 Sample Supervisor Call (SVC) Interception Programs/102,Black,notBold,notItalic,closed,FitPage
+Appendixes/111,Black,notBold,notItalic,open,FitPage
+	Appendix A - Supported Vertical Forms Control (VFC) Character Set/111,Black,notBold,notItalic,closed,FitPage
+Index/115,Black,notBold,notItalic,closed,FitPage
+Comment Form/119,Black,notBold,notItalic,closed,FitPage

@@ -1,0 +1,139 @@
+OS/32 COPY User Guide (1983)/1,Black,bold,notItalic,closed,FitPage
+Table of Contents/3,Black,notBold,notItalic,closed,FitPage
+Preface/7,Black,notBold,notItalic,closed,FitPage
+Chapter 1 - OS/32 COPY Overview/9,Black,notBold,notItalic,open,FitPage
+	1.1 General Description of OS/32 COPY/9,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - Getting Started/11,Black,notBold,notItalic,open,FitPage
+	2.1 Introduction/11,Black,notBold,notItalic,closed,FitPage
+	2.2 Loading OS/32 COPY/11,Black,notBold,notItalic,closed,FitPage
+	2.3 Starting OS/32 COPY/13,Black,notBold,notItalic,closed,FitPage
+		2.3.1 Command Device: COMMAND=fd1/14,Black,notBold,notItalic,closed,FitPage
+		2.3.2 Log Device: LOG=fd2/14,Black,notBold,notItalic,closed,FitPage
+		2.3.3 List Device: LIST=fd3/14,Black,notBold,notItalic,closed,FitPage
+		2.3.4 START Examples/14,Black,notBold,notItalic,closed,FitPage
+	2.4 Communication with OS/32 COPY/15,Black,notBold,notItalic,closed,FitPage
+		2.4.1 Mode of Program Operation/15,Black,notBold,notItalic,closed,FitPage
+			2.4.1.1 Interactive Mode/15,Black,notBold,notItalic,closed,FitPage
+			2.4.1.2 Batch Mode/16,Black,notBold,notItalic,closed,FitPage
+	2.5 Stopping OS/32 COPY/16,Black,notBold,notItalic,closed,FitPage
+		2.5.1 Terminating the Program/16,Black,notBold,notItalic,closed,FitPage
+		2.5.2 Termination a Command Operation/16,Black,notBold,notItalic,closed,FitPage
+	2.6 Pausing the Program/17,Black,notBold,notItalic,closed,FitPage
+Chapter 3 - Guide to OS/32 COPY Features/19,Black,notBold,notItalic,open,FitPage
+	3.1 Introduction/19,Black,notBold,notItalic,closed,FitPage
+		3.1.1 Overview of OS/32 COPY Command/19,Black,notBold,notItalic,closed,FitPage
+	3.2 Fundamental Copy Operations/20,Black,notBold,notItalic,closed,FitPage
+		3.2.1 Copying a Disk File to Another File or Device/21,Black,notBold,notItalic,closed,FitPage
+		3.2.2 Copying Unlabelled Magnetic Tapes/21,Black,notBold,notItalic,open,FitPage
+			3.2.2.1 Copy to Unlabelled Magnetic Tapes/21,Black,notBold,notItalic,closed,FitPage
+			3.2.2.2 Copying from Unlabelled Magnetic Tapes/22,Black,notBold,notItalic,open,FitPage
+			3.2.2.3 Copying Between Unlabelled Tapes/23,Black,notBold,notItalic,closed,FitPage
+			3.2.2.4 Default Values/23,Black,notBold,notItalic,closed,FitPage
+			3.2.2.5 More Examples/23,Black,notBold,notItalic,closed,FitPage
+		3.2.3 Copying Labelled Magnetic Tape/25,Black,notBold,notItalic,open,FitPage
+			3.2.3.1 Copying from Labelled Tapes/25,Black,notBold,notItalic,closed,FitPage
+			3.2.3.2 Output Labelled Tapes/28,Black,notBold,notItalic,closed,FitPage
+		3.2.4 Copying To and From Other Devices/31,Black,notBold,notItalic,closed,FitPage
+		3.2.5 User-Specified Terminator/31,Black,notBold,notItalic,closed,FitPage
+		3.2.6 Handling of End of File (EOF), End of Volume (EOV), and End of Medium (EOM) Conditions/32,Black,notBold,notItalic,open,FitPage
+			3.2.6.1 End of File (EOF)/32,Black,notBold,notItalic,closed,FitPage
+			3.2.6.2 End of Volume (EOV)/33,Black,notBold,notItalic,closed,FitPage
+			3.2.6.3 End of Medium (EOM)/34,Black,notBold,notItalic,closed,FitPage
+	3.3 More Elaborate Copy Operations/35,Black,notBold,notItalic,closed,FitPage
+		3.3.1 Implicit Specification of Input and Output Files/35,Black,notBold,notItalic,closed,FitPage
+		3.3.2 Copying Multiple Files with a Single Command/36,Black,notBold,notItalic,closed,FitPage
+		3.3.3 Copying Part of a File/37,Black,notBold,notItalic,closed,FitPage
+		3.3.4 Automatic Allocation of Output Files/39,Black,notBold,notItalic,closed,FitPage
+		3.3.5 Copying Disk Files with Protection Keys/40,Black,notBold,notItalic,closed,FitPage
+		3.3.6 Copying Variable Length Records/41,Black,notBold,notItalic,closed,FitPage
+	3.4 Verifying/42,Black,notBold,notItalic,closed,FitPage
+		3.4.1 Verification Following a Copy Operation/42,Black,notBold,notItalic,closed,FitPage
+		3.4.2 Verifying Without a COPY Command/44,Black,notBold,notItalic,closed,FitPage
+		3.4.3 Use of the CONTINUE/NOCONT Option/45,Black,notBold,notItalic,closed,FitPage
+	3.5 Displaying Files/45,Black,notBold,notItalic,closed,FitPage
+	3.6 File Positioning/47,Black,notBold,notItalic,closed,FitPage
+		3.6.1 Forward File (FFILE) and Backward File (BFILE)/49,Black,notBold,notItalic,closed,FitPage
+		3.6.2 Record Positioning/49,Black,notBold,notItalic,closed,FitPage
+		3.6.3 REWIND Command/50,Black,notBold,notItalic,closed,FitPage
+		3.6.4 Writing Filemarks/50,Black,notBold,notItalic,closed,FitPage
+	3.7 OPTIONS, LIST, NOLOG, and FILES Commands/50,Black,notBold,notItalic,closed,FitPage
+		3.7.1 OPTIONS Command/51,Black,notBold,notItalic,closed,FitPage
+			3.7.1.1 Filemark Recognition/51,Black,notBold,notItalic,closed,FitPage
+			3.7.1.2 ASCII/BINARY Mode/51,Black,notBold,notItalic,closed,FitPage
+			3.7.1.3 Pseudo Filemark Recognition/52,Black,notBold,notItalic,closed,FitPage
+			3.7.1.4 Terminator Sequence/52,Black,notBold,notItalic,closed,FitPage
+			3.7.1.5 Use of CONTINUE/NOCONT/53,Black,notBold,notItalic,closed,FitPage
+			3.7.1.6 FILL Character Designation/53,Black,notBold,notItalic,closed,FitPage
+		3.7.2 LIST Command/54,Black,notBold,notItalic,closed,FitPage
+		3.7.3 LOG and NOLOG Commands/54,Black,notBold,notItalic,closed,FitPage
+		3.7.4 FILES Command/54,Black,notBold,notItalic,closed,FitPage
+	3.8 Batch Operations/54,Black,notBold,notItalic,closed,FitPage
+		3.8.1 Default Assignments of List and Log Devices/55,Black,notBold,notItalic,closed,FitPage
+		3.8.2 Error and End of Volume (EOV) Handling/55,Black,notBold,notItalic,closed,FitPage
+		3.8.3 Handling of Nonempty Output Files in the COPY Command/55,Black,notBold,notItalic,closed,FitPage
+		3.8.4 SEND STOP Processing/55,Black,notBold,notItalic,closed,FitPage
+Chapter 4 - OS/32 COPY Reference Guide/56,Black,notBold,notItalic,open,FitPage
+	4.1 Introduction/56,Black,notBold,notItalic,closed,FitPage
+	4.2 File Handling/56,Black,notBold,notItalic,closed,FitPage
+		4.2.1 Current File Maintenance/56,Black,notBold,notItalic,closed,FitPage
+		4.2.2 Determination of File Attributes/56,Black,notBold,notItalic,closed,FitPage
+		4.2.3 Labelled Magnetic Tape/57,Black,notBold,notItalic,closed,FitPage
+	4.3 Command Syntax/58,Black,notBold,notItalic,closed,FitPage
+		4.3.1 Continuation of Commands/58,Black,notBold,notItalic,closed,FitPage
+		4.3.2 Command Parameters/59,Black,notBold,notItalic,closed,FitPage
+		4.3.3 Implicit Specifications of a File Descriptor (fd) Parameter/59,Black,notBold,notItalic,closed,FitPage
+		4.3.4 Comment Statements/60,Black,notBold,notItalic,closed,FitPage
+	4.4 OS/32 COPY Commands/60,Black,notBold,notItalic,open,FitPage
+		4.4.1 ALLOCATE Command/61,Black,notBold,notItalic,closed,FitPage
+		4.4.2 BFILE Command/64,Black,notBold,notItalic,closed,FitPage
+		4.4.3 BRECORD Command/65,Black,notBold,notItalic,closed,FitPage
+		4.4.4 CONTINUE Command/66,Black,notBold,notItalic,closed,FitPage
+		4.4.5 COPY Command/67,Black,notBold,notItalic,closed,FitPage
+		4.4.6 DELETE Command/71,Black,notBold,notItalic,closed,FitPage
+		4.4.7 DISPLAY Command/72,Black,notBold,notItalic,closed,FitPage
+		4.4.8 END Command/74,Black,notBold,notItalic,closed,FitPage
+		4.4.9 FFILE Command/75,Black,notBold,notItalic,closed,FitPage
+		4.4.10 FILES Command/77,Black,notBold,notItalic,closed,FitPage
+		4.4.11 FRECORD Command/80,Black,notBold,notItalic,closed,FitPage
+		4.4.12 HELP Command/81,Black,notBold,notItalic,closed,FitPage
+		4.4.13 INPUT Command/83,Black,notBold,notItalic,closed,FitPage
+		4.4.14 LIST Command/86,Black,notBold,notItalic,closed,FitPage
+		4.4.15 LOG Command/87,Black,notBold,notItalic,closed,FitPage
+		4.4.16 NOLOG Command/88,Black,notBold,notItalic,closed,FitPage
+		4.4.17 OPTIONS Command/89,Black,notBold,notItalic,closed,FitPage
+		4.4.18 OUTPUT Command/92,Black,notBold,notItalic,closed,FitPage
+		4.4.19 PAUSE Command/95,Black,notBold,notItalic,closed,FitPage
+		4.4.20 RENAME Command/96,Black,notBold,notItalic,closed,FitPage
+		4.4.21 REWIND Command/97,Black,notBold,notItalic,closed,FitPage
+		4.4.22 SEND STOP Command/98,Black,notBold,notItalic,closed,FitPage
+		4.4.23 VERIFY Command/99,Black,notBold,notItalic,closed,FitPage
+		4.4.24 WFILE Command/102,Black,notBold,notItalic,closed,FitPage
+Chapter 5 - Error Handling and Messages/104,Black,notBold,notItalic,open,FitPage
+	5.1 Error Handling/104,Black,notBold,notItalic,closed,FitPage
+		5.1.1 Interactive Mode/104,Black,notBold,notItalic,closed,FitPage
+		5.1.2 Batch Mode/104,Black,notBold,notItalic,closed,FitPage
+		5.1.3 Return Code/104,Black,notBold,notItalic,closed,FitPage
+	5.2 Message Summary/105,Black,notBold,notItalic,closed,FitPage
+		ALLOCATE ERROR sslu FOR fd/105,Black,notBold,notItalic,closed,FitPage
+		ASSIGN ERROR sslu ON xxxx FOR fd/106,Black,notBold,notItalic,closed,FitPage
+		ATTRIBUTE ERROR ON xxxx FOR fd/107,Black,notBold,notItalic,closed,FitPage
+		ATTRIBUTE WARNING ON xxxx FOR fd/108,Black,notBold,notItalic,closed,FitPage
+		DELETE ERROR sslu FOR fd/109,Black,notBold,notItalic,closed,FitPage
+		Error - fd ASSIGN TO INPUT/110,Black,notBold,notItalic,closed,FitPage
+		INPUT FILE MUST BE ENTERED/111,Black,notBold,notItalic,closed,FitPage
+		INVALID BLOCK/RECORD SIZE/112,Black,notBold,notItalic,closed,FitPage
+		INSUFFICIENT MEMORY -nKB EXTRA REQUIRED/113,Black,notBold,notItalic,closed,FitPage
+		I/O ERROR lussss ON xxxx FOR fd/114,Black,notBold,notItalic,closed,FitPage
+		LABELLED TAPE ERROR ON xxxx/115,Black,notBold,notItalic,closed,FitPage
+		LIST FILE MUST BE ENTERED/116,Black,notBold,notItalic,closed,FitPage
+		OUTPUT FILE MUST BE ENTERED/117,Black,notBold,notItalic,closed,FitPage
+		RECORD LENGTH ERROR on xxxx n BYTES READ, m BYTES EXPECTED/118,Black,notBold,notItalic,closed,FitPage
+		RENAME ERROR sslu FOR fd/119,Black,notBold,notItalic,closed,FitPage
+Appendixes/122,Black,notBold,notItalic,open,FitPage
+	Appendix A - Command Summary/122,Black,notBold,notItalic,closed,FitPage
+	Appendix B - Task Establishment and Size Information/125,Black,notBold,notItalic,closed,FitPage
+	Appendix C - Table of Device Characteristics/127,Black,notBold,notItalic,closed,FitPage
+	Appendix D - Labelled Tape File Format Summary/129,Black,notBold,notItalic,closed,FitPage
+	Appendix E - The Tape Labeller Program/133,Black,notBold,notItalic,closed,FitPage
+Index/137,Black,notBold,notItalic,closed,FitPage
+Comment Form/141,Black,notBold,notItalic,closed,FitPage

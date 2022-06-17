@@ -1,0 +1,89 @@
+OS/32 FASTBACK Reference Manual (1983)/1,Black,bold,notItalic,closed,FitPage
+Table of Contents/3,Black,notBold,notItalic,closed,FitPage
+Preface/7,Black,notBold,notItalic,closed,FitPage
+Chapter 1 - OS/32 Fastback Overview/9,Black,notBold,notItalic,open,FitPage
+	1.1 Introduction/9,Black,notBold,notItalic,closed,FitPage
+	1.2 General Description/10,Black,notBold,notItalic,closed,FitPage
+	1.3 OS/32 Fastback Requirements/11,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - Getting Started/13,Black,notBold,notItalic,open,FitPage
+	2.1 When to Run Fastback/13,Black,notBold,notItalic,closed,FitPage
+	2.2 Loading Fastback/13,Black,notBold,notItalic,open,FitPage
+		2.2.1 Loading Fastback from the System Console/13,Black,notBold,notItalic,closed,FitPage
+		2.2.2 Loading Fastback from an MTM Terminal/14,Black,notBold,notItalic,closed,FitPage
+	2.3 Starting Fastback/15,Black,notBold,notItalic,open,FitPage
+		2.3.1 Staring Fastback in Interactive Mode/15,Black,notBold,notItalic,closed,FitPage
+		2.3.2 Starting Fastback in Batch Mode/17,Black,notBold,notItalic,closed,FitPage
+		2.3.3 Starting Fastback in Immediate Mode/18,Black,notBold,notItalic,closed,FitPage
+	2.4 Stopping Fastback/19,Black,notBold,notItalic,closed,FitPage
+Chapter 3 - Command Entry/21,Black,notBold,notItalic,open,FitPage
+	3.1 Introduction/21,Black,notBold,notItalic,closed,FitPage
+	3.2 Batch and Immediate Mode Command Entry/21,Black,notBold,notItalic,open,FitPage
+		3.2.1 BACKUP/25,Black,notBold,notItalic,closed,FitPage
+		3.2.2 BEFORE/27,Black,notBold,notItalic,closed,FitPage
+		3.2.3 BUFFERSIZE/30,Black,notBold,notItalic,closed,FitPage
+		3.2.4 DISC/32,Black,notBold,notItalic,closed,FitPage
+		3.2.5 DISPLAY/33,Black,notBold,notItalic,closed,FitPage
+		3.2.6 END/35,Black,notBold,notItalic,closed,FitPage
+		3.2.7 ERRORPOOL/36,Black,notBold,notItalic,closed,FitPage
+		3.2.8 KEEPFILES/38,Black,notBold,notItalic,closed,FitPage
+		3.2.9 LIST/40,Black,notBold,notItalic,closed,FitPage
+		3.2.10 NOPROTECT/42,Black,notBold,notItalic,closed,FitPage
+		3.2.11 ONERROR/45,Black,notBold,notItalic,closed,FitPage
+		3.2.12 POSITIONING/47,Black,notBold,notItalic,closed,FitPage
+		3.2.13 RESTORE/49,Black,notBold,notItalic,closed,FitPage
+		3.2.14 SELECT/51,Black,notBold,notItalic,closed,FitPage
+		3.2.15 SINCE/53,Black,notBold,notItalic,closed,FitPage
+		3.2.16 TAPE/56,Black,notBold,notItalic,closed,FitPage
+		3.2.17 TEMPLATE/58,Black,notBold,notItalic,closed,FitPage
+		3.2.18 VERIFY/60,Black,notBold,notItalic,closed,FitPage
+		3.2.19 VERIFYONLY/61,Black,notBold,notItalic,closed,FitPage
+		3.2.20 WORKSPACE/63,Black,notBold,notItalic,closed,FitPage
+	3.3 Interactive Command Entry/65,Black,notBold,notItalic,open,FitPage
+		3.3.1 Dialogue for the Backup Function/67,Black,notBold,notItalic,closed,FitPage
+		3.3.2 Dialogue for the Restore Function/70,Black,notBold,notItalic,closed,FitPage
+		3.3.3 Dialogue for the Display Function/74,Black,notBold,notItalic,closed,FitPage
+		3.3.4 Dialogue for the Verifyonly Function/76,Black,notBold,notItalic,closed,FitPage
+Chapter 4 - File Selection/81,Black,notBold,notItalic,open,FitPage
+	4.1 General Information/81,Black,notBold,notItalic,closed,FitPage
+	4.2 Select Entry Format/83,Black,notBold,notItalic,closed,FitPage
+		4.2.1 Select Mask/83,Black,notBold,notItalic,closed,FitPage
+		4.2.2 Volume Name Masking/88,Black,notBold,notItalic,closed,FitPage
+		4.2.3 Account Number Masking/88,Black,notBold,notItalic,closed,FitPage
+		4.2,4 Complex Masks/89,Black,notBold,notItalic,closed,FitPage
+		4.2.5 Date/Time Limit/90,Black,notBold,notItalic,closed,FitPage
+		4.2.6 Reprotect/92,Black,notBold,notItalic,closed,FitPage
+		4.2.7 Rename/93,Black,notBold,notItalic,closed,FitPage
+	4.3 Examples of Valid Select Entries/98,Black,notBold,notItalic,closed,FitPage
+	4.4 Processing of Select Entries/98,Black,notBold,notItalic,closed,FitPage
+	4.5 Non-Matched Masks/100,Black,notBold,notItalic,closed,FitPage
+Chapter 5 - Fastback Operation/103,Black,notBold,notItalic,open,FitPage
+	5.1 Description/103,Black,notBold,notItalic,closed,FitPage
+	5.2 Actions Performed For Each Function/103,Black,notBold,notItalic,closed,FitPage
+		5.2.1 The Backup Operation/104,Black,notBold,notItalic,closed,FitPage
+		5.2.2 The Restore Operation/107,Black,notBold,notItalic,closed,FitPage
+		5.2.3 The Verifyonly Operation/110,Black,notBold,notItalic,closed,FitPage
+		5.2.4 The Display Operation/110,Black,notBold,notItalic,closed,FitPage
+	5.3 The Error Pool/111,Black,notBold,notItalic,closed,FitPage
+	5.4 Timing Information/111,Black,notBold,notItalic,closed,FitPage
+	5.5 Tuning Information/113,Black,notBold,notItalic,closed,FitPage
+	5.6 Pack Administration File/116,Black,notBold,notItalic,closed,FitPage
+Chapter 6 - Error Handling, List Output and Messages/119,Black,notBold,notItalic,open,FitPage
+	6.1 Command Error Handling/119,Black,notBold,notItalic,closed,FitPage
+	6.2 List Output/121,Black,notBold,notItalic,closed,FitPage
+		6.2.1 List Output and Error Handling/121,Black,notBold,notItalic,closed,FitPage
+		6.2.2 List Contents/122,Black,notBold,notItalic,closed,FitPage
+		6.2.3 Sorting the List Output/122,Black,notBold,notItalic,closed,FitPage
+		6.2.4 Using Output as a Select List/124,Black,notBold,notItalic,closed,FitPage
+	6.3 Message Summary/125,Black,notBold,notItalic,closed,FitPage
+Chapter 7 - Internal Failure/203,Black,notBold,notItalic,open,FitPage
+	7.1 Fastback Error Recovery/203,Black,notBold,notItalic,closed,FitPage
+Appendixes/205,Black,notBold,notItalic,open,FitPage
+	Appendix A - Fastback Command Summary/205,Black,notBold,notItalic,closed,FitPage
+	Appendix B - End of Task Codes/207,Black,notBold,notItalic,closed,FitPage
+	Appendix C - Link Procedure/209,Black,notBold,notItalic,closed,FitPage
+	Appendix D - Logical Unit Usage/211,Black,notBold,notItalic,closed,FitPage
+	Appendix E - Compatibility with Other Products/213,Black,notBold,notItalic,closed,FitPage
+	Appendix F - Comparison with OS/32 BACKUP/215,Black,notBold,notItalic,closed,FitPage
+	Appendix G - Fastback Tape Format/219,Black,notBold,notItalic,closed,FitPage
+Index/223,Black,notBold,notItalic,closed,FitPage
+Comment Form/227,Black,notBold,notItalic,closed,FitPage

@@ -1,35 +1,35 @@
 System Mathematical Library Run Time Library (RTL) Reference Manual (1982)/1,Black,bold,italic,open,FitPage
-	Preface/3,Black,notBold,notItalic,closed,FitPage
-	Table of Contents/5,Black,notBold,notItalic,closed,FitPage
-	Chapters/7,Black,notBold,notItalic,open,FitPage
-		Chapter 1 - Introduction/7,Black,notBold,notItalic,closed,FitPage
-		Chapter 2 - General Considerations/9,Black,notBold,notItalic,open,FitPage
-			2.1 Terms Related to Accuracy/9,Black,notBold,notItalic,closed,FitPage
-			2.2 Accuracy of Function Subprograms in General/9,Black,notBold,notItalic,closed,FitPage
-			2.3 Generation of Error Messages/11,Black,notBold,notItalic,closed,FitPage
-			2.4 External and Intrinsic Versions of Functions/11,Black,notBold,notItalic,closed,FitPage
-		Chapter 3 - Description of Function Subprograms/12,Black,notBold,notItalic,open,FitPage
-			3.1 Introduction/12,Black,notBold,notItalic,closed,FitPage
-			3.2 Elementary Functions/12,Black,notBold,notItalic,closed,FitPage
-				3.2.1 Square Root/12,Black,notBold,notItalic,closed,FitPage
-				3.2.2 Exponential Functions/14,Black,notBold,notItalic,closed,FitPage
-				3.2.3 Trigonometric Functions/15,Black,notBold,notItalic,closed,FitPage
-				3.2.4 Logarithmic Functions/18,Black,notBold,notItalic,closed,FitPage
-				3.2.5 Inverse Trigonometric Functions/19,Black,notBold,notItalic,closed,FitPage
-				3.2.6 Hyperbolic Functions/22,Black,notBold,notItalic,closed,FitPage
-			3.3 Min and Max Functions/25,Black,notBold,notItalic,closed,FitPage
-			3.4 Type Conversions/27,Black,notBold,notItalic,closed,FitPage
-			3.5 Miscellaneous Functions/29,Black,notBold,notItalic,closed,FitPage
-				3.5.1 Remaindering/29,Black,notBold,notItalic,closed,FitPage
-				3.5.2 Manipulation of Complex Numbers/30,Black,notBold,notItalic,closed,FitPage
-				3.5.3 Absolute Values/30,Black,notBold,notItalic,closed,FitPage
-				3.5.4 Transfer of Sign/31,Black,notBold,notItalic,closed,FitPage
-				3.5.5 Positive Difference/31,Black,notBold,notItalic,closed,FitPage
-				3.5.6 Truncation and Rounding/32,Black,notBold,notItalic,closed,FitPage
-				3.5.7 Double-Precision Product of Single-Precision Factors/32,Black,notBold,notItalic,closed,FitPage
-			3.6 Involution (Raising to Powres)/33,Black,notBold,notItalic,closed,FitPage
-	Appendixes/36,Black,notBold,notItalic,open,FitPage
-		Appendix 1 - Error Messages/36,Black,notBold,notItalic,closed,FitPage
-		Appendix 2 - Alphabetical List of Subprograms Documented in This Manual/41,Black,notBold,notItalic,closed,FitPage
-		Appendix 3 - Arithmetic Tables/44,Black,notBold,notItalic,closed,FitPage
-	Index/49,Black,notBold,notItalic,closed,FitPage
+Preface/3,Black,notBold,notItalic,closed,FitPage
+Table of Contents/5,Black,notBold,notItalic,closed,FitPage
+Chapters/7,Black,notBold,notItalic,open,FitPage
+	Chapter 1 - Introduction/7,Black,notBold,notItalic,closed,FitPage
+	Chapter 2 - General Considerations/9,Black,notBold,notItalic,open,FitPage
+		2.1 Terms Related to Accuracy/9,Black,notBold,notItalic,closed,FitPage
+		2.2 Accuracy of Function Subprograms in General/9,Black,notBold,notItalic,closed,FitPage
+		2.3 Generation of Error Messages/11,Black,notBold,notItalic,closed,FitPage
+		2.4 External and Intrinsic Versions of Functions/11,Black,notBold,notItalic,closed,FitPage
+	Chapter 3 - Description of Function Subprograms/12,Black,notBold,notItalic,open,FitPage
+		3.1 Introduction/12,Black,notBold,notItalic,closed,FitPage
+		3.2 Elementary Functions/12,Black,notBold,notItalic,closed,FitPage
+			3.2.1 Square Root/12,Black,notBold,notItalic,closed,FitPage
+			3.2.2 Exponential Functions/14,Black,notBold,notItalic,closed,FitPage
+			3.2.3 Trigonometric Functions/15,Black,notBold,notItalic,closed,FitPage
+			3.2.4 Logarithmic Functions/18,Black,notBold,notItalic,closed,FitPage
+			3.2.5 Inverse Trigonometric Functions/19,Black,notBold,notItalic,closed,FitPage
+			3.2.6 Hyperbolic Functions/22,Black,notBold,notItalic,closed,FitPage
+		3.3 Min and Max Functions/25,Black,notBold,notItalic,closed,FitPage
+		3.4 Type Conversions/27,Black,notBold,notItalic,closed,FitPage
+		3.5 Miscellaneous Functions/29,Black,notBold,notItalic,closed,FitPage
+			3.5.1 Remaindering/29,Black,notBold,notItalic,closed,FitPage
+			3.5.2 Manipulation of Complex Numbers/30,Black,notBold,notItalic,closed,FitPage
+			3.5.3 Absolute Values/30,Black,notBold,notItalic,closed,FitPage
+			3.5.4 Transfer of Sign/31,Black,notBold,notItalic,closed,FitPage
+			3.5.5 Positive Difference/31,Black,notBold,notItalic,closed,FitPage
+			3.5.6 Truncation and Rounding/32,Black,notBold,notItalic,closed,FitPage
+			3.5.7 Double-Precision Product of Single-Precision Factors/32,Black,notBold,notItalic,closed,FitPage
+		3.6 Involution (Raising to Powres)/33,Black,notBold,notItalic,closed,FitPage
+Appendixes/36,Black,notBold,notItalic,open,FitPage
+	Appendix 1 - Error Messages/36,Black,notBold,notItalic,closed,FitPage
+	Appendix 2 - Alphabetical List of Subprograms Documented in This Manual/41,Black,notBold,notItalic,closed,FitPage
+	Appendix 3 - Arithmetic Tables/44,Black,notBold,notItalic,closed,FitPage
+Index/49,Black,notBold,notItalic,closed,FitPage

@@ -1,0 +1,209 @@
+SPL/32 Spooler System Administration Reference Manual (1983)/1,Black,bold,notItalic,closed,FitPage
+Table of Contents/3,Black,notBold,notItalic,closed,FitPage
+Preface/13,Black,notBold,notItalic,closed,FitPage
+Chapter 1 - Introduction to SPL/32/15,Black,notBold,notItalic,open,FitPage
+	1.1 Introduction/15,Black,notBold,notItalic,closed,FitPage
+	1.2 Components of the Spooling Process/17,Black,notBold,notItalic,closed,FitPage
+		1.2.1 Input Spooling/17,Black,notBold,notItalic,closed,FitPage
+		1.2.2 Output Spooling/17,Black,notBold,notItalic,closed,FitPage
+		1.2.3 The Spool Queue/17,Black,notBold,notItalic,closed,FitPage
+		1.2.4 The Pseudo Device/17,Black,notBold,notItalic,closed,FitPage
+		1.2.5 The Spool File/17,Black,notBold,notItalic,closed,FitPage
+		1.2.16 The Uniform Spooler Control Interface/17,Black,notBold,notItalic,closed,FitPage
+	1.3 Review/18,Black,notBold,notItalic,closed,FitPage
+	1.4 Components of Spooler Control/19,Black,notBold,notItalic,closed,FitPage
+		1.4.1 Control and Subcontrol Tasks/19,Black,notBold,notItalic,closed,FitPage
+		1.4.2 Levels of Authorization/19,Black,notBold,notItalic,closed,FitPage
+	1.5 Requirements for SPL/32/21,Black,notBold,notItalic,closed,FitPage
+		1.5.1 Hardware/21,Black,notBold,notItalic,closed,FitPage
+		1.5.2 Memory Requirements/21,Black,notBold,notItalic,closed,FitPage
+		1.5.3 Software Requirements/21,Black,notBold,notItalic,closed,FitPage
+	1.6 Initializing SPL/32/22,Black,notBold,notItalic,closed,FitPage
+		1.6.1 Loading SPL/32/22,Black,notBold,notItalic,closed,FitPage
+		1.6.2 Linking SPL/32/23,Black,notBold,notItalic,closed,FitPage
+		1.6.3 Starting the Spooler/23,Black,notBold,notItalic,open,FitPage
+			1.6.3.1 Creating a START Command File/24,Black,notBold,notItalic,closed,FitPage
+		1.6.4 SPL/32 System Console Interface/25,Black,notBold,notItalic,closed,FitPage
+		1.6.5 Ending the Spooler Task/26,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - Input Spooling/27,Black,notBold,notItalic,open,FitPage
+	2.1 Introduction/27,Black,notBold,notItalic,closed,FitPage
+	2.2 Establishing Input Spooling/27,Black,notBold,notItalic,closed,FitPage
+	2.3 Input Spooling Control Statements/27,Black,notBold,notItalic,closed,FitPage
+		2.3.1 The /@INPUT Control Statement/27,Black,notBold,notItalic,closed,FitPage
+		2.3.2 The /@SUBMIT Control Statement/29,Black,notBold,notItalic,closed,FitPage
+		2.3.3 Ending Input Spooling of the Card File/30,Black,notBold,notItalic,closed,FitPage
+	2.4 Removing Input Spooling Devices/31,Black,notBold,notItalic,closed,FitPage
+Chapter 3 - The Spool File and the Spool Queue/33,Black,notBold,notItalic,open,FitPage
+	3.1 Introduction/33,Black,notBold,notItalic,closed,FitPage
+	3.2 The Spool File/33,Black,notBold,notItalic,closed,FitPage
+		3.2.1 Naming Spool Files/34,Black,notBold,notItalic,closed,FitPage
+	3.3 The Spool Queue/36,Black,notBold,notItalic,closed,FitPage
+		3.3.1 Creating the Spool Queue/36,Black,notBold,notItalic,closed,FitPage
+		3.3.2 Displaying the Spool Queue File Name/36,Black,notBold,notItalic,closed,FitPage
+		3.3.3 Respecifying the Spool Queue/37,Black,notBold,notItalic,closed,FitPage
+		3.3.4 Respecifying the Spool Queue While the Spooler Is Active/37,Black,notBold,notItalic,closed,FitPage
+		3.3.5 Interrogating the Spool Queue/37,Black,notBold,notItalic,open,FitPage
+			3.3.5.1 Displaying Entries in the Spool Queue/37,Black,notBold,notItalic,closed,FitPage
+			3.3.5.2 Displaying Queue Entries According to Preprinted Form Requests/39,Black,notBold,notItalic,closed,FitPage
+			3.3.5.3 Displaying Files by Assigned Pseudo Device/39,Black,notBold,notItalic,closed,FitPage
+			3.3.5.4 Displaying Information About a Particular File/40,Black,notBold,notItalic,closed,FitPage
+			3.3.5.5 Displaying the Spooler Environment Configuration/40,Black,notBold,notItalic,closed,FitPage
+			3.3.5.6 Displaying All Spool Queue and Spooler Configuration Information/41,Black,notBold,notItalic,closed,FitPage
+			3.3.5.7 Functional Discussion of the INTERROGATE Command/42,Black,notBold,notItalic,closed,FitPage
+Chapter 4 - Output Spooling/43,Black,notBold,notItalic,open,FitPage
+	4.1 Introduction/43,Black,notBold,notItalic,closed,FitPage
+	4.2 The Pseudo Device/44,Black,notBold,notItalic,closed,FitPage
+		4.2.1 The Global Pseudo Device/44,Black,notBold,notItalic,closed,FitPage
+		4.2.2 Creating Pseudo Devices in the Spooling Environment/45,Black,notBold,notItalic,closed,FitPage
+		4.2.3 Associating Pseudo Devices with Physical Devices/46,Black,notBold,notItalic,closed,FitPage
+		4.2.4 Directing Output to a Pseudo Device/47,Black,notBold,notItalic,closed,FitPage
+		4.2.5 Limiting Default Access to a Pseudo Device/48,Black,notBold,notItalic,closed,FitPage
+		4.2.6 Establishing Unique Default Print Locations/48,Black,notBold,notItalic,closed,FitPage
+		4.2.8 Deleting Pseudo Devices From the Spooling Environment/49,Black,notBold,notItalic,closed,FitPage
+	4.3 Physical Output Device Control/50,Black,notBold,notItalic,closed,FitPage
+		4.3.1 Altering the Status of Physical Output Devices/50,Black,notBold,notItalic,closed,FitPage
+		4.3.2 Removing Files From The Spool Queue/51,Black,notBold,notItalic,closed,FitPage
+		4.3.3 Removing Physical Devices From the Spooling Environment/52,Black,notBold,notItalic,closed,FitPage
+	4.4 Using Preprinted Forms/52,Black,notBold,notItalic,closed,FitPage
+		4.4.1 Naming and Characterizing Preprinted Forms/53,Black,notBold,notItalic,closed,FitPage
+		4.4.2 Associating a Form With a Physical Device/53,Black,notBold,notItalic,closed,FitPage
+		4.4.3 Removing Forms From the Spooling Environment/54,Black,notBold,notItalic,closed,FitPage
+	4.5 Using Identification Pages/55,Black,notBold,notItalic,closed,FitPage
+	4.6 Using the Checkpoint Feature/56,Black,notBold,notItalic,closed,FitPage
+		4.6.1 Turning Checkpointing Off/57,Black,notBold,notItalic,closed,FitPage
+	4.7 Output Priority/58,Black,notBold,notItalic,closed,FitPage
+		4.7.1 Changing the Global Default Priority/58,Black,notBold,notItalic,closed,FitPage
+		4.7.2 Altering the Output Priority of a Spool File/59,Black,notBold,notItalic,closed,FitPage
+Chapter 5 - Tasks and Levels and Authorization/61,Black,notBold,notItalic,open,FitPage
+	5.1 Introduction/61,Black,notBold,notItalic,closed,FitPage
+	5.2 Control Tasks and their Communication with the Spooler/62,Black,notBold,notItalic,closed,FitPage
+		5.2.1 Command Messages/62,Black,notBold,notItalic,closed,FitPage
+		5.2.2 Acceptance Messages/62,Black,notBold,notItalic,closed,FitPage
+		5.2.3 Request for Mnemonic Table Messages/62,Black,notBold,notItalic,closed,FitPage
+	5.3 Spooler Communication with Control Tasks/63,Black,notBold,notItalic,closed,FitPage
+		5.3.1 Service Response Messages/63,Black,notBold,notItalic,closed,FitPage
+		5.3.2 Exception Response Mesages/63,Black,notBold,notItalic,closed,FitPage
+		5.3.3 Authority Messages/63,Black,notBold,notItalic,closed,FitPage
+		5.3.4 Attention Messages/63,Black,notBold,notItalic,closed,FitPage
+		5.3.5 Mnemonic Messages/63,Black,notBold,notItalic,closed,FitPage
+	5.4 Including Control Tasks in the Spooling Environment/64,Black,notBold,notItalic,closed,FitPage
+	5.5 Displaying Control Tasks in the Spooling Environment/64,Black,notBold,notItalic,closed,FitPage
+	5.6 Removing Control Tasks from the Spooling Environment/64,Black,notBold,notItalic,closed,FitPage
+	5.7 Subcontrol Tasks and their Communication with the Spooler/65,Black,notBold,notItalic,closed,FitPage
+		5.7.1 Command Messages/65,Black,notBold,notItalic,closed,FitPage
+	5.8 Spooler Communication with Subcontrol Tasks/65,Black,notBold,notItalic,closed,FitPage
+		5.8.1 Service Response Messages/66,Black,notBold,notItalic,closed,FitPage
+		5.8.2 Exception Response Messages/66,Black,notBold,notItalic,closed,FitPage
+	5.9 Including Subcontrol Tasks in the Spooling Environment/66,Black,notBold,notItalic,closed,FitPage
+	5.10 Displaying Subcontrol Tasks in the Spooling Environment/66,Black,notBold,notItalic,closed,FitPage
+	5.11 Removing Subcontrol Tasks from the Spooling Environment/67,Black,notBold,notItalic,closed,FitPage
+	5.12 User-Level Tasks and their Communication with the Spooler/67,Black,notBold,notItalic,closed,FitPage
+	5.13 Levels of Authorization/68,Black,notBold,notItalic,closed,FitPage
+		5.13.1 Authorization Identifiers (AID)/70,Black,notBold,notItalic,closed,FitPage
+		5.13.2 Origin Identifiers (OID)/70,Black,notBold,notItalic,closed,FitPage
+Chapter 6 - SPL/32 Commands/71,Black,notBold,notItalic,open,FitPage
+	6.1 Introduction/71,Black,notBold,notItalic,closed,FitPage
+	6.2 ATTACH Command/72,Black,notBold,notItalic,closed,FitPage
+	6.3 BANNER Command/74,Black,notBold,notItalic,closed,FitPage
+	6.4 BLOCK Command/77,Black,notBold,notItalic,closed,FitPage
+	6.5 CHANGE Command/78,Black,notBold,notItalic,closed,FitPage
+	6.6 CHECKPOINT Command/80,Black,notBold,notItalic,closed,FitPage
+	6.7 CREATE Command/82,Black,notBold,notItalic,closed,FitPage
+	6.6 CTASK Command/83,Black,notBold,notItalic,closed,FitPage
+	6.9 DELETE Command/85,Black,notBold,notItalic,closed,FitPage
+	6.10 DETACH Command/86,Black,notBold,notItalic,closed,FitPage
+	6.11 DEVICE Command/87,Black,notBold,notItalic,closed,FitPage
+	6.12 END Command/90,Black,notBold,notItalic,closed,FitPage
+	6.13 FLUSH Command/91,Black,notBold,notItalic,closed,FitPage
+	6.14 FORM Command/93,Black,notBold,notItalic,closed,FitPage
+	6.15 GLOBAL Command/96,Black,notBold,notItalic,closed,FitPage
+	6.16 GROUP Command/97,Black,notBold,notItalic,closed,FitPage
+	6.17 INPUT Command/99,Black,notBold,notItalic,closed,FitPage
+	6.18 INTERROGATE Command/101,Black,notBold,notItalic,closed,FitPage
+	6.19 PRIMARY Command/103,Black,notBold,notItalic,closed,FitPage
+	6.20 PRINT Command/105,Black,notBold,notItalic,closed,FitPage
+	6.21 PRIORITY Command/107,Black,notBold,notItalic,closed,FitPage
+	6.22 PUNCH Command/108,Black,notBold,notItalic,closed,FitPage
+	6.23 QUEUE Command/110,Black,notBold,notItalic,closed,FitPage
+	6.24 SCTASK Command/112,Black,notBold,notItalic,closed,FitPage
+	6.25 SECONDARY Command/114,Black,notBold,notItalic,closed,FitPage
+	6.26 SPOOLFILE Command/115,Black,notBold,notItalic,closed,FitPage
+	6.27 SPVOLUME Command/118,Black,notBold,notItalic,closed,FitPage
+	6.28 TRAILING Command/120,Black,notBold,notItalic,closed,FitPage
+Appendixes/123,Black,notBold,notItalic,open,FitPage
+	Appendix A - SPL/32 Command Summary/123,Black,notBold,notItalic,closed,FitPage
+	Appendix B - SPL/32 Command Message Summary/127,Black,notBold,notItalic,closed,FitPage
+	Appendix C - SPL/32 vs. SPOOLER Command Correlation/133,Black,notBold,notItalic,closed,FitPage
+	Appendix D - Message Handling/135,Black,notBold,notItalic,closed,FitPage
+		D.1 Introduction/135,Black,notBold,notItalic,closed,FitPage
+			D.1.1 Message Overview/135,Black,notBold,notItalic,closed,FitPage
+		D.2 The Uniform Spooler Control Interface (USCI)/135,Black,notBold,notItalic,closed,FitPage
+			D.2.1 Establishing Communication With the Spooler/136,Black,notBold,notItalic,closed,FitPage
+			D.2.2 Losing or Terminating Communication With a Task/136,Black,notBold,notItalic,open,FitPage
+				D.2.2.1 Normal Termination of a Control Task/136,Black,notBold,notItalic,closed,FitPage
+			D.2.3 Response Routing (Spooler to Task)/137,Black,notBold,notItalic,closed,FitPage
+			D.2.4 Dialogue Termination/137,Black,notBold,notItalic,closed,FitPage
+		D.3 Message Header/138,Black,notBold,notItalic,closed,FitPage
+		D.4 Message Formats/142,Black,notBold,notItalic,open,FitPage
+			D.4.1 Task to SPL/32 Message Formats/142,Black,notBold,notItalic,open,FitPage
+				D.4.1.1 The Command Message/142,Black,notBold,notItalic,closed,FitPage
+				D.4.1.2 Acceptance Response Message Format/144,Black,notBold,notItalic,closed,FitPage
+				D.4.1.3 Request for Mnemonic Table Message/146,Black,notBold,notItalic,closed,FitPage
+			D.4.2 SPL/32 to Task Message Formats/148,Black,notBold,notItalic,open,FitPage
+				D.4.2.1 Service Response Message Format/148,Black,notBold,notItalic,closed,FitPage
+				D.2.2.2 Buffer Set Format/149,Black,notBold,notItalic,closed,FitPage
+			D.4.3 Individual Command Service Response Messages/154,Black,notBold,notItalic,open,FitPage
+				D.4.3.1 ATTACH Command Service Record/154,Black,notBold,notItalic,closed,FitPage
+				D.4.3.2 BLOCK Command Service Record/156,Black,notBold,notItalic,closed,FitPage
+				D.4.3.3 CHECKPOINT Command Service Record/158,Black,notBold,notItalic,closed,FitPage
+				D.4.3.4 CTASK Command Service Record/160,Black,notBold,notItalic,closed,FitPage
+				D.4.3.5 FORM Command Service Record/162,Black,notBold,notItalic,closed,FitPage
+				D.4.3.6 GLOBAL Command Service Record/164,Black,notBold,notItalic,closed,FitPage
+				D.4.3.7 GROUP Command Service Record/166,Black,notBold,notItalic,closed,FitPage
+				D.4.3.8 INPUT Command Service Record/168,Black,notBold,notItalic,closed,FitPage
+				D.4.3.9 INTERROGATE Command Service Record/170,Black,notBold,notItalic,closed,FitPage
+				D.4.3.10 PRIMARY Command Service Record/176,Black,notBold,notItalic,closed,FitPage
+				D.4.3.11 PRIORITY Command Service Record/178,Black,notBold,notItalic,closed,FitPage
+				D.4.3.12 QUEUE Command Service Record/180,Black,notBold,notItalic,closed,FitPage
+				D.4.3.13 SCTASK Command Service Record/182,Black,notBold,notItalic,closed,FitPage
+				D.4.3.14 SECONDARY Command Service Record/184,Black,notBold,notItalic,closed,FitPage
+				D.4.3.15 The SPVOLUME Command Service Record/186,Black,notBold,notItalic,closed,FitPage
+			D.4.4 Exception Response Messages/188,Black,notBold,notItalic,closed,FitPage
+			D.4.5 Attention Messages/193,Black,notBold,notItalic,closed,FitPage
+			D.4.6 Mnemonic Message Format/198,Black,notBold,notItalic,closed,FitPage
+			D.4.7 Authority Message Format/200,Black,notBold,notItalic,closed,FitPage
+		D.5 Message Recovery Procedures/202,Black,notBold,notItalic,closed,FitPage
+	Appendix E - SPL/32 Command Preparsed Format/205,Black,notBold,notItalic,closed,FitPage
+		E.1 Introduction/205,Black,notBold,notItalic,closed,FitPage
+		E.2 ATTACH Command/206,Black,notBold,notItalic,closed,FitPage
+		E.3 BANNER Command/207,Black,notBold,notItalic,closed,FitPage
+		E.4 BLOCK Command/209,Black,notBold,notItalic,closed,FitPage
+		E.5 CHANGE Command/210,Black,notBold,notItalic,closed,FitPage
+		E.6 CHECKPOINT Command/212,Black,notBold,notItalic,closed,FitPage
+		E.7 CREATE Command/213,Black,notBold,notItalic,closed,FitPage
+		E.8 CTASK Command/214,Black,notBold,notItalic,closed,FitPage
+		E.9 DELETE Command/215,Black,notBold,notItalic,closed,FitPage
+		E.10 DETACH Command/216,Black,notBold,notItalic,closed,FitPage
+		E.11 DEVICE Command/217,Black,notBold,notItalic,closed,FitPage
+		E.12 END Command/219,Black,notBold,notItalic,closed,FitPage
+		E.13 FLUSH Command/220,Black,notBold,notItalic,closed,FitPage
+		E.14 FORM Command (INCLUDE)/222,Black,notBold,notItalic,closed,FitPage
+		E.15 FORM Command (REMOVE)/224,Black,notBold,notItalic,closed,FitPage
+		E.16 FORM Command (MOUNT, MOUNT/VERIFY)/225,Black,notBold,notItalic,closed,FitPage
+		E.17 GLOBAL Command/227,Black,notBold,notItalic,closed,FitPage
+		E.18 GROUP Command/228,Black,notBold,notItalic,closed,FitPage
+		E.19 INPUT Command (INCLUDE)/229,Black,notBold,notItalic,closed,FitPage
+		E.20 INPUT Command (REMOVE)/230,Black,notBold,notItalic,closed,FitPage
+		E.21 INTERROGATE Command/231,Black,notBold,notItalic,closed,FitPage
+		E.22 PRIMARY Command/233,Black,notBold,notItalic,closed,FitPage
+		E.23 PRINT Command/234,Black,notBold,notItalic,closed,FitPage
+		E.24 PRIORITY Command/236,Black,notBold,notItalic,closed,FitPage
+		E.25 PUNCH Command/237,Black,notBold,notItalic,closed,FitPage
+		E.26 QUEUE Command/239,Black,notBold,notItalic,closed,FitPage
+		E.27 SCTASK Command/241,Black,notBold,notItalic,closed,FitPage
+		E.28 SECONDARY Command/243,Black,notBold,notItalic,closed,FitPage
+		E.29 SPVOLUME Command/244,Black,notBold,notItalic,closed,FitPage
+		E.30 TRAILER Command/245,Black,notBold,notItalic,closed,FitPage
+		E.31 Summary/247,Black,notBold,notItalic,closed,FitPage
+Index/249,Black,notBold,notItalic,closed,FitPage
+Documentation Change Notice/255,Black,notBold,notItalic,closed,FitPage

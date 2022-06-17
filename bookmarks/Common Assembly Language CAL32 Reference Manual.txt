@@ -1,0 +1,136 @@
+Common Assembly Language/32 (CAL/32) Reference Manual (1986)/1,Black,bold,notItalic,closed,FitPage
+Table of Contents/5,Black,notBold,notItalic,closed,FitPage
+Preface/11,Black,notBold,notItalic,closed,FitPage
+Chapter 1 - Basic Concepts/13,Black,notBold,notItalic,open,FitPage
+	1.1 Introduction/13,Black,notBold,notItalic,closed,FitPage
+	1.2 The Processor/13,Black,notBold,notItalic,closed,FitPage
+		1.2.1 Temporary Storage (Registers)/15,Black,notBold,notItalic,closed,FitPage
+		1.2.2 Program Status Word (PSW)/16,Black,notBold,notItalic,closed,FitPage
+		1.2.3 Input/Output (I/O) Interface/17,Black,notBold,notItalic,closed,FitPage
+			1.2.3.1 Main Memory/17,Black,notBold,notItalic,closed,FitPage
+		1.2.4 Software Relocation/17,Black,notBold,notItalic,closed,FitPage
+		1.2.5 Hardware Relocation/18,Black,notBold,notItalic,closed,FitPage
+	1.3 Instruction Formats (16-bit)/18,Black,notBold,notItalic,closed,FitPage
+		1.3.1 Register-to-Register (RR) Instructions/18,Black,notBold,notItalic,closed,FitPage
+		1.3.2 Register and Indexed Storage (RX) Instructions/19,Black,notBold,notItalic,closed,FitPage
+		1.3.3 Register and Immediate (RI) Instructions/20,Black,notBold,notItalic,closed,FitPage
+		1.3.4 Short Form (SF) Instructions/20,Black,notBold,notItalic,closed,FitPage
+	1.4 Instruction Formats (32-bit)/21,Black,notBold,notItalic,closed,FitPage
+		1.4.1 Register-to-Register (RR) Instructions/21,Black,notBold,notItalic,closed,FitPage
+		1.4.2 Register and Indexed Storage One (RX1) Instructions/22,Black,notBold,notItalic,closed,FitPage
+		1.4.3 Register and Indexed Storage Two (RX2) Instructions/22,Black,notBold,notItalic,closed,FitPage
+		1.4.4 Register and Indexed Storage Three (RX3) Instructions/23,Black,notBold,notItalic,closed,FitPage
+		1.4.5 Register and Immediate One (RI1) Instructions/24,Black,notBold,notItalic,closed,FitPage
+		1.4.6 Register and Immediate Two (RI2) Instructions/24,Black,notBold,notItalic,closed,FitPage
+		1.4.7 Short Form (SF) Instructions/25,Black,notBold,notItalic,closed,FitPage
+		1.4.8 Register and Indexed Storage/Register and Indexed Storage (RXRX) Instructions/26,Black,notBold,notItalic,closed,FitPage
+	1.5 Variations on Instruction Formats/28,Black,notBold,notItalic,closed,FitPage
+		1.5.1 Conditional Branch Instructions/28,Black,notBold,notItalic,closed,FitPage
+		1.5.2 Branch and Link Instructions/29,Black,notBold,notItalic,closed,FitPage
+		1.5.3 Other Variations/29,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - Symbolic Representations/31,Black,notBold,notItalic,open,FitPage
+	2.1 Introduction/31,Black,notBold,notItalic,closed,FitPage
+	2.2 Symbols and Expressions/31,Black,notBold,notItalic,closed,FitPage
+	2.3 Symbols and Their Values/33,Black,notBold,notItalic,closed,FitPage
+		2.3.1 Implicit Symbols/33,Black,notBold,notItalic,closed,FitPage
+		2.3.2 Global Symbols/35,Black,notBold,notItalic,closed,FitPage
+Chapter 3 - The Source Program/37,Black,notBold,notItalic,open,FitPage
+	3.1 Introduction/37,Black,notBold,notItalic,closed,FitPage
+	3.2 Comment Statements/37,Black,notBold,notItalic,closed,FitPage
+	3.3 Instruction Statements/38,Black,notBold,notItalic,closed,FitPage
+		3.3.1 Fixed Format Source Programming/38,Black,notBold,notItalic,closed,FitPage
+		3.3.2 Free Format Source Programming/39,Black,notBold,notItalic,closed,FitPage
+	3.4 Common Assembly Language (CAL/32) Instruction Representation/40,Black,notBold,notItalic,closed,FitPage
+		3.4.1 Name Field/40,Black,notBold,notItalic,closed,FitPage
+		3.4.2 Operation Field/41,Black,notBold,notItalic,closed,FitPage
+		3.4.3 Operand Field/42,Black,notBold,notItalic,open,FitPage
+			3.4.3.1 Register-to-Register (RR) Instructions/42,Black,notBold,notItalic,closed,FitPage
+			3.4.3.2 Register and Indexed Storage (RX) Instructions/43,Black,notBold,notItalic,closed,FitPage
+			3.4.3.3 Register and Immediate (RI) Instructions/44,Black,notBold,notItalic,closed,FitPage
+			3.4.3.4 Register and Indexed Storage/Register and Indexed Storage (RXRX) Instructions/45,Black,notBold,notItalic,closed,FitPage
+	3.5 Common Assembly Language/32 (CAL/32) Machine Instructions/47,Black,notBold,notItalic,closed,FitPage
+		3.5.1 Usual Branch Mnemonics for the 3280 System/61,Black,notBold,notItalic,closed,FitPage
+		3.5.2 CAL/32 Machine Instructions for 3280 System/63,Black,notBold,notItalic,closed,FitPage
+		3.5.3 Instructions for the Input/Output Processor (IOP)/65,Black,notBold,notItalic,closed,FitPage
+	3.6 Assembler Instructions/66,Black,notBold,notItalic,closed,FitPage
+		3.6.1 Symbol Definition Instructions/66,Black,notBold,notItalic,open,FitPage
+			3.6.1.1 Equate (EQU) Instruction/66,Black,notBold,notItalic,closed,FitPage
+			3.6.1.2 External, Entry, Weak External, Weak Entry and Data Entry (EXTERN, ENTRY, WXTRN, WNTRY and DNTRY) Instructions/69,Black,notBold,notItalic,closed,FitPage
+			3.6.1.3 Include (INCLD) Instruction/72,Black,notBold,notItalic,closed,FitPage
+		3.6.2 Data Definition Instructions/73,Black,notBold,notItalic,open,FitPage
+			3.6.2.1 Define Storage (DS, DSH and DSF) Instruction/73,Black,notBold,notItalic,closed,FitPage
+			3.6.2.2 Define Constant (DC and DCF) Instruction/75,Black,notBold,notItalic,closed,FitPage
+			3.6.2.3 Hexadecimal Constants/76,Black,notBold,notItalic,closed,FitPage
+			3.6.2.4 Integer Constants/78,Black,notBold,notItalic,closed,FitPage
+			3.6.2.5 Address Constants/80,Black,notBold,notItalic,closed,FitPage
+			3.6.2.6 Floating Point Constants/82,Black,notBold,notItalic,closed,FitPage
+			3.6.2.7 Character Constants/83,Black,notBold,notItalic,closed,FitPage
+			3.6.2.8 Decimal String Constants/83,Black,notBold,notItalic,closed,FitPage
+		3.6.3 Define Byte (DB) Instruction/86,Black,notBold,notItalic,closed,FitPage
+		3.6.4 Define List (DLIST) Instruction/87,Black,notBold,notItalic,closed,FitPage
+		3.6.5 Define Command (DCMD) Instruction/88,Black,notBold,notItalic,closed,FitPage
+		3.6.6 Location Counter (LOC) Instructions/88,Black,notBold,notItalic,open,FitPage
+			3.6.6.1 Pure (PURE) Instruction/88,Black,notBold,notItalic,open,FitPage
+			3.6.6.2 Impure (IMPUR) Instruction/89,Black,notBold,notItalic,closed,FitPage
+			3.6.6.3 Origin (ORG) Instruction/89,Black,notBold,notItalic,closed,FitPage
+			3.6.6.4 Absolute (ABS) Instruction/90,Black,notBold,notItalic,closed,FitPage
+			3.6.6.5 Align (ALIGN) Instruction/90,Black,notBold,notItalic,closed,FitPage
+			3.6.6.6 Conditional No Operation (CNOP) Instruction/91,Black,notBold,notItalic,closed,FitPage
+			3.6.7 Assembler Control Instructions/92,Black,notBold,notItalic,open,FitPage
+				3.6.7.1 Target (TARGT) Instruction/92,Black,notBold,notItalic,closed,FitPage
+				3.6.7.2 End (END) Instruction/92,Black,notBold,notItalic,closed,FitPage
+				3.6.7.3 Copy Library (CLIB) Instruction/93,Black,notBold,notItalic,closed,FitPage
+				3.6.7.4 Copy (COPY) Instruction/93,Black,notBold,notItalic,closed,FitPage
+				3.6.7.5 File Copy (FCOPY) instruction/94,Black,notBold,notItalic,closed,FitPage
+				3.6.7.6 Lower-Case (LCASE) Instruction/95,Black,notBold,notItalic,closed,FitPage
+				3.6..7.7 No Lower-Case (NLCASE) Instruction/95,Black,notBold,notItalic,closed,FitPage
+				3.6.7.8 Pause (PAUSE) Instruction/95,Black,notBold,notItalic,closed,FitPage
+				3.6.7.9 Squeeze (SQUEZ and NOSQZ) Instructions/96,Black,notBold,notItalic,closed,FitPage
+				3.6.7.10 Squeeze Related (ERSQL and NORX3) Instructions/99,Black,notBold,notItalic,closed,FitPage
+				3.6.7.11 Sequence Checking (SQCHK and NOSEQ) Instructions/100,Black,notBold,notItalic,closed,FitPage
+				3.6.7.12 Scratch (SCRAT) Instruction/100,Black,notBold,notItalic,closed,FitPage
+				3.6.7.13 Pass Pause (PPAUS) Instruction/101,Black,notBold,notItalic,open,FitPage
+				3.6.7.14 Message (MSG) Instruction/101,Black,notBold,notItalic,closed,FitPage
+				3.6.7.15 Batch Assembly (BATCH and BEND) Instructions/101,Black,notBold,notItalic,closed,FitPage
+				3.6.7.16 Unreferenced Externals (UREX and NUREX) Instructions/102,Black,notBold,notItalic,closed,FitPage
+				3.6.7.17 Assembly Performance (HPM and NHPM) Instructions/102,Black,notBold,notItalic,closed,FitPage
+				3.6.7.18 16-Bit Object Code (CAL and NOCAL) Instructions/103,Black,notBold,notItalic,closed,FitPage
+			3.6.8 Conditional Assembly Instructions/103,Black,notBold,notItalic,open,FitPage
+				3.6.8.1 Compound Conditional (IFx, ELSE and ENDC) Instructions/103,Black,notBold,notItalic,closed,FitPage
+				3.6.8.2 Simple If (IF) Instruction/107,Black,notBold,notItalic,open,FitPage
+				3.6.8.3 Do (DO) Instruction/108,Black,notBold,notItalic,closed,FitPage
+			3.6.9 Instructions for Data Structures/109,Black,notBold,notItalic,open,FitPage
+				3.6.9.1 Structure Definition (COMN, STRUC and ENDS) Instructions/109,Black,notBold,notItalic,closed,FitPage
+				3.6.92 Structure Initialization (BDATA and BORG) Instructions/111,Black,notBold,notItalic,closed,FitPage
+			3.6.10 Listing Control Instructions/113,Black,notBold,notItalic,open,FitPage
+				3.6.10.1 Listing Identification (PROG and TITLE) Instructions/113,Black,notBold,notItalic,closed,FitPage
+				3.6.10.2 Format Control (LCNT, EJECT, SPACE and WIDTH) Instructions/113,Black,notBold,notItalic,closed,FitPage
+				3.6.10.3 Content Control Instructions/114,Black,notBold,notItalic,closed,FitPage
+			3.6.11 Auxiliary Processing Unit (APU) and NAPU Options/117,Black,notBold,notItalic,closed,FitPage
+	3.7 Assembly Listing/117,Black,notBold,notItalic,closed,FitPage
+Chapter 4 - Common Mode Programming/121,Black,notBold,notItalic,open,FitPage
+	4.1 Introduction/121,Black,notBold,notItalic,closed,FitPage
+	4.2 Address Operation Instructions/121,Black,notBold,notItalic,closed,FitPage
+	4.3 Common Mode Immediate Operations/123,Black,notBold,notItalic,closed,FitPage
+	4.4 Common Mode Assembler Instructions/123,Black,notBold,notItalic,closed,FitPage
+	4.4 Common Mode Assembler Instructions/123,Black,notBold,notItalic,closed,FitPage
+		4.4.1 Data Definition Instructions/124,Black,notBold,notItalic,open,FitPage
+			4.4.1.1 Define Address Length Constant (DAC) Instruction/124,Black,notBold,notItalic,closed,FitPage
+			4.4.1.2 Define Address Length Storage (DAS) Instruction/124,Black,notBold,notItalic,closed,FitPage
+		4.4.2 Assembler Control (CAL and NOCAL) Instructions/125,Black,notBold,notItalic,closed,FitPage
+	4.5 Mixed Mode Computations/125,Black,notBold,notItalic,closed,FitPage
+	4.6 Global Symbols/126,Black,notBold,notItalic,closed,FitPage
+	4.7 Special Instructions/128,Black,notBold,notItalic,closed,FitPage
+Chapter 5 - Common Assembly Language/32 (CAL/32) Operating Instructions/131,Black,notBold,notItalic,open,FitPage
+	5.1 Introduction/131,Black,notBold,notItalic,closed,FitPage
+	5.2 Operating Instructions for Establishing Common Assembly Language/32 (CAL/32) as a Task/131,Black,notBold,notItalic,closed,FitPage
+	5.3 Common Assembly Language/32 (CAL/32) Start Options/133,Black,notBold,notItalic,closed,FitPage
+		5.3.1 High Performance Method (HPM) Assembly/137,Black,notBold,notItalic,closed,FitPage
+		5.3.2 Assigning Logical Units/139,Black,notBold,notItalic,closed,FitPage
+		5.3.3 Starting Common Assembly Language (CAL/32) Using Command Substitution System (CSS)/141,Black,notBold,notItalic,closed,FitPage
+		5.3.4 CAL/32 Assembler End of Task (EOT) Codes/143,Black,notBold,notItalic,closed,FitPage
+Appendixes/145,Black,notBold,notItalic,open,FitPage
+	Appendix A - Common Assembly Language/32 (CAL/32) Error Codes/145,Black,notBold,notItalic,closed,FitPage
+	Appendix B - Object Code Format/149,Black,notBold,notItalic,closed,FitPage
+Index/155,Black,notBold,notItalic,closed,FitPage
+Comment Form/161,Black,notBold,notItalic,closed,FitPage

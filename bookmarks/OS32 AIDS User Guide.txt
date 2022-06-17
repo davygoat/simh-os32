@@ -1,0 +1,86 @@
+OS/32 AIDS User Guide (1986)/1,Black,bold,notItalic,open,FitPage
+Table of Contents/3,Black,notBold,notItalic,closed,FitPage
+Preface/7,Black,notBold,notItalic,closed,FitPage
+Chapter 1 - OS/32 AIDS/9,Black,notBold,notItalic,open,FitPage
+	1.1 Introduction/9,Black,notBold,notItalic,closed,FitPage
+	1.2 Basic Operations/9,Black,notBold,notItalic,closed,FitPage
+	1.3 Requirements/9,Black,notBold,notItalic,closed,FitPage
+	1.4 Features/10,Black,notBold,notItalic,closed,FitPage
+	1.5 Modes of Use/10,Black,notBold,notItalic,closed,FitPage
+	1.6 Directives/11,Black,notBold,notItalic,closed,FitPage
+	1.7 Address Conventions/11,Black,notBold,notItalic,closed,FitPage
+	1.8 Logical Unit (LU) Assignments/14,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - OS/32 AIDS Data Format Modes/15,Black,notBold,notItalic,open,FitPage
+	2.1 Introduction/15,Black,notBold,notItalic,closed,FitPage
+	2.2 Halfword Hexadecimal Format (X)/15,Black,notBold,notItalic,closed,FitPage
+	2.3 Fullword Hexadecimal Format (Y)/15,Black,notBold,notItalic,closed,FitPage
+	2.4 Halfword Decimal Format (H)/16,Black,notBold,notItalic,closed,FitPage
+	2.4 Fullword Decimal Format (F)/16,Black,notBold,notItalic,closed,FitPage
+	2.6 Character Format (C)/16,Black,notBold,notItalic,closed,FitPage
+	2.7 Single Precision Floating Point Format (E)/16,Black,notBold,notItalic,closed,FitPage
+	2.8 Double Precision Floating Point Format (D)/17,Black,notBold,notItalic,closed,FitPage
+	2.9 Disassembly Format (A)/18,Black,notBold,notItalic,closed,FitPage
+Chapter 3 - OS/32 AIDS Commands/21,Black,notBold,notItalic,open,FitPage
+	3.1 Introduction/21,Black,notBold,notItalic,closed,FitPage
+	3.2 ADD Command/22,Black,notBold,notItalic,closed,FitPage
+	3.3 BATCH Command/24,Black,notBold,notItalic,closed,FitPage
+	3.4 BIAS Command/25,Black,notBold,notItalic,closed,FitPage
+	3.5 CONVERT Command/26,Black,notBold,notItalic,closed,FitPage
+	3.6 DUMP Command/29,Black,notBold,notItalic,closed,FitPage
+	3.7 END Command/32,Black,notBold,notItalic,closed,FitPage
+	3.8 EXECUTE Command/33,Black,notBold,notItalic,closed,FitPage
+	3.9 GO Command/35,Black,notBold,notItalic,closed,FitPage
+	3.10 INSERT Command/37,Black,notBold,notItalic,closed,FitPage
+	3.11 JUMP Command/44,Black,notBold,notItalic,closed,FitPage
+	3.12 LOG Command/46,Black,notBold,notItalic,closed,FitPage
+	3.13 LOGICAL UNIT (LU) Command/47,Black,notBold,notItalic,closed,FitPage
+	3.14 NEXT Command/48,Black,notBold,notItalic,closed,FitPage
+	3.15 NO BATCH Command/49,Black,notBold,notItalic,closed,FitPage
+	3.16 NO LOG Command/50,Black,notBold,notItalic,closed,FitPage
+	3.17 OPEN Command/51,Black,notBold,notItalic,closed,FitPage
+	3.18 OPEN NEXT Command/54,Black,notBold,notItalic,closed,FitPage
+	3.19 OPEN PREVIOUS Command/56,Black,notBold,notItalic,closed,FitPage
+	3.20 PAUSE Command/58,Black,notBold,notItalic,closed,FitPage
+	3.21 REPLACE Command/59,Black,notBold,notItalic,closed,FitPage
+	3.22 SUBTRACT Command/62,Black,notBold,notItalic,closed,FitPage
+	3.23 TYPE Command/64,Black,notBold,notItalic,closed,FitPage
+	3.24 WHERE Command/66,Black,notBold,notItalic,closed,FitPage
+	3.25 ZAP Command/67,Black,notBold,notItalic,closed,FitPage
+Chapter 4 - OS/32 AIDS Operating Instructions/69,Black,notBold,notItalic,open,FitPage
+	4.1 OS/32 AIDS Operation/69,Black,notBold,notItalic,closed,FitPage
+	4.2 START Procedures/69,Black,notBold,notItalic,open,FitPage
+		4.2.1 Building AIDS into a User Task (U-Task)/70,Black,notBold,notItalic,closed,FitPage
+		4.2.2 Building AIDS as a Shared Partial Segment/70,Black,notBold,notItalic,closed,FitPage
+		4.2.3 Using the START Command/72,Black,notBold,notItalic,closed,FitPage
+	4.3 Error Messages/73,Black,notBold,notItalic,closed,FitPage
+Appendixes/77,Black,notBold,notItalic,open,FitPage
+	Appendix A - OS/32 AIDS Command Summary/77,Black,notBold,notItalic,closed,FitPage
+	Appendix B - Sample Dump Formats/79,Black,notBold,notItalic,closed,FitPage
+	Appendix C - Supplement to the OS/32 AIDS User Guide for Code Compatible Machine (CCM) Support/81,Black,notBold,notItalic,closed,FitPage
+		C.1 Introduction/81,Black,notBold,notItalic,closed,FitPage
+		C.2 General Features/81,Black,notBold,notItalic,closed,FitPage
+		C.3 Code Compatible Machine (CCM) Support Features/81,Black,notBold,notItalic,closed,FitPage
+			C.3.1 Boundary Alignments/82,Black,notBold,notItalic,closed,FitPage
+			C.3.2 Breakpoint Sentinel/82,Black,notBold,notItalic,closed,FitPage
+			C.3.3 Fault Traps/82,Black,notBold,notItalic,closed,FitPage
+			C.3.4 User Task-Status Word (TSW) Trap Handling/82,Black,notBold,notItalic,closed,FitPage
+			C.3.5 Data Format Options/82,Black,notBold,notItalic,open,FitPage
+				C.3.5.1 Character Mode (C, CA, CE)/83,Black,notBold,notItalic,closed,FitPage
+				C.3.5.2 Disassembly Format (A, AP, AC)/83,Black,notBold,notItalic,closed,FitPage
+			C.3.6 Register Address Conventions/84,Black,notBold,notItalic,closed,FitPage
+			C.3.7 General Directive Guidelines/84,Black,notBold,notItalic,closed,FitPage
+			C.3.8 OS/32 AIDS Commands/85,Black,notBold,notItalic,open,FitPage
+				C.3.8.1 CONVERT Command/86,Black,notBold,notItalic,closed,FitPage
+				C.3.8.2 DUMP Command/89,Black,notBold,notItalic,closed,FitPage
+				C.3.8.3 END Command/93,Black,notBold,notItalic,closed,FitPage
+				C.3.8.4 EXECUTE Command/94,Black,notBold,notItalic,closed,FitPage
+				C.3.8.5 GO Command/97,Black,notBold,notItalic,closed,FitPage
+				C.3.8.6 JUMP Command/99,Black,notBold,notItalic,closed,FitPage
+				C.3.8.7 OPEN Command/102,Black,notBold,notItalic,closed,FitPage
+				C.3.8.8 OPEN NEXT Command/106,Black,notBold,notItalic,closed,FitPage
+				C.3.8.9 OPEN PREVIOUS Command/109,Black,notBold,notItalic,closed,FitPage
+				C.3.8.10 REPLACE Command/112,Black,notBold,notItalic,closed,FitPage
+			C.3.9 Limitations/114,Black,notBold,notItalic,closed,FitPage
+	Appendix D - OS/32 AIDS Glossary/115,Black,notBold,notItalic,closed,FitPage
+Index/117,Black,notBold,notItalic,closed,FitPage
+Comment Form/121,Black,notBold,notItalic,closed,FitPage

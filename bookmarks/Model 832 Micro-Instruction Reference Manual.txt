@@ -1,154 +1,154 @@
 Model 8/32 Micro-Instruction Reference Manual (1976)/1,Black,bold,italic,open,FitPage
-	Page Revision Status Sheet/2,Black,notBold,notItalic,open,FitPage
-	Model 8/32 Micro-Program Descrption/3,Black,notBold,notItalic,open,FitPage
-		Figures/3,Black,notBold,notItalic,closed,FitPage
-			Figure 1 - Model 8/32 Block Diagram/4,Black,notBold,notItalic,closed,FitPage
-			Figure 3 - Double Precision Floating Point Unit Block Diagram/47,Black,notBold,notItalic,closed,FitPage
-			Figure 4 - Power Up/95,Black,notBold,notItalic,closed,FitPage
-			Figure 5 - Interrupt Support/98,Black,notBold,notItalic,closed,FitPage
-			Figure 6 - Console Support/100,Black,notBold,notItalic,closed,FitPage
-			Figure 7 - I/O Interrupts/103,Black,notBold,notItalic,closed,FitPage
-			Figure 8 - Channel Command Block/107,Black,notBold,notItalic,closed,FitPage
-			Figure 9 - Power Fail Interrupt/108,Black,notBold,notItalic,closed,FitPage
-		Tables/3,Black,notBold,notItalic,closed,FitPage
-			Table 1 - Register Set Selection/6,Black,notBold,notItalic,open,FitPage
-			Table 2 - Interrupt Traps/7,Black,notBold,notItalic,closed,FitPage
-			Table 3 - External Interrupt Enable/7,Black,notBold,notItalic,closed,FitPage
-			Table 4 - MCR Bit Definition/8,Black,notBold,notItalic,closed,FitPage
-			Table 5 - Instruction Word Fields/9,Black,notBold,notItalic,closed,FitPage
-			Table 6 - MC Field/11,Black,notBold,notItalic,closed,FitPage
-			Table 7 - Register Addresses/12,Black,notBold,notItalic,closed,FitPage
-			Table 8 - State of MDR After Instruction Read/92,Black,notBold,notItalic,closed,FitPage
-			Table 9 - B Bus Gating After Instruction Read/92,Black,notBold,notItalic,closed,FitPage
-		1. Introduction/3,Black,notBold,notItalic,closed,FitPage
-		2. Block Diagram Analysis/3,Black,notBold,notItalic,open,FitPage
-			2.1 System Organization/3,Black,notBold,notItalic,closed,FitPage
-			2.2 Control Store Memory/3,Black,notBold,notItalic,closed,FitPage
-			2.3 Flag Register (FLR)/5,Black,notBold,notItalic,closed,FitPage
-			2.4 Program Status Word (PSW)/5,Black,notBold,notItalic,closed,FitPage
-			2.5 Main Memory/5,Black,notBold,notItalic,closed,FitPage
-			2.6 General Registers/6,Black,notBold,notItalic,closed,FitPage
-			2.7 Floating-Point Registers/6,Black,notBold,notItalic,closed,FitPage
-			2.8 Micro-Registers/6,Black,notBold,notItalic,closed,FitPage
-			2.9 Arithmetic Logic Unit (ALU)/6,Black,notBold,notItalic,closed,FitPage
-			2.10 Input/Output/6,Black,notBold,notItalic,closed,FitPage
-			2.11 Interrupt Control/6,Black,notBold,notItalic,closed,FitPage
-			2.12 Machine Control Register (MCR)/7,Black,notBold,notItalic,closed,FitPage
-		3. Data and Instruction Formats/8,Black,notBold,notItalic,open,FitPage
-			3.1 Data Formats/8,Black,notBold,notItalic,closed,FitPage
-			3.2 Instruction Formats/8,Black,notBold,notItalic,closed,FitPage
-				3.2.1 Address Link/9,Black,notBold,notItalic,closed,FitPage
-				3.2.2 Register Branch/10,Black,notBold,notItalic,closed,FitPage
-				3.3.3 Register to Register Transfer/10,Black,notBold,notItalic,closed,FitPage
-				3.2.4 Register to Register Control/10,Black,notBold,notItalic,closed,FitPage
-				3.2.5 Register to Register Immediate/10,Black,notBold,notItalic,closed,FitPage
-				3.2.6 Register Write/10,Black,notBold,notItalic,closed,FitPage
-			3.3 Main Memory Control/10,Black,notBold,notItalic,closed,FitPage
-		4. Source and Destination Registers/12,Black,notBold,notItalic,closed,FitPage
-		5. Instruction Repertoire/13,Black,notBold,notItalic,open,FitPage
-			5.1 Introduction/13,Black,notBold,notItalic,closed,FitPage
-			5.2 Logical Instructions/15,Black,notBold,notItalic,closed,FitPage
-				5.2.1 Load/15,Black,notBold,notItalic,closed,FitPage
-				5.2.2 Store/16,Black,notBold,notItalic,closed,FitPage
-				5.2.3 AND/16,Black,notBold,notItalic,closed,FitPage
-				5.2.4 OR/17,Black,notBold,notItalic,closed,FitPage
-				5.2.5 Exclusive OR/18,Black,notBold,notItalic,closed,FitPage
-			5.3 Branch/Execute and Link Instructions/19,Black,notBold,notItalic,closed,FitPage
-				5.3.1 Branch and Link/20,Black,notBold,notItalic,closed,FitPage
-				5.3.2 Execute And Link/21,Black,notBold,notItalic,closed,FitPage
-			5.4 Shift/Rotate Instructions/22,Black,notBold,notItalic,closed,FitPage
-				5.4.1 Shift Left Logical/23,Black,notBold,notItalic,closed,FitPage
-				5.4.2 Shift Left Halfword Logical/24,Black,notBold,notItalic,closed,FitPage
-				5.4.3 Shift Right Logical/25,Black,notBold,notItalic,closed,FitPage
-				5.4.4 Shift Right Halfword Logical/26,Black,notBold,notItalic,closed,FitPage
-				5.4.5 Shift Left Arithmetic/27,Black,notBold,notItalic,closed,FitPage
-				5.4.6 Shift Left Halfword Airthmetic/28,Black,notBold,notItalic,closed,FitPage
-				5.4.7 Shift Right Arithmetic/29,Black,notBold,notItalic,closed,FitPage
-				5.4.8 Shift Right Halfword Arithmetic/30,Black,notBold,notItalic,closed,FitPage
-				5.4.9 Rotate Left/31,Black,notBold,notItalic,closed,FitPage
-				5.4.10 Rotate Right/32,Black,notBold,notItalic,closed,FitPage
-			5.5 Fixed Point Airthmetic Instructions/33,Black,notBold,notItalic,closed,FitPage
-				5.5.1 Add/34,Black,notBold,notItalic,closed,FitPage
-				5.5.2 Add and Increment/35,Black,notBold,notItalic,closed,FitPage
-				5.5.3 Subtract/36,Black,notBold,notItalic,closed,FitPage
-				5.5.4 Subtract and Decrement/37,Black,notBold,notItalic,closed,FitPage
-				5.5.5 Multiply/38,Black,notBold,notItalic,closed,FitPage
-				5.5.6 Divide/39,Black,notBold,notItalic,closed,FitPage
-			5.6 Floating Point Instruction/40,Black,notBold,notItalic,closed,FitPage
-				5.6.1 Compare/41,Black,notBold,notItalic,closed,FitPage
-				5.6.2 Compare and Equalize/42,Black,notBold,notItalic,closed,FitPage
-				5.6.3 Add/43,Black,notBold,notItalic,closed,FitPage
-				5.6.4 Subtract/44,Black,notBold,notItalic,closed,FitPage
-				5.6.5 Add Unnormalized/44,Black,notBold,notItalic,closed,FitPage
-				5.6.6 Multiply/45,Black,notBold,notItalic,closed,FitPage
-				5.6.7 Divide/46,Black,notBold,notItalic,closed,FitPage
-				5.6.8 Read Condition Code/49,Black,notBold,notItalic,closed,FitPage
-				5.6.9 Load Register Single Precision/50,Black,notBold,notItalic,closed,FitPage
-				5.6.10 Read Register Single Precision/51,Black,notBold,notItalic,closed,FitPage
-				5.6.11 Compare Single Precision/52,Black,notBold,notItalic,closed,FitPage
-				5.6.12 Add Single Precision/53,Black,notBold,notItalic,closed,FitPage
-				5.6.13 Subtract Single Precision/54,Black,notBold,notItalic,closed,FitPage
-				5.6.14 Multiple Single Precision/55,Black,notBold,notItalic,closed,FitPage
-				5.6.15 Divide Single Precision/56,Black,notBold,notItalic,closed,FitPage
-				5.6.16 Load Unnormalized Double Precision/57,Black,notBold,notItalic,closed,FitPage
-				5.6.17 Load Register Double Precision/58,Black,notBold,notItalic,closed,FitPage
-				5.6.18 Read Register Double Precision/59,Black,notBold,notItalic,closed,FitPage
-				5.6.19 Compare Double Precision/60,Black,notBold,notItalic,closed,FitPage
-				5.6.20 Add Double Precision/61,Black,notBold,notItalic,closed,FitPage
-				5.6.21 Subtrat Double Precision/62,Black,notBold,notItalic,closed,FitPage
-				5.6.22 Multiply Double Precision/63,Black,notBold,notItalic,closed,FitPage
-				5.6.23 Divide Double Precision/64,Black,notBold,notItalic,closed,FitPage
-			5.7 Byte Handling Instructions/66,Black,notBold,notItalic,closed,FitPage
-				5.7.1 Load Byte/66,Black,notBold,notItalic,closed,FitPage
-				5.7.2 Store Byte/67,Black,notBold,notItalic,closed,FitPage
-				5.7.3 Exchange Byte/68,Black,notBold,notItalic,closed,FitPage
-			5.8 Control Instructions/69,Black,notBold,notItalic,closed,FitPage
-				5.8. Sense Machine Control Register/70,Black,notBold,notItalic,closed,FitPage
-				5.8.2 Clear Machine Control Register/71,Black,notBold,notItalic,closed,FitPage
-				5.8.3 Load the Wait Flait-Flop/71,Black,notBold,notItalic,closed,FitPage
-				5.8.4 Pulse Output Lines/72,Black,notBold,notItalic,closed,FitPage
-				5.8.5 Power Down/72,Black,notBold,notItalic,closed,FitPage
-				5.8.6 Branch and Disable Console/73,Black,notBold,notItalic,closed,FitPage
-		6. Input/Output System/74,Black,notBold,notItalic,open,FitPage
-			6.1 Multiplexor Bus/74,Black,notBold,notItalic,closed,FitPage
-				6.1.1 Data Lines/74,Black,notBold,notItalic,closed,FitPage
-				6.1.2 Control Lines/74,Black,notBold,notItalic,closed,FitPage
-				6.1.3 Test Lines/75,Black,notBold,notItalic,closed,FitPage
-				6.1.4 Initialize Line/75,Black,notBold,notItalic,closed,FitPage
-			6.2 Input/Output Instructions/75,Black,notBold,notItalic,closed,FitPage
-				6.2.1 Acknowledge Interrupt/76,Black,notBold,notItalic,closed,FitPage
-				6.2.2 Address and Sense Status/77,Black,notBold,notItalic,closed,FitPage
-				6.2.3 Sense Status/78,Black,notBold,notItalic,closed,FitPage
-				6.2.4 Address and Output Command/79,Black,notBold,notItalic,closed,FitPage
-				6.2.5 Output Command/80,Black,notBold,notItalic,closed,FitPage
-				6.2.6 Address and Read Data/81,Black,notBold,notItalic,closed,FitPage
-				6.2.7 Read Data/82,Black,notBold,notItalic,closed,FitPage
-				6.2.8 Address and Write Data/83,Black,notBold,notItalic,closed,FitPage
-				6.2.9 Write Data/84,Black,notBold,notItalic,closed,FitPage
-				6.2.10 Address and Real Halfword/85,Black,notBold,notItalic,closed,FitPage
-				6.2.11 Read Halfword/86,Black,notBold,notItalic,closed,FitPage
-				6.2.12 Address and Write Halfword/87,Black,notBold,notItalic,closed,FitPage
-				6.2.13 Write Halfword/88,Black,notBold,notItalic,closed,FitPage
-				6.2.14 Test Halfword Line and Transfer/88,Black,notBold,notItalic,closed,FitPage
-		7. Interrupt System/89,Black,notBold,notItalic,open,FitPage
-			7.1 Internal Interrupts/89,Black,notBold,notItalic,closed,FitPage
-				7.1.1 Illegal Instruction Interrupt/89,Black,notBold,notItalic,closed,FitPage
-				7.1.2 Memory Access Controller Interrupt/89,Black,notBold,notItalic,closed,FitPage
-				7.1.3 Machine Malfunction Interrupt/89,Black,notBold,notItalic,closed,FitPage
-			7.2 External Interrupts/90,Black,notBold,notItalic,closed,FitPage
-				7.2.1 Display Console/90,Black,notBold,notItalic,closed,FitPage
-				7.2.2 Attention/90,Black,notBold,notItalic,closed,FitPage
-		8. Instruction Execution/90,Black,notBold,notItalic,open,FitPage
-			8.1 Instruction Read/90,Black,notBold,notItalic,closed,FitPage
-			8.2 Decode Option/93,Black,notBold,notItalic,closed,FitPage
-			8.3 Operand Fetch/93,Black,notBold,notItalic,closed,FitPage
-		9. The Micro-Program/94,Black,notBold,notItalic,closed,FitPage
-			9.1 System Initialization/94,Black,notBold,notItalic,closed,FitPage
-			9.2 System Interrupt/97,Black,notBold,notItalic,closed,FitPage
-			9.3 Console Support/100,Black,notBold,notItalic,closed,FitPage
-			9.4 I/O Interrupts (Refer to Figure 7)/102,Black,notBold,notItalic,closed,FitPage
-			9.5 Power Fail Interrupt/107,Black,notBold,notItalic,closed,FitPage
-	Listings/3,Black,notBold,notItalic,closed,FitPage
-		05-058R02A13 - Micro-Program Listing/109,Black,notBold,notItalic,closed,FitPage
-		05-058F02A13 - Micro-Program Listing/167,Black,notBold,notItalic,closed,FitPage
-		05-069A13 - ROM MIcro-Program Listing/237,Black,notBold,notItalic,closed,FitPage
+Page Revision Status Sheet/2,Black,notBold,notItalic,open,FitPage
+Model 8/32 Micro-Program Descrption/3,Black,notBold,notItalic,open,FitPage
+	Figures/3,Black,notBold,notItalic,closed,FitPage
+		Figure 1 - Model 8/32 Block Diagram/4,Black,notBold,notItalic,closed,FitPage
+		Figure 3 - Double Precision Floating Point Unit Block Diagram/47,Black,notBold,notItalic,closed,FitPage
+		Figure 4 - Power Up/95,Black,notBold,notItalic,closed,FitPage
+		Figure 5 - Interrupt Support/98,Black,notBold,notItalic,closed,FitPage
+		Figure 6 - Console Support/100,Black,notBold,notItalic,closed,FitPage
+		Figure 7 - I/O Interrupts/103,Black,notBold,notItalic,closed,FitPage
+		Figure 8 - Channel Command Block/107,Black,notBold,notItalic,closed,FitPage
+		Figure 9 - Power Fail Interrupt/108,Black,notBold,notItalic,closed,FitPage
+	Tables/3,Black,notBold,notItalic,closed,FitPage
+		Table 1 - Register Set Selection/6,Black,notBold,notItalic,open,FitPage
+		Table 2 - Interrupt Traps/7,Black,notBold,notItalic,closed,FitPage
+		Table 3 - External Interrupt Enable/7,Black,notBold,notItalic,closed,FitPage
+		Table 4 - MCR Bit Definition/8,Black,notBold,notItalic,closed,FitPage
+		Table 5 - Instruction Word Fields/9,Black,notBold,notItalic,closed,FitPage
+		Table 6 - MC Field/11,Black,notBold,notItalic,closed,FitPage
+		Table 7 - Register Addresses/12,Black,notBold,notItalic,closed,FitPage
+		Table 8 - State of MDR After Instruction Read/92,Black,notBold,notItalic,closed,FitPage
+		Table 9 - B Bus Gating After Instruction Read/92,Black,notBold,notItalic,closed,FitPage
+	1. Introduction/3,Black,notBold,notItalic,closed,FitPage
+	2. Block Diagram Analysis/3,Black,notBold,notItalic,open,FitPage
+		2.1 System Organization/3,Black,notBold,notItalic,closed,FitPage
+		2.2 Control Store Memory/3,Black,notBold,notItalic,closed,FitPage
+		2.3 Flag Register (FLR)/5,Black,notBold,notItalic,closed,FitPage
+		2.4 Program Status Word (PSW)/5,Black,notBold,notItalic,closed,FitPage
+		2.5 Main Memory/5,Black,notBold,notItalic,closed,FitPage
+		2.6 General Registers/6,Black,notBold,notItalic,closed,FitPage
+		2.7 Floating-Point Registers/6,Black,notBold,notItalic,closed,FitPage
+		2.8 Micro-Registers/6,Black,notBold,notItalic,closed,FitPage
+		2.9 Arithmetic Logic Unit (ALU)/6,Black,notBold,notItalic,closed,FitPage
+		2.10 Input/Output/6,Black,notBold,notItalic,closed,FitPage
+		2.11 Interrupt Control/6,Black,notBold,notItalic,closed,FitPage
+		2.12 Machine Control Register (MCR)/7,Black,notBold,notItalic,closed,FitPage
+	3. Data and Instruction Formats/8,Black,notBold,notItalic,open,FitPage
+		3.1 Data Formats/8,Black,notBold,notItalic,closed,FitPage
+		3.2 Instruction Formats/8,Black,notBold,notItalic,closed,FitPage
+			3.2.1 Address Link/9,Black,notBold,notItalic,closed,FitPage
+			3.2.2 Register Branch/10,Black,notBold,notItalic,closed,FitPage
+			3.3.3 Register to Register Transfer/10,Black,notBold,notItalic,closed,FitPage
+			3.2.4 Register to Register Control/10,Black,notBold,notItalic,closed,FitPage
+			3.2.5 Register to Register Immediate/10,Black,notBold,notItalic,closed,FitPage
+			3.2.6 Register Write/10,Black,notBold,notItalic,closed,FitPage
+		3.3 Main Memory Control/10,Black,notBold,notItalic,closed,FitPage
+	4. Source and Destination Registers/12,Black,notBold,notItalic,closed,FitPage
+	5. Instruction Repertoire/13,Black,notBold,notItalic,open,FitPage
+		5.1 Introduction/13,Black,notBold,notItalic,closed,FitPage
+		5.2 Logical Instructions/15,Black,notBold,notItalic,closed,FitPage
+			5.2.1 Load/15,Black,notBold,notItalic,closed,FitPage
+			5.2.2 Store/16,Black,notBold,notItalic,closed,FitPage
+			5.2.3 AND/16,Black,notBold,notItalic,closed,FitPage
+			5.2.4 OR/17,Black,notBold,notItalic,closed,FitPage
+			5.2.5 Exclusive OR/18,Black,notBold,notItalic,closed,FitPage
+		5.3 Branch/Execute and Link Instructions/19,Black,notBold,notItalic,closed,FitPage
+			5.3.1 Branch and Link/20,Black,notBold,notItalic,closed,FitPage
+			5.3.2 Execute And Link/21,Black,notBold,notItalic,closed,FitPage
+		5.4 Shift/Rotate Instructions/22,Black,notBold,notItalic,closed,FitPage
+			5.4.1 Shift Left Logical/23,Black,notBold,notItalic,closed,FitPage
+			5.4.2 Shift Left Halfword Logical/24,Black,notBold,notItalic,closed,FitPage
+			5.4.3 Shift Right Logical/25,Black,notBold,notItalic,closed,FitPage
+			5.4.4 Shift Right Halfword Logical/26,Black,notBold,notItalic,closed,FitPage
+			5.4.5 Shift Left Arithmetic/27,Black,notBold,notItalic,closed,FitPage
+			5.4.6 Shift Left Halfword Airthmetic/28,Black,notBold,notItalic,closed,FitPage
+			5.4.7 Shift Right Arithmetic/29,Black,notBold,notItalic,closed,FitPage
+			5.4.8 Shift Right Halfword Arithmetic/30,Black,notBold,notItalic,closed,FitPage
+			5.4.9 Rotate Left/31,Black,notBold,notItalic,closed,FitPage
+			5.4.10 Rotate Right/32,Black,notBold,notItalic,closed,FitPage
+		5.5 Fixed Point Airthmetic Instructions/33,Black,notBold,notItalic,closed,FitPage
+			5.5.1 Add/34,Black,notBold,notItalic,closed,FitPage
+			5.5.2 Add and Increment/35,Black,notBold,notItalic,closed,FitPage
+			5.5.3 Subtract/36,Black,notBold,notItalic,closed,FitPage
+			5.5.4 Subtract and Decrement/37,Black,notBold,notItalic,closed,FitPage
+			5.5.5 Multiply/38,Black,notBold,notItalic,closed,FitPage
+			5.5.6 Divide/39,Black,notBold,notItalic,closed,FitPage
+		5.6 Floating Point Instruction/40,Black,notBold,notItalic,closed,FitPage
+			5.6.1 Compare/41,Black,notBold,notItalic,closed,FitPage
+			5.6.2 Compare and Equalize/42,Black,notBold,notItalic,closed,FitPage
+			5.6.3 Add/43,Black,notBold,notItalic,closed,FitPage
+			5.6.4 Subtract/44,Black,notBold,notItalic,closed,FitPage
+			5.6.5 Add Unnormalized/44,Black,notBold,notItalic,closed,FitPage
+			5.6.6 Multiply/45,Black,notBold,notItalic,closed,FitPage
+			5.6.7 Divide/46,Black,notBold,notItalic,closed,FitPage
+			5.6.8 Read Condition Code/49,Black,notBold,notItalic,closed,FitPage
+			5.6.9 Load Register Single Precision/50,Black,notBold,notItalic,closed,FitPage
+			5.6.10 Read Register Single Precision/51,Black,notBold,notItalic,closed,FitPage
+			5.6.11 Compare Single Precision/52,Black,notBold,notItalic,closed,FitPage
+			5.6.12 Add Single Precision/53,Black,notBold,notItalic,closed,FitPage
+			5.6.13 Subtract Single Precision/54,Black,notBold,notItalic,closed,FitPage
+			5.6.14 Multiple Single Precision/55,Black,notBold,notItalic,closed,FitPage
+			5.6.15 Divide Single Precision/56,Black,notBold,notItalic,closed,FitPage
+			5.6.16 Load Unnormalized Double Precision/57,Black,notBold,notItalic,closed,FitPage
+			5.6.17 Load Register Double Precision/58,Black,notBold,notItalic,closed,FitPage
+			5.6.18 Read Register Double Precision/59,Black,notBold,notItalic,closed,FitPage
+			5.6.19 Compare Double Precision/60,Black,notBold,notItalic,closed,FitPage
+			5.6.20 Add Double Precision/61,Black,notBold,notItalic,closed,FitPage
+			5.6.21 Subtrat Double Precision/62,Black,notBold,notItalic,closed,FitPage
+			5.6.22 Multiply Double Precision/63,Black,notBold,notItalic,closed,FitPage
+			5.6.23 Divide Double Precision/64,Black,notBold,notItalic,closed,FitPage
+		5.7 Byte Handling Instructions/66,Black,notBold,notItalic,closed,FitPage
+			5.7.1 Load Byte/66,Black,notBold,notItalic,closed,FitPage
+			5.7.2 Store Byte/67,Black,notBold,notItalic,closed,FitPage
+			5.7.3 Exchange Byte/68,Black,notBold,notItalic,closed,FitPage
+		5.8 Control Instructions/69,Black,notBold,notItalic,closed,FitPage
+			5.8. Sense Machine Control Register/70,Black,notBold,notItalic,closed,FitPage
+			5.8.2 Clear Machine Control Register/71,Black,notBold,notItalic,closed,FitPage
+			5.8.3 Load the Wait Flait-Flop/71,Black,notBold,notItalic,closed,FitPage
+			5.8.4 Pulse Output Lines/72,Black,notBold,notItalic,closed,FitPage
+			5.8.5 Power Down/72,Black,notBold,notItalic,closed,FitPage
+			5.8.6 Branch and Disable Console/73,Black,notBold,notItalic,closed,FitPage
+	6. Input/Output System/74,Black,notBold,notItalic,open,FitPage
+		6.1 Multiplexor Bus/74,Black,notBold,notItalic,closed,FitPage
+			6.1.1 Data Lines/74,Black,notBold,notItalic,closed,FitPage
+			6.1.2 Control Lines/74,Black,notBold,notItalic,closed,FitPage
+			6.1.3 Test Lines/75,Black,notBold,notItalic,closed,FitPage
+			6.1.4 Initialize Line/75,Black,notBold,notItalic,closed,FitPage
+		6.2 Input/Output Instructions/75,Black,notBold,notItalic,closed,FitPage
+			6.2.1 Acknowledge Interrupt/76,Black,notBold,notItalic,closed,FitPage
+			6.2.2 Address and Sense Status/77,Black,notBold,notItalic,closed,FitPage
+			6.2.3 Sense Status/78,Black,notBold,notItalic,closed,FitPage
+			6.2.4 Address and Output Command/79,Black,notBold,notItalic,closed,FitPage
+			6.2.5 Output Command/80,Black,notBold,notItalic,closed,FitPage
+			6.2.6 Address and Read Data/81,Black,notBold,notItalic,closed,FitPage
+			6.2.7 Read Data/82,Black,notBold,notItalic,closed,FitPage
+			6.2.8 Address and Write Data/83,Black,notBold,notItalic,closed,FitPage
+			6.2.9 Write Data/84,Black,notBold,notItalic,closed,FitPage
+			6.2.10 Address and Real Halfword/85,Black,notBold,notItalic,closed,FitPage
+			6.2.11 Read Halfword/86,Black,notBold,notItalic,closed,FitPage
+			6.2.12 Address and Write Halfword/87,Black,notBold,notItalic,closed,FitPage
+			6.2.13 Write Halfword/88,Black,notBold,notItalic,closed,FitPage
+			6.2.14 Test Halfword Line and Transfer/88,Black,notBold,notItalic,closed,FitPage
+	7. Interrupt System/89,Black,notBold,notItalic,open,FitPage
+		7.1 Internal Interrupts/89,Black,notBold,notItalic,closed,FitPage
+			7.1.1 Illegal Instruction Interrupt/89,Black,notBold,notItalic,closed,FitPage
+			7.1.2 Memory Access Controller Interrupt/89,Black,notBold,notItalic,closed,FitPage
+			7.1.3 Machine Malfunction Interrupt/89,Black,notBold,notItalic,closed,FitPage
+		7.2 External Interrupts/90,Black,notBold,notItalic,closed,FitPage
+			7.2.1 Display Console/90,Black,notBold,notItalic,closed,FitPage
+			7.2.2 Attention/90,Black,notBold,notItalic,closed,FitPage
+	8. Instruction Execution/90,Black,notBold,notItalic,open,FitPage
+		8.1 Instruction Read/90,Black,notBold,notItalic,closed,FitPage
+		8.2 Decode Option/93,Black,notBold,notItalic,closed,FitPage
+		8.3 Operand Fetch/93,Black,notBold,notItalic,closed,FitPage
+	9. The Micro-Program/94,Black,notBold,notItalic,closed,FitPage
+		9.1 System Initialization/94,Black,notBold,notItalic,closed,FitPage
+		9.2 System Interrupt/97,Black,notBold,notItalic,closed,FitPage
+		9.3 Console Support/100,Black,notBold,notItalic,closed,FitPage
+		9.4 I/O Interrupts (Refer to Figure 7)/102,Black,notBold,notItalic,closed,FitPage
+		9.5 Power Fail Interrupt/107,Black,notBold,notItalic,closed,FitPage
+Listings/3,Black,notBold,notItalic,closed,FitPage
+	05-058R02A13 - Micro-Program Listing/109,Black,notBold,notItalic,closed,FitPage
+	05-058F02A13 - Micro-Program Listing/167,Black,notBold,notItalic,closed,FitPage
+	05-069A13 - ROM Micro-Program Listing/237,Black,notBold,notItalic,closed,FitPage

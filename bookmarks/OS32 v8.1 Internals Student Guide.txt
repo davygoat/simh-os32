@@ -1,131 +1,131 @@
 OS/32 Internals Student Guide (1985)/1,Black,bold,italic,open,FitPage
-	Introduction/3,Black,notBold,notItalic,open,FitPage
-	Table of Contents/4,Black,notBold,notItalic,open,FitPage
-	Meaning of Mnemonics Used in this Study Guide/7,Black,notBold,notItalic,open,FitPage
-	Section 1 - System Modules/9,Black,notBold,notItalic,closed,FitPage
-		Table of Contents/10,Black,notBold,notItalic,open,FitPage
-		System Modules/11,Black,notBold,notItalic,open,FitPage
-		Auxiliary Processor Services (APSV)/12,Black,notBold,notItalic,open,FitPage
-		Console Driver (CDVR)/14,Black,notBold,notItalic,open,FitPage
-		Bulk Device Command Executors (CMDB)/15,Black,notBold,notItalic,open,FitPage
-		Command Executors (CMEX)/16,Black,notBold,notItalic,open,FitPage
-		Internal Reader (CMIR)/18,Black,notBold,notItalic,open,FitPage
-		Console Monitor (CMON)/19,Black,notBold,notItalic,open,FitPage
-		Command Processor (CMSP)/20,Black,notBold,notItalic,open,FitPage
-		Panic Dump Support (DUMP)/22,Black,notBold,notItalic,open,FitPage
-		Error Recording (ERRC)/23,Black,notBold,notItalic,open,FitPage
-		Accounting Support (EXAC)/25,Black,notBold,notItalic,open,FitPage
-		Executive Interrupts (EXIN)/26,Black,notBold,notItalic,open,FitPage
-		Executive I/O Services (EXIO)/27,Black,notBold,notItalic,open,FitPage
-		Executive Loader (EXLD)/32,Black,notBold,notItalic,open,FitPage
-		Roll Manager (EXMR)/33,Black,notBold,notItalic,open,FitPage
-		Memory Manager (EXMY)/34,Black,notBold,notItalic,open,FitPage
-		Supervisory Services (EXSP)/36,Black,notBold,notItalic,open,FitPage
-		Executive Services (EXSV)/37,Black,notBold,notItalic,open,FitPage
-		Time Management (EXTI)/38,Black,notBold,notItalic,open,FitPage
-		Task Manager (EXTM)/39,Black,notBold,notItalic,open,FitPage
-		Software Floating Point Emulation (FLTP)/41,Black,notBold,notItalic,open,FitPage
-		File Manager Services Part A (FMA7)/42,Black,notBold,notItalic,open,FitPage
-		File Manager Services Part B (FMB7)/43,Black,notBold,notItalic,open,FitPage
-		Continguous File Manager (FMCO)/44,Black,notBold,notItalic,open,FitPage
-		Index File Manager (FMIN)/45,Black,notBold,notItalic,open,FitPage
-		File Manager (FMS7)/46,Black,notBold,notItalic,open,FitPage
-		File Manager Utilities (FMUT)/47,Black,notBold,notItalic,open,FitPage
-		SVC Intercept (INTC)/48,Black,notBold,notItalic,open,FitPage
-		Communications Support (ITAM)/49,Black,notBold,notItalic,open,FitPage
-		Communications File Manager (ITFM)/52,Black,notBold,notItalic,open,FitPage
-		Memory Checks (MCHK)/54,Black,notBold,notItalic,open,FitPage
-		Mirror Dummy (MIRR)/55,Black,notBold,notItalic,open,FitPage
-		Supervisor Call Zero (SVCO)/56,Black,notBold,notItalic,open,FitPage
-		Operating System End (UBOT)/57,Black,notBold,notItalic,open,FitPage
-	Section 2 - System Structures/58,Black,notBold,notItalic,closed,FitPage
-		System Structures/59,Black,notBold,notItalic,open,FitPage
-		Table of Contents/60,Black,notBold,notItalic,open,FitPage
-		Access Control Block (ACB)/61,Black,notBold,notItalic,open,FitPage
-		Auxilliary Processor Block (APB)/63,Black,notBold,notItalic,open,FitPage
-		Channel Control Block (CCB)/67,Black,notBold,notItalic,open,FitPage
-		Context Block (CTX)/68,Black,notBold,notItalic,open,FitPage
-		Device Control Block Dependent Segment (DDCB)/69,Black,notBold,notItalic,open,FitPage
-		Primary File Directory (DIR)/73,Black,notBold,notItalic,open,FitPage
-		Device Mnemonic Table (DMT)/74,Black,notBold,notItalic,open,FitPage
-		Event Coordination Node (EVN)/75,Black,notBold,notItalic,open,FitPage
-		File Control Block (FCB)/77,Black,notBold,notItalic,open,FitPage
-		File Descriptor (FD)/82,Black,notBold,notItalic,open,FitPage
-		Free Block Descriptor (FDE)/83,Black,notBold,notItalic,open,FitPage
-		FMIN Extended SVC1 Parameter Block)/84,Black,notBold,notItalic,open,FitPage
-		Intercept Control Block (ICB)/85,Black,notBold,notItalic,open,FitPage
-		Input/Output Block (IOB)/87,Black,notBold,notItalic,open,FitPage
-		Input/Output Handler Routines (IOH)/89,Black,notBold,notItalic,open,FitPage
-		IOP Processor Block (IPB)/91,Black,notBold,notItalic,open,FitPage
-		Intercept Path Control Block (IPCB)/99,Black,notBold,notItalic,open,FitPage
-		Intercept Request Control Block (IRCB)/101,Black,notBold,notItalic,open,FitPage
-		Initial Value Table (IVT)/102,Black,notBold,notItalic,open,FitPage
-		Loader Common Entry (LCE)/103,Black,notBold,notItalic,open,FitPage
-		Loader Information Block (LIB)/104,Black,notBold,notItalic,open,FitPage
-		Logical Processor Mapping Table (LPMT)/106,Black,notBold,notItalic,open,FitPage
-		Loader Sharable-Segment Entry (LSE)/107,Black,notBold,notItalic,open,FitPage
-		LOADSEG Parameter Block (LSG)/108,Black,notBold,notItalic,open,FitPage
-		Loader's Task Control Block (LTCB)/109,Black,notBold,notItalic,open,FitPage
-		Overlay Control Block (OCB)/111,Black,notBold,notItalic,open,FitPage
-		Overlay Descriptor Table (ODT)/112,Black,notBold,notItalic,open,FitPage
-		Overlay Reference Table Header (ORH)/113,Black,notBold,notItalic,open,FitPage
-		Overlay Reference Table (ORT)/114,Black,notBold,notItalic,open,FitPage
-		Device Control Block Independent Portion (PDCB)/115,Black,notBold,notItalic,open,FitPage
-		Private File Control Block (PFCB)/118,Black,notBold,notItalic,open,FitPage
-		Pseudo Device Control Block (PSDCB)/121,Black,notBold,notItalic,open,FitPage
-		Pseudo Task Control Block (PSTCB)/122,Black,notBold,notItalic,open,FitPage
-		Queue Control Block (QCB)/123,Black,notBold,notItalic,open,FitPage
-		Queue Control Block Header (QCH)/125,Black,notBold,notItalic,open,FitPage
-		Queue Handler (QH)/126,Black,notBold,notItalic,open,FitPage
-		Queue Parameter Block (QPB)/127,Black,notBold,notItalic,open,FitPage
-		RS/RSA Context Block (RCTX)/128,Black,notBold,notItalic,open,FitPage
-		Roll Selection List (RLST)/129,Black,notBold,notItalic,open,FitPage
-		Segment Descriptor Entry (SDE)/130,Black,notBold,notItalic,open,FitPage
-		Secondary Directory (SECDIR)/131,Black,notBold,notItalic,open,FitPage
-		System Pointer Table (SPT)/133,Black,notBold,notItalic,open,FitPage
-		Segment Table Entry (STE)/142,Black,notBold,notItalic,open,FitPage
-		System Value Table (SVT)/143,Black,notBold,notItalic,open,FitPage
-		System Spage Struc (SYP)/144,Black,notBold,notItalic,open,FitPage
-		Task Control Block (TCB)/145,Black,notBold,notItalic,open,FitPage
-		Accounting Data Extension (TIO)/154,Black,notBold,notItalic,open,FitPage
-		Task Queue-Header (TEQ)/155,Black,notBold,notItalic,open,FitPage
-		Timer Queue Entry (TQM)/156,Black,notBold,notItalic,open,FitPage
-		Task Event Queue Entry (TQE)/157,Black,notBold,notItalic,open,FitPage
-		Task Event Queue Header (TQH)/158,Black,notBold,notItalic,open,FitPage
-		Task Trap Block (TTB)/159,Black,notBold,notItalic,open,FitPage
-		Volume Descriptor (VD)/160,Black,notBold,notItalic,open,FitPage
-		Volume Mnemonic Table (VMT)/161,Black,notBold,notItalic,open,FitPage
-	Section 3 - Flow Diagrams/162,Black,notBold,notItalic,closed,FitPage
-		Flow Diagrams/163,Black,notBold,notItalic,open,FitPage
-		Initialization/164,Black,notBold,notItalic,open,FitPage
-		Console Support/186,Black,notBold,notItalic,open,FitPage
-		Internal Reader/227,Black,notBold,notItalic,open,FitPage
-		Resident Loader/238,Black,notBold,notItalic,open,FitPage
-		Crash Handler/318,Black,notBold,notItalic,open,FitPage
-		Time Functions/321,Black,notBold,notItalic,open,FitPage
-		Task Management: Task Manager, Roll Support/328,Black,notBold,notItalic,open,FitPage
-		I/O Subsystem/371,Black,notBold,notItalic,open,FitPage
-		File Manager/390,Black,notBold,notItalic,open,FitPage
-		File Management Utilities/423,Black,notBold,notItalic,open,FitPage
-		SVC Intercept/445,Black,notBold,notItalic,open,FitPage
-		End of Task/456,Black,notBold,notItalic,open,FitPage
-		Interrupt Handler/468,Black,notBold,notItalic,open,FitPage
-		System States/496,Black,notBold,notItalic,closed,FitPage
-			Supervisor Call States/497,Black,notBold,notItalic,open,FitPage
-			UT/DT/ET State/501,Black,notBold,notItalic,open,FitPage
-			NS State/502,Black,notBold,notItalic,open,FitPage
-			RS State/503,Black,notBold,notItalic,open,FitPage
-			RSA State/504,Black,notBold,notItalic,open,FitPage
-			ES State/505,Black,notBold,notItalic,open,FitPage
-		SVC0/506,Black,notBold,notItalic,open,FitPage
-	Lab Exercises/507,Black,notBold,notItalic,open,FitPage
-	Appendix/508,Black,notBold,notItalic,closed,FitPage
-		Table of Contents/509,Black,notBold,notItalic,open,FitPage
-		System Options Bits/510,Black,notBold,notItalic,open,FitPage
-		Task Options Bits/513,Black,notBold,notItalic,open,FitPage
-		Task Wait Bits/516,Black,notBold,notItalic,open,FitPage
-		Task Status Bits/518,Black,notBold,notItalic,open,FitPage
-		DCB Flag Bits/521,Black,notBold,notItalic,open,FitPage
-		IOB Flag Bits/523,Black,notBold,notItalic,open,FitPage
-		FCB Flag Bits/525,Black,notBold,notItalic,open,FitPage
-	Notes/526,Black,notBold,notItalic,open,FitPage
+Introduction/3,Black,notBold,notItalic,open,FitPage
+Table of Contents/4,Black,notBold,notItalic,open,FitPage
+Meaning of Mnemonics Used in this Study Guide/7,Black,notBold,notItalic,open,FitPage
+Section 1 - System Modules/9,Black,notBold,notItalic,closed,FitPage
+	Table of Contents/10,Black,notBold,notItalic,open,FitPage
+	System Modules/11,Black,notBold,notItalic,open,FitPage
+	Auxiliary Processor Services (APSV)/12,Black,notBold,notItalic,open,FitPage
+	Console Driver (CDVR)/14,Black,notBold,notItalic,open,FitPage
+	Bulk Device Command Executors (CMDB)/15,Black,notBold,notItalic,open,FitPage
+	Command Executors (CMEX)/16,Black,notBold,notItalic,open,FitPage
+	Internal Reader (CMIR)/18,Black,notBold,notItalic,open,FitPage
+	Console Monitor (CMON)/19,Black,notBold,notItalic,open,FitPage
+	Command Processor (CMSP)/20,Black,notBold,notItalic,open,FitPage
+	Panic Dump Support (DUMP)/22,Black,notBold,notItalic,open,FitPage
+	Error Recording (ERRC)/23,Black,notBold,notItalic,open,FitPage
+	Accounting Support (EXAC)/25,Black,notBold,notItalic,open,FitPage
+	Executive Interrupts (EXIN)/26,Black,notBold,notItalic,open,FitPage
+	Executive I/O Services (EXIO)/27,Black,notBold,notItalic,open,FitPage
+	Executive Loader (EXLD)/32,Black,notBold,notItalic,open,FitPage
+	Roll Manager (EXMR)/33,Black,notBold,notItalic,open,FitPage
+	Memory Manager (EXMY)/34,Black,notBold,notItalic,open,FitPage
+	Supervisory Services (EXSP)/36,Black,notBold,notItalic,open,FitPage
+	Executive Services (EXSV)/37,Black,notBold,notItalic,open,FitPage
+	Time Management (EXTI)/38,Black,notBold,notItalic,open,FitPage
+	Task Manager (EXTM)/39,Black,notBold,notItalic,open,FitPage
+	Software Floating Point Emulation (FLTP)/41,Black,notBold,notItalic,open,FitPage
+	File Manager Services Part A (FMA7)/42,Black,notBold,notItalic,open,FitPage
+	File Manager Services Part B (FMB7)/43,Black,notBold,notItalic,open,FitPage
+	Continguous File Manager (FMCO)/44,Black,notBold,notItalic,open,FitPage
+	Index File Manager (FMIN)/45,Black,notBold,notItalic,open,FitPage
+	File Manager (FMS7)/46,Black,notBold,notItalic,open,FitPage
+	File Manager Utilities (FMUT)/47,Black,notBold,notItalic,open,FitPage
+	SVC Intercept (INTC)/48,Black,notBold,notItalic,open,FitPage
+	Communications Support (ITAM)/49,Black,notBold,notItalic,open,FitPage
+	Communications File Manager (ITFM)/52,Black,notBold,notItalic,open,FitPage
+	Memory Checks (MCHK)/54,Black,notBold,notItalic,open,FitPage
+	Mirror Dummy (MIRR)/55,Black,notBold,notItalic,open,FitPage
+	Supervisor Call Zero (SVCO)/56,Black,notBold,notItalic,open,FitPage
+	Operating System End (UBOT)/57,Black,notBold,notItalic,open,FitPage
+Section 2 - System Structures/58,Black,notBold,notItalic,closed,FitPage
+	System Structures/59,Black,notBold,notItalic,open,FitPage
+	Table of Contents/60,Black,notBold,notItalic,open,FitPage
+	Access Control Block (ACB)/61,Black,notBold,notItalic,open,FitPage
+	Auxilliary Processor Block (APB)/63,Black,notBold,notItalic,open,FitPage
+	Channel Control Block (CCB)/67,Black,notBold,notItalic,open,FitPage
+	Context Block (CTX)/68,Black,notBold,notItalic,open,FitPage
+	Device Control Block Dependent Segment (DDCB)/69,Black,notBold,notItalic,open,FitPage
+	Primary File Directory (DIR)/73,Black,notBold,notItalic,open,FitPage
+	Device Mnemonic Table (DMT)/74,Black,notBold,notItalic,open,FitPage
+	Event Coordination Node (EVN)/75,Black,notBold,notItalic,open,FitPage
+	File Control Block (FCB)/77,Black,notBold,notItalic,open,FitPage
+	File Descriptor (FD)/82,Black,notBold,notItalic,open,FitPage
+	Free Block Descriptor (FDE)/83,Black,notBold,notItalic,open,FitPage
+	FMIN Extended SVC1 Parameter Block)/84,Black,notBold,notItalic,open,FitPage
+	Intercept Control Block (ICB)/85,Black,notBold,notItalic,open,FitPage
+	Input/Output Block (IOB)/87,Black,notBold,notItalic,open,FitPage
+	Input/Output Handler Routines (IOH)/89,Black,notBold,notItalic,open,FitPage
+	IOP Processor Block (IPB)/91,Black,notBold,notItalic,open,FitPage
+	Intercept Path Control Block (IPCB)/99,Black,notBold,notItalic,open,FitPage
+	Intercept Request Control Block (IRCB)/101,Black,notBold,notItalic,open,FitPage
+	Initial Value Table (IVT)/102,Black,notBold,notItalic,open,FitPage
+	Loader Common Entry (LCE)/103,Black,notBold,notItalic,open,FitPage
+	Loader Information Block (LIB)/104,Black,notBold,notItalic,open,FitPage
+	Logical Processor Mapping Table (LPMT)/106,Black,notBold,notItalic,open,FitPage
+	Loader Sharable-Segment Entry (LSE)/107,Black,notBold,notItalic,open,FitPage
+	LOADSEG Parameter Block (LSG)/108,Black,notBold,notItalic,open,FitPage
+	Loader's Task Control Block (LTCB)/109,Black,notBold,notItalic,open,FitPage
+	Overlay Control Block (OCB)/111,Black,notBold,notItalic,open,FitPage
+	Overlay Descriptor Table (ODT)/112,Black,notBold,notItalic,open,FitPage
+	Overlay Reference Table Header (ORH)/113,Black,notBold,notItalic,open,FitPage
+	Overlay Reference Table (ORT)/114,Black,notBold,notItalic,open,FitPage
+	Device Control Block Independent Portion (PDCB)/115,Black,notBold,notItalic,open,FitPage
+	Private File Control Block (PFCB)/118,Black,notBold,notItalic,open,FitPage
+	Pseudo Device Control Block (PSDCB)/121,Black,notBold,notItalic,open,FitPage
+	Pseudo Task Control Block (PSTCB)/122,Black,notBold,notItalic,open,FitPage
+	Queue Control Block (QCB)/123,Black,notBold,notItalic,open,FitPage
+	Queue Control Block Header (QCH)/125,Black,notBold,notItalic,open,FitPage
+	Queue Handler (QH)/126,Black,notBold,notItalic,open,FitPage
+	Queue Parameter Block (QPB)/127,Black,notBold,notItalic,open,FitPage
+	RS/RSA Context Block (RCTX)/128,Black,notBold,notItalic,open,FitPage
+	Roll Selection List (RLST)/129,Black,notBold,notItalic,open,FitPage
+	Segment Descriptor Entry (SDE)/130,Black,notBold,notItalic,open,FitPage
+	Secondary Directory (SECDIR)/131,Black,notBold,notItalic,open,FitPage
+	System Pointer Table (SPT)/133,Black,notBold,notItalic,open,FitPage
+	Segment Table Entry (STE)/142,Black,notBold,notItalic,open,FitPage
+	System Value Table (SVT)/143,Black,notBold,notItalic,open,FitPage
+	System Spage Struc (SYP)/144,Black,notBold,notItalic,open,FitPage
+	Task Control Block (TCB)/145,Black,notBold,notItalic,open,FitPage
+	Accounting Data Extension (TIO)/154,Black,notBold,notItalic,open,FitPage
+	Task Queue-Header (TEQ)/155,Black,notBold,notItalic,open,FitPage
+	Timer Queue Entry (TQM)/156,Black,notBold,notItalic,open,FitPage
+	Task Event Queue Entry (TQE)/157,Black,notBold,notItalic,open,FitPage
+	Task Event Queue Header (TQH)/158,Black,notBold,notItalic,open,FitPage
+	Task Trap Block (TTB)/159,Black,notBold,notItalic,open,FitPage
+	Volume Descriptor (VD)/160,Black,notBold,notItalic,open,FitPage
+	Volume Mnemonic Table (VMT)/161,Black,notBold,notItalic,open,FitPage
+Section 3 - Flow Diagrams/162,Black,notBold,notItalic,closed,FitPage
+	Flow Diagrams/163,Black,notBold,notItalic,open,FitPage
+	Initialization/164,Black,notBold,notItalic,open,FitPage
+	Console Support/186,Black,notBold,notItalic,open,FitPage
+	Internal Reader/227,Black,notBold,notItalic,open,FitPage
+	Resident Loader/238,Black,notBold,notItalic,open,FitPage
+	Crash Handler/318,Black,notBold,notItalic,open,FitPage
+	Time Functions/321,Black,notBold,notItalic,open,FitPage
+	Task Management: Task Manager, Roll Support/328,Black,notBold,notItalic,open,FitPage
+	I/O Subsystem/371,Black,notBold,notItalic,open,FitPage
+	File Manager/390,Black,notBold,notItalic,open,FitPage
+	File Management Utilities/423,Black,notBold,notItalic,open,FitPage
+	SVC Intercept/445,Black,notBold,notItalic,open,FitPage
+	End of Task/456,Black,notBold,notItalic,open,FitPage
+	Interrupt Handler/468,Black,notBold,notItalic,open,FitPage
+	System States/496,Black,notBold,notItalic,closed,FitPage
+		Supervisor Call States/497,Black,notBold,notItalic,open,FitPage
+		UT/DT/ET State/501,Black,notBold,notItalic,open,FitPage
+		NS State/502,Black,notBold,notItalic,open,FitPage
+		RS State/503,Black,notBold,notItalic,open,FitPage
+		RSA State/504,Black,notBold,notItalic,open,FitPage
+		ES State/505,Black,notBold,notItalic,open,FitPage
+	SVC0/506,Black,notBold,notItalic,open,FitPage
+Lab Exercises/507,Black,notBold,notItalic,open,FitPage
+Appendix/508,Black,notBold,notItalic,closed,FitPage
+	Table of Contents/509,Black,notBold,notItalic,open,FitPage
+	System Options Bits/510,Black,notBold,notItalic,open,FitPage
+	Task Options Bits/513,Black,notBold,notItalic,open,FitPage
+	Task Wait Bits/516,Black,notBold,notItalic,open,FitPage
+	Task Status Bits/518,Black,notBold,notItalic,open,FitPage
+	DCB Flag Bits/521,Black,notBold,notItalic,open,FitPage
+	IOB Flag Bits/523,Black,notBold,notItalic,open,FitPage
+	FCB Flag Bits/525,Black,notBold,notItalic,open,FitPage
+Notes/526,Black,notBold,notItalic,open,FitPage

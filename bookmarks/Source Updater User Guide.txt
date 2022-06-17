@@ -1,0 +1,30 @@
+Source Updater User Guide (1979)/1,Black,bold,notItalic,closed,FitPage
+Page Revision Status Sheet/2,Black,notBold,notItalic,closed,FitPage
+Preface/3,Black,notBold,notItalic,closed,FitPage
+Table of Contents/5,Black,notBold,notItalic,open,FitPage
+Chapter 1 - Introduction to Source Updater/7,Black,notBold,notItalic,open,FitPage
+	1.1 General/7,Black,notBold,notItalic,closed,FitPage
+	1.2 Configuration/7,Black,notBold,notItalic,closed,FitPage
+	1.3 Logical Unit Assignments/7,Black,notBold,notItalic,closed,FitPage
+	1.4 Default Data Block Size (32-Bit Only)/8,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - Source Updater Commands/9,Black,notBold,notItalic,open,FitPage
+	2.1 General/9,Black,notBold,notItalic,closed,FitPage
+	2.2 FIND Command/11,Black,notBold,notItalic,closed,FitPage
+	2.3 COPY Command/12,Black,notBold,notItalic,closed,FitPage
+	2.4 LIST Command/13,Black,notBold,notItalic,closed,FitPage
+	2.5 TABLE Command/14,Black,notBold,notItalic,closed,FitPage
+	2.6 UPDATE Command/15,Black,notBold,notItalic,closed,FitPage
+	2.7 INSERT Command/17,Black,notBold,notItalic,closed,FitPage
+	2.8 DELETE Command/18,Black,notBold,notItalic,closed,FitPage
+	2.9 MODIFY Command/19,Black,notBold,notItalic,closed,FitPage
+	2.10 REPLACE Command/20,Black,notBold,notItalic,closed,FitPage
+	.11 SELECT Command/21,Black,notBold,notItalic,closed,FitPage
+	2.12 ENDUP Command/22,Black,notBold,notItalic,closed,FitPage
+	2.13 RESEQUENCE Command/23,Black,notBold,notItalic,closed,FitPage
+	2.14 VERIFY Command/24,Black,notBold,notItalic,closed,FitPage
+	2.15 EXCEPTION Command/25,Black,notBold,notItalic,closed,FitPage
+	2.16 BUILD Command/27,Black,notBold,notItalic,closed,FitPage
+	2.17 INCLUDE Command/28,Black,notBold,notItalic,closed,FitPage
+	2.19 REWIND Command/29,Black,notBold,notItalic,closed,FitPage
+Index/31,Black,notBold,notItalic,closed,FitPage
+Comment Form/33,Black,notBold,notItalic,closed,FitPage

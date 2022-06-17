@@ -1,0 +1,84 @@
+OS/32 Application Level Programmer Reference Manual (1988)/1,Black,bold,notItalic,closed,FitPage
+Table of Contents/5,Black,notBold,notItalic,closed,FitPage
+Preface/9,Black,notBold,notItalic,closed,FitPage
+Chapter 1 - Programming in an OS/32 Environment/11,Black,notBold,notItalic,open,FitPage
+	1.1 OS/32 Operational Overview/11,Black,notBold,notItalic,closed,FitPage
+	1.2 OS/32 Real-Time Environment/13,Black,notBold,notItalic,closed,FitPage
+	1.3 Multi-Terminal Monitor (MTM) Time-Sharing Environment/14,Black,notBold,notItalic,closed,FitPage
+	1.4 The OS/32 Application Programmer/15,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - Task Structure and Execution Control/17,Black,notBold,notItalic,open,FitPage
+	2.1 Introduction/17,Black,notBold,notItalic,closed,FitPage
+	2.2 Image File Format/18,Black,notBold,notItalic,closed,FitPage
+	2.3 Loading a User Task (U-Task) Into Memory/21,Black,notBold,notItalic,closed,FitPage
+	2.4 Task States and Priorities/26,Black,notBold,notItalic,closed,FitPage
+	2.5 Monitor Tasks and Subtasks/28,Black,notBold,notItalic,closed,FitPage
+		2.5.1 The Multi-Terminal Monitor (MTM)/29,Black,notBold,notItalic,closed,FitPage
+	2.6 Restrictions on Intertask Communication/29,Black,notBold,notItalic,closed,FitPage
+	2.7 Accessing OS/32 System Services/30,Black,notBold,notItalic,closed,FitPage
+Chapter 3 - Interrupt Servicing in a Real-Time Environment/31,Black,notBold,notItalic,open,FitPage
+	3.1 Introduction/31,Black,notBold,notItalic,closed,FitPage
+	3.2 Task Status Word (TSW)/32,Black,notBold,notItalic,closed,FitPage
+	3.3 Traps Handled by OS/32/35,Black,notBold,notItalic,closed,FitPage
+	3.4 User-Dedicated Location (UDL) and Task Status Word (TSW) Swap/39,Black,notBold,notItalic,closed,FitPage
+	3.5 Traps Handled By User-Written Tasks/46,Black,notBold,notItalic,closed,FitPage
+		3.5.1 Arithmetic Fault Trap/47,Black,notBold,notItalic,closed,FitPage
+		3.5.2 Data Format/Alignment Faults/48,Black,notBold,notItalic,closed,FitPage
+		3.5.3 Power Restoration/49,Black,notBold,notItalic,closed,FitPage
+		3.5.4 Illegal Instruction Faults/49,Black,notBold,notItalic,closed,FitPage
+		3.5.5 Memory Access Faults/49,Black,notBold,notItalic,closed,FitPage
+		3.5.6 Task Queue Trap-Causing Events and Task Queue Service/50,Black,notBold,notItalic,closed,FitPage
+		3.5.7 User-Defined Trap-Causing Events/57,Black,notBold,notItalic,closed,FitPage
+	3.6 Writing Tasks That Handle Task Traps/57,Black,notBold,notItalic,closed,FitPage
+		3.6.1 Handling Task Queue Traps/61,Black,notBold,notItalic,closed,FitPage
+		3.6.2 Tips for Writing Task Trap-Handling Routines/62,Black,notBold,notItalic,closed,FitPage
+		3.6.3 Handling Traps From Trap-Generating Devices/63,Black,notBold,notItalic,closed,FitPage
+		3.6.4 Sample Task Trap-Handling Program/64,Black,notBold,notItalic,closed,FitPage
+		3.6.5 Using the OS/32 System Macro Library to Handle Traps/66,Black,notBold,notItalic,closed,FitPage
+		3.6.6 Writing FORTRAN Trap-Handling Programs/66,Black,notBold,notItalic,closed,FitPage
+		3.6.7 Writing Pascal Trap-Handling Programs/67,Black,notBold,notItalic,closed,FitPage
+Chapter 4 - OS/32 Disk File Management Services/71,Black,notBold,notItalic,open,FitPage
+	4.1 Introduction to the OS/32 File Manager/71,Black,notBold,notItalic,closed,FitPage
+	4.2 System Resource Management/72,Black,notBold,notItalic,closed,FitPage
+	4.3 File Organization/73,Black,notBold,notItalic,closed,FitPage
+		4.3.1 Linked-List Indexed Organization/75,Black,notBold,notItalic,closed,FitPage
+		4.3.2 Contiguous Organization/76,Black,notBold,notItalic,closed,FitPage
+	4.4 Disk Organization/76,Black,notBold,notItalic,closed,FitPage
+	4.5 Supported Disk File Types/77,Black,notBold,notItalic,closed,FitPage
+		4.5.1 Contiguous Files/77,Black,notBold,notItalic,closed,FitPage
+		4.5.2 Indexed and Nonbuffered Indexed Files/78,Black,notBold,notItalic,closed,FitPage
+		4.5.3 Extendable Contiguous Files/78,Black,notBold,notItalic,closed,FitPage
+		4.5.4 Long Record Files/79,Black,notBold,notItalic,closed,FitPage
+	4.6 Mirror Disk Environment/79,Black,notBold,notItalic,closed,FitPage
+		4.6.1 Disk Failure/80,Black,notBold,notItalic,closed,FitPage
+		4.6.2 Norman Input/Output (I/O) Performance/80,Black,notBold,notItalic,closed,FitPage
+	4.7 Disk Space Management/80,Black,notBold,notItalic,closed,FitPage
+	4.8 Volume Description/81,Black,notBold,notItalic,closed,FitPage
+		4.8.1 File Directories/82,Black,notBold,notItalic,closed,FitPage
+		4.8.2 Bit Map/86,Black,notBold,notItalic,closed,FitPage
+		4.8.3 Permanent and Temporary File Allocation/86,Black,notBold,notItalic,closed,FitPage
+	4.9 Assigning Files to a Task/86,Black,notBold,notItalic,closed,FitPage
+	4.10 Access Methods/87,Black,notBold,notItalic,closed,FitPage
+		4.10.1 Buffered Input/Output (I/O) (Indexed Files)/90,Black,notBold,notItalic,closed,FitPage
+		4.10.2 Nonbuffered Input/Output (I/O)/91,Black,notBold,notItalic,closed,FitPage
+			4.10.2.1 Accessing Contiguous Files/91,Black,notBold,notItalic,closed,FitPage
+			4.10.2.2 Accessing Nonbuffered Indexed Files/91,Black,notBold,notItalic,closed,FitPage
+			4.10.2.3 Accessing Extendable Contiguous Files/92,Black,notBold,notItalic,closed,FitPage
+			4.10.2.4 Accessing Long Record Files/92,Black,notBold,notItalic,closed,FitPage
+	4.11 File Security/93,Black,notBold,notItalic,closed,FitPage
+	4.12 Choosing the Right File Type/96,Black,notBold,notItalic,closed,FitPage
+		4.12.1 Using Contiguous Files/97,Black,notBold,notItalic,closed,FitPage
+		4.12.2 Using Indexed Files/97,Black,notBold,notItalic,closed,FitPage
+		4.12.3 Using Nonbuffered Indexed Files/98,Black,notBold,notItalic,closed,FitPage
+		4.12.4 Using Extendable Contiguous Files/98,Black,notBold,notItalic,closed,FitPage
+		4.12.5 Using Long Record Files/99,Black,notBold,notItalic,closed,FitPage
+		4.12.6 Disk Fragmentation/99,Black,notBold,notItalic,closed,FitPage
+Chapter 5 - Writing Programs That Access OS/32 System Services/101,Black,notBold,notItalic,open,FitPage
+	5.1 Introduction/101,Black,notBold,notItalic,closed,FitPage
+	5.2 Building a Supervisor Call (SVC) Parameter Block/103,Black,notBold,notItalic,closed,FitPage
+		5.2.1 Accessing Input/Output (I/O) System Services/103,Black,notBold,notItalic,closed,FitPage
+		5.2.2 Accessing File Management Services/107,Black,notBold,notItalic,closed,FitPage
+	5.3 Using the OS/32 System Macro Library to Access System Services/109,Black,notBold,notItalic,closed,FitPage
+	5.4 Writing a FORTRAN Program That Accesses System Services/110,Black,notBold,notItalic,closed,FitPage
+	5.5 Writing a Pascal Program That Accesses System Servies/111,Black,notBold,notItalic,closed,FitPage
+Index/113,Black,notBold,notItalic,closed,FitPage
+Comment Form/119,Black,notBold,notItalic,closed,FitPage

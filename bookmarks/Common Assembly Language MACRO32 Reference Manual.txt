@@ -1,0 +1,135 @@
+Common Assembly Language MACRO/32 Processor (CAL MACRO/32) Library Utility Reference Manual (1986)/1,Black,bold,notItalic,closed,FitPage
+Table of Contents/3,Black,notBold,notItalic,closed,FitPage
+Preface/9,Black,notBold,notItalic,closed,FitPage
+Chapter 1 - CAL MACRO/32 Processor/11,Black,notBold,notItalic,open,FitPage
+	1.1 Introduction/11,Black,notBold,notItalic,closed,FitPage
+	1.2 CAL MACRO/32 Processor Requirements/11,Black,notBold,notItalic,closed,FitPage
+		1.2.1 Configuration Option/11,Black,notBold,notItalic,closed,FitPage
+		1.2.2 Relationship to Other Products/11,Black,notBold,notItalic,closed,FitPage
+	1.3 CAL MACRO/32 Processor Components/12,Black,notBold,notItalic,closed,FitPage
+	1.4 Summary of CAL MACRO/32 Processor Features/12,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - Preparation of a Macro Definition/15,Black,notBold,notItalic,open,FitPage
+	2.1 Introduction/15,Black,notBold,notItalic,closed,FitPage
+	2.2 Macro Instructions/15,Black,notBold,notItalic,closed,FitPage
+	2.3 Macro Definitions/16,Black,notBold,notItalic,closed,FitPage
+		2.3.1 Macro Definition Fields/16,Black,notBold,notItalic,closed,FitPage
+	2.4 Special Symbols/18,Black,notBold,notItalic,closed,FitPage
+		2.4.1 Variable Symbols/18,Black,notBold,notItalic,open,FitPage
+			2.4.1.1 Local, Global, and Batch Global Variable Symbols/19,Black,notBold,notItalic,closed,FitPage
+			2.4.1.2 Defining Variable Symbols/19,Black,notBold,notItalic,closed,FitPage
+		2.4.2 Concatenation Symbols/20,Black,notBold,notItalic,closed,FitPage
+		2.4.3 Sequence Symbols/20,Black,notBold,notItalic,closed,FitPage
+	2.5 Macro Definition Contents/21,Black,notBold,notItalic,closed,FitPage
+		2.5.1 Macro Header and Trailer Statements/22,Black,notBold,notItalic,closed,FitPage
+		2.5.2 Macro Instruction Prototype Statements/22,Black,notBold,notItalic,open,FitPage
+			2.5.2.1 Positional Macro Instruction Prototype Statements/22,Black,notBold,notItalic,closed,FitPage
+			2.5.2.2 Keyword Macro Instruction Prototype Statements/23,Black,notBold,notItalic,closed,FitPage
+			2.5.2.3 Mixed Mode Macro Instruction Prototype Statements/24,Black,notBold,notItalic,closed,FitPage
+	2.6 Model Statements/25,Black,notBold,notItalic,closed,FitPage
+		2.6.1 Name Field/26,Black,notBold,notItalic,closed,FitPage
+		2.6.2 Operation Field/26,Black,notBold,notItalic,closed,FitPage
+		2.6.3 Operand Field/27,Black,notBold,notItalic,closed,FitPage
+		2.6.4 Comments Fields/27,Black,notBold,notItalic,closed,FitPage
+		2.6.5 Using Symbolic Parameters in Model Statements/27,Black,notBold,notItalic,open,FitPage
+			2.6.5.1 Concatenation Rules/28,Black,notBold,notItalic,closed,FitPage
+Chapter 3 - Writing Macro Instructions/31,Black,notBold,notItalic,open,FitPage
+	3.1 Introduction/31,Black,notBold,notItalic,closed,FitPage
+	3.2 Rules for Writing Macro Instructions/31,Black,notBold,notItalic,closed,FitPage
+		3.2.1 Macro Instruction Name Field/31,Black,notBold,notItalic,closed,FitPage
+		3.2.2 Macro Instruction Operation Field/31,Black,notBold,notItalic,closed,FitPage
+		3.2.3 Macro Instruction Operand Field/31,Black,notBold,notItalic,closed,FitPage
+	3.3 Macro Instruction Operands/33,Black,notBold,notItalic,closed,FitPage
+		3.3.1 Continuation of Macro Instructions/34,Black,notBold,notItalic,closed,FitPage
+		3.3.2 Omitted Operands/35,Black,notBold,notItalic,closed,FitPage
+		3.3.3 Sublists/36,Black,notBold,notItalic,closed,FitPage
+	3.4 Inner/Outer Macro Instructions/37,Black,notBold,notItalic,closed,FitPage
+		3.4.1 Levels of Macro Instructions/38,Black,notBold,notItalic,closed,FitPage
+		3.4.2 Macro Instructions in Conditional Assembly/39,Black,notBold,notItalic,closed,FitPage
+Chapter 4 - Conditional Expansion of Macro Definitions/41,Black,notBold,notItalic,open,FitPage
+	4.1 Introduction/41,Black,notBold,notItalic,closed,FitPage
+	4.2 Global, Batch Global, and Local Set Variable Symbol Declaration Statements/41,Black,notBold,notItalic,closed,FitPage
+		4.2.1 Global SET Variable Symbol Declaration (GBLx) Statement/42,Black,notBold,notItalic,closed,FitPage
+		4.2.2 Batch Global SET Variable Symbol Declaration (BGBLx) Statement/43,Black,notBold,notItalic,closed,FitPage
+		4.2.3 Local SET Variable Symbol Declaration (LCLx) Statement/44,Black,notBold,notItalic,closed,FitPage
+		4.2.4 Declaring SET Variable Symbols/44,Black,notBold,notItalic,closed,FitPage
+		4.2.5 Declaring SET Variables as Arrays/45,Black,notBold,notItalic,closed,FitPage
+	4.3 Set Variable Symbols (SETx) Statements/46,Black,notBold,notItalic,closed,FitPage
+		4.3.1 SET Arithmetic Variable (SETA) Statement/48,Black,notBold,notItalic,open,FitPage
+			4.3.1.1 Using SETA Variable Symbol/49,Black,notBold,notItalic,closed,FitPage
+		4.3.2 SET Character Variable (SETC) Statement/50,Black,notBold,notItalic,open,FitPage
+			4.3.2.1 Substring Notation/50,Black,notBold,notItalic,closed,FitPage
+			4.3.2.2 Using SETC Variable Symbols/51,Black,notBold,notItalic,closed,FitPage
+		4.3.3 SET Binary Variable (SETB) Statement/54,Black,notBold,notItalic,open,FitPage
+			4.3.3.1 Using SETB Variable Symbols/55,Black,notBold,notItalic,closed,FitPage
+	4.4 Attributes/56,Black,notBold,notItalic,closed,FitPage
+		4.4.1 Type Attribute (T')/57,Black,notBold,notItalic,closed,FitPage
+		4.4.2 Count Attribute (K')/57,Black,notBold,notItalic,closed,FitPage
+		4.4.3 Number Attribute (N')/57,Black,notBold,notItalic,closed,FitPage
+	4.5 Conditional and Unconditional Branch Instructions/59,Black,notBold,notItalic,closed,FitPage
+		4.5.1 Conditional Branch (AIF) Instruction/59,Black,notBold,notItalic,closed,FitPage
+		4.5.2 Unconditional Branch (AGO) Instruction/60,Black,notBold,notItalic,closed,FitPage
+		4.5.3 Computed AGO and AIF Statements/60,Black,notBold,notItalic,closed,FitPage
+	4.6 Conditional Instruction Loop Counter (ACTR) Instruction/63,Black,notBold,notItalic,closed,FitPage
+	4.7 No Operation (ANOP) Instruction/64,Black,notBold,notItalic,closed,FitPage
+	4.8 Macro Definition Exit (MEXIT) Instruction/67,Black,notBold,notItalic,closed,FitPage
+	4.9 Request for Message (MNOTE) Instruction/69,Black,notBold,notItalic,closed,FitPage
+	4.10 System Variable Symbols/71,Black,notBold,notItalic,closed,FitPage
+		4.10.1 %SYSLIST Symbol/72,Black,notBold,notItalic,closed,FitPage
+		4.10.2 %SYSIDX Symbol/74,Black,notBold,notItalic,closed,FitPage
+		4.10.3 %SYSMAC Symbol/76,Black,notBold,notItalic,closed,FitPage
+		4.10.4 %SYSTIME Symbol/78,Black,notBold,notItalic,closed,FitPage
+		4.10.5 %SYSDATE Symbol/78,Black,notBold,notItalic,closed,FitPage
+	4.11 AREAD Statement/79,Black,notBold,notItalic,closed,FitPage
+	4.12 Substring Notation in Model Statements/80,Black,notBold,notItalic,closed,FitPage
+Chapter 5 - Additional CAL MACRO/32 Features/81,Black,notBold,notItalic,open,FitPage
+	5.1 Introduction/81,Black,notBold,notItalic,open,FitPage
+	5.1.1 As Is (ASIS) Instruction/82,Black,notBold,notItalic,closed,FitPage
+	5.1.2 Macro Call (MCALL) Instruction/83,Black,notBold,notItalic,closed,FitPage
+	5.1.3 Macro Copy (NCOPY) Statement/84,Black,notBold,notItalic,closed,FitPage
+	5.1.4 Macro Definitions (MDEFS) Instruction/86,Black,notBold,notItalic,closed,FitPage
+	5.1.5 Macro Libraries (MLIBS) Instruction/87,Black,notBold,notItalic,closed,FitPage
+	5.1.6 Macro Listing (MLIST) Instruction/88,Black,notBold,notItalic,closed,FitPage
+	5.1.7 Pause (MPAUS) Instruction/89,Black,notBold,notItalic,closed,FitPage
+	5.1.8 Macro Trace (MTRAC) Instruction/90,Black,notBold,notItalic,closed,FitPage
+	5.1.9 No Libraries (NOLIB) Instructions/91,Black,notBold,notItalic,closed,FitPage
+	5.1.10 No Trace (NTRAC) Instructions/92,Black,notBold,notItalic,closed,FitPage
+Chapter 6 - Operation of the CAL MACRO/32 Processor/93,Black,notBold,notItalic,open,FitPage
+	6.1 Introduction/93,Black,notBold,notItalic,closed,FitPage
+		6.1.1 Device Assignments/93,Black,notBold,notItalic,closed,FitPage
+		6.1.2 Memory Requirements/93,Black,notBold,notItalic,closed,FitPage
+	6.2 Operation of the Macro Processor Under OS/32/94,Black,notBold,notItalic,closed,FitPage
+	6.3 I/O Errors/95,Black,notBold,notItalic,closed,FitPage
+	6.4 START Options/96,Black,notBold,notItalic,closed,FitPage
+	6.5 CAL MACRO/32 Processor Termination/96,Black,notBold,notItalic,closed,FitPage
+Chapter 7 - Macro Library Utility Program/97,Black,notBold,notItalic,open,FitPage
+	7.1 Introduction/97,Black,notBold,notItalic,closed,FitPage
+	7.2 Macro Library/97,Black,notBold,notItalic,closed,FitPage
+		7.2.1 Header Record/98,Black,notBold,notItalic,closed,FitPage
+		7.2.2 Index Records/98,Black,notBold,notItalic,closed,FitPage
+		7.2.3 Macro Definitions/99,Black,notBold,notItalic,closed,FitPage
+	7.3 Command Format/99,Black,notBold,notItalic,closed,FitPage
+	7.4 Macro Library Utility Commands/100,Black,notBold,notItalic,closed,FitPage
+		7.4.1 BF Command/101,Black,notBold,notItalic,closed,FitPage
+		7.4.2 DELETE Command/102,Black,notBold,notItalic,closed,FitPage
+		7.4.3 DIRECTORY Command/103,Black,notBold,notItalic,closed,FitPage
+		7.4.4 END Command/104,Black,notBold,notItalic,closed,FitPage
+		7.4.5 ESTABLISH Command/105,Black,notBold,notItalic,closed,FitPage
+		7.4.6 FF Command/106,Black,notBold,notItalic,closed,FitPage
+		7.4.7 GET Command/107,Black,notBold,notItalic,closed,FitPage
+		7.4.8 INCLUDE Command/108,Black,notBold,notItalic,closed,FitPage
+		7.4.9 LIST Command/110,Black,notBold,notItalic,closed,FitPage
+		7.4.10 PAUSE Command/111,Black,notBold,notItalic,closed,FitPage
+		7.4.11 RW Command/112,Black,notBold,notItalic,closed,FitPage
+		7.4.12 SAVE Command/113,Black,notBold,notItalic,closed,FitPage
+		7.4.13 WFM Command/115,Black,notBold,notItalic,closed,FitPage
+		7.4.14 Comments/116,Black,notBold,notItalic,closed,FitPage
+	7.5 Operation with a Macro Library on Magnetic Tape/117,Black,notBold,notItalic,closed,FitPage
+	7.6 Operation of a Macro Library Utility under OS/32/117,Black,notBold,notItalic,closed,FitPage
+Appendixes/119,Black,notBold,notItalic,open,FitPage
+	Appendix A - Command Summary/119,Black,notBold,notItalic,closed,FitPage
+	Appendix B - Instruction Statement Summary/121,Black,notBold,notItalic,closed,FitPage
+	Appendix C - Examples of Macro Expansion/123,Black,notBold,notItalic,closed,FitPage
+	Appendix D - CAL MACRO/32 Processor Error Messages/129,Black,notBold,notItalic,closed,FitPage
+Glossary/137,Black,notBold,notItalic,closed,FitPage
+Index/145,Black,notBold,notItalic,closed,FitPage
+Comment Form/147,Black,notBold,notItalic,closed,FitPage

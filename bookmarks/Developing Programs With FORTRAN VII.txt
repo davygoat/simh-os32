@@ -1,0 +1,234 @@
+Developing Programs with Fortran VII (1990)/1,Black,bold,notItalic,open,FitPage
+About This Book/3,Black,notBold,notItalic,open,FitPage
+	Document Organization/4,Black,notBold,notItalic,closed,FitPage
+Contents/7,Black,notBold,notItalic,closed,FitPage
+Revision History/15,Black,notBold,notItalic,closed,FitPage
+Conventions/17,Black,notBold,notItalic,closed,FitPage
+Chapter 1 - FORTRAN VII Overview/21,Black,notBold,notItalic,open,FitPage
+	The FORTRAN VII Compilers/22,Black,notBold,notItalic,closed,FitPage
+	FORTRAN VII Support Products/22,Black,notBold,notItalic,closed,FitPage
+	Minimum System Requirements for FORTRAN VII/24,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - Overview of the Program Development Process/25,Black,notBold,notItalic,open,FitPage
+	Program Development Process Phases/26,Black,notBold,notItalic,closed,FitPage
+	Review of the CSS/28,Black,notBold,notItalic,closed,FitPage
+	Entering the FORTRAN VII Environment/30,Black,notBold,notItalic,closed,FitPage
+		Creating Your Source Program/31,Black,notBold,notItalic,closed,FitPage
+		Creating a Data File/32,Black,notBold,notItalic,closed,FitPage
+		Assigning Logical Units/33,Black,notBold,notItalic,closed,FitPage
+	Using Program Development Commands/34,Black,notBold,notItalic,open,FitPage
+		COMPILE Command/34,Black,notBold,notItalic,closed,FitPage
+		LINK Command/37,Black,notBold,notItalic,closed,FitPage
+		COMPLINK Command/37,Black,notBold,notItalic,closed,FitPage
+		RUN Command/38,Black,notBold,notItalic,closed,FitPage
+		EXEC Command/38,Black,notBold,notItalic,closed,FitPage
+	Debugging Phase/39,Black,notBold,notItalic,closed,FitPage
+Chapter 3 - Controlling Compilation Through Directives/41,Black,notBold,notItalic,open,FitPage
+	Introducing the Two Types of Directives/42,Black,notBold,notItalic,closed,FitPage
+	Notes on Using the Two Types of Directives/50,Black,notBold,notItalic,closed,FitPage
+	How to Use the Instream Compiler Directives/51,Black,notBold,notItalic,closed,FitPage
+	Controlling Compiler Input/54,Black,notBold,notItalic,closed,FitPage
+	Controlling Compiler List Output/61,Black,notBold,notItalic,closed,FitPage
+	Inserting CAL Blocks/67,Black,notBold,notItalic,closed,FitPage
+	Controlling Compiler Optimization/67,Black,notBold,notItalic,closed,FitPage
+	Controlling the F7Z In-line Expansion Feature/70,Black,notBold,notItalic,closed,FitPage
+	Debugging the Source Code/81,Black,notBold,notItalic,closed,FitPage
+	Preparing Your Code for Parallelization/83,Black,notBold,notItalic,closed,FitPage
+	Miscellaneous Instream Compiler Directives/85,Black,notBold,notItalic,closed,FitPage
+Chapter 4 - Prepararing Your Source Code/97,Black,notBold,notItalic,open,FitPage
+	Calling Subroutines with Dummy Arguments/98,Black,notBold,notItalic,closed,FitPage
+	Processing of DO Loops/101,Black,notBold,notItalic,closed,FitPage
+	Using the Computed GOTO/104,Black,notBold,notItalic,closed,FitPage
+	Using the Assigned GOTO/105,Black,notBold,notItalic,closed,FitPage
+	Using Array Subscripts/105,Black,notBold,notItalic,closed,FitPage
+	Using Parentheses/106,Black,notBold,notItalic,closed,FitPage
+	Converting Data Types/107,Black,notBold,notItalic,closed,FitPage
+		Allocation of Variables in Common/108,Black,notBold,notItalic,closed,FitPage
+		Integer Conversion/109,Black,notBold,notItalic,closed,FitPage
+	Defining Program Entitities/110,Black,notBold,notItalic,closed,FitPage
+	Testing Values of Floating Point Variables/112,Black,notBold,notItalic,closed,FitPage
+	Equivalencing Integer to Floating Point Variables/112,Black,notBold,notItalic,closed,FitPage
+	Improving Program Readability/112,Black,notBold,notItalic,closed,FitPage
+	Optimizing I/O Operations/113,Black,notBold,notItalic,closed,FitPage
+	Preparing Code for the Optimizing Compilers/115,Black,notBold,notItalic,closed,FitPage
+		Basic Optimization Concepts/116,Black,notBold,notItalic,closed,FitPage
+			Constant Computation (Built-in)/118,Black,notBold,notItalic,closed,FitPage
+			Compile Time Type Conversions (Built-in)/118,Black,notBold,notItalic,closed,FitPage
+			Symbolic Arithmetic (Optional)/119,Black,notBold,notItalic,closed,FitPage
+			Array Linearization (Built-in)/120,Black,notBold,notItalic,closed,FitPage
+			Short Circuit Logical Expression Computatin (Built-in)/121,Black,notBold,notItalic,closed,FitPage
+			Machine Instruction Choice (Built-in)/121,Black,notBold,notItalic,closed,FitPage
+			Expression Reordering (Built-in)/122,Black,notBold,notItalic,closed,FitPage
+			Strength Reduction (Built-in/Optional)/123,Black,notBold,notItalic,closed,FitPage
+			Loop Test Replacement (Optional)/125,Black,notBold,notItalic,closed,FitPage
+			Global Register Allocation (Optional)/125,Black,notBold,notItalic,closed,FitPage
+			Invariant Code Motion (Optional)/126,Black,notBold,notItalic,closed,FitPage
+			Constant Propagation and Computation (Optional)/127,Black,notBold,notItalic,closed,FitPage
+			Dead Code Elimination (Optional)/128,Black,notBold,notItalic,closed,FitPage
+			Scalar Propagation (Optional)/129,Black,notBold,notItalic,closed,FitPage
+			Folding (Optional)/129,Black,notBold,notItalic,closed,FitPage
+			Common Subexpression Elimination (Optional)/130,Black,notBold,notItalic,closed,FitPage
+		Sequence of Optimization/132,Black,notBold,notItalic,closed,FitPage
+		Preparing Source Code for the Optimizing Compilers/132,Black,notBold,notItalic,closed,FitPage
+Chapter 5 - Interfacing Assembly Language Routines/137,Black,notBold,notItalic,open,FitPage
+	Knowing Your Options/138,Black,notBold,notItalic,closed,FitPage
+	Standard FORTRAN Calling Sequence/138,Black,notBold,notItalic,closed,FitPage
+		Passing Arguments/138,Black,notBold,notItalic,closed,FitPage
+		Passing the Return Address/146,Black,notBold,notItalic,closed,FitPage
+		Run-Time Library (RTL) Scratchpad/146,Black,notBold,notItalic,closed,FitPage
+		Function Results and Condition Codes (CCs)/147,Black,notBold,notItalic,closed,FitPage
+		Calling and Receiving Sequences/148,Black,notBold,notItalic,closed,FitPage
+		Sharing Data/155,Black,notBold,notItalic,closed,FitPage
+		Calling Intrinsic Subprograms from Assembly Program/157,Black,notBold,notItalic,closed,FitPage
+	Inserting an Assembly Language Block in Source Code/157,Black,notBold,notItalic,closed,FitPage
+		Guidelines for Embedding Assembly Blocks/162,Black,notBold,notItalic,closed,FitPage
+	Get and Reslease Storage Assembly Routines/165,Black,notBold,notItalic,closed,FitPage
+		MALLOC Routine (Get Storage)/165,Black,notBold,notItalic,closed,FitPage
+		MFREE Routine (Release Storage)/166,Black,notBold,notItalic,closed,FitPage
+		PFREE Routine (Release Partial Storage)/167,Black,notBold,notItalic,closed,FitPage
+Chapter 6 - Building a Command File to Compiler Your Program/169,Black,notBold,notItalic,open,FitPage
+	The Basic Compilation Process/170,Black,notBold,notItalic,closed,FitPage
+	Using the F7O and F7Z Compilers/170,Black,notBold,notItalic,closed,FitPage
+		Loading the Compiler/171,Black,notBold,notItalic,closed,FitPage
+		Allocating and Assigning I/O Files/173,Black,notBold,notItalic,open,FitPage
+		Using the Compiler Start Directives/175,Black,notBold,notItalic,closed,FitPage
+		Using the In-line Start Directives/187,Black,notBold,notItalic,closed,FitPage
+		Testing End of Task Code/188,Black,notBold,notItalic,closed,FitPage
+		Program Development Procedures with Embedded CAL/190,Black,notBold,notItalic,closed,FitPage
+Chapter 7 - Building a Command File to Link a FORTRAN Program/193,Black,notBold,notItalic,open,FitPage
+	Introducing the Basic Link Development Procedure/194,Black,notBold,notItalic,closed,FitPage
+	Allocating Link I/O Files/196,Black,notBold,notItalic,closed,FitPage
+	Building a Basic Link .CMD File/198,Black,notBold,notItalic,closed,FitPage
+		Linking Trap Handling Programs/204,Black,notBold,notItalic,closed,FitPage
+		Overlaying a Program/207,Black,notBold,notItalic,closed,FitPage
+		Linking Shared Data Areas/211,Black,notBold,notItalic,closed,FitPage
+		Linking Shared Segments/214,Black,notBold,notItalic,closed,FitPage
+	DCMD Messages/216,Black,notBold,notItalic,closed,FitPage
+	Loading and Executing Link/217,Black,notBold,notItalic,open,FitPage
+	Testing End of Task Codes for Link/217,Black,notBold,notItalic,closed,FitPage
+Chapter 8 - Build a Command File to Execute a FORTRAN Program/221,Black,notBold,notItalic,open,FitPage
+	Introducing the Basic Execute Procedure/222,Black,notBold,notItalic,open,FitPage
+		Loading and Starting the Task Image/223,Black,notBold,notItalic,closed,FitPage
+		Assigning Logical Units/223,Black,notBold,notItalic,closed,FitPage
+		Testing End of Task Codes/224,Black,notBold,notItalic,closed,FitPage
+Chapter 9 - Run-Time Debugging/225,Black,notBold,notItalic,open,FitPage
+	Basic Debugging Concepts/226,Black,notBold,notItalic,closed,FitPage
+	Compiling Code Using $COMP/$NCOMP/226,Black,notBold,notItalic,closed,FitPage
+	Checking Intermediate Values with $TRACE/228,Black,notBold,notItalic,closed,FitPage
+	Tracing Executable Statements/229,Black,notBold,notItalic,closed,FitPage
+	Checking Array Subscripts Using $TEST/231,Black,notBold,notItalic,closed,FitPage
+	RTL Argument Checking/233,Black,notBold,notItalic,closed,FitPage
+	Analyzing Run-Time Error Messages/234,Black,notBold,notItalic,closed,FitPage
+	Removing the Debugging Aids/234,Black,notBold,notItalic,closed,FitPage
+Chapter 10 - Analyzing Program Maps and Listings/235,Black,notBold,notItalic,open,FitPage
+	Source Listings/236,Black,notBold,notItalic,closed,FitPage
+		F7O Source Listing with Compilation Errors/237,Black,notBold,notItalic,closed,FitPage
+		F7O and F7Z Listings Without Compilation Errors/239,Black,notBold,notItalic,closed,FitPage
+	Cross-Reference Listings/242,Black,notBold,notItalic,closed,FitPage
+	Batch Statistics/245,Black,notBold,notItalic,closed,FitPage
+	Link Maps/247,Black,notBold,notItalic,closed,FitPage
+	Optimization Summaries/252,Black,notBold,notItalic,closed,FitPage
+	Assembly Listings/255,Black,notBold,notItalic,closed,FitPage
+	F7Z Extended Listing/257,Black,notBold,notItalic,closed,FitPage
+Chapter 11 - FORTRAN VII RTL Routines/263,Black,notBold,notItalic,open,FitPage
+	Terminating Execution Using EXIT and EXITRE/264,Black,notBold,notItalic,closed,FitPage
+	Accessing the System Time and Date/265,Black,notBold,notItalic,closed,FitPage
+		DATE Subroutine/265,Black,notBold,notItalic,closed,FitPage
+		TIME Subroutine/266,Black,notBold,notItalic,closed,FitPage
+		ICLOCK Subroutine/267,Black,notBold,notItalic,closed,FitPage
+	Sending Messages Using CONMSG/269,Black,notBold,notItalic,closed,FitPage
+	Controlling Access to Shared Data/270,Black,notBold,notItalic,closed,FitPage
+		LOKON Function/270,Black,notBold,notItalic,closed,FitPage
+		LOKOFF Subroutine/271,Black,notBold,notItalic,closed,FitPage
+	Accessing Run-Time Start Options Through GETOPTS/272,Black,notBold,notItalic,closed,FitPage
+Chapter 12 - FORTRAN VII XPA System/273,Black,notBold,notItalic,open,FitPage
+	Introducing the XPA System/274,Black,notBold,notItalic,closed,FitPage
+	Timing Your Program/274,Black,notBold,notItalic,closed,FitPage
+		Including the Timer in Your Program/274,Black,notBold,notItalic,closed,FitPage
+		XPA_SET Routine/276,Black,notBold,notItalic,closed,FitPage
+		Influences Upon the Trace Profile/277,Black,notBold,notItalic,closed,FitPage
+		Interfacing with INIT/ENABLE and Error Conditions/278,Black,notBold,notItalic,closed,FitPage
+	How to Analyze the Results/279,Black,notBold,notItalic,closed,FitPage
+		Basic XPA Commands/279,Black,notBold,notItalic,open,FitPage
+			PROGRAM Command/280,Black,notBold,notItalic,closed,FitPage
+			INPUT Command/280,Black,notBold,notItalic,closed,FitPage
+			OUTPUT Command/280,Black,notBold,notItalic,closed,FitPage
+			TAG Command/281,Black,notBold,notItalic,closed,FitPage
+			TABLE Command/282,Black,notBold,notItalic,closed,FitPage
+		Commands for Analyzing Modules/283,Black,notBold,notItalic,open,FitPage
+			BIAS Command/284,Black,notBold,notItalic,closed,FitPage
+			RANGE Command/284,Black,notBold,notItalic,closed,FitPage
+			STEP Command/285,Black,notBold,notItalic,closed,FitPage
+			LIMIT Command/286,Black,notBold,notItalic,closed,FitPage
+			TITLE Command/286,Black,notBold,notItalic,closed,FitPage
+			LOCATE Command/287,Black,notBold,notItalic,closed,FitPage
+			NODE Command/287,Black,notBold,notItalic,closed,FitPage
+			MAP Command/287,Black,notBold,notItalic,closed,FitPage
+			HELP Command/288,Black,notBold,notItalic,closed,FitPage
+		Merging XPA Files/288,Black,notBold,notItalic,closed,FitPage
+		Ending the Session/288,Black,notBold,notItalic,closed,FitPage
+Chapter 13 - FORTRAN VII CRA System/289,Black,notBold,notItalic,open,FitPage
+	Introducing the CRA/290,Black,notBold,notItalic,closed,FitPage
+	Analysis of Your Pogram/290,Black,notBold,notItalic,closed,FitPage
+	CRA Limitations/292,Black,notBold,notItalic,closed,FitPage
+	Error Conditions/293,Black,notBold,notItalic,closed,FitPage
+	How to Analyzie the Results/293,Black,notBold,notItalic,closed,FitPage
+Chapter 14 - Floating Point Calculations/299,Black,notBold,notItalic,open,FitPage
+	Floating Point Representations/300,Black,notBold,notItalic,closed,FitPage
+	Rounding Techniques/302,Black,notBold,notItalic,closed,FitPage
+		Truncation/303,Black,notBold,notItalic,closed,FitPage
+		Jamming/303,Black,notBold,notItalic,closed,FitPage
+		R-Star Rounding/304,Black,notBold,notItalic,closed,FitPage
+	Floating Point Hardware/305,Black,notBold,notItalic,closed,FitPage
+	Lost Precision in Floating Point Arithmetic/306,Black,notBold,notItalic,closed,FitPage
+	Accuracy Issues in the FORTRAN Code/308,Black,notBold,notItalic,closed,FitPage
+		Integer Arithmetic/308,Black,notBold,notItalic,closed,FitPage
+		Floating Point Arithmetic/309,Black,notBold,notItalic,closed,FitPage
+			Simple Assignment/309,Black,notBold,notItalic,closed,FitPage
+			Compile-Time and Run-Time Evaluation/311,Black,notBold,notItalic,closed,FitPage
+		Optimization and Order of Evaluation Effects/313,Black,notBold,notItalic,closed,FitPage
+	Possible Effects of the FORTRAN RTLs/315,Black,notBold,notItalic,closed,FitPage
+	Summary/317,Black,notBold,notItalic,closed,FitPage
+Chapter 15 - Universal Optimization/319,Black,notBold,notItalic,open,FitPage
+	Comparing the Optimization Methods/320,Black,notBold,notItalic,closed,FitPage
+		Statement Optimizers/320,Black,notBold,notItalic,closed,FitPage
+		Block Optimizers/321,Black,notBold,notItalic,closed,FitPage
+		Global Optimizers/321,Black,notBold,notItalic,closed,FitPage
+		Universal Optimizers/321,Black,notBold,notItalic,closed,FitPage
+	Phases of the F7O and F7Z Compilation/322,Black,notBold,notItalic,closed,FitPage
+	Illustrating the Use of In-line Expansion/325,Black,notBold,notItalic,closed,FitPage
+	How F7Z Performs In-line Expansion/327,Black,notBold,notItalic,closed,FitPage
+	Intermediate Code Translation/328,Black,notBold,notItalic,closed,FitPage
+	Argument Passing for In-Line Expanded Subprograms/331,Black,notBold,notItalic,closed,FitPage
+	Preparing Source Code for In-line Expansion/332,Black,notBold,notItalic,closed,FitPage
+	When To Use In-line Expansion/333,Black,notBold,notItalic,closed,FitPage
+Chapter 16 - FORTRAN VII Error Messages/337,Black,notBold,notItalic,open,FitPage
+	Introduction/338,Black,notBold,notItalic,closed,FitPage
+	Compiler Messages/338,Black,notBold,notItalic,closed,FitPage
+	Diagnostic Messages for FORTRAN VII RTL/359,Black,notBold,notItalic,closed,FitPage
+		End-of-File (EOF) Errors/360,Black,notBold,notItalic,closed,FitPage
+		I/O Common Errors/361,Black,notBold,notItalic,closed,FitPage
+		SVC1 Errors/363,Black,notBold,notItalic,closed,FitPage
+		SVC7 Errors/366,Black,notBold,notItalic,closed,FitPage
+		Format Translator Errors/371,Black,notBold,notItalic,closed,FitPage
+		Formatted I/O Errors/374,Black,notBold,notItalic,closed,FitPage
+		List-Directed I/O Errors/377,Black,notBold,notItalic,closed,FitPage
+		Namelist I/O Errors/380,Black,notBold,notItalic,closed,FitPage
+		Auxiliary I/O Errors/383,Black,notBold,notItalic,closed,FitPage
+		Pack fd Errors/391,Black,notBold,notItalic,closed,FitPage
+		Math Errors/392,Black,notBold,notItalic,closed,FitPage
+		Miscellaneous Errors/397,Black,notBold,notItalic,closed,FitPage
+	Special Error Messages/399,Black,notBold,notItalic,closed,FitPage
+	Nonzero End-of-Task Codes/402,Black,notBold,notItalic,closed,FitPage
+Appendixes/403,Black,notBold,notItalic,open,FitPage
+	Appendix A - RTL Subprograms/403,Black,notBold,notItalic,open,FitPage
+		Introduction/404,Black,notBold,notItalic,closed,FitPage
+		Program Initiation and Termination Routines/404,Black,notBold,notItalic,closed,FitPage
+		Formatted I/O Routines/405,Black,notBold,notItalic,closed,FitPage
+		Unformatted, Namelist, List-Directed I/O Routines/406,Black,notBold,notItalic,closed,FitPage
+		Auxiliary I/O Command Routines/407,Black,notBold,notItalic,closed,FitPage
+		Conversion Routines/407,Black,notBold,notItalic,closed,FitPage
+		Alternate Returns for Subroutines (.ARET)/407,Black,notBold,notItalic,closed,FitPage
+		Debug Routines/408,Black,notBold,notItalic,closed,FitPage
+		RTL Constants/412,Black,notBold,notItalic,closed,FitPage
+Index/413,Black,notBold,notItalic,closed,FitPage
+Comment Form/423,Black,notBold,notItalic,closed,FitPage

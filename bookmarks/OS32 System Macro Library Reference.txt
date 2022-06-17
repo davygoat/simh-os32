@@ -1,0 +1,169 @@
+OS/32 System Macro Library (1983)/1,Black,bold,notItalic,closed,FitPage
+Table of Contents/3,Black,notBold,notItalic,closed,FitPage
+Preface/11,Black,notBold,notItalic,closed,FitPage
+Chapter 1 - Overview of the System Macro Library/13,Black,notBold,notItalic,open,FitPage
+	1.1 Introduction/13,Black,notBold,notItalic,closed,FitPage
+	1.2 Macro Instructions/13,Black,notBold,notItalic,closed,FitPage
+		1.2.1 Macro Instruction Formatting/13,Black,notBold,notItalic,open,FitPage
+			1.2.1.1 Fixed Formatting of Macro Instruction Statements/14,Black,notBold,notItalic,closed,FitPage
+			1.2.1.2 Free Formatting of Macro Instruction Statements/14,Black,notBold,notItalic,closed,FitPage
+		1.2.2 Macro Instruction Fields/15,Black,notBold,notItalic,closed,FitPage
+	1.3 Parameters/16,Black,notBold,notItalic,closed,FitPage
+		1.3.1 Positional Parameters/16,Black,notBold,notItalic,closed,FitPage
+		1.3.2 Keyword Parameters/16,Black,notBold,notItalic,closed,FitPage
+		1.3.3 Mixed Mode Parameters/17,Black,notBold,notItalic,closed,FitPage
+	1.4 Parameter Field Value Mnemonics/17,Black,notBold,notItalic,closed,FitPage
+	1.5 Macro Expansion Errors/21,Black,notBold,notItalic,closed,FitPage
+	1.6 Constructing Parameter Blocks/22,Black,notBold,notItalic,closed,FitPage
+		1.6.1 Parameter Blocks for Supervisor Macros/23,Black,notBold,notItalic,open,FitPage
+			1.6.1.1 Omitting the PCB= and FORM= Parameters/23,Black,notBold,notItalic,closed,FitPage
+			1.6.1.2 Code FORM=L (List Form)/24,Black,notBold,notItalic,closed,FitPage
+			1.6.1.3 Code PCB= (Execute Form)/24,Black,notBold,notItalic,closed,FitPage
+		1.6.2 Parameter Blocks for Input/Output, File Management, Task Management, and Timer Management Macros/25,Black,notBold,notItalic,closed,FitPage
+	1.7 Error Handling and Recovery/28,Black,notBold,notItalic,closed,FitPage
+	1.8 Macros in Conditional Assembly/29,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - Supervisor Macros/31,Black,notBold,notItalic,open,FitPage
+	2.1 Introduction/31,Black,notBold,notItalic,closed,FitPage
+	2.2 End of Task (EOT)/32,Black,notBold,notItalic,closed,FitPage
+	2.3 Fetch Date (FETDATE)/34,Black,notBold,notItalic,closed,FitPage
+	2.4 Fetch Pointer (FETPTR)/36,Black,notBold,notItalic,closed,FitPage
+	2.5 Fetch Time (FETTIME)/38,Black,notBold,notItalic,closed,FitPage
+	2.6 Get Storage (GETSTORE)/40,Black,notBold,notItalic,closed,FitPage
+	2.8 Build a Mnemonic Table (MNEMTBL)/43,Black,notBold,notItalic,closed,FitPage
+	2.9 Move ASCII (MVASCII)/44,Black,notBold,notItalic,closed,FitPage
+	2.10 Pack Numeric Data (PACK)/47,Black,notBold,notItalic,closed,FitPage
+	2.11 Pack a File Descriptor (PACKFD)/49,Black,notBold,notItalic,closed,FitPage
+	2.12 Pause a Task (PAUS)/52,Black,notBold,notItalic,closed,FitPage
+	2.13 Extract Information from System Tables (PEEK)/53,Black,notBold,notItalic,closed,FitPage
+	2.14 Generate a Peek Structure and Equates (PEEKS)/54,Black,notBold,notItalic,closed,FitPage
+	2.15 Release Storage (RELSTORE)/56,Black,notBold,notItalic,closed,FitPage
+	2.16 Scan a Mnemonic Table (SCAN)/58,Black,notBold,notItalic,closed,FitPage
+	2.17 Set Status (SETSTAT)/61,Black,notBold,notItalic,closed,FitPage
+	2.18 Unpack Binary Number (UNPK)/63,Black,notBold,notItalic,closed,FitPage
+	2.19 Write to Operator -- Log Message (WTO)/65,Black,notBold,notItalic,closed,FitPage
+Chapter 3 - File Management Macros/67,Black,notBold,notItalic,open,FitPage
+	3.1 Introduction/67,Black,notBold,notItalic,closed,FitPage
+	3.2 Parameters for File Management Macros/67,Black,notBold,notItalic,closed,FitPage
+	3.3 Allocate and Assign a File or Device (ALAS)/72,Black,notBold,notItalic,closed,FitPage
+	3.4 Allocate a File (ALLOCATE)/75,Black,notBold,notItalic,closed,FitPage
+	3.5 Assign a File or Device (ASSIGN)/78,Black,notBold,notItalic,closed,FitPage
+	3.6 Change Access Privileges (CHAP)/81,Black,notBold,notItalic,closed,FitPage
+	3.7 Check the Error Status of an FMPCB (CHECKFM)/84,Black,notBold,notItalic,closed,FitPage
+	3.8 Checkpoint a Logical Unit (CKPOINT)/85,Black,notBold,notItalic,closed,FitPage
+	3.9 Close a Logical Unit and Delete a File (CLDE)/87,Black,notBold,notItalic,closed,FitPage
+	3.10 Close a Logical Unit (CLOSE)/89,Black,notBold,notItalic,closed,FitPage
+	3.11 Delete a File (DELETE)/91,Black,notBold,notItalic,closed,FitPage
+	3.12 Generate a File Descriptor Structure (FDS)/93,Black,notBold,notItalic,closed,FitPage
+	3.13 Fetch Attriutes of a File or Device Assigned to an LU (FETATR)/94,Black,notBold,notItalic,closed,FitPage
+	3.14 Generate the Subroutine to Check the Status of an FMPCB (FMERR)/96,Black,notBold,notItalic,closed,FitPage
+	3.15 Fetch Return Address in a User Routine for File Management Error (FMERRET)/97,Black,notBold,notItalic,closed,FitPage
+	3.16 Generate a Table of Addresses for FM Error Handling (FMERRTBL)/99,Black,notBold,notItalic,closed,FitPage
+	3.17 Generate a File Management Parameter Control Block (FMPCB)/101,Black,notBold,notItalic,closed,FitPage
+	3.18 Generate an FMPCB Structure and Equates (FMPCBS)/103,Black,notBold,notItalic,closed,FitPage
+	3.19 Return the Relative Record Address of the Next Sequential Record (NOTE)/105,Black,notBold,notItalic,closed,FitPage
+	3.20 Repositiona  File to a Specified Relative Record Address (POINT)/107,Black,notBold,notItalic,closed,FitPage
+	3.21 Rename a File Assigned to a Logical Unit (RENAME)/109,Black,notBold,notItalic,closed,FitPage
+	3.22 Reprotect a File Assigned to a Logical Unit by Changing the Keys (REPROT)/111,Black,notBold,notItalic,closed,FitPage
+Chapter 4 - Input/Output Macros/113,Black,notBold,notItalic,open,FitPage
+	4.1 Introduction/113,Black,notBold,notItalic,closed,FitPage
+	4.2 Parameters for I/O Macros/113,Black,notBold,notItalic,closed,FitPage
+	4.3 Backward to Filemark on a File or Device (BFILE)/118,Black,notBold,notItalic,closed,FitPage
+	4.4 Backspace One Record (BREC)/120,Black,notBold,notItalic,closed,FitPage
+	4.5 Forward to Filemark on a File or Device (FFILE)/121,Black,notBold,notItalic,closed,FitPage
+	4.6 Forward to Next Record on a File or Device (FREC)/122,Black,notBold,notItalic,closed,FitPage
+	4.7 Halt an Input/Output Proceed Request (HALTIO)/123,Black,notBold,notItalic,closed,FitPage
+	4.8 Generate the Subroutine that Checks the Status of an IOPCB (IOERR)/126,Black,notBold,notItalic,closed,FitPage
+	4.9 Fetch Return Address in a User Routine for Input/Output Errors (IOERRET)/127,Black,notBold,notItalic,closed,FitPage
+	4.10 Generate a Table of Addresses for Input/Output Error User Handling Routines (IOERRTBL)/128,Black,notBold,notItalic,closed,FitPage
+	4.11 Generate an Input/Output Parameter Control Block (IOPCB)/130,Black,notBold,notItalic,closed,FitPage
+	4.12 Generate an IOPCB Structure (IPCBS)/132,Black,notBold,notItalic,closed,FitPage
+	4.13 Read a Logical Record (READ)/133,Black,notBold,notItalic,closed,FitPage
+	4.14 Rewind a File or Device (REWIND)/136,Black,notBold,notItalic,closed,FitPage
+	4.15 Test for Input/Output Completion (TESTIO)/137,Black,notBold,notItalic,closed,FitPage
+	4.16 Wait for Input/Output Completion (WAITIO)/138,Black,notBold,notItalic,closed,FitPage
+	4.17 Write Filemark (WFM)/140,Black,notBold,notItalic,closed,FitPage
+	4.18 Write a Logical Record (WRITE)/141,Black,notBold,notItalic,closed,FitPage
+Chapter 5 - Task Management Macros/145,Black,notBold,notItalic,open,FitPage
+	5.1 Introduction/145,Black,notBold,notItalic,closed,FitPage
+	5.2 Cancel a Task (CANCEL)/146,Black,notBold,notItalic,closed,FitPage
+	5.3 Change Priority (CHPRIO)/148,Black,notBold,notItalic,closed,FitPage
+	5.4 Check the Status of a Task (CKTASK)/150,Black,notBold,notItalic,closed,FitPage
+	5.5 Connect a Trap Generating Device to a Task (CONNECT)/152,Black,notBold,notItalic,closed,FitPage
+	5.6 Disable Interrupts on a Trap-Generating Device (FREEZE)/154,Black,notBold,notItalic,closed,FitPage
+	5.7 Load a Task into Memory (LOAD)/156,Black,notBold,notItalic,closed,FitPage
+	5.8 Load a Task Status Word (LTSW)/159,Black,notBold,notItalic,closed,FitPage
+	5.9 Make a Task Nonresident (MAKNRES)/161,Black,notBold,notItalic,closed,FitPage
+	5.10 Make a Task Nonrollable (MAKNROLL)/162,Black,notBold,notItalic,closed,FitPage
+	5.11 Make a Task Resident (MAKERES)/163,Black,notBold,notItalic,closed,FitPage
+	5.12 Make a Task Rollable (MAKROLL)/164,Black,notBold,notItalic,closed,FitPage
+	5.13 Build a Message Ring or Chain of Buffers (MSGRING)/165,Black,notBold,notItalic,closed,FitPage
+	5.14 Add a Parameter to the Task Queue (QUEPARM)/166,Black,notBold,notItalic,closed,FitPage
+	5.15 Receive a Logical Unit from a Task (RECVLU)/168,Black,notBold,notItalic,closed,FitPage
+	5.16 Release a Task (RELEASE)/170,Black,notBold,notItalic,closed,FitPage
+	5.17 Run a Task (RUN)/171,Black,notBold,notItalic,closed,FitPage
+	5.18 Send a Logical Unit to a Task (SENDLU)/174,Black,notBold,notItalic,closed,FitPage
+	5.19 Send a Message (SENDMSG)/176,Black,notBold,notItalic,closed,FitPage
+	5.20 Initialize or Modify a User Dedicated Location (SETUDL)/178,Black,notBold,notItalic,closed,FitPage
+	5.21 Simulate an Inerrupt on a Trap-Generating Device (SIMINT)/180,Black,notBold,notItalic,closed,FitPage
+	5.22 Start Execution of a Task (START)/182,Black,notBold,notItalic,closed,FitPage
+	5.23 Place a Task in the Wait State (SUSPEND)/186,Black,notBold,notItalic,closed,FitPage
+	5.24 Enable Interrupts on a Connected Trap-Generating Device (THAW)/187,Black,notBold,notItalic,closed,FitPage
+	5.25 Construct a Task Parameter Control Blcok (TMPCB)/189,Black,notBold,notItalic,closed,FitPage
+	5.26 Exit Trap Events Service Routine (TEXIT)/191,Black,notBold,notItalic,closed,FitPage
+	5.27 Generate a User Dedicated Location Structure and Equates (UDLS)/192,Black,notBold,notItalic,closed,FitPage
+	5.28 Disconnect a Trap-Generating Device (UNCONN)/194,Black,notBold,notItalic,closed,FitPage
+Chapter 6 - Timer Management Macros/197,Black,notBold,notItalic,open,FitPage
+	6.1 Introduction/197,Black,notBold,notItalic,closed,FitPage
+	6.2 Cancel Time Interval Request (CANTIME)/198,Black,notBold,notItalic,closed,FitPage
+	6.3 Schedule Traps Cyclically at Different Times (CYCTIME)/199,Black,notBold,notItalic,closed,FitPage
+	6.4 Generate a GENTIME Interval (GENTIME)/201,Black,notBold,notItalic,closed,FitPage
+	6.5 Read Time Remaining for an Interval to Elapse (READTIME)/203,Black,notBold,notItalic,closed,FitPage
+	6.6 Build a Table of Time Intervals for CYCTIME (TIMETBL)/205,Black,notBold,notItalic,closed,FitPage
+	6.7 Schedule an Interrupt by Adding a Parameter to the Task Queue when a Specified Interval Has Elapsed (TRAPTIME)/206,Black,notBold,notItalic,closed,FitPage
+	6.8 Wait for a Specific Interval to Elapse (WAITTIME)/208,Black,notBold,notItalic,closed,FitPage
+Chapter 7 - Model 3200MPS System Macros/209,Black,notBold,notItalic,open,FitPage
+	7.1 Introduction/209,Black,notBold,notItalic,closed,FitPage
+		7.1.1 Chapter Organization/209,Black,notBold,notItalic,closed,FitPage
+	7.2 Support Macros/210,Black,notBold,notItalic,closed,FitPage
+		7.2.1 APPCB (Build APU Parameter Block Macro) Macro/211,Black,notBold,notItalic,closed,FitPage
+		7.2.2 APPERTBL (Build APU Error Recovery Table) Macro/213,Black,notBold,notItalic,closed,FitPage
+		7.2.3 APPERR (APU Error Recovery) Macro/216,Black,notBold,notItalic,closed,FitPage
+		7.2.4 APPERRET (APU Error Return) Macro/218,Black,notBold,notItalic,closed,FitPage
+		7.2.5 APSTRUC (Control and Mapping Structures) Macro/220,Black,notBold,notItalic,closed,FitPage
+	7.3 Information Macros/222,Black,notBold,notItalic,closed,FitPage
+		7.3.1 FETLPU (Fetch LPU Map) Macro/223,Black,notBold,notItalic,closed,FitPage
+		7.3.2 APUSTAT (Fetch APU Status) Macro/227,Black,notBold,notItalic,closed,FitPage
+	7.4 Map LPU to APU Macros/233,Black,notBold,notItalic,closed,FitPage
+		7.4.1 APUMAP (APU Mapping) Macro/234,Black,notBold,notItalic,closed,FitPage
+	7.5 Task Control Macros/237,Black,notBold,notItalic,closed,FitPage
+		7.5.1 APUCNTL (APU Control) Macros/238,Black,notBold,notItalic,closed,FitPage
+		7.5.2 REQUEUE (Requeue the APU Ready Queue) Macro/244,Black,notBold,notItalic,closed,FitPage
+	7.6 TASK Direction Macros/246,Black,notBold,notItalic,closed,FitPage
+		7.6.1 SETCPU (Set CPU-Directed Task) Macro/247,Black,notBold,notItalic,closed,FitPage
+		7.6.2 SETLPU (Set LPU-Directed Task) Macro/249,Black,notBold,notItalic,closed,FitPage
+	7.7 Task Timer Macros/251,Black,notBold,notItalic,closed,FitPage
+		7.7.1 CRTIMERS (Create Software Interval Timer) Macro/252,Black,notBold,notItalic,closed,FitPage
+		7.7.2 RESETTIME (Reset Software Interval Timer) Macro/254,Black,notBold,notItalic,closed,FitPage
+		7.7.3 STRTIME (Start Software Interval Timer) Macro/255,Black,notBold,notItalic,closed,FitPage
+		7.7.4 GETIME (Read Software Interval Timer) Macro/257,Black,notBold,notItalic,closed,FitPage
+		7.7.5 READTCNT (Read Software Interval Timer's Count) Macro/258,Black,notBold,notItalic,closed,FitPage
+		7.7.6 STOPTIME (Stop Software Interval Timer) Macro/259,Black,notBold,notItalic,closed,FitPage
+Chapter 8 - Miscellaneous Macros/261,Black,notBold,notItalic,open,FitPage
+	8.1 Introduction/261,Black,notBold,notItalic,closed,FitPage
+	8.2 Generate a Character Constant of a Specified Length (CHAR)/262,Black,notBold,notItalic,closed,FitPage
+	8.3 Compare Logical Character (CLC)/263,Black,notBold,notItalic,closed,FitPage
+	8.4 Define System Macro Environment (ENVIRON)/265,Black,notBold,notItalic,closed,FitPage
+	8.5 Fetch Accounting Information (FETACCT)/267,Black,notBold,notItalic,closed,FitPage
+	8.6 Generate a Message (GENMSG)/268,Black,notBold,notItalic,closed,FitPage
+	8.7 Load a Range of Registers from an Area (LDREG)/270,Black,notBold,notItalic,closed,FitPage
+	8.8 Move Character (MVC)/271,Black,notBold,notItalic,closed,FitPage
+	8.9 Set Accounting Information (SETACCT)/273,Black,notBold,notItalic,closed,FitPage
+	8.10 Skip to Blank (SKTB)/274,Black,notBold,notItalic,closed,FitPage
+	8.11 Skip to Carriage Return (SKTCR)/275,Black,notBold,notItalic,closed,FitPage
+	8.12 Skip to Delimiter--Blank, Comma, Carriage Return (SKTD)/277,Black,notBold,notItalic,closed,FitPage
+	8.13 Skip to Nonblank (SKTNB)/278,Black,notBold,notItalic,closed,FitPage
+	8.14 Take a Snapshot Dump of an Area of Storage (SNAP)/279,Black,notBold,notItalic,closed,FitPage
+	8.15 Generate the Subroutine for the SNAP Macro (SNAPSUB)/281,Black,notBold,notItalic,closed,FitPage
+	8.16 Store a Range of Registers in a Given Area (STREG)/282,Black,notBold,notItalic,closed,FitPage
+Index/283,Black,notBold,notItalic,closed,FitPage
+Comment Form/289,Black,notBold,notItalic,closed,FitPage

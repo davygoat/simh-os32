@@ -1,0 +1,240 @@
+OS/32 Basic Data Communications (1984)/1,Black,bold,notItalic,closed,FitPage
+Table of Contents/3,Black,notBold,notItalic,closed,FitPage
+Preface/13,Black,notBold,notItalic,closed,FitPage
+Chapter 1 - Basic Data Communications/15,Black,notBold,notItalic,open,FitPage
+	1.1 Introduction/15,Black,notBold,notItalic,closed,FitPage
+	1.2 Data Communication Networks/16,Black,notBold,notItalic,closed,FitPage
+	1.3 A Basic Data Communications System/17,Black,notBold,notItalic,closed,FitPage
+		1.3.1 Terminals/18,Black,notBold,notItalic,open,FitPage
+			1.3.1.1 Terminal Communications Modes/18,Black,notBold,notItalic,closed,FitPage
+			1.3.1.2 Terminal Speeds/20,Black,notBold,notItalic,closed,FitPage
+			1.3.1.3 Data Transmission Modes/20,Black,notBold,notItalic,closed,FitPage
+			1.3.1.4 Data Codes/22,Black,notBold,notItalic,closed,FitPage
+		1.3.2 Modems/23,Black,notBold,notItalic,closed,FitPage
+		1.3.3 Transmission Lines/24,Black,notBold,notItalic,closed,FitPage
+		1.3.4 Multiplexors (MUXs) and Concentrators/25,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - OS/32 Data Communications Subsystem/27,Black,notBold,notItalic,open,FitPage
+	2.1 Introduction/27,Black,notBold,notItalic,closed,FitPage
+	2.2 Adapters/28,Black,notBold,notItalic,closed,FitPage
+		2.2.1 Asynchronous Adapters/28,Black,notBold,notItalic,closed,FitPage
+		2.2.2 Bisynchronous Adapters/29,Black,notBold,notItalic,closed,FitPage
+		2.2.3 Zero-Bit Insertion/Deletion (ZBID) Adapters/30,Black,notBold,notItalic,closed,FitPage
+	2.3 Line Drivers/31,Black,notBold,notItalic,closed,FitPage
+	2.4 Device-Independent Access/31,Black,notBold,notItalic,closed,FitPage
+		2.4.1 Terminal Managers/32,Black,notBold,notItalic,closed,FitPage
+		2.4.2 Protocols/34,Black,notBold,notItalic,closed,FitPage
+	2.5 Device-Dependent Access/36,Black,notBold,notItalic,closed,FitPage
+Chapter 3 - Device Handling/37,Black,notBold,notItalic,open,FitPage
+	3.1 Introduction/37,Black,notBold,notItalic,open,FitPage
+	3.2 Supervisor Call 7 (SVC7)/37,Black,notBold,notItalic,closed,FitPage
+		3.2.1 Supervisor Call 7 (SVC7) Parameter Block/37,Black,notBold,notItalic,open,FitPage
+			3.2.1.1 Function Code Field/39,Black,notBold,notItalic,closed,FitPage
+			3.2.1.2 Error Status Field/39,Black,notBold,notItalic,closed,FitPage
+			3.2.1.3 Logical Unit (lu) Field/41,Black,notBold,notItalic,closed,FitPage
+			3.2.1.4 Read and Write Key Fields/41,Black,notBold,notItalic,closed,FitPage
+			3.2.1.5 Logical Record Length Field/41,Black,notBold,notItalic,closed,FitPage
+			3.2.1.6 Device Mnemonic Field/41,Black,notBold,notItalic,closed,FitPage
+			3.2.1.7 Filename Field/41,Black,notBold,notItalic,closed,FitPage
+			3.2.1.8 Extension Field/41,Black,notBold,notItalic,closed,FitPage
+			3.2.1.9 File Size Field/42,Black,notBold,notItalic,closed,FitPage
+	3.3 Command Function/42,Black,notBold,notItalic,closed,FitPage
+		3.3.1 Allocate Function/42,Black,notBold,notItalic,closed,FitPage
+		3.3.2 Assign Function/42,Black,notBold,notItalic,closed,FitPage
+		3.3.3 Change Access Privileges Function/43,Black,notBold,notItalic,closed,FitPage
+		3.3.4 Close Function/44,Black,notBold,notItalic,closed,FitPage
+		3.3.5 Delete Function/44,Black,notBold,notItalic,closed,FitPage
+		3.3.6 Checkpoint Function/45,Black,notBold,notItalic,closed,FitPage
+		3.3.7 Fetch Attributes Function/45,Black,notBold,notItalic,closed,FitPage
+		3.3.8 Vertical Forms Control (VFC) Function/45,Black,notBold,notItalic,closed,FitPage
+		3.3.9 Rename Function/46,Black,notBold,notItalic,closed,FitPage
+		3.3.10 Reprotect Function/46,Black,notBold,notItalic,closed,FitPage
+	3.4 Operator Commands/46,Black,notBold,notItalic,closed,FitPage
+		3.4.1 ALLOCATE Command/47,Black,notBold,notItalic,closed,FitPage
+		3.4.2 ASSIGN Command/49,Black,notBold,notItalic,closed,FitPage
+		3.4.3 CLOSE Command/51,Black,notBold,notItalic,closed,FitPage
+		3.4.4 DELETE Command/52,Black,notBold,notItalic,closed,FitPage
+		3.4.5 XALLOCATE Command/53,Black,notBold,notItalic,closed,FitPage
+		3.4.6 XDELETE Command/55,Black,notBold,notItalic,closed,FitPage
+Chapter 4 - Device-Independent Access/57,Black,notBold,notItalic,open,FitPage
+	4.1 Introduction/57,Black,notBold,notItalic,closed,FitPage
+	4.2 Terminal Manager Access/57,Black,notBold,notItalic,closed,FitPage
+	4.3 Sequence of Operation/58,Black,notBold,notItalic,closed,FitPage
+	4.4 Supervisor Call 1 (SVC1)/60,Black,notBold,notItalic,closed,FitPage
+		4.4.1 Supervisor Call 1 (SVC1) Parameter Block/60,Black,notBold,notItalic,closed,FitPage
+Chapter 5 - Device-Dependent Access/69,Black,notBold,notItalic,open,FitPage
+	5.1 Introduction/69,Black,notBold,notItalic,closed,FitPage
+	5.2 Line Driver Access/69,Black,notBold,notItalic,closed,FitPage
+		5.2.1 Sequence of Operations/70,Black,notBold,notItalic,closed,FitPage
+		5.2.2 Supervisor Call 15 (SVC15) and the Task Environment/71,Black,notBold,notItalic,closed,FitPage
+			5.2.2.1 Supervisor Call 15 (SVC15) Trap Handling/72,Black,notBold,notItalic,closed,FitPage
+	5.3 Supervisor Call 15 (SVC15) Parameter Block/73,Black,notBold,notItalic,closed,FitPage
+		5.3.1 Function Code Field/74,Black,notBold,notItalic,closed,FitPage
+		5.3.2 Logical Unit (lu) Field/75,Black,notBold,notItalic,closed,FitPage
+		5.3.3 Status Information Field/76,Black,notBold,notItalic,closed,FitPage
+		5.3.4 Command Number Field/80,Black,notBold,notItalic,closed,FitPage
+		5.3.5 Driver Command Word (DCW) Pointer/80,Black,notBold,notItalic,closed,FitPage
+		5.3.6 Length of Last Read Field/80,Black,notBold,notItalic,closed,FitPage
+		5.3.7 Length of Last Write Field/80,Black,notBold,notItalic,closed,FitPage
+		5.3.8 Data Fields/81,Black,notBold,notItalic,closed,FitPage
+		5.3.9 Data Field Chain/81,Black,notBold,notItalic,closed,FitPage
+	5.4 Buffer Types/82,Black,notBold,notItalic,closed,FitPage
+		5.4.1 Direct Buffers/83,Black,notBold,notItalic,closed,FitPage
+		5.4.2 Indirect Buffers/83,Black,notBold,notItalic,closed,FitPage
+		5.4.3 Chained Buffers/84,Black,notBold,notItalic,closed,FitPage
+		5.4.4 Queued Buffers/87,Black,notBold,notItalic,open,FitPage
+			5.4.4.1 Coding a Queued Buffer Request/88,Black,notBold,notItalic,closed,FitPage
+	5.5 Driver Command Word (DCW)/89,Black,notBold,notItalic,closed,FitPage
+	5.6 Line Driver Command Types/91,Black,notBold,notItalic,closed,FitPage
+		5.6.1 Null-Type Commands/92,Black,notBold,notItalic,open,FitPage
+			5.6.1.1 NO OPERATION (NOP) Command/92,Black,notBold,notItalic,closed,FitPage
+			5.6.1.2 WAIT Command/92,Black,notBold,notItalic,closed,FitPage
+			5.6.1.3 TRANSFER IN (XFER) Command/92,Black,notBold,notItalic,closed,FitPage
+			5.6.1.4 CONDITIONAL TRANSFER (CXFER) Command/92,Black,notBold,notItalic,closed,FitPage
+		5.6.2 Control-Type Commands/93,Black,notBold,notItalic,open,FitPage
+			5.6.2.1 EXAMINE Command/93,Black,notBold,notItalic,closed,FitPage
+			5.6.2.2 RING WAIT Command/93,Black,notBold,notItalic,closed,FitPage
+			5.6.2.3 ANSWER Command/94,Black,notBold,notItalic,closed,FitPage
+			5.6.2.3 DISCONNECT Command/94,Black,notBold,notItalic,closed,FitPage
+		5.6.3 Read-Type Commands/94,Black,notBold,notItalic,open,FitPage
+			5.6.3.1 READ BUFFER Command/94,Black,notBold,notItalic,closed,FitPage
+			5.6.3.2 READ1 Command/94,Black,notBold,notItalic,closed,FitPage
+			5.6.3.3 READ2 Command/95,Black,notBold,notItalic,closed,FitPage
+		5.6.4 Prepare-Type Commands/95,Black,notBold,notItalic,open,FitPage
+			5.6.4.1 PREPARE Command/95,Black,notBold,notItalic,closed,FitPage
+			5.6.4.2 PREPARE3 Command/95,Black,notBold,notItalic,closed,FitPage
+		5.6.5 Write-Type Commands/95,Black,notBold,notItalic,open,FitPage
+			5.6.5.1 WRITE BUFFER Command/96,Black,notBold,notItalic,closed,FitPage
+			5.6.5.2 WRITE1 Command/96,Black,notBold,notItalic,closed,FitPage
+			5.6.5.3 WRITE2 Command/96,Black,notBold,notItalic,closed,FitPage
+		5.6.6 Hold-Type Commands/96,Black,notBold,notItalic,open,FitPage
+			5.6.6.1 HOLD SPACE (Line Break) Command/96,Black,notBold,notItalic,closed,FitPage
+		5.6.7 Mode-Type Commands/97,Black,notBold,notItalic,open,FitPage
+			5.6.7.1 MODE TOUT (Time-out Interval) Command/97,Black,notBold,notItalic,closed,FitPage
+			5.6.7.2 MODE CMD2 (Adapter) Command/97,Black,notBold,notItalic,closed,FitPage
+			5.6.7.3 MODE RCMD (Read) and MODE WCMD (Write) Commands/98,Black,notBold,notItalic,closed,FitPage
+			5.6.7.4 MODE RDIS (Read Disable) and MODE WDIS (Write Disable) Commands/98,Black,notBold,notItalic,closed,FitPage
+			5.6.7.5 MODE DISC (Disconnect) Command/98,Black,notBold,notItalic,closed,FitPage
+			5.6.7.6 MODE SYNCNT (SYNC Character Count) Command/98,Black,notBold,notItalic,closed,FitPage
+			5.6.7.7 MODE SPCHAR (Special Character Enable Masks) Command/98,Black,notBold,notItalic,closed,FitPage
+			5.6.7.8 MODE TRANSL (Translation Options) Command/98,Black,notBold,notItalic,closed,FitPage
+		5.6.8 Test-Type Commands/98,Black,notBold,notItalic,closed,FitPage
+Chapter 6 - Data Communications Structures/99,Black,notBold,notItalic,open,FitPage
+	6.1 Introduction/99,Black,notBold,notItalic,closed,FitPage
+	6.2 Data Communications Line Drivers/99,Black,notBold,notItalic,closed,FitPage
+	6.3 Control Block Formats/100,Black,notBold,notItalic,closed,FitPage
+		6.3.1 Data Communications Device Control Block (DCB)/100,Black,notBold,notItalic,open,FitPage
+			6.3.1.1 Device Control Block (DCB) Device-Independent Portion (Standard DCB)/102,Black,notBold,notItalic,closed,FitPage
+			6.3.1.2 Device Control Blocks (DCB) Data Communications-Related Portion/105,Black,notBold,notItalic,closed,FitPage
+			6.3.1.3 Device Control Block (DCB) Device-Dependent Portion/114,Black,notBold,notItalic,closed,FitPage
+		6.3.2 Line Control Block (LCB)/114,Black,notBold,notItalic,open,FitPage
+			6.3.2.1 Line Control Block (LCB) Device-Independent Portion/114,Black,notBold,notItalic,closed,FitPage
+			6.3.2.2 Line Control Block (LCB) Device-Dependent Portion/120,Black,notBold,notItalic,closed,FitPage
+			6.3.2.3 Line Control Block(LCB) Data Block Descriptor Portion/123,Black,notBold,notItalic,closed,FitPage
+		6.3.3 Channel Control Block (CCB)/124,Black,notBold,notItalic,open,FitPage
+			6.3.3.1 Channel Control Block (CCB) Device-Independent Portion/124,Black,notBold,notItalic,closed,FitPage
+			6.3.3.2 Channel Control Block (CCB) Device-Dependent Portion/125,Black,notBold,notItalic,closed,FitPage
+		6.3.4 Drop Control Table (DCT) for Zero-Bit Insertion/Deletion Data Link Control (ZDLC) Communications/128,Black,notBold,notItalic,closed,FitPage
+		6.3.5 Drop Definition Table (DDT) for Zero-Bit Insertion/Deletion Data Link Control (ZDLC) Communications/132,Black,notBold,notItalic,closed,FitPage
+		6.3.6 Drop Control Table (DCT) for Asynchronous Multidrop Communications/134,Black,notBold,notItalic,closed,FitPage
+		6.3.7 Drop Access Table (DAT) for Asynchronous Multidrop Communications/136,Black,notBold,notItalic,closed,FitPage
+		6.3.8 Input/Output Block (IOB) for Asynchronous Multidrop Communications/138,Black,notBold,notItalic,closed,FitPage
+		6.3.9 Station Description Table (SDT) for 3270 Emulator/141,Black,notBold,notItalic,closed,FitPage
+		6.3.10 Device Definition Table (DDT) for the 3270 Emulator/142,Black,notBold,notItalic,closed,FitPage
+		5.3.11 Input/Output Handler (IOH)/145,Black,notBold,notItalic,closed,FitPage
+		6.3.12 File manager Handler (FMH)/148,Black,notBold,notItalic,closed,FitPage
+	6.4 Device Control Block (DCB) Pointers for Line Driver Command Interpretation/150,Black,notBold,notItalic,closed,FitPage
+		6.4.1 DCB.TERM Pointer/151,Black,notBold,notItalic,closed,FitPage
+		6.4.2 DCB.DOCR, DCB.DOCW, DCB.MOCR and DCB.MOCW Pointer/151,Black,notBold,notItalic,closed,FitPage
+		6.4.3 DCB.AOC Pointer/152,Black,notBold,notItalic,closed,FitPage
+		6.4.4 DCB.INIT Pointer/152,Black,notBold,notItalic,closed,FitPage
+		6.4.5 DCB.RDN and DCB.WDN Pointers/152,Black,notBold,notItalic,closed,FitPage
+		6.4.6 DCB.ITV and DCB.OTV Pointer/152,Black,notBold,notItalic,closed,FitPage
+	6.5 Event Service Routine (ESR) Scheduling/152,Black,notBold,notItalic,closed,FitPage
+	6.6 Supervisor Call 15 (SVC15) Structure and Flow/154,Black,notBold,notItalic,closed,FitPage
+	6.7 Common Data Communications Subroutines/157,Black,notBold,notItalic,closed,FitPage
+		6.7.1 Supervisor Call 15 (SVC15) Subroutine/157,Black,notBold,notItalic,closed,FitPage
+		6.7.2 ITSRABS Subroutine/158,Black,notBold,notItalic,closed,FitPage
+		6.7.3 CMTERM Subroutine/158,Black,notBold,notItalic,closed,FitPage
+		6.7.4 CMEXIT Subroutine/159,Black,notBold,notItalic,closed,FitPage
+		6.7.5 ISSEXEC Subroutine/160,Black,notBold,notItalic,closed,FitPage
+		6.7.6 ITSETEA Subroutine/162,Black,notBold,notItalic,closed,FitPage
+		6.7.7 ITXFRISR Subroutine/162,Black,notBold,notItalic,closed,FitPage
+		6.7.8 ITISSTOP Subroutine/163,Black,notBold,notItalic,closed,FitPage
+		6.7.9 IT..STOP Subroutine/163,Black,notBold,notItalic,closed,FitPage
+		6.7.10 ITIMLINK Subroutine/164,Black,notBold,notItalic,closed,FitPage
+		6.7.11 ITIMUNLK Subroutine/164,Black,notBold,notItalic,closed,FitPage
+		6.7.12 ITISTOTC Subroutine/165,Black,notBold,notItalic,closed,FitPage
+		6.7.13 ITISPOTC Subroutine/165,Black,notBold,notItalic,closed,FitPage
+		6.7.14 ICMDINT Subroutine/165,Black,notBold,notItalic,closed,FitPage
+		6.7.15 ITGETMOD2 Subroutine/166,Black,notBold,notItalic,closed,FitPage
+		6.7.16 ITGETMOD Subroutine/166,Black,notBold,notItalic,closed,FitPage
+		6.7.17 ITGETDAT Subroutine/167,Black,notBold,notItalic,closed,FitPage
+		6.7.18 ITGETBUF Subroutine/168,Black,notBold,notItalic,closed,FitPage
+	6.8 Supervisor Call 1 (SVC1) Processing/168,Black,notBold,notItalic,closed,FitPage
+	6.9 Additional Executive Functions/168,Black,notBold,notItalic,closed,FitPage
+		6.9.1 Cancellation of Input/Output (I/O)/169,Black,notBold,notItalic,closed,FitPage
+		6.9.2 Add To Task Queue/169,Black,notBold,notItalic,closed,FitPage
+		6.9.3 System Initialization/169,Black,notBold,notItalic,closed,FitPage
+		6.9.4 Timer Management/169,Black,notBold,notItalic,closed,FitPage
+	6.10 Supervisor Call 7 (SVC7) Processing/170,Black,notBold,notItalic,closed,FitPage
+		6.10.1 Allocate/170,Black,notBold,notItalic,closed,FitPage
+		6.10.2 Delete/170,Black,notBold,notItalic,closed,FitPage
+		6.10.3 Assign/171,Black,notBold,notItalic,closed,FitPage
+		6.10.4 Close/171,Black,notBold,notItalic,closed,FitPage
+		6.10.5 Checkpoint/172,Black,notBold,notItalic,closed,FitPage
+		6.10.6 Fetch Attributes/172,Black,notBold,notItalic,closed,FitPage
+		6.10.7 Change Access Privileges/172,Black,notBold,notItalic,closed,FitPage
+		6.10.8 Rename/172,Black,notBold,notItalic,closed,FitPage
+		6.10.9 Reprotect/172,Black,notBold,notItalic,closed,FitPage
+Chapter 7 - How to Write and Use a Terminal Manager/173,Black,notBold,notItalic,open,FitPage
+	7.1 Introduction/173,Black,notBold,notItalic,closed,FitPage
+	7.2 Terminal Manager Modification/173,Black,notBold,notItalic,closed,FitPage
+	7.3 Background Information/173,Black,notBold,notItalic,closed,FitPage
+	7.4 Terminal Manager Structure/174,Black,notBold,notItalic,closed,FitPage
+		7.4.1 Nonbuffered Terminal Manager/174,Black,notBold,notItalic,closed,FitPage
+		7.4.2 Buffered Terminal Manager (Input)/176,Black,notBold,notItalic,closed,FitPage
+		7.4.3 Buffered Terminal Manager (Output)/177,Black,notBold,notItalic,closed,FitPage
+	7.5 Terminal Manager Functions/178,Black,notBold,notItalic,closed,FitPage
+		7.5.1 Special Terminal Manager Functions/183,Black,notBold,notItalic,open,FitPage
+			7.5.1.1 Format Control/183,Black,notBold,notItalic,closed,FitPage
+			7.5.1.2 Time-out Control/183,Black,notBold,notItalic,closed,FitPage
+			7.5.1.3 Buffer Control/184,Black,notBold,notItalic,closed,FitPage
+	7.6 System Generation (SYSGEN) Conventions/184,Black,notBold,notItalic,closed,FitPage
+		7.6.1 Register Conventions/184,Black,notBold,notItalic,closed,FitPage
+		7.6.2 Device Control Block/Line Control Block (DCB/LCB) References/185,Black,notBold,notItalic,closed,FitPage
+		7.6.3 EXTRN/ENTRY References/185,Black,notBold,notItalic,closed,FitPage
+		7.6.4 System Generation (Sysgen)/187,Black,notBold,notItalic,open,FitPage
+	7.7 Writing Terminal Manager Summary/187,Black,notBold,notItalic,closed,FitPage
+	7.8 How to Use Data Communications Terminal Managers/187,Black,notBold,notItalic,closed,FitPage
+Chapter 8 - How to Write and Use Data Communications Line Drivers/191,Black,notBold,notItalic,open,FitPage
+	8.1 Introduction/191,Black,notBold,notItalic,closed,FitPage
+	8.2 Modifying a Line Driver/191,Black,notBold,notItalic,closed,FitPage
+	8.3 Line Driver Use of the Device Control Block (DCB)/194,Black,notBold,notItalic,closed,FitPage
+	8.4 Line Driver Structure/195,Black,notBold,notItalic,closed,FitPage
+		8.4.1 Driver Initiation Routine/195,Black,notBold,notItalic,closed,FitPage
+		Translation Tables/196,Black,notBold,notItalic,closed,FitPage
+	8.5 Data Communications Line Driver Example/196,Black,notBold,notItalic,closed,FitPage
+		8.5.1 Command Table/196,Black,notBold,notItalic,closed,FitPage
+		8.5.2 Command Fetch/197,Black,notBold,notItalic,closed,FitPage
+		8.5.3 Modifier Fetch/198,Black,notBold,notItalic,closed,FitPage
+		8.5.4 Command/Modifier Routines/198,Black,notBold,notItalic,closed,FitPage
+		8.5.5 Entering Interrupt Service Routines (ISRs)/199,Black,notBold,notItalic,closed,FitPage
+		8.5.6 Special Character Routines/201,Black,notBold,notItalic,closed,FitPage
+		8.5.7 Read After Write (RAW) Turnaround/202,Black,notBold,notItalic,closed,FitPage
+		8.5.8 Driver-Termination Phase/203,Black,notBold,notItalic,closed,FitPage
+	8.6 Using Data Communications Line Drivers/203,Black,notBold,notItalic,closed,FitPage
+		8.6.1 Buffer Management/204,Black,notBold,notItalic,open,FitPage
+			8.6.1.1 Chained Buffers/208,Black,notBold,notItalic,closed,FitPage
+			8.6.1.2 Line Driver Data Communications Device Interface/210,Black,notBold,notItalic,closed,FitPage
+Chapter 9 - Generating an Operating System with Data Communications Devices/217,Black,notBold,notItalic,open,FitPage
+	9.1 Introduction/217,Black,notBold,notItalic,closed,FitPage
+	9.2 Data Communications Configuration Statement/217,Black,notBold,notItalic,open,FitPage
+	9.3 System Libraries/218,Black,notBold,notItalic,closed,FitPage
+		9.3.1 The Driver Library/218,Black,notBold,notItalic,closed,FitPage
+		9.3.2 Including User-Written Drivers/219,Black,notBold,notItalic,open,FitPage
+			9.3.2.1 Creating the DCBxxx Macro/219,Black,notBold,notItalic,closed,FitPage
+Appendixes/221,Black,notBold,notItalic,open,FitPage
+	Appendix A - Line Driver Command Summary/221,Black,notBold,notItalic,closed,FitPage
+	Appendix B - Interface Signal Definitions/223,Black,notBold,notItalic,closed,FitPage
+Index/225,Black,notBold,notItalic,closed,FitPage
+Comment Form/231,Black,notBold,notItalic,closed,FitPage

@@ -1,0 +1,126 @@
+OS/32 Multi-Terminal Monitor (MTM) System Planning and Operator Reference Manual (1985)/1,Black,bold,notItalic,open,FitPage
+Table of Contents page (i and blank ii)/5,Black,notBold,notItalic,open,FitPage
+Preface/7,Black,notBold,notItalic,open,FitPage
+Chapter 1 - General Description/9,Black,notBold,notItalic,open,FitPage
+	1.1 Introduction/9,Black,notBold,notItalic,open,FitPage
+	1.2 Multi-Terminal Monitor (MTM) System Requirements/10,Black,notBold,notItalic,open,FitPage
+	1.4 OS/32 System Generation (SYSGEN) Options/11,Black,notBold,notItalic,open,FitPage
+	1.5 File Descriptors/11,Black,notBold,notItalic,open,FitPage
+Chapter 2 - Multi-Terminal Monitor (MTM) System Generation (SYSGEN)/13,Black,notBold,notItalic,open,FitPage
+	2.1 Introduction/13,Black,notBold,notItalic,open,FitPage
+	2.2 Selecting Multi-Terminal Monitor (MTM) System Generation (SYSGEN) Options/13,Black,notBold,notItalic,open,FitPage
+	2.3 Generating a Multi-Terminal Monitor (MTM) System Using the Standard Command Substitution System (CSS) Command File (MTMSGN.CSS)/16,Black,notBold,notItalic,open,FitPage
+	2.4 Multi-Terminal Monitor (MTM) System Generation (SYSGEN) Options/17,Black,notBold,notItalic,open,FitPage
+		2.4.1 Sector Buffer Size (CDBUFSIZ) Option/18,Black,notBold,notItalic,open,FitPage
+		2.4.2 Special Console Buffer Size (CONBUFSIZ) Option/19,Black,notBold,notItalic,open,FitPage
+		2.4.3 Command Buffer Size (CSBFSZ) Option/19,Black,notBold,notItalic,open,FitPage
+		2.4.4 Input/Output (I/O) Class Table (IOTAB) Macro/20,Black,notBold,notItalic,open,FitPage
+		2.4.5 Multi-Terminal Monitor (MTM) Link (LINKOPT) Option/21,Black,notBold,notItalic,open,FitPage
+		2.4.6 Number of Special Console Buffers (NCONBFS) Option/22,Black,notBold,notItalic,open,FitPage
+		2.4.7 Number of Command Buffers (MCBFS) Options/24,Black,notBold,notItalic,open,FitPage
+		2.4.8 Number of Command Substitution System (CSS) Levels (NCSSLVS) Option/26,Black,notBold,notItalic,open,FitPage
+		2.4.9 Number of Message Buffers (NMSGS) Option/26,Black,notBold,notItalic,open,FitPage
+		2.4.9a Number of MTMASST Tasks (SGN.ASST) Option/27,Black,notBold,notItalic,open,FitPage
+		2.4.10 Number of Sector Length Buffers (NSECTS) Option/29,Black,notBold,notItalic,open,FitPage
+		2.4.11 Number of Concurrent Users (NUSERS) Option/30,Black,notBold,notItalic,open,FitPage
+		2.4.13 Multi-Terminal Monitor (MTM) Terminal Prompt Device Name (PRMTDEV) Macro/31,Black,notBold,notItalic,open,FitPage
+		2.4.14 Multi-Terminal Monitor (MTM) Terminal Prompt Sequence (PRMTSEQ) Macro)/31,Black,notBold,notItalic,open,FitPage
+		2.4.15 Multi-Terminal Monitor (MTM) Task Queue Size (QUESIZE) Option/33,Black,notBold,notItalic,open,FitPage
+		2.4.16 OS/32 Accounting Facility (SGN.ACT) Option/33,Black,notBold,notItalic,open,FitPage
+		2.4.17 Batch Job Pause (SGN.BTCP) Option/34,Black,notBold,notItalic,open,FitPage
+		2.4.18 Default User Volume (SGN.MVOL) Option/34,Black,notBold,notItalic,open,FitPage
+		2.4.19 Batch Job Relative Priority (SGN.PRIO) Option/35,Black,notBold,notItalic,open,FitPage
+		2.4.20 Forced Roll (SGN.ROLL) Option/37,Black,notBold,notItalic,open,FitPage
+		2.4.21 Multi-Terminal Monitor (MTM) Scheduling (SGN.SCHR) Option/37,Black,notBold,notItalic,open,FitPage
+		2.4.22 SPL/32 Interface (SGN.SPL) Option/41,Black,notBold,notItalic,open,FitPage
+		2.4.23 Global and Local Variables (SGN.VAR) Option/41,Black,notBold,notItalic,open,FitPage
+		2.4.24 Number of New Global Variables (SGN.@GLO) Option/42,Black,notBold,notItalic,open,FitPage
+		2.4.25 Number of New Internal Variables (SGN.@INT) Option/42,Black,notBold,notItalic,open,FitPage
+		2.4.26 HASP Interface (SGN.$HSP) Option/43,Black,notBold,notItalic,open,FitPage
+		2.4.27 Input/Output (I/O) Count Limit Per Accounting User Class (UIOLIM) Macro/43,Black,notBold,notItalic,open,FitPage
+		2.4.28 Processor Time Limit Per Accounting User Class (UPRCLIM) Macro/46,Black,notBold,notItalic,open,FitPage
+		2.4.29 Multi-Terminal Monitor (MTM) Version Identification (VERSION) Macro/47,Black,notBold,notItalic,open,FitPage
+	2.4 Memory Requirements for System Generation (SYSGEN) Options/48,Black,notBold,notItalic,open,FitPage
+Chapter 3 - Authorized User Utility/51,Black,notBold,notItalic,open,FitPage
+	3.1 Introduction/51,Black,notBold,notItalic,open,FitPage
+	3.2 Authorized User File (AUF)/51,Black,notBold,notItalic,open,FitPage
+	3.3 Building and Starting the Authorized User Utility/54,Black,notBold,notItalic,open,FitPage
+	3.4 Authorized User Utility Commands/56,Black,notBold,notItalic,open,FitPage
+		3.4.1 ACCOUNTS command/58,Black,notBold,notItalic,open,FitPage
+		3.4.2 ADD command/60,Black,notBold,notItalic,open,FitPage
+		3.4.3 CHANGE command/62,Black,notBold,notItalic,open,FitPage
+		3.4.4 DELETE command/64,Black,notBold,notItalic,open,FitPage
+		3.4.5 END command/65,Black,notBold,notItalic,open,FitPage
+		3.4.6 LIST command/66,Black,notBold,notItalic,open,FitPage
+		3.4.7 MODE command/68,Black,notBold,notItalic,open,FitPage
+		3.4.8 PAUSE command/69,Black,notBold,notItalic,open,FitPage
+		3.4.9 PRIVILEGE command/70,Black,notBold,notItalic,open,FitPage
+		3.4.10 TOTAL command/76,Black,notBold,notItalic,open,FitPage
+Chapter 4 - OS/32 Accounting Facility/79,Black,notBold,notItalic,open,FitPage
+	4.1 Introduction/79,Black,notBold,notItalic,open,FitPage
+	4.2 System Requirements/80,Black,notBold,notItalic,closed,FitPage
+		4.2.1 OS/32 System Generation (Sysgen)/80,Black,notBold,notItalic,open,FitPage
+		4.2.2 Multi-Terminal Monitor (MTM) System Generation (Sysgen)/80,Black,notBold,notItalic,open,FitPage
+		4.2.3 Accounting Transaction File (ATF)/80,Black,notBold,notItalic,open,FitPage
+	4.3 LINK Option/81,Black,notBold,notItalic,open,FitPage
+	4.4 Starting Data Collection/81,Black,notBold,notItalic,open,FitPage
+	4.5 Data Collection/81,Black,notBold,notItalic,closed,FitPage
+		4.5.1 Accounting Date and Time Formats/81,Black,notBold,notItalic,open,FitPage
+		4.5.2 Terminal Session or Batch Job Accounting Data/83,Black,notBold,notItalic,closed,FitPage
+			4.5.2.1 Elapsed Time/83,Black,notBold,notItalic,open,FitPage
+			4.5.2.2 Signon and Signoff Date and Time/84,Black,notBold,notItalic,open,FitPage
+			4.5.2.3 Job Number/84,Black,notBold,notItalic,open,FitPage
+			4.5.2.4 Date and Time a Job is Submitted/84,Black,notBold,notItalic,open,FitPage
+			4.5.2.5 Total Number of Tasks Executed/84,Black,notBold,notItalic,open,FitPage
+			4.5.2.6 Total Number of Command Substitution System (CSS) Calls Executed/84,Black,notBold,notItalic,open,FitPage
+			4.5.2.7 Total Number of Command Entered/84,Black,notBold,notItalic,open,FitPage
+			4.5.2.8 Total Number of DISPLAY FILES Commands Entered/85,Black,notBold,notItalic,open,FitPage
+			4.5.2.9 User Identifier (Userid)/85,Black,notBold,notItalic,open,FitPage
+			4.5.2.10 Renamed and Deleted Files/85,Black,notBold,notItalic,open,FitPage
+		4.5.3 Task-Related Accounting Data/85,Black,notBold,notItalic,closed,FitPage
+			4.5.3.1 Processor (PRC) Time/86,Black,notBold,notItalic,open,FitPage
+			4.5.3.2 Roll Time/87,Black,notBold,notItalic,open,FitPage
+			4.5.3.3 Wait Time/87,Black,notBold,notItalic,open,FitPage
+			4.5.3.4 Date and Time a Task Started and Terminated/87,Black,notBold,notItalic,open,FitPage
+			4.5.3.5 User Identifier (Userid)/87,Black,notBold,notItalic,open,FitPage
+			4.5.3.6 Memory Used by a Task/88,Black,notBold,notItalic,open,FitPage
+			4.5.3.7 Count of Input/Output (I/O) Transfers to I/O Devices/88,Black,notBold,notItalic,open,FitPage
+			4.5.3.8 Roll Count/88,Black,notBold,notItalic,open,FitPage
+			4.5.3.9 File Descriptor (fd) from Which a Task Was Loaded/89,Black,notBold,notItalic,open,FitPage
+			4.5.3.10 User-Supplied Information/89,Black,notBold,notItalic,open,FitPage
+			4.5.3.11 Account Number/89,Black,notBold,notItalic,open,FitPage
+			4.5.3.12 Job Number/89,Black,notBold,notItalic,open,FitPage
+			4.5.3.13 End of Task Code/89,Black,notBold,notItalic,open,FitPage
+	4.6 Terminal User Access to Accounting Information/90,Black,notBold,notItalic,closed,FitPage
+		4.6.1 Task Termination/90,Black,notBold,notItalic,open,FitPage
+		4.6.2 Task Control Block (TCB) Counter Overflow/90,Black,notBold,notItalic,open,FitPage
+		4.6.3 Signoff Time/90,Black,notBold,notItalic,open,FitPage
+Chapter 5 - Multi-Terminal Monitor (MTM) Operating Procedures/91,Black,notBold,notItalic,open,FitPage
+	5.1 Introduction/91,Black,notBold,notItalic,open,FitPage
+	5.2 Loading and Establishing the Multi-Terminal Monitor (MTM)/91,Black,notBold,notItalic,open,FitPage
+	5.3 START command/92,Black,notBold,notItalic,open,FitPage
+	5.4 .MTM command/94,Black,notBold,notItalic,open,FitPage
+	5.5 Multi-Terminal Monitor (MTM) End Of Task Codes/103,Black,notBold,notItalic,open,FitPage
+	5.6 Multi-Terinal Monitor (MTM) Error Messages/105,Black,notBold,notItalic,open,FitPage
+Chapter 6 - Multi-Terminal Monitor (MTM) Operation in a Model 3200MPS System Multiprocessing Environment/109,Black,notBold,notItalic,closed,FitPage
+	6.1 Introduction/109,Black,notBold,notItalic,open,FitPage
+	6.2 Operation of the Load Leveling Executive (LLE)/110,Black,notBold,notItalic,open,FitPage
+		6.2.1 Queue 0 Eligibility/110,Black,notBold,notItalic,open,FitPage
+		6.2.2 Fixed Mode of Operation/111,Black,notBold,notItalic,open,FitPage
+		6.2.3 Dynamic Mode of Operation/111,Black,notBold,notItalic,open,FitPage
+		6.2.4 Error Termination/112,Black,notBold,notItalic,open,FitPage
+	6.3 Optimization and Control of Load-Leveling/112,Black,notBold,notItalic,open,FitPage
+	6.4 Load-Leveling Optimizing and Control (.MTM LLE) Commands/113,Black,notBold,notItalic,open,FitPage
+		6.4.1 .MTM LLE command/114,Black,notBold,notItalic,open,FitPage
+			6.5 Load-Leveling Executive (LLE) Operating Tips/119,Black,notBold,notItalic,open,FitPage
+		6.4.2 .MTM PSM Command/120,Black,notBold,notItalic,open,FitPage
+	6.5 Load-Leveling Executive Operating Tips/122,Black,notBold,notItalic,open,FitPage
+Appendixes/123,Black,notBold,notItalic,open,FitPage
+	Appendix A - Multi-Terminal Monitor (MTM) System Generation (SYSGEN) Options/123,Black,notBold,notItalic,open,FitPage
+	Appendix B - Authorized User Utility Commands/127,Black,notBold,notItalic,open,FitPage
+	Appendix C - Authorized User Utility Message Summary/129,Black,notBold,notItalic,open,FitPage
+	Appendix D - Accounting Transaction File (ATF) Record Formats/133,Black,notBold,notItalic,open,FitPage
+	Appendix E - Multi-Terminal Monitor (MTM) Operator Command Summary/139,Black,notBold,notItalic,open,FitPage
+Index/141,Black,notBold,notItalic,open,FitPage
+Comment Form/145,Black,notBold,notItalic,open,FitPage
+Table of Contents (pages iii et seq.)/147,Black,notBold,notItalic,open,FitPage

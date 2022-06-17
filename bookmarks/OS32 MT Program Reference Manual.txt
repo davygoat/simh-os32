@@ -1,239 +1,239 @@
 OS/32-MT Program Reference Manual (1976)/1,Black,notBold,notItalic,open,FitPage
-	Page Revision Status Sheet/2,Black,notBold,notItalic,open,FitPage
-	Preface/4,Black,notBold,notItalic,open,FitPage
-	Table of Contents/5,Black,notBold,notItalic,open,FitPage
-	Chapter 1 - System Overview/10,Black,notBold,notItalic,open,FitPage
-		Introduction/10,Black,notBold,notItalic,open,FitPage
-		Important Features/11,Black,notBold,notItalic,open,FitPage
-		System Components/11,Black,notBold,notItalic,closed,FitPage
-			System Manager/12,Black,notBold,notItalic,open,FitPage
-			Executive Functoins/12,Black,notBold,notItalic,open,FitPage
-			Task Manager/12,Black,notBold,notItalic,open,FitPage
-			Timer Manager/12,Black,notBold,notItalic,open,FitPage
-			Memory Manager/12,Black,notBold,notItalic,open,FitPage
-			File Manager/12,Black,notBold,notItalic,open,FitPage
-			I/O Subsystem/12,Black,notBold,notItalic,open,FitPage
-			Resident Loader/12,Black,notBold,notItalic,open,FitPage
-		Overview/13,Black,notBold,notItalic,open,FitPage
-		Hardware Considerations/14,Black,notBold,notItalic,closed,FitPage
-			Floating Point Support/14,Black,notBold,notItalic,open,FitPage
-			Using Writable COntrol Store/14,Black,notBold,notItalic,open,FitPage
-	Chapter 2 - System Operation/15,Black,notBold,notItalic,open,FitPage
-		System Generation/15,Black,notBold,notItalic,open,FitPage
-		System Startup/15,Black,notBold,notItalic,open,FitPage
-		Error Handling/15,Black,notBold,notItalic,closed,FitPage
-			System Crashes/15,Black,notBold,notItalic,open,FitPage
-			Unrecoverable Task Errors/16,Black,notBold,notItalic,open,FitPage
-			Recoverable Errors/16,Black,notBold,notItalic,open,FitPage
-		System Shut Down and Restart/16,Black,notBold,notItalic,open,FitPage
-	Chapter 3 - System Description/17,Black,notBold,notItalic,open,FitPage
-		Tasks/17,Black,notBold,notItalic,closed,FitPage
-			Foreground/Background Tasks/17,Black,notBold,notItalic,open,FitPage
-			User/Executive Tasks/17,Black,notBold,notItalic,open,FitPage
-			Task Address Space and Logical Segments/17,Black,notBold,notItalic,open,FitPage
-			Priority and Scheduling/19,Black,notBold,notItalic,open,FitPage
-			Protection/19,Black,notBold,notItalic,open,FitPage
-		System Manager/19,Black,notBold,notItalic,open,FitPage
-		Supervisor Calls (SVCs)/19,Black,notBold,notItalic,open,FitPage
-		Memory Management/20,Black,notBold,notItalic,closed,FitPage
-			Foreground Partitions/20,Black,notBold,notItalic,open,FitPage
-			Background Partition/20,Black,notBold,notItalic,open,FitPage
-			Task Common/20,Black,notBold,notItalic,open,FitPage
-			Resident Library/21,Black,notBold,notItalic,open,FitPage
-			System Space/21,Black,notBold,notItalic,open,FitPage
-			Sample Memory Allocation/21,Black,notBold,notItalic,open,FitPage
-		Interrupts and Traps/23,Black,notBold,notItalic,closed,FitPage
-			Task Queue/23,Black,notBold,notItalic,open,FitPage
-			Task Status Word (TSW)/23,Black,notBold,notItalic,open,FitPage
-			User Dedicated Location (UDL)/23,Black,notBold,notItalic,open,FitPage
-			Task-Handled Traps/26,Black,notBold,notItalic,open,FitPage
-			Interrupts/27,Black,notBold,notItalic,open,FitPage
-		Files and Devices/29,Black,notBold,notItalic,closed,FitPage
-			Direct Access Files/29,Black,notBold,notItalic,open,FitPage
-			Volume Organization/29,Black,notBold,notItalic,open,FitPage
-			Identification of Files/29,Black,notBold,notItalic,open,FitPage
-			File Organization/30,Black,notBold,notItalic,open,FitPage
-			File Access Methods/32,Black,notBold,notItalic,open,FitPage
-			File and Device Protection/33,Black,notBold,notItalic,open,FitPage
-			Null Device/34,Black,notBold,notItalic,open,FitPage
-	Chapter 4 - Supervisor Calls/35,Black,notBold,notItalic,open,FitPage
-		SVC Instructions/35,Black,notBold,notItalic,closed,FitPage
-			SVC Errors/36,Black,notBold,notItalic,open,FitPage
-		SVC 1 - Input/Output Request/36,Black,notBold,notItalic,closed,FitPage
-			Function Code/36,Black,notBold,notItalic,open,FitPage
-			Halt I/O Command/38,Black,notBold,notItalic,open,FitPage
-			Logical Unit (LU)/39,Black,notBold,notItalic,open,FitPage
-			Error Status (Device Dependent and Device Independent Status)/39,Black,notBold,notItalic,open,FitPage
-			Buffer Address/40,Black,notBold,notItalic,open,FitPage
-			Random Address/40,Black,notBold,notItalic,open,FitPage
-			Length of Data Transfer/40,Black,notBold,notItalic,open,FitPage
-			Undonditional Proceed/40,Black,notBold,notItalic,open,FitPage
-			Proceed/Wait I/O/40,Black,notBold,notItalic,open,FitPage
-			Wait Only/41,Black,notBold,notItalic,open,FitPage
-			Test I/O Complete/41,Black,notBold,notItalic,open,FitPage
-		SVC 2 - General Service Functions/41,Black,notBold,notItalic,closed,FitPage
-			SVC 2 Code 1 - Pause/41,Black,notBold,notItalic,open,FitPage
-			SVC 2 Code 2 - Get Storage/41,Black,notBold,notItalic,open,FitPage
-			SVC 2 Code 3 - Release Storage/42,Black,notBold,notItalic,open,FitPage
-			SVC 2 Code 4 - Set Status/42,Black,notBold,notItalic,open,FitPage
-			SVC 2 Code 5 - Fetch Pointer/42,Black,notBold,notItalic,open,FitPage
-			SVC 2 Code 6 - Unpack Binary Number/43,Black,notBold,notItalic,open,FitPage
-			SVC 2 Code 7 - Log Message/43,Black,notBold,notItalic,open,FitPage
-			SVC 2 Code 8 - Interrogate Clock/44,Black,notBold,notItalic,open,FitPage
-			SVC 2 Code 9 - Fetch Date/44,Black,notBold,notItalic,open,FitPage
-			SVC 2 Code 10 - Time-of-Day Wait/44,Black,notBold,notItalic,open,FitPage
-			SVC 2 Code 11 - Interval Wait/45,Black,notBold,notItalic,open,FitPage
-			SVC 2 Code 15 - Pack Numeric Data/45,Black,notBold,notItalic,open,FitPage
-			SVC 2 Code 16 - Pack File Descriptor/45,Black,notBold,notItalic,open,FitPage
-			SVC 2 Code 17 - Scan Mnemonic Table/47,Black,notBold,notItalic,open,FitPage
-			SVC 2 Code 18 - Move ASCII Characters/47,Black,notBold,notItalic,open,FitPage
-			SVC 2 Code 19 - Peek/48,Black,notBold,notItalic,open,FitPage
-			SVC 2 Code 20 - Expand Allocation/49,Black,notBold,notItalic,open,FitPage
-			SVC 2 Code 23 - Timer Management/49,Black,notBold,notItalic,open,FitPage
-		SVC 3 - End of Task (EOT)/53,Black,notBold,notItalic,open,FitPage
-		SVC 5 - Fetch Overlay/53,Black,notBold,notItalic,open,FitPage
-		SVC 6 - Intertask Coordination/54,Black,notBold,notItalic,closed,FitPage
-			Task ID and Function Code/56,Black,notBold,notItalic,open,FitPage
-			End Task Function (Function Code E field)/58,Black,notBold,notItalic,open,FitPage
-			Load Task Function (Function Code L field)/58,Black,notBold,notItalic,open,FitPage
-			Task Resident (Function Code H field)/58,Black,notBold,notItalic,open,FitPage
-			Suspend (Function Code S field)/58,Black,notBold,notItalic,open,FitPage
-			Send Message (Function Code M field)/58,Black,notBold,notItalic,open,FitPage
-			Queue Parameter Function (Function Code Q field)/58,Black,notBold,notItalic,open,FitPage
-			Change Priority Function (Function Code P field)/58,Black,notBold,notItalic,open,FitPage
-			Trap-Generating Device Functions/59,Black,notBold,notItalic,open,FitPage
-			Connect (Function Code O field)/59,Black,notBold,notItalic,open,FitPage
-			Thaw (Function Code T field)/59,Black,notBold,notItalic,open,FitPage
-			SINT (Function Code I field)/59,Black,notBold,notItalic,open,FitPage
-			Freeze (Function Code F field)/59,Black,notBold,notItalic,open,FitPage
-			Unconnect (Function Code U field)/59,Black,notBold,notItalic,open,FitPage
-			Release (Function Code R field)/59,Black,notBold,notItalic,open,FitPage
-			Task Non-Resident (Function Code N field)/59,Black,notBold,notItalic,open,FitPage
-			Start Task (Function Code A field)/59,Black,notBold,notItalic,open,FitPage
-			Message Rings and Message Buffer Structures/60,Black,notBold,notItalic,open,FitPage
-			Message Buffer Structures/60,Black,notBold,notItalic,open,FitPage
-		SVC 7 - File Handling Services/61,Black,notBold,notItalic,closed,FitPage
-			SVC 7 - Parameter Block Fields/62,Black,notBold,notItalic,open,FitPage
-			Error Status/63,Black,notBold,notItalic,open,FitPage
-			LU/63,Black,notBold,notItalic,open,FitPage
-			Write Key and Read Key/63,Black,notBold,notItalic,open,FitPage
-			Record Length/63,Black,notBold,notItalic,open,FitPage
-			Volume Name (VOLN) or Device Mnemonic/64,Black,notBold,notItalic,open,FitPage
-			Filename/64,Black,notBold,notItalic,open,FitPage
-			Extension/64,Black,notBold,notItalic,open,FitPage
-			Size/64,Black,notBold,notItalic,open,FitPage
-			Allocate/65,Black,notBold,notItalic,open,FitPage
-			Assign/65,Black,notBold,notItalic,open,FitPage
-			Change Access Privileges/66,Black,notBold,notItalic,open,FitPage
-			Rename/66,Black,notBold,notItalic,open,FitPage
-			Reprotect/67,Black,notBold,notItalic,open,FitPage
-			Close/67,Black,notBold,notItalic,open,FitPage
-			Delete/67,Black,notBold,notItalic,open,FitPage
-			Checkpoint/67,Black,notBold,notItalic,open,FitPage
-			Fetch Attributes/68,Black,notBold,notItalic,open,FitPage
-		SVC 9 - Load TSW/70,Black,notBold,notItalic,open,FitPage
-		SVC 14 - User SVC/72,Black,notBold,notItalic,open,FitPage
-		SVC 15 - ITAM Device Dependent I/O/72,Black,notBold,notItalic,open,FitPage
-	Chapter 5 - Console Operations/73,Black,notBold,notItalic,open,FitPage
-		System Console Device/73,Black,notBold,notItalic,closed,FitPage
-			Prompts/73,Black,notBold,notItalic,open,FitPage
-			BREAK Key/73,Black,notBold,notItalic,open,FitPage
-		Command Syntax/73,Black,notBold,notItalic,closed,FitPage
-			Mnemonics/74,Black,notBold,notItalic,open,FitPage
-			Optional Operands/74,Black,notBold,notItalic,open,FitPage
-			General Syntactic Rules/74,Black,notBold,notItalic,open,FitPage
-			Decimal and Hexadecimal Numbers/75,Black,notBold,notItalic,open,FitPage
-			Task Identifiers/75,Black,notBold,notItalic,open,FitPage
-			File Descriptors/75,Black,notBold,notItalic,open,FitPage
-		Error Response/76,Black,notBold,notItalic,open,FitPage
-		General System Commands/77,Black,notBold,notItalic,closed,FitPage
-			Set Time/77,Black,notBold,notItalic,open,FitPage
-			Display Time/78,Black,notBold,notItalic,open,FitPage
-			Volume/78,Black,notBold,notItalic,open,FitPage
-			Set Log/78,Black,notBold,notItalic,open,FitPage
-			Display Map/79,Black,notBold,notItalic,open,FitPage
-			Display ITAMTERM/80,Black,notBold,notItalic,open,FitPage
-			Set Partition/81,Black,notBold,notItalic,open,FitPage
-			Set Slice/82,Black,notBold,notItalic,open,FitPage
-		Utility Commands/82,Black,notBold,notItalic,closed,FitPage
-			Bias/82,Black,notBold,notItalic,open,FitPage
-			Examine/83,Black,notBold,notItalic,open,FitPage
-			Modify/83,Black,notBold,notItalic,open,FitPage
-			Build and ENDB/84,Black,notBold,notItalic,open,FitPage
-			Reset/84,Black,notBold,notItalic,open,FitPage
-		Task Related Commands/84,Black,notBold,notItalic,closed,FitPage
-			Task/84,Black,notBold,notItalic,open,FitPage
-			Start/85,Black,notBold,notItalic,open,FitPage
-			Pause/86,Black,notBold,notItalic,open,FitPage
-			Continue/86,Black,notBold,notItalic,open,FitPage
-			Cancel/86,Black,notBold,notItalic,open,FitPage
-			Load/86,Black,notBold,notItalic,open,FitPage
-			Assign/87,Black,notBold,notItalic,open,FitPage
-			Display LU/88,Black,notBold,notItalic,open,FitPage
-			Close/89,Black,notBold,notItalic,open,FitPage
-			Option/89,Black,notBold,notItalic,open,FitPage
-			Set Priority/90,Black,notBold,notItalic,open,FitPage
-			Display Parameters/90,Black,notBold,notItalic,open,FitPage
-			Send/91,Black,notBold,notItalic,open,FitPage
-		Device and File Control Commands/92,Black,notBold,notItalic,closed,FitPage
-			Allocate/92,Black,notBold,notItalic,open,FitPage
-			Delete/94,Black,notBold,notItalic,open,FitPage
-			Rename/94,Black,notBold,notItalic,open,FitPage
-			Reprotect/94,Black,notBold,notItalic,open,FitPage
-			Display files/94,Black,notBold,notItalic,open,FitPage
-			Mark/95,Black,notBold,notItalic,open,FitPage
-			Display Devices/96,Black,notBold,notItalic,open,FitPage
-		Magnetic Tape and File Control Commands/96,Black,notBold,notItalic,open,FitPage
-		Command Substitution System/97,Black,notBold,notItalic,closed,FitPage
-			High Level Operator Command Package/98,Black,notBold,notItalic,open,FitPage
-			Calling CSS Files/98,Black,notBold,notItalic,open,FitPage
-			Use of Parameters/99,Black,notBold,notItalic,open,FitPage
-			Commands Executable from a CSS File/100,Black,notBold,notItalic,open,FitPage
-			Interaction of CSS with Background and Foreground/100,Black,notBold,notItalic,open,FitPage
-			$EXIT and $CLEAR/100,Black,notBold,notItalic,open,FitPage
-			$JOB and $TERMJOB/100,Black,notBold,notItalic,open,FitPage
-			Logical Operators/101,Black,notBold,notItalic,open,FitPage
-			Return Code Testing/101,Black,notBold,notItalic,open,FitPage
-			File Existence Testing/102,Black,notBold,notItalic,open,FitPage
-			Parameter Existence Testing/102,Black,notBold,notItalic,open,FitPage
-			Listing Directives/103,Black,notBold,notItalic,open,FitPage
-			CSS File Construction/103,Black,notBold,notItalic,open,FitPage
-			CSS Command Summary/104,Black,notBold,notItalic,open,FitPage
-			CSS Error Conditions/105,Black,notBold,notItalic,open,FitPage
-	Appendices/154,Black,notBold,notItalic,closed,FitPage
-		Appendix 1 - Supervisor Calls/106,Black,notBold,notItalic,open,FitPage
-		                             /106,Black,notBold,notItalic,closed,FitPage
-		Appendix 2 - Command Summary/120,Black,notBold,notItalic,open,FitPage
-		Appendix 3 - Command Error Summary/128,Black,notBold,notItalic,open,FitPage
-		Appendix 4 - System Messages/135,Black,notBold,notItalic,open,FitPage
-		Appendix 5 - Crash Codes/136,Black,notBold,notItalic,open,FitPage
-		Appendix 6 - Revision Information/138,Black,notBold,notItalic,open,FitPage
-	Figures/8,Black,notBold,notItalic,closed,FitPage
-		1-1 OS/32 MT Functional Block Diagram/13,Black,notBold,notItalic,open,FitPage
-		3-1 OS/32 MT Memory Map Example/22,Black,notBold,notItalic,open,FitPage
-		3-2 User Dedicated Locations/25,Black,notBold,notItalic,open,FitPage
-		4-1 SVC 2 Code 19 Parameter Block/48,Black,notBold,notItalic,open,FitPage
-		4-2 SVC 6 Parameter Block/54,Black,notBold,notItalic,open,FitPage
-		4-3 Message Buffer Structures/61,Black,notBold,notItalic,open,FitPage
-		4-4 SVC 7 Parameter Block/62,Black,notBold,notItalic,open,FitPage
-		4-5 SVC 7 Command/Modifier Halfword/62,Black,notBold,notItalic,open,FitPage
-	Tables/34,Black,notBold,notItalic,closed,FitPage
-		3-1 Task Status Word/24,Black,notBold,notItalic,open,FitPage
-		3-2 Task Queue Reason Codes/27,Black,notBold,notItalic,open,FitPage
-		3-3 Access Privilege Compatibility/34,Black,notBold,notItalic,open,FitPage
-		4-1 OS/32 MT Supervisor Calls/35,Black,notBold,notItalic,open,FitPage
-		4-2 SVC 1 Data Transfer Function Code/37,Black,notBold,notItalic,open,FitPage
-		4-3 SVC 1 Command Function Code/38,Black,notBold,notItalic,open,FitPage
-		4-4 Interpretation of SVC 1 Device Independent Status Byte/39,Black,notBold,notItalic,open,FitPage
-		4-5 SVC 6 Parameter Block Fields/55,Black,notBold,notItalic,open,FitPage
-		4-6 SVC 6 Function Codes/56,Black,notBold,notItalic,open,FitPage
-		4-7 SVC 6 Error Codes/57,Black,notBold,notItalic,open,FitPage
-		4-8 SVC 7 Return Codes/64,Black,notBold,notItalic,open,FitPage
-		4-9 Valid Access Privilege Changes/66,Black,notBold,notItalic,open,FitPage
-		4-10 SVC 7 Device Attributes Halfword/68,Black,notBold,notItalic,open,FitPage
-		4-11 Device Codes/69,Black,notBold,notItalic,open,FitPage
-		4-12 Task Status Word/71,Black,notBold,notItalic,open,FitPage
-		4-13 Task Queue Reason Codes/72,Black,notBold,notItalic,open,FitPage
-	Index/142,Black,notBold,notItalic,closed,FitPage
-		[starting from page 2]/142,Black,notBold,notItalic,open,FitPage
-		[page 1 misplaced at end of index]/152,Black,notBold,notItalic,open,FitPage
+Page Revision Status Sheet/2,Black,notBold,notItalic,open,FitPage
+Preface/4,Black,notBold,notItalic,open,FitPage
+Table of Contents/5,Black,notBold,notItalic,open,FitPage
+Chapter 1 - System Overview/10,Black,notBold,notItalic,open,FitPage
+	Introduction/10,Black,notBold,notItalic,open,FitPage
+	Important Features/11,Black,notBold,notItalic,open,FitPage
+	System Components/11,Black,notBold,notItalic,closed,FitPage
+		System Manager/12,Black,notBold,notItalic,open,FitPage
+		Executive Functoins/12,Black,notBold,notItalic,open,FitPage
+		Task Manager/12,Black,notBold,notItalic,open,FitPage
+		Timer Manager/12,Black,notBold,notItalic,open,FitPage
+		Memory Manager/12,Black,notBold,notItalic,open,FitPage
+		File Manager/12,Black,notBold,notItalic,open,FitPage
+		I/O Subsystem/12,Black,notBold,notItalic,open,FitPage
+		Resident Loader/12,Black,notBold,notItalic,open,FitPage
+	Overview/13,Black,notBold,notItalic,open,FitPage
+	Hardware Considerations/14,Black,notBold,notItalic,closed,FitPage
+		Floating Point Support/14,Black,notBold,notItalic,open,FitPage
+		Using Writable Control Store/14,Black,notBold,notItalic,open,FitPage
+Chapter 2 - System Operation/15,Black,notBold,notItalic,open,FitPage
+	System Generation/15,Black,notBold,notItalic,open,FitPage
+	System Startup/15,Black,notBold,notItalic,open,FitPage
+	Error Handling/15,Black,notBold,notItalic,closed,FitPage
+		System Crashes/15,Black,notBold,notItalic,open,FitPage
+		Unrecoverable Task Errors/16,Black,notBold,notItalic,open,FitPage
+		Recoverable Errors/16,Black,notBold,notItalic,open,FitPage
+	System Shut Down and Restart/16,Black,notBold,notItalic,open,FitPage
+Chapter 3 - System Description/17,Black,notBold,notItalic,open,FitPage
+	Tasks/17,Black,notBold,notItalic,closed,FitPage
+		Foreground/Background Tasks/17,Black,notBold,notItalic,open,FitPage
+		User/Executive Tasks/17,Black,notBold,notItalic,open,FitPage
+		Task Address Space and Logical Segments/17,Black,notBold,notItalic,open,FitPage
+		Priority and Scheduling/19,Black,notBold,notItalic,open,FitPage
+		Protection/19,Black,notBold,notItalic,open,FitPage
+	System Manager/19,Black,notBold,notItalic,open,FitPage
+	Supervisor Calls (SVCs)/19,Black,notBold,notItalic,open,FitPage
+	Memory Management/20,Black,notBold,notItalic,closed,FitPage
+		Foreground Partitions/20,Black,notBold,notItalic,open,FitPage
+		Background Partition/20,Black,notBold,notItalic,open,FitPage
+		Task Common/20,Black,notBold,notItalic,open,FitPage
+		Resident Library/21,Black,notBold,notItalic,open,FitPage
+		System Space/21,Black,notBold,notItalic,open,FitPage
+		Sample Memory Allocation/21,Black,notBold,notItalic,open,FitPage
+	Interrupts and Traps/23,Black,notBold,notItalic,closed,FitPage
+		Task Queue/23,Black,notBold,notItalic,open,FitPage
+		Task Status Word (TSW)/23,Black,notBold,notItalic,open,FitPage
+		User Dedicated Location (UDL)/23,Black,notBold,notItalic,open,FitPage
+		Task-Handled Traps/26,Black,notBold,notItalic,open,FitPage
+		Interrupts/27,Black,notBold,notItalic,open,FitPage
+	Files and Devices/29,Black,notBold,notItalic,closed,FitPage
+		Direct Access Files/29,Black,notBold,notItalic,open,FitPage
+		Volume Organization/29,Black,notBold,notItalic,open,FitPage
+		Identification of Files/29,Black,notBold,notItalic,open,FitPage
+		File Organization/30,Black,notBold,notItalic,open,FitPage
+		File Access Methods/32,Black,notBold,notItalic,open,FitPage
+		File and Device Protection/33,Black,notBold,notItalic,open,FitPage
+		Null Device/34,Black,notBold,notItalic,open,FitPage
+Chapter 4 - Supervisor Calls/35,Black,notBold,notItalic,open,FitPage
+	SVC Instructions/35,Black,notBold,notItalic,closed,FitPage
+		SVC Errors/36,Black,notBold,notItalic,open,FitPage
+	SVC 1 - Input/Output Request/36,Black,notBold,notItalic,closed,FitPage
+		Function Code/36,Black,notBold,notItalic,open,FitPage
+		Halt I/O Command/38,Black,notBold,notItalic,open,FitPage
+		Logical Unit (LU)/39,Black,notBold,notItalic,open,FitPage
+		Error Status (Device Dependent and Device Independent Status)/39,Black,notBold,notItalic,open,FitPage
+		Buffer Address/40,Black,notBold,notItalic,open,FitPage
+		Random Address/40,Black,notBold,notItalic,open,FitPage
+		Length of Data Transfer/40,Black,notBold,notItalic,open,FitPage
+		Undonditional Proceed/40,Black,notBold,notItalic,open,FitPage
+		Proceed/Wait I/O/40,Black,notBold,notItalic,open,FitPage
+		Wait Only/41,Black,notBold,notItalic,open,FitPage
+		Test I/O Complete/41,Black,notBold,notItalic,open,FitPage
+	SVC 2 - General Service Functions/41,Black,notBold,notItalic,closed,FitPage
+		SVC 2 Code 1 - Pause/41,Black,notBold,notItalic,open,FitPage
+		SVC 2 Code 2 - Get Storage/41,Black,notBold,notItalic,open,FitPage
+		SVC 2 Code 3 - Release Storage/42,Black,notBold,notItalic,open,FitPage
+		SVC 2 Code 4 - Set Status/42,Black,notBold,notItalic,open,FitPage
+		SVC 2 Code 5 - Fetch Pointer/42,Black,notBold,notItalic,open,FitPage
+		SVC 2 Code 6 - Unpack Binary Number/43,Black,notBold,notItalic,open,FitPage
+		SVC 2 Code 7 - Log Message/43,Black,notBold,notItalic,open,FitPage
+		SVC 2 Code 8 - Interrogate Clock/44,Black,notBold,notItalic,open,FitPage
+		SVC 2 Code 9 - Fetch Date/44,Black,notBold,notItalic,open,FitPage
+		SVC 2 Code 10 - Time-of-Day Wait/44,Black,notBold,notItalic,open,FitPage
+		SVC 2 Code 11 - Interval Wait/45,Black,notBold,notItalic,open,FitPage
+		SVC 2 Code 15 - Pack Numeric Data/45,Black,notBold,notItalic,open,FitPage
+		SVC 2 Code 16 - Pack File Descriptor/45,Black,notBold,notItalic,open,FitPage
+		SVC 2 Code 17 - Scan Mnemonic Table/47,Black,notBold,notItalic,open,FitPage
+		SVC 2 Code 18 - Move ASCII Characters/47,Black,notBold,notItalic,open,FitPage
+		SVC 2 Code 19 - Peek/48,Black,notBold,notItalic,open,FitPage
+		SVC 2 Code 20 - Expand Allocation/49,Black,notBold,notItalic,open,FitPage
+		SVC 2 Code 23 - Timer Management/49,Black,notBold,notItalic,open,FitPage
+	SVC 3 - End of Task (EOT)/53,Black,notBold,notItalic,open,FitPage
+	SVC 5 - Fetch Overlay/53,Black,notBold,notItalic,open,FitPage
+	SVC 6 - Intertask Coordination/54,Black,notBold,notItalic,closed,FitPage
+		Task ID and Function Code/56,Black,notBold,notItalic,open,FitPage
+		End Task Function (Function Code E field)/58,Black,notBold,notItalic,open,FitPage
+		Load Task Function (Function Code L field)/58,Black,notBold,notItalic,open,FitPage
+		Task Resident (Function Code H field)/58,Black,notBold,notItalic,open,FitPage
+		Suspend (Function Code S field)/58,Black,notBold,notItalic,open,FitPage
+		Send Message (Function Code M field)/58,Black,notBold,notItalic,open,FitPage
+		Queue Parameter Function (Function Code Q field)/58,Black,notBold,notItalic,open,FitPage
+		Change Priority Function (Function Code P field)/58,Black,notBold,notItalic,open,FitPage
+		Trap-Generating Device Functions/59,Black,notBold,notItalic,open,FitPage
+		Connect (Function Code O field)/59,Black,notBold,notItalic,open,FitPage
+		Thaw (Function Code T field)/59,Black,notBold,notItalic,open,FitPage
+		SINT (Function Code I field)/59,Black,notBold,notItalic,open,FitPage
+		Freeze (Function Code F field)/59,Black,notBold,notItalic,open,FitPage
+		Unconnect (Function Code U field)/59,Black,notBold,notItalic,open,FitPage
+		Release (Function Code R field)/59,Black,notBold,notItalic,open,FitPage
+		Task Non-Resident (Function Code N field)/59,Black,notBold,notItalic,open,FitPage
+		Start Task (Function Code A field)/59,Black,notBold,notItalic,open,FitPage
+		Message Rings and Message Buffer Structures/60,Black,notBold,notItalic,open,FitPage
+		Message Buffer Structures/60,Black,notBold,notItalic,open,FitPage
+	SVC 7 - File Handling Services/61,Black,notBold,notItalic,closed,FitPage
+		SVC 7 - Parameter Block Fields/62,Black,notBold,notItalic,open,FitPage
+		Error Status/63,Black,notBold,notItalic,open,FitPage
+		LU/63,Black,notBold,notItalic,open,FitPage
+		Write Key and Read Key/63,Black,notBold,notItalic,open,FitPage
+		Record Length/63,Black,notBold,notItalic,open,FitPage
+		Volume Name (VOLN) or Device Mnemonic/64,Black,notBold,notItalic,open,FitPage
+		Filename/64,Black,notBold,notItalic,open,FitPage
+		Extension/64,Black,notBold,notItalic,open,FitPage
+		Size/64,Black,notBold,notItalic,open,FitPage
+		Allocate/65,Black,notBold,notItalic,open,FitPage
+		Assign/65,Black,notBold,notItalic,open,FitPage
+		Change Access Privileges/66,Black,notBold,notItalic,open,FitPage
+		Rename/66,Black,notBold,notItalic,open,FitPage
+		Reprotect/67,Black,notBold,notItalic,open,FitPage
+		Close/67,Black,notBold,notItalic,open,FitPage
+		Delete/67,Black,notBold,notItalic,open,FitPage
+		Checkpoint/67,Black,notBold,notItalic,open,FitPage
+		Fetch Attributes/68,Black,notBold,notItalic,open,FitPage
+	SVC 9 - Load TSW/70,Black,notBold,notItalic,open,FitPage
+	SVC 14 - User SVC/72,Black,notBold,notItalic,open,FitPage
+	SVC 15 - ITAM Device Dependent I/O/72,Black,notBold,notItalic,open,FitPage
+Chapter 5 - Console Operations/73,Black,notBold,notItalic,open,FitPage
+	System Console Device/73,Black,notBold,notItalic,closed,FitPage
+		Prompts/73,Black,notBold,notItalic,open,FitPage
+		BREAK Key/73,Black,notBold,notItalic,open,FitPage
+	Command Syntax/73,Black,notBold,notItalic,closed,FitPage
+		Mnemonics/74,Black,notBold,notItalic,open,FitPage
+		Optional Operands/74,Black,notBold,notItalic,open,FitPage
+		General Syntactic Rules/74,Black,notBold,notItalic,open,FitPage
+		Decimal and Hexadecimal Numbers/75,Black,notBold,notItalic,open,FitPage
+		Task Identifiers/75,Black,notBold,notItalic,open,FitPage
+		File Descriptors/75,Black,notBold,notItalic,open,FitPage
+	Error Response/76,Black,notBold,notItalic,open,FitPage
+	General System Commands/77,Black,notBold,notItalic,closed,FitPage
+		Set Time/77,Black,notBold,notItalic,open,FitPage
+		Display Time/78,Black,notBold,notItalic,open,FitPage
+		Volume/78,Black,notBold,notItalic,open,FitPage
+		Set Log/78,Black,notBold,notItalic,open,FitPage
+		Display Map/79,Black,notBold,notItalic,open,FitPage
+		Display ITAMTERM/80,Black,notBold,notItalic,open,FitPage
+		Set Partition/81,Black,notBold,notItalic,open,FitPage
+		Set Slice/82,Black,notBold,notItalic,open,FitPage
+	Utility Commands/82,Black,notBold,notItalic,closed,FitPage
+		Bias/82,Black,notBold,notItalic,open,FitPage
+		Examine/83,Black,notBold,notItalic,open,FitPage
+		Modify/83,Black,notBold,notItalic,open,FitPage
+		Build and ENDB/84,Black,notBold,notItalic,open,FitPage
+		Reset/84,Black,notBold,notItalic,open,FitPage
+	Task Related Commands/84,Black,notBold,notItalic,closed,FitPage
+		Task/84,Black,notBold,notItalic,open,FitPage
+		Start/85,Black,notBold,notItalic,open,FitPage
+		Pause/86,Black,notBold,notItalic,open,FitPage
+		Continue/86,Black,notBold,notItalic,open,FitPage
+		Cancel/86,Black,notBold,notItalic,open,FitPage
+		Load/86,Black,notBold,notItalic,open,FitPage
+		Assign/87,Black,notBold,notItalic,open,FitPage
+		Display LU/88,Black,notBold,notItalic,open,FitPage
+		Close/89,Black,notBold,notItalic,open,FitPage
+		Option/89,Black,notBold,notItalic,open,FitPage
+		Set Priority/90,Black,notBold,notItalic,open,FitPage
+		Display Parameters/90,Black,notBold,notItalic,open,FitPage
+		Send/91,Black,notBold,notItalic,open,FitPage
+	Device and File Control Commands/92,Black,notBold,notItalic,closed,FitPage
+		Allocate/92,Black,notBold,notItalic,open,FitPage
+		Delete/94,Black,notBold,notItalic,open,FitPage
+		Rename/94,Black,notBold,notItalic,open,FitPage
+		Reprotect/94,Black,notBold,notItalic,open,FitPage
+		Display files/94,Black,notBold,notItalic,open,FitPage
+		Mark/95,Black,notBold,notItalic,open,FitPage
+		Display Devices/96,Black,notBold,notItalic,open,FitPage
+	Magnetic Tape and File Control Commands/96,Black,notBold,notItalic,open,FitPage
+	Command Substitution System/97,Black,notBold,notItalic,closed,FitPage
+		High Level Operator Command Package/98,Black,notBold,notItalic,open,FitPage
+		Calling CSS Files/98,Black,notBold,notItalic,open,FitPage
+		Use of Parameters/99,Black,notBold,notItalic,open,FitPage
+		Commands Executable from a CSS File/100,Black,notBold,notItalic,open,FitPage
+		Interaction of CSS with Background and Foreground/100,Black,notBold,notItalic,open,FitPage
+		$EXIT and $CLEAR/100,Black,notBold,notItalic,open,FitPage
+		$JOB and $TERMJOB/100,Black,notBold,notItalic,open,FitPage
+		Logical Operators/101,Black,notBold,notItalic,open,FitPage
+		Return Code Testing/101,Black,notBold,notItalic,open,FitPage
+		File Existence Testing/102,Black,notBold,notItalic,open,FitPage
+		Parameter Existence Testing/102,Black,notBold,notItalic,open,FitPage
+		Listing Directives/103,Black,notBold,notItalic,open,FitPage
+		CSS File Construction/103,Black,notBold,notItalic,open,FitPage
+		CSS Command Summary/104,Black,notBold,notItalic,open,FitPage
+		CSS Error Conditions/105,Black,notBold,notItalic,open,FitPage
+Appendices/154,Black,notBold,notItalic,closed,FitPage
+	Appendix 1 - Supervisor Calls/106,Black,notBold,notItalic,open,FitPage
+	                             /106,Black,notBold,notItalic,closed,FitPage
+	Appendix 2 - Command Summary/120,Black,notBold,notItalic,open,FitPage
+	Appendix 3 - Command Error Summary/128,Black,notBold,notItalic,open,FitPage
+	Appendix 4 - System Messages/135,Black,notBold,notItalic,open,FitPage
+	Appendix 5 - Crash Codes/136,Black,notBold,notItalic,open,FitPage
+	Appendix 6 - Revision Information/138,Black,notBold,notItalic,open,FitPage
+Figures/8,Black,notBold,notItalic,closed,FitPage
+	1-1 OS/32 MT Functional Block Diagram/13,Black,notBold,notItalic,open,FitPage
+	3-1 OS/32 MT Memory Map Example/22,Black,notBold,notItalic,open,FitPage
+	3-2 User Dedicated Locations/25,Black,notBold,notItalic,open,FitPage
+	4-1 SVC 2 Code 19 Parameter Block/48,Black,notBold,notItalic,open,FitPage
+	4-2 SVC 6 Parameter Block/54,Black,notBold,notItalic,open,FitPage
+	4-3 Message Buffer Structures/61,Black,notBold,notItalic,open,FitPage
+	4-4 SVC 7 Parameter Block/62,Black,notBold,notItalic,open,FitPage
+	4-5 SVC 7 Command/Modifier Halfword/62,Black,notBold,notItalic,open,FitPage
+Tables/34,Black,notBold,notItalic,closed,FitPage
+	3-1 Task Status Word/24,Black,notBold,notItalic,open,FitPage
+	3-2 Task Queue Reason Codes/27,Black,notBold,notItalic,open,FitPage
+	3-3 Access Privilege Compatibility/34,Black,notBold,notItalic,open,FitPage
+	4-1 OS/32 MT Supervisor Calls/35,Black,notBold,notItalic,open,FitPage
+	4-2 SVC 1 Data Transfer Function Code/37,Black,notBold,notItalic,open,FitPage
+	4-3 SVC 1 Command Function Code/38,Black,notBold,notItalic,open,FitPage
+	4-4 Interpretation of SVC 1 Device Independent Status Byte/39,Black,notBold,notItalic,open,FitPage
+	4-5 SVC 6 Parameter Block Fields/55,Black,notBold,notItalic,open,FitPage
+	4-6 SVC 6 Function Codes/56,Black,notBold,notItalic,open,FitPage
+	4-7 SVC 6 Error Codes/57,Black,notBold,notItalic,open,FitPage
+	4-8 SVC 7 Return Codes/64,Black,notBold,notItalic,open,FitPage
+	4-9 Valid Access Privilege Changes/66,Black,notBold,notItalic,open,FitPage
+	4-10 SVC 7 Device Attributes Halfword/68,Black,notBold,notItalic,open,FitPage
+	4-11 Device Codes/69,Black,notBold,notItalic,open,FitPage
+	4-12 Task Status Word/71,Black,notBold,notItalic,open,FitPage
+	4-13 Task Queue Reason Codes/72,Black,notBold,notItalic,open,FitPage
+Index/142,Black,notBold,notItalic,closed,FitPage
+	[starting from page 2]/142,Black,notBold,notItalic,open,FitPage
+	[page 1 misplaced at end of index]/152,Black,notBold,notItalic,open,FitPage

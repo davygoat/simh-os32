@@ -1,0 +1,222 @@
+Multi-Terminal Monitor (MTM) Reference Manual (1985)/1,Black,bold,notItalic,open,FitPage
+Table of Contents/1,Black,notBold,notItalic,closed,FitPage
+                 /3,Black,notBold,notItalic,closed,FitPage
+Preface/11,Black,notBold,notItalic,closed,FitPage
+Chapter 1 - General Description/13,Black,notBold,notItalic,open,FitPage
+	1.1 Introduction/13,Black,notBold,notItalic,closed,FitPage
+	1.2 Multi-Terminal Monitor (MTM) Operation/13,Black,notBold,notItalic,closed,FitPage
+	1.3 User Information/14,Black,notBold,notItalic,closed,FitPage
+		1.3.1 Multi-Terminal Monitor (MTM) Devices/15,Black,notBold,notItalic,closed,FitPage
+		1.3.2 Authorization/15,Black,notBold,notItalic,closed,FitPage
+		1.3.3 Privileged Users/15,Black,notBold,notItalic,closed,FitPage
+		1.3.4 Transmitting Messages/16,Black,notBold,notItalic,closed,FitPage
+		1.3.5 Number of Terminal Users/16,Black,notBold,notItalic,closed,FitPage
+	1.4 Multi-Terminal Monitor (MTM) Subtask Environments/16,Black,notBold,notItalic,closed,FitPage
+		1.4.1 Multi-Terminal Monitor (MTM) Terminal Modes/17,Black,notBold,notItalic,closed,FitPage
+		1.4.2 Interactive Task to Terminal Mode/18,Black,notBold,notItalic,closed,FitPage
+	1.5 Multi-Terminal Monitor (MTM) in a Multiprocessor Environment/18,Black,notBold,notItalic,closed,FitPage
+	1.6 Loading a Task/19,Black,notBold,notItalic,closed,FitPage
+	1.7 Multi-Terminal Monitor (MTM) Special Features/19,Black,notBold,notItalic,closed,FitPage
+		1.7.1 Command Substitution System (CSS)/20,Black,notBold,notItalic,closed,FitPage
+		1.7.2 The Help Facility/20,Black,notBold,notItalic,closed,FitPage
+		1.7.3 Program Development Commands/20,Black,notBold,notItalic,closed,FitPage
+		1.7.4 Spooling/20,Black,notBold,notItalic,closed,FitPage
+		1.7.5 Security and Access Protection of Disks/20,Black,notBold,notItalic,closed,FitPage
+		1.7.6 Signon Command Substitution System (CSS)/21,Black,notBold,notItalic,closed,FitPage
+	1.8 Conventions/21,Black,notBold,notItalic,closed,FitPage
+		1.8.1 Prompt Conventions/21,Black,notBold,notItalic,closed,FitPage
+		1.8.2 Terminal Conventions/22,Black,notBold,notItalic,open,FitPage
+			1.8.2.1 Using the BREAK Key/22,Black,notBold,notItalic,closed,FitPage
+		1.8.3 Command Conventions/23,Black,notBold,notItalic,closed,FitPage
+		1.8.4 File Conventions/23,Black,notBold,notItalic,open,FitPage
+			1.8.4.1 Private Account Numbers/23,Black,notBold,notItalic,closed,FitPage
+			1.8.4.2 Group Account Numbers/23,Black,notBold,notItalic,closed,FitPage
+			1.8.4.3 System Account Numbers/24,Black,notBold,notItalic,closed,FitPage
+			1.8.4.4 File Descriptions (fds)/24,Black,notBold,notItalic,closed,FitPage
+Chapter 2 - Multi-Terminal Monitor (MTM) User Commands/27,Black,notBold,notItalic,open,FitPage
+	2.1 Introduction/27,Black,notBold,notItalic,closed,FitPage
+	2.2 ALLOCATE command/28,Black,notBold,notItalic,closed,FitPage
+	2.3 ASSIGN command/32,Black,notBold,notItalic,closed,FitPage
+	2.4 BFILE command/38,Black,notBold,notItalic,closed,FitPage
+	2.5 BIAS command/39,Black,notBold,notItalic,closed,FitPage
+	2.6 BREAK command/40,Black,notBold,notItalic,closed,FitPage
+	2.7 BRECORD command/41,Black,notBold,notItalic,closed,FitPage
+	2.8 BUILD and ENDB commands/42,Black,notBold,notItalic,closed,FitPage
+	2.9 CANCEL command/44,Black,notBold,notItalic,closed,FitPage
+	2.10 CLOSE command/45,Black,notBold,notItalic,closed,FitPage
+	2.11 CONTINUE command/46,Black,notBold,notItalic,closed,FitPage
+	2.12 DELETE command/47,Black,notBold,notItalic,closed,FitPage
+	2.13 DISPLAY command/48,Black,notBold,notItalic,closed,FitPage
+	2.14 DISPLAY ACCOUNTING command/50,Black,notBold,notItalic,closed,FitPage
+	2.15 DISPLAY DEVICES command/53,Black,notBold,notItalic,closed,FitPage
+	2.16 DISPLAY DFLOAT command/55,Black,notBold,notItalic,closed,FitPage
+	2.17 DISPLAY FILES command/56,Black,notBold,notItalic,closed,FitPage
+	2.18 DISPLAY FLOAT command/62,Black,notBold,notItalic,closed,FitPage
+	2.19 DISPLAY LU command/63,Black,notBold,notItalic,closed,FitPage
+	2.20 DISPLAY PARAMETERS command/64,Black,notBold,notItalic,closed,FitPage
+	2.21 DISPLAY REGISTERS command/70,Black,notBold,notItalic,closed,FitPage
+	2.22 DISPLAY TIME command/71,Black,notBold,notItalic,closed,FitPage
+	2.23 DISPLAY USERS command/72,Black,notBold,notItalic,closed,FitPage
+	2.24 ENABLE command/73,Black,notBold,notItalic,closed,FitPage
+	2.25 EXAMINE command/75,Black,notBold,notItalic,closed,FitPage
+	2.26 FFILE command/77,Black,notBold,notItalic,closed,FitPage
+	2.27 FRECORD command/78,Black,notBold,notItalic,closed,FitPage
+	2.28 HELP command/79,Black,notBold,notItalic,closed,FitPage
+	2.29 INIT command/81,Black,notBold,notItalic,closed,FitPage
+	2.30 LOAD command/82,Black,notBold,notItalic,closed,FitPage
+	2.31 LOG command/84,Black,notBold,notItalic,closed,FitPage
+	2.32 MESSAGE command/86,Black,notBold,notItalic,closed,FitPage
+	2.33 MODIFY command/87,Black,notBold,notItalic,closed,FitPage
+	2.34 OPTIONS command/89,Black,notBold,notItalic,closed,FitPage
+	2.35 PASSWORD command/91,Black,notBold,notItalic,closed,FitPage
+	2.36 PAUSE command/92,Black,notBold,notItalic,closed,FitPage
+	2.37 PREVENT command/93,Black,notBold,notItalic,closed,FitPage
+	2.38 PRINT command/94,Black,notBold,notItalic,closed,FitPage
+	2.39 PUNCH command/95,Black,notBold,notItalic,closed,FitPage
+	2.40 $RELEASE command/96,Black,notBold,notItalic,closed,FitPage
+	2.41 RENAME command/98,Black,notBold,notItalic,closed,FitPage
+	2.42 REPROTECT command/99,Black,notBold,notItalic,closed,FitPage
+	2.43 REWIND and RW commands/100,Black,notBold,notItalic,closed,FitPage
+	2.44 RVOLUME command/101,Black,notBold,notItalic,closed,FitPage
+	2.45 SEND command/104,Black,notBold,notItalic,closed,FitPage
+	2.46 SET CSS command/105,Black,notBold,notItalic,closed,FitPage
+	2.47 SET GROUP command/106,Black,notBold,notItalic,closed,FitPage
+	2.48 SET KEYOPERATOR command/108,Black,notBold,notItalic,closed,FitPage
+	2.49 SET PRIVATE command/110,Black,notBold,notItalic,closed,FitPage
+	2.50 SIGNOFF command/112,Black,notBold,notItalic,closed,FitPage
+	2.51 SIGNON command/113,Black,notBold,notItalic,closed,FitPage
+	2.52 SPOOLFILE command/117,Black,notBold,notItalic,closed,FitPage
+	2.53 START command/120,Black,notBold,notItalic,closed,FitPage
+	2.54 TASK command/122,Black,notBold,notItalic,closed,FitPage
+	2.55 TEMPFILE command/123,Black,notBold,notItalic,closed,FitPage
+	2.56 VOLUME command/127,Black,notBold,notItalic,closed,FitPage
+	2.57 WFILE command/129,Black,notBold,notItalic,closed,FitPage
+	2.58 XALLOCATE command/130,Black,notBold,notItalic,closed,FitPage
+	2.59 XDELETE command/133,Black,notBold,notItalic,closed,FitPage
+Chapter 3 - Multi-Terminal Monitor (MTM)/Non-MTM Task Interfaces/135,Black,notBold,notItalic,open,FitPage
+	3.1 Introduction/135,Black,notBold,notItalic,closed,FitPage
+	3.2 Interfacing with a Foreground Task/135,Black,notBold,notItalic,closed,FitPage
+		3.2.1 Programming Details/136,Black,notBold,notItalic,closed,FitPage
+	3.3 HASP Interface/138,Black,notBold,notItalic,closed,FitPage
+	3.4 Integrated Transaction Controller (ITC)/Reliance Interface/139,Black,notBold,notItalic,closed,FitPage
+Chapter 4 - Program Development/141,Black,notBold,notItalic,open,FitPage
+	4.1 Introduction/141,Black,notBold,notItalic,closed,FitPage
+	4.2 Creating a Source Program/141,Black,notBold,notItalic,closed,FitPage
+		4.2.1 Creating a Data File/144,Black,notBold,notItalic,closed,FitPage
+	4.3 Executing a Program/145,Black,notBold,notItalic,closed,FitPage
+	4.4 Modifying a Program/145,Black,notBold,notItalic,closed,FitPage
+	4.5 Reexecuting a Modified Program/145,Black,notBold,notItalic,closed,FitPage
+	4.6 Executing Multiple Programs as a Single Program/147,Black,notBold,notItalic,closed,FitPage
+	4.7 How to Recover from Errors/151,Black,notBold,notItalic,closed,FitPage
+	4.8 Assigning Logical Units/152,Black,notBold,notItalic,closed,FitPage
+	4.9 Program Development Commands/153,Black,notBold,notItalic,closed,FitPage
+		4.9.1 ADD command/154,Black,notBold,notItalic,closed,FitPage
+		4.9.2 COMPILE command/157,Black,notBold,notItalic,closed,FitPage
+		4.9.3 COMPLINK command/162,Black,notBold,notItalic,closed,FitPage
+		4.9.4 EDIT command/166,Black,notBold,notItalic,closed,FitPage
+		4.9.5 ENV command/170,Black,notBold,notItalic,closed,FitPage
+		4.9.6 EXEC command/171,Black,notBold,notItalic,closed,FitPage
+		4.9.7 LANGUAGE command/174,Black,notBold,notItalic,closed,FitPage
+		4.9.8 LINK command/178,Black,notBold,notItalic,closed,FitPage
+			4.9.8.1 Link Sequences/179,Black,notBold,notItalic,closed,FitPage
+		4.9.9 LIST command/182,Black,notBold,notItalic,closed,FitPage
+		4.9.10 REMOVE command/184,Black,notBold,notItalic,closed,FitPage
+		4.9.11 RUN command/185,Black,notBold,notItalic,closed,FitPage
+	4.10 Sample Program Development Sessions/187,Black,notBold,notItalic,closed,FitPage
+Chapter 5 - Multi-Terminal Monitor (MTM) Batch Processing/193,Black,notBold,notItalic,open,FitPage
+	5.1 Introduction/193,Black,notBold,notItalic,closed,FitPage
+	5.2 Batch Commands/193,Black,notBold,notItalic,closed,FitPage
+		5.2.1 INQUIRE command/195,Black,notBold,notItalic,closed,FitPage
+		5.2.2 LOG command/197,Black,notBold,notItalic,closed,FitPage
+		5.2.3 PURGE command/199,Black,notBold,notItalic,closed,FitPage
+		5.2.4 SIGNOFF command/200,Black,notBold,notItalic,closed,FitPage
+		5.2.5 SIGNON command/201,Black,notBold,notItalic,closed,FitPage
+		5.2.6 SUBMIT command/204,Black,notBold,notItalic,closed,FitPage
+	5.3 Batch Job Submission Using the Spooler/206,Black,notBold,notItalic,closed,FitPage
+	5.4 Error Handling/206,Black,notBold,notItalic,closed,FitPage
+	5.5 Batch Task Pause Option/206,Black,notBold,notItalic,closed,FitPage
+	5.6 Effect of Restricted Disks on Batch Jobs/206,Black,notBold,notItalic,closed,FitPage
+Chapter 6 - Command Substitution System (CSS)/207,Black,notBold,notItalic,open,FitPage
+	6.1 General Description/207,Black,notBold,notItalic,closed,FitPage
+	6.2 Establishing a Command Substitution System (CSS) File/208,Black,notBold,notItalic,closed,FitPage
+	6.3 Calling a Command Substitution System (CSS) File/209,Black,notBold,notItalic,closed,FitPage
+	6.4 Use of Parameters/212,Black,notBold,notItalic,closed,FitPage
+		6.4.1 Positional Parameters/213,Black,notBold,notItalic,closed,FitPage
+		6.4.2 Keyword Parameters/215,Black,notBold,notItalic,closed,FitPage
+	6.5 Use of Variables/219,Black,notBold,notItalic,closed,FitPage
+		6.5.1 Types of Variables/219,Black,notBold,notItalic,closed,FitPage
+		6.5.2 Naming Local or Global Variables/221,Black,notBold,notItalic,closed,FitPage
+		6.5.3 Naming New Global or New Internal Variables/222,Black,notBold,notItalic,closed,FitPage
+		6.5.4 Command Substitution System (CSS) Line Expansion/224,Black,notBold,notItalic,closed,FitPage
+		6.5.5 Reserved Variables/225,Black,notBold,notItalic,closed,FitPage
+	6.6 Commands Executable Within a Command Substitution System (CSS) File/225,Black,notBold,notItalic,closed,FitPage
+		6.6.1 Character Replacement Command (%...%)/226,Black,notBold,notItalic,closed,FitPage
+		6.6.2 $BUILD and $ENDB commands/230,Black,notBold,notItalic,closed,FitPage
+		6.6.3 $CLEAR command/232,Black,notBold,notItalic,closed,FitPage
+		6.6.4 $CONTINUE command/233,Black,notBold,notItalic,closed,FitPage
+		6.6.5 $COPY and $NOCOPY commands/234,Black,notBold,notItalic,closed,FitPage
+		6.6.6 $DEFINE command/236,Black,notBold,notItalic,open,FitPage
+			6.6.6.1 File Descriptor (fd) Operators/237,Black,notBold,notItalic,open,FitPage
+				6.6.6.1.1 ACCOUNT operator/238,Black,notBold,notItalic,closed,FitPage
+				6.6.6.1.2 EXTENSION operator/239,Black,notBold,notItalic,closed,FitPage
+				6.6.6.1.3 FILENAME operator/240,Black,notBold,notItalic,closed,FitPage
+				6.6.6.1.4 VOLUMENAME operator/241,Black,notBold,notItalic,closed,FitPage
+			6.6.6.2 Logical Operators/242,Black,notBold,notItalic,closed,FitPage
+			6.6.6.3 Computation and Conversion Operators/243,Black,notBold,notItalic,open,FitPage
+				6.6.6.3.1 DCOMPUTE operator/244,Black,notBold,notItalic,closed,FitPage
+				6.6.6.3.2 DHCONVERT operator/245,Black,notBold,notItalic,closed,FitPage
+				6.6.6.3.3 HCOMPUTE operator/246,Black,notBold,notItalic,closed,FitPage
+				6.6.6.3.4 HDCONVERT operator/248,Black,notBold,notItalic,closed,FitPage
+			6.6.6.4 Other Operators/249,Black,notBold,notItalic,open,FitPage
+				6.6.6.4.1 CLEAR operator/249,Black,notBold,notItalic,closed,FitPage
+				6.6.6.4.2 CURRENT operator/250,Black,notBold,notItalic,closed,FitPage
+				6.6.6.4.3 DVOLUMENAME operator/251,Black,notBold,notItalic,closed,FitPage
+				6.6.6.4.4 POSITION operator/252,Black,notBold,notItalic,closed,FitPage
+				6.6.6.4.5 REQUIRED operator/254,Black,notBold,notItalic,closed,FitPage
+				6.6.6.4.6 SEARCH operator/255,Black,notBold,notItalic,closed,FitPage
+				6.6.6.4.7 STRING operator/258,Black,notBold,notItalic,closed,FitPage
+				6.6.6.4.8 SUBSTRING operator/259,Black,notBold,notItalic,closed,FitPage
+		6.6.7 $EXIT command/261,Black,notBold,notItalic,closed,FitPage
+		6.6.8 $FREE command/262,Black,notBold,notItalic,closed,FitPage
+		6.6.9 $GLOBAL command/263,Black,notBold,notItalic,closed,FitPage
+		6.6.10 $JOB and $TERMJOB commands/264,Black,notBold,notItalic,closed,FitPage
+		6.6.11 $LOCAL command/267,Black,notBold,notItalic,closed,FitPage
+		6.6.12 $PAUSE command/268,Black,notBold,notItalic,closed,FitPage
+		6.6.13 PRIOR command/269,Black,notBold,notItalic,closed,FitPage
+		6.6.14 $RELEASE command/270,Black,notBold,notItalic,closed,FitPage
+		6.6.15 $SET command/272,Black,notBold,notItalic,closed,FitPage
+		6.6.16 SET CODE command/273,Black,notBold,notItalic,closed,FitPage
+		6.6.17 $SKIP command/274,Black,notBold,notItalic,closed,FitPage
+		6.6.18 $WAIT command/275,Black,notBold,notItalic,closed,FitPage
+		6.6.19 $WRITE command/276,Black,notBold,notItalic,closed,FitPage
+	6.7 Logical IF commands/276,Black,notBold,notItalic,closed,FitPage
+		6.7.1 End of Task Code Testing Commands/277,Black,notBold,notItalic,closed,FitPage
+		6.7.2 File Existence Testing Commands/278,Black,notBold,notItalic,closed,FitPage
+		6.7.3 Parameters Existence Testing Commands/279,Black,notBold,notItalic,closed,FitPage
+		6.7.4 $ELSE command/280,Black,notBold,notItalic,closed,FitPage
+		6.7.5 $GOTO and $LABEL commands/281,Black,notBold,notItalic,closed,FitPage
+		6.7.6 $IFEXTENSION command/284,Black,notBold,notItalic,closed,FitPage
+		6.7.7 $IFVOLUME command/285,Black,notBold,notItalic,closed,FitPage
+	6.8 $IF...CONDITIONAL command/286,Black,notBold,notItalic,closed,FitPage
+Chapter 7 - Spooling/289,Black,notBold,notItalic,open,FitPage
+	7.1 Introduction/289,Black,notBold,notItalic,closed,FitPage
+	7.2 The OS/32 Spooler/289,Black,notBold,notItalic,closed,FitPage
+		7.2.1 Input Spooling/290,Black,notBold,notItalic,closed,FitPage
+		7.2.2 Input Spooling Control Card Statement/290,Black,notBold,notItalic,closed,FitPage
+			7.2.2.1 The /@INPUT Control Statement/290,Black,notBold,notItalic,closed,FitPage
+			7.2.2.2 The /@SUBMIT Control Statement/291,Black,notBold,notItalic,closed,FitPage
+	7.3 The SPL/32 Spooler/295,Black,notBold,notItalic,closed,FitPage
+		7.3.1 SPL/32 and Multi-Terminal Monitor (MTM) Interaction/296,Black,notBold,notItalic,closed,FitPage
+	7.2.3 Output Spooling/293,Black,notBold,notItalic,closed,FitPage
+	7.2.4 Spooling Errors/294,Black,notBold,notItalic,closed,FitPage
+Appendices/297,Black,notBold,notItalic,open,FitPage
+	Appendix A - Multi-Terminal Monitor (MTM) Command Summary/297,Black,notBold,notItalic,closed,FitPage
+	Appendix B - Program Development Command Summary/305,Black,notBold,notItalic,closed,FitPage
+	Appendix C - Command Substitution System (CSS) Command Summary/307,Black,notBold,notItalic,closed,FitPage
+	Appendix D - Multi-Terminal Monitor (MTM) Message Summary/311,Black,notBold,notItalic,closed,FitPage
+	Appendix E - Command Substitution System (CSS) Message Summary/329,Black,notBold,notItalic,closed,FitPage
+	Appendix F - Program Development Message Summary/335,Black,notBold,notItalic,closed,FitPage
+	Appendix G - Multi-Terminal Monitor (MTM)/Non-MTM Monitor Task Interface Messages/339,Black,notBold,notItalic,open,FitPage
+	Appendix H - Control Summary For Bidirectional Input/Output Control (BIOC) CRT Driver/343,Black,notBold,notItalic,closed,FitPage
+Index/351,Black,notBold,notItalic,closed,FitPage
+Publication Comment Form/356,Black,notBold,notItalic,closed,FitPage
