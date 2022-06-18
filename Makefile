@@ -75,7 +75,7 @@ doc::	capscheck \
 	pdf/1983\ -\ OS32\ SPL32\ Spooler\ System\ Administration\ Reference.pdf                                           \
 	pdf/1984\ -\ C\ Programming\ Manual.pdf                                                                            \
 	pdf/1984\ -\ OS32\ Basic\ Data\ Communications\ Reference.pdf                                                      \
-	pdf/1984\ -\ OS32\ FASTCHEK\ Reference\ Manual\ [fragmentary].pdf                                                  \
+	pdf/1982\ -\ OS32\ FASTCHEK\ Reference\ Manual.pdf                                                                 \
 	pdf/1984\ -\ OS32\ PATCH\ Reference\ Manual.pdf                                                                    \
 	pdf/1984\ -\ OS32\ Environment\ Control\ Monitor\ ECM32\ Programming\ and\ Operations\ Manual.pdf                  \
 	pdf/1984\ -\ OS32\ Network\ Drivers\ Programming\ Reference\ Manual.pdf                                            \
@@ -217,13 +217,13 @@ pdf/1984\ -\ OS32\ Environment\ Control\ Monitor\ ECM32\ Programming\ and\ Opera
 	-jpdfbookmarks --apply "$^" 48-065F01R01_OS32_R7.02_Environment_Control_Monitor_ECM32_Programming_and_Operations_Manual_198402.pdf --out "$@"
 	rm 48-065F01R01_OS32_R7.02_Environment_Control_Monitor_ECM32_Programming_and_Operations_Manual_198402.pdf
 
-pdf/1984\ -\ OS32\ FASTCHEK\ Reference\ Manual\ [fragmentary].pdf: \
+pdf/1982\ -\ OS32\ FASTCHEK\ Reference\ Manual.pdf: \
 			bookmarks/OS32\ FASTCHEK\ Reference\ Manual.txt
 	rm -f "$@"
 	mkdir -p pdf/
-	wget http://bitsavers.org/pdf/interdata/32bit/os32/1984_7.2/48-064F02R00_OS32_R7.02_Fastchek_Reference_1984.pdf
-	-jpdfbookmarks --apply "$^" 48-064F02R00_OS32_R7.02_Fastchek_Reference_1984.pdf --out "$@"
-	rm 48-064F02R00_OS32_R7.02_Fastchek_Reference_1984.pdf
+	wget http://bitsavers.org/pdf/interdata/32bit/os32/1982_6.1/48-064F00R00_OS32_R06.2_Fastchek_Reference_1982.pdf
+	-jpdfbookmarks --apply "$^" 48-064F00R00_OS32_R06.2_Fastchek_Reference_1982.pdf --out "$@"
+	rm 48-064F00R00_OS32_R06.2_Fastchek_Reference_1982.pdf
 
 pdf/1984\ -\ OS32\ PATCH\ Reference\ Manual.pdf: \
 			bookmarks/OS32\ PATCH\ Reference\ Manual.txt
