@@ -11,6 +11,7 @@ if [ -n "`echo exit | ./id32 | tee /dev/tty | grep 'Interdata 32b simulator V3'`
    echo
    exit 1
 fi
+killall id32
 mkdir -p logs
 rm -f logs/*
 for stage in stage-*.ini; do
