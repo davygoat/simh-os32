@@ -25,20 +25,20 @@ v4:: v4/BIN/id32
 open:: open/BIN/id32
 	cp $< ./
 
-v3/BIN/id32:
+v3/BIN/id32::
 	rm -rf v3
 	wget http://simh.trailing-edge.com/sources/simhv312-2.zip
 	unzip simhv312-2.zip
 	mv sim v3
 	cd v3 ; make id32
 
-v4/BIN/id32:
+v4/BIN/id32::
 	rm -rf v4
 	git clone https://github.com/simh/simh
 	mv simh v4
 	cd v4 ; make id32
 
-open/BIN/id32:
+open/BIN/id32::
 	rm -rf open
 	git clone https://github.com/open-simh/simh
 	mv simh open
@@ -50,7 +50,7 @@ os32kit.zip: $(FILES) os32.dsk doc
 
 os32doc.zip: doc
 	rm -f os32doc.zip
-	zip -r9 os32doc pdf/ -x pdf/2020\ -\ $(FTPDOC).pdf
+	zip -r9 os32doc pdf/*.html pdf/*.pdf
 
 os32.dsk: stage-??-*.ini
 	[ -x os32.dsk ] || ./rebuild-system.sh

@@ -1,6 +1,6 @@
 id32
 tapes/
-pdf/
+pdf/*.pdf
 v3/
 v4/
 open/
