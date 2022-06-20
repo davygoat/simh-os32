@@ -9,5 +9,3 @@
 
 - Try porting an old vi to Whitesmiths C.
 
-- OS/32 support for SUBMIT jobs. Does this require SPOOLER?
-
