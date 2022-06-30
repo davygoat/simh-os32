@@ -605,6 +605,70 @@ Some preinstalled programs :
 - IPCARCH: IPC Archive Utility
 
 
+MEDIT :
+
+  - Type MEDIT ? (question mark) for default key map.
+
+  - Recognised termcap capabilities:
+
+    cd        clear down to bottom of screen
+    ce        clear end of line
+    cl        clear screen
+    cm        cursor move to row, col
+    do        cursor down
+    is        initialise session (terminal)
+    nd        cursor right
+    se        leave standout mode
+    so        enter standout mode
+    up        cursor up
+
+  - MEDIT commands, mostly for binding to non-default keys:
+
+    auto
+    baud
+    bfind     backwards find
+    bottom    go to bottom (of file)
+    bpage     back page
+    close
+    config
+    copy
+    cut
+    dcl       delete cursor left
+    dcr       delete cursor right
+    dll       delete line left
+    dlr       delete line right
+    dwl       delete word left
+    dwr       delete word right
+    edit
+    end
+    fill
+    find      find string
+    goto
+    justify
+    llength
+    mark
+    mcd       move cursor down
+    mcl       move cursor left
+    mcr       move cursor right
+    mcu       move cursor up
+    open
+    overtype  toggle insert/overtype mode
+    page      next page
+    quote
+    read
+    replace
+    rmargin
+    save
+    tab
+    tableft
+    tabs
+    tell      show cursor location
+    top       go to top (of file)
+    view
+    wrap
+    write
+
+
 Problems :
 
 - MTM seems to do a lot of "busy work". CPU usage can get quite high
