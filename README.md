@@ -5,12 +5,14 @@ This repository holds the source code and build files for a SimH software kit wi
 OS/32 base system and software development tools:
 
 - Perkin-Elmer **OS/32** V8.1.
-- **MTM** 8.1 with Ease of Use (**EOU**) program development utilities and **HELP** files.
+- **MTM** 8.1 with Ease of Use (**EOU**) program development utilities, **HELP** files and two batch streams for **SUBMIT**.
+- **SPL/32** 03-590 R01-01 spooler with working **PRINT** command.
+- **MEDIT** 03-488 R00-01 full screen editor, partially configured for xterm.
 - **Fortran V II** R05-01.00 (Development and Optimising compilers).
 - Perkin-Elmer **Pascal** R01-00.
-- OS/32 **C Compiler** 04-193R00-00 (aka. **Whitesmiths C**).
+- OS/32 **C Compiler** 04-193 R00-00 (aka. **Whitesmiths C**).
 - **RATFOR** from the Software Tools tape (IUG-523).
-- **Common Assembly Language CAL/32** 03-338R01-01.
+- **Common Assembly Language CAL/32** 03-338 R01-01.
 - **MACRO/32** assembler 03-339 R00-01.
 - HLAL2 **high level assembler macros** (IUG-200).
 - SYSGEN'd with 8 terminal lines on port 1026 for **telnet** access.
@@ -23,7 +25,6 @@ The following items exist on the disk, but have not been tested in any way, sinc
 - DMS/32, a CODASYL-type database management system, in SYS:/16. Again, this probably depends on having COBOL.
 - IUG-523 Software Tools is on a separate disk labelled STUG.
 - IUG-165 MicroEMACS in SYS:/165 in case you want to try and get it working.
-- MEDIT, another full screen editor, in SYS:/17.
 - VCF (Virtual Console Facility)
 - Reliance/ECM (Environment Control Manager, a transaction handler)
 
