@@ -3,9 +3,5 @@
 
 - FTPd: catch signal to perform shutdown.
 
-- Write-up: "Writing Code under OS/32".
-
-- Write-up: "User Guide" for the FTP server.
-
 - Try porting an old vi to Whitesmiths C.
 
