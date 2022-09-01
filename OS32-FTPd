@@ -1829,7 +1829,7 @@ proc HandleSimH_Startup {} {
       }
 
       send "startup\r"
-      expect ".SPLI"
+      expect ".SPL "
       expect -ex "*"
       TrafficLight green "SimH V3 \"Classic\" boot automation (end)"
 
