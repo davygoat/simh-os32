@@ -571,6 +571,8 @@ FORTRAN VII:
 
 - IUG-214 also has a wildcard matcher / directory reader without using CSS.
 
+  See also $SVC7EXT macro in SSYSSTRUC.MLB (SVC7 option 0xff05, OSS03882).
+
 
 FASTCHEK strings, possible start options?
 
