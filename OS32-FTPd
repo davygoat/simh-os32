@@ -1757,7 +1757,7 @@ proc HandleSimH_Startup {} {
    }
 
    expect {
-      "Interdata 32b simulator V4" {
+      -re "Interdata 32b simulator (V4|Open SIMH)" {
          array set simh {
             inifile "os32.ini"
          }
@@ -1835,7 +1835,7 @@ proc HandleSimH_Startup {} {
 
    } else {
 
-      TrafficLight green "SimH V4 \"github\""
+      TrafficLight green "SimH V4 native automation"
       send "do $simh(inifile)\r"
    }
 }
