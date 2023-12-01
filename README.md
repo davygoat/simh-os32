@@ -6,7 +6,7 @@ OS/32 base system and software development tools:
 
 - Perkin-Elmer **OS/32** V8.1.
 - **MTM** 8.1 with Ease of Use (**EOU**) program development utilities, **HELP** files and two batch streams for **SUBMIT**.
-- **SPL/32** 03-590 R01-01 spooler with working **PRINT** command.
+- OS/32 03-152 R03-01 **spooler** with working **PRINT** command.
 - **MEDIT** 03-488 R00-01 full screen editor, partially configured for xterm.
 - **Fortran V II** R05-01.00 (Development and Optimising compilers).
 - Perkin-Elmer **Pascal** R01-00.
