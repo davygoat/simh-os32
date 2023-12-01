@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ## vim:set nowrap:\
 ## vim:set syntax=tcl:\
 ## FreeBSD, no symlink... ##############################################\
