@@ -16,33 +16,30 @@ HLADOC=HLAL2\ High\ Level\ Assembler\ Language\ Macros
 
 FILES=README.md README.txt OS32-FTPd os32.ini supnik.ini ftpd.config example.shadow.config *.sim *.tcl Makefile between-the-lines.txt
 
-v3::
-	make v3/BIN/id32
-	cp v3/BIN/id32 ./
+v3 bob::
+	-make v3/BIN/id32
+	mv v3/BIN/id32 ./
 
-v4::
-	make v4/BIN/id32
-	cp v4/BIN/id32 ./
+v4 open open-simh::
+	-make open/BIN/id32
+	mv open/BIN/id32 ./
 
-open::
-	make open/BIN/id32
-	cp open/BIN/id32 ./
+BOB=simhv312-4.zip
 
-v3/BIN/id32::
-	if [ ! -d v3 ]; then \
-	   wget http://simh.trailing-edge.com/sources/simhv312-2.zip ;\
-	   unzip simhv312-2.zip ;\
-	   mv sim v3 ;\
-	fi
+$(BOB):
+	wget http://simh.trailing-edge.com/sources/$(BOB) || \
+	wget http://simh.trailing-edge.com/sources/archive/$(BOB)
+
+v3/BIN/id32:: $(BOB)
+	rm -rf v3
+	unzip $(BOB)
+	mv sim v3
 	-(cd v3 ; make id32)
 
-v4/BIN/id32:
-	[ -d v4 ] || git clone https://github.com/simh/simh v4
-	cd v4 ; git pull ; make id32
-
-open/BIN/id32:
+open/BIN/id32::
 	[ -d open ] || git clone https://github.com/open-simh/simh open
-	cd open ; git pull ; make id32
+	-(cd open ; git pull)
+	-(cd open ; make id32)
 
 os32kit.zip: $(FILES) os32.dsk doc
 	rm -f os32kit.zip
