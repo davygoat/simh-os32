@@ -433,7 +433,7 @@ LINK options:
   N/XSVC1
 
   See also CLU.TSK (Compatible Link Utility), which has built-in help;
-  and PATH.TSK, which also has help. Both programs are mentioned in
+  and PATCH.TSK, which also has help. Both programs are mentioned in
   Don Stalkowski's write-up.
 
 
