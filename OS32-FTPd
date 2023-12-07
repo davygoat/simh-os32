@@ -1729,6 +1729,10 @@ namespace eval OS32 {
             }
             timeout $::OS32::config::timeout {
                upvar #0 ::OS32::ftpcmd ftpcmd
+               if { $::SHUTUP } {
+                  puts stderr "*** SIGTERM REACTION ***"
+                  send "shutdown\r"
+               }
                if { $ftpcmd != "" } {
                   TrafficLight red "*** TIMEOUT ***"
                   send "\$WRITE FILE STUCK\r"
@@ -1866,6 +1870,18 @@ proc HandleSimH_V3_Shutdown {} {
 
 ;######################################################################
    #
+   # Externally triggered SHUTDOWN
+   #
+
+set ::SHUTUP 0
+
+proc DoShutup {} {
+   puts stderr "** SIGTERM ACTION ***"
+   set ::SHUTUP 1
+}
+
+;######################################################################
+   #
    # Main program
    #
 
@@ -1885,6 +1901,8 @@ namespace eval OS32 {
       spawn $::OS32::config::simulator
       HandleSimH_Startup
    }
+
+   trap DoShutup SIGTERM
 
    while {1} {
       set adduser 0
