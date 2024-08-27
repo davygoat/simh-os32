@@ -1781,7 +1781,7 @@ proc HandleSimH_Startup {} {
    upvar #0 ::OS32::config::vt100 vt100
    set fd [ open $simh(inifile) r ]
    set schluck [ read $fd ]
-   if { [regexp -nocase {\s*att[^ ]* +pas +([0-9]+)} $schluck -> mtmport] } {
+   if { [regexp -nocase {\s*att.+ pas +([0-9]+)} $schluck -> mtmport] } {
       puts stderr "\n$vt100(green)PAS device for MTM authentication on port $mtmport$vt100(normal)"
    } else {
       set mtmport -1
