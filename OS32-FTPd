@@ -3,7 +3,7 @@
 ## vim:set syntax=tcl:\
 ## FreeBSD, no symlink... ##############################################\
    TCL=$(ls {/usr,/usr/local,/opt}/bin/expect* 2>/dev/null | head -1)  #\
-   [ -n "$TCL" ] || exec echo "Cannot find tclsh"                      #\
+   [ -n "$TCL" ] || exec echo "Cannot find expect -- not installed?"   #\
    exec $TCL "$0" ${1+"$@"}                                            #\
 ########################################################################
 #
@@ -16,9 +16,14 @@
 # - Return errors to the client.
 #
 
-package require Expect
-package require ftpd
-package require md5
+if { [catch {
+               package require Expect
+               package require ftpd
+               package require md5
+            } msg] } {
+   puts "$msg -- tcllib not installed?"
+   exit 1
+}
 
 namespace eval OS32 {
 
