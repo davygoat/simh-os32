@@ -1672,6 +1672,13 @@ namespace eval OS32 {
    proc DoExpect {} {
       namespace eval :: {
          interact {
+            # short timeout
+            timeout 1 {
+               if { $::SHUTUP } {
+                  puts stderr "*** SIGTERM REACTION ***"
+                  send "shutdown\r"
+               }
+            }
             -o
             # We'll usually trigger pattern matching on <CR>.
             -re "\r" {
@@ -1727,12 +1734,9 @@ namespace eval OS32 {
                   }
                }
             }
+            # long timeout
             timeout $::OS32::config::timeout {
                upvar #0 ::OS32::ftpcmd ftpcmd
-               if { $::SHUTUP } {
-                  puts stderr "*** SIGTERM REACTION ***"
-                  send "shutdown\r"
-               }
                if { $ftpcmd != "" } {
                   TrafficLight red "*** TIMEOUT ***"
                   send "\$WRITE FILE STUCK\r"
