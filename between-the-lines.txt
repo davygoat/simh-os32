@@ -471,7 +471,7 @@ Whitesmiths C bugs/quirks:
 CAL and MACRO:
 
 - CAL allows lowercase, but MACRO seems to be case sensitive, so probably
-  best to stick to upppercase (standard convention).
+  best to stick to uppercase (standard convention).
 
 - Labels and names must start in column zero, "commands" must NOT start in
   column zero (must be preceded by at least one space).
@@ -512,9 +512,9 @@ FORTRAN VII:
   You can ASSIGN 5 to a file, but lines will be indented by a single space
   (i.e. Fortran carriage control, like a printer).
 
-- FORTRAN makes much use of logical unit numbers for general I/O, so it so
-  it is a good idea to use an ancilliary .ASN file to ASSIGN any LUs your
-  program will be needing.  The EXEC command runs this file, if it exists,
+- FORTRAN makes much use of logical  unit numbers for general I/O, so it
+  is a  good idea to use  an ancilliary .ASN  file to ASSIGN any  LUs your
+  program will be needing. The EXEC  command runs this file, if it exists,
   before it starts your program.
 
   BUILD prog.ASN

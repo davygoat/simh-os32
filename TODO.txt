@@ -1,7 +1,20 @@
 
-- MicroEMACS
+- SNOBOL (IUG tape?)
 
-- FTPd: catch signal to perform shutdown.
+- BASIC interpreter.
 
-- Try porting an old vi to Whitesmiths C.
+- Figure out tapes (labelled/unlabelled). COPY User Guide 3.2.2 and 3.2.3.
+  OS/32 supports ANSI labelled tapes, but only 'single file, multiple
+  volume' (Appendix D). This might work if I can handle a tar file in
+  OS/32 (knock up a simple tar util). 3.2.3.2 and Appendix E refer to a
+  Tape Labeller program.
+
+- There is also an ANSI tape program on the IUG tapes, but I haven't
+  found any instructions for it.
+
+- Figure out Paper tape reader/punch?
+
+- RT-11 floppy reader (IUG).
+
+- ECM/VCF ?
 
