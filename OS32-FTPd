@@ -1,20 +1,11 @@
-#!/bin/bash
+#!/bin/sh
 ## vim:set nowrap:\
 ## vim:set syntax=tcl:\
 ## FreeBSD, no symlink... ##############################################\
-   TCL=$(ls {/usr,/usr/local,/opt}/bin/expect* 2>/dev/null | head -1)  #\
-   [ -n "$TCL" ] || exec echo "Cannot find expect -- not installed?"   #\
+   TCL=$(ls $(echo $PATH:|sed 's,:,/expect* ,g') 2>/dev/null|head -1)  #\
+   [ -n "$TCL" ] || exec echo "Cannot find expect"                     #\
    exec $TCL "$0" ${1+"$@"}                                            #\
 ########################################################################
-#
-# TODO
-#
-# - ABOR for Ctrl/C.
-# - Binary and contiguous files?
-# - Don't "die" on the client.
-# - Don't leave the dimmer on.
-# - Return errors to the client.
-#
 
 if { [catch {
                package require Expect
