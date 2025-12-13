@@ -30,6 +30,7 @@ exit
 
    expect "\r\n*" send "load backup\r";c
    expect "TSKID = BACKUP" send "start ,in=mag1:,out=iug:,ac=%ACT%,verify,delete,list=con:\r";c
+   expect "BACKUP:END OF TASK     0" detach mt0; echo; echof -n "OK: TAPE DETACHED AND READY FOR YOUR NEXT 'DO IUG'.";c
    send "\r"
    continue
    goto bottom
