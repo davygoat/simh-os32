@@ -24,7 +24,10 @@ exit
 
 :automate
 
+   set on
    attach -e -r mt0 %TAP%
+   set noon
+
    expect "\r\n*" send "load backup\r";c
    expect "TSKID = BACKUP" send "start ,in=mag1:,out=iug:,ac=%ACT%,verify,delete,list=con:\r";c
    send "\r"
