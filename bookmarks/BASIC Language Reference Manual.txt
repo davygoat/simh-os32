@@ -1,0 +1,79 @@
+BASIC Language Reference Manual (1973)/1,Black,bold,notItalic,open,FitPage
+Preface/2,Black,notBold,notItalic,open,FitPage
+Table of Contents/4,Black,notBold,notItalic,open,FitPage
+Chapter 1 - Introduction to BASIC Programming/8,Black,notBold,notItalic,closed,FitPage
+                                             /8,Black,notBold,notItalic,closed,FitPage
+	1.1 BASIC Statements and Modes/8,Black,notBold,notItalic,open,FitPage
+	1.2 Line Numbers/8,Black,notBold,notItalic,open,FitPage
+	1.3 BASIC Character Set/9,Black,notBold,notItalic,open,FitPage
+	1.4 Writing a BASIC Program/10,Black,notBold,notItalic,open,FitPage
+	1.5 Providing Data/10,Black,notBold,notItalic,open,FitPage
+	1.6 Program Loops/11,Black,notBold,notItalic,open,FitPage
+	1.7 Calculations/11,Black,notBold,notItalic,open,FitPage
+	1.8 Printing Output/12,Black,notBold,notItalic,open,FitPage
+	1.9 Programming Example/12,Black,notBold,notItalic,open,FitPage
+	1.10 Editing a Program/13,Black,notBold,notItalic,open,FitPage
+	1.11 Executing a Program/13,Black,notBold,notItalic,open,FitPage
+Chapter 2 - Elements of BASIC/14,Black,notBold,notItalic,closed,FitPage
+	2.1 Numbers/14,Black,notBold,notItalic,open,FitPage
+	2.2 Arithmetic Variables/14,Black,notBold,notItalic,open,FitPage
+	2.3 Arithmetic Expressions/15,Black,notBold,notItalic,open,FitPage
+	2.4 Arrays/16,Black,notBold,notItalic,open,FitPage
+	2.5 Array Definitions/17,Black,notBold,notItalic,open,FitPage
+	2.6 Array Elements/17,Black,notBold,notItalic,open,FitPage
+	2.7 Redimensioning Arrays/18,Black,notBold,notItalic,open,FitPage
+	2.8 Functions/19,Black,notBold,notItalic,open,FitPage
+	2.9 String Literals/22,Black,notBold,notItalic,open,FitPage
+	2.10 String Variables/22,Black,notBold,notItalic,open,FitPage
+	2.11 String Arrays/22,Black,notBold,notItalic,open,FitPage
+	2.12 String Expressions and Subscripting/23,Black,notBold,notItalic,open,FitPage
+Chapter 3 - BASIC Statements/26,Black,notBold,notItalic,closed,FitPage
+	3.1 Introduction/26,Black,notBold,notItalic,open,FitPage
+	3.2 LET/27,Black,notBold,notItalic,open,FitPage
+	3.3 DEF/28,Black,notBold,notItalic,open,FitPage
+	3.4 DIM/29,Black,notBold,notItalic,open,FitPage
+	3.5 END/30,Black,notBold,notItalic,open,FitPage
+	3.6 FOR and NEXT/31,Black,notBold,notItalic,open,FitPage
+	3.7 GOSUB and RETURN/33,Black,notBold,notItalic,open,FitPage
+	3.8 GOTO/34,Black,notBold,notItalic,open,FitPage
+	3.9 IF/35,Black,notBold,notItalic,open,FitPage
+	3.10 INPUT/36,Black,notBold,notItalic,open,FitPage
+	3.11 ON/37,Black,notBold,notItalic,open,FitPage
+	3.12 PRINT/38,Black,notBold,notItalic,open,FitPage
+	3.13 PRINT USING/43,Black,notBold,notItalic,open,FitPage
+	3.14 RANDOM/48,Black,notBold,notItalic,open,FitPage
+	3.15 READ and DATA/49,Black,notBold,notItalic,open,FitPage
+	3.16 REM/50,Black,notBold,notItalic,open,FitPage
+	3.17 RESTORE/51,Black,notBold,notItalic,open,FitPage
+	3.18 STOP/52,Black,notBold,notItalic,open,FitPage
+	3.19 CALL/53,Black,notBold,notItalic,open,FitPage
+	3.20 REW, WFM and DSP/55,Black,notBold,notItalic,open,FitPage
+	3.21 Matrix Operations/56,Black,notBold,notItalic,open,FitPage
+Chapter 4 - Command Mode Operations/68,Black,notBold,notItalic,closed,FitPage
+	4.1 Introduction/68,Black,notBold,notItalic,open,FitPage
+	4.2 Control Keys/68,Black,notBold,notItalic,open,FitPage
+	4.3 Keyboard Commands/69,Black,notBold,notItalic,open,FitPage
+	4.4 PAUSE/70,Black,notBold,notItalic,open,FitPage
+	4.5 NEW/70,Black,notBold,notItalic,open,FitPage
+	4.6 LOAD/70,Black,notBold,notItalic,open,FitPage
+	4.7 LIST/71,Black,notBold,notItalic,open,FitPage
+	4.8 RUN/72,Black,notBold,notItalic,open,FitPage
+	4.9 RENUM/73,Black,notBold,notItalic,open,FitPage
+	4.10 SIZE/73,Black,notBold,notItalic,open,FitPage
+	4.11 Immediate Mode BASIC Statements/74,Black,notBold,notItalic,open,FitPage
+	4.12 ERASE/75,Black,notBold,notItalic,open,FitPage
+Chapter 5 - Operating Instructions/76,Black,notBold,notItalic,closed,FitPage
+	5.1 Single-User BASIC under BOSS and DOS/76,Black,notBold,notItalic,open,FitPage
+	5.2 Single-User BASIC under RTOS/77,Black,notBold,notItalic,open,FitPage
+	5.3 Multi-User BASIC under the Multi-User Executive (03-058)/79,Black,notBold,notItalic,open,FitPage
+	5.4 Multi-User BASIC under RTOS/79,Black,notBold,notItalic,open,FitPage
+	5.5 Single-User BASIC under OS/32-ST/80,Black,notBold,notItalic,open,FitPage
+	For operation under OS/16MT and OS/32MT...../80,Black,notBold,notItalic,open,FitPage
+Appendices/81,Black,notBold,notItalic,closed,FitPage
+	Appendix 1 - Error Messages/81,Black,notBold,notItalic,open,FitPage
+	Appendix 2 - Program Size and Time Estimates/83,Black,notBold,notItalic,open,FitPage
+	Appendix 3 - ASCII Code Conversion Table/85,Black,notBold,notItalic,closed,FitPage
+		ASCII Code Conversion Table/85,Black,notBold,notItalic,open,FitPage
+		Table of Mathematical Constants/87,Black,notBold,notItalic,open,FitPage
+	Appendix 4 - Revision Information/88,Black,notBold,notItalic,open,FitPage
+	Publication Comment Form/89,Black,notBold,notItalic,open,FitPage

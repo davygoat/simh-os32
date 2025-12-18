@@ -158,6 +158,14 @@ pdf/1976\ -\ OS32\ MT\ Program\ Logic\ Manual.pdf: \
 	-jpdfbookmarks --apply "$^" B29-391R02_OS32MT_ProgramLogic_Apr76.pdf --out "$@"
 	rm B29-391R02_OS32MT_ProgramLogic_Apr76.pdf
 
+pdf/1973\ -\ BASIC\ Language\ Reference\ Manual.pdf: \
+			bookmarks/BASIC\ Language\ Reference\ Manual.txt
+	rm -f "$@"
+	mkdir -p pdf/
+	wget http://bitsavers.org/pdf/interdata/lang/29-338r03_BASIC_Lang_Ref_Jan75.pdf
+	-jpdfbookmarks --apply "$^" 29-338r03_BASIC_Lang_Ref_Jan75.pdf --out "$@"
+	rm 29-338r03_BASIC_Lang_Ref_Jan75.pdf
+
 pdf/1976\ -\ OS32\ MT\ Program\ Reference\ Manual.pdf: \
 			bookmarks/OS32\ MT\ Program\ Reference\ Manual.txt
 	rm -f "$@"
