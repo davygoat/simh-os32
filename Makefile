@@ -158,7 +158,7 @@ pdf/1976\ -\ OS32\ MT\ Program\ Logic\ Manual.pdf: \
 	-jpdfbookmarks --apply "$^" B29-391R02_OS32MT_ProgramLogic_Apr76.pdf --out "$@"
 	rm B29-391R02_OS32MT_ProgramLogic_Apr76.pdf
 
-pdf/1973\ -\ BASIC\ Language\ Reference\ Manual.pdf: \
+pdf/1975\ -\ BASIC\ Language\ Reference\ Manual.pdf: \
 			bookmarks/BASIC\ Language\ Reference\ Manual.txt
 	rm -f "$@"
 	mkdir -p pdf/
