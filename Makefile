@@ -109,12 +109,12 @@ capscheck:
 
 pdf/2020\ -\ $(FTPDOC).pdf: doc/$(FTPDOC).odt
 	rm -f "$@"
-	libreoffice6.2 --convert-to pdf doc/$(FTPDOC).odt
+	libreoffice --convert-to pdf doc/$(FTPDOC).odt
 	mv $(FTPDOC).pdf pdf/2020\ -\ $(FTPDOC).pdf
 
 pdf/1985\ -\ $(HLADOC).pdf: doc/$(HLADOC).odt bookmarks/$(HLADOC).txt
 	rm -f "$@"
-	libreoffice6.2 --convert-to pdf doc/$(HLADOC).odt
+	libreoffice --convert-to pdf doc/$(HLADOC).odt
 	-jpdfbookmarks --apply bookmarks/$(HLADOC).txt $(HLADOC).pdf --out "$@"
 	rm $(HLADOC).pdf
 
