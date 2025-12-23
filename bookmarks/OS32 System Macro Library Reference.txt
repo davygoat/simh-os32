@@ -61,7 +61,7 @@ Chapter 3 - File Management Macros/67,Black,notBold,notItalic,open,FitPage
 	3.17 Generate a File Management Parameter Control Block (FMPCB)/101,Black,notBold,notItalic,closed,FitPage
 	3.18 Generate an FMPCB Structure and Equates (FMPCBS)/103,Black,notBold,notItalic,closed,FitPage
 	3.19 Return the Relative Record Address of the Next Sequential Record (NOTE)/105,Black,notBold,notItalic,closed,FitPage
-	3.20 Repositiona  File to a Specified Relative Record Address (POINT)/107,Black,notBold,notItalic,closed,FitPage
+	3.20 Reposition a File to a Specified Relative Record Address (POINT)/107,Black,notBold,notItalic,closed,FitPage
 	3.21 Rename a File Assigned to a Logical Unit (RENAME)/109,Black,notBold,notItalic,closed,FitPage
 	3.22 Reprotect a File Assigned to a Logical Unit by Changing the Keys (REPROT)/111,Black,notBold,notItalic,closed,FitPage
 Chapter 4 - Input/Output Macros/113,Black,notBold,notItalic,open,FitPage

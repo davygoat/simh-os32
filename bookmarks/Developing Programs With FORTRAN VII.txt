@@ -85,7 +85,7 @@ Chapter 5 - Interfacing Assembly Language Routines/137,Black,notBold,notItalic,o
 		MALLOC Routine (Get Storage)/165,Black,notBold,notItalic,closed,FitPage
 		MFREE Routine (Release Storage)/166,Black,notBold,notItalic,closed,FitPage
 		PFREE Routine (Release Partial Storage)/167,Black,notBold,notItalic,closed,FitPage
-Chapter 6 - Building a Command File to Compiler Your Program/169,Black,notBold,notItalic,open,FitPage
+Chapter 6 - Building a Command File to Compile Your Program/169,Black,notBold,notItalic,open,FitPage
 	The Basic Compilation Process/170,Black,notBold,notItalic,closed,FitPage
 	Using the F7O and F7Z Compilers/170,Black,notBold,notItalic,closed,FitPage
 		Loading the Compiler/171,Black,notBold,notItalic,closed,FitPage
