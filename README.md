@@ -1,6 +1,6 @@
 # SimH Interdata OS/32 kit
 
-This repository holds the source code and build files for a SimH software kit with a working OS/32 system, two assemblers, four high level languages, and a handy Tcl/Expect based FTP server front-end. The kit is built from bitsavers tapes with SimH 4.0 or Open SimH, but the ready-made disk also works with SimH 3.X "Classic". The kit can be downloaded from the [Releases](https://github.com/davygoat/simh-os32/releases) page.
+This repository holds the source code and build files for a SimH software kit with a working OS/32 system, two assemblers, six high level languages, and a handy Tcl/Expect based FTP server front-end. The kit is built from bitsavers tapes with SimH 4.0 or Open SimH, but the ready-made disk also works with SimH 3.X "Classic". The kit can be downloaded from the [Releases](https://github.com/davygoat/simh-os32/releases) page.
 
 OS/32 base system and software development tools:
 
@@ -12,6 +12,8 @@ OS/32 base system and software development tools:
 - Perkin-Elmer **Pascal** R01-00.
 - OS/32 **C Compiler** 04-193 R00-00 (aka. **Whitesmiths C**).
 - **RATFOR** from the Software Tools tape (IUG-523).
+- SNOBOL4 3.11 **SNOBOL interpreter** from the OS/32 and Utility Development CSS tape (IUG-161).
+- BASIC1 03-00 **BASIC interpreter** (IUG-365) with PAUSE command fixed.
 - **Common Assembly Language CAL/32** 03-338 R01-01.
 - **MACRO/32** assembler 03-339 R00-01.
 - HLAL2 **high level assembler macros** (IUG-200).
@@ -23,7 +25,6 @@ The following items exist on the disk, but have not been tested in any way, sinc
 - A debugger in SYS:/14.
 - SORT/MERGE-II, in SYS:/15, if you know how to use it without COBOL.
 - DMS/32, a CODASYL-type database management system, in SYS:/16. Again, this probably depends on having COBOL.
-- IUG-523 Software Tools is on a separate disk labelled STUG.
 - IUG-165 MicroEMACS in SYS:/165 in case you want to try and get it working.
 - VCF (Virtual Console Facility)
 - Reliance/ECM (Environment Control Manager, a transaction handler)
