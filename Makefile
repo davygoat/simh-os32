@@ -57,6 +57,7 @@ os32.dsk: stage-??-*.ini
 doc::	capscheck \
 	pdf/1974\ -\ 32\ Bit\ Series\ Reference\ Manual.pdf                                                                \
 	pdf/1975\ -\ FORTRAN\ V\ Level\ II\ Compiler\ Functional\ Spec.pdf                                                 \
+	pdf/1975\ -\ BASIC\ Language\ Reference\ Manual.pdf                                                                \
 	pdf/1976\ -\ Model\ 832\ Micro-Instruction\ Reference\ Manual.pdf                                                  \
 	pdf/1976\ -\ OS32\ MT\ Program\ Logic\ Manual.pdf                                                                  \
 	pdf/1976\ -\ OS32\ MT\ Program\ Reference\ Manual.pdf                                                              \
