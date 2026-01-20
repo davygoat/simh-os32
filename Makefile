@@ -24,7 +24,7 @@ v4 open open-simh::
 	-make open/BIN/id32
 	mv open/BIN/id32 ./
 
-BOB=simhv312-4.zip
+BOB=simhv312-5.zip
 
 $(BOB):
 	wget https://simh.trailing-edge.com/sources/$(BOB) || \
